@@ -2,7 +2,7 @@
   "schema": "bytecast-module-manifest-v1",
   "app_id": "training_hub",
   "app_name": "Training Hub",
-  "updated_on": "2026-02-08",
+  "updated_on": "2026-02-09",
   "modules": [
     {
       "id": "aerovista_offer_pack",
@@ -21,6 +21,15 @@
       "category": "app",
       "path": "../lift_lab_bytecast_bundle/site/index.html",
       "canon_path": "lift_lab_bytecast_bundle"
+    },
+    {
+      "id": "tr_001_golden_path",
+      "name": "TR-001 • Golden Path Missions",
+      "description": "Golden Path v1 training pack: checkpoints -> mark Training done -> handoff to Seeder.",
+      "owner": "Training and Community",
+      "category": "mission",
+      "path": "../training_missions/tr_001_golden_path/index.html",
+      "canon_path": "training_missions/tr_001_golden_path"
     },
     {
       "id": "workspace_docs_index",

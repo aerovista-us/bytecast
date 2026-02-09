@@ -241,6 +241,48 @@
       font-size: 0.9rem;
       color: #fff;
     }
+
+    details.packlist{
+      margin-top: 1rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(140deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)),
+        rgba(0,0,0,0.18);
+      box-shadow: 0 10px 26px rgba(0,0,0,0.34);
+      padding: 0.9rem;
+    }
+    details.packlist > summary{
+      list-style: none;
+      cursor: pointer;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+      font-family: "Sora", "Segoe UI", sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    details.packlist > summary::-webkit-details-marker{ display:none; }
+    .packgrid{
+      margin-top: 0.9rem;
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 0.8rem;
+    }
+    .pack{
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.03);
+      padding: 0.75rem;
+      display:flex;
+      gap: 12px;
+      align-items:flex-start;
+    }
+    .pack:hover{ border-color: var(--line-strong); box-shadow: 0 0 18px rgba(34, 167, 255, 0.16); }
+    .pack .app-icon{ width: 40px; height: 40px; border-radius: 12px; }
+    .pack .t{ font-weight: 800; }
+    .pack .d{ color: var(--muted); font-size: 0.9rem; line-height: 1.35; margin-top: 4px; }
   </style>
 </head>
 <body>
@@ -312,6 +354,99 @@
         </span>
       </div>
     </section>
+
+    <details class="packlist" aria-label="All runnable packs">
+      <summary>
+        <span>All Packs (Quick Launch)</span>
+        <span class="cycle-chip" style="margin:0; border-color: rgba(255,255,255,0.18);">optional</span>
+      </summary>
+      <div class="packgrid">
+        <a class="pack" href="./seed_bytecast.html">
+          <img class="app-icon" src="./assets/icons/bytecast.svg" alt="" aria-hidden="true" />
+          <div>
+            <div class="t">ByteCast Playlist</div>
+            <div class="d">Episode discovery, resume, Golden Path handoffs.</div>
+          </div>
+        </a>
+        <a class="pack" href="./training_hub/index.html">
+          <img class="app-icon" src="./assets/icons/training.svg" alt="" aria-hidden="true" />
+          <div>
+            <div class="t">Training Hub</div>
+            <div class="d">Module router + workflow loop (no content hosting).</div>
+          </div>
+        </a>
+        <a class="pack" href="./training_missions/tr_001_golden_path/index.html">
+          <img class="app-icon" src="./assets/icons/training.svg" alt="" aria-hidden="true" />
+          <div>
+            <div class="t">TR-001 Golden Path</div>
+            <div class="d">Two checkpoints -> mark Training done -> handoff to Seeder.</div>
+          </div>
+        </a>
+        <a class="pack" href="./seed_builder_studio/index.html">
+          <img class="app-icon" src="./assets/icons/seed.svg" alt="" aria-hidden="true" />
+          <div>
+            <div class="t">Seed Builder Studio</div>
+            <div class="d">Tooling router: templates, generators, Orchard, standards.</div>
+          </div>
+        </a>
+        <a class="pack" href="./seed_builder_studio/seed_orchard_ui/index.html">
+          <img class="app-icon" src="./assets/icons/seed.svg" alt="" aria-hidden="true" />
+          <div>
+            <div class="t">Seed Orchard</div>
+            <div class="d">Plant -> harvest -> export artifact -> mint badge.</div>
+          </div>
+        </a>
+        <a class="pack" href="./aerovista_offer_pack/app/index.html">
+          <img class="app-icon" src="./assets/icons/offerpack.svg" alt="" aria-hidden="true" />
+          <div>
+            <div class="t">AeroVista Offer Pack</div>
+            <div class="d">Divisions, offers, SOP, pricing, bundles, one-pager.</div>
+          </div>
+        </a>
+        <a class="pack" href="./lift_lab_bytecast_bundle/site/index.html">
+          <img class="app-icon" src="./assets/icons/liftlab.svg" alt="" aria-hidden="true" />
+          <div>
+            <div class="t">Lift Lab Training</div>
+            <div class="d">Non-coder missions and contribution pathways.</div>
+          </div>
+        </a>
+        <a class="pack" href="./template/index.html">
+          <img class="app-icon" src="./assets/icons/template.svg" alt="" aria-hidden="true" />
+          <div>
+            <div class="t">Episode Template</div>
+            <div class="d">Canonical baseline for new episode packs.</div>
+          </div>
+        </a>
+        <a class="pack" href="./docs/index.html">
+          <img class="app-icon" src="./assets/icons/docs.svg" alt="" aria-hidden="true" />
+          <div>
+            <div class="t">Docs Portal</div>
+            <div class="d">Standards, troubleshooting, contributor ramp, site map.</div>
+          </div>
+        </a>
+        <a class="pack" href="./episodes/welcome_to_bytecast/index.html">
+          <img class="app-icon" src="./assets/icons/bytecast.svg" alt="" aria-hidden="true" />
+          <div>
+            <div class="t">EP-001 Welcome</div>
+            <div class="d">Listen + Slide + Engage gates, then handoff to Training.</div>
+          </div>
+        </a>
+        <a class="pack" href="./episodes/aerovista_7_division_overview/index.html">
+          <img class="app-icon" src="./assets/icons/bytecast.svg" alt="" aria-hidden="true" />
+          <div>
+            <div class="t">EP-002 AeroVista</div>
+            <div class="d">7 divisions overview (JSON-driven offer pack integration).</div>
+          </div>
+        </a>
+        <a class="pack" href="./data/episode_registry.json">
+          <img class="app-icon" src="./assets/icons/docs.svg" alt="" aria-hidden="true" />
+          <div>
+            <div class="t">Runtime Registry</div>
+            <div class="d">`data/episode_registry.json` (Playlist reads this only).</div>
+          </div>
+        </a>
+      </div>
+    </details>
 
     <footer class="footer" aria-label="Footer">
       <div>Builder links (tiny):</div>

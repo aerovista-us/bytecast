@@ -17,6 +17,7 @@ This map classifies projects in `\\100.115.9.61\Collab\mini.shops\bytecast` usin
 | `index.html` | Primary | Workspace entry / sacred indexer | Active and maintained | Keep small; add links only |
 | `seed_bytecast.html` | Primary | ByteCast App launcher (episode discovery/resume) | Active and maintained | Keep focused: discover + resume + progress |
 | `training_hub` | Primary | Shell: onboarding + module router | Active and maintained | Keep as orchestration layer only |
+| `training_missions` | Primary | Training packs (missions) | Active (new) | Keep standalone mission packs; grow the ladder here |
 | `seed_builder_studio` | Primary | Shell: seeding/tooling router | Active and maintained | Keep as orchestration layer only |
 | `ep1` | Legacy | Compatibility wrapper for EP-001 | Redirect-only wrapper | Review retirement on 2026-03-08 |
 | `ep3` | Legacy | Compatibility wrapper for EP-002 | Redirect-only wrapper | Review retirement on 2026-03-08 |

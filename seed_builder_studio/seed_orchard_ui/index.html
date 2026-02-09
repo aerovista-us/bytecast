@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#f4d8a4" />
   <title>Seed Orchard - Plant and Harvest</title>
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
@@ -21,6 +22,12 @@
       <p class="lead">
         Give a few inputs. Get a focused harvest: bold ideas, clear actions, and outputs you can ship.
       </p>
+      <nav class="quick-nav" aria-label="ByteCast navigation">
+        <a href="../../index.html">Overview</a>
+        <a href="../../seed_bytecast.html">Playlist</a>
+        <a href="../../training_hub/index.html">Training</a>
+        <a href="../index.html">Seed Builder</a>
+      </nav>
     </header>
 
     <section class="panel input-panel" aria-label="Plant your seed">
@@ -75,6 +82,14 @@
       </ol>
 
       <div id="fruitGrid" class="fruit-grid"></div>
+
+      <div id="harvestActions" class="harvest-actions" hidden>
+        <div class="harvest-actions__row">
+          <button id="exportJson" type="button" class="action-btn">Export Seed Artifact (JSON)</button>
+          <a id="claimBadge" class="action-btn secondary" href="../../seed_bytecast.html">Back to Playlist</a>
+        </div>
+        <p id="exportNote" class="hint">Export creates a small artifact and marks your Seed step complete for the Golden Path.</p>
+      </div>
     </section>
   </main>
 

@@ -321,6 +321,24 @@
       </div>
     </section>
 
+    <section class="panel" id="journey" aria-label="Golden path handoff">
+      <div class="deck__bar">
+        <h3>Next Step</h3>
+        <div class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">GATES</b> Listen • Slide • Engage</div>
+      </div>
+      <div class="card">
+        <p style="margin:0; color:rgba(255,255,255,0.78); max-width:85ch; line-height:1.55;">
+          Golden Path v1: complete the gates here, then hand off to Training (TR-001), then export a Seed artifact.
+          Your Playlist will show a badge when you finish.
+        </p>
+        <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+          <a class="btn btn--primary" href="../../seed_bytecast.html">Back to Playlist</a>
+          <a id="nextTrainingBtn" class="btn" href="../../training_missions/tr_001_golden_path/index.html">Next: Training (TR-001)</a>
+          <span id="gateNote" class="chip" style="opacity:0.9;">Loading gate status...</span>
+        </div>
+      </div>
+    </section>
+
     <section class="panel about" id="about">
       <details open>
         <summary>About AeroVista <span class="hint">summary + bread & butter</span></summary>
@@ -616,6 +634,87 @@
   const $ = (s,r=document)=>r.querySelector(s);
   const $$ = (s,r=document)=>Array.from(r.querySelectorAll(s));
 
+  // Golden Path workflow (shared across shells + Playlist)
+  const WORKFLOW_KEY = "bytecast.workflow.v1";
+  const LAST_EP_KEY = "bytecast.last_episode.href.v1";
+  const LAST_EP_TIME_KEY = "bytecast.last_episode.time.v1";
+
+  function defaultWorkflow() {
+    return {
+      cycle: 1,
+      abilityLevel: 0,
+      bytecast: { listen: false, slide: false, interact: false },
+      trainingDone: false,
+      seedDone: false,
+      updatedAt: "",
+    };
+  }
+
+  function loadWorkflow() {
+    const fallback = defaultWorkflow();
+    try {
+      const raw = localStorage.getItem(WORKFLOW_KEY);
+      if (!raw) return fallback;
+      const parsed = JSON.parse(raw);
+      const bytecast = parsed.bytecast && typeof parsed.bytecast === "object" ? parsed.bytecast : {};
+      return {
+        ...fallback,
+        ...parsed,
+        cycle: Number.isFinite(Number(parsed.cycle)) ? Math.max(1, Number(parsed.cycle)) : 1,
+        abilityLevel: Number.isFinite(Number(parsed.abilityLevel)) ? Math.max(0, Number(parsed.abilityLevel)) : 0,
+        bytecast: {
+          listen: Boolean(bytecast.listen),
+          slide: Boolean(bytecast.slide),
+          interact: Boolean(bytecast.interact),
+        },
+        trainingDone: Boolean(parsed.trainingDone),
+        seedDone: Boolean(parsed.seedDone),
+      };
+    } catch {
+      return fallback;
+    }
+  }
+
+  function saveWorkflow(wf) {
+    try { localStorage.setItem(WORKFLOW_KEY, JSON.stringify(wf)); } catch {}
+  }
+
+  function setGate(flagName) {
+    const wf = loadWorkflow();
+    wf.bytecast = wf.bytecast || { listen: false, slide: false, interact: false };
+    if (!wf.bytecast[flagName]) {
+      wf.bytecast[flagName] = true;
+      wf.updatedAt = new Date().toISOString();
+      saveWorkflow(wf);
+    }
+    renderGate();
+  }
+
+  function renderGate() {
+    const wf = loadWorkflow();
+    const bc = wf.bytecast || {};
+    const note = $("#gateNote");
+    const ok = Boolean(bc.listen && bc.slide && bc.interact);
+    if (note) {
+      note.textContent = ok
+        ? "Gates complete. Next: Training (TR-001)."
+        : `Gates: Listen ${bc.listen ? "OK" : "TODO"} • Slide ${bc.slide ? "OK" : "TODO"} • Engage ${bc.interact ? "OK" : "TODO"}`;
+    }
+    const btn = $("#nextTrainingBtn");
+    if (btn) {
+      btn.classList.toggle("is-disabled", !ok);
+      btn.setAttribute("aria-disabled", ok ? "false" : "true");
+      btn.tabIndex = ok ? 0 : -1;
+      btn.title = ok ? "" : "Locked: complete Listen + Slide + Engage first.";
+    }
+  }
+
+  // Always update resume pointer when opening the episode directly.
+  try {
+    localStorage.setItem(LAST_EP_KEY, location.href);
+    localStorage.setItem(LAST_EP_TIME_KEY, String(Date.now()));
+  } catch {}
+
   // Theme switch
   const themeSelect = $("#themeSelect");
   const THEME_KEY = "bytecast_theme";
@@ -688,6 +787,9 @@
     idx = (n + slides.length) % slides.length;
     slides.forEach((sl,i)=>sl.classList.toggle("is-active", i===idx));
     syncDots();
+    if (idx === slides.length - 1) {
+      setGate("slide");
+    }
   }
   $("#btnPrev").addEventListener("click", ()=>goTo(idx-1));
   $("#btnNext").addEventListener("click", ()=>goTo(idx+1));
@@ -735,6 +837,7 @@
   }
   audio.addEventListener("timeupdate", syncTime);
   audio.addEventListener("loadedmetadata", syncTime);
+  audio.addEventListener("play", ()=>setGate("listen"), { once: true });
 
   seek.addEventListener("input", ()=>{
     const dur=audio.duration||0;
@@ -921,6 +1024,7 @@
       quizState.score = scoreNow;
       quizState.passed = scoreNow >= passThresh;
       try{ localStorage.setItem(QUIZ_KEY, JSON.stringify(quizState)); }catch{}
+      if (quizState.passed) setGate("interact");
       renderQuiz();
     });
 
@@ -932,6 +1036,7 @@
   }
 
   renderQuiz();
+  renderGate();
 </script>
 </body>
 </html>

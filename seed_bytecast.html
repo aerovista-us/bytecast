@@ -269,6 +269,19 @@
     }
     .banner p{ margin:0; }
     .banner .label{ color: rgba(248,223,169,0.95); font-weight: 700; }
+    .banner--neon{
+      border-color: rgba(34,167,255,0.32);
+      background:
+        linear-gradient(145deg, rgba(34,167,255,0.10), rgba(166,107,255,0.06)),
+        rgba(0, 0, 0, 0.2);
+    }
+    .chips{ display:flex; flex-wrap:wrap; gap:8px; }
+    .chip--badge{
+      border-color: rgba(255,196,90,0.38);
+      background: rgba(255,196,90,0.09);
+      box-shadow: var(--glow-gold);
+      color: rgba(255,255,255,0.92);
+    }
   </style>
 </head>
 <body>
@@ -331,8 +344,16 @@
             <p class="label">Next recommended: loading...</p>
             <p class="tiny muted" id="nextWhy">We pick the lowest-completion active episode by default.</p>
             <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
-              <a id="nextBtn" class="btn btn--legendary" href="./episodes/welcome_to_bytecast/index.html">Legendary Next Action</a>
+              <a id="nextBtn" class="btn btn--primary" href="./episodes/welcome_to_bytecast/index.html">Open recommended</a>
               <a class="btn" href="./docs/SITE_MAP.md">Site Map</a>
+            </div>
+          </div>
+          <div class="banner banner--neon" id="goldenBanner" style="margin-top:12px;">
+            <p class="label" id="goldenLabel">Golden Path: loading...</p>
+            <p class="tiny muted" id="goldenWhy">Playlist -> EP-001 -> Training -> Seed -> Badge.</p>
+            <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
+              <a id="goldenBtn" class="btn btn--legendary" href="./episodes/welcome_to_bytecast/index.html">Legendary: Continue Journey</a>
+              <a class="btn" href="./training_missions/tr_001_golden_path/index.html">TR-001</a>
             </div>
           </div>
         </aside>
@@ -407,6 +428,12 @@
           <a class="btn" href="./docs/README.md">Docs Index</a>
           <a class="btn" href="./.CODEX/end_of_session_report_2026-02-08.md">Session Report</a>
         </div>
+        <div style="margin-top:14px; padding-top:14px; border-top:1px solid var(--stroke);">
+          <div class="k">Badges</div>
+          <div id="badgeList" class="chips" style="margin-top:10px;">
+            <span class="tiny muted">No badges yet.</span>
+          </div>
+        </div>
         <p class="tiny" style="margin:12px 0 0;">
           Run via `python -m http.server 8080` for best results (fetch + JSON).
         </p>
@@ -420,6 +447,7 @@
     const LAST_EP_KEY = "bytecast.last_episode.href.v1";
     const LAST_EP_TIME_KEY = "bytecast.last_episode.time.v1";
     const WORKFLOW_KEY = "bytecast.workflow.v1";
+    const BADGES_KEY = "bytecast.badges.v1";
 
     const $ = (sel) => document.querySelector(sel);
 
@@ -502,6 +530,33 @@
       }
     }
 
+    function loadBadges() {
+      try {
+        const raw = localStorage.getItem(BADGES_KEY);
+        const parsed = raw ? JSON.parse(raw) : [];
+        return Array.isArray(parsed) ? parsed : [];
+      } catch {
+        return [];
+      }
+    }
+
+    function saveBadges(badges) {
+      try { localStorage.setItem(BADGES_KEY, JSON.stringify(badges)); } catch {}
+    }
+
+    function mintBadge(id, label, meta = {}) {
+      const badges = loadBadges();
+      if (badges.some((b) => b && b.id === id)) return false;
+      badges.unshift({ id, label, issuedAt: new Date().toISOString(), meta });
+      saveBadges(badges.slice(0, 50));
+      return true;
+    }
+
+    function bytecastComplete(wf) {
+      const bc = wf.bytecast || {};
+      return Boolean(bc.listen && bc.slide && bc.interact);
+    }
+
     function computeQuizScore(profile, epId) {
       const quiz = profile?.engagement?.quiz;
       if (!quiz?.enabled) return null;
@@ -535,6 +590,96 @@
       if (!parts.length) return { pct: 0, quest, quiz };
       const pct = Math.round((parts.reduce((a, b) => a + b, 0) / parts.length) * 100);
       return { pct, quest, quiz };
+    }
+
+    function renderBadges() {
+      const list = $("#badgeList");
+      if (!list) return;
+      const badges = loadBadges();
+      if (!badges.length) {
+        list.innerHTML = `<span class="tiny muted">No badges yet. Complete the Golden Path to mint your first.</span>`;
+        return;
+      }
+      list.innerHTML = badges
+        .slice(0, 8)
+        .map((b) => {
+          const label = b?.label || b?.id || "Badge";
+          const when = b?.issuedAt ? new Date(b.issuedAt).toLocaleDateString() : "";
+          return `<span class="chip chip--badge"><b style="font-family:var(--mono);">BADGE</b> ${escapeHtml(label)}${when ? ` • ${escapeHtml(when)}` : ""}</span>`;
+        })
+        .join("");
+    }
+
+    function renderGoldenPath() {
+      const wf = loadWorkflowState();
+      const bcOk = bytecastComplete(wf);
+      const trainingOk = Boolean(wf.trainingDone);
+      const seedOk = Boolean(wf.seedDone);
+
+      const badges = loadBadges();
+      const hasBadge = badges.some((b) => b && b.id === "p1_golden_path_v1");
+      const eligible = bcOk && trainingOk && seedOk;
+      if (eligible && !hasBadge) {
+        mintBadge("p1_golden_path_v1", "P1: Golden Path", { cycle: wf.cycle || 1 });
+      }
+
+      const nowBadges = loadBadges();
+      const badgeOk = nowBadges.some((b) => b && b.id === "p1_golden_path_v1");
+
+      const label = $("#goldenLabel");
+      const why = $("#goldenWhy");
+      const btn = $("#goldenBtn");
+
+      let href = "./episodes/welcome_to_bytecast/index.html";
+      let labelText = "Golden Path: Start";
+      let whyText = "Start EP-001 and finish the three gates (Listen + Slide + Engage).";
+      let btnText = "Legendary: Start EP-001";
+
+      if (!bcOk) {
+        href = "./episodes/welcome_to_bytecast/index.html";
+        labelText = "Golden Path: EP-001 gates";
+        whyText = "Locked: complete Listen + Slide + Engage in EP-001.";
+        btnText = "Legendary: Finish EP-001";
+      } else if (!trainingOk) {
+        href = "./training_missions/tr_001_golden_path/index.html";
+        labelText = "Golden Path: Training (TR-001)";
+        whyText = "Unlocked: complete TR-001 to mark Training done for this cycle.";
+        btnText = "Legendary: Run TR-001";
+      } else if (!seedOk) {
+        href = "./seed_builder_studio/seed_orchard_ui/index.html";
+        labelText = "Golden Path: Seed Orchard";
+        whyText = "Unlocked: export a Seed artifact to mark Seed done.";
+        btnText = "Legendary: Export Seed";
+      } else if (badgeOk) {
+        href = "./seed_bytecast.html";
+        labelText = "Golden Path: Badge earned";
+        whyText = "You shipped the proof. Badge is minted in this browser.";
+        btnText = "Legendary: View Badge";
+      } else {
+        href = "./seed_builder_studio/seed_orchard_ui/index.html";
+        labelText = "Golden Path: Mint badge";
+        whyText = "Eligible now: open Seed Orchard and export once to mint the badge.";
+        btnText = "Legendary: Mint Badge";
+      }
+
+      if (label) label.textContent = labelText;
+      if (why) why.textContent = whyText;
+      if (btn) {
+        btn.textContent = btnText;
+        btn.setAttribute("href", href);
+      }
+
+      const funnel = [
+        `Listen ${wf.bytecast?.listen ? "OK" : "TODO"}`,
+        `Slide ${wf.bytecast?.slide ? "OK" : "TODO"}`,
+        `Engage ${wf.bytecast?.interact ? "OK" : "TODO"}`,
+        `Training ${trainingOk ? "OK" : (bcOk ? "TODO" : "LOCKED")}`,
+        `Seed ${seedOk ? "OK" : (trainingOk ? "TODO" : "LOCKED")}`,
+        `Badge ${badgeOk ? "OK" : (eligible ? "TODO" : "LOCKED")}`,
+      ].join(" • ");
+      $("#heroSub").textContent = `Playlist hub for the journey: Listen -> Slide -> Engage -> Training -> Seed -> Badge. (${funnel})`;
+
+      renderBadges();
     }
 
     function setLastEpisode(href) {
@@ -631,6 +776,8 @@
         resumeHint.textContent = "Resume: none yet. Open any episode to set your resume point.";
       }
 
+      renderGoldenPath();
+
       let registry;
       try {
         registry = await loadJson(REGISTRY_URL);
@@ -682,18 +829,7 @@
         $("#nextWhy").textContent = `Completion: ${next.completion.pct}%. We recommend the lowest-completion active episode.`;
       }
 
-      // Lightweight funnel view (no hard gating): reads the same workflow key used by shells.
-      const wf = loadWorkflowState();
-      const bc = wf.bytecast || {};
-      const funnel = [
-        `Listen ${bc.listen ? "OK" : "TODO"}`,
-        `Slide ${bc.slide ? "OK" : "TODO"}`,
-        `Engage ${bc.interact ? "OK" : "TODO"}`,
-        `Training ${wf.trainingDone ? "OK" : (bc.interact ? "TODO" : "LOCKED")}`,
-        `Seed ${wf.seedDone ? "OK" : (wf.trainingDone ? "TODO" : "LOCKED")}`,
-        `Badge ${wf.seedDone ? "TODO" : "LOCKED"}`,
-      ].join(" • ");
-      $("#heroSub").textContent = `Playlist hub for the journey: Listen -> Slide -> Engage -> Training -> Seed -> Badge. (${funnel})`;
+      renderGoldenPath();
 
       // Capture opens for resume.
       listEl.addEventListener("click", (ev) => {
@@ -706,6 +842,10 @@
 
     wireTheme();
     render();
+    window.addEventListener("focus", renderGoldenPath);
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) renderGoldenPath();
+    });
   </script>
 </body>
 </html>

@@ -6,6 +6,15 @@
   const growthSteps = Array.from(document.querySelectorAll("#growthTrack li"));
   const intensityInput = document.getElementById("intensity");
   const intensityLabel = document.getElementById("intensityLabel");
+  const harvestActions = document.getElementById("harvestActions");
+  const exportJsonBtn = document.getElementById("exportJson");
+  const claimBadgeLink = document.getElementById("claimBadge");
+  const exportNote = document.getElementById("exportNote");
+
+  const WORKFLOW_KEY = "bytecast.workflow.v1";
+  const BADGES_KEY = "bytecast.badges.v1";
+
+  let lastArtifact = null;
 
   const intensityMap = {
     1: "Gentle growth",
@@ -124,6 +133,114 @@
     });
   }
 
+  function loadWorkflow() {
+    const fallback = {
+      cycle: 1,
+      abilityLevel: 0,
+      bytecast: { listen: false, slide: false, interact: false },
+      trainingDone: false,
+      seedDone: false,
+      updatedAt: "",
+    };
+    try {
+      const raw = localStorage.getItem(WORKFLOW_KEY);
+      if (!raw) return fallback;
+      const parsed = JSON.parse(raw);
+      const bytecast = parsed.bytecast && typeof parsed.bytecast === "object" ? parsed.bytecast : {};
+      return {
+        ...fallback,
+        ...parsed,
+        cycle: Number.isFinite(Number(parsed.cycle)) ? Math.max(1, Number(parsed.cycle)) : 1,
+        abilityLevel: Number.isFinite(Number(parsed.abilityLevel)) ? Math.max(0, Number(parsed.abilityLevel)) : 0,
+        bytecast: { listen: Boolean(bytecast.listen), slide: Boolean(bytecast.slide), interact: Boolean(bytecast.interact) },
+        trainingDone: Boolean(parsed.trainingDone),
+        seedDone: Boolean(parsed.seedDone),
+      };
+    } catch {
+      return fallback;
+    }
+  }
+
+  function saveWorkflow(wf) {
+    try { localStorage.setItem(WORKFLOW_KEY, JSON.stringify(wf)); } catch {}
+  }
+
+  function loadBadges() {
+    try {
+      const raw = localStorage.getItem(BADGES_KEY);
+      const parsed = raw ? JSON.parse(raw) : [];
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  }
+
+  function saveBadges(badges) {
+    try { localStorage.setItem(BADGES_KEY, JSON.stringify(badges)); } catch {}
+  }
+
+  function mintBadge(id, label, meta = {}) {
+    const badges = loadBadges();
+    if (badges.some((b) => b && b.id === id)) return false;
+    badges.unshift({
+      id,
+      label,
+      issuedAt: new Date().toISOString(),
+      meta,
+    });
+    saveBadges(badges.slice(0, 50));
+    return true;
+  }
+
+  function bytecastComplete(wf) {
+    const bc = wf.bytecast || {};
+    return Boolean(bc.listen && bc.slide && bc.interact);
+  }
+
+  function downloadJson(filename, obj) {
+    const json = JSON.stringify(obj, null, 2);
+    const blob = new Blob([json], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 2500);
+  }
+
+  function refreshExportUI() {
+    if (!harvestActions) return;
+    const wf = loadWorkflow();
+    const bcOk = bytecastComplete(wf);
+    const trainingOk = Boolean(wf.trainingDone);
+
+    exportJsonBtn?.classList.toggle("is-disabled", !lastArtifact);
+    exportJsonBtn && (exportJsonBtn.disabled = !lastArtifact);
+
+    if (!lastArtifact) {
+      harvestActions.hidden = true;
+      return;
+    }
+
+    harvestActions.hidden = false;
+
+    if (!bcOk) {
+      exportNote.textContent = "Golden Path locked: complete EP-001 gates first (Listen + Slide + Engage). You can still export, but badge minting will wait.";
+    } else if (!trainingOk) {
+      exportNote.textContent = "Next step: complete Training (TR-001), then export to mint the badge.";
+    } else {
+      exportNote.textContent = "Ready: export your Seed artifact. This marks Seed complete and mints the Golden Path badge.";
+    }
+
+    if (trainingOk) {
+      claimBadgeLink.textContent = "Back to Playlist (Badge)";
+    } else {
+      claimBadgeLink.textContent = "Back to Playlist";
+    }
+  }
+
   form.addEventListener("submit", (event) => {
     event.preventDefault();
 
@@ -150,8 +267,54 @@
     animateGrowth();
     renderFruits(fruits);
     harvestMeta.textContent = `${data.seedName}: harvested ${data.harvestSize} fruits for ${data.audience}.`;
+
+    lastArtifact = {
+      schema: "bytecast-seed-artifact-v1",
+      tool: "seed_builder_studio/seed_orchard_ui",
+      createdAt: new Date().toISOString(),
+      seed: {
+        name: data.seedName,
+        goal: data.goal,
+        audience: data.audience,
+        harvestSize: data.harvestSize,
+        intensity: data.intensity,
+      },
+      fruits,
+    };
+
+    refreshExportUI();
+  });
+
+  exportJsonBtn?.addEventListener("click", () => {
+    if (!lastArtifact) return;
+    const safeName = String(lastArtifact.seed?.name || "seed")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "_")
+      .replace(/^_+|_+$/g, "")
+      .slice(0, 48) || "seed";
+
+    downloadJson(`${safeName}_artifact.json`, lastArtifact);
+
+    const wf = loadWorkflow();
+    wf.seedDone = true;
+    wf.updatedAt = new Date().toISOString();
+    saveWorkflow(wf);
+
+    if (bytecastComplete(wf) && wf.trainingDone) {
+      mintBadge("p1_golden_path_v1", "P1: Golden Path", {
+        cycle: wf.cycle,
+        seed: lastArtifact.seed?.name || "",
+      });
+      exportNote.textContent = "Exported. Seed step complete. Badge minted. Open Playlist to see it.";
+      claimBadgeLink.textContent = "Claim Badge + Back to Playlist";
+    } else {
+      exportNote.textContent = "Exported. Seed step complete. Finish EP-001 gates and Training to mint the badge.";
+    }
+
+    refreshExportUI();
   });
 
   intensityInput.addEventListener("input", setIntensityLabel);
   setIntensityLabel();
+  refreshExportUI();
 })();

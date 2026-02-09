@@ -19,7 +19,7 @@ Source of truth: `.CODEX/episode_registry.json`
 | Episode | Repo path | GitHub Pages URL | Notes |
 |---|---|---|---|
 | EP-001 | `episodes/welcome_to_bytecast/index.html` | `https://aerovista-us.github.io/bytecast/episodes/welcome_to_bytecast/index.html` | Audio expected at `episodes/welcome_to_bytecast/assets/welcome_to_bytecast.aac` |
-| EP-002 | `episodes/aerovista_7_division_overview/index.html` | `https://aerovista-us.github.io/bytecast/episodes/aerovista_7_division_overview/index.html` | Pulls Offer Pack JSON; audio expected at `episodes/aerovista_7_division_overview/assets/bytecast-ep2.mp3` |
+| EP-002 | `episodes/aerovista_7_division_overview/index.html` | `https://aerovista-us.github.io/bytecast/episodes/aerovista_7_division_overview/index.html` | Pulls Offer Pack JSON; audio at `episodes/aerovista_7_division_overview/aerovista_7_division_overview.aac` (optional fallback: `assets/bytecast-ep2.mp3`) |
 
 Runtime-safe registry mirror (used by Playlist):
 - `data/episode_registry.json`
@@ -32,6 +32,7 @@ Manifest: `training_hub/data/modules.json`
 |---|---|---|
 | Offer Pack App | `aerovista_offer_pack/app/index.html` | `https://aerovista-us.github.io/bytecast/aerovista_offer_pack/app/index.html` |
 | Lift Lab Training Site | `lift_lab_bytecast_bundle/site/index.html` | `https://aerovista-us.github.io/bytecast/lift_lab_bytecast_bundle/site/index.html` |
+| TR-001 Golden Path Missions | `training_missions/tr_001_golden_path/index.html` | `https://aerovista-us.github.io/bytecast/training_missions/tr_001_golden_path/index.html` |
 | Docs index | `docs/README.md` | `https://aerovista-us.github.io/bytecast/docs/README.md` |
 | Episodes index | `episodes/README.md` | `https://aerovista-us.github.io/bytecast/episodes/README.md` |
 | Episode registry (runtime mirror) | `data/episode_registry.json` | `https://aerovista-us.github.io/bytecast/data/episode_registry.json` |
