@@ -6,6 +6,8 @@
   <title>ByteCast Training Hub</title>
   <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="./styles.css">
+  <script defer src="../assets/shared/bytecast_loop.js"></script>
+  <script defer src="../assets/shared/bytecast_loop_ui.js"></script>
   <script defer src="./app.js"></script>
 </head>
 <body data-app-mode="training">
@@ -42,6 +44,12 @@
         <a id="next-app-link" href="../seed_builder_studio/index.html">Go to Seed Builder</a>
       </div>
       <p id="workflow-note" class="status-line">Progress is saved locally on this browser.</p>
+    </section>
+
+    <section class="panel" aria-label="Quest map">
+      <h2>Quest Map</h2>
+      <p class="status-line">Rendered from <code>data/journey_steps.json</code>. You can add/remove steps by editing JSON only.</p>
+      <div id="journey-map"></div>
     </section>
 
     <section aria-label="Workspace app map" class="panel">

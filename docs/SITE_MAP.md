@@ -24,6 +24,9 @@ Source of truth: `.CODEX/episode_registry.json`
 Runtime-safe registry mirror (used by Playlist):
 - `data/episode_registry.json`
 
+Journey loop config (used by Playlist/Hub/Seeder CTAs):
+- `data/journey_steps.json`
+
 ## Training Hub modules (linked packs)
 
 Manifest: `training_hub/data/modules.json`
@@ -36,6 +39,7 @@ Manifest: `training_hub/data/modules.json`
 | Docs index | `docs/README.md` | `https://aerovista-us.github.io/bytecast/docs/README.md` |
 | Episodes index | `episodes/README.md` | `https://aerovista-us.github.io/bytecast/episodes/README.md` |
 | Episode registry (runtime mirror) | `data/episode_registry.json` | `https://aerovista-us.github.io/bytecast/data/episode_registry.json` |
+| Journey loop config | `data/journey_steps.json` | `https://aerovista-us.github.io/bytecast/data/journey_steps.json` |
 
 ## Seed Builder modules (linked packs)
 
@@ -75,3 +79,4 @@ These exist to avoid dead links until the 2026-03-08 review window.
 | System manual | `.CODEX/bytecast_system_manual_2026-02-09.md` | `https://aerovista-us.github.io/bytecast/.CODEX/bytecast_system_manual_2026-02-09.md` |
 | Analytics standard | `.CODEX/umami_analytics_standard_2026-02-09.md` | `https://aerovista-us.github.io/bytecast/.CODEX/umami_analytics_standard_2026-02-09.md` |
 | Episode registry (builder) | `.CODEX/episode_registry.json` | `https://aerovista-us.github.io/bytecast/.CODEX/episode_registry.json` |
+| Loop standard | `docs/LOOP_STANDARD.md` | `https://aerovista-us.github.io/bytecast/docs/LOOP_STANDARD.md` |

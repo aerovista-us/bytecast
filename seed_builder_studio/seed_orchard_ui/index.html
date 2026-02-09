@@ -30,6 +30,12 @@
       </nav>
     </header>
 
+    <section class="panel" aria-label="Quest map">
+      <h2>Quest Map</h2>
+      <p class="hint">Rendered from <code>data/journey_steps.json</code>. Shows what’s next and why steps are locked.</p>
+      <div id="journey-map"></div>
+    </section>
+
     <section class="panel input-panel" aria-label="Plant your seed">
       <h2>Plant</h2>
       <form id="seedForm" class="seed-form">
@@ -106,6 +112,8 @@
     </article>
   </template>
 
+  <script src="../../assets/shared/bytecast_loop.js"></script>
+  <script src="../../assets/shared/bytecast_loop_ui.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

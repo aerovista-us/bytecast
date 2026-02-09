@@ -407,6 +407,13 @@
       </svg>
     </section>
 
+    <section class="card" aria-label="Quest map" style="margin-top:14px;">
+      <div class="k">Quest Map</div>
+      <h2 class="h2">Where you are, what’s next, what’s locked, why.</h2>
+      <p class="muted" style="margin:0 0 10px;">Rendered from <span style="font-family:var(--mono);">data/journey_steps.json</span>. Add/remove steps by editing JSON only.</p>
+      <div id="journeyMap"></div>
+    </section>
+
     <section class="grid" aria-label="Launcher grid">
       <section class="card span-8" aria-label="Episodes">
         <div class="k">Episodes</div>
@@ -441,13 +448,20 @@
     </section>
   </main>
 
+  <script src="./assets/shared/bytecast_loop.js"></script>
+  <script src="./assets/shared/bytecast_loop_ui.js"></script>
   <script>
+    // Shared loop/workflow helpers (config-driven journey + v1->v2 migration).
+    const Loop = window.ByteCastLoop || null;
+    const LoopUI = window.ByteCastLoopUI || null;
+
     const THEME_KEY = "bytecast.theme.v1";
     const REGISTRY_URL = "./data/episode_registry.json";
     const LAST_EP_KEY = "bytecast.last_episode.href.v1";
     const LAST_EP_TIME_KEY = "bytecast.last_episode.time.v1";
     const WORKFLOW_KEY = "bytecast.workflow.v1";
     const BADGES_KEY = "bytecast.badges.v1";
+    const JOURNEY_URL = "./data/journey_steps.json";
 
     const $ = (sel) => document.querySelector(sel);
 
@@ -531,6 +545,7 @@
     }
 
     function loadBadges() {
+      if (Loop) return Loop.loadBadges();
       try {
         const raw = localStorage.getItem(BADGES_KEY);
         const parsed = raw ? JSON.parse(raw) : [];
@@ -545,6 +560,7 @@
     }
 
     function mintBadge(id, label, meta = {}) {
+      if (Loop) return Loop.mintBadge(id, label, meta);
       const badges = loadBadges();
       if (badges.some((b) => b && b.id === id)) return false;
       badges.unshift({ id, label, issuedAt: new Date().toISOString(), meta });
@@ -610,76 +626,96 @@
         .join("");
     }
 
-    function renderGoldenPath() {
-      const wf = loadWorkflowState();
-      const bcOk = bytecastComplete(wf);
-      const trainingOk = Boolean(wf.trainingDone);
-      const seedOk = Boolean(wf.seedDone);
+    const GOLDEN_FALLBACK_CONFIG = {
+      journeys: [
+        {
+          id: "p1_golden_path",
+          label: "P1: Golden Path",
+          steps: [
+            { id: "ep001_gates", label: "EP-001 Gates", href: "episodes/welcome_to_bytecast/index.html" },
+            { id: "tr001_golden_path", label: "Training (TR-001)", href: "training_missions/tr_001_golden_path/index.html", depends_on: ["ep001_gates"] },
+            { id: "seed_export_v1", label: "Seed Export", href: "seed_builder_studio/seed_orchard_ui/index.html", depends_on: ["tr001_golden_path"] },
+            { id: "badge_p1_golden_path_v1", label: "Badge", href: "seed_bytecast.html", depends_on: ["seed_export_v1"], complete_when: { type: "badge_has", badge_id: "p1_golden_path_v1" } }
+          ],
+          badges: [{ id: "p1_golden_path_v1", label: "P1: Golden Path", requires: ["ep001_gates", "tr001_golden_path", "seed_export_v1"] }]
+        }
+      ]
+    };
 
-      const badges = loadBadges();
-      const hasBadge = badges.some((b) => b && b.id === "p1_golden_path_v1");
-      const eligible = bcOk && trainingOk && seedOk;
-      if (eligible && !hasBadge) {
-        mintBadge("p1_golden_path_v1", "P1: Golden Path", { cycle: wf.cycle || 1 });
-      }
-
-      const nowBadges = loadBadges();
-      const badgeOk = nowBadges.some((b) => b && b.id === "p1_golden_path_v1");
-
+    async function renderGoldenPath() {
       const label = $("#goldenLabel");
       const why = $("#goldenWhy");
       const btn = $("#goldenBtn");
 
-      let href = "./episodes/welcome_to_bytecast/index.html";
-      let labelText = "Golden Path: Start";
-      let whyText = "Start EP-001 and finish the three gates (Listen + Slide + Engage).";
-      let btnText = "Legendary: Start EP-001";
+      if (!Loop) {
+        // Fallback to v1 only (no config).
+        const wf = loadWorkflowState();
+        const bcOk = bytecastComplete(wf);
+        const trainingOk = Boolean(wf.trainingDone);
+        const seedOk = Boolean(wf.seedDone);
+        const eligible = bcOk && trainingOk && seedOk;
+        if (eligible) mintBadge("p1_golden_path_v1", "P1: Golden Path", { cycle: wf.cycle || 1 });
+        const badgeOk = loadBadges().some((b) => b && b.id === "p1_golden_path_v1");
 
-      if (!bcOk) {
-        href = "./episodes/welcome_to_bytecast/index.html";
-        labelText = "Golden Path: EP-001 gates";
-        whyText = "Locked: complete Listen + Slide + Engage in EP-001.";
-        btnText = "Legendary: Finish EP-001";
-      } else if (!trainingOk) {
-        href = "./training_missions/tr_001_golden_path/index.html";
-        labelText = "Golden Path: Training (TR-001)";
-        whyText = "Unlocked: complete TR-001 to mark Training done for this cycle.";
-        btnText = "Legendary: Run TR-001";
-      } else if (!seedOk) {
-        href = "./seed_builder_studio/seed_orchard_ui/index.html";
-        labelText = "Golden Path: Seed Orchard";
-        whyText = "Unlocked: export a Seed artifact to mark Seed done.";
-        btnText = "Legendary: Export Seed";
-      } else if (badgeOk) {
-        href = "./seed_bytecast.html";
-        labelText = "Golden Path: Badge earned";
-        whyText = "You shipped the proof. Badge is minted in this browser.";
-        btnText = "Legendary: View Badge";
-      } else {
-        href = "./seed_builder_studio/seed_orchard_ui/index.html";
-        labelText = "Golden Path: Mint badge";
-        whyText = "Eligible now: open Seed Orchard and export once to mint the badge.";
-        btnText = "Legendary: Mint Badge";
+        const funnel = [
+          `Listen ${wf.bytecast?.listen ? "OK" : "TODO"}`,
+          `Slide ${wf.bytecast?.slide ? "OK" : "TODO"}`,
+          `Engage ${wf.bytecast?.interact ? "OK" : "TODO"}`,
+          `Training ${trainingOk ? "OK" : (bcOk ? "TODO" : "LOCKED")}`,
+          `Seed ${seedOk ? "OK" : (trainingOk ? "TODO" : "LOCKED")}`,
+          `Badge ${badgeOk ? "OK" : (eligible ? "TODO" : "LOCKED")}`,
+        ].join(" • ");
+        $("#heroSub").textContent = `Playlist hub for the journey: Listen -> Slide -> Engage -> Training -> Seed -> Badge. (${funnel})`;
+
+        if (label) label.textContent = "Golden Path";
+        if (why) why.textContent = "Complete the loop: EP-001 -> Training -> Seed -> Badge.";
+        if (btn) {
+          btn.textContent = badgeOk ? "Legendary: View Badge" : "Legendary: Continue Journey";
+          btn.setAttribute("href", bcOk ? (trainingOk ? (seedOk ? "./seed_bytecast.html" : "./seed_builder_studio/seed_orchard_ui/index.html") : "./training_missions/tr_001_golden_path/index.html") : "./episodes/welcome_to_bytecast/index.html");
+        }
+        renderBadges();
+        return;
       }
 
-      if (label) label.textContent = labelText;
-      if (why) why.textContent = whyText;
+      const config = await Loop.loadJourneyConfig(JOURNEY_URL, GOLDEN_FALLBACK_CONFIG);
+      const journeys = Array.isArray(config?.journeys) ? config.journeys : [];
+      const activeId = Loop.getActiveJourneyId?.() || journeys.find((j) => j && j.isDefault)?.id || journeys[0]?.id || "p1_golden_path";
+      Loop.setActiveJourneyId?.(activeId);
+      const wf2 = Loop.ensureWorkflowV2(activeId);
+      const journey = Loop.getJourneyById(config, activeId) || Loop.getJourneyById(GOLDEN_FALLBACK_CONFIG, "p1_golden_path");
+      if (!journey) return;
+
+      const badgeResult = Loop.ensureJourneyBadges(journey, wf2);
+      if ((badgeResult?.minted || badgeResult?.marked) && Loop.saveWorkflowV2) {
+        Loop.saveWorkflowV2(wf2, activeId);
+      }
+
+      const next = Loop.getNextStep(journey, wf2);
+      const nextHref = next?.href ? Loop.resolveFromRoot(next.href) : Loop.resolveFromRoot("episodes/welcome_to_bytecast/index.html");
+      const nextLabel = next?.label || "Next step";
+      const done = journey.steps?.every?.((s) => Loop.isStepComplete(journey, s, wf2));
+
+      if (label) label.textContent = done ? `${journey.label}: complete` : `${journey.label}: ${nextLabel}`;
+      if (why) why.textContent = done ? "Loop complete. Badge lives in this browser." : (journey.description || "Playlist -> EP-001 -> Training -> Seed -> Badge.");
       if (btn) {
-        btn.textContent = btnText;
-        btn.setAttribute("href", href);
+        btn.textContent = next?.cta || "Legendary: Continue Journey";
+        btn.setAttribute("href", nextHref);
       }
 
-      const funnel = [
-        `Listen ${wf.bytecast?.listen ? "OK" : "TODO"}`,
-        `Slide ${wf.bytecast?.slide ? "OK" : "TODO"}`,
-        `Engage ${wf.bytecast?.interact ? "OK" : "TODO"}`,
-        `Training ${trainingOk ? "OK" : (bcOk ? "TODO" : "LOCKED")}`,
-        `Seed ${seedOk ? "OK" : (trainingOk ? "TODO" : "LOCKED")}`,
-        `Badge ${badgeOk ? "OK" : (eligible ? "TODO" : "LOCKED")}`,
-      ].join(" • ");
+      const funnel = journey.steps
+        .map((s) => `${s.label} ${Loop.isStepComplete(journey, s, wf2) ? "OK" : (Loop.isStepUnlocked(journey, s, wf2) ? "TODO" : "LOCKED")}`)
+        .join(" • ");
       $("#heroSub").textContent = `Playlist hub for the journey: Listen -> Slide -> Engage -> Training -> Seed -> Badge. (${funnel})`;
 
       renderBadges();
+
+      if (LoopUI) {
+        await LoopUI.renderJourneyMap({
+          container: document.getElementById("journeyMap"),
+          configUrl: JOURNEY_URL,
+          surface: "playlist",
+        });
+      }
     }
 
     function setLastEpisode(href) {
@@ -776,7 +812,7 @@
         resumeHint.textContent = "Resume: none yet. Open any episode to set your resume point.";
       }
 
-      renderGoldenPath();
+      await renderGoldenPath();
 
       let registry;
       try {
@@ -829,7 +865,7 @@
         $("#nextWhy").textContent = `Completion: ${next.completion.pct}%. We recommend the lowest-completion active episode.`;
       }
 
-      renderGoldenPath();
+      await renderGoldenPath();
 
       // Capture opens for resume.
       listEl.addEventListener("click", (ev) => {
@@ -842,9 +878,9 @@
 
     wireTheme();
     render();
-    window.addEventListener("focus", renderGoldenPath);
+    window.addEventListener("focus", () => { void renderGoldenPath(); });
     document.addEventListener("visibilitychange", () => {
-      if (!document.hidden) renderGoldenPath();
+      if (!document.hidden) void renderGoldenPath();
     });
   </script>
 </body>

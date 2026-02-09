@@ -11,10 +11,16 @@
   const claimBadgeLink = document.getElementById("claimBadge");
   const exportNote = document.getElementById("exportNote");
 
+  const Loop = window.ByteCastLoop || null;
+  const LoopUI = window.ByteCastLoopUI || null;
+
   const WORKFLOW_KEY = "bytecast.workflow.v1";
   const BADGES_KEY = "bytecast.badges.v1";
+  const JOURNEY_URL = "../../data/journey_steps.json";
+  const PRIMARY_JOURNEY_ID = "";
 
   let lastArtifact = null;
+  let cachedJourney = null;
 
   const intensityMap = {
     1: "Gentle growth",
@@ -166,6 +172,7 @@
   }
 
   function loadBadges() {
+    if (Loop) return Loop.loadBadges();
     try {
       const raw = localStorage.getItem(BADGES_KEY);
       const parsed = raw ? JSON.parse(raw) : [];
@@ -176,10 +183,15 @@
   }
 
   function saveBadges(badges) {
+    if (Loop) {
+      // Loop saves internally; keep this for legacy fallback.
+      return;
+    }
     try { localStorage.setItem(BADGES_KEY, JSON.stringify(badges)); } catch {}
   }
 
   function mintBadge(id, label, meta = {}) {
+    if (Loop) return Loop.mintBadge(id, label, meta);
     const badges = loadBadges();
     if (badges.some((b) => b && b.id === id)) return false;
     badges.unshift({
@@ -210,11 +222,47 @@
     setTimeout(() => URL.revokeObjectURL(url), 2500);
   }
 
-  function refreshExportUI() {
+  async function loadJourney() {
+    if (!Loop) return null;
+    const fallbackId = PRIMARY_JOURNEY_ID || "";
+    const activeId = Loop.getActiveJourneyId?.() || fallbackId;
+    if (cachedJourney && cachedJourney.id === activeId) return cachedJourney;
+    const fallback = {
+      journeys: [
+        {
+          id: "p1_golden_path",
+          label: "P1: Golden Path",
+          steps: [
+            { id: "ep001_gates", label: "EP-001 Gates", lane: "bytecast", href: "episodes/welcome_to_bytecast/index.html" },
+            { id: "tr001_golden_path", label: "Training (TR-001)", lane: "training", href: "training_missions/tr_001_golden_path/index.html", depends_on: ["ep001_gates"] },
+            { id: "seed_export_v1", label: "Seed Export", lane: "seed", href: "seed_builder_studio/seed_orchard_ui/index.html", depends_on: ["tr001_golden_path"] },
+            { id: "badge_p1_golden_path_v1", label: "Badge", lane: "badge", href: "seed_bytecast.html", depends_on: ["seed_export_v1"], complete_when: { type: "badge_has", badge_id: "p1_golden_path_v1" } }
+          ],
+          badges: [{ id: "p1_golden_path_v1", label: "P1: Golden Path", requires: ["ep001_gates", "tr001_golden_path", "seed_export_v1"] }]
+        }
+      ]
+    };
+    const config = await Loop.loadJourneyConfig(JOURNEY_URL, fallback);
+    const journeys = Array.isArray(config?.journeys) ? config.journeys : [];
+    const defaultId = journeys.find((j) => j && j.isDefault)?.id || journeys[0]?.id || "";
+    const desired = activeId || defaultId || "p1_golden_path";
+    cachedJourney = Loop.getJourneyById(config, desired) || Loop.getJourneyById(fallback, desired);
+    return cachedJourney;
+  }
+
+  async function refreshExportUI() {
     if (!harvestActions) return;
     const wf = loadWorkflow();
-    const bcOk = bytecastComplete(wf);
-    const trainingOk = Boolean(wf.trainingDone);
+    const bcOkLegacy = bytecastComplete(wf);
+    const trainingOkLegacy = Boolean(wf.trainingDone);
+    const wf2 = Loop ? Loop.ensureWorkflowV2() : null;
+    const journey = Loop ? await loadJourney() : null;
+    const bcOk = (Loop && journey && wf2)
+      ? (Loop.isStepDone(wf2, "ep001_gates") || (journey.steps || []).some((s) => s?.id === "ep001_gates" && Loop.isStepComplete(journey, s, wf2)))
+      : bcOkLegacy;
+    const trainingOk = (Loop && journey && wf2)
+      ? (Loop.isStepDone(wf2, "tr001_golden_path") || (journey.steps || []).some((s) => s?.id === "tr001_golden_path" && Loop.isStepComplete(journey, s, wf2)))
+      : trainingOkLegacy;
 
     exportJsonBtn?.classList.toggle("is-disabled", !lastArtifact);
     exportJsonBtn && (exportJsonBtn.disabled = !lastArtifact);
@@ -238,6 +286,20 @@
       claimBadgeLink.textContent = "Back to Playlist (Badge)";
     } else {
       claimBadgeLink.textContent = "Back to Playlist";
+    }
+
+    if (Loop && journey) {
+      // Keep claim link aligned with the config-defined badge step.
+      const badgeStep = (journey.steps || []).find((s) => s?.lane === "badge") || (journey.steps || []).find((s) => s?.id?.startsWith("badge_"));
+      if (badgeStep?.href) claimBadgeLink.href = Loop.resolveFromRoot(badgeStep.href);
+    }
+
+    if (LoopUI) {
+      await LoopUI.renderJourneyMap({
+        container: document.getElementById("journey-map"),
+        configUrl: JOURNEY_URL,
+        surface: "seed_orchard",
+      });
     }
   }
 
@@ -282,7 +344,7 @@
       fruits,
     };
 
-    refreshExportUI();
+    void refreshExportUI();
   });
 
   exportJsonBtn?.addEventListener("click", () => {
@@ -293,28 +355,73 @@
       .replace(/^_+|_+$/g, "")
       .slice(0, 48) || "seed";
 
-    downloadJson(`${safeName}_artifact.json`, lastArtifact);
+    const filename = `${safeName}_artifact.json`;
+    downloadJson(filename, lastArtifact);
 
-    const wf = loadWorkflow();
-    wf.seedDone = true;
-    wf.updatedAt = new Date().toISOString();
-    saveWorkflow(wf);
-
-    if (bytecastComplete(wf) && wf.trainingDone) {
-      mintBadge("p1_golden_path_v1", "P1: Golden Path", {
-        cycle: wf.cycle,
+    if (Loop) {
+      // Proof payload: artifact name + simple hash (sha256 when available).
+      const json = JSON.stringify(lastArtifact, null, 2);
+      const metaBase = {
         seed: lastArtifact.seed?.name || "",
-      });
-      exportNote.textContent = "Exported. Seed step complete. Badge minted. Open Playlist to see it.";
-      claimBadgeLink.textContent = "Claim Badge + Back to Playlist";
+        artifactName: filename,
+        filesCount: 1,
+        schema: lastArtifact.schema || "",
+      };
+
+      const toHex = (buf) => Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, "0")).join("");
+      const hashFallback = (text) => {
+        let hash = 2166136261;
+        for (let i = 0; i < text.length; i += 1) {
+          hash ^= text.charCodeAt(i);
+          hash += (hash << 1) + (hash << 4) + (hash << 7) + (hash << 8) + (hash << 24);
+        }
+        return `fnv1a32:${(hash >>> 0).toString(16)}`;
+      };
+
+      (async () => {
+        let artifactHash = "";
+        try {
+          if (window.crypto?.subtle) {
+            const data = new TextEncoder().encode(json);
+            const digest = await window.crypto.subtle.digest("SHA-256", data);
+            artifactHash = `sha256:${toHex(digest)}`;
+          } else {
+            artifactHash = hashFallback(json);
+          }
+        } catch {
+          artifactHash = hashFallback(json);
+        }
+
+        Loop.markStepDone("seed_export_v1", { ...metaBase, artifactHash });
+        loadJourney().then((journey) => {
+          if (!journey) return;
+          const wf2 = Loop.ensureWorkflowV2();
+          const badgeResult = Loop.ensureJourneyBadges(journey, wf2);
+          if (badgeResult?.minted || badgeResult?.marked) Loop.saveWorkflowV2?.(wf2, journey?.id || "");
+        });
+        void refreshExportUI();
+      })();
     } else {
-      exportNote.textContent = "Exported. Seed step complete. Finish EP-001 gates and Training to mint the badge.";
+      const wf = loadWorkflow();
+      wf.seedDone = true;
+      wf.updatedAt = new Date().toISOString();
+      saveWorkflow(wf);
+      if (bytecastComplete(wf) && wf.trainingDone) {
+        mintBadge("p1_golden_path_v1", "P1: Golden Path", {
+          cycle: wf.cycle,
+          seed: lastArtifact.seed?.name || "",
+        });
+        exportNote.textContent = "Exported. Seed step complete. Badge minted. Open Playlist to see it.";
+        claimBadgeLink.textContent = "Claim Badge + Back to Playlist";
+      } else {
+        exportNote.textContent = "Exported. Seed step complete. Finish EP-001 gates and Training to mint the badge.";
+      }
     }
 
-    refreshExportUI();
+    if (!Loop) void refreshExportUI();
   });
 
   intensityInput.addEventListener("input", setIntensityLabel);
   setIntensityLabel();
-  refreshExportUI();
+  void refreshExportUI();
 })();

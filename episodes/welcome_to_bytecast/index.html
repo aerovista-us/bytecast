@@ -384,7 +384,9 @@
     </footer>
   </main>
 
+  <script src="../../assets/shared/bytecast_loop.js"></script>
 <script>
+  const Loop = window.ByteCastLoop || null;
   const PROFILE = {
   "schema": "bytecast-ep-profile-v1",
   "episode": {
@@ -680,6 +682,13 @@
   }
 
   function setGate(flagName) {
+    if (Loop) {
+      const map = { listen: "ep001_listen", slide: "ep001_slide", interact: "ep001_engage" };
+      const stepId = map[flagName];
+      if (stepId) Loop.markStepDone(stepId, { episode: "EP-001" });
+      renderGate();
+      return;
+    }
     const wf = loadWorkflow();
     wf.bytecast = wf.bytecast || { listen: false, slide: false, interact: false };
     if (!wf.bytecast[flagName]) {

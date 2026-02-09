@@ -553,9 +553,11 @@
     </footer>
   </main>
 
+  <script src="../../assets/shared/bytecast_loop.js"></script>
   <script>
     const PROFILE_URL = "./bytecast_ep_profile.json";
     const OFFER_PACK_URL = "../../aerovista_offer_pack/app/data/offer-pack-data.json";
+    const Loop = window.ByteCastLoop || null;
 
     const $ = (s, r = document) => r.querySelector(s);
 
@@ -936,6 +938,9 @@
       await renderOfferPack();
 
       const audioEl = $("#audio");
+      audioEl.addEventListener("play", () => {
+        try { Loop?.markStepDone?.("ep002_listen", { episode: profile?.episode?.code || "EP-002" }); } catch {}
+      }, { once: true });
       audioEl.addEventListener("error", () => {
         $("#audioHint").textContent = "Audio missing or blocked. Place assets/bytecast-ep2.mp3 and serve via http://";
       });

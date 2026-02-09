@@ -1,6 +1,13 @@
 (function () {
   'use strict';
 
+  try {
+    // Division track completion: counts as "Offer Pack Visit" for journey steps.
+    window.ByteCastLoop?.markStepDone?.('offer_pack_visit', { app: 'aerovista_offer_pack' });
+  } catch {
+    // ignore
+  }
+
   let data = null;
   let noncoderData = null;
   let summitCoursesData = null;

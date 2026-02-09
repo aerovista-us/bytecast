@@ -1,0 +1,158 @@
+{
+  "schema": "bytecast-journey-steps-v1",
+  "updated_on": "2026-02-09",
+  "journeys": [
+    {
+      "id": "p1_golden_path",
+      "label": "Onboarding (Golden Path)",
+      "description": "EP-001 gates -> TR-001 -> Seed export -> Badge",
+      "isDefault": true,
+      "steps": [
+        {
+          "id": "ep001_gates",
+          "label": "EP-001 Gates",
+          "lane": "bytecast",
+          "href": "episodes/welcome_to_bytecast/index.html",
+          "cta": "Legendary: Finish EP-001",
+          "complete_when": {
+            "type": "steps_all",
+            "ids": ["ep001_listen", "ep001_slide", "ep001_engage"]
+          }
+        },
+        {
+          "id": "tr001_golden_path",
+          "label": "Training (TR-001)",
+          "lane": "training",
+          "href": "training_missions/tr_001_golden_path/index.html",
+          "cta": "Legendary: Run TR-001",
+          "depends_on": ["ep001_gates"]
+        },
+        {
+          "id": "seed_export_v1",
+          "label": "Seed Export",
+          "lane": "seed",
+          "href": "seed_builder_studio/seed_orchard_ui/index.html",
+          "cta": "Legendary: Export Seed",
+          "depends_on": ["tr001_golden_path"]
+        },
+        {
+          "id": "badge_p1_golden_path_v1",
+          "label": "Badge",
+          "lane": "badge",
+          "href": "seed_bytecast.html",
+          "cta": "Legendary: View Badge",
+          "depends_on": ["seed_export_v1"],
+          "complete_when": {
+            "type": "badge_has",
+            "badge_id": "p1_golden_path_v1"
+          }
+        }
+      ],
+      "badges": [
+        {
+          "id": "p1_golden_path_v1",
+          "label": "P1: Golden Path",
+          "requires": ["ep001_gates", "tr001_golden_path", "seed_export_v1"]
+        }
+      ]
+    },
+    {
+      "id": "seeding_v1",
+      "label": "Seeding Track",
+      "description": "Standalone seed work: export an artifact and earn the seeding badge.",
+      "steps": [
+        {
+          "id": "seed_export_v1",
+          "label": "Seed Export",
+          "lane": "seed",
+          "href": "seed_builder_studio/seed_orchard_ui/index.html",
+          "cta": "Legendary: Export a Seed",
+          "complete_when": {
+            "type": "step_done",
+            "id": "seed_export_v1"
+          }
+        },
+        {
+          "id": "badge_seed_exporter_v1",
+          "label": "Seeding Badge",
+          "lane": "badge",
+          "href": "seed_bytecast.html",
+          "cta": "Legendary: View Badge",
+          "depends_on": ["seed_export_v1"],
+          "complete_when": {
+            "type": "badge_has",
+            "badge_id": "seed_exporter_v1"
+          }
+        }
+      ],
+      "badges": [
+        {
+          "id": "seed_exporter_v1",
+          "label": "Seeding: Exporter",
+          "requires": ["seed_export_v1"]
+        }
+      ]
+    },
+    {
+      "id": "division_aerovista_v1",
+      "label": "Division Track: AeroVista",
+      "description": "Understand the divisions, open the offer system, ship a seed artifact.",
+      "steps": [
+        {
+          "id": "ep002_listen",
+          "label": "EP-002 Listen",
+          "lane": "bytecast",
+          "href": "episodes/aerovista_7_division_overview/index.html",
+          "cta": "Legendary: Start EP-002",
+          "complete_when": {
+            "type": "step_done",
+            "id": "ep002_listen"
+          }
+        },
+        {
+          "id": "offer_pack_visit",
+          "label": "Offer Pack Visit",
+          "lane": "training",
+          "href": "aerovista_offer_pack/app/index.html",
+          "cta": "Legendary: Open Offer Pack",
+          "depends_on": ["ep002_listen"],
+          "complete_when": {
+            "type": "step_done",
+            "id": "offer_pack_visit"
+          }
+        },
+        {
+          "id": "seed_export_v1",
+          "label": "Seed Export",
+          "lane": "seed",
+          "href": "seed_builder_studio/seed_orchard_ui/index.html",
+          "cta": "Legendary: Export Seed",
+          "depends_on": ["offer_pack_visit"],
+          "complete_when": {
+            "type": "step_done",
+            "id": "seed_export_v1"
+          }
+        },
+        {
+          "id": "badge_division_aerovista_v1",
+          "label": "Division Badge",
+          "lane": "badge",
+          "href": "seed_bytecast.html",
+          "cta": "Legendary: View Badge",
+          "depends_on": ["seed_export_v1"],
+          "complete_when": {
+            "type": "badge_has",
+            "badge_id": "division_aerovista_v1"
+          }
+        }
+      ],
+      "badges": [
+        {
+          "id": "division_aerovista_v1",
+          "label": "Division: AeroVista",
+          "requires": ["ep002_listen", "offer_pack_visit", "seed_export_v1"]
+        }
+      ]
+    }
+  ]
+}

@@ -205,9 +205,11 @@
     </section>
   </main>
 
+  <script src="../../assets/shared/bytecast_loop.js"></script>
   <script>
     const WORKFLOW_KEY = "bytecast.workflow.v1";
     const MISSIONS_KEY = "bytecast.tr001.v1";
+    const Loop = window.ByteCastLoop || null;
 
     function defaultWorkflow() {
       return {
@@ -309,9 +311,13 @@
     document.getElementById("markTraining").addEventListener("click", () => {
       const wf = loadWorkflow();
       if (!bytecastComplete(wf)) return;
-      wf.trainingDone = true;
-      wf.updatedAt = new Date().toISOString();
-      saveWorkflow(wf);
+      if (Loop) {
+        Loop.markStepDone("tr001_golden_path", { mission: "tr_001_golden_path" });
+      } else {
+        wf.trainingDone = true;
+        wf.updatedAt = new Date().toISOString();
+        saveWorkflow(wf);
+      }
       render();
     });
 
@@ -320,4 +326,3 @@
   </script>
 </body>
 </html>
-

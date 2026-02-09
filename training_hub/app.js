@@ -1,11 +1,18 @@
 const MANIFEST_PATH = "./data/modules.json";
 const CANON_MAP_PATH = "../.CODEX/bytecast_canon_map_2026-02-08.md";
+const JOURNEY_PATH = "../data/journey_steps.json";
+const PRIMARY_JOURNEY_ID = "";
 const WORKFLOW_KEY = "bytecast.workflow.v1";
 const APP_MODE = document.body.dataset.appMode || "training";
+const Loop = window.ByteCastLoop || null;
+const LoopUI = window.ByteCastLoopUI || null;
 
 const state = {
   modules: [],
   canonEntries: [],
+  journeyConfig: null,
+  primaryJourney: null,
+  nextJourneyHref: "",
 };
 
 const refs = {
@@ -34,9 +41,10 @@ async function init() {
   wireEvents();
   renderWorkflow();
   try {
-    const [manifestResponse, canonResponse] = await Promise.all([
+    const [manifestResponse, canonResponse, journeyResponse] = await Promise.all([
       fetch(MANIFEST_PATH),
       fetch(CANON_MAP_PATH),
+      fetch(JOURNEY_PATH),
     ]);
 
     if (!manifestResponse.ok) {
@@ -49,12 +57,37 @@ async function init() {
 
     const manifest = await manifestResponse.json();
     const canonMarkdown = await canonResponse.text();
+    let journeyConfig = null;
+    try {
+      journeyConfig = journeyResponse.ok ? await journeyResponse.json() : null;
+    } catch {
+      journeyConfig = null;
+    }
 
     state.modules = Array.isArray(manifest.modules) ? manifest.modules : [];
     state.canonEntries = parseCanonEntries(canonMarkdown);
+    state.journeyConfig = journeyConfig || {
+      journeys: [
+        {
+          id: "p1_golden_path",
+          label: "P1: Golden Path",
+          description: "Playlist -> EP-001 -> Training -> Seed -> Badge",
+          steps: [
+            { id: "ep001_gates", label: "EP-001 Gates", lane: "bytecast", href: "episodes/welcome_to_bytecast/index.html" },
+            { id: "tr001_golden_path", label: "Training (TR-001)", lane: "training", href: "training_missions/tr_001_golden_path/index.html", depends_on: ["ep001_gates"] },
+            { id: "seed_export_v1", label: "Seed Export", lane: "seed", href: "seed_builder_studio/seed_orchard_ui/index.html", depends_on: ["tr001_golden_path"] },
+            { id: "badge_p1_golden_path_v1", label: "Badge", lane: "badge", href: "seed_bytecast.html", depends_on: ["seed_export_v1"], complete_when: { type: "badge_has", badge_id: "p1_golden_path_v1" } }
+          ],
+          badges: [{ id: "p1_golden_path_v1", label: "P1: Golden Path", requires: ["ep001_gates", "tr001_golden_path", "seed_export_v1"] }]
+        }
+      ]
+    };
+    const activeId = Loop?.getActiveJourneyId?.() || state.journeyConfig.journeys.find((j) => j && j.isDefault)?.id || state.journeyConfig.journeys[0]?.id || "";
+    state.primaryJourney = Loop ? Loop.getJourneyById(state.journeyConfig, activeId) : null;
 
     hydrateCategoryFilter(state.modules);
     render();
+    renderWorkflow();
     refs.loadStatus.textContent = `Loaded ${state.modules.length} modules from ${MANIFEST_PATH}.`;
   } catch (error) {
     console.error(error);
@@ -178,6 +211,75 @@ function renderWorkflow() {
     return;
   }
 
+  if (Loop && state.journeyConfig) {
+    const activeId = Loop.getActiveJourneyId?.() || state.journeyConfig.journeys.find((j) => j && j.isDefault)?.id || state.journeyConfig.journeys[0]?.id || "";
+    state.primaryJourney = Loop.getJourneyById(state.journeyConfig, activeId);
+  }
+
+  if (Loop && state.primaryJourney) {
+    const wf2 = Loop.ensureWorkflowV2();
+    const journey = state.primaryJourney;
+
+    const badgeResult = Loop.ensureJourneyBadges(journey, wf2);
+    if (badgeResult?.minted || badgeResult?.marked) {
+      Loop.saveWorkflowV2?.(wf2, journey?.id || "");
+    }
+
+    const steps = Array.isArray(journey.steps) ? journey.steps : [];
+    const doneCount = steps.filter((s) => Loop.isStepComplete(journey, s, wf2)).length;
+    const next = Loop.getNextStep(journey, wf2);
+    const nextHref = next?.href ? Loop.resolveFromRoot(next.href) : "";
+    state.nextJourneyHref = nextHref;
+
+    const updatedAt = formatWorkflowTime(wf2.updatedAt);
+    refs.workflowSummary.textContent =
+      `${journey.label}. Cycle ${wf2.cycle}. Ability Level ${wf2.abilityLevel}. ` +
+      `Steps ${doneCount}/${Math.max(1, steps.length)}. ` +
+      `${next ? `Next: ${next.label}.` : "No next step found."}`;
+
+    const laneStep = (lane) => steps.find((s) => s && s.lane === lane) || null;
+    const bc = laneStep("bytecast");
+    const tr = laneStep("training");
+    const sd = laneStep("seed");
+
+    const bcDone = bc ? Loop.isStepComplete(journey, bc, wf2) : Loop.isStepDone(wf2, "ep001_gates");
+    const trDone = tr ? Loop.isStepComplete(journey, tr, wf2) : Loop.isStepDone(wf2, "tr001_golden_path");
+    const sdDone = sd ? Loop.isStepComplete(journey, sd, wf2) : Loop.isStepDone(wf2, "seed_export_v1");
+
+    refs.wfBytecast?.classList.toggle("done", bcDone);
+    refs.wfTraining?.classList.toggle("done", trDone);
+    refs.wfSeed?.classList.toggle("done", sdDone);
+    if (refs.wfBytecast) refs.wfBytecast.textContent = bcDone ? "ByteCast OK" : "ByteCast TODO";
+    if (refs.wfTraining) refs.wfTraining.textContent = trDone ? "Training OK" : (bcDone ? "Training TODO" : "Training LOCKED");
+    if (refs.wfSeed) refs.wfSeed.textContent = sdDone ? "Seed OK" : (trDone ? "Seed TODO" : "Seed LOCKED");
+
+    if (refs.markLoopStep) {
+      const disabled = !nextHref;
+      refs.markLoopStep.disabled = disabled;
+      refs.markLoopStep.classList.toggle("is-disabled", disabled);
+      refs.markLoopStep.textContent = next?.cta || (next ? `Open: ${next.label}` : "Next step unavailable");
+    }
+
+    if (refs.nextAppLink) {
+      refs.nextAppLink.href = nextHref || "../seed_bytecast.html";
+      refs.nextAppLink.textContent = next ? `Open: ${next.label}` : "Open Playlist";
+      refs.nextAppLink.classList.toggle("is-disabled", !nextHref);
+      refs.nextAppLink.setAttribute("aria-disabled", nextHref ? "false" : "true");
+    }
+
+    setWorkflowNote(`Last updated: ${updatedAt}. This loop is config-driven via ${JOURNEY_PATH}.`);
+
+    if (LoopUI) {
+      void LoopUI.renderJourneyMap({
+        container: document.getElementById("journey-map"),
+        configUrl: JOURNEY_PATH,
+        surface: "training_hub",
+      });
+    }
+    return;
+  }
+
+  // Fallback: legacy v1 loop UI.
   const workflowState = loadWorkflowState();
   const bytecastComplete = isBytecastComplete(workflowState);
   const bytecastCompletedCount = getBytecastCompletedCount(workflowState);
@@ -203,20 +305,14 @@ function renderWorkflow() {
   }
 
   if (refs.markLoopStep) {
-    if (APP_MODE === "training") {
-      refs.markLoopStep.disabled = !trainingUnlocked || Boolean(workflowState.trainingDone);
-      refs.markLoopStep.classList.toggle("is-disabled", refs.markLoopStep.disabled);
-      refs.markLoopStep.textContent = workflowState.trainingDone
-        ? "Training Cycle Completed"
-        : "Complete Training Cycle";
-    } else {
-      refs.markLoopStep.disabled = !seedUnlocked;
-      refs.markLoopStep.classList.toggle("is-disabled", refs.markLoopStep.disabled);
-      refs.markLoopStep.textContent = "Complete Seed Builder Real Work + Unlock Next Ability";
-    }
+    refs.markLoopStep.disabled = !trainingUnlocked || Boolean(workflowState.trainingDone);
+    refs.markLoopStep.classList.toggle("is-disabled", refs.markLoopStep.disabled);
+    refs.markLoopStep.textContent = workflowState.trainingDone
+      ? "Training Cycle Completed"
+      : "Complete Training Cycle";
   }
 
-  if (refs.nextAppLink && APP_MODE === "training") {
+  if (refs.nextAppLink) {
     refs.nextAppLink.classList.toggle("is-disabled", !seedUnlocked);
     refs.nextAppLink.setAttribute("aria-disabled", seedUnlocked ? "false" : "true");
   }
@@ -224,9 +320,22 @@ function renderWorkflow() {
   setWorkflowNote(
     `Last updated: ${updatedAt}. Required order: listen -> slide -> interact, then training, then seed real work.`
   );
+
+  if (LoopUI) {
+    void LoopUI.renderJourneyMap({
+      container: document.getElementById("journey-map"),
+      configUrl: JOURNEY_PATH,
+      surface: "training_hub",
+    });
+  }
 }
 
 function onMarkLoopStep() {
+  if (Loop && state.nextJourneyHref) {
+    window.location.href = state.nextJourneyHref;
+    return;
+  }
+
   const workflowState = loadWorkflowState();
 
   if (APP_MODE === "training") {
