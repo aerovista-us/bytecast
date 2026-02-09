@@ -1,0 +1,53 @@
+{
+  "schema": "bytecast-module-manifest-v1",
+  "app_id": "training_hub",
+  "app_name": "Training Hub",
+  "updated_on": "2026-02-08",
+  "modules": [
+    {
+      "id": "aerovista_offer_pack",
+      "name": "AeroVista Offer Pack App",
+      "description": "Primary training and sales operations app for divisions, offers, and execution playbooks.",
+      "owner": "Offers and Sales Ops",
+      "category": "app",
+      "path": "../aerovista_offer_pack/app/index.html",
+      "canon_path": "aerovista_offer_pack"
+    },
+    {
+      "id": "lift_lab_training_site",
+      "name": "Lift Lab Training Site",
+      "description": "Non-coder onboarding bundle with missions, contribution lanes, and guided workflows.",
+      "owner": "Training and Community",
+      "category": "app",
+      "path": "../lift_lab_bytecast_bundle/site/index.html",
+      "canon_path": "lift_lab_bytecast_bundle"
+    },
+    {
+      "id": "workspace_docs_index",
+      "name": "Workspace Docs Index",
+      "description": "Main standards and operations documents for seed, template, and publishing workflows.",
+      "owner": "Platform Ops",
+      "category": "docs",
+      "path": "../docs/README.md",
+      "canon_path": "docs"
+    },
+    {
+      "id": "episode_index",
+      "name": "Episode Slug Index",
+      "description": "Canonical index for publishable episodes under content-based slug folders.",
+      "owner": "Content Ops",
+      "category": "episodes",
+      "path": "../episodes/README.md",
+      "canon_path": "episodes"
+    },
+    {
+      "id": "episode_registry",
+      "name": "Episode Registry JSON",
+      "description": "Source of truth for episode slug mapping, legacy wrappers, and publishable status.",
+      "owner": "Content Ops",
+      "category": "episodes",
+      "path": "../.CODEX/episode_registry.json",
+      "canon_path": "episodes"
+    }
+  ]
+}

@@ -1,0 +1,780 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ByteCast — Episode Template</title>
+  <meta name="description" content="ByteCast: dark, sleek, slideshow-style audio + learning + engagement template." />
+  <style>
+    /* =========================================================
+      BYTECAST — Dark Sleek Template (Venta + Neon)
+      - Default theme: venta black + neon blue
+      - Accents: bright orange + ghost purple glow
+      - Theme switching via CSS variables
+    ========================================================= */
+
+    :root {
+      --bg0: #050607;        /* venta-ish */
+      --bg1: #0b0f14;
+      --card: rgba(255,255,255,0.06);
+      --card2: rgba(255,255,255,0.085);
+      --stroke: rgba(255,255,255,0.12);
+      --stroke2: rgba(100,180,255,0.25);
+
+      --ink: rgba(255,255,255,0.93);
+      --muted: rgba(255,255,255,0.66);
+      --faint: rgba(255,255,255,0.42);
+
+      --neon: #22a7ff;       /* neon blue */
+      --neon2:#0be1ff;       /* cyan pop */
+      --orange:#ff6a2a;      /* highlight orange */
+      --ghost: #a66bff;      /* ghost purple */
+
+      --shadow: 0 18px 80px rgba(0,0,0,0.55);
+      --shadow2: 0 10px 35px rgba(0,0,0,0.45);
+      --radius: 22px;
+      --radius2: 14px;
+
+      --max: 1180px;
+      --pad: clamp(16px, 2.2vw, 26px);
+
+      --glow-neon: 0 0 18px rgba(34,167,255,0.30), 0 0 42px rgba(34,167,255,0.16);
+      --glow-ghost: 0 0 18px rgba(166,107,255,0.26), 0 0 44px rgba(166,107,255,0.12);
+      --glow-orange: 0 0 18px rgba(255,106,42,0.22), 0 0 40px rgba(255,106,42,0.10);
+
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    /* Themes (switch by data-theme on <html>) */
+    html[data-theme="venta-neon"] { /* default = same as :root */ }
+
+    html[data-theme="ghostwave"]{
+      --bg0:#05040a; --bg1:#0b0820;
+      --neon:#5c8cff; --neon2:#a66bff;
+      --ghost:#ff3df3; --orange:#ffb020;
+      --stroke2: rgba(166,107,255,0.28);
+      --glow-neon: 0 0 18px rgba(92,140,255,0.28), 0 0 44px rgba(166,107,255,0.16);
+      --glow-ghost: 0 0 18px rgba(255,61,243,0.20), 0 0 44px rgba(255,61,243,0.10);
+    }
+
+    html[data-theme="embercore"]{
+      --bg0:#070606; --bg1:#120c0a;
+      --neon:#ff6a2a; --neon2:#ffb020;
+      --orange:#22a7ff; --ghost:#a66bff;
+      --stroke2: rgba(255,176,32,0.25);
+      --glow-neon: 0 0 18px rgba(255,106,42,0.24), 0 0 44px rgba(255,176,32,0.14);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      background:
+        radial-gradient(1200px 600px at 15% 10%, rgba(34,167,255,0.10), transparent 60%),
+        radial-gradient(900px 500px at 85% 25%, rgba(166,107,255,0.09), transparent 60%),
+        radial-gradient(1100px 700px at 50% 100%, rgba(255,106,42,0.05), transparent 62%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+    .skip {
+      position: absolute; left: -999px; top: 8px;
+      background: #000; color: #fff; padding: 10px 12px; border-radius: 10px;
+      z-index: 9999;
+    }
+    .skip:focus { left: 12px; }
+
+    /* Top chrome */
+    .topbar {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(12px);
+      background: linear-gradient(180deg, rgba(5,6,7,0.82), rgba(5,6,7,0.56));
+      border-bottom: 1px solid var(--stroke);
+    }
+
+    .topbar__inner{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 14px var(--pad);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-content: space-between;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,0.03);
+      box-shadow: var(--shadow2);
+    }
+    .dot {
+      width: 10px; height: 10px; border-radius: 999px;
+      background: var(--neon);
+      box-shadow: var(--glow-neon);
+    }
+    .badge small { color: var(--muted); letter-spacing: 0.3px; }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .select, .btn {
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,0.03);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 10px 12px;
+      font-size: 13px;
+      outline: none;
+    }
+    .btn {
+      cursor: pointer;
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      transition: transform .12s ease, border-color .2s ease, box-shadow .2s ease;
+    }
+    .btn:hover { transform: translateY(-1px); border-color: var(--stroke2); box-shadow: var(--glow-neon); }
+    .btn:active { transform: translateY(0px); }
+
+    .btn--primary {
+      border-color: rgba(34,167,255,0.35);
+      box-shadow: var(--glow-neon);
+    }
+
+    /* Layout */
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 18px var(--pad) 90px;
+    }
+
+    .hero {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.12);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02)),
+        radial-gradient(1100px 500px at 10% 0%, rgba(34,167,255,0.16), transparent 55%),
+        radial-gradient(900px 450px at 90% 20%, rgba(166,107,255,0.14), transparent 55%),
+        radial-gradient(900px 450px at 60% 120%, rgba(255,106,42,0.07), transparent 60%);
+      box-shadow: var(--shadow);
+      padding: clamp(18px, 2.8vw, 34px);
+    }
+
+    .hero__grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 18px;
+      align-items: start;
+    }
+    @media (max-width: 900px){
+      .hero__grid { grid-template-columns: 1fr; }
+    }
+
+    .h-title {
+      font-size: clamp(34px, 4.2vw, 58px);
+      line-height: 1.02;
+      margin: 0 0 10px;
+      letter-spacing: -0.02em;
+      text-shadow: 0 0 18px rgba(34,167,255,0.10);
+    }
+    .h-sub {
+      margin: 0 0 16px;
+      font-size: clamp(15px, 1.35vw, 18px);
+      color: var(--muted);
+      max-width: 62ch;
+    }
+
+    .pills { display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0 0; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 8px 12px; border-radius: 999px;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,0.03);
+      color: rgba(255,255,255,0.86);
+      font-size: 12px;
+    }
+    .pill strong { font-family: var(--mono); font-weight: 700; color: rgba(255,255,255,0.94); }
+    .pill .spark { width: 8px; height: 8px; border-radius: 99px; background: var(--ghost); box-shadow: var(--glow-ghost); }
+
+    /* Animated ByteCast logo */
+    .logoCard{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.22);
+      padding: 16px;
+      box-shadow: var(--shadow2);
+    }
+    .logoWrap{
+      display:flex; align-items:center; justify-content:center;
+      height: 220px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 18px;
+      background:
+        radial-gradient(400px 200px at 30% 30%, rgba(34,167,255,0.20), transparent 70%),
+        radial-gradient(380px 220px at 70% 50%, rgba(166,107,255,0.16), transparent 72%),
+        radial-gradient(420px 280px at 50% 100%, rgba(255,106,42,0.10), transparent 75%),
+        rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+    .logoWrap::after{
+      content:"";
+      position:absolute; inset:-40%;
+      background: conic-gradient(from 180deg, rgba(34,167,255,0.22), rgba(166,107,255,0.14), rgba(255,106,42,0.10), rgba(34,167,255,0.22));
+      filter: blur(26px);
+      opacity: .45;
+      animation: spin 10s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    svg#bytecastLogo{
+      width: min(520px, 100%);
+      height: auto;
+      z-index: 2;
+      filter: drop-shadow(0 0 18px rgba(34,167,255,0.22)) drop-shadow(0 0 28px rgba(166,107,255,0.16));
+      animation: floaty 4.2s ease-in-out infinite;
+    }
+    @keyframes floaty{
+      0%,100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+    }
+    .logoCaption{
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;
+    }
+
+    /* Player */
+    .player {
+      margin-top: 14px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      box-shadow: var(--shadow2);
+      overflow: hidden;
+    }
+    .player__top {
+      padding: 16px var(--pad);
+      display:flex; align-items:center; justify-content:space-between; gap: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+    }
+    .player__meta h2 { margin:0; font-size: 16px; letter-spacing: -0.01em; }
+    .player__meta p { margin:6px 0 0; color: var(--muted); font-size: 13px; max-width: 72ch; }
+
+    .player__controls{
+      padding: 14px var(--pad) 18px;
+      display:grid;
+      gap: 14px;
+    }
+
+    audio { width: 100%; }
+
+    .ctrlRow{
+      display:flex; gap: 12px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    }
+    .ctrlGroup{
+      display:flex; gap: 10px; flex-wrap:wrap; align-items:center;
+    }
+
+    .chip{
+      display:inline-flex; align-items:center; gap: 8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--stroke);
+      background: rgba(0,0,0,0.22);
+      font-size: 12px;
+      color: rgba(255,255,255,0.86);
+    }
+    .chip b { font-family: var(--mono); font-weight: 800; color: rgba(255,255,255,0.92); }
+    .chip .tagdot { width: 7px; height: 7px; border-radius: 99px; background: var(--neon); box-shadow: var(--glow-neon); }
+
+    .kbtn{
+      border: 1px solid var(--stroke);
+      background: rgba(0,0,0,0.26);
+      color: var(--ink);
+      padding: 10px 12px;
+      border-radius: 999px;
+      cursor:pointer;
+      display:inline-flex; align-items:center; gap: 10px;
+      transition: transform .12s ease, border-color .2s ease, box-shadow .2s ease;
+      min-height: 40px;
+      user-select:none;
+    }
+    .kbtn:hover{ transform: translateY(-1px); border-color: var(--stroke2); box-shadow: var(--glow-neon); }
+    .kbtn:active{ transform: translateY(0px); }
+
+    .kbtn .mini { font-family: var(--mono); font-size: 11px; color: var(--faint); }
+    .kbtn .tag { font-size: 11px; padding: 3px 8px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.86); }
+    .kbtn .tag--neon{ border-color: rgba(34,167,255,0.32); box-shadow: var(--glow-neon); }
+    .kbtn .tag--orange{ border-color: rgba(255,106,42,0.30); box-shadow: var(--glow-orange); }
+    .kbtn .tag--ghost{ border-color: rgba(166,107,255,0.30); box-shadow: var(--glow-ghost); }
+
+    .seek {
+      display:grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items:center;
+    }
+    input[type="range"]{
+      width: 100%;
+      accent-color: var(--neon);
+    }
+    .time {
+      font-family: var(--mono);
+      color: rgba(255,255,255,0.82);
+      font-size: 12px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--stroke);
+      background: rgba(0,0,0,0.20);
+      min-width: 126px;
+      text-align: center;
+    }
+
+    /* Slideshow */
+    .deck {
+      margin-top: 18px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.03);
+      box-shadow: var(--shadow2);
+      overflow: hidden;
+    }
+
+    .deck__bar{
+      display:flex; gap: 10px; align-items:center; justify-content:space-between;
+      padding: 12px var(--pad);
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.20);
+    }
+    .deck__bar h3{
+      margin:0;
+      font-size: 14px;
+      color: rgba(255,255,255,0.88);
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .dots { display:flex; gap: 8px; align-items:center; flex-wrap:wrap; justify-content:flex-end; }
+    .dotBtn{
+      width: 10px; height: 10px;
+      border-radius: 99px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.06);
+      cursor:pointer;
+      transition: transform .12s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .dotBtn[aria-current="true"]{
+      background: var(--neon);
+      border-color: rgba(34,167,255,0.45);
+      box-shadow: var(--glow-neon);
+      transform: scale(1.05);
+    }
+
+    .slides{
+      position: relative;
+      min-height: 320px;
+    }
+    .slide{
+      display:none;
+      padding: 18px var(--pad) 20px;
+    }
+    .slide.is-active{ display:block; animation: slideIn .22s ease; }
+    @keyframes slideIn{
+      from { opacity:0; transform: translateY(6px); }
+      to { opacity:1; transform: translateY(0px); }
+    }
+
+    .slideGrid{
+      display:grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 16px;
+      align-items: start;
+    }
+    @media (max-width: 920px){
+      .slideGrid{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      border-radius: var(--radius2);
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.20);
+      padding: 16px;
+    }
+    .card h4{ margin:0 0 10px; font-size: 16px; letter-spacing:-0.01em; }
+    .card p{ margin: 0 0 10px; color: var(--muted); line-height: 1.55; }
+    .card ul{ margin: 10px 0 0; padding-left: 18px; color: rgba(255,255,255,0.82); }
+    .card li{ margin: 6px 0; color: rgba(255,255,255,0.82); }
+
+    .callout{
+      border-radius: var(--radius2);
+      border: 1px solid rgba(34,167,255,0.24);
+      background: radial-gradient(600px 260px at 30% 10%, rgba(34,167,255,0.18), transparent 62%),
+                  rgba(0,0,0,0.20);
+      padding: 16px;
+      box-shadow: var(--glow-neon);
+    }
+    .callout .k { font-family: var(--mono); color: rgba(255,255,255,0.88); font-size: 12px; }
+    .callout strong { color: rgba(255,255,255,0.94); }
+
+    /* Engagement blocks (quests/quiz/games) */
+    .engageGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 720px){
+      .engageGrid{ grid-template-columns: 1fr; }
+    }
+    .slot{
+      border-radius: var(--radius2);
+      border: 1px dashed rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.02);
+      padding: 14px;
+      min-height: 120px;
+    }
+    .slotHeader{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      margin-bottom: 8px;
+    }
+    .slotHeader b{ letter-spacing: -0.01em; }
+    .slot small{ color: var(--muted); }
+
+    /* About section */
+    .about{
+      margin-top: 18px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.03);
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+    }
+    details{
+      border-top: 1px solid rgba(255,255,255,0.10);
+      padding: 0 var(--pad);
+      background: rgba(0,0,0,0.12);
+    }
+    details:first-of-type { border-top: none; }
+    summary{
+      cursor:pointer;
+      padding: 16px 0;
+      list-style:none;
+      display:flex; align-items:center; justify-content:space-between; gap: 12px;
+      color: rgba(255,255,255,0.92);
+      font-weight: 700;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    summary .hint{
+      color: var(--muted);
+      font-weight: 500;
+      font-size: 12px;
+    }
+    .about__content{
+      padding: 0 0 18px;
+      display:grid;
+      gap: 12px;
+    }
+
+    .twoCol{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 900px){
+      .twoCol{ grid-template-columns: 1fr; }
+    }
+
+    /* Footer */
+    footer{
+      margin-top: 18px;
+      color: var(--faint);
+      display:flex; justify-content:space-between; gap: 12px; flex-wrap:wrap;
+      font-size: 12px;
+      padding: 10px 2px;
+    }
+
+    :focus-visible{
+      outline: 2px solid rgba(34,167,255,0.55);
+      outline-offset: 3px;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <div class="topbar">
+    <div class="topbar__inner">
+      <div class="badge" title="ByteCast status">
+        <span class="dot"></span>
+        <div>
+          <div style="font-weight:800; letter-spacing:-0.01em;">ByteCast</div>
+          <small>Slideshow • Audio • Engagement</small>
+        </div>
+      </div>
+
+      <div class="controls">
+        <select class="select" id="themeSelect" aria-label="Theme">
+          <option value="venta-neon">Venta • Neon Blue (Default)</option>
+          <option value="ghostwave">Ghostwave (Purple)</option>
+          <option value="embercore">Embercore (Warm)</option>
+        </select>
+
+        <button class="btn btn--primary" id="btnPrev" type="button" aria-label="Previous slide">
+          ◀ <span style="font-family:var(--mono);">Prev</span>
+        </button>
+        <button class="btn btn--primary" id="btnNext" type="button" aria-label="Next slide">
+          <span style="font-family:var(--mono);">Next</span> ▶
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <main id="main" class="wrap">
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero__grid">
+        <div>
+          <h1 class="h-title" id="heroTitle">BYTECAST</h1>
+          <p class="h-sub">
+            Dark, sleek episodes with additive learning: audio + slides + micro-engagement.
+            Built for captivation, not scrolling fatigue.
+          </p>
+
+          <div class="pills" aria-label="Episode metadata">
+            <span class="pill"><span class="spark"></span><strong id="epCode">EP-000</strong> • Internal</span>
+            <span class="pill"><span class="spark"></span><strong id="epDate">2026-02-07</strong> • Timestamped</span>
+            <span class="pill"><span class="spark"></span><strong id="epTheme">Venta/Neon</strong> • Default</span>
+            <span class="pill"><span class="spark"></span><strong id="epTags">Seeds • Ops • Standard</strong></span>
+          </div>
+
+          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+            <button class="btn btn--primary" type="button" id="jumpPlayer">Jump to Player</button>
+            <button class="btn" type="button" id="jumpAbout">About / AeroVista</button>
+          </div>
+        </div>
+
+        <aside class="logoCard" aria-label="ByteCast logo">
+          <div class="logoWrap">
+            <!-- Flashy animated SVG logo -->
+            <svg id="bytecastLogo" viewBox="0 0 980 260" role="img" aria-label="ByteCast logo">
+              <defs>
+                <linearGradient id="gNeon" x1="0" x2="1" y1="0" y2="1">
+                  <stop offset="0" stop-color="var(--neon2)" />
+                  <stop offset="0.55" stop-color="var(--neon)" />
+                  <stop offset="1" stop-color="var(--ghost)" />
+                </linearGradient>
+
+                <filter id="fGlow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="6" result="blur"/>
+                  <feColorMatrix in="blur" type="matrix"
+                    values="1 0 0 0 0
+                            0 1 0 0 0
+                            0 0 1 0 0
+                            0 0 0 18 -7" result="glow"/>
+                  <feMerge>
+                    <feMergeNode in="glow"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+
+                <mask id="scanMask">
+                  <rect x="0" y="0" width="980" height="260" fill="white" opacity="0.18"/>
+                  <rect id="scanBar" x="-280" y="0" width="280" height="260" fill="white" opacity="1">
+                    <animate attributeName="x" from="-280" to="980" dur="2.6s" repeatCount="indefinite"/>
+                  </rect>
+                </mask>
+              </defs>
+
+              <!-- outer frame -->
+              <rect x="12" y="18" rx="34" ry="34" width="956" height="224"
+                    fill="rgba(0,0,0,0.18)" stroke="rgba(255,255,255,0.16)" stroke-width="2"/>
+
+              <!-- waves -->
+              <g opacity="0.78">
+                <path d="M70 180 C 140 110, 220 230, 300 160 S 470 120, 540 168 S 700 222, 790 145 S 900 105, 930 145"
+                      fill="none" stroke="var(--ghost)" stroke-width="6" opacity="0.38">
+                  <animate attributeName="opacity" values="0.18;0.52;0.18" dur="3.6s" repeatCount="indefinite"/>
+                </path>
+                <path d="M70 160 C 150 95, 230 210, 310 142 S 470 105, 545 152 S 705 210, 800 132 S 900 92, 930 132"
+                      fill="none" stroke="var(--neon)" stroke-width="8" opacity="0.58">
+                  <animate attributeName="stroke-width" values="7;9;7" dur="2.8s" repeatCount="indefinite"/>
+                </path>
+              </g>
+
+              <!-- main text -->
+              <g filter="url(#fGlow)">
+                <text x="90" y="140" font-size="88" font-weight="900" font-family="var(--sans)"
+                      fill="url(#gNeon)" letter-spacing="-1.6">BYTECAST</text>
+
+                <text x="92" y="182" font-size="18" font-weight="700" font-family="var(--mono)"
+                      fill="rgba(255,255,255,0.72)" letter-spacing="2.2">
+                  AUDIO • SLIDES • QUESTS • QUIZ • DROPS
+                </text>
+              </g>
+
+              <!-- scanline sheen -->
+              <rect x="12" y="18" rx="34" ry="34" width="956" height="224"
+                    fill="rgba(255,255,255,0.06)" mask="url(#scanMask)"/>
+              <!-- orange corner spark -->
+              <circle cx="910" cy="70" r="6" fill="var(--orange)">
+                <animate attributeName="r" values="5;7;5" dur="1.1s" repeatCount="indefinite"/>
+              </circle>
+            </svg>
+          </div>
+          <div class="logoCaption">
+            <span><b style="color:rgba(255,255,255,0.92);">Default:</b> Venta + Neon</span>
+            <span style="color:var(--muted); font-family:var(--mono);">Press ← / →</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Player -->
+    <section class="player" id="player">
+      <div class="player__top">
+        <div class="player__meta">
+          <h2 id="trackTitle">Episode Audio</h2>
+          <p id="trackDesc">
+            Drop your ByteCast audio file in <span style="font-family:var(--mono);">assets/</span> and set the src below.
+            Controls are tagged for training + repeatability.
+          </p>
+        </div>
+        <div class="chip" title="Playback profile">
+          <span class="tagdot"></span> <b>MODE</b> • Internal • Additive
+        </div>
+      </div>
+
+      <div class="player__controls">
+        <audio id="audio" preload="metadata" controls>
+          <!-- Replace with your file -->
+          <source src="assets/bytecast-ep.mp3" type="audio/mpeg" />
+        </audio>
+
+        <div class="seek" aria-label="Seek bar">
+          <input id="seek" type="range" min="0" max="1000" value="0" aria-label="Seek" />
+          <div class="time" id="time">00:00 / 00:00</div>
+        </div>
+
+        <!-- Tagged controls (every control has tags) -->
+        <div class="ctrlRow">
+          <div class="ctrlGroup" role="group" aria-label="Playback controls">
+            <button class="kbtn" id="cPlay" type="button">
+              ▶ Play <span class="mini">Space</span>
+              <span class="tag tag--neon">core</span>
+              <span class="tag tag--ghost">player</span>
+            </button>
+
+            <button class="kbtn" id="cBack" type="button">
+              ↺ -10s <span class="mini">J</span>
+              <span class="tag tag--neon">seek</span>
+              <span class="tag tag--ghost">review</span>
+            </button>
+
+            <button class="kbtn" id="cFwd" type="button">
+              +10s ↻ <span class="mini">L</span>
+              <span class="tag tag--neon">seek</span>
+              <span class="tag tag--orange">pace</span>
+            </button>
+
+            <button class="kbtn" id="cMark" type="button">
+              ✦ Mark <span class="mini">M</span>
+              <span class="tag tag--orange">highlight</span>
+              <span class="tag tag--ghost">notes</span>
+            </button>
+          </div>
+
+          <div class="ctrlGroup" role="group" aria-label="Secondary controls">
+            <button class="kbtn" id="cSpeed" type="button">
+              1.0× Speed <span class="mini">S</span>
+              <span class="tag tag--neon">tempo</span>
+              <span class="tag tag--ghost">clarity</span>
+            </button>
+
+            <button class="kbtn" id="cLoop" type="button">
+              ⟲ Loop <span class="mini">R</span>
+              <span class="tag tag--ghost">repeat</span>
+              <span class="tag tag--neon">training</span>
+            </button>
+
+            <button class="kbtn" id="cMute" type="button">
+              🔊 Mute <span class="mini">K</span>
+              <span class="tag tag--neon">audio</span>
+              <span class="tag tag--orange">focus</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="ctrlRow" aria-label="Markers and notes">
+          <div class="chip"><span class="tagdot"></span> <b>MARKERS</b> <span id="marksCount">0</span></div>
+          <div class="chip"><span class="tagdot"></span> <b>LAST</b> <span id="lastMark">—</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slideshow deck -->
+    <section class="deck" aria-label="Episode slideshow">
+      <div class="deck__bar">
+        <h3 id="deckTitle">Episode Slides</h3>
+        <div class="dots" id="dots" aria-label="Slide navigation"></div>
+      </div>
+
+      <div class="slides" id="slides">
+        <!-- Slide 1 -->
+        <article class="slide is-active" data-title="Intent">
+          <div class="slideGrid">
+            <div class="card">
+              <h4>Intent</h4>
+              <p>
+                This episode is designed as an additive learning run: each slide adds one layer,
+                so you feel forward motion without cognitive overload.
+              </p>
+              <ul>
+                <li>Listen → land the concept</li>
+                <li>Slide → lock the takeaway</li>
+                <li>Engage → confirm it sticks</li>
+              </ul>
+            </div>
+            <div class="callout">
+              <div class="k">KEY LINE</div>
+              <p style="margin:10px 0 0; color:rgba(255,255,255,0.86); line-height:1.55;">
+                <strong>Captivation beats duration.</strong>
+                We build episodes that make people finish.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Slide 2 -->
+        <article class="slide" data-title="What Changed">
+          <div class="slideGrid">
+            <div class="card">
+              <h4>What Changed</h4>
+              <p>
+                Seeds now ship with optional analytics + Seed Options docs. Minimal, toggleable, safe on file://.
+              </p>
+              <ul>
+                <li>Umami pre-wired via <span style="font-family:var(--mono);">window.__UMAMI__</span></li>
+                <li>Auto-disable on <span style="font-family:var(--mono);">file://</span></li>
+                <li>Domain guard to prevent accidental tracking</li>
+                <li><span style="font-family:var(--mono);">?no_analytics=1</s_

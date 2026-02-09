@@ -1,0 +1,55 @@
+[
+  {
+    "id": "mission_bug_report",
+    "track": "Scout",
+    "title": "Submit a gold-tier bug report",
+    "difficulty": "Easy",
+    "time_minutes": 15,
+    "what_to_do": [
+      "Find one issue on the ByteCast page that feels broken or confusing",
+      "Write exact steps to reproduce",
+      "Include device/OS/browser",
+      "Attach screenshot or 10\u201320s clip"
+    ],
+    "done_looks_like": "Issue opened with clear repro steps + environment + media"
+  },
+  {
+    "id": "mission_docs_pr",
+    "track": "Scribe",
+    "title": "Improve one doc paragraph",
+    "difficulty": "Easy",
+    "time_minutes": 20,
+    "what_to_do": [
+      "Pick a paragraph in LiftLab_Playbook.md",
+      "Rewrite for clarity (shorter sentences)",
+      "Add one concrete example"
+    ],
+    "done_looks_like": "PR merged with a clear before/after improvement"
+  },
+  {
+    "id": "mission_ux_notes",
+    "track": "Designer",
+    "title": "UX feedback with annotated screenshot",
+    "difficulty": "Easy",
+    "time_minutes": 20,
+    "what_to_do": [
+      "Take a screenshot of a confusing area",
+      "Annotate it (arrows + notes)",
+      "Propose a simpler layout or wording"
+    ],
+    "done_looks_like": "Issue posted with annotated image + specific suggestion"
+  },
+  {
+    "id": "mission_json_slide",
+    "track": "Builder",
+    "title": "Add a new slide via JSON",
+    "difficulty": "Easy",
+    "time_minutes": 25,
+    "what_to_do": [
+      "Edit content/slides.json",
+      "Add a slide (title + bullets)",
+      "Verify it renders on the page"
+    ],
+    "done_looks_like": "New slide appears in the slideshow"
+  }
+]

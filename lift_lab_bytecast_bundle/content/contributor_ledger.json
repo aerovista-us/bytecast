@@ -1,0 +1,15 @@
+{
+  "program": "AeroVista Lift Lab",
+  "updated": "2026-02-07",
+  "contributors": [
+    {
+      "handle": "example_user",
+      "track": "Scout",
+      "level": "L1",
+      "wins": [
+        "Submitted first bug report"
+      ],
+      "notes": "Welcome aboard."
+    }
+  ]
+}

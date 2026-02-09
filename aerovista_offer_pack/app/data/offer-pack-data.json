@@ -1,0 +1,1005 @@
+{
+  "schema": "offer-pack-v1",
+  "divisions": [
+    {
+      "id": "nexus",
+      "name": "NeXuS TechWorks",
+      "tagline": "Web + AI + Automation",
+      "offers": [
+        {
+          "id": "nexus-launchpad",
+          "key": "launchpad",
+          "name": "LaunchPad Website (1-Page)",
+          "outcome": "A modern one-page site that looks great on mobile, captures leads, and is deployed.",
+          "includes": [
+            "Single-page layout (Hero, Services, About, Proof, CTA, Contact)",
+            "Mobile-first build",
+            "Contact form wired",
+            "Basic SEO (titles/meta/structure)",
+            "Deployment (Firebase/GitHub Pages)"
+          ],
+          "clientProvides": [
+            "Logo (any format) OR we create a simple mark treatment",
+            "Text/bullets (rough is fine)",
+            "3–8 photos (phone pics OK)",
+            "Contact details + preferred CTA"
+          ],
+          "exclusions": [
+            "E-commerce, memberships, complex backend",
+            "Long-form copywriting from scratch",
+            "Multi-language sites"
+          ],
+          "notes": "",
+          "upsells": [
+            "Extra pages, booking, analytics, email capture, blog"
+          ],
+          "turnaround": "3–5 days"
+        },
+        {
+          "id": "nexus-business-ops-dashboard-“lite”",
+          "key": "business-ops-dashboard-“lite”",
+          "name": "Business Ops Dashboard “Lite”",
+          "outcome": "",
+          "includes": [
+            "internal dashboard (metrics + links + docs)",
+            "simple auth",
+            "hosting setup"
+          ],
+          "clientProvides": [],
+          "exclusions": [],
+          "notes": "",
+          "upsells": [
+            "Power BI embed",
+            "automations",
+            "role-based views"
+          ],
+          "turnaround": "1–2 weeks"
+        },
+        {
+          "id": "nexus-automation-quickstart",
+          "key": "automation-quickstart",
+          "name": "Automation QuickStart (n8n)",
+          "outcome": "3 core workflows that save time immediately (intake → tracking → notifications).",
+          "includes": [
+            "3 workflows",
+            "Logging + basic error alerts",
+            "Documentation + handoff"
+          ],
+          "clientProvides": [],
+          "exclusions": [],
+          "notes": "",
+          "upsells": [
+            "CRM sync",
+            "Approvals",
+            "Weekly reports",
+            "More workflows"
+          ],
+          "turnaround": "3–7 days"
+        },
+        {
+          "id": "nexus-security-performance",
+          "key": "security-performance",
+          "name": "Security & Performance Tune-Up",
+          "outcome": "Site/app basics hardened + faster + safer defaults.",
+          "includes": [
+            "SSL/TLS verification",
+            "Security headers baseline",
+            "Speed pass (image + caching + render)",
+            "Backup checklist"
+          ],
+          "clientProvides": [],
+          "exclusions": [],
+          "notes": "",
+          "upsells": [
+            "Monitoring",
+            "WAF/Cloud Armor",
+            "Incident playbook"
+          ],
+          "turnaround": "1–2 days"
+        }
+      ]
+    },
+    {
+      "id": "skyforge",
+      "name": "SkyForge Creative Studios",
+      "tagline": "Interactive Web Experiences",
+      "offers": [
+        {
+          "id": "skyforge-quest-page",
+          "key": "quest-page",
+          "name": "Interactive Landing “Quest Page”",
+          "outcome": "A high-conversion landing page that feels like an experience: story sections + gates + quiz + badge.",
+          "includes": [
+            "Scroll-driven story sections",
+            "CTA “gates”",
+            "Mini quiz (80% pass optional)",
+            "Completion badge"
+          ],
+          "clientProvides": [],
+          "exclusions": [],
+          "notes": "",
+          "upsells": [
+            "Chapters",
+            "Seasonal events",
+            "Leaderboard"
+          ],
+          "turnaround": "3–7 days"
+        },
+        {
+          "id": "skyforge-promo-minigame",
+          "key": "promo-minigame",
+          "name": "Promo Mini-Game (Web)",
+          "outcome": "A shareable browser mini-game that drives engagement.",
+          "includes": [
+            "Simple game loop (score + share)",
+            "Branded visuals",
+            "Analytics hooks"
+          ],
+          "clientProvides": [],
+          "exclusions": [],
+          "notes": "",
+          "upsells": [
+            "Prize logic",
+            "Email capture",
+            "Monthly new levels"
+          ],
+          "turnaround": "1–2 weeks"
+        },
+        {
+          "id": "skyforge-event-booth-mode",
+          "key": "event-booth-mode",
+          "name": "Event Booth Mode",
+          "outcome": "Kiosk-friendly experience for events: attract loop + tap-to-start.",
+          "includes": [
+            "Kiosk UI mode",
+            "Attract loop",
+            "Tap-to-start reset flow"
+          ],
+          "clientProvides": [],
+          "exclusions": [],
+          "notes": "",
+          "upsells": [
+            "QR redeem codes",
+            "Post-event follow-up automation"
+          ],
+          "turnaround": "1 week"
+        }
+      ]
+    },
+    {
+      "id": "echoverse",
+      "name": "EchoVerse Audio",
+      "tagline": "Music + Sound + Brand Audio",
+      "offers": [
+        {
+          "id": "echoverse-sonic-logo",
+          "key": "sonic-logo",
+          "name": "Brand Sonic Logo (5–8 sec)",
+          "outcome": "A signature audio mark usable across intros, ads, reels, and events.",
+          "includes": [
+            "3 concepts → 1 final",
+            "Stems",
+            "WAV/MP3 exports"
+          ],
+          "clientProvides": [],
+          "exclusions": [],
+          "notes": "",
+          "upsells": [
+            "Extended versions",
+            "Seasonal variants"
+          ],
+          "turnaround": "3–5 days"
+        },
+        {
+          "id": "echoverse-podcast-pack",
+          "key": "podcast-pack",
+          "name": "Podcast/YouTube Starter Audio Pack",
+          "outcome": "A consistent, professional audio identity for content.",
+          "includes": [
+            "Intro/outro",
+            "3 stingers",
+            "Bed loop",
+            "Loudness leveling"
+          ],
+          "clientProvides": [],
+          "exclusions": [],
+          "notes": "",
+          "upsells": [
+            "Monthly new packs",
+            "Soundboard kit"
+          ],
+          "turnaround": "5–7 days"
+        },
+        {
+          "id": "echoverse-track-polish",
+          "key": "track-polish",
+          "name": "Track Polish “Radio Clean”",
+          "outcome": "A cleaner mix + streaming-ready master.",
+          "includes": [
+            "Mix cleanup",
+            "Master to target loudness"
+          ],
+          "clientProvides": [],
+          "exclusions": [],
+          "notes": "",
+          "upsells": [
+            "Alt masters",
+            "Instrumental",
+            "Performance edit"
+          ],
+          "turnaround": "2–4 days"
+        },
+        {
+          "id": "echoverse-soundscapes",
+          "key": "soundscapes",
+          "name": "Ambient Soundscapes for Spaces",
+          "outcome": "Loopable ambience for shops/brands/spaces.",
+          "includes": [
+            "10–20 min loopable ambience track"
+          ],
+          "clientProvides": [],
+          "exclusions": [],
+          "notes": "",
+          "upsells": [
+            "Seasonal drops",
+            "In-store playlist system"
+          ],
+          "turnaround": "3–7 days"
+        }
+      ]
+    },
+    {
+      "id": "summit",
+      "name": "Summit Learning",
+      "tagline": "Training + SOP + Micro-Courses",
+      "offers": [
+        {
+          "id": "summit-sop-in-a-box",
+          "key": "sop-in-a-box",
+          "name": "SOP in a Box",
+          "outcome": "One process converted into a clear SOP people can follow.",
+          "includes": [
+            "SOP document",
+            "Checklist",
+            "Screenshots (if needed)"
+          ],
+          "clientProvides": [],
+          "exclusions": [],
+          "notes": "",
+          "upsells": [
+            "SOP library",
+            "Onboarding bundle"
+          ],
+          "turnaround": "2–4 days"
+        },
+        {
+          "id": "summit-micro-training",
+          "key": "micro-training",
+          "name": "Micro-Training Module",
+          "outcome": "A micro-course that teaches one skill quickly and checks understanding.",
+          "includes": [
+            "10–15 min lesson",
+            "Quiz (80% pass)",
+            "Completion badge/certificate"
+          ],
+          "clientProvides": [],
+          "exclusions": [],
+          "notes": "",
+          "upsells": [
+            "LMS packaging",
+            "Tracking dashboard"
+          ],
+          "turnaround": "1 week"
+        },
+        {
+          "id": "summit-ops-quality-pack",
+          "key": "ops-quality-pack",
+          "name": "Call Center / Ops Quality Pack",
+          "outcome": "Quality measurement system: consistent scoring + coaching.",
+          "includes": [
+            "Rubric",
+            "Scoring guide",
+            "Violation categories",
+            "Coaching template"
+          ],
+          "clientProvides": [],
+          "exclusions": [],
+          "notes": "",
+          "upsells": [
+            "PowerApp/PowerBI integration"
+          ],
+          "turnaround": "1 week"
+        }
+      ]
+    },
+    {
+      "id": "lumina",
+      "name": "Lumina Creative",
+      "tagline": "Branding + Visual Kits",
+      "offers": [
+        {
+          "id": "lumina-brand-kit-lite",
+          "key": "brand-kit-lite",
+          "name": "Brand Kit Lite",
+          "outcome": "Consistent brand look fast: logo cleanup + colors + type + templates.",
+          "includes": [
+            "Logo cleanup",
+            "Color palette",
+            "Typography set",
+            "10 social templates",
+            "Mini style guide"
+          ],
+          "clientProvides": [],
+          "exclusions": [],
+          "notes": "",
+          "upsells": [
+            "Full brand book",
+            "Print assets"
+          ],
+          "turnaround": "3–7 days"
+        },
+        {
+          "id": "lumina-social-drop-pack",
+          "key": "social-drop-pack",
+          "name": "Social Drop Pack (30 posts)",
+          "outcome": "A month of content that looks consistent and polished.",
+          "includes": [
+            "30 branded graphics",
+            "Captions",
+            "Hashtag bank"
+          ],
+          "clientProvides": [],
+          "exclusions": [],
+          "notes": "",
+          "upsells": [
+            "Monthly retainer",
+            "Ad variants"
+          ],
+          "turnaround": "1 week"
+        },
+        {
+          "id": "lumina-flyer-card-sprint",
+          "key": "flyer-card-sprint",
+          "name": "Flyer + Business Card Sprint",
+          "outcome": "Print-ready assets quickly.",
+          "includes": [
+            "Flyer design",
+            "Business card design",
+            "Source files"
+          ],
+          "clientProvides": [],
+          "exclusions": [],
+          "notes": "",
+          "upsells": [
+            "Signage",
+            "Vehicle decal layout"
+          ],
+          "turnaround": "2–3 days"
+        }
+      ]
+    },
+    {
+      "id": "vespera",
+      "name": "Vespera Publishing",
+      "tagline": "Digital Products + Writing",
+      "offers": [
+        {
+          "id": "vespera-lead-magnet-funnel",
+          "key": "lead-magnet-funnel",
+          "name": "Lead Magnet + Funnel Copy",
+          "outcome": "A lead magnet + landing copy that converts visitors to leads.",
+          "includes": [
+            "3–5 page PDF guide",
+            "Landing copy",
+            "Email capture wording"
+          ],
+          "clientProvides": [],
+          "exclusions": [],
+          "notes": "",
+          "upsells": [
+            "Email sequence",
+            "Upsell page"
+          ],
+          "turnaround": "3–5 days"
+        },
+        {
+          "id": "vespera-proposal-kit",
+          "key": "proposal-kit",
+          "name": "Client-Facing Proposal Kit",
+          "outcome": "A consistent proposal system that closes faster.",
+          "includes": [
+            "Proposal template",
+            "Scope language",
+            "Pricing table",
+            "Terms section"
+          ],
+          "clientProvides": [],
+          "exclusions": [],
+          "notes": "",
+          "upsells": [
+            "Industry-specific versions"
+          ],
+          "turnaround": "2–4 days"
+        },
+        {
+          "id": "vespera-newsletter-engine",
+          "key": "newsletter-engine",
+          "name": "Newsletter Engine (Monthly)",
+          "outcome": "Monthly newsletter plus repurposed content.",
+          "includes": [
+            "1 newsletter",
+            "3 shorts repurposed from it"
+          ],
+          "clientProvides": [],
+          "exclusions": [],
+          "notes": "",
+          "upsells": [
+            "Automation",
+            "Scheduling",
+            "Analytics"
+          ],
+          "turnaround": ""
+        }
+      ]
+    },
+    {
+      "id": "horizon",
+      "name": "Horizon Aerial & Visual",
+      "tagline": "Drone + Photo + Property Media",
+      "offers": [
+        {
+          "id": "horizon-drone-mini",
+          "key": "drone-mini",
+          "name": "Real Estate Drone Mini",
+          "outcome": "Listing-ready aerial photos + a short highlight video.",
+          "includes": [
+            "10–20 edited aerial photos",
+            "30–60 sec highlight video"
+          ],
+          "clientProvides": [],
+          "exclusions": [],
+          "notes": "- Weather dependent; schedule window required.",
+          "upsells": [
+            "Full walkthrough edit",
+            "Twilight pass"
+          ],
+          "turnaround": "48–72 hours (weather dependent)"
+        },
+        {
+          "id": "horizon-progress-snapshot",
+          "key": "progress-snapshot",
+          "name": "Property Progress Snapshot",
+          "outcome": "Repeatable monthly aerial set for comparison over time.",
+          "includes": [
+            "Standard angles set",
+            "Labeled shots for month-to-month comparison"
+          ],
+          "clientProvides": [],
+          "exclusions": [],
+          "notes": "",
+          "upsells": [
+            "Quarterly recap video",
+            "Mapping"
+          ],
+          "turnaround": "subscription-friendly"
+        },
+        {
+          "id": "horizon-mapping-lite",
+          "key": "mapping-lite",
+          "name": "Mapping Lite",
+          "outcome": "Basic ortho/map output for acreage/roof/lot visuals (non-engineering).",
+          "includes": [
+            "Basic ortho/map output"
+          ],
+          "clientProvides": [],
+          "exclusions": [],
+          "notes": "",
+          "upsells": [
+            "Higher-res passes",
+            "Seasonal rescan"
+          ],
+          "turnaround": "3–7 days"
+        }
+      ]
+    }
+  ],
+  "sales": {
+    "pitch": "We deliver fast, premium, and practical work across web, interactive experiences, audio, training, design, publishing, and aerial media — built to ship quickly now, and scale later without rebuilding.",
+    "qualification": [
+      "1) What do you sell, and who’s the buyer?",
+      "2) What’s the #1 action you want people to take?",
+      "3) What do you already have? (domain/logo/photos/copy)",
+      "4) What’s your deadline and why?",
+      "5) What’s your “good outcome” in one sentence?"
+    ],
+    "objections": [
+      "“I can do it myself”: You can — you’re buying time, polish, and a future-proof base.",
+      "“Too expensive”: Let’s match scope to your outcome; we can launch small and expand.",
+      "“Need it ASAP”: If assets are ready, we can move fast. Otherwise we start with a sprint.",
+      "“Not sure what I need”: We’ll recommend the smallest package that gets you a win."
+    ],
+    "closePattern": [
+      "Confirm outcome → choose package → confirm assets → confirm timeline → collect deposit → send intake."
+    ],
+    "followUp": [
+      {
+        "label": "Same day",
+        "subject": "AeroVista — next step + intake",
+        "body": "Here’s the intake form. Once we have assets and the deposit, we schedule immediately and start the sprint."
+      },
+      {
+        "label": "48 hours",
+        "subject": "Quick check-in",
+        "body": "Want to proceed with the package we discussed or adjust scope? Either way I can keep momentum moving."
+      }
+    ]
+  },
+  "delivery": {
+    "phases": [
+      "1) Intake + deposit + assets",
+      "2) Direction lock (scope, timeline, deliverables)",
+      "3) Build/produce",
+      "4) Review round 1",
+      "5) Review round 2 (standard final)",
+      "6) Delivery + handoff + archive"
+    ],
+    "revisionPolicy": [
+      "- Two rounds included.",
+      "- Additional changes become a small add-on or a change order."
+    ],
+    "handoff": [
+      "Final deliverables",
+      "“What changed” summary",
+      "Maintenance notes / SOP",
+      "Any credentials/access returned to client control"
+    ],
+    "qaChecklists": [
+      {
+        "id": "web",
+        "name": "Web (LaunchPad / Quest Page / Mini-Game)",
+        "items": [
+          "Mobile layout passes",
+          "Performance acceptable",
+          "Contact flow tested",
+          "Analytics (if included) verified",
+          "Domain + SSL verified",
+          "CTA visible above the fold",
+          "Basic SEO fields present",
+          "Accessibility quick pass (contrast, labels, focus)"
+        ]
+      },
+      {
+        "id": "audio",
+        "name": "Audio (Sonic Logo / Podcast Pack / Track Polish)",
+        "items": [
+          "Loudness target consistent",
+          "No clipping",
+          "Stems exported (if included)",
+          "File naming standard",
+          "Client preview link works"
+        ]
+      },
+      {
+        "id": "design",
+        "name": "Design (Brand Kit / Social Pack / Print)",
+        "items": [
+          "Export sizes correct",
+          "Fonts licensed/converted properly",
+          "Print bleed/safe zones checked (if applicable)",
+          "Source files packaged"
+        ]
+      },
+      {
+        "id": "drone",
+        "name": "Drone (Weather dependent)",
+        "items": [
+          "Flight plan + safety checks done",
+          "Shots match brief angles",
+          "Edits consistent and labeled",
+          "Deliverables organized for client"
+        ]
+      }
+    ]
+  },
+  "intake": {
+    "sections": [
+      {
+        "id": "contact-+-basics",
+        "title": "Contact + Basics",
+        "fields": [
+          "Client name:",
+          "Business name:",
+          "Email:",
+          "Phone:",
+          "Time zone:",
+          "Preferred contact method:"
+        ]
+      },
+      {
+        "id": "project-goal",
+        "title": "Project Goal",
+        "fields": [
+          "What are we building / delivering?",
+          "Success looks like:",
+          "Deadline (and why):"
+        ]
+      },
+      {
+        "id": "audience",
+        "title": "Audience",
+        "fields": [
+          "Who is the target customer?",
+          "Top 3 problems you solve:",
+          "Top 3 competitors (links):"
+        ]
+      },
+      {
+        "id": "brand-+-assets",
+        "title": "Brand + Assets",
+        "fields": [
+          "Existing website/social links:",
+          "Logo files (attach):",
+          "Brand colors (if any):",
+          "Photos/videos (attach or link):",
+          "Copy / bullet points (paste anything you have):"
+        ]
+      },
+      {
+        "id": "call-to-action",
+        "title": "Call-to-Action",
+        "fields": [
+          "Primary action: (call / book / buy / quote / signup)",
+          "Secondary action:"
+        ]
+      },
+      {
+        "id": "constraints",
+        "title": "Constraints",
+        "fields": [
+          "Must include:",
+          "Must avoid:",
+          "Approval contact:",
+          "Revision preference: (1–2 rounds standard)"
+        ]
+      },
+      {
+        "id": "access-(if-needed)",
+        "title": "Access (if needed)",
+        "fields": [
+          "Domain registrar:",
+          "Hosting:",
+          "Accounts we’ll need access to:",
+          "Who can grant access?"
+        ]
+      },
+      {
+        "id": "notes",
+        "title": "Notes",
+        "fields": [
+          "Anything else we should know?"
+        ]
+      }
+    ]
+  },
+  "pricing": {
+    "byDivision": {
+      "nexus": {
+        "launchpad-website": {
+          "good": "1-page + form + basic SEO + deploy",
+          "better": "Good + analytics + email capture + 2nd revision round",
+          "best": "Better + 2–3 pages + booking + content assist"
+        },
+        "ops-dashboard-lite": {
+          "good": "single dashboard + auth + hosting",
+          "better": "Better IA + role views + data import",
+          "best": "Power BI embed + automations + alerts"
+        },
+        "automation-quickstart-n8n": {
+          "good": "3 workflows + logging",
+          "better": "+ CRM sync + approvals",
+          "best": "+ reporting + error handling + monthly tune-ups"
+        },
+        "security--performance": {
+          "good": "SSL/TLS + headers + speed pass",
+          "better": "+ monitoring + backup automation",
+          "best": "+ WAF/Cloud Armor + incident playbook"
+        }
+      },
+      "skyforge": {
+        "quest-page": {
+          "good": "1 chapter + gates + quiz + badge",
+          "better": "+ 2 chapters + analytics",
+          "best": "+ leaderboard + seasonal events"
+        },
+        "promo-mini-game": {
+          "good": "game + score + share",
+          "better": "+ email capture + prize logic",
+          "best": "monthly new levels + campaign reporting"
+        },
+        "event-booth-mode": {
+          "good": "kiosk mode + attract loop",
+          "better": "+ QR redeem codes",
+          "best": "+ post-event automations"
+        }
+      },
+      "echoverse": {
+        "sonic-logo": {
+          "good": "3 concepts → 1 final",
+          "better": "+ variants + longer cut",
+          "best": "seasonal pack + usage guide"
+        },
+        "podcast-pack": {
+          "good": "intro/outro + stingers + bed loop",
+          "better": "+ soundboard kit",
+          "best": "monthly refresh pack"
+        },
+        "track-polish": {
+          "good": "mix cleanup + master",
+          "better": "+ alt master + instrumental",
+          "best": "performance edit + radio edit pack"
+        },
+        "soundscapes": {
+          "good": "10–20 min loop",
+          "better": "+ seasonal variant",
+          "best": "playlist system integration"
+        }
+      },
+      "summit": {
+        "sop-in-a-box": {
+          "good": "1 SOP + checklist",
+          "better": "+ screenshots + role notes",
+          "best": "SOP library + onboarding bundle"
+        },
+        "micro-training": {
+          "good": "module + quiz + badge",
+          "better": "+ tracking + reporting",
+          "best": "LMS packaging + quarterly refresh"
+        },
+        "ops-quality-pack": {
+          "good": "rubric + scoring + coaching",
+          "better": "+ dashboards",
+          "best": "PowerApp + PowerBI integration"
+        }
+      },
+      "lumina": {
+        "brand-kit-lite": {
+          "good": "logo cleanup + palette + type",
+          "better": "+ templates + mini style guide",
+          "best": "full brand book + print assets"
+        },
+        "social-drop-pack": {
+          "good": "10 posts",
+          "better": "30 posts",
+          "best": "monthly retainer + ad variants"
+        },
+        "flyercard-sprint": {
+          "good": "1 flyer + 1 card",
+          "better": "+ 2 variants",
+          "best": "signage + vehicle decal layout"
+        }
+      },
+      "vespera": {
+        "lead-magnet--funnel": {
+          "good": "PDF + landing copy",
+          "better": "+ email sequence",
+          "best": "+ upsell page + A/B options"
+        },
+        "proposal-kit": {
+          "good": "base templates",
+          "better": "industry-specific",
+          "best": "full pipeline + pricing guidance"
+        },
+        "newsletter-engine": {
+          "good": "1 newsletter",
+          "better": "+ 3 shorts",
+          "best": "automation + scheduling + analytics"
+        }
+      },
+      "horizon": {
+        "drone-mini": {
+          "good": "photos + short video",
+          "better": "+ twilight pass",
+          "best": "full walkthrough + edit pack"
+        },
+        "progress-snapshot": {
+          "good": "monthly angles set",
+          "better": "quarterly recap",
+          "best": "subscription + archive portal"
+        },
+        "mapping-lite": {
+          "good": "basic ortho",
+          "better": "higher-res pass",
+          "best": "seasonal rescan plan"
+        }
+      },
+      "_bundles": {}
+    },
+    "byOfferId": {
+      "nexus-launchpad": {
+        "good": "1-page + form + basic SEO + deploy",
+        "better": "Good + analytics + email capture + 2nd revision round",
+        "best": "Better + 2–3 pages + booking + content assist"
+      },
+      "skyforge-quest-page": {
+        "good": "1 chapter + gates + quiz + badge",
+        "better": "+ 2 chapters + analytics",
+        "best": "+ leaderboard + seasonal events"
+      },
+      "skyforge-event-booth-mode": {
+        "good": "kiosk mode + attract loop",
+        "better": "+ QR redeem codes",
+        "best": "+ post-event automations"
+      },
+      "echoverse-sonic-logo": {
+        "good": "3 concepts → 1 final",
+        "better": "+ variants + longer cut",
+        "best": "seasonal pack + usage guide"
+      },
+      "echoverse-podcast-pack": {
+        "good": "intro/outro + stingers + bed loop",
+        "better": "+ soundboard kit",
+        "best": "monthly refresh pack"
+      },
+      "echoverse-track-polish": {
+        "good": "mix cleanup + master",
+        "better": "+ alt master + instrumental",
+        "best": "performance edit + radio edit pack"
+      },
+      "echoverse-soundscapes": {
+        "good": "10–20 min loop",
+        "better": "+ seasonal variant",
+        "best": "playlist system integration"
+      },
+      "summit-sop-in-a-box": {
+        "good": "1 SOP + checklist",
+        "better": "+ screenshots + role notes",
+        "best": "SOP library + onboarding bundle"
+      },
+      "summit-micro-training": {
+        "good": "module + quiz + badge",
+        "better": "+ tracking + reporting",
+        "best": "LMS packaging + quarterly refresh"
+      },
+      "summit-ops-quality-pack": {
+        "good": "rubric + scoring + coaching",
+        "better": "+ dashboards",
+        "best": "PowerApp + PowerBI integration"
+      },
+      "lumina-brand-kit-lite": {
+        "good": "logo cleanup + palette + type",
+        "better": "+ templates + mini style guide",
+        "best": "full brand book + print assets"
+      },
+      "lumina-social-drop-pack": {
+        "good": "10 posts",
+        "better": "30 posts",
+        "best": "monthly retainer + ad variants"
+      },
+      "vespera-proposal-kit": {
+        "good": "base templates",
+        "better": "industry-specific",
+        "best": "full pipeline + pricing guidance"
+      },
+      "vespera-newsletter-engine": {
+        "good": "1 newsletter",
+        "better": "+ 3 shorts",
+        "best": "automation + scheduling + analytics"
+      },
+      "horizon-drone-mini": {
+        "good": "photos + short video",
+        "better": "+ twilight pass",
+        "best": "full walkthrough + edit pack"
+      },
+      "horizon-progress-snapshot": {
+        "good": "monthly angles set",
+        "better": "quarterly recap",
+        "best": "subscription + archive portal"
+      },
+      "horizon-mapping-lite": {
+        "good": "basic ortho",
+        "better": "higher-res pass",
+        "best": "seasonal rescan plan"
+      }
+    }
+  },
+  "bundles": [
+    {
+      "id": "new-business-launch",
+      "name": "New Business Launch",
+      "includes": "LaunchPad Website + Brand Kit Lite + Sonic Logo + Social Drop Pack (10)",
+      "outcome": "A business looks legit instantly across web + socials + audio brand mark."
+    },
+    {
+      "id": "creator-podcast-starter",
+      "name": "Creator/Podcast Starter",
+      "includes": "Podcast/YouTube Starter Audio Pack + Social templates + Landing page + Lead magnet",
+      "outcome": "Consistent creator brand identity + lead capture funnel."
+    },
+    {
+      "id": "real-estate-pro-kit",
+      "name": "Real Estate Pro Kit",
+      "includes": "Real Estate Drone Mini + Flyer/Card Sprint + 1-page agent site",
+      "outcome": "Listing visuals + print + web presence that sells faster."
+    }
+  ],
+  "onePager": {
+    "intro": "Fast, clean, profitable work:",
+    "divisions": [
+      {
+        "name": "NeXuS TechWorks",
+        "items": [
+          "LaunchPad Website (1-Page): modern, mobile-first, contact-ready, deployed.",
+          "Ops Dashboard Lite: internal metrics + links + docs, simple auth, hosting.",
+          "Automation QuickStart (n8n): 3 workflows + logging + alerts.",
+          "Security & Performance Tune-Up: SSL/TLS, headers, speed pass, backup checklist."
+        ]
+      },
+      {
+        "name": "SkyForge Creative Studios",
+        "items": [
+          "Interactive Quest Page: story sections + “gates” CTA + quiz + badge.",
+          "Promo Mini-Game: score + share + branded hooks + analytics-ready.",
+          "Event Booth Mode: kiosk-friendly loop + tap-to-start + QR flows."
+        ]
+      },
+      {
+        "name": "EchoVerse Audio",
+        "items": [
+          "Sonic Logo: 3 concepts → 1 final + stems.",
+          "Podcast/YouTube Pack: intro/outro + stingers + bed loop + loudness leveling.",
+          "Track Polish: mix cleanup + master + streaming targets.",
+          "Ambient Soundscapes: 10–20 min loopable brand ambience."
+        ]
+      },
+      {
+        "name": "Summit Learning",
+        "items": [
+          "SOP in a Box: process → SOP + checklist + screenshots.",
+          "Micro-Training Module: 10–15 min lesson + quiz (80% pass) + badge.",
+          "Ops Quality Pack: rubric + scoring + coaching templates."
+        ]
+      },
+      {
+        "name": "Lumina Creative",
+        "items": [
+          "Brand Kit Lite: logo cleanup + colors/type + 10 social templates.",
+          "Social Drop Pack (30): graphics + captions + hashtag bank.",
+          "Flyer/Card Sprint: print-ready design + source files."
+        ]
+      },
+      {
+        "name": "Vespera Publishing",
+        "items": [
+          "Lead Magnet + Funnel Copy: 3–5 page PDF + landing copy + capture wording.",
+          "Proposal Kit: templates + scope language + pricing table + terms.",
+          "Newsletter Engine: 1 newsletter + 3 repurposed shorts."
+        ]
+      },
+      {
+        "name": "Horizon Aerial & Visual",
+        "items": [
+          "Drone Mini: 10–20 photos + 30–60 sec highlight video.",
+          "Progress Snapshot: repeatable monthly angles for comparisons.",
+          "Mapping Lite: basic ortho/map outputs (non-engineering).",
+          "### Popular bundles",
+          "New Business Launch: LaunchPad + Brand Kit Lite + Sonic Logo + Social Pack (10)",
+          "Creator/Podcast Starter: Podcast pack + socials + landing + lead magnet",
+          "Real Estate Pro Kit: Drone Mini + flyer/card + 1-page agent site",
+          "**Standard terms:** 50% to schedule · two revision rounds · clear client-provided asset list."
+        ]
+      }
+    ],
+    "popularBundles": [
+      "**New Business Launch:** LaunchPad + Brand Kit Lite + Sonic Logo + Social Pack (10)",
+      "**Creator/Podcast Starter:** Podcast pack + socials + landing + lead magnet",
+      "**Real Estate Pro Kit:** Drone Mini + flyer/card + 1-page agent site"
+    ],
+    "standardTerms": "50% to schedule · two revision rounds · clear client-provided asset list."
+  },
+  "fulfillmentRules": [
+    "Standard Intake Form for all divisions (goal, audience, assets, deadline)",
+    "Two revision rounds included (protects margin)",
+    "Clear \"Client Provides\" list per offer",
+    "Fast close: 50% deposit to schedule, remainder on delivery"
+  ]
+}

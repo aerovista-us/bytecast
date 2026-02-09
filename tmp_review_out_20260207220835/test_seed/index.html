@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0c10" />
+  <meta name="description" content="A static-first experience bundle." />
+  
+  <link rel="icon" href="assets/favicon.svg" />
+  <link rel="preload" href="assets/hero.jpg" as="image" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>My Title</title>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="hero" role="banner">
+    <div class="hero__bg" aria-hidden="true"></div>
+
+    <nav class="nav">
+      <div class="brand">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__text">My Title</span>
+      </div>
+
+      <div class="nav__actions">
+        <button class="btn btn--ghost" id="ambientBtn" type="button" aria-pressed="false" title="Toggle ambient glow">
+          Ambient
+        </button>
+        <a class="btn btn--soft" href="#path">Begin</a>
+      </div>
+    </nav>
+
+    <div class="hero__content">
+      <p class="kicker">Rain • Ruins • Manuscript • Synchronicity</p>
+      <h1>Tag</h1>
+      <p class="sub">A quiet field-manual experience — the world teaches through patterns: signals that keep appearing until you finally see them.</p>
+
+      <div class="hero__cta">
+        <a class="btn btn--primary" href="#insights">Open the first page</a>
+        
+      </div>
+
+      <div class="hero__meta">
+        <span class="pill">No login</span>
+        <span class="pill">Static deploy</span>
+        <span class="pill">Mobile-friendly</span>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="main" role="main">
+    <section id="insights" class="section">
+      <div class="section__head">
+        <h2>Three starter insights</h2>
+        <p>Tap a card to reveal the hidden note. Each one is a page turn.</p>
+      </div>
+
+      <div class="grid">
+        <button class="card card--paper" data-insight="1" type="button" aria-expanded="false">
+          <div class="card__top">
+            <span class="stamp">Insight I</span>
+            <span class="tag">Awareness</span>
+          </div>
+          <h3>What you focus on grows.</h3>
+          <p class="card__hint">Tap to reveal the margin note.</p>
+          <div class="card__reveal" aria-hidden="true">
+            <p>Your attention is a lantern. Shine it on the signal — not the noise — and your next step becomes obvious.</p>
+          </div>
+        </button>
+
+        <button class="card card--paper" data-insight="2" type="button" aria-expanded="false">
+          <div class="card__top">
+            <span class="stamp">Insight II</span>
+            <span class="tag">Synch</span>
+          </div>
+          <h3>Patterns are invitations.</h3>
+          <p class="card__hint">Tap to reveal the margin note.</p>
+          <div class="card__reveal" aria-hidden="true">
+            <p>Coincidences repeat when you're meant to move. Treat them like trail markers — gentle, persistent, specific.</p>
+          </div>
+        </button>
+
+        <button class="card card--paper" data-insight="3" type="button" aria-expanded="false">
+          <div class="card__top">
+            <span class="stamp">Insight III</span>
+            <span class="tag">Energy</span>
+          </div>
+          <h3>Everything carries a current.</h3>
+          <p class="card__hint">Tap to reveal the margin note.</p>
+          <div class="card__reveal" aria-hidden="true">
+            <p>When you calm your body, you can sense the room. The threads feel like warmth, breath, and momentum — not fireworks.</p>
+          </div>
+        </button>
+      </div>
+    </section>
+
+    <section id="path" class="section section--path">
+      <div class="section__head">
+        <h2>The path</h2>
+        <p>Complete steps to unlock the next node. Extend this into quests.</p>
+      </div>
+
+      <ol class="path" aria-label="Progress path">
+        <li class="path__node is-active" data-step="1">
+          <div class="node">
+            <span class="node__dot" aria-hidden="true"></span>
+            <div class="node__body">
+              <h3>Enter the canopy</h3>
+              <p>Take 10 seconds. Breathe slow. Look for what repeats.</p>
+              <button class="btn btn--soft node__btn" type="button">Mark complete</button>
+            </div>
+          </div>
+        </li>
+
+        <li class="path__node" data-step="2">
+          <div class="node">
+            <span class="node__dot" aria-hidden="true"></span>
+            <div class="node__body">
+              <h3>Find the marker</h3>
+              <p>Write down the last coincidence you ignored. What did it point at?</p>
+              <button class="btn btn--soft node__btn" type="button" disabled>Locked</button>
+            </div>
+          </div>
+        </li>
+
+        <li class="path__node" data-step="3">
+          <div class="node">
+            <span class="node__dot" aria-hidden="true"></span>
+            <div class="node__body">
+              <h3>Follow the thread</h3>
+              <p>Choose one small action that honors the signal. Make it real.</p>
+              <button class="btn btn--soft node__btn" type="button" disabled>Locked</button>
+            </div>
+          </div>
+        </li>
+      </ol>
+
+      <div class="path__footer">
+        <div class="meter" aria-label="Progress">
+          <div class="meter__bar" id="meterBar" style="width: 0%"></div>
+        </div>
+        <p class="muted" id="meterText">0% complete</p>
+      </div>
+    </section>
+
+    <section class="section section--cta">
+      <div class="cta">
+        <h2>Turn this into your full experience</h2>
+        <p>Swap in your hero art, add music, expand the path into quests. Keep it light: mystery + warmth + momentum.</p>
+        <div class="cta__actions">
+          <a class="btn btn--primary" href="PROMPTS.md">Open prompts</a>
+          <a class="btn btn--ghost" href="deploy_github_pages.md">Deploy guide</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer__inner">
+      <div class="footer__left">
+        <div class="brand brand--small">
+          <span class="brand__mark" aria-hidden="true"></span>
+          <span class="brand__text">Seed Bundle</span>
+        </div>
+        <p class="muted">Built as a static bundle. Replace assets. Extend the quests. Ship it.</p>
+      </div>
+      <div class="footer__right">
+        <a class="link" href="#main">Back to top</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

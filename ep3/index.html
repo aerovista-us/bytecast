@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Legacy Episode Path - Redirecting</title>
+  <meta http-equiv="refresh" content="0; url=../episodes/aerovista_7_division_overview/index.html" />
+  <style>
+    :root {
+      --bg: #070a12;
+      --card: #0b1020;
+      --ink: #e9eeff;
+      --muted: #9aa7d6;
+      --line: rgba(148, 163, 255, 0.2);
+      --blue: #2e6bff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(900px 500px at 20% 0%, rgba(46, 107, 255, 0.22), transparent 60%), var(--bg);
+      color: var(--ink);
+      font: 15px/1.4 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      padding: 20px;
+    }
+    .card {
+      width: min(680px, 100%);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--card);
+      padding: 18px;
+    }
+    h1 { margin: 0 0 10px; font-size: 18px; }
+    p { margin: 0 0 12px; color: var(--muted); }
+    a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(46, 107, 255, 0.45);
+      border-radius: 12px;
+      padding: 9px 12px;
+      color: var(--ink);
+      text-decoration: none;
+      background: rgba(46, 107, 255, 0.12);
+      font-weight: 600;
+    }
+    code { color: var(--ink); }
+  </style>
+</head>
+<body>
+  <section class="card">
+    <h1>Legacy wrapper: <code>ep3</code></h1>
+    <p>This path is maintained for compatibility only.</p>
+    <p>Canonical episode path: <code>episodes/aerovista_7_division_overview</code></p>
+    <a href="../episodes/aerovista_7_division_overview/index.html">Open canonical episode</a>
+  </section>
+  <script>
+    window.location.replace("../episodes/aerovista_7_division_overview/index.html");
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#f4d8a4" />
+  <title>Seed Orchard - Plant and Harvest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="sky-glow" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <main class="app">
+    <header class="hero">
+      <p class="eyebrow">Seed Studio</p>
+      <h1>Plant a Seed. Harvest Real Fruits.</h1>
+      <p class="lead">
+        Give a few inputs. Get a focused harvest: bold ideas, clear actions, and outputs you can ship.
+      </p>
+    </header>
+
+    <section class="panel input-panel" aria-label="Plant your seed">
+      <h2>Plant</h2>
+      <form id="seedForm" class="seed-form">
+        <label>
+          Seed Name
+          <input id="seedName" name="seedName" type="text" maxlength="60" placeholder="Example: ByteCast Growth Engine" required />
+        </label>
+
+        <label>
+          Core Goal
+          <input id="goal" name="goal" type="text" maxlength="100" placeholder="Example: turn viewers into contributors" required />
+        </label>
+
+        <div class="row">
+          <label>
+            Audience
+            <input id="audience" name="audience" type="text" maxlength="60" placeholder="Example: creators and operators" required />
+          </label>
+
+          <label>
+            Harvest Size
+            <select id="harvestSize" name="harvestSize">
+              <option value="3">3 fruits</option>
+              <option value="4" selected>4 fruits</option>
+              <option value="5">5 fruits</option>
+            </select>
+          </label>
+        </div>
+
+        <label>
+          Intensity
+          <input id="intensity" name="intensity" type="range" min="1" max="5" value="3" />
+          <span id="intensityLabel" class="hint">Balanced growth</span>
+        </label>
+
+        <button type="submit" class="plant-btn">Plant Seed</button>
+      </form>
+    </section>
+
+    <section class="panel harvest-panel" aria-live="polite" aria-label="Harvest results">
+      <div class="harvest-head">
+        <h2>Harvest</h2>
+        <p id="harvestMeta" class="hint">No seed planted yet.</p>
+      </div>
+
+      <ol id="growthTrack" class="growth-track" aria-label="Growth phases">
+        <li>Rooting intent</li>
+        <li>Growing structure</li>
+        <li>Bearing fruit</li>
+      </ol>
+
+      <div id="fruitGrid" class="fruit-grid"></div>
+    </section>
+  </main>
+
+  <template id="fruitCardTemplate">
+    <article class="fruit-card">
+      <p class="fruit-type"></p>
+      <h3 class="fruit-title"></h3>
+      <p class="fruit-why"></p>
+      <p class="fruit-action"></p>
+      <div class="fruit-tags">
+        <span class="tag effort"></span>
+        <span class="tag signal"></span>
+      </div>
+    </article>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>

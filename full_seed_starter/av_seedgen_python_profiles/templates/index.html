@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="{THEME_COLOR}" />
+  <meta name="description" content="{DESCRIPTION}" />
+  {PWA_LINKS}
+  <link rel="icon" href="assets/favicon.svg" />
+  <link rel="preload" href="assets/hero.jpg" as="image" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>{TITLE}</title>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="hero" role="banner">
+    <div class="hero__bg" aria-hidden="true"></div>
+
+    <nav class="nav">
+      <div class="brand">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__text">{BRAND}</span>
+      </div>
+
+      <div class="nav__actions">
+        <button class="btn btn--ghost" id="ambientBtn" type="button" aria-pressed="false" title="Toggle ambient glow">
+          Ambient
+        </button>
+        <a class="btn btn--soft" href="#path">Begin</a>
+      </div>
+    </nav>
+
+    <div class="hero__content">
+      <p class="kicker">{KICKER}</p>
+      <h1>{TAGLINE}</h1>
+      <p class="sub">{SUBHEAD}</p>
+
+      <div class="hero__cta">
+        <a class="btn btn--primary" href="#insights">{PRIMARY_CTA}</a>
+        {INSTALL_BUTTON}
+      </div>
+
+      <div class="hero__meta">
+        <span class="pill">No login</span>
+        <span class="pill">Static deploy</span>
+        <span class="pill">Mobile-friendly</span>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="main" role="main">
+    <section id="insights" class="section">
+      <div class="section__head">
+        <h2>{SECTION1_TITLE}</h2>
+        <p>{SECTION1_DESC}</p>
+      </div>
+
+      <div class="grid">
+        <button class="card card--paper" data-insight="1" type="button" aria-expanded="false">
+          <div class="card__top">
+            <span class="stamp">Insight I</span>
+            <span class="tag">{INSIGHT1_TAG}</span>
+          </div>
+          <h3>{INSIGHT1_HEAD}</h3>
+          <p class="card__hint">Tap to reveal the margin note.</p>
+          <div class="card__reveal" aria-hidden="true">
+            <p>{INSIGHT1_BODY}</p>
+          </div>
+        </button>
+
+        <button class="card card--paper" data-insight="2" type="button" aria-expanded="false">
+          <div class="card__top">
+            <span class="stamp">Insight II</span>
+            <span class="tag">{INSIGHT2_TAG}</span>
+          </div>
+          <h3>{INSIGHT2_HEAD}</h3>
+          <p class="card__hint">Tap to reveal the margin note.</p>
+          <div class="card__reveal" aria-hidden="true">
+            <p>{INSIGHT2_BODY}</p>
+          </div>
+        </button>
+
+        <button class="card card--paper" data-insight="3" type="button" aria-expanded="false">
+          <div class="card__top">
+            <span class="stamp">Insight III</span>
+            <span class="tag">{INSIGHT3_TAG}</span>
+          </div>
+          <h3>{INSIGHT3_HEAD}</h3>
+          <p class="card__hint">Tap to reveal the margin note.</p>
+          <div class="card__reveal" aria-hidden="true">
+            <p>{INSIGHT3_BODY}</p>
+          </div>
+        </button>
+      </div>
+    </section>
+
+    <section id="path" class="section section--path">
+      <div class="section__head">
+        <h2>{SECTION2_TITLE}</h2>
+        <p>{SECTION2_DESC}</p>
+      </div>
+
+      <ol class="path" aria-label="Progress path">
+        <li class="path__node is-active" data-step="1">
+          <div class="node">
+            <span class="node__dot" aria-hidden="true"></span>
+            <div class="node__body">
+              <h3>{STEP1_TITLE}</h3>
+              <p>{STEP1_DESC}</p>
+              <button class="btn btn--soft node__btn" type="button">Mark complete</button>
+            </div>
+          </div>
+        </li>
+
+        <li class="path__node" data-step="2">
+          <div class="node">
+            <span class="node__dot" aria-hidden="true"></span>
+            <div class="node__body">
+              <h3>{STEP2_TITLE}</h3>
+              <p>{STEP2_DESC}</p>
+              <button class="btn btn--soft node__btn" type="button" disabled>Locked</button>
+            </div>
+          </div>
+        </li>
+
+        <li class="path__node" data-step="3">
+          <div class="node">
+            <span class="node__dot" aria-hidden="true"></span>
+            <div class="node__body">
+              <h3>{STEP3_TITLE}</h3>
+              <p>{STEP3_DESC}</p>
+              <button class="btn btn--soft node__btn" type="button" disabled>Locked</button>
+            </div>
+          </div>
+        </li>
+      </ol>
+
+      <div class="path__footer">
+        <div class="meter" aria-label="Progress">
+          <div class="meter__bar" id="meterBar" style="width: 0%"></div>
+        </div>
+        <p class="muted" id="meterText">0% complete</p>
+      </div>
+    </section>
+
+    {OPTIONAL_QUIZ_SECTION}
+
+    <section class="section section--cta">
+      <div class="cta">
+        <h2>{CTA_TITLE}</h2>
+        <p>{CTA_DESC}</p>
+        <div class="cta__actions">
+          <a class="btn btn--primary" href="PROMPTS.md">Open prompts</a>
+          <a class="btn btn--ghost" href="deploy_github_pages.md">Deploy guide</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer__inner">
+      <div class="footer__left">
+        <div class="brand brand--small">
+          <span class="brand__mark" aria-hidden="true"></span>
+          <span class="brand__text">{FOOTER_TITLE}</span>
+        </div>
+        <p class="muted">{FOOTER_DESC}</p>
+      </div>
+      <div class="footer__right">
+        <a class="link" href="#main">Back to top</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+[
+  {
+    "id": "WO-TRAEFIK-0001",
+    "title": "Upgrade Traefik to v2.11.8 and confirm local API",
+    "status": "COMPLETED",
+    "priority": "P1",
+    "project": "NXCore / Edge",
+    "tags": [
+      "traefik",
+      "infra"
+    ],
+    "acceptance_criteria": [
+      "Traefik version 2.11.8",
+      "/api/overview returns JSON"
+    ],
+    "notes": "",
+    "next_steps": [],
+    "evidence": [
+      "traefik version output shown",
+      "curl /api/overview JSON shown"
+    ]
+  },
+  {
+    "id": "WO-ANALYTICS-0001",
+    "title": "Deploy Umami config+loader to /vday/ with analytics OFF by default",
+    "status": "COMPLETED",
+    "priority": "P1",
+    "project": "AeroVista Drops / Analytics",
+    "tags": [
+      "umami",
+      "github-pages",
+      "service-worker"
+    ],
+    "acceptance_criteria": [
+      "Umami tags present",
+      "Config empty disables analytics",
+      "SW network-first for config/loader",
+      "verify_remote passed"
+    ],
+    "notes": "",
+    "next_steps": [],
+    "evidence": [
+      "user-provided in-thread summary of deployment and verify_remote pass"
+    ]
+  },
+  {
+    "id": "WO-CLOUDFLARE-0001",
+    "title": "Install cloudflared on NXCore",
+    "status": "COMPLETED",
+    "priority": "P1",
+    "project": "NXCore / Edge",
+    "tags": [
+      "cloudflare",
+      "cloudflared"
+    ],
+    "acceptance_criteria": [
+      "cloudflared installed"
+    ],
+    "notes": "",
+    "next_steps": [],
+    "evidence": [
+      "cloudflared install log shown"
+    ]
+  }
+]

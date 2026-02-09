@@ -1,0 +1,82 @@
+{
+  "meta": {
+    "title": "ByteCast \u2014 Seeds Announcement (Internal)",
+    "subtitle": "Episode Profile \u2022 Portrait Slides + Multi-Audio",
+    "date": "2026-02-05",
+    "brand": "AeroVista / ByteCast",
+    "theme": {
+      "bg0": "#07080b",
+      "bg1": "#0b0f16",
+      "ink": "#eef7ff",
+      "muted": "#b6c7d9",
+      "accent": "#ffd27d",
+      "accent2": "#ffefb1"
+    }
+  },
+  "audio": [
+    {
+      "id": "intro",
+      "title": "Intro",
+      "src": "assets/audio/intro.mp3",
+      "duration_hint": "0:12"
+    },
+    {
+      "id": "main",
+      "title": "Main Segment",
+      "src": "assets/audio/main.mp3",
+      "duration_hint": "4:40"
+    },
+    {
+      "id": "outro",
+      "title": "Outro",
+      "src": "assets/audio/outro.mp3",
+      "duration_hint": "0:18"
+    }
+  ],
+  "slides": [
+    {
+      "title": "Seeds Are Live",
+      "kicker": "Internal Drop",
+      "body": "We standardized \u2018Seeds\u2019: static-first micro-site bundles you can reskin and deploy fast.\\n\\nThis episode is a portrait slideshow + playlist template.",
+      "image": "assets/slides/slide1.jpg",
+      "audio_id": "intro"
+    },
+    {
+      "title": "What\u2019s in a Seed",
+      "kicker": "Canonical structure",
+      "body": "index.html + styles.css + app.js + PROMPTS + deploy guide + assets.\\n\\nOptional: PWA manifest + SW.\\n\\nGoal: no framework, no build step, ship clean.",
+      "image": "assets/slides/slide2.jpg",
+      "audio_id": "main",
+      "markers": [
+        {
+          "t": 15,
+          "label": "Why we do it"
+        },
+        {
+          "t": 55,
+          "label": "UX primitives"
+        }
+      ]
+    },
+    {
+      "title": "Profiles",
+      "kicker": "One flag, different vibes",
+      "body": "SeedGen profiles: celestine / music_drop / onboarding.\\n\\nProfiles set defaults; CLI overrides anything.\\n\\nFrom now on: spawn a seed first, then customize.",
+      "image": "assets/slides/slide3.jpg",
+      "audio_id": "main",
+      "markers": [
+        {
+          "t": 125,
+          "label": "Rules of engagement"
+        }
+      ]
+    },
+    {
+      "title": "Call to Action",
+      "kicker": "Ship something",
+      "body": "All micro-sites are Seeds.\\n\\nPick profile \u2192 generate \u2192 swap assets \u2192 deploy.\\n\\nPing with seed name + profile for first round tracking.",
+      "image": "assets/slides/slide4.jpg",
+      "audio_id": "outro"
+    }
+  ]
+}

@@ -1,0 +1,236 @@
+{
+  "schema": "summit-courses-v1",
+  "published_on": "2026-02-08",
+  "owner": "Summit Learning",
+  "audience": "Contributors (non-coders to advanced contributors)",
+  "levels": [
+    {
+      "code": "L0",
+      "label": "Foundation"
+    },
+    {
+      "code": "L1",
+      "label": "No-code Contributor"
+    },
+    {
+      "code": "L2",
+      "label": "UI and QA Contributor"
+    },
+    {
+      "code": "L3",
+      "label": "Code Contributor"
+    },
+    {
+      "code": "L4",
+      "label": "Contributor Lead"
+    }
+  ],
+  "courses": [
+    {
+      "id": "summit-101-contributor-foundations",
+      "title": "Summit 101: Contributor Foundations",
+      "level": "L0",
+      "duration": {
+        "minutes": 45,
+        "format": "self-paced"
+      },
+      "prerequisites": [],
+      "completion_criteria": [
+        "Identify where docs, app code, and data files live in the repository.",
+        "Complete one onboarding task from FIRST_TASKS.md.",
+        "Submit one issue or one small PR with a clear summary."
+      ]
+    },
+    {
+      "id": "bug-reports-that-get-fixed",
+      "title": "Bug Reports That Get Fixed",
+      "level": "L0",
+      "duration": {
+        "minutes": 35,
+        "format": "self-paced"
+      },
+      "prerequisites": [
+        "Summit 101: Contributor Foundations"
+      ],
+      "completion_criteria": [
+        "Submit one bug report using the issue template.",
+        "Include reproduction steps, expected vs actual behavior, and environment details.",
+        "Attach screenshot or short video evidence."
+      ]
+    },
+    {
+      "id": "docs-that-unblock-teams",
+      "title": "Docs That Unblock Teams",
+      "level": "L1",
+      "duration": {
+        "minutes": 50,
+        "format": "workshop"
+      },
+      "prerequisites": [
+        "Summit 101: Contributor Foundations"
+      ],
+      "completion_criteria": [
+        "Improve one README or docs page for beginner clarity.",
+        "Add one FAQ or troubleshooting item tied to a real issue pattern.",
+        "Get one docs change merged."
+      ]
+    },
+    {
+      "id": "json-and-content-ops-for-non-coders",
+      "title": "JSON and Content Ops for Non-Coders",
+      "level": "L1",
+      "duration": {
+        "minutes": 40,
+        "format": "self-paced"
+      },
+      "prerequisites": [
+        "Summit 101: Contributor Foundations"
+      ],
+      "completion_criteria": [
+        "Edit one content field in a JSON data file.",
+        "Preview the app and verify the change appears correctly.",
+        "Document the content update in a PR description."
+      ]
+    },
+    {
+      "id": "accessibility-scout-basics",
+      "title": "Accessibility Scout Basics",
+      "level": "L2",
+      "duration": {
+        "minutes": 55,
+        "format": "workshop"
+      },
+      "prerequisites": [
+        "Bug Reports That Get Fixed"
+      ],
+      "completion_criteria": [
+        "Run one keyboard-only navigation pass on the app.",
+        "Identify at least three a11y findings with severity and location.",
+        "Submit one issue with actionable accessibility recommendations."
+      ]
+    },
+    {
+      "id": "ui-polish-without-coding-deeply",
+      "title": "UI Polish Without Coding Deeply",
+      "level": "L2",
+      "duration": {
+        "minutes": 60,
+        "format": "workshop"
+      },
+      "prerequisites": [
+        "Summit 101: Contributor Foundations",
+        "Docs That Unblock Teams"
+      ],
+      "completion_criteria": [
+        "Make one responsive UI improvement in styles.css.",
+        "Validate the result at mobile and desktop widths.",
+        "Provide before/after screenshots in the PR."
+      ]
+    },
+    {
+      "id": "github-workflow-for-beginners",
+      "title": "GitHub Workflow for Beginners",
+      "level": "L1",
+      "duration": {
+        "minutes": 45,
+        "format": "self-paced"
+      },
+      "prerequisites": [],
+      "completion_criteria": [
+        "Create an issue and link it to a change.",
+        "Open one pull request with test steps.",
+        "Address at least one round of review feedback."
+      ]
+    },
+    {
+      "id": "issue-triage-and-backlog-hygiene",
+      "title": "Issue Triage and Backlog Hygiene",
+      "level": "L2",
+      "duration": {
+        "minutes": 50,
+        "format": "workshop"
+      },
+      "prerequisites": [
+        "GitHub Workflow for Beginners"
+      ],
+      "completion_criteria": [
+        "Triage and label 10 issues using the project taxonomy.",
+        "Rewrite two vague issues into clear acceptance criteria.",
+        "Create one prioritized task list for next sprint."
+      ]
+    },
+    {
+      "id": "qa-playbooks-for-product-releases",
+      "title": "QA Playbooks for Product Releases",
+      "level": "L2",
+      "duration": {
+        "minutes": 65,
+        "format": "workshop"
+      },
+      "prerequisites": [
+        "Bug Reports That Get Fixed",
+        "Accessibility Scout Basics"
+      ],
+      "completion_criteria": [
+        "Execute one full smoke test checklist on release candidate build.",
+        "Log pass/fail results with reproduction notes for failures.",
+        "Publish a release QA summary."
+      ]
+    },
+    {
+      "id": "bytecast-for-contributors",
+      "title": "ByteCast for Contributors",
+      "level": "L1",
+      "duration": {
+        "minutes": 40,
+        "format": "self-paced"
+      },
+      "prerequisites": [
+        "Summit 101: Contributor Foundations"
+      ],
+      "completion_criteria": [
+        "Draft one ByteCast episode plan with a single learning objective.",
+        "Include a practical action step tied to a real repo task.",
+        "Publish one episode outline in markdown or JSON profile format."
+      ]
+    },
+    {
+      "id": "from-non-coder-to-junior-builder",
+      "title": "From Non-Coder to Junior Builder",
+      "level": "L3",
+      "duration": {
+        "minutes": 90,
+        "format": "workshop"
+      },
+      "prerequisites": [
+        "JSON and Content Ops for Non-Coders",
+        "UI Polish Without Coding Deeply",
+        "GitHub Workflow for Beginners"
+      ],
+      "completion_criteria": [
+        "Implement one low-risk behavior fix in app.js.",
+        "Demonstrate that the fix works with clear test steps.",
+        "Merge one reviewed code PR."
+      ]
+    },
+    {
+      "id": "contributor-leadership-practicum",
+      "title": "Contributor Leadership Practicum",
+      "level": "L4",
+      "duration": {
+        "minutes": 75,
+        "format": "cohort"
+      },
+      "prerequisites": [
+        "Issue Triage and Backlog Hygiene",
+        "QA Playbooks for Product Releases",
+        "From Non-Coder to Junior Builder"
+      ],
+      "completion_criteria": [
+        "Run one contributor support session (office hour or async review block).",
+        "Mentor one contributor from task selection to completion.",
+        "Publish a short weekly operations report with risks and next actions."
+      ]
+    }
+  ]
+}

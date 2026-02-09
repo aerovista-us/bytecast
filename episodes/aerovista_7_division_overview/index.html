@@ -1,0 +1,946 @@
+<!doctype html>
+<html lang="en" data-theme="venta-neon">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ByteCast EP-002</title>
+  <meta name="description" content="A high-signal overview of AeroVista's 7 divisions and how they interlock." />
+  <style>
+    :root {
+      --bg0: #050607;
+      --bg1: #0b0f14;
+      --card: rgba(255,255,255,0.06);
+      --stroke: rgba(255,255,255,0.12);
+      --stroke2: rgba(100,180,255,0.25);
+
+      --ink: rgba(255,255,255,0.93);
+      --muted: rgba(255,255,255,0.66);
+      --faint: rgba(255,255,255,0.42);
+
+      --neon: #22a7ff;
+      --orange: #ff6a2a;
+      --ghost: #a66bff;
+
+      --shadow: 0 18px 80px rgba(0,0,0,0.55);
+      --shadow2: 0 10px 35px rgba(0,0,0,0.45);
+      --radius: 22px;
+
+      --max: 1180px;
+      --pad: clamp(16px, 2.2vw, 26px);
+
+      --glow-neon: 0 0 18px rgba(34,167,255,0.30), 0 0 42px rgba(34,167,255,0.16);
+      --glow-ghost: 0 0 18px rgba(166,107,255,0.26), 0 0 44px rgba(166,107,255,0.12);
+
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      background:
+        radial-gradient(1200px 600px at 15% 10%, rgba(34,167,255,0.10), transparent 60%),
+        radial-gradient(900px 500px at 85% 25%, rgba(166,107,255,0.09), transparent 60%),
+        radial-gradient(1100px 700px at 50% 100%, rgba(255,106,42,0.05), transparent 62%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+    .skip {
+      position: absolute;
+      left: -999px;
+      top: 8px;
+      background: #000;
+      color: #fff;
+      padding: 10px 12px;
+      border-radius: 10px;
+      z-index: 9999;
+    }
+    .skip:focus { left: 12px; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(12px);
+      background: linear-gradient(180deg, rgba(5,6,7,0.82), rgba(5,6,7,0.56));
+      border-bottom: 1px solid var(--stroke);
+    }
+
+    .topbar__inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 14px var(--pad);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,0.03);
+      box-shadow: var(--shadow2);
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--neon);
+      box-shadow: var(--glow-neon);
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .btn {
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,0.03);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 10px 12px;
+      font-size: 13px;
+      cursor: pointer;
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      transition: transform .12s ease, border-color .2s ease, box-shadow .2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      border-color: var(--stroke2);
+      box-shadow: var(--glow-neon);
+    }
+
+    .btn--primary {
+      border-color: rgba(34,167,255,0.35);
+      box-shadow: var(--glow-neon);
+    }
+
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 18px var(--pad) 90px;
+    }
+
+    .hero {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.12);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02)),
+        radial-gradient(1100px 500px at 10% 0%, rgba(34,167,255,0.16), transparent 55%),
+        radial-gradient(900px 450px at 90% 20%, rgba(166,107,255,0.14), transparent 55%),
+        radial-gradient(900px 450px at 60% 120%, rgba(255,106,42,0.07), transparent 60%);
+      box-shadow: var(--shadow);
+      padding: clamp(18px, 2.8vw, 34px);
+    }
+
+    .hero__grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .hero__grid { grid-template-columns: 1fr; }
+    }
+
+    .h-title {
+      font-size: clamp(34px, 4.2vw, 58px);
+      line-height: 1.02;
+      margin: 0 0 10px;
+      letter-spacing: -0.02em;
+    }
+
+    .h-sub {
+      margin: 0 0 16px;
+      font-size: clamp(15px, 1.35vw, 18px);
+      color: var(--muted);
+      max-width: 62ch;
+    }
+
+    .pills { display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0 0; }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,0.03);
+      color: rgba(255,255,255,0.86);
+      font-size: 12px;
+    }
+    .pill strong { font-family: var(--mono); font-weight: 700; color: rgba(255,255,255,0.94); }
+    .spark { width: 8px; height: 8px; border-radius: 99px; background: var(--ghost); box-shadow: var(--glow-ghost); }
+
+    .panel {
+      margin-top: 14px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      overflow: hidden;
+    }
+
+    .panel__top {
+      padding: 16px var(--pad);
+      display: flex;
+      gap: 14px;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.18);
+    }
+
+    .panel__meta h2 { margin: 0; font-size: 16px; }
+    .panel__meta p { margin: 6px 0 0; color: var(--muted); font-size: 13px; max-width: 72ch; }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--stroke);
+      background: rgba(0,0,0,0.22);
+      font-size: 12px;
+    }
+
+    .tagdot { width: 7px; height: 7px; border-radius: 99px; background: var(--neon); box-shadow: var(--glow-neon); }
+
+    .panel__body {
+      padding: 14px var(--pad) 18px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .muted { color: var(--muted); }
+
+    audio { width: 100%; }
+
+    .deck__bar {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px var(--pad);
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.20);
+    }
+
+    .deck__bar h3 {
+      margin: 0;
+      font-size: 14px;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .dots { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+    .dotBtn {
+      width: 10px;
+      height: 10px;
+      border-radius: 99px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.06);
+      cursor: pointer;
+      transition: transform .12s ease, box-shadow .2s ease, background .2s ease;
+    }
+
+    .dotBtn[aria-current="true"] {
+      background: var(--neon);
+      border-color: rgba(34,167,255,0.45);
+      box-shadow: var(--glow-neon);
+      transform: scale(1.05);
+    }
+
+    .slides { min-height: 320px; }
+    .slide { display: none; padding: 18px var(--pad) 20px; }
+    .slide.is-active { display: block; animation: slideIn .22s ease; }
+    @keyframes slideIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0px); } }
+
+    .slideGrid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 16px; }
+    @media (max-width: 920px) { .slideGrid { grid-template-columns: 1fr; } }
+
+    .card {
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.20);
+      padding: 16px;
+    }
+
+    .card h4 { margin: 0 0 10px; font-size: 16px; }
+    .card p { margin: 0 0 10px; color: var(--muted); line-height: 1.55; }
+    .card ul { margin: 10px 0 0; padding-left: 18px; color: rgba(255,255,255,0.82); }
+
+    .callout {
+      border-radius: 14px;
+      border: 1px solid rgba(34,167,255,0.24);
+      background: rgba(0,0,0,0.20);
+      padding: 16px;
+      box-shadow: var(--glow-neon);
+    }
+
+    .callout .k { font-family: var(--mono); font-size: 12px; color: rgba(255,255,255,0.88); }
+
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 900px) { .grid2 { grid-template-columns: 1fr; } }
+
+    .offerGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    @media (max-width: 900px) { .offerGrid { grid-template-columns: 1fr; } }
+
+    .offer {
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.20);
+      padding: 14px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .offerHead {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: start;
+    }
+
+    .offerHead b { line-height: 1.2; }
+
+    .tiny { font-size: 12px; color: var(--muted); }
+
+    details.summaryCard {
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.16);
+      overflow: hidden;
+    }
+
+    details.summaryCard summary {
+      cursor: pointer;
+      padding: 14px;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      font-weight: 800;
+    }
+
+    details.summaryCard summary::-webkit-details-marker { display: none; }
+
+    details.summaryCard .inner { padding: 0 14px 14px; }
+
+    :focus-visible {
+      outline: 2px solid rgba(34,167,255,0.55);
+      outline-offset: 3px;
+      border-radius: 12px;
+    }
+
+    footer {
+      margin-top: 18px;
+      color: var(--faint);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 12px;
+      padding: 10px 2px;
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <div class="topbar">
+    <div class="topbar__inner">
+      <div class="badge">
+        <span class="dot"></span>
+        <div>
+          <div style="font-weight:900; letter-spacing:-0.01em;" id="topEp">ByteCast • EP-002</div>
+          <small style="color:var(--muted);" id="topTitle">AeroVista Overview: 7 Divisions + How They Interlock</small>
+        </div>
+      </div>
+      <div class="controls">
+        <a class="btn" href="../../index.html">Workspace</a>
+        <a class="btn" href="../../seed_bytecast.html">ByteCast App</a>
+        <a class="btn" href="../../training_hub/index.html">Training Hub</a>
+        <a class="btn" href="../../seed_builder_studio/index.html">Seed Builder</a>
+        <button class="btn btn--primary" id="btnPrev" type="button">◀ <span style="font-family:var(--mono);">Prev</span></button>
+        <button class="btn btn--primary" id="btnNext" type="button"><span style="font-family:var(--mono);">Next</span> ▶</button>
+      </div>
+    </div>
+  </div>
+
+  <main class="wrap" id="main">
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero__grid">
+        <div>
+          <h1 class="h-title" id="heroTitle">BYTECAST</h1>
+          <p class="h-sub" id="heroSub">Loading episode profile...</p>
+
+          <div class="pills" aria-label="Episode metadata" id="metaPills"></div>
+
+          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+            <button class="btn btn--primary" type="button" id="jumpPlayer">Jump to Player</button>
+            <button class="btn" type="button" id="jumpDivisions">Divisions + Offers</button>
+            <button class="btn" type="button" id="jumpEngage">Quest + Quiz</button>
+          </div>
+
+          <p style="margin:14px 0 0; color:var(--muted); max-width:70ch;" id="heroNote">
+            Flow: listen -> slide -> interact. Then training cycle. Then seed builder real work.
+          </p>
+        </div>
+
+        <aside class="card" aria-label="Episode status">
+          <div class="callout" style="padding:16px; border-radius:18px;">
+            <div class="k">AEROVISTA MAP</div>
+            <p style="margin:10px 0 0; color:rgba(255,255,255,0.86); line-height:1.55;" id="keyLine">
+              Divisions protect focus and ship clearer outputs.
+            </p>
+            <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+              <span class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">EP</b> EP-002</span>
+              <span class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">MODE</b> Internal</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Workspace app map">
+      <div class="panel__top">
+        <div class="panel__meta">
+          <h2>Cross-App Visual Lanes</h2>
+          <p>EP-002 now uses the same animated SVG navigator as the rest of the core pages.</p>
+        </div>
+      </div>
+      <div class="panel__body">
+        <svg viewBox="0 0 1240 430" role="img" aria-label="Workspace map" style="width:100%; height:auto; display:block; border-radius:12px; border:1px solid rgba(255,255,255,0.14); background:rgba(0,0,0,0.24);">
+          <style>
+            .m-lane{fill:none;stroke-width:3;stroke-linecap:round;stroke-dasharray:12 12;animation:m-dash 12s linear infinite;opacity:.9}
+            .m-b{stroke:#22a7ff}.m-g{stroke:#ffc45a}.m-v{stroke:#a66bff}.m-o{stroke:#ff6a2a}
+            .m-dot{filter:drop-shadow(0 0 6px rgba(255,255,255,.45))}
+            .m-node{cursor:pointer;transform-box:fill-box;transform-origin:center;animation:m-float 5.8s ease-in-out infinite}
+            .m-n1{animation-delay:-1s}.m-n2{animation-delay:-2s}.m-n3{animation-delay:-3s}.m-n4{animation-delay:-4s}
+            .m-box{fill:rgba(8,12,18,.82);stroke-width:2}.m-sb{stroke:#22a7ff}.m-st{stroke:#ffc45a}.m-ss{stroke:#a66bff}.m-so{stroke:#ff6a2a}.m-se{stroke:#8fd9ff}
+            .m-t{fill:#f4fbff;font:700 20px Sora,Segoe UI,sans-serif}.m-s{fill:rgba(255,255,255,.72);font:14px 'IBM Plex Sans',Segoe UI,sans-serif}
+            @keyframes m-dash{from{stroke-dashoffset:220}to{stroke-dashoffset:0}}
+            @keyframes m-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+            @media (prefers-reduced-motion: reduce){.m-lane,.m-node{animation:none}}
+          </style>
+          <defs>
+            <path id="m1" d="M 420 205 C 530 118, 645 95, 780 102" />
+            <path id="m2" d="M 420 232 C 540 312, 655 334, 780 328" />
+            <path id="m3" d="M 420 220 C 500 220, 600 220, 680 220" />
+            <path id="m4" d="M 280 182 C 236 130, 206 108, 164 92" />
+            <path id="m5" d="M 300 254 C 244 306, 206 335, 164 350" />
+          </defs>
+          <rect x="0" y="0" width="1240" height="430" fill="#0c121b"/>
+          <path class="m-lane m-b" d="M 420 205 C 530 118, 645 95, 780 102" />
+          <path class="m-lane m-v" d="M 420 232 C 540 312, 655 334, 780 328" />
+          <path class="m-lane m-o" d="M 420 220 C 500 220, 600 220, 680 220" />
+          <path class="m-lane m-g" d="M 280 182 C 236 130, 206 108, 164 92" />
+          <path class="m-lane m-g" d="M 300 254 C 244 306, 206 335, 164 350" />
+          <circle class="m-dot" r="4" fill="#22a7ff"><animateMotion dur="4.6s" repeatCount="indefinite"><mpath href="#m1"/></animateMotion></circle>
+          <circle class="m-dot" r="4" fill="#a66bff"><animateMotion dur="4.9s" repeatCount="indefinite"><mpath href="#m2"/></animateMotion></circle>
+          <circle class="m-dot" r="4" fill="#ff6a2a"><animateMotion dur="5.2s" repeatCount="indefinite"><mpath href="#m3"/></animateMotion></circle>
+          <circle class="m-dot" r="3.6" fill="#ffc45a"><animateMotion dur="4.4s" repeatCount="indefinite"><mpath href="#m4"/></animateMotion></circle>
+          <circle class="m-dot" r="3.6" fill="#ffc45a"><animateMotion dur="5.1s" repeatCount="indefinite"><mpath href="#m5"/></animateMotion></circle>
+          <a href="../../seed_bytecast.html"><g class="m-node m-n1"><rect class="m-box m-sb" x="210" y="160" width="220" height="120" rx="20"/><text class="m-t" x="234" y="208">ByteCast</text><text class="m-s" x="234" y="230">episode player app</text></g></a>
+          <a href="../../training_hub/index.html"><g class="m-node m-n2"><rect class="m-box m-st" x="780" y="48" width="240" height="110" rx="18"/><text class="m-t" x="804" y="92">Training Hub</text><text class="m-s" x="804" y="114">onboarding and modules</text></g></a>
+          <a href="../../seed_builder_studio/index.html"><g class="m-node m-n3"><rect class="m-box m-ss" x="780" y="272" width="240" height="110" rx="18"/><text class="m-t" x="804" y="316">Seed Builder</text><text class="m-s" x="804" y="338">tooling and generation</text></g></a>
+          <a href="../../aerovista_offer_pack/app/index.html"><g class="m-node m-n4"><rect class="m-box m-so" x="668" y="170" width="170" height="96" rx="16"/><text class="m-t" x="690" y="208" style="font-size:18px;">Offer Pack</text><text class="m-s" x="690" y="229">sales reference</text></g></a>
+          <a href="../../episodes/welcome_to_bytecast/index.html"><g class="m-node m-n2"><rect class="m-box m-se" x="36" y="48" width="210" height="72" rx="14"/><text class="m-t" x="58" y="89" style="font-size:16px;">EP-001</text></g></a>
+          <a href="../../episodes/aerovista_7_division_overview/index.html"><g class="m-node m-n3"><rect class="m-box m-se" x="36" y="314" width="210" height="72" rx="14"/><text class="m-t" x="58" y="355" style="font-size:16px;">EP-002</text></g></a>
+          <a href="../../index.html"><g class="m-node m-n4"><rect class="m-box m-se" x="1038" y="170" width="166" height="96" rx="16"/><text class="m-t" x="1062" y="208" style="font-size:17px;">Workspace</text><text class="m-s" x="1062" y="229">all app entry</text></g></a>
+        </svg>
+      </div>
+    </section>
+
+    <section class="panel" id="player">
+      <div class="panel__top">
+        <div class="panel__meta">
+          <h2>Episode Audio</h2>
+          <p>Episode AAC: <span style="font-family:var(--mono);">aerovista_7_division_overview.aac</span> (fallback: <span style="font-family:var(--mono);">assets/bytecast-ep2.mp3</span>).</p>
+        </div>
+        <div class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">MODE</b> • Internal • Additive</div>
+      </div>
+
+      <div class="panel__body">
+        <audio id="audio" preload="metadata" controls>
+          <source id="audioSourceAac" src="aerovista_7_division_overview.aac" type="audio/aac" />
+          <source id="audioSourceMp3" src="assets/bytecast-ep2.mp3" type="audio/mpeg" />
+        </audio>
+        <p class="muted" id="audioHint">If audio does not load, run: <span style="font-family:var(--mono);">python -m http.server 8080</span></p>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Episode slideshow">
+      <div class="deck__bar">
+        <h3 id="deckTitle">Episode Slides</h3>
+        <div class="dots" id="dots" aria-label="Slide navigation"></div>
+      </div>
+      <div class="slides" id="slides"></div>
+    </section>
+
+    <section class="panel" id="divisions" aria-label="Divisions and offers">
+      <div class="panel__top">
+        <div class="panel__meta">
+          <h2>Divisions + Offers (from Offer Pack)</h2>
+          <p>
+            Powered by <span style="font-family:var(--mono);">aerovista_offer_pack/app/data/offer-pack-data.json</span>.
+            Jump from overview to concrete offers.
+          </p>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <a class="btn btn--primary" href="../../aerovista_offer_pack/app/index.html#divisions" target="_blank" rel="noreferrer">Open Offer Pack</a>
+          <a class="btn" href="../../aerovista_offer_pack/app/index.html#pricing" target="_blank" rel="noreferrer">Pricing</a>
+        </div>
+      </div>
+      <div class="panel__body">
+        <p class="muted" id="offerLoad">Loading divisions and offers...</p>
+        <div id="divisionList" class="offerGrid"></div>
+      </div>
+    </section>
+
+    <section class="panel" id="engage" aria-label="Quest and quiz">
+      <div class="deck__bar">
+        <h3>Engagement</h3>
+        <div class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">PASS</b> 80%</div>
+      </div>
+      <div class="panel__body">
+        <div class="grid2">
+          <div class="card">
+            <h4 id="questTitle">Quest</h4>
+            <p>Check these off. This is how the loop locks in.</p>
+            <div id="questList"></div>
+          </div>
+
+          <div class="card">
+            <h4>Quiz</h4>
+            <p>Quick alignment check.</p>
+            <div id="quiz"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div id="footerLeft">ByteCast EP-002 • v1 • Venta/Neon default</div>
+      <div style="font-family:var(--mono);">Keys: Left/Right slides</div>
+    </footer>
+  </main>
+
+  <script>
+    const PROFILE_URL = "./bytecast_ep_profile.json";
+    const OFFER_PACK_URL = "../../aerovista_offer_pack/app/data/offer-pack-data.json";
+
+    const $ = (s, r = document) => r.querySelector(s);
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    function toId(text) {
+      return String(text || "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)/g, "");
+    }
+
+    async function loadJson(url) {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Fetch failed ${response.status} for ${url}`);
+      }
+      return await response.json();
+    }
+
+    function pill(label, value) {
+      return `<span class="pill"><span class="spark"></span><strong>${escapeHtml(label)}</strong> ${escapeHtml(value)}</span>`;
+    }
+
+    function renderSlides(profile) {
+      const slidesEl = $("#slides");
+      const dotsEl = $("#dots");
+      slidesEl.innerHTML = "";
+      dotsEl.innerHTML = "";
+
+      const slides = Array.isArray(profile.slides) ? profile.slides : [];
+      if (!slides.length) {
+        slidesEl.innerHTML = `<div class="slide is-active"><div class="card"><h4>No slides</h4><p class="muted">Add slides in <span style="font-family:var(--mono);">bytecast_ep_profile.json</span>.</p></div></div>`;
+        return;
+      }
+
+      slides.forEach((slide, index) => {
+        const art = document.createElement("article");
+        art.className = "slide" + (index === 0 ? " is-active" : "");
+        art.dataset.title = slide.title || `Slide ${index + 1}`;
+        const bullets = Array.isArray(slide.bullets) ? slide.bullets : [];
+
+        art.innerHTML = `
+          <div class="slideGrid">
+            <div class="card">
+              <h4>${escapeHtml(slide.title || "")}</h4>
+              <p style="margin-top:-4px;"><span style="font-family:var(--mono); color:rgba(255,255,255,0.78);">Goal:</span> ${escapeHtml(slide.goal || "")}</p>
+              <ul>${bullets.map((b) => `<li>${escapeHtml(b)}</li>`).join("")}</ul>
+            </div>
+            <div class="callout">
+              <div class="k">TAKEAWAY</div>
+              <p style="margin:10px 0 0; color:rgba(255,255,255,0.86); line-height:1.55;">
+                <strong>${escapeHtml(bullets[0] || slide.goal || "")}</strong>
+              </p>
+              <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+                <span class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">SLIDE</b> ${index + 1}/${slides.length}</span>
+                <span class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">TITLE</b> ${escapeHtml(slide.title || "")}</span>
+              </div>
+            </div>
+          </div>
+        `;
+
+        slidesEl.appendChild(art);
+
+        const dot = document.createElement("button");
+        dot.className = "dotBtn";
+        dot.type = "button";
+        dot.title = art.dataset.title;
+        dot.setAttribute("aria-label", `Go to slide ${index + 1}`);
+        dot.addEventListener("click", () => goTo(index));
+        dotsEl.appendChild(dot);
+      });
+
+      const slideEls = Array.from(document.querySelectorAll("#slides .slide"));
+      let idx = 0;
+
+      function syncDots() {
+        const dotEls = Array.from(document.querySelectorAll("#dots .dotBtn"));
+        dotEls.forEach((b, i) => b.setAttribute("aria-current", String(i === idx)));
+        const title = slideEls[idx]?.dataset?.title ? `Episode Slides • ${slideEls[idx].dataset.title}` : "Episode Slides";
+        $("#deckTitle").textContent = title;
+      }
+
+      function goTo(n) {
+        idx = (n + slideEls.length) % slideEls.length;
+        slideEls.forEach((sl, i) => sl.classList.toggle("is-active", i === idx));
+        syncDots();
+      }
+
+      $("#btnPrev").addEventListener("click", () => goTo(idx - 1));
+      $("#btnNext").addEventListener("click", () => goTo(idx + 1));
+
+      window.addEventListener("keydown", (e) => {
+        const t = e.target?.tagName?.toLowerCase();
+        const inField = (t === "input" || t === "textarea" || e.target?.isContentEditable);
+        if (inField) {
+          return;
+        }
+
+        if (e.key === "ArrowLeft") {
+          goTo(idx - 1);
+        }
+        if (e.key === "ArrowRight") {
+          goTo(idx + 1);
+        }
+      });
+
+      syncDots();
+    }
+
+    function renderQuest(profile, prefix) {
+      const quest = profile?.engagement?.quest;
+      const questList = $("#questList");
+      if (!quest || !Array.isArray(quest.items)) {
+        $("#questTitle").textContent = "Quest";
+        questList.innerHTML = `<p class="muted">No quest configured in <span style="font-family:var(--mono);">bytecast_ep_profile.json</span>.</p>`;
+        return;
+      }
+
+      $("#questTitle").textContent = `Quest — ${quest.title || ""}`.trim();
+      const QUEST_KEY = `${prefix}_quest`;
+
+      const questState = new Set((() => {
+        try {
+          return JSON.parse(localStorage.getItem(QUEST_KEY) || "[]");
+        } catch {
+          return [];
+        }
+      })());
+
+      questList.innerHTML = quest.items.map((item) => {
+        const checked = questState.has(item.id) ? "checked" : "";
+        return `
+          <label style="display:flex; gap:10px; align-items:flex-start; padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.08);">
+            <input type="checkbox" data-qid="${escapeHtml(item.id)}" ${checked} style="margin-top:3px; width:18px; height:18px; accent-color: var(--neon);" />
+            <div>
+              <div style="font-weight:800; letter-spacing:-0.01em;">${escapeHtml(item.text || "")}</div>
+              <div style="color:var(--muted); font-size:12px; margin-top:4px;">tag: <span style="font-family:var(--mono);">${escapeHtml(item.id)}</span></div>
+            </div>
+          </label>
+        `;
+      }).join("");
+
+      questList.addEventListener("change", (e) => {
+        const cb = e.target;
+        if (cb && cb.matches('input[type="checkbox"][data-qid]')) {
+          const id = cb.getAttribute("data-qid");
+          if (cb.checked) {
+            questState.add(id);
+          } else {
+            questState.delete(id);
+          }
+          try {
+            localStorage.setItem(QUEST_KEY, JSON.stringify([...questState]));
+          } catch {
+            // ignore
+          }
+        }
+      });
+    }
+
+    function renderQuiz(profile, prefix) {
+      const quiz = profile?.engagement?.quiz;
+      const quizEl = $("#quiz");
+      if (!quiz || !quiz.enabled || !Array.isArray(quiz.questions)) {
+        quizEl.innerHTML = `<p class="muted">No quiz enabled for this episode.</p>`;
+        return;
+      }
+
+      const questions = quiz.questions;
+      const passThresh = Number(quiz.pass_threshold || 0.8);
+      const QUIZ_KEY = `${prefix}_quiz`;
+
+      let quizState = (() => {
+        try {
+          return JSON.parse(localStorage.getItem(QUIZ_KEY) || "{}");
+        } catch {
+          return {};
+        }
+      })();
+
+      function render() {
+        const answers = quizState.answers || {};
+        const score = (typeof quizState.score === "number") ? quizState.score : null;
+        const passed = Boolean(quizState.passed);
+
+        quizEl.innerHTML = `
+          <div style="display:grid; gap:12px;">
+            ${questions.map((q) => {
+              const picked = answers[q.id];
+              return `
+                <div class="card" style="border-style:solid;">
+                  <div style="display:flex; justify-content:space-between; gap:10px; align-items:center; margin-bottom:10px;">
+                    <b>${escapeHtml(q.q || "")}</b>
+                    <span class="pill" style="margin:0;"><span class="spark"></span><strong>${escapeHtml(q.id)}</strong></span>
+                  </div>
+                  <div style="display:grid; gap:8px;">
+                    ${(q.choices || []).map((c, ix) => {
+                      const sel = (picked === ix) ? "checked" : "";
+                      return `
+                        <label style="display:flex; gap:10px; align-items:flex-start;">
+                          <input type="radio" name="${escapeHtml(q.id)}" value="${ix}" ${sel} style="margin-top:3px; accent-color: var(--neon);" />
+                          <span style="color:rgba(255,255,255,0.86);">${escapeHtml(c)}</span>
+                        </label>
+                      `;
+                    }).join("")}
+                  </div>
+                </div>
+              `;
+            }).join("")}
+
+            <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+              <button class="btn btn--primary" type="button" id="gradeQuiz">Grade Quiz</button>
+              <button class="btn" type="button" id="resetQuiz">Reset</button>
+              <span class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">THRESH</b> ${Math.round(passThresh * 100)}%</span>
+              <span class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">SCORE</b> ${score === null ? "—" : Math.round(score * 100) + "%"}</span>
+              <span class="chip" style="${passed ? "box-shadow: var(--glow-neon); border-color: rgba(34,167,255,0.35);" : ""}">
+                <span class="tagdot"></span> <b style="font-family:var(--mono);">STATUS</b> ${passed ? "PASS" : (score === null ? "—" : "TRY AGAIN")}
+              </span>
+            </div>
+          </div>
+        `;
+
+        quizEl.querySelectorAll('input[type="radio"]').forEach((r) => {
+          r.addEventListener("change", () => {
+            const qid = r.name;
+            const v = Number(r.value);
+            quizState.answers = quizState.answers || {};
+            quizState.answers[qid] = v;
+            try {
+              localStorage.setItem(QUIZ_KEY, JSON.stringify(quizState));
+            } catch {
+              // ignore
+            }
+          });
+        });
+
+        $("#gradeQuiz").addEventListener("click", () => {
+          const ans = quizState.answers || {};
+          let correct = 0;
+          questions.forEach((q) => {
+            if (ans[q.id] === q.answer_index) {
+              correct += 1;
+            }
+          });
+          const scoreNow = correct / questions.length;
+          quizState.score = scoreNow;
+          quizState.passed = scoreNow >= passThresh;
+          try {
+            localStorage.setItem(QUIZ_KEY, JSON.stringify(quizState));
+          } catch {
+            // ignore
+          }
+          render();
+        });
+
+        $("#resetQuiz").addEventListener("click", () => {
+          quizState = {};
+          try {
+            localStorage.removeItem(QUIZ_KEY);
+          } catch {
+            // ignore
+          }
+          render();
+        });
+      }
+
+      render();
+    }
+
+    async function renderOfferPack() {
+      const loadEl = $("#offerLoad");
+      const listEl = $("#divisionList");
+
+      try {
+        const data = await loadJson(OFFER_PACK_URL);
+        const divisions = Array.isArray(data.divisions) ? data.divisions : [];
+
+        if (!divisions.length) {
+          loadEl.textContent = "No divisions found in Offer Pack JSON.";
+          return;
+        }
+
+        loadEl.textContent = "";
+        listEl.innerHTML = divisions.map((div) => {
+          const offers = Array.isArray(div.offers) ? div.offers : [];
+          const openDivisions = `../../aerovista_offer_pack/app/index.html#divisions`;
+          const divLabel = `${div.name || div.id || "Division"}`;
+
+          return `
+            <details class="summaryCard">
+              <summary>
+                <span>${escapeHtml(divLabel)}</span>
+                <span class="tiny">${offers.length} offers</span>
+              </summary>
+              <div class="inner">
+                <p class="tiny">${escapeHtml(div.tagline || "")}</p>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin:10px 0 12px;">
+                  <a class="btn" href="${openDivisions}" target="_blank" rel="noreferrer">Open division in Offer Pack</a>
+                </div>
+                <div style="display:grid; gap:10px;">
+                  ${offers.slice(0, 6).map((offer) => {
+                    const offerAnchor = offer?.id ? `#offer-${encodeURIComponent(offer.id)}` : "";
+                    const offerUrl = `../../aerovista_offer_pack/app/index.html${offerAnchor}`;
+                    return `
+                      <div class="offer">
+                        <div class="offerHead">
+                          <b>${escapeHtml(offer.name || offer.id || "Offer")}</b>
+                          <a class="btn btn--primary" href="${offerUrl}" target="_blank" rel="noreferrer">Open</a>
+                        </div>
+                        <div class="tiny">${escapeHtml(offer.outcome || "")}</div>
+                      </div>
+                    `;
+                  }).join("")}
+                  ${offers.length > 6 ? `<div class="tiny muted">Showing 6 of ${offers.length}. Open the Offer Pack for full list.</div>` : ""}
+                </div>
+              </div>
+            </details>
+          `;
+        }).join("");
+      } catch (error) {
+        console.error(error);
+        loadEl.textContent = "Unable to load Offer Pack JSON. Run a local server and try again.";
+      }
+    }
+
+    async function main() {
+      let profile;
+      try {
+        profile = await loadJson(PROFILE_URL);
+      } catch (error) {
+        console.error(error);
+        $("#heroSub").textContent = "Unable to load episode profile. Run a local server and reload.";
+        $("#audioHint").textContent = "Run: python -m http.server 8080";
+        return;
+      }
+
+      const epCode = profile?.episode?.code || "EP";
+      const title = profile?.episode?.title || "ByteCast";
+      const date = profile?.episode?.date || "";
+      const tags = Array.isArray(profile?.content?.tags) ? profile.content.tags : [];
+      const summary = profile?.content?.summary_short || "";
+
+      document.title = `ByteCast ${epCode} • ${title}`;
+      $("#topEp").textContent = `ByteCast • ${epCode}`;
+      $("#topTitle").textContent = title;
+      $("#heroSub").textContent = summary;
+      $("#keyLine").textContent = (profile?.slides?.[0]?.bullets?.[0]) || "Divisions protect focus and ship clearer outputs.";
+      $("#footerLeft").textContent = `ByteCast ${epCode} • ${date || ""} • Venta/Neon default`;
+
+      const meta = $("#metaPills");
+      meta.innerHTML = [
+        pill(epCode, "Internal"),
+        pill(date || "Date", "Timestamped"),
+        pill("tags", tags.slice(0, 3).join(" • ") || ""),
+      ].join("");
+
+      $("#jumpPlayer").addEventListener("click", () => $("#player").scrollIntoView({ behavior: "smooth" }));
+      $("#jumpDivisions").addEventListener("click", () => $("#divisions").scrollIntoView({ behavior: "smooth" }));
+      $("#jumpEngage").addEventListener("click", () => $("#engage").scrollIntoView({ behavior: "smooth" }));
+
+      const audioPath = profile?.media?.audio_files?.[0]?.path || "assets/bytecast-ep2.mp3";
+      const aacPath = profile?.media?.audio_aac || "aerovista_7_division_overview.aac";
+      $("#audioSourceMp3").setAttribute("src", audioPath);
+      $("#audioSourceAac").setAttribute("src", aacPath);
+
+      const epPrefix = toId(epCode || "ep");
+      renderSlides(profile);
+      renderQuest(profile, epPrefix);
+      renderQuiz(profile, epPrefix);
+      await renderOfferPack();
+
+      const audioEl = $("#audio");
+      audioEl.addEventListener("error", () => {
+        $("#audioHint").textContent = "Audio missing or blocked. Place assets/bytecast-ep2.mp3 and serve via http://";
+      });
+    }
+
+    main();
+  </script>
+</body>
+</html>

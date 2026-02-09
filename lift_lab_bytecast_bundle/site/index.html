@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AeroVista ByteCast — Lift Lab</title>
+  <meta name="description" content="Lift Lab: contribute now, learn fast. Four tracks. Ship small wins." />
+  <style>
+    :root{
+      --bg:#070A12;
+      --panel:#0B1020;
+      --panel2:#0E1630;
+      --txt:#E9EEFF;
+      --muted:#9AA7D6;
+      --line:rgba(148,163,255,.18);
+      --blue:#2E6BFF;
+      --orange:#FF7A18;
+      --purp:#8A4DFF;
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --r:18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:
+        radial-gradient(1200px 700px at 20% -10%, rgba(46,107,255,.35), transparent 65%),
+        radial-gradient(900px 600px at 110% 15%, rgba(138,77,255,.22), transparent 60%),
+        radial-gradient(700px 600px at 40% 120%, rgba(255,122,24,.10), transparent 55%),
+        var(--bg);
+      color:var(--txt);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      line-height:1.25;
+    }
+    a{color:inherit}
+    .wrap{max-width:1080px;margin:0 auto;padding:18px 16px 60px}
+    .topbar{
+      display:flex;gap:12px;align-items:center;justify-content:space-between;
+      padding:12px 14px;border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(11,16,32,.85), rgba(7,10,18,.75));
+      border-radius:var(--r); box-shadow: var(--shadow);
+      position:sticky; top:10px; backdrop-filter: blur(10px); z-index:50;
+    }
+    .brand{display:flex;gap:10px;align-items:center;min-width:0}
+    .logo{
+      width:38px;height:38px;border-radius:14px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(46,107,255,.9), transparent 55%),
+        radial-gradient(circle at 70% 70%, rgba(138,77,255,.85), transparent 55%),
+        linear-gradient(180deg, rgba(255,122,24,.22), rgba(0,0,0,.05));
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow: 0 10px 30px rgba(46,107,255,.18);
+      position:relative;
+    }
+    .logo:after{
+      content:""; position:absolute; inset:7px; border-radius:11px;
+      border:1px solid rgba(255,255,255,.14);
+    }
+    .brand h1{margin:0;font-size:14px;letter-spacing:.6px;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .brand .sub{margin:0;color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+    .btn{
+      display:inline-flex;gap:8px;align-items:center;justify-content:center;
+      padding:10px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.12);
+      background:linear-gradient(180deg, rgba(14,22,48,.85), rgba(11,16,32,.85));
+      cursor:pointer; user-select:none;
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+      font-size:13px; color:var(--txt);
+    }
+    .btn:hover{transform: translateY(-1px); border-color: rgba(46,107,255,.45)}
+    .btn:active{transform: translateY(0)}
+    .pill{
+      border-color: rgba(46,107,255,.45);
+      background:linear-gradient(180deg, rgba(46,107,255,.22), rgba(14,22,48,.85));
+    }
+    .grid{
+      display:grid; gap:14px; margin-top:14px;
+      grid-template-columns: 1.15fr .85fr;
+    }
+    @media (max-width: 920px){ .grid{grid-template-columns:1fr} }
+    .card{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(11,16,32,.88), rgba(7,10,18,.70));
+      border-radius:var(--r);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .card .hd{
+      padding:14px 14px 10px;
+      display:flex;align-items:flex-start;justify-content:space-between;gap:12px
+    }
+    .kicker{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:6px 10px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      color:var(--muted);
+      background:rgba(14,22,48,.7);
+      font-size:12px;
+    }
+    .dot{width:8px;height:8px;border-radius:99px;background:var(--blue);box-shadow:0 0 18px rgba(46,107,255,.6)}
+    .dot.p{background:var(--purp); box-shadow:0 0 18px rgba(138,77,255,.55)}
+    .dot.o{background:var(--orange); box-shadow:0 0 18px rgba(255,122,24,.55)}
+    .title{margin:8px 0 6px;font-size:22px;letter-spacing:.2px}
+    .desc{margin:0;color:var(--muted);font-size:13px;max-width:62ch}
+    .body{padding:0 14px 14px}
+    .player{
+      display:grid; gap:10px; padding:12px; border-radius:16px;
+      border:1px solid rgba(255,255,255,.12);
+      background:linear-gradient(180deg, rgba(14,22,48,.75), rgba(11,16,32,.6));
+    }
+    audio{width:100%}
+    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+    .tag{
+      padding:6px 10px;border-radius:999px;font-size:12px;
+      border:1px solid rgba(255,255,255,.12);
+      color:var(--muted);
+      background:rgba(7,10,18,.35);
+    }
+    .split{display:grid; gap:12px; grid-template-columns: 1fr}
+    .slides{
+      padding:12px; border-radius:16px;
+      border:1px solid rgba(255,255,255,.12);
+      background:linear-gradient(180deg, rgba(14,22,48,.65), rgba(11,16,32,.50));
+    }
+    .slideTitle{margin:0 0 8px;font-size:16px}
+    ul{margin:0;padding-left:18px;color:var(--muted);font-size:13px}
+    li{margin:6px 0}
+    .nav{
+      display:flex;gap:10px;justify-content:space-between;align-items:center;margin-top:10px
+    }
+    .ghost{
+      background:transparent;
+      border:1px solid rgba(255,255,255,.12);
+    }
+    .progress{
+      height:8px; border-radius:99px; overflow:hidden;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.25);
+    }
+    .bar{
+      height:100%; width:0%;
+      background:linear-gradient(90deg, rgba(46,107,255,.95), rgba(138,77,255,.85), rgba(255,122,24,.75));
+      transition: width .2s ease;
+    }
+    .missions{
+      display:grid; gap:10px;
+    }
+    .mission{
+      padding:12px; border-radius:16px;
+      border:1px solid rgba(255,255,255,.12);
+      background:linear-gradient(180deg, rgba(14,22,48,.62), rgba(11,16,32,.48));
+    }
+    .mTop{display:flex;gap:10px;align-items:flex-start;justify-content:space-between}
+    .mTitle{margin:0;font-size:14px}
+    .meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .chip{
+      font-size:11px;color:var(--muted);
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(7,10,18,.30);
+      padding:5px 8px;border-radius:999px;
+    }
+    .small{font-size:12px;color:var(--muted);margin:8px 0 0}
+    .small a{text-decoration:underline;text-underline-offset:2px}
+    .small a:hover{color:var(--txt)}
+    .checkRow{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-top:10px}
+    .toggle{
+      display:flex;gap:8px;align-items:center;font-size:12px;color:var(--muted)
+    }
+    input[type="checkbox"]{width:16px;height:16px; accent-color: var(--blue)}
+    .select{
+      min-width:140px;
+      padding:8px 10px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(7,10,18,.5);
+      color:var(--txt);
+      font-size:12px;
+    }
+    .missionTools{
+      display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;
+      margin:2px 0 10px;
+    }
+    .status{
+      margin:0 0 10px;
+      color:var(--muted);
+      font-size:12px;
+    }
+    .empty{
+      padding:12px;
+      border-radius:12px;
+      border:1px dashed rgba(255,255,255,.16);
+      background:rgba(7,10,18,.22);
+      color:var(--muted);
+      font-size:12px;
+    }
+    .footer{
+      margin-top:16px;color:var(--muted);font-size:12px;
+      padding:14px;border-radius:16px;border:1px solid var(--line);
+      background:rgba(7,10,18,.35);
+    }
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
+    .sr{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar" role="banner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div style="min-width:0">
+          <h1>ByteCast · Lift Lab</h1>
+          <p class="sub">Contribute now · learn fast · ship small wins</p>
+        </div>
+      </div>
+      <div class="actions" aria-label="Page actions">
+        <button class="btn pill" id="btnStart">Start Episode</button>
+        <button class="btn ghost" id="btnMissions">Jump to Missions</button>
+        <button class="btn ghost" id="btnCopy">Copy Share Text</button>
+      </div>
+    </div>
+
+    <div class="grid" role="main">
+      <!-- LEFT -->
+      <section class="card" aria-label="Episode player and slides">
+        <div class="hd">
+          <div>
+            <div class="kicker"><span class="dot"></span><span class="dot p"></span><span class="dot o"></span> Episode: LiftLab-01</div>
+            <h2 class="title">Lift Lab: Join the Build</h2>
+            <p class="desc">If you want to contribute to AeroVista but don’t code yet — you’re still needed. Pick a track, ship a first win, and level up.</p>
+          </div>
+          <div class="kicker mono" title="Build ID">v1</div>
+        </div>
+
+        <div class="body">
+          <div class="player" aria-label="Audio player">
+            <div class="row">
+              <div class="tag">Default Theme: Venta Black · Neon Blue · Orange Accent · Ghost Purp Glow</div>
+              <div class="tag">Portrait-friendly · slideshow pages</div>
+            </div>
+            <audio id="audio" controls preload="metadata" aria-label="ByteCast audio player">
+              <source src="assets/bytecast_liftlab01.mp3" type="audio/mpeg" />
+              <source src="assets/bytecast_liftlab01.ogg" type="audio/ogg" />
+              Your browser does not support the audio element.
+            </audio>
+            <div class="progress" aria-label="Slide progress">
+              <div class="bar" id="bar"></div>
+            </div>
+            <div class="nav" aria-label="Slideshow controls">
+              <button class="btn ghost" id="prev" aria-label="Previous slide">← Prev</button>
+              <div class="tag" id="slideCounter" aria-live="polite">Slide 1 / 1</div>
+              <button class="btn" id="next" aria-label="Next slide">Next →</button>
+            </div>
+          </div>
+
+          <div class="slides" style="margin-top:12px" aria-label="Slideshow">
+            <h3 class="slideTitle" id="sTitle">Loading…</h3>
+            <ul id="sBullets"></ul>
+            <p class="small">Tip: Hit <span class="mono">Start Episode</span>, then step through slides as you listen.</p>
+          </div>
+
+          <div class="footer">
+            <div><strong>Links (local bundle)</strong></div>
+            <div style="margin-top:6px" class="mono small">
+              <a href="../docs/LiftLab_Playbook.md">docs/LiftLab_Playbook.md</a> ·
+              <a href="../docs/FIRST_TASKS.md">docs/FIRST_TASKS.md</a> ·
+              <a href="../docs/ByteCast_Episode_Script.md">docs/ByteCast_Episode_Script.md</a>
+            </div>
+            <div id="ledgerStamp" class="small" style="margin-top:8px"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT -->
+      <aside class="card" aria-label="Missions">
+        <div class="hd">
+          <div>
+            <div class="kicker"><span class="dot"></span> Missions</div>
+            <h2 class="title" style="font-size:18px;margin-top:10px">Pick ONE. Ship it today.</h2>
+            <p class="desc">Missions are tiny, real contributions. Mark them complete as you go — progress saves locally on your device.</p>
+          </div>
+        </div>
+        <div class="body">
+          <div class="missionTools">
+            <label for="trackFilter" class="sr">Filter missions by track</label>
+            <select id="trackFilter" class="select" aria-label="Filter missions by track">
+              <option value="all">All tracks</option>
+            </select>
+            <button type="button" class="btn ghost" id="clearDone">Reset completed</button>
+          </div>
+          <p class="status" id="missionStatus">0/0 completed</p>
+          <div class="missions" id="missions"></div>
+          <div class="footer" style="margin-top:12px">
+            <div><strong>Next step</strong></div>
+            <div style="margin-top:6px">Open <a href="../docs/FIRST_TASKS.md" class="mono">docs/FIRST_TASKS.md</a> and claim a task in your track.</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_DONE_KEY = "liftlab_done";
+    const STORAGE_TRACK_KEY = "liftlab_track_filter";
+
+    function loadDoneSet(){
+      try{
+        const raw = localStorage.getItem(STORAGE_DONE_KEY);
+        const parsed = raw ? JSON.parse(raw) : [];
+        if(Array.isArray(parsed)) return new Set(parsed);
+      }catch(e){
+        console.warn("Invalid local completion data; resetting.", e);
+      }
+      return new Set();
+    }
+
+    function loadTrackFilter(){
+      try{
+        return localStorage.getItem(STORAGE_TRACK_KEY) || "all";
+      }catch(e){
+        return "all";
+      }
+    }
+
+    const state = {
+      slides: [],
+      missions: [],
+      idx: 0,
+      done: loadDoneSet(),
+      trackFilter: loadTrackFilter()
+    };
+
+    function $(id){ return document.getElementById(id); }
+
+    async function loadJSON(path){
+      const res = await fetch(path, {cache:"no-store"});
+      if(!res.ok) throw new Error("Failed to load " + path);
+      return res.json();
+    }
+
+    function setProgress(){
+      const total = Math.max(state.slides.length, 1);
+      const pct = ((state.idx+1)/total)*100;
+      $("bar").style.width = pct + "%";
+      $("slideCounter").textContent = `Slide ${state.idx+1} / ${total}`;
+    }
+
+    function renderSlide(){
+      if(!state.slides.length){
+        $("sTitle").textContent = "Slides missing";
+        $("sBullets").innerHTML = "<li>content/slides.json not found.</li>";
+        return;
+      }
+      const s = state.slides[state.idx];
+      $("sTitle").textContent = s.title || "Untitled";
+      const ul = $("sBullets");
+      ul.innerHTML = "";
+      (s.bullets || []).forEach(b=>{
+        const li = document.createElement("li");
+        li.textContent = b;
+        ul.appendChild(li);
+      });
+      setProgress();
+    }
+
+    function saveDone(){
+      localStorage.setItem(STORAGE_DONE_KEY, JSON.stringify(Array.from(state.done)));
+    }
+
+    function saveTrackFilter(){
+      localStorage.setItem(STORAGE_TRACK_KEY, state.trackFilter || "all");
+    }
+
+    function renderTrackFilter(){
+      const select = $("trackFilter");
+      if(!select) return;
+      const tracks = Array.from(new Set(state.missions.map(m => m.track || "Track"))).sort();
+      const options = ['<option value="all">All tracks</option>'].concat(
+        tracks.map(track => `<option value="${escapeAttr(track)}">${escapeHtml(track)}</option>`)
+      );
+      select.innerHTML = options.join("");
+      const value = state.trackFilter || "all";
+      const exists = value === "all" || tracks.indexOf(value) >= 0;
+      select.value = exists ? value : "all";
+      if(!exists){
+        state.trackFilter = "all";
+        saveTrackFilter();
+      }
+    }
+
+    function renderMissions(){
+      const root = $("missions");
+      root.innerHTML = "";
+      const visibleMissions = state.trackFilter === "all"
+        ? state.missions
+        : state.missions.filter(m => (m.track || "Track") === state.trackFilter);
+
+      const completedAll = state.missions.filter(m => state.done.has(m.id)).length;
+      const completedVisible = visibleMissions.filter(m => state.done.has(m.id)).length;
+      const status = $("missionStatus");
+      if(status){
+        const filterLabel = state.trackFilter === "all" ? "All tracks" : state.trackFilter;
+        status.textContent = `${completedAll}/${state.missions.length} completed · Showing ${filterLabel} (${completedVisible}/${visibleMissions.length})`;
+      }
+
+      if(!visibleMissions.length){
+        root.innerHTML = '<div class="empty">No missions in this track filter yet.</div>';
+        return;
+      }
+
+      visibleMissions.forEach(m=>{
+        const div = document.createElement("div");
+        div.className = "mission";
+        const isDone = state.done.has(m.id);
+
+        div.innerHTML = `
+          <div class="mTop">
+            <div>
+              <p class="mTitle">${escapeHtml(m.title || "Mission")}</p>
+              <div class="meta">
+                <span class="chip">${escapeHtml(m.track || "Track")}</span>
+                <span class="chip">${escapeHtml(m.difficulty || "Easy")}</span>
+                <span class="chip">${escapeHtml((m.time_minutes||0) + " min")}</span>
+              </div>
+              <p class="small">${escapeHtml((m.what_to_do||[]).slice(0,3).join(" · "))}${(m.what_to_do||[]).length>3 ? "…" : ""}</p>
+            </div>
+            <div class="toggle">
+              <label>
+                <span class="sr">Mark mission complete</span>
+                <input type="checkbox" ${isDone ? "checked" : ""} data-mid="${escapeAttr(m.id)}" aria-label="Mark ${escapeAttr(m.title||"mission")} complete" />
+              </label>
+            </div>
+          </div>
+
+          <details style="margin-top:10px">
+            <summary class="btn ghost" style="display:inline-flex">Open checklist</summary>
+            <div style="margin-top:10px">
+              <div class="tag" style="display:inline-block;margin-bottom:8px">Done looks like</div>
+              <div class="small" style="margin:0 0 10px">${escapeHtml(m.done_looks_like || "A shipped contribution.")}</div>
+              <div class="tag" style="display:inline-block;margin-bottom:8px">Checklist</div>
+              <ul>${(m.what_to_do||[]).map(x=>`<li>${escapeHtml(x)}</li>`).join("")}</ul>
+            </div>
+          </details>
+        `;
+        root.appendChild(div);
+      });
+
+      root.querySelectorAll('input[type="checkbox"][data-mid]').forEach(cb=>{
+        cb.addEventListener("change", (e)=>{
+          const id = e.target.getAttribute("data-mid");
+          if(e.target.checked) state.done.add(id); else state.done.delete(id);
+          saveDone();
+          renderMissions();
+        });
+      });
+    }
+
+    function escapeHtml(s){
+      return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+    function escapeAttr(s){ return escapeHtml(s).replace(/`/g,"&#96;"); }
+
+    async function init(){
+      try{
+        state.slides = await loadJSON("../content/slides.json");
+      }catch(e){
+        console.warn(e);
+        state.slides = [{title:"Lift Lab", bullets:["Missing slides JSON."]}];
+      }
+      try{
+        state.missions = await loadJSON("../content/missions.json");
+      }catch(e){
+        console.warn(e);
+        state.missions = [{id:"missing", title:"Missions JSON missing", track:"Builder", difficulty:"Easy", time_minutes:5, what_to_do:["Add content/missions.json"], done_looks_like:"Missions render."}];
+      }
+      try{
+        const ledger = await loadJSON("../content/contributor_ledger.json");
+        if(ledger && ledger.updated){
+          $("ledgerStamp").textContent = "Contributor ledger updated: " + ledger.updated;
+        }
+      }catch(e){
+        console.warn("Ledger unavailable.", e);
+      }
+
+      state.idx = 0;
+      renderSlide();
+      renderTrackFilter();
+      renderMissions();
+
+      $("prev").addEventListener("click", ()=>{ state.idx = (state.idx - 1 + state.slides.length) % state.slides.length; renderSlide(); });
+      $("next").addEventListener("click", ()=>{ state.idx = (state.idx + 1) % state.slides.length; renderSlide(); });
+      $("trackFilter").addEventListener("change", (e)=>{
+        state.trackFilter = e.target.value || "all";
+        saveTrackFilter();
+        renderMissions();
+      });
+      $("clearDone").addEventListener("click", ()=>{
+        state.done.clear();
+        saveDone();
+        renderMissions();
+      });
+
+      $("btnStart").addEventListener("click", ()=>{
+        const a = $("audio");
+        a.play().catch(()=>{});
+        window.scrollTo({top: 0, behavior:"smooth"});
+      });
+      $("btnMissions").addEventListener("click", ()=>{
+        document.querySelector('[aria-label="Missions"]').scrollIntoView({behavior:"smooth", block:"start"});
+      });
+      $("btnCopy").addEventListener("click", async ()=>{
+        const text = "AeroVista Lift Lab — contribute now, learn fast. Pick a track: Scout (testing), Scribe (docs), Designer (UX), Builder (coding ramp). Ship one small win today.";
+        try{
+          await navigator.clipboard.writeText(text);
+          $("btnCopy").textContent = "Copied ✓";
+          setTimeout(()=>$("btnCopy").textContent="Copy Share Text", 1200);
+        }catch{
+          alert(text);
+        }
+      });
+
+      document.addEventListener("keydown", (e)=>{
+        const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : "";
+        if(tag === "input" || tag === "select" || tag === "textarea") return;
+        if(e.key === "ArrowLeft"){
+          e.preventDefault();
+          $("prev").click();
+        } else if(e.key === "ArrowRight"){
+          e.preventDefault();
+          $("next").click();
+        } else if(e.key.toLowerCase() === "m"){
+          e.preventDefault();
+          $("btnMissions").click();
+        }
+      });
+    }
+    init();
+  </script>
+</body>
+</html>

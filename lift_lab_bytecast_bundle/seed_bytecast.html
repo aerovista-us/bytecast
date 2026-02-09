@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lift Lab ByteCast Launcher</title>
+  <meta http-equiv="refresh" content="0; url=site/index.html" />
+  <style>
+    :root {
+      --bg: #070a12;
+      --card: #0b1020;
+      --ink: #e9eeff;
+      --muted: #9aa7d6;
+      --line: rgba(148, 163, 255, 0.2);
+      --blue: #2e6bff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(900px 500px at 20% 0%, rgba(46, 107, 255, 0.22), transparent 60%), var(--bg);
+      color: var(--ink);
+      font: 15px/1.4 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      padding: 20px;
+    }
+    .card {
+      width: min(560px, 100%);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--card);
+      padding: 18px;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+    p {
+      margin: 0 0 12px;
+      color: var(--muted);
+    }
+    a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(46, 107, 255, 0.45);
+      border-radius: 12px;
+      padding: 9px 12px;
+      color: var(--ink);
+      text-decoration: none;
+      background: rgba(46, 107, 255, 0.12);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <section class="card">
+    <h1>Lift Lab ByteCast</h1>
+    <p>Launching the streamlined episode page.</p>
+    <a href="site/index.html">Open `site/index.html`</a>
+  </section>
+  <script>
+    window.location.replace("site/index.html");
+  </script>
+</body>
+</html>

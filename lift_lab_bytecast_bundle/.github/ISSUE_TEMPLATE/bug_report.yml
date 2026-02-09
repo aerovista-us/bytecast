@@ -1,0 +1,47 @@
+name: Bug report
+description: Report something broken or confusing
+title: "[BUG] "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping! The best bug reports include exact steps and a screenshot/video.
+  - type: input
+    id: page
+    attributes:
+      label: Page / URL
+      placeholder: "Where did this happen?"
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: "1) ... 2) ... 3) ..."
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: input
+    id: env
+    attributes:
+      label: Device / OS / Browser
+      placeholder: "e.g., iPhone 15 iOS 17 Safari"
+    validations:
+      required: true
+  - type: textarea
+    id: media
+    attributes:
+      label: Screenshot / Video
+      description: Paste links or drag files here

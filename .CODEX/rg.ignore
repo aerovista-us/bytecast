@@ -1,0 +1,52 @@
+# Ripgrep extra ignores for AeroVista workspaces.
+# Used by X:\.CODEX\tools\safe-rg.ps1.
+#
+# Notes:
+# - These are "safe defaults" to avoid accidental scans of huge, usually-unhelpful folders.
+# - Override by running rg directly, or update this file when you intentionally want to include a folder.
+
+# VCS / tooling
+.git/
+.hg/
+.svn/
+
+# Common build / dependency outputs
+node_modules/
+dist/
+build/
+out/
+.next/
+.nuxt/
+.svelte-kit/
+.parcel-cache/
+.turbo/
+.cache/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+__pycache__/
+
+# OS / Windows junk
+System Volume Information/
+$RECYCLE.BIN/
+FOUND.000/
+
+# Common large artifacts
+*.iso
+*.img
+*.vhd
+*.vhdx
+*.qcow2
+*.qcow2.*
+*.dmg
+*.exe
+
+# This workspace (X:\) top-level folders that are often massive and rarely search targets.
+# Comment out items here when you intentionally need to search inside them.
+Backup/
+core-backup-*/
+libvirt-images/
+vaults/
+

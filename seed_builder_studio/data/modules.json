@@ -1,0 +1,62 @@
+{
+  "schema": "bytecast-module-manifest-v1",
+  "app_id": "seed_builder_studio",
+  "app_name": "Seed Builder Studio",
+  "updated_on": "2026-02-08",
+  "modules": [
+    {
+      "id": "profiles_generator",
+      "name": "Profiles Generator",
+      "description": "Primary generator workflow with profile support for seed and episode pack creation.",
+      "owner": "Generator Ops",
+      "category": "generator",
+      "path": "../full_seed_starter/av_seedgen_python_profiles/README.md",
+      "canon_path": "full_seed_starter/av_seedgen_python_profiles"
+    },
+    {
+      "id": "episode_template",
+      "name": "Episode Template Baseline",
+      "description": "Canonical baseline for manual episode starts and structural consistency checks.",
+      "owner": "Template Ops",
+      "category": "template",
+      "path": "../template/index.html",
+      "canon_path": "template"
+    },
+    {
+      "id": "seed_orchard_ui",
+      "name": "Seed Orchard UI Concept",
+      "description": "Legacy prototype for seed-to-fruit storytelling and concept flow validation.",
+      "owner": "Concept Lab",
+      "category": "prototype",
+      "path": "../seed_orchard_ui/index.html",
+      "canon_path": "seed_orchard_ui"
+    },
+    {
+      "id": "portrait_profile_template",
+      "name": "Portrait Profile Template",
+      "description": "Legacy optional template variant for profile portrait-style ByteCast outputs.",
+      "owner": "Template Ops",
+      "category": "template",
+      "path": "../full_seed_starter/bytecast_ep_profile_portrait/index.html",
+      "canon_path": "full_seed_starter/bytecast_ep_profile_portrait"
+    },
+    {
+      "id": "seed_standard",
+      "name": "Seed Standard",
+      "description": "Canonical seed architecture standard and quality gates used across studio modules.",
+      "owner": "Platform Ops",
+      "category": "docs",
+      "path": "../docs/SEED_STANDARD.md",
+      "canon_path": "docs"
+    },
+    {
+      "id": "seed_options",
+      "name": "Seed Options",
+      "description": "Config and runtime knobs reference for themes, analytics, and deployment mode choices.",
+      "owner": "Platform Ops",
+      "category": "docs",
+      "path": "../docs/SEED_OPTIONS.md",
+      "canon_path": "docs"
+    }
+  ]
+}

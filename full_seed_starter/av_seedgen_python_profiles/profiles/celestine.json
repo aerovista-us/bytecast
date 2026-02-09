@@ -1,0 +1,55 @@
+{
+  "kicker": "Rain \u2022 Ruins \u2022 Manuscript \u2022 Synchronicity",
+  "subhead": "A quiet field-manual experience \u2014 the rainforest teaches through patterns: signals that keep appearing until you finally see them.",
+  "description": "A jungle-manuscript awakening experience: ruins, mist, synchronicity, and subtle energy threads.",
+  "theme": {
+    "bg0": "#070a0c",
+    "bg1": "#0b0f12",
+    "ink": "#e9efe7",
+    "muted": "#a9b6a8",
+    "accent": "#f2d48f",
+    "accent2": "#ffd88a",
+    "paper": "#e9dcc2",
+    "paper2": "#d4c5a7",
+    "theme_color": "#0b0c10"
+  },
+  "insights": {
+    "tags": [
+      "Awareness",
+      "Synch",
+      "Energy"
+    ],
+    "heads": [
+      "What you focus on grows.",
+      "Patterns are invitations.",
+      "Everything carries a current."
+    ],
+    "bodies": [
+      "Your attention is a lantern. Shine it on the signal \u2014 not the noise \u2014 and your next step becomes obvious.",
+      "Coincidences repeat when you're meant to move. Treat them like trail markers \u2014 gentle, persistent, specific.",
+      "When you calm your body, you can sense the room. The threads feel like warmth, breath, and momentum \u2014 not fireworks."
+    ]
+  },
+  "steps": {
+    "titles": [
+      "Enter the canopy",
+      "Find the marker",
+      "Follow the thread"
+    ],
+    "descs": [
+      "Take 10 seconds. Breathe slow. Look for what repeats.",
+      "Write down the last coincidence you ignored. What did it point at?",
+      "Choose one small action that honors the signal. Make it real."
+    ]
+  },
+  "prompts": {
+    "hero_prompt": "Cinematic rainforest ruins, ancient stone doorway covered in vines and moss, misty atmosphere, volumetric sunbeams, subtle golden energy threads floating in the air like visible intuition, magical realism, high detail, soft film grain, no modern objects, wide composition for website hero, serene and mysterious",
+    "section_bg_prompt": "Misty rainforest canopy with soft sunbeams, faint paper grain overlay, extremely subtle carved glyph pattern watermark, minimal detail, calm atmosphere, wide web background, no focal subject",
+    "card_tex_prompt": "Aged parchment texture with faint hand-drawn map lines, subtle moss stain at edges, soft vignette, warm sepia tone, clean center space for text, high resolution",
+    "footer_bg_prompt": "Twilight jungle silhouettes with distant ruin shapes barely visible, fog layers, tiny golden energy threads drifting, dark emerald palette, cinematic minimal detail, wide background",
+    "icon_ideas": "compass, torn page, leaf sprig, rune stone, sunbeam rays, footpath marker, candle flame, insight eye"
+  },
+  "quiz": {
+    "enabled": false
+  }
+}

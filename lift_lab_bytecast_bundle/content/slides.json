@@ -1,0 +1,35 @@
+[
+  {
+    "title": "Lift Lab",
+    "bullets": [
+      "Contribute now, learn fast",
+      "Four tracks: Scout, Scribe, Designer, Builder",
+      "Level up by shipping small wins"
+    ]
+  },
+  {
+    "title": "Choose Your First Mission",
+    "bullets": [
+      "Bug report (Scout)",
+      "Docs PR (Scribe)",
+      "UX notes (Designer)",
+      "JSON-only change (Builder)"
+    ]
+  },
+  {
+    "title": "The Ladder",
+    "bullets": [
+      "L0 Observer \u2192 L1 Contributor \u2192 L2 Shipper \u2192 L3 Builder \u2192 L4 Specialist",
+      "We review fast, feedback is consistent",
+      "Small PRs win"
+    ]
+  },
+  {
+    "title": "Where to Start",
+    "bullets": [
+      "Open FIRST_TASKS.md",
+      "Pick one task",
+      "Ship it today"
+    ]
+  }
+]

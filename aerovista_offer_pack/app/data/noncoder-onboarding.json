@@ -1,0 +1,166 @@
+{
+  "schema": "noncoder-onboarding-v1",
+  "assumptions": [
+    {
+      "label": "Coding background",
+      "value": "None or very limited"
+    },
+    {
+      "label": "Time availability",
+      "value": "45-90 minutes per session"
+    },
+    {
+      "label": "Device reality",
+      "value": "Phone-first, laptop optional"
+    },
+    {
+      "label": "Confidence level",
+      "value": "Nervous about breaking things"
+    },
+    {
+      "label": "Preferred learning style",
+      "value": "Small tasks tied to real outcomes"
+    }
+  ],
+  "pathway": {
+    "title": "Contributor Ladder for Non-Coders",
+    "steps": [
+      {
+        "name": "Level 0 - Scout",
+        "summary": "Testing, bug reports, edge-case hunting"
+      },
+      {
+        "name": "Level 1 - Scribe",
+        "summary": "Docs, JSON/content edits, onboarding clarity"
+      },
+      {
+        "name": "Level 2 - UX Helper",
+        "summary": "Layout and accessibility improvements"
+      },
+      {
+        "name": "Level 3 - Builder",
+        "summary": "Small bug fixes and behavior improvements"
+      }
+    ]
+  },
+  "tracks": [
+    {
+      "id": "scout",
+      "name": "Scout Guild",
+      "focus": "Testing and bug quality",
+      "whyItMatters": "Great bug reports can unblock coders faster than raw code edits.",
+      "tasks": [
+        "Run mobile + desktop smoke test",
+        "Submit one bug with full repro details",
+        "Test one slow-network scenario",
+        "Record one short screen capture"
+      ],
+      "graduationSignal": "At least 3 high-quality issues accepted as valid"
+    },
+    {
+      "id": "scribe",
+      "name": "Scribe Guild",
+      "focus": "Docs and onboarding clarity",
+      "whyItMatters": "Better docs reduce repetitive support and speed up new contributors.",
+      "tasks": [
+        "Improve one README section",
+        "Add one FAQ answer for beginners",
+        "Create one 'common mistakes' checklist",
+        "Rewrite one confusing paragraph in plain language"
+      ],
+      "graduationSignal": "One merged docs PR and one issue closed by doc update"
+    },
+    {
+      "id": "ux",
+      "name": "UX Guild",
+      "focus": "Clarity and accessibility",
+      "whyItMatters": "Usability and readability drive completion and retention.",
+      "tasks": [
+        "Audit keyboard navigation in one flow",
+        "Report 3 confusing UI moments with suggestions",
+        "Improve one mobile spacing issue",
+        "Validate contrast in critical views"
+      ],
+      "graduationSignal": "Two UX issues fixed from your feedback"
+    },
+    {
+      "id": "ops",
+      "name": "Ops Guild",
+      "focus": "Backlog and contributor flow",
+      "whyItMatters": "Cleanly scoped work lets everyone ship faster.",
+      "tasks": [
+        "Triage and label 10 issues",
+        "Convert one vague idea into acceptance criteria",
+        "Create one no-code first task",
+        "Post weekly contributor update"
+      ],
+      "graduationSignal": "Backlog quality improves and issue cycle time drops"
+    }
+  ],
+  "bytecasts": [
+    {
+      "id": "bc-001",
+      "title": "How to File a Perfect Bug Report",
+      "duration": "7 min",
+      "level": "L0",
+      "outcome": "You can report issues that are immediately actionable.",
+      "action": "Submit 1 bug report using the template in CONTRIBUTING.md."
+    },
+    {
+      "id": "bc-002",
+      "title": "Mobile-First Testing in 15 Minutes",
+      "duration": "10 min",
+      "level": "L0",
+      "outcome": "You can catch breakpoints and touch interaction issues quickly.",
+      "action": "Test Home, Onboarding, and Divisions views on a phone-sized viewport."
+    },
+    {
+      "id": "bc-003",
+      "title": "Editing JSON Without Fear",
+      "duration": "9 min",
+      "level": "L1",
+      "outcome": "You can edit content data safely and validate output.",
+      "action": "Update one offer outcome in offer-pack-data.json and refresh."
+    },
+    {
+      "id": "bc-004",
+      "title": "Write Docs People Actually Finish",
+      "duration": "8 min",
+      "level": "L1",
+      "outcome": "You can produce concise docs with clear next steps.",
+      "action": "Add one FAQ entry and one troubleshooting bullet."
+    },
+    {
+      "id": "bc-005",
+      "title": "Accessibility Basics for Contributors",
+      "duration": "11 min",
+      "level": "L2",
+      "outcome": "You can check focus order, labels, and contrast quickly.",
+      "action": "Run one keyboard-only pass and open one a11y issue."
+    },
+    {
+      "id": "bc-006",
+      "title": "From Suggestion to Accepted Task",
+      "duration": "6 min",
+      "level": "L2",
+      "outcome": "You can propose scoped work with acceptance criteria.",
+      "action": "Draft one feature request using the issue template."
+    },
+    {
+      "id": "bc-007",
+      "title": "First Tiny Fix in app.js",
+      "duration": "12 min",
+      "level": "L3",
+      "outcome": "You can make and verify one safe behavior change.",
+      "action": "Complete one Level 3 task from FIRST_TASKS.md."
+    },
+    {
+      "id": "bc-008",
+      "title": "Weekly Contribution Rhythm",
+      "duration": "5 min",
+      "level": "L0-L3",
+      "outcome": "You can contribute consistently without burnout.",
+      "action": "Pick one task, one support action, and one retrospective note this week."
+    }
+  ]
+}

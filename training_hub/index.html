@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ByteCast Training Hub</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script defer src="./app.js"></script>
+</head>
+<body data-app-mode="training">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="shell-header">
+    <div class="brand">
+      <p class="eyebrow">ByteCast Platform</p>
+      <h1 id="app-title">Training Hub</h1>
+      <p class="subtitle">Learning, onboarding, and contributor workflow entry point.</p>
+    </div>
+    <nav class="top-nav" aria-label="Primary">
+      <a href="../index.html">Workspace Entry</a>
+      <a href="../training_hub/index.html" aria-current="page">Training Hub</a>
+      <a href="../seed_builder_studio/index.html">Seed Builder Studio</a>
+      <a href="../seed_bytecast.html">ByteCast App</a>
+      <a href="../.CODEX/bytecast_canon_map_2026-02-08.md" target="_blank" rel="noopener noreferrer">CANON Map</a>
+      <a href="../.CODEX/episode_content_naming_and_2app_migration_plan_2026-02-08.md" target="_blank" rel="noopener noreferrer">Migration Plan</a>
+    </nav>
+  </header>
+
+  <main id="main-content" class="shell-main">
+    <section class="panel workflow-panel" aria-label="Workflow loop">
+      <h2>Progression Loop</h2>
+      <p id="workflow-summary" class="workflow-summary">Loading workflow status...</p>
+      <div class="workflow-pills">
+        <span id="wf-bytecast" class="wf-pill">ByteCast (listen/slide/interact)</span>
+        <span id="wf-training" class="wf-pill">Training Hub</span>
+        <span id="wf-seed" class="wf-pill">Seed Builder</span>
+      </div>
+      <div class="module-actions workflow-actions">
+        <button id="mark-loop-step" type="button">Complete Training Cycle</button>
+        <a class="launch-link" href="../seed_bytecast.html">Open ByteCast</a>
+        <a id="next-app-link" href="../seed_builder_studio/index.html">Go to Seed Builder</a>
+      </div>
+      <p id="workflow-note" class="status-line">Progress is saved locally on this browser.</p>
+    </section>
+
+    <section aria-label="Workspace app map" class="panel">
+      <div style="display:grid; gap:6px; margin-bottom:10px;">
+        <span style="display:inline-flex; width:max-content; padding:3px 10px; border-radius:999px; border:1px solid rgba(34,167,255,0.4); background:rgba(34,167,255,0.14); font:700 11px/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; letter-spacing:.06em; text-transform:uppercase;">App Map</span>
+        <h2 style="margin:0; font-family:'Sora','Segoe UI',sans-serif; font-size:1.04rem;">Cross-App Visual Lanes</h2>
+        <p style="margin:0; color:var(--muted);">Training Hub now uses the same animated SVG navigator as the other core pages.</p>
+      </div>
+      <svg viewBox="0 0 1240 430" role="img" aria-label="Workspace map" style="width:100%; height:auto; display:block; border-radius:12px; border:1px solid rgba(255,255,255,0.14); background:rgba(0,0,0,0.24);">
+        <style>
+          .m-lane{fill:none;stroke-width:3;stroke-linecap:round;stroke-dasharray:12 12;animation:m-dash 12s linear infinite;opacity:.9}
+          .m-b{stroke:#22a7ff}.m-g{stroke:#ffc45a}.m-v{stroke:#a66bff}.m-o{stroke:#ff6a2a}
+          .m-dot{filter:drop-shadow(0 0 6px rgba(255,255,255,.45))}
+          .m-node{cursor:pointer;transform-box:fill-box;transform-origin:center;animation:m-float 5.8s ease-in-out infinite}
+          .m-n1{animation-delay:-1s}.m-n2{animation-delay:-2s}.m-n3{animation-delay:-3s}.m-n4{animation-delay:-4s}
+          .m-box{fill:rgba(8,12,18,.82);stroke-width:2}.m-sb{stroke:#22a7ff}.m-st{stroke:#ffc45a}.m-ss{stroke:#a66bff}.m-so{stroke:#ff6a2a}.m-se{stroke:#8fd9ff}
+          .m-t{fill:#f4fbff;font:700 20px Sora,Segoe UI,sans-serif}.m-s{fill:rgba(255,255,255,.72);font:14px 'IBM Plex Sans',Segoe UI,sans-serif}
+          @keyframes m-dash{from{stroke-dashoffset:220}to{stroke-dashoffset:0}}
+          @keyframes m-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+          @media (prefers-reduced-motion: reduce){.m-lane,.m-node{animation:none}}
+        </style>
+        <defs>
+          <path id="m1" d="M 420 205 C 530 118, 645 95, 780 102" />
+          <path id="m2" d="M 420 232 C 540 312, 655 334, 780 328" />
+          <path id="m3" d="M 420 220 C 500 220, 600 220, 680 220" />
+          <path id="m4" d="M 280 182 C 236 130, 206 108, 164 92" />
+          <path id="m5" d="M 300 254 C 244 306, 206 335, 164 350" />
+        </defs>
+        <rect x="0" y="0" width="1240" height="430" fill="#0c121b"/>
+        <path class="m-lane m-b" d="M 420 205 C 530 118, 645 95, 780 102" />
+        <path class="m-lane m-v" d="M 420 232 C 540 312, 655 334, 780 328" />
+        <path class="m-lane m-o" d="M 420 220 C 500 220, 600 220, 680 220" />
+        <path class="m-lane m-g" d="M 280 182 C 236 130, 206 108, 164 92" />
+        <path class="m-lane m-g" d="M 300 254 C 244 306, 206 335, 164 350" />
+        <circle class="m-dot" r="4" fill="#22a7ff"><animateMotion dur="4.6s" repeatCount="indefinite"><mpath href="#m1"/></animateMotion></circle>
+        <circle class="m-dot" r="4" fill="#a66bff"><animateMotion dur="4.9s" repeatCount="indefinite"><mpath href="#m2"/></animateMotion></circle>
+        <circle class="m-dot" r="4" fill="#ff6a2a"><animateMotion dur="5.2s" repeatCount="indefinite"><mpath href="#m3"/></animateMotion></circle>
+        <circle class="m-dot" r="3.6" fill="#ffc45a"><animateMotion dur="4.4s" repeatCount="indefinite"><mpath href="#m4"/></animateMotion></circle>
+        <circle class="m-dot" r="3.6" fill="#ffc45a"><animateMotion dur="5.1s" repeatCount="indefinite"><mpath href="#m5"/></animateMotion></circle>
+        <a href="../seed_bytecast.html"><g class="m-node m-n1"><rect class="m-box m-sb" x="210" y="160" width="220" height="120" rx="20"/><text class="m-t" x="234" y="208">ByteCast</text><text class="m-s" x="234" y="230">episode player app</text></g></a>
+        <a href="../training_hub/index.html"><g class="m-node m-n2"><rect class="m-box m-st" x="780" y="48" width="240" height="110" rx="18"/><text class="m-t" x="804" y="92">Training Hub</text><text class="m-s" x="804" y="114">onboarding and modules</text></g></a>
+        <a href="../seed_builder_studio/index.html"><g class="m-node m-n3"><rect class="m-box m-ss" x="780" y="272" width="240" height="110" rx="18"/><text class="m-t" x="804" y="316">Seed Builder</text><text class="m-s" x="804" y="338">tooling and generation</text></g></a>
+        <a href="../aerovista_offer_pack/app/index.html"><g class="m-node m-n4"><rect class="m-box m-so" x="668" y="170" width="170" height="96" rx="16"/><text class="m-t" x="690" y="208" style="font-size:18px;">Offer Pack</text><text class="m-s" x="690" y="229">sales reference</text></g></a>
+        <a href="../episodes/welcome_to_bytecast/index.html"><g class="m-node m-n2"><rect class="m-box m-se" x="36" y="48" width="210" height="72" rx="14"/><text class="m-t" x="58" y="89" style="font-size:16px;">EP-001</text></g></a>
+        <a href="../episodes/aerovista_7_division_overview/index.html"><g class="m-node m-n3"><rect class="m-box m-se" x="36" y="314" width="210" height="72" rx="14"/><text class="m-t" x="58" y="355" style="font-size:16px;">EP-002</text></g></a>
+        <a href="../index.html"><g class="m-node m-n4"><rect class="m-box m-se" x="1038" y="170" width="166" height="96" rx="16"/><text class="m-t" x="1062" y="208" style="font-size:17px;">Workspace</text><text class="m-s" x="1062" y="229">all app entry</text></g></a>
+      </svg>
+    </section>
+
+    <section class="panel controls-panel">
+      <h2>Module Finder</h2>
+      <div class="controls-grid">
+        <label>
+          Search
+          <input id="search-input" type="search" placeholder="Find module, owner, path">
+        </label>
+        <label>
+          CANON class
+          <select id="status-filter">
+            <option value="all">All</option>
+            <option value="primary">Primary</option>
+            <option value="legacy">Legacy</option>
+            <option value="duplicate">Duplicate</option>
+            <option value="archive">Archive</option>
+            <option value="unknown">Unknown</option>
+          </select>
+        </label>
+        <label>
+          Category
+          <select id="category-filter">
+            <option value="all">All</option>
+          </select>
+        </label>
+      </div>
+      <p id="load-status" class="status-line" aria-live="polite">Loading modules...</p>
+    </section>
+
+    <section class="panel metrics-panel" aria-label="Summary">
+      <div class="metric">
+        <p class="metric-label">Modules</p>
+        <p id="metric-total" class="metric-value">0</p>
+      </div>
+      <div class="metric">
+        <p class="metric-label">Primary</p>
+        <p id="metric-primary" class="metric-value">0</p>
+      </div>
+      <div class="metric">
+        <p class="metric-label">Legacy/Duplicate</p>
+        <p id="metric-risk" class="metric-value">0</p>
+      </div>
+      <div class="metric">
+        <p class="metric-label">Visible now</p>
+        <p id="metric-visible" class="metric-value">0</p>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Modules</h2>
+      <div id="modules-grid" class="modules-grid"></div>
+      <p id="empty-state" class="empty-state" hidden>No modules match current filters.</p>
+    </section>
+  </main>
+</body>
+</html>

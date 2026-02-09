@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ByteCast Training Hub</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script defer src="./app.js"></script>
+</head>
+<body data-app-mode="training">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="shell-header">
+    <div class="brand">
+      <p class="eyebrow">ByteCast Platform</p>
+      <h1 id="app-title">Training Hub</h1>
+      <p class="subtitle">Learning, onboarding, and contributor workflow entry point.</p>
+    </div>
+    <nav class="top-nav" aria-label="Primary">
+      <a href="../index.html">Workspace Entry</a>
+      <a href="../training_hub/index.html" aria-current="page">Training Hub</a>
+      <a href="../seed_builder_studio/index.html">Seed Builder Studio</a>
+      <a href="../seed_bytecast.html">ByteCast App</a>
+      <a href="../.CODEX/bytecast_canon_map_2026-02-08.md" target="_blank" rel="noopener noreferrer">CANON Map</a>
+      <a href="../.CODEX/episode_content_naming_and_2app_migration_plan_2026-02-08.md" target="_blank" rel="noopener noreferrer">Migration Plan</a>
+    </nav>
+  </header>
+
+  <main id="main-content" class="shell-main">
+    <section class="panel workflow-panel" aria-label="Workflow loop">
+      <h2>Progression Loop</h2>
+      <p id="workflow-summary" class="workflow-summary">Loading workflow status...</p>
+      <div class="workflow-pills">
+        <span id="wf-bytecast" class="wf-pill">ByteCast (listen/slide/interact)</span>
+        <span id="wf-training" class="wf-pill">Training Hub</span>
+        <span id="wf-seed" class="wf-pill">Seed Builder</span>
+      </div>
+      <div class="module-actions workflow-actions">
+        <button id="mark-loop-step" type="button">Complete Training Cycle</button>
+        <a class="launch-link" href="../seed_bytecast.html">Open ByteCast</a>
+        <a id="next-app-link" href="../seed_builder_studio/index.html">Go to Seed Builder</a>
+      </div>
+      <p id="workflow-note" class="status-line">Progress is saved locally on this browser.</p>
+    </section>
+
+    <section class="panel controls-panel">
+      <h2>Module Finder</h2>
+      <div class="controls-grid">
+        <label>
+          Search
+          <input id="search-input" type="search" placeholder="Find module, owner, path">
+        </label>
+        <label>
+          CANON class
+          <select id="status-filter">
+            <option value="all">All</option>
+            <option value="primary">Primary</option>
+            <option value="legacy">Legacy</option>
+            <option value="duplicate">Duplicate</option>
+            <option value="archive">Archive</option>
+            <option value="unknown">Unknown</option>
+          </select>
+        </label>
+        <label>
+          Category
+          <select id="category-filter">
+            <option value="all">All</option>
+          </select>
+        </label>
+      </div>
+      <p id="load-status" class="status-line" aria-live="polite">Loading modules...</p>
+    </section>
+
+    <section class="panel metrics-panel" aria-label="Summary">
+      <div class="metric">
+        <p class="metric-label">Modules</p>
+        <p id="metric-total" class="metric-value">0</p>
+      </div>
+      <div class="metric">
+        <p class="metric-label">Primary</p>
+        <p id="metric-primary" class="metric-value">0</p>
+      </div>
+      <div class="metric">
+        <p class="metric-label">Legacy/Duplicate</p>
+        <p id="metric-risk" class="metric-value">0</p>
+      </div>
+      <div class="metric">
+        <p class="metric-label">Visible now</p>
+        <p id="metric-visible" class="metric-value">0</p>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Modules</h2>
+      <div id="modules-grid" class="modules-grid"></div>
+      <p id="empty-state" class="empty-state" hidden>No modules match current filters.</p>
+    </section>
+  </main>
+</body>
+</html>

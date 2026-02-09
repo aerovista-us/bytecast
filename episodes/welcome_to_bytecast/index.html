@@ -1,0 +1,936 @@
+<!doctype html>
+<html lang="en" data-theme="venta-neon">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ByteCast — EP-001 • Welcome to ByteCast: How to Use This + Why It Matters</title>
+  <meta name="description" content="A fast, hype-driven welcome: what ByteCast is, how to use the player + slides + quests, and how to join the mission without drama." />
+  <style>
+    :root {
+      --bg0: #050607; --bg1: #0b0f14;
+      --card: rgba(255,255,255,0.06); --stroke: rgba(255,255,255,0.12);
+      --stroke2: rgba(100,180,255,0.25);
+      --ink: rgba(255,255,255,0.93); --muted: rgba(255,255,255,0.66); --faint: rgba(255,255,255,0.42);
+      --neon: #22a7ff; --neon2:#0be1ff; --orange:#ff6a2a; --ghost:#a66bff;
+      --shadow: 0 18px 80px rgba(0,0,0,0.55); --shadow2: 0 10px 35px rgba(0,0,0,0.45);
+      --radius: 22px; --radius2: 14px; --max: 1180px; --pad: clamp(16px, 2.2vw, 26px);
+      --glow-neon: 0 0 18px rgba(34,167,255,0.30), 0 0 42px rgba(34,167,255,0.16);
+      --glow-ghost: 0 0 18px rgba(166,107,255,0.26), 0 0 44px rgba(166,107,255,0.12);
+      --glow-orange: 0 0 18px rgba(255,106,42,0.22), 0 0 40px rgba(255,106,42,0.10);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    html[data-theme="ghostwave"]{ --bg0:#05040a; --bg1:#0b0820; --neon:#5c8cff; --neon2:#a66bff; --ghost:#ff3df3; --orange:#ffb020; --stroke2: rgba(166,107,255,0.28);
+      --glow-neon: 0 0 18px rgba(92,140,255,0.28), 0 0 44px rgba(166,107,255,0.16);
+      --glow-ghost: 0 0 18px rgba(255,61,243,0.20), 0 0 44px rgba(255,61,243,0.10);
+    }
+    html[data-theme="embercore"]{ --bg0:#070606; --bg1:#120c0a; --neon:#ff6a2a; --neon2:#ffb020; --orange:#22a7ff; --ghost:#a66bff; --stroke2: rgba(255,176,32,0.25);
+      --glow-neon: 0 0 18px rgba(255,106,42,0.24), 0 0 44px rgba(255,176,32,0.14);
+    }
+    *{ box-sizing:border-box; }
+    body{ margin:0; font-family:var(--sans); color:var(--ink);
+      background:
+        radial-gradient(1200px 600px at 15% 10%, rgba(34,167,255,0.10), transparent 60%),
+        radial-gradient(900px 500px at 85% 25%, rgba(166,107,255,0.09), transparent 60%),
+        radial-gradient(1100px 700px at 50% 100%, rgba(255,106,42,0.05), transparent 62%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+    }
+    .topbar{ position:sticky; top:0; z-index:50; backdrop-filter: blur(12px);
+      background: linear-gradient(180deg, rgba(5,6,7,0.82), rgba(5,6,7,0.56));
+      border-bottom:1px solid rgba(255,255,255,0.12);
+    }
+    .topbar__inner{ max-width:var(--max); margin:0 auto; padding:14px var(--pad);
+      display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap;
+    }
+    .badge{ display:inline-flex; gap:10px; align-items:center; padding:8px 12px; border-radius:999px;
+      border:1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.03);
+    }
+    .dot{ width:10px; height:10px; border-radius:999px; background:var(--neon); box-shadow:var(--glow-neon); }
+    .controls{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
+    .select,.btn{ border:1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.03); color:var(--ink);
+      border-radius:999px; padding:10px 12px; font-size:13px;
+    }
+    .btn{ cursor:pointer; display:inline-flex; gap:10px; align-items:center; transition: transform .12s ease, border-color .2s ease, box-shadow .2s ease; text-decoration:none; }
+    .btn:hover{ transform: translateY(-1px); border-color: rgba(100,180,255,0.25); box-shadow: var(--glow-neon); }
+    .btn--primary{ border-color: rgba(34,167,255,0.35); box-shadow: var(--glow-neon); }
+    .wrap{ max-width:var(--max); margin:0 auto; padding:18px var(--pad) 90px; }
+    .hero{ border-radius:var(--radius); border:1px solid rgba(255,255,255,0.12);
+      background: linear-gradient(135deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02));
+      padding: clamp(18px, 2.8vw, 34px);
+    }
+    .hero__grid{ display:grid; grid-template-columns: 1.2fr 0.8fr; gap:18px; }
+    @media (max-width:900px){ .hero__grid{ grid-template-columns:1fr; } }
+    .h-title{ margin:0 0 10px; font-size: clamp(34px, 4.2vw, 58px); line-height:1.02; letter-spacing:-0.02em; }
+    .h-sub{ margin:0 0 16px; color:rgba(255,255,255,0.66); max-width:62ch; font-size: clamp(15px, 1.35vw, 18px); }
+    .pills{ display:flex; flex-wrap:wrap; gap:10px; }
+    .pill{ display:inline-flex; align-items:center; gap:10px; padding:8px 12px; border-radius:999px; border:1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.03); font-size:12px; }
+    .pill strong{ font-family:var(--mono); }
+    .spark{ width:8px; height:8px; border-radius:99px; background:var(--ghost); box-shadow:var(--glow-ghost); }
+    .panel{ margin-top:14px; border-radius:var(--radius); border:1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.04); overflow:hidden; }
+    .panel__top{ padding:16px var(--pad); display:flex; gap:14px; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; border-bottom:1px solid rgba(255,255,255,0.10); background: rgba(0,0,0,0.18); }
+    .panel__meta h2{ margin:0; font-size:16px; }
+    .panel__meta p{ margin:6px 0 0; color:rgba(255,255,255,0.66); font-size:13px; max-width:72ch; }
+    .chip{ display:inline-flex; align-items:center; gap:8px; padding:8px 10px; border-radius:999px; border:1px solid rgba(255,255,255,0.12); background: rgba(0,0,0,0.22); font-size:12px; }
+    .tagdot{ width:7px; height:7px; border-radius:99px; background:var(--neon); box-shadow:var(--glow-neon); }
+    .panel__body{ padding:14px var(--pad) 18px; display:grid; gap:14px; }
+    audio{ width:100%; }
+    .seek{ display:grid; grid-template-columns:1fr auto; gap:10px; align-items:center; }
+    input[type="range"]{ width:100%; accent-color: var(--neon); }
+    .time{ font-family:var(--mono); font-size:12px; border:1px solid rgba(255,255,255,0.12); background: rgba(0,0,0,0.20); padding:8px 10px; border-radius:999px; min-width:126px; text-align:center; }
+    .ctrlRow{ display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between; }
+    .ctrlGroup{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+    .kbtn{ border:1px solid rgba(255,255,255,0.12); background: rgba(0,0,0,0.26); color:var(--ink);
+      padding:10px 12px; border-radius:999px; cursor:pointer; display:inline-flex; align-items:center; gap:10px; min-height:40px;
+      transition: transform .12s ease, border-color .2s ease, box-shadow .2s ease; user-select:none;
+    }
+    .kbtn:hover{ transform: translateY(-1px); border-color: rgba(100,180,255,0.25); box-shadow: var(--glow-neon); }
+    .mini{ font-family:var(--mono); font-size:11px; color:rgba(255,255,255,0.42); }
+    .tag{ font-size:11px; padding:3px 8px; border-radius:999px; border:1px solid rgba(255,255,255,0.12); }
+    .tag--neon{ border-color: rgba(34,167,255,0.32); box-shadow: var(--glow-neon); }
+    .tag--orange{ border-color: rgba(255,106,42,0.30); box-shadow: var(--glow-orange); }
+    .tag--ghost{ border-color: rgba(166,107,255,0.30); box-shadow: var(--glow-ghost); }
+    .deck__bar{ display:flex; gap:10px; align-items:center; justify-content:space-between; padding:12px var(--pad); border-bottom:1px solid rgba(255,255,255,0.10); background: rgba(0,0,0,0.20); }
+    .deck__bar h3{ margin:0; font-size:14px; letter-spacing:0.02em; text-transform:uppercase; }
+    .dots{ display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
+    .dotBtn{ width:10px; height:10px; border-radius:99px; border:1px solid rgba(255,255,255,0.16); background: rgba(255,255,255,0.06); cursor:pointer; transition: transform .12s ease, box-shadow .2s ease, background .2s ease; }
+    .dotBtn[aria-current="true"]{ background: var(--neon); border-color: rgba(34,167,255,0.45); box-shadow: var(--glow-neon); transform: scale(1.05); }
+    .slides{ min-height: 340px; }
+    .slide{ display:none; padding:18px var(--pad) 20px; }
+    .slide.is-active{ display:block; animation: slideIn .22s ease; }
+    @keyframes slideIn{ from{ opacity:0; transform: translateY(6px); } to{ opacity:1; transform: translateY(0px); } }
+    .slideGrid{ display:grid; grid-template-columns:1.15fr 0.85fr; gap:16px; }
+    @media (max-width:920px){ .slideGrid{ grid-template-columns:1fr; } }
+    .card{ border-radius:14px; border:1px solid rgba(255,255,255,0.12); background: rgba(0,0,0,0.20); padding:16px; }
+    .card h4{ margin:0 0 10px; font-size:16px; }
+    .card p{ margin:0 0 10px; color:rgba(255,255,255,0.66); line-height:1.55; }
+    .card ul{ margin:10px 0 0; padding-left:18px; color: rgba(255,255,255,0.82); }
+    .callout{ border-radius:14px; border:1px solid rgba(34,167,255,0.24); background: rgba(0,0,0,0.20); padding:16px; box-shadow: var(--glow-neon); }
+    .callout .k{ font-family:var(--mono); font-size:12px; color: rgba(255,255,255,0.88); }
+    .about details{ border-top:1px solid rgba(255,255,255,0.10); padding:0 var(--pad); background: rgba(0,0,0,0.12); }
+    .about details:first-of-type{ border-top:none; }
+    summary{ cursor:pointer; padding:16px 0; list-style:none; display:flex; justify-content:space-between; gap:12px; font-weight:800; }
+    summary::-webkit-details-marker{ display:none; }
+    .hint{ color:rgba(255,255,255,0.66); font-weight:500; font-size:12px; }
+    .about__content{ padding: 0 0 18px; display:grid; gap:12px; }
+    .twoCol{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    @media (max-width:900px){ .twoCol{ grid-template-columns:1fr; } }
+    footer{ margin-top:18px; color:rgba(255,255,255,0.42); display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; font-size:12px; padding:10px 2px; }
+    :focus-visible{ outline:2px solid rgba(34,167,255,0.55); outline-offset:3px; border-radius:12px; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar__inner">
+      <div class="badge">
+        <span class="dot"></span>
+        <div>
+          <div style="font-weight:900; letter-spacing:-0.01em;">ByteCast • EP-001</div>
+          <small style="color:rgba(255,255,255,0.66);">Welcome to ByteCast: How to Use This + Why It Matters</small>
+        </div>
+      </div>
+      <div class="controls">
+        <select class="select" id="themeSelect" aria-label="Theme">
+          <option value="venta-neon">Venta • Neon Blue (Default)</option>
+          <option value="ghostwave">Ghostwave (Purple)</option>
+          <option value="embercore">Embercore (Warm)</option>
+        </select>
+        <button class="btn btn--primary" id="btnPrev" type="button">◀ <span style="font-family:var(--mono);">Prev</span></button>
+        <button class="btn btn--primary" id="btnNext" type="button"><span style="font-family:var(--mono);">Next</span> ▶</button>
+      </div>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero__grid">
+        <div>
+          <h1 class="h-title" id="heroTitle">BYTECAST</h1>
+          <p class="h-sub">A fast, hype-driven welcome: what ByteCast is, how to use the player + slides + quests, and how to join the mission without drama.</p>
+
+          <div class="pills" aria-label="Episode metadata">
+            <span class="pill"><span class="spark"></span><strong>EP-001</strong> • Internal</span>
+            <span class="pill"><span class="spark"></span><strong>2026-02-07</strong> • Timestamped</span>
+            <span class="pill"><span class="spark"></span><strong>bytecast • welcome • tutorial</strong> • +more</span>
+          </div>
+
+          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+            <button class="btn btn--primary" type="button" id="jumpPlayer">Jump to Player</button>
+            <button class="btn" type="button" id="jumpEngage">Quest + Quiz</button>
+            <button class="btn" type="button" id="jumpAbout">About / AeroVista</button>
+          </div>
+
+          <p style="margin:14px 0 0; color:rgba(255,255,255,0.66); max-width:70ch;">
+            <b style="color:rgba(255,255,255,0.92);">Recruitment rule:</b> If you want in, don’t ask for permission — ship a small win. Proof-of-work gets noticed.
+          </p>
+
+          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn btn--primary" href="#about">Join AeroVista (Instructions)</a>
+            <a class="btn" href="https://aerovista-us.github.io/about/" target="_blank" rel="noreferrer">Explore Drops</a>
+          </div>
+        </div>
+
+        <aside class="card" aria-label="ByteCast logo">
+          <div class="callout" style="padding:16px; border-radius:18px;">
+            <div class="k">BYTECAST</div>
+            <p style="margin:10px 0 0; color:rgba(255,255,255,0.86); line-height:1.55;">
+              Audio + Slides + Engagement. Finish the brief. Ship the win.
+            </p>
+            <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+              <span class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">Keys</b> ←/→ Space J/L M</span>
+              <span class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">Theme</b> Venta/Neon</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Workspace app map">
+      <div class="panel__top">
+        <div class="panel__meta">
+          <h2>Cross-App Visual Lanes</h2>
+          <p>EP-001 now carries the same animated SVG navigator used across the workspace.</p>
+        </div>
+      </div>
+      <div class="panel__body">
+        <svg viewBox="0 0 1240 430" role="img" aria-label="Workspace map" style="width:100%; height:auto; display:block; border-radius:12px; border:1px solid rgba(255,255,255,0.14); background:rgba(0,0,0,0.24);">
+          <style>
+            .m-lane{fill:none;stroke-width:3;stroke-linecap:round;stroke-dasharray:12 12;animation:m-dash 12s linear infinite;opacity:.9}
+            .m-b{stroke:#22a7ff}.m-g{stroke:#ffc45a}.m-v{stroke:#a66bff}.m-o{stroke:#ff6a2a}
+            .m-dot{filter:drop-shadow(0 0 6px rgba(255,255,255,.45))}
+            .m-node{cursor:pointer;transform-box:fill-box;transform-origin:center;animation:m-float 5.8s ease-in-out infinite}
+            .m-n1{animation-delay:-1s}.m-n2{animation-delay:-2s}.m-n3{animation-delay:-3s}.m-n4{animation-delay:-4s}
+            .m-box{fill:rgba(8,12,18,.82);stroke-width:2}.m-sb{stroke:#22a7ff}.m-st{stroke:#ffc45a}.m-ss{stroke:#a66bff}.m-so{stroke:#ff6a2a}.m-se{stroke:#8fd9ff}
+            .m-t{fill:#f4fbff;font:700 20px Sora,Segoe UI,sans-serif}.m-s{fill:rgba(255,255,255,.72);font:14px 'IBM Plex Sans',Segoe UI,sans-serif}
+            @keyframes m-dash{from{stroke-dashoffset:220}to{stroke-dashoffset:0}}
+            @keyframes m-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+            @media (prefers-reduced-motion: reduce){.m-lane,.m-node{animation:none}}
+          </style>
+          <defs>
+            <path id="m1" d="M 420 205 C 530 118, 645 95, 780 102" />
+            <path id="m2" d="M 420 232 C 540 312, 655 334, 780 328" />
+            <path id="m3" d="M 420 220 C 500 220, 600 220, 680 220" />
+            <path id="m4" d="M 280 182 C 236 130, 206 108, 164 92" />
+            <path id="m5" d="M 300 254 C 244 306, 206 335, 164 350" />
+          </defs>
+          <rect x="0" y="0" width="1240" height="430" fill="#0c121b"/>
+          <path class="m-lane m-b" d="M 420 205 C 530 118, 645 95, 780 102" />
+          <path class="m-lane m-v" d="M 420 232 C 540 312, 655 334, 780 328" />
+          <path class="m-lane m-o" d="M 420 220 C 500 220, 600 220, 680 220" />
+          <path class="m-lane m-g" d="M 280 182 C 236 130, 206 108, 164 92" />
+          <path class="m-lane m-g" d="M 300 254 C 244 306, 206 335, 164 350" />
+          <circle class="m-dot" r="4" fill="#22a7ff"><animateMotion dur="4.6s" repeatCount="indefinite"><mpath href="#m1"/></animateMotion></circle>
+          <circle class="m-dot" r="4" fill="#a66bff"><animateMotion dur="4.9s" repeatCount="indefinite"><mpath href="#m2"/></animateMotion></circle>
+          <circle class="m-dot" r="4" fill="#ff6a2a"><animateMotion dur="5.2s" repeatCount="indefinite"><mpath href="#m3"/></animateMotion></circle>
+          <circle class="m-dot" r="3.6" fill="#ffc45a"><animateMotion dur="4.4s" repeatCount="indefinite"><mpath href="#m4"/></animateMotion></circle>
+          <circle class="m-dot" r="3.6" fill="#ffc45a"><animateMotion dur="5.1s" repeatCount="indefinite"><mpath href="#m5"/></animateMotion></circle>
+          <a href="../../seed_bytecast.html"><g class="m-node m-n1"><rect class="m-box m-sb" x="210" y="160" width="220" height="120" rx="20"/><text class="m-t" x="234" y="208">ByteCast</text><text class="m-s" x="234" y="230">episode player app</text></g></a>
+          <a href="../../training_hub/index.html"><g class="m-node m-n2"><rect class="m-box m-st" x="780" y="48" width="240" height="110" rx="18"/><text class="m-t" x="804" y="92">Training Hub</text><text class="m-s" x="804" y="114">onboarding and modules</text></g></a>
+          <a href="../../seed_builder_studio/index.html"><g class="m-node m-n3"><rect class="m-box m-ss" x="780" y="272" width="240" height="110" rx="18"/><text class="m-t" x="804" y="316">Seed Builder</text><text class="m-s" x="804" y="338">tooling and generation</text></g></a>
+          <a href="../../aerovista_offer_pack/app/index.html"><g class="m-node m-n4"><rect class="m-box m-so" x="668" y="170" width="170" height="96" rx="16"/><text class="m-t" x="690" y="208" style="font-size:18px;">Offer Pack</text><text class="m-s" x="690" y="229">sales reference</text></g></a>
+          <a href="../../episodes/welcome_to_bytecast/index.html"><g class="m-node m-n2"><rect class="m-box m-se" x="36" y="48" width="210" height="72" rx="14"/><text class="m-t" x="58" y="89" style="font-size:16px;">EP-001</text></g></a>
+          <a href="../../episodes/aerovista_7_division_overview/index.html"><g class="m-node m-n3"><rect class="m-box m-se" x="36" y="314" width="210" height="72" rx="14"/><text class="m-t" x="58" y="355" style="font-size:16px;">EP-002</text></g></a>
+          <a href="../../index.html"><g class="m-node m-n4"><rect class="m-box m-se" x="1038" y="170" width="166" height="96" rx="16"/><text class="m-t" x="1062" y="208" style="font-size:17px;">Workspace</text><text class="m-s" x="1062" y="229">all app entry</text></g></a>
+        </svg>
+      </div>
+    </section>
+
+    <section class="panel" id="player">
+      <div class="panel__top">
+        <div class="panel__meta">
+          <h2>Episode Audio</h2>
+          <p>Connected audio: <span style="font-family:var(--mono);">assets/welcome_to_bytecast.aac</span>. Mark key moments with <b>M</b>.</p>
+        </div>
+        <div class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">MODE</b> • Internal • Additive</div>
+      </div>
+
+      <div class="panel__body">
+        <audio id="audio" preload="metadata" controls>
+          <source src="assets/welcome_to_bytecast.aac" type="audio/aac" />
+        </audio>
+
+        <div class="seek">
+          <input id="seek" type="range" min="0" max="1000" value="0" aria-label="Seek" />
+          <div class="time" id="time">00:00 / 00:00</div>
+        </div>
+
+        <div class="ctrlRow">
+          <div class="ctrlGroup">
+            <button class="kbtn" id="cPlay" type="button">▶ Play <span class="mini">Space</span>
+              <span class="tag tag--neon">core</span><span class="tag tag--ghost">player</span>
+            </button>
+            <button class="kbtn" id="cBack" type="button">↺ -10s <span class="mini">J</span>
+              <span class="tag tag--neon">seek</span><span class="tag tag--ghost">review</span>
+            </button>
+            <button class="kbtn" id="cFwd" type="button">+10s ↻ <span class="mini">L</span>
+              <span class="tag tag--neon">seek</span><span class="tag tag--orange">pace</span>
+            </button>
+            <button class="kbtn" id="cMark" type="button">✦ Mark <span class="mini">M</span>
+              <span class="tag tag--orange">highlight</span><span class="tag tag--ghost">notes</span>
+            </button>
+          </div>
+
+          <div class="ctrlGroup">
+            <button class="kbtn" id="cSpeed" type="button">1.0× Speed <span class="mini">S</span>
+              <span class="tag tag--neon">tempo</span><span class="tag tag--ghost">clarity</span>
+            </button>
+            <button class="kbtn" id="cLoop" type="button">⟲ Loop <span class="mini">R</span>
+              <span class="tag tag--ghost">repeat</span><span class="tag tag--neon">training</span>
+            </button>
+            <button class="kbtn" id="cMute" type="button">🔊 Mute <span class="mini">K</span>
+              <span class="tag tag--neon">audio</span><span class="tag tag--orange">focus</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="ctrlRow">
+          <div class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">MARKERS</b> <span id="marksCount">0</span></div>
+          <div class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">LAST</b> <span id="lastMark">—</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Episode slideshow">
+      <div class="deck__bar">
+        <h3 id="deckTitle">Episode Slides</h3>
+        <div class="dots" id="dots" aria-label="Slide navigation"></div>
+      </div>
+      <div class="slides" id="slides"></div>
+    </section>
+
+    <section class="panel" id="engage" aria-label="Quest and quiz">
+      <div class="deck__bar">
+        <h3>Engagement</h3>
+        <div class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">PASS</b> 80% • Badge: FIRST WIN</div>
+      </div>
+      <div class="slide" style="display:block;">
+        <div class="slideGrid">
+          <div class="card">
+            <h4>Quest — First Win Checklist</h4>
+            <p>Check these off. This is how recruitment solidifies: tiny proof-of-work.</p>
+            <div id="questList"></div>
+          </div>
+
+          <div class="card">
+            <h4>Quiz — Checkpoint</h4>
+            <p>Quick verification. Not for ego — for alignment.</p>
+            <div id="quiz"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel about" id="about">
+      <details open>
+        <summary>About AeroVista <span class="hint">summary + bread & butter</span></summary>
+        <div class="about__content">
+          <div class="card">
+            <h4>AeroVista Summary</h4>
+            <p>AeroVista is a multi-division creative + engineering ecosystem shipping reusable experiences that blend software, storytelling, automation, music, and design.</p>
+          </div>
+          <div class="twoCol" id="divisions"></div>
+        </div>
+      </details>
+      <details>
+        <summary>About ByteCast <span class="hint">what it is + why it exists</span></summary>
+        <div class="about__content">
+          <div class="card">
+            <h4>What ByteCast is</h4>
+            <p>ByteCast is the voice layer: fast, sleek internal episodes that ship intent + decisions + upgrades with a structure that sticks.</p>
+          </div>
+          <div class="card">
+            <h4>How ByteCast works</h4>
+            <ul>
+              <li>Audio anchors emotion + mission</li>
+              <li>Slides convert it into repeatable memory</li>
+              <li>Engagement confirms retention (quiz/quest/game)</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+      <details>
+        <summary>Episode Summary <span class="hint">specific details</span></summary>
+        <div class="about__content">
+          <div class="card">
+            <h4>EP-001 — Welcome to ByteCast: How to Use This + Why It Matters</h4>
+            <p>Episode 1 is a lightweight onboarding primer. It teaches the ByteCast flow (listen → slide → engage), sets expectations for contributors, and builds anticipation for upcoming drops. It includes a simple quest checklist and a mini-quiz checkpoint designed to reinforce the core idea: we ship reusable experiences fast, measure what works, and scale the winners.</p>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <footer>
+      <div>ByteCast EP-001 • v1 • Venta/Neon default • file:// safe</div>
+      <div style="font-family:var(--mono);">Keys: ←/→ slides • Space play/pause • J/L seek • M mark</div>
+    </footer>
+  </main>
+
+<script>
+  const PROFILE = {
+  "schema": "bytecast-ep-profile-v1",
+  "episode": {
+    "code": "EP-001",
+    "title": "Welcome to ByteCast: How to Use This + Why It Matters",
+    "type": "internal",
+    "date": "2026-02-07",
+    "runtime_target_minutes": 6,
+    "status": "draft"
+  },
+  "content": {
+    "tags": [
+      "bytecast",
+      "welcome",
+      "tutorial",
+      "recruitment",
+      "onboarding",
+      "aerovista"
+    ],
+    "summary_short": "A fast, hype-driven welcome: what ByteCast is, how to use the player + slides + quests, and how to join the mission without drama.",
+    "summary_long": "Episode 1 is a lightweight onboarding primer. It teaches the ByteCast flow (listen \u2192 slide \u2192 engage), sets expectations for contributors, and builds anticipation for upcoming drops. It includes a simple quest checklist and a mini-quiz checkpoint designed to reinforce the core idea: we ship reusable experiences fast, measure what works, and scale the winners."
+  },
+  "media": {
+    "audio_files": [
+      {
+        "path": "assets/welcome_to_bytecast.aac",
+        "label": "Episode audio (main)",
+        "required": true
+      }
+    ],
+    "images": [
+      {
+        "path": "assets/hero.jpg",
+        "label": "Hero image (optional)",
+        "required": false
+      },
+      {
+        "path": "assets/favicon.svg",
+        "label": "Favicon (optional)",
+        "required": false
+      }
+    ]
+  },
+  "slides": [
+    {
+      "id": "s1",
+      "title": "Welcome",
+      "goal": "Set tone + hype. What ByteCast is in one breath.",
+      "bullets": [
+        "ByteCast = audio + slides + micro-engagement that actually sticks.",
+        "Built for captivation: finish the episode, keep the momentum.",
+        "If you\u2019re here, you\u2019re already closer than most."
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "How to Use This Page",
+      "goal": "Teach the controls and the flow.",
+      "bullets": [
+        "Press Space to play/pause; J/L to jump; M to mark key moments.",
+        "Use \u2190 / \u2192 to move slides (additive learning).",
+        "Engagement blocks are optional: quests, quiz, mini-games."
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "The AeroVista Loop",
+      "goal": "Explain the production philosophy.",
+      "bullets": [
+        "Ship small experiences fast (Seeds).",
+        "Measure what hits (optional analytics).",
+        "Scale the winners into bigger builds."
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Recruitment & Fit",
+      "goal": "Set contributor vibe and expectations.",
+      "bullets": [
+        "We value self-guidance, clarity, and clean execution.",
+        "We don\u2019t gate people with ego \u2014 we gate with follow-through.",
+        "Bring your craft. Respect the system. Ship."
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "Quest: First Win",
+      "goal": "A simple checklist to solidify commitment.",
+      "bullets": [
+        "Open one seed drop and explore it end-to-end.",
+        "Find one improvement (UX, copy, accessibility, performance).",
+        "Submit it as a clean suggestion: problem \u2192 impact \u2192 fix."
+      ]
+    },
+    {
+      "id": "s6",
+      "title": "What\u2019s Next",
+      "goal": "Anticipation + tease upcoming episodes.",
+      "bullets": [
+        "EP-002: Seed Playbook (design rules + modules).",
+        "EP-003: Contributor Path (quests, badges, \u2018proof of work\u2019).",
+        "EP-004: Command Center pulse + dashboards."
+      ]
+    }
+  ],
+  "engagement": {
+    "quest": {
+      "title": "First Win Checklist",
+      "items": [
+        {
+          "id": "q1",
+          "text": "Play the episode audio and mark 2 key moments (M)."
+        },
+        {
+          "id": "q2",
+          "text": "Complete the slide deck (reach \u2018What\u2019s Next\u2019)."
+        },
+        {
+          "id": "q3",
+          "text": "Open one AeroVista drop and write 1 improvement idea."
+        },
+        {
+          "id": "q4",
+          "text": "Pick a lane: build, design, audio, docs \u2014 choose one."
+        }
+      ],
+      "reward_badge": {
+        "label": "FIRST WIN",
+        "style": "neon"
+      }
+    },
+    "quiz": {
+      "enabled": true,
+      "pass_threshold": 0.8,
+      "questions": [
+        {
+          "id": "k1",
+          "q": "ByteCast is primarily designed for:",
+          "choices": [
+            "Long lectures",
+            "Captivation + additive learning",
+            "Hidden access control",
+            "Marketing only"
+          ],
+          "answer_index": 1,
+          "explain": "Audio anchors the intent, slides lock the memory, engagement confirms retention."
+        },
+        {
+          "id": "k2",
+          "q": "What\u2019s the correct usage flow?",
+          "choices": [
+            "Scroll randomly",
+            "Listen \u2192 Slide \u2192 Engage",
+            "Engage \u2192 Listen \u2192 Slide",
+            "Slide only"
+          ],
+          "answer_index": 1,
+          "explain": "We want forward motion without overload."
+        },
+        {
+          "id": "k3",
+          "q": "Seeds should still work when opened as file:// because:",
+          "choices": [
+            "It looks cool",
+            "We avoid build steps and keep static-first portability",
+            "We dislike servers",
+            "It improves SEO"
+          ],
+          "answer_index": 1,
+          "explain": "Static-first = fast distribution + easy testing."
+        },
+        {
+          "id": "k4",
+          "q": "Our contributor gate is mostly about:",
+          "choices": [
+            "Status",
+            "Follow-through and clean execution",
+            "Being loud",
+            "Knowing every tool"
+          ],
+          "answer_index": 1,
+          "explain": "We care about proof-of-work and self-guidance."
+        },
+        {
+          "id": "k5",
+          "q": "Optional analytics exists to:",
+          "choices": [
+            "Spy on users",
+            "Prove what resonates so we can scale winners",
+            "Replace creativity",
+            "Prevent file:// usage"
+          ],
+          "answer_index": 1,
+          "explain": "Feedback loops help decision-making without breaking offline mode."
+        }
+      ]
+    }
+  },
+  "aerovista_about": {
+    "summary": "AeroVista is a multi-division creative + engineering ecosystem shipping reusable experiences that blend software, storytelling, automation, music, and design.",
+    "divisions": [
+      {
+        "name": "NeXuS TechWorks",
+        "bread_and_butter": "Full-stack engineering, offline-first apps, automation pipelines, DevOps, security hardening."
+      },
+      {
+        "name": "SkyForge Creative Studios",
+        "bread_and_butter": "Interactive builds: playable sites, quests, AR/VR concepts, narrative experiences."
+      },
+      {
+        "name": "EchoVerse Audio",
+        "bread_and_butter": "Music production, sound design, album worlds, audio tooling, interactive player drops."
+      },
+      {
+        "name": "Summit Learning",
+        "bread_and_butter": "Teaching systems, tutorials, internal training, playbooks, skill paths."
+      },
+      {
+        "name": "Lumina Creative",
+        "bread_and_butter": "Branding, visuals, marketing assets, launch kits, content strategy."
+      },
+      {
+        "name": "Vespera Publishing",
+        "bread_and_butter": "Digital content, books/courses, structured knowledge products."
+      },
+      {
+        "name": "Horizon Aerial & Visual",
+        "bread_and_butter": "Drone cinematography, mapping, 3D capture, real estate/ag/visual products."
+      }
+    ]
+  },
+  "cta": {
+    "primary": {
+      "label": "Join AeroVista (Instructions)",
+      "href": "#about",
+      "note": "Replace with your onboarding gate link when ready."
+    },
+    "secondary": {
+      "label": "Explore Drops",
+      "href": "https://aerovista-us.github.io/about/",
+      "note": "Public about page / hub."
+    },
+    "recruitment_copy": "If you want in, don\u2019t ask for permission \u2014 ship a small win. Proof-of-work gets noticed."
+  }
+};
+
+  const $ = (s,r=document)=>r.querySelector(s);
+  const $$ = (s,r=document)=>Array.from(r.querySelectorAll(s));
+
+  // Theme switch
+  const themeSelect = $("#themeSelect");
+  const THEME_KEY = "bytecast_theme";
+  const savedTheme = localStorage.getItem(THEME_KEY);
+  if (savedTheme) document.documentElement.setAttribute("data-theme", savedTheme);
+  themeSelect.value = document.documentElement.getAttribute("data-theme") || "venta-neon";
+  themeSelect.addEventListener("change", ()=>{
+    const v = themeSelect.value;
+    document.documentElement.setAttribute("data-theme", v);
+    localStorage.setItem(THEME_KEY, v);
+  });
+
+  // Jumps
+  $("#jumpPlayer").addEventListener("click", ()=>$("#player").scrollIntoView({behavior:"smooth"}));
+  $("#jumpEngage").addEventListener("click", ()=>$("#engage").scrollIntoView({behavior:"smooth"}));
+  $("#jumpAbout").addEventListener("click", ()=>$("#about").scrollIntoView({behavior:"smooth"}));
+
+  // Slides render
+  const slidesEl = $("#slides");
+  PROFILE.slides.forEach((s, i)=>{
+    const art = document.createElement("article");
+    art.className = "slide" + (i===0 ? " is-active" : "");
+    art.dataset.title = s.title;
+    art.innerHTML = `
+      <div class="slideGrid">
+        <div class="card">
+          <h4>${s.title}</h4>
+          <p style="margin-top:-4px;"><span style="font-family:var(--mono); color:rgba(255,255,255,0.78);">Goal:</span> ${s.goal}</p>
+          <ul>${s.bullets.map(b=>`<li>${b}</li>`).join("")}</ul>
+        </div>
+        <div class="callout">
+          <div class="k">TAKEAWAY</div>
+          <p style="margin:10px 0 0; color:rgba(255,255,255,0.86); line-height:1.55;">
+            <strong>${s.bullets[0]}</strong>
+          </p>
+          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+            <span class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">SLIDE</b> ${i+1}/${PROFILE.slides.length}</span>
+            <span class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">TITLE</b> ${s.title}</span>
+          </div>
+        </div>
+      </div>
+    `;
+    slidesEl.appendChild(art);
+  });
+
+  const slides = $$("#slides .slide");
+  const dots = $("#dots");
+  let idx = 0;
+
+  function renderDots(){
+    dots.innerHTML="";
+    slides.forEach((sl,i)=>{
+      const b=document.createElement("button");
+      b.className="dotBtn";
+      b.type="button";
+      b.title=sl.dataset.title || `Slide ${i+1}`;
+      b.setAttribute("aria-label", `Go to slide ${i+1}`);
+      b.addEventListener("click", ()=>goTo(i));
+      dots.appendChild(b);
+    });
+    syncDots();
+  }
+  function syncDots(){
+    const btns = $$("#dots .dotBtn");
+    btns.forEach((b,i)=>b.setAttribute("aria-current", String(i===idx)));
+    const title = slides[idx]?.dataset?.title ? `Episode Slides • ${slides[idx].dataset.title}` : "Episode Slides";
+    $("#deckTitle").textContent = title;
+  }
+  function goTo(n){
+    idx = (n + slides.length) % slides.length;
+    slides.forEach((sl,i)=>sl.classList.toggle("is-active", i===idx));
+    syncDots();
+  }
+  $("#btnPrev").addEventListener("click", ()=>goTo(idx-1));
+  $("#btnNext").addEventListener("click", ()=>goTo(idx+1));
+  renderDots();
+
+  window.addEventListener("keydown",(e)=>{
+    const t=e.target?.tagName?.toLowerCase();
+    const inField = (t==="input"||t==="textarea"||e.target?.isContentEditable);
+    if(inField) return;
+    if(e.key==="ArrowLeft") goTo(idx-1);
+    if(e.key==="ArrowRight") goTo(idx+1);
+  });
+
+  // Divisions render
+  const divWrap = $("#divisions");
+  PROFILE.aerovista_about.divisions.forEach(d=>{
+    const c=document.createElement("div");
+    c.className="card";
+    c.innerHTML = `<h4>${d.name}</h4><p>${d.bread_and_butter}</p>`;
+    divWrap.appendChild(c);
+  });
+
+  // Audio enhancements
+  const audio = $("#audio");
+  const seek = $("#seek");
+  const time = $("#time");
+  const cPlay=$("#cPlay"), cBack=$("#cBack"), cFwd=$("#cFwd"), cSpeed=$("#cSpeed"), cLoop=$("#cLoop"), cMute=$("#cMute"), cMark=$("#cMark");
+  const marksCount=$("#marksCount"), lastMark=$("#lastMark");
+
+  let marks=[];
+  let speeds=[1.0,1.15,1.25,1.35,1.5];
+  let speedIdx=0;
+
+  function fmt(t){
+    if(!isFinite(t)) return "00:00";
+    const m=Math.floor(t/60);
+    const s=Math.floor(t%60);
+    return String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+  }
+  function syncTime(){
+    const cur=audio.currentTime||0;
+    const dur=audio.duration||0;
+    time.textContent = `${fmt(cur)} / ${fmt(dur)}`;
+    if(dur>0) seek.value = String(Math.floor((cur/dur)*1000));
+  }
+  audio.addEventListener("timeupdate", syncTime);
+  audio.addEventListener("loadedmetadata", syncTime);
+
+  seek.addEventListener("input", ()=>{
+    const dur=audio.duration||0;
+    if(dur<=0) return;
+    const pct=Number(seek.value)/1000;
+    audio.currentTime=pct*dur;
+  });
+
+  function togglePlay(){
+    if(audio.paused) audio.play();
+    else audio.pause();
+    cPlay.firstChild.textContent = audio.paused ? "▶ Play " : "⏸ Pause ";
+  }
+  cPlay.addEventListener("click", togglePlay);
+  audio.addEventListener("play", ()=>cPlay.firstChild.textContent="⏸ Pause ");
+  audio.addEventListener("pause", ()=>cPlay.firstChild.textContent="▶ Play ");
+
+  cBack.addEventListener("click", ()=>audio.currentTime=Math.max(0,(audio.currentTime||0)-10));
+  cFwd.addEventListener("click", ()=>audio.currentTime=Math.min((audio.duration||Infinity),(audio.currentTime||0)+10));
+
+  cSpeed.addEventListener("click", ()=>{
+    speedIdx=(speedIdx+1)%speeds.length;
+    audio.playbackRate=speeds[speedIdx];
+    cSpeed.childNodes[0].textContent = `${audio.playbackRate.toFixed(2)}× Speed `;
+  });
+
+  cLoop.addEventListener("click", ()=>{
+    audio.loop=!audio.loop;
+    cLoop.childNodes[0].textContent = audio.loop ? "⟲ Loop: ON " : "⟲ Loop ";
+    cLoop.style.boxShadow = audio.loop ? "var(--glow-ghost)" : "";
+  });
+
+  cMute.addEventListener("click", ()=>{
+    audio.muted=!audio.muted;
+    cMute.childNodes[0].textContent = audio.muted ? "🔇 Muted " : "🔊 Mute ";
+    cMute.style.boxShadow = audio.muted ? "var(--glow-orange)" : "";
+  });
+
+  const MARK_KEY = "bytecast_ep1_marks";
+  cMark.addEventListener("click", ()=>{
+    const t=audio.currentTime||0;
+    const stamp=fmt(t);
+    marks.push({t,stamp,at:new Date().toISOString()});
+    marksCount.textContent=String(marks.length);
+    lastMark.textContent=stamp;
+    try{ localStorage.setItem(MARK_KEY, JSON.stringify(marks.slice(-50))); }catch{}
+  });
+
+  window.addEventListener("keydown",(e)=>{
+    const t=e.target?.tagName?.toLowerCase();
+    const inField = (t==="input"||t==="textarea"||e.target?.isContentEditable);
+    if(inField) return;
+
+    if(e.code==="Space"){ e.preventDefault(); togglePlay(); }
+    if(e.key.toLowerCase()==="j") cBack.click();
+    if(e.key.toLowerCase()==="l") cFwd.click();
+    if(e.key.toLowerCase()==="m") cMark.click();
+    if(e.key.toLowerCase()==="s") cSpeed.click();
+    if(e.key.toLowerCase()==="r") cLoop.click();
+    if(e.key.toLowerCase()==="k") cMute.click();
+  });
+
+  try{
+    const saved = JSON.parse(localStorage.getItem(MARK_KEY)||"[]");
+    if(Array.isArray(saved)&&saved.length){
+      marks=saved;
+      marksCount.textContent=String(marks.length);
+      lastMark.textContent=saved[saved.length-1]?.stamp||"—";
+    }
+  }catch{}
+
+  // Quest
+  const QUEST_KEY="bytecast_ep1_quest";
+  const questState = new Set((()=>{
+    try{ return JSON.parse(localStorage.getItem(QUEST_KEY)||"[]"); }catch{ return []; }
+  })());
+  const questList=$("#questList");
+  questList.innerHTML = PROFILE.engagement.quest.items.map(item=>{
+    const checked = questState.has(item.id) ? "checked" : "";
+    return `
+      <label style="display:flex; gap:10px; align-items:flex-start; padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.08);">
+        <input type="checkbox" data-qid="${item.id}" ${checked} style="margin-top:3px; width:18px; height:18px; accent-color: var(--neon);" />
+        <div>
+          <div style="font-weight:800; letter-spacing:-0.01em;">${item.text}</div>
+          <div style="color:rgba(255,255,255,0.66); font-size:12px; margin-top:4px;">tag: <span style="font-family:var(--mono);">${item.id}</span></div>
+        </div>
+      </label>
+    `;
+  }).join("") + `
+    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
+      <span class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">BADGE</b> ${PROFILE.engagement.quest.reward_badge.label}</span>
+      <span class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">TIP</b> submit your 1 improvement suggestion</span>
+    </div>
+  `;
+
+  questList.addEventListener("change",(e)=>{
+    const cb = e.target;
+    if(cb && cb.matches('input[type="checkbox"][data-qid]')){
+      const id = cb.getAttribute("data-qid");
+      if(cb.checked) questState.add(id);
+      else questState.delete(id);
+      try{ localStorage.setItem(QUEST_KEY, JSON.stringify([...questState])); }catch{}
+    }
+  });
+
+  // Quiz
+  const QUIZ_KEY="bytecast_ep1_quiz";
+  let quizState = (()=>{ try{ return JSON.parse(localStorage.getItem(QUIZ_KEY)||"{}"); }catch{ return {}; } })();
+  const quizEl=$("#quiz");
+  const Q = PROFILE.engagement.quiz.questions;
+  const passThresh = PROFILE.engagement.quiz.pass_threshold;
+
+  function renderQuiz(){
+    const answers = quizState.answers || {};
+    const score = quizState.score ?? null;
+    const passed = quizState.passed ?? false;
+
+    quizEl.innerHTML = `
+      <div style="display:grid; gap:12px;">
+        ${Q.map(q=>{
+          const picked = answers[q.id];
+          return `
+            <div class="card" style="border-style:solid;">
+              <div style="display:flex; justify-content:space-between; gap:10px; align-items:center; margin-bottom:10px;">
+                <b>${q.q}</b>
+                <span class="pill" style="margin:0;"><span class="spark"></span><strong>${q.id}</strong></span>
+              </div>
+              <div style="display:grid; gap:8px;">
+                ${q.choices.map((c,ix)=>{
+                  const sel = (picked===ix) ? "checked" : "";
+                  return `
+                    <label style="display:flex; gap:10px; align-items:flex-start;">
+                      <input type="radio" name="${q.id}" value="${ix}" ${sel} style="margin-top:3px; accent-color: var(--neon);" />
+                      <span style="color:rgba(255,255,255,0.86);">${c}</span>
+                    </label>
+                  `;
+                }).join("")}
+              </div>
+              <div style="margin-top:10px; color:rgba(255,255,255,0.66); font-size:12px;">
+                <span style="font-family:var(--mono);">tag:</span> quiz • checkpoint
+              </div>
+            </div>
+          `;
+        }).join("")}
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+          <button class="btn btn--primary" type="button" id="gradeQuiz">Grade Quiz</button>
+          <button class="btn" type="button" id="resetQuiz">Reset</button>
+          <span class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">THRESH</b> ${Math.round(passThresh*100)}%</span>
+          <span class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">SCORE</b> ${score===null ? "—" : Math.round(score*100)+"%"}</span>
+          <span class="chip" style="${passed ? "box-shadow: var(--glow-neon); border-color: rgba(34,167,255,0.35);" : ""}">
+            <span class="tagdot"></span> <b style="font-family:var(--mono);">STATUS</b> ${passed ? "PASS" : (score===null ? "—" : "TRY AGAIN")}
+          </span>
+        </div>
+
+        ${passed ? `
+          <div class="callout">
+            <div class="k">COMPLETION</div>
+            <p style="margin:10px 0 0; color:rgba(255,255,255,0.86); line-height:1.55;">
+              <strong>Badge unlocked:</strong> ${PROFILE.engagement.quest.reward_badge.label}. Now ship a tiny proof-of-work.
+            </p>
+          </div>
+        ` : ``}
+      </div>
+    `;
+
+    quizEl.querySelectorAll('input[type="radio"]').forEach(r=>{
+      r.addEventListener("change", ()=>{
+        const qid = r.name;
+        const v = Number(r.value);
+        quizState.answers = quizState.answers || {};
+        quizState.answers[qid] = v;
+        try{ localStorage.setItem(QUIZ_KEY, JSON.stringify(quizState)); }catch{}
+      });
+    });
+
+    $("#gradeQuiz").addEventListener("click", ()=>{
+      const ans = quizState.answers || {};
+      let correct = 0;
+      Q.forEach(q=>{
+        if(ans[q.id] === q.answer_index) correct++;
+      });
+      const scoreNow = correct / Q.length;
+      quizState.score = scoreNow;
+      quizState.passed = scoreNow >= passThresh;
+      try{ localStorage.setItem(QUIZ_KEY, JSON.stringify(quizState)); }catch{}
+      renderQuiz();
+    });
+
+    $("#resetQuiz").addEventListener("click", ()=>{
+      quizState = {};
+      try{ localStorage.removeItem(QUIZ_KEY); }catch{}
+      renderQuiz();
+    });
+  }
+
+  renderQuiz();
+</script>
+</body>
+</html>

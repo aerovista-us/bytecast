@@ -1,0 +1,40 @@
+[
+  {
+    "id": "WO-OPS-NEW-0001",
+    "title": "Normalize NXCore DNS behavior for public vs tailnet domains (avoid split-horizon surprises)",
+    "status": "NEW",
+    "priority": "P2",
+    "project": "NXCore / Networking",
+    "tags": [
+      "dns",
+      "tailscale",
+      "resolved"
+    ],
+    "acceptance_criteria": [
+      "NXCore can test public domains reliably",
+      "No accidental routing of public domains to tailnet DNS"
+    ],
+    "notes": "",
+    "next_steps": [],
+    "evidence": []
+  },
+  {
+    "id": "WO-DROPS-NEW-0002",
+    "title": "Implement per-drop subdomain scheme (<repo>.aerovista.us) for GitHub Pages drops",
+    "status": "NEW",
+    "priority": "P2",
+    "project": "AeroVista Drops",
+    "tags": [
+      "dns",
+      "github-pages",
+      "branding"
+    ],
+    "acceptance_criteria": [
+      "vday.aerovista.us works",
+      "Repeatable documented steps for new drops"
+    ],
+    "notes": "",
+    "next_steps": [],
+    "evidence": []
+  }
+]

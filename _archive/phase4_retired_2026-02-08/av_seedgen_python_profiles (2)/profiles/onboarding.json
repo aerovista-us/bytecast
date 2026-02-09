@@ -1,0 +1,61 @@
+{
+  "kicker": "Founder briefing \u2022 Self-guided \u2022 Earn the badge",
+  "subhead": "A clean onboarding gate: mission notes, expectations, and a lightweight quiz that stores a badge locally (not access control).",
+  "description": "A founder welcome/onboarding seed with optional quiz gate.",
+  "theme": {
+    "bg0": "#07080b",
+    "bg1": "#0b0f16",
+    "ink": "#eef7ff",
+    "muted": "#b6c7d9",
+    "accent": "#ffd27d",
+    "accent2": "#ffefb1",
+    "paper": "#efe4cc",
+    "paper2": "#dac7a0",
+    "theme_color": "#0b0f16"
+  },
+  "insights": {
+    "tags": [
+      "Mission",
+      "Expectations",
+      "Tools"
+    ],
+    "heads": [
+      "Build small. Ship often.",
+      "Show your work.",
+      "Keep it readable."
+    ],
+    "bodies": [
+      "We prefer real artifacts over long promises. Minimal steps, maximum momentum.",
+      "Write notes like someone else will maintain it next month. Screenshots and reproducible steps win.",
+      "Clarity beats cleverness: consistent naming, consistent structure, consistent results."
+    ]
+  },
+  "steps": {
+    "titles": [
+      "Read the brief",
+      "Run the demo",
+      "Pass the gate"
+    ],
+    "descs": [
+      "Scan the insights and make sure the vibe fits.",
+      "Follow instructions without hand-holding.",
+      "Earn a badge (stored locally) to signal commitment."
+    ]
+  },
+  "prompts": {
+    "hero_prompt": "Cinematic lakeside night scene with glowing circuitry vines and a clean badge emblem hovering above calm water, soft fog, neon-gold highlights, wide hero composition, no text",
+    "section_bg_prompt": "Dark gradient with faint topographic lines and subtle glow nodes, wide background",
+    "card_tex_prompt": "Aged paper texture with faint stamped seals and subtle edge wear, clean center space",
+    "footer_bg_prompt": "Minimal night horizon with gentle glow, tiny particles drifting, wide background",
+    "icon_ideas": "badge, checklist, compass, terminal, book, wrench, spark, map"
+  },
+  "quiz": {
+    "enabled": true,
+    "title": "Quick gate (prototype)",
+    "desc": "This is not real access control \u2014 it just captures effort. Enter 5 comma-separated specifics you learned (tools, rules, steps, or naming).",
+    "pass_pct": 80,
+    "placeholder": "Example: tokens-first CSS, no frameworks, GitHub Pages deploy, reveal cards, progress path",
+    "button": "Check + Earn Badge",
+    "status_default": "Tip: be specific. Commas separate your answers."
+  }
+}

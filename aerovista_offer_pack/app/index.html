@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AeroVista Offer Pack — Training & Reference</title>
+  <meta name="description" content="Internal training and reference for AeroVista offer pack: divisions, sales playbook, delivery, intake, pricing, one-pager." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <header class="topbar" role="banner">
+    <div class="topbar__inner">
+      <a href="#home" class="topbar__logo" data-route="home">AeroVista Offer Pack</a>
+      <nav class="nav" aria-label="Main">
+        <a href="#home" class="nav__link" data-route="home">Home</a>
+        <a href="#onboarding" class="nav__link" data-route="onboarding">Onboarding</a>
+        <a href="#bytecasts" class="nav__link" data-route="bytecasts">ByteCasts</a>
+        <a href="#summit" class="nav__link" data-route="summit">Summit Courses</a>
+        <a href="#divisions" class="nav__link" data-route="divisions">Divisions</a>
+        <a href="#sales" class="nav__link" data-route="sales">Sales</a>
+        <a href="#delivery" class="nav__link" data-route="delivery">Delivery</a>
+        <a href="#intake" class="nav__link" data-route="intake">Intake</a>
+        <a href="#pricing" class="nav__link" data-route="pricing">Pricing</a>
+        <a href="#bundles" class="nav__link" data-route="bundles">Bundles</a>
+        <a href="#onepager" class="nav__link" data-route="onepager">One-pager</a>
+      </nav>
+      <div class="topbar__actions">
+        <button type="button" class="btn btn--icon" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle theme">Theme</button>
+        <button type="button" class="btn" id="print-onepager" aria-label="Print one-pager" title="Print one-pager">Print</button>
+        <button type="button" class="btn btn--primary" id="open-search" aria-label="Open search (Ctrl+K)" title="Search (Ctrl+K)">Search</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="wrap main" role="main">
+    <section id="view-home" class="view" data-view="home" aria-labelledby="home-title">
+      <div class="hero">
+        <h1 id="home-title" class="h-title">Offer Pack</h1>
+        <p class="h-sub" id="home-pitch">Loading…</p>
+        <div id="home-stats" class="home-stats" aria-label="Pack summary"><!-- filled by JS --></div>
+        <div id="home-continue"><!-- filled by JS --></div>
+        <div class="role-tiles" aria-label="Quick links by role">
+          <a href="#sales" class="tile" data-route="sales"><span class="tile__label">Sales</span><span class="tile__desc">Playbook + One-pager</span></a>
+          <a href="#delivery" class="tile" data-route="delivery"><span class="tile__label">Delivery</span><span class="tile__desc">SOP + QA checklists</span></a>
+          <a href="#divisions" class="tile" data-route="divisions"><span class="tile__label">Offers</span><span class="tile__desc">All divisions & cards</span></a>
+        </div>
+        <div class="nav-tiles" id="home-nav-tiles"><!-- filled by JS --></div>
+        <section aria-label="Workspace app map" style="margin-top:18px; border:1px solid var(--stroke); border-radius:12px; padding:12px; background:linear-gradient(140deg, rgba(14,165,233,0.08), rgba(6,182,212,0.04));">
+          <div style="display:grid; gap:6px; margin-bottom:10px;">
+            <span style="display:inline-flex; width:max-content; padding:3px 10px; border-radius:999px; border:1px solid rgba(14,165,233,0.4); background:rgba(14,165,233,0.14); font:700 11px/1 var(--mono); letter-spacing:.06em; text-transform:uppercase;">App Map</span>
+            <h2 style="margin:0; font-size:1.02rem;">Cross-App Visual Lanes</h2>
+            <p style="margin:0; color:var(--muted);">Offer Pack is now aligned with the same animated SVG navigation language as every core page.</p>
+          </div>
+          <svg viewBox="0 0 1240 430" role="img" aria-label="Workspace map" style="width:100%; height:auto; display:block; border-radius:10px; border:1px solid var(--stroke); background:#0c121b;">
+            <style>
+              .m-lane{fill:none;stroke-width:3;stroke-linecap:round;stroke-dasharray:12 12;animation:m-dash 12s linear infinite;opacity:.9}
+              .m-b{stroke:#22a7ff}.m-g{stroke:#ffc45a}.m-v{stroke:#a66bff}.m-o{stroke:#ff6a2a}
+              .m-dot{filter:drop-shadow(0 0 6px rgba(255,255,255,.45))}
+              .m-node{cursor:pointer;transform-box:fill-box;transform-origin:center;animation:m-float 5.8s ease-in-out infinite}
+              .m-n1{animation-delay:-1s}.m-n2{animation-delay:-2s}.m-n3{animation-delay:-3s}.m-n4{animation-delay:-4s}
+              .m-box{fill:rgba(8,12,18,.82);stroke-width:2}.m-sb{stroke:#22a7ff}.m-st{stroke:#ffc45a}.m-ss{stroke:#a66bff}.m-so{stroke:#ff6a2a}.m-se{stroke:#8fd9ff}
+              .m-t{fill:#f4fbff;font:700 20px Sora,Segoe UI,sans-serif}.m-s{fill:rgba(255,255,255,.72);font:14px 'IBM Plex Sans',Segoe UI,sans-serif}
+              @keyframes m-dash{from{stroke-dashoffset:220}to{stroke-dashoffset:0}}
+              @keyframes m-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+              @media (prefers-reduced-motion: reduce){.m-lane,.m-node{animation:none}}
+            </style>
+            <defs>
+              <path id="m1" d="M 420 205 C 530 118, 645 95, 780 102" />
+              <path id="m2" d="M 420 232 C 540 312, 655 334, 780 328" />
+              <path id="m3" d="M 420 220 C 500 220, 600 220, 680 220" />
+              <path id="m4" d="M 280 182 C 236 130, 206 108, 164 92" />
+              <path id="m5" d="M 300 254 C 244 306, 206 335, 164 350" />
+            </defs>
+            <rect x="0" y="0" width="1240" height="430" fill="#0c121b"/>
+            <path class="m-lane m-b" d="M 420 205 C 530 118, 645 95, 780 102" />
+            <path class="m-lane m-v" d="M 420 232 C 540 312, 655 334, 780 328" />
+            <path class="m-lane m-o" d="M 420 220 C 500 220, 600 220, 680 220" />
+            <path class="m-lane m-g" d="M 280 182 C 236 130, 206 108, 164 92" />
+            <path class="m-lane m-g" d="M 300 254 C 244 306, 206 335, 164 350" />
+            <circle class="m-dot" r="4" fill="#22a7ff"><animateMotion dur="4.6s" repeatCount="indefinite"><mpath href="#m1"/></animateMotion></circle>
+            <circle class="m-dot" r="4" fill="#a66bff"><animateMotion dur="4.9s" repeatCount="indefinite"><mpath href="#m2"/></animateMotion></circle>
+            <circle class="m-dot" r="4" fill="#ff6a2a"><animateMotion dur="5.2s" repeatCount="indefinite"><mpath href="#m3"/></animateMotion></circle>
+            <circle class="m-dot" r="3.6" fill="#ffc45a"><animateMotion dur="4.4s" repeatCount="indefinite"><mpath href="#m4"/></animateMotion></circle>
+            <circle class="m-dot" r="3.6" fill="#ffc45a"><animateMotion dur="5.1s" repeatCount="indefinite"><mpath href="#m5"/></animateMotion></circle>
+            <a href="../../seed_bytecast.html"><g class="m-node m-n1"><rect class="m-box m-sb" x="210" y="160" width="220" height="120" rx="20"/><text class="m-t" x="234" y="208">ByteCast</text><text class="m-s" x="234" y="230">episode player app</text></g></a>
+            <a href="../../training_hub/index.html"><g class="m-node m-n2"><rect class="m-box m-st" x="780" y="48" width="240" height="110" rx="18"/><text class="m-t" x="804" y="92">Training Hub</text><text class="m-s" x="804" y="114">onboarding and modules</text></g></a>
+            <a href="../../seed_builder_studio/index.html"><g class="m-node m-n3"><rect class="m-box m-ss" x="780" y="272" width="240" height="110" rx="18"/><text class="m-t" x="804" y="316">Seed Builder</text><text class="m-s" x="804" y="338">tooling and generation</text></g></a>
+            <a href="../../aerovista_offer_pack/app/index.html#home"><g class="m-node m-n4"><rect class="m-box m-so" x="668" y="170" width="170" height="96" rx="16"/><text class="m-t" x="690" y="208" style="font-size:18px;">Offer Pack</text><text class="m-s" x="690" y="229">sales reference</text></g></a>
+            <a href="../../episodes/welcome_to_bytecast/index.html"><g class="m-node m-n2"><rect class="m-box m-se" x="36" y="48" width="210" height="72" rx="14"/><text class="m-t" x="58" y="89" style="font-size:16px;">EP-001</text></g></a>
+            <a href="../../episodes/aerovista_7_division_overview/index.html"><g class="m-node m-n3"><rect class="m-box m-se" x="36" y="314" width="210" height="72" rx="14"/><text class="m-t" x="58" y="355" style="font-size:16px;">EP-002</text></g></a>
+            <a href="../../index.html"><g class="m-node m-n4"><rect class="m-box m-se" x="1038" y="170" width="166" height="96" rx="16"/><text class="m-t" x="1062" y="208" style="font-size:17px;">Workspace</text><text class="m-s" x="1062" y="229">all app entry</text></g></a>
+          </svg>
+        </section>
+      </div>
+    </section>
+
+    <section id="view-divisions" class="view view--hidden" data-view="divisions" aria-labelledby="divisions-title">
+      <h2 id="divisions-title" class="view-title">Divisions & Offers</h2>
+      <div class="view-tools">
+        <label for="division-filter" class="sr-only">Filter offers</label>
+        <input id="division-filter" class="tool-input" type="search" placeholder="Filter offers or divisions…" autocomplete="off" />
+        <button type="button" class="btn" id="expand-all-divisions">Expand all</button>
+        <button type="button" class="btn" id="collapse-all-divisions">Collapse all</button>
+      </div>
+      <div id="divisions-list" class="divisions-list"><!-- filled by JS --></div>
+      <div id="offer-detail" class="offer-detail offer-detail--hidden" aria-live="polite"><!-- filled by JS --></div>
+    </section>
+
+    <section id="view-onboarding" class="view view--hidden" data-view="onboarding" aria-labelledby="onboarding-title">
+      <h2 id="onboarding-title" class="view-title">Non-Coder Onboarding Path</h2>
+      <div id="onboarding-content"><!-- filled by JS --></div>
+    </section>
+
+    <section id="view-bytecasts" class="view view--hidden" data-view="bytecasts" aria-labelledby="bytecasts-title">
+      <h2 id="bytecasts-title" class="view-title">ByteCasts for Non-Coders</h2>
+      <div id="bytecasts-content"><!-- filled by JS --></div>
+    </section>
+
+    <section id="view-summit" class="view view--hidden" data-view="summit" aria-labelledby="summit-title">
+      <h2 id="summit-title" class="view-title">Summit Courses</h2>
+      <div class="view-tools">
+        <label for="summit-level-filter" class="sr-only">Filter summit courses by level</label>
+        <select id="summit-level-filter" class="tool-select" aria-label="Filter summit courses by level">
+          <option value="all">All levels</option>
+        </select>
+        <label for="summit-sort" class="sr-only">Sort summit courses</label>
+        <select id="summit-sort" class="tool-select" aria-label="Sort summit courses">
+          <option value="recommended">Sort: Recommended</option>
+          <option value="duration-asc">Sort: Duration (Shortest)</option>
+          <option value="duration-desc">Sort: Duration (Longest)</option>
+          <option value="name-asc">Sort: Name (A-Z)</option>
+          <option value="name-desc">Sort: Name (Z-A)</option>
+          <option value="completion-desc">Sort: Completion % (High-Low)</option>
+          <option value="completion-asc">Sort: Completion % (Low-High)</option>
+        </select>
+        <button type="button" class="btn" id="summit-reset-progress">Reset completion</button>
+      </div>
+      <div id="summit-content"><!-- filled by JS --></div>
+    </section>
+
+    <section id="view-sales" class="view view--hidden" data-view="sales" aria-labelledby="sales-title">
+      <h2 id="sales-title" class="view-title">Sales Playbook</h2>
+      <div id="sales-content"><!-- filled by JS --></div>
+    </section>
+
+    <section id="view-delivery" class="view view--hidden" data-view="delivery" aria-labelledby="delivery-title">
+      <h2 id="delivery-title" class="view-title">Delivery</h2>
+      <div id="delivery-content"><!-- filled by JS --></div>
+    </section>
+
+    <section id="view-intake" class="view view--hidden" data-view="intake" aria-labelledby="intake-title">
+      <h2 id="intake-title" class="view-title">Client Intake Form</h2>
+      <div id="intake-content"><!-- filled by JS --></div>
+    </section>
+
+    <section id="view-pricing" class="view view--hidden" data-view="pricing" aria-labelledby="pricing-title">
+      <h2 id="pricing-title" class="view-title">Pricing Grid (Good / Better / Best)</h2>
+      <div id="pricing-content"><!-- filled by JS --></div>
+    </section>
+
+    <section id="view-bundles" class="view view--hidden" data-view="bundles" aria-labelledby="bundles-title">
+      <h2 id="bundles-title" class="view-title">Bundles</h2>
+      <div id="bundles-content"><!-- filled by JS --></div>
+    </section>
+
+    <section id="view-onepager" class="view view--hidden view--onepager" data-view="onepager" aria-labelledby="onepager-title">
+      <h2 id="onepager-title" class="view-title">One-Pager (Client-ready)</h2>
+      <div id="onepager-content" class="onepager-content"><!-- filled by JS --></div>
+    </section>
+  </main>
+
+  <div id="search-overlay" class="search-overlay search-overlay--hidden" role="dialog" aria-modal="true" aria-label="Search">
+    <div class="search-overlay__inner">
+      <input type="search" id="search-input" class="search-input" placeholder="Search divisions, offers, objections, courses…" autocomplete="off" aria-label="Search" />
+      <p class="search-help">Use Up/Down to move, Enter to open, Esc to close.</p>
+      <div id="search-results" class="search-results"></div>
+      <button type="button" class="btn search-close" id="search-close">Close</button>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

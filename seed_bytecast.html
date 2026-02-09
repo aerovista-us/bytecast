@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="en" data-theme="venta-neon">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ByteCast App</title>
+  <meta name="description" content="ByteCast App: episode launcher, resume, and progress overview." />
+  <style>
+    :root {
+      --bg0: #050607;
+      --bg1: #0b0f14;
+      --card: rgba(255,255,255,0.06);
+      --stroke: rgba(255,255,255,0.12);
+      --stroke2: rgba(100,180,255,0.25);
+
+      --ink: rgba(255,255,255,0.93);
+      --muted: rgba(255,255,255,0.66);
+      --faint: rgba(255,255,255,0.42);
+
+      --neon: #22a7ff;
+      --orange: #ff6a2a;
+      --ghost: #a66bff;
+      --gold: #ffc45a;
+
+      --shadow: 0 18px 80px rgba(0,0,0,0.55);
+      --shadow2: 0 10px 35px rgba(0,0,0,0.45);
+      --radius: 22px;
+      --radius2: 14px;
+
+      --max: 1180px;
+      --pad: clamp(16px, 2.2vw, 26px);
+
+      --glow-neon: 0 0 18px rgba(34,167,255,0.30), 0 0 42px rgba(34,167,255,0.16);
+      --glow-ghost: 0 0 18px rgba(166,107,255,0.26), 0 0 44px rgba(166,107,255,0.12);
+      --glow-gold: 0 0 22px rgba(255,196,90,0.34), 0 0 44px rgba(255,153,0,0.14);
+
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    }
+
+    html[data-theme="ghostwave"]{
+      --bg0:#05040a; --bg1:#0b0820;
+      --neon:#5c8cff; --ghost:#ff3df3; --orange:#ffb020;
+      --stroke2: rgba(166,107,255,0.28);
+      --glow-neon: 0 0 18px rgba(92,140,255,0.28), 0 0 44px rgba(166,107,255,0.16);
+      --glow-ghost: 0 0 18px rgba(255,61,243,0.20), 0 0 44px rgba(255,61,243,0.10);
+    }
+    html[data-theme="embercore"]{
+      --bg0:#070606; --bg1:#120c0a;
+      --neon:#ff6a2a; --orange:#22a7ff; --ghost:#a66bff;
+      --stroke2: rgba(255,176,32,0.25);
+      --glow-neon: 0 0 18px rgba(255,106,42,0.24), 0 0 44px rgba(255,176,32,0.14);
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 600px at 15% 10%, rgba(34,167,255,0.10), transparent 60%),
+        radial-gradient(900px 500px at 85% 25%, rgba(166,107,255,0.09), transparent 60%),
+        radial-gradient(1100px 700px at 50% 100%, rgba(255,106,42,0.05), transparent 62%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+    }
+    a{ color:inherit; text-decoration:none; }
+    a:hover{ text-decoration:underline; text-underline-offset:3px; }
+
+    .skip {
+      position:absolute;
+      left:-999px;
+      top: 8px;
+      background:#000;
+      color:#fff;
+      padding:10px 12px;
+      border-radius:10px;
+      z-index:9999;
+    }
+    .skip:focus{ left: 12px; }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter: blur(12px);
+      background: linear-gradient(180deg, rgba(5,6,7,0.82), rgba(5,6,7,0.56));
+      border-bottom:1px solid var(--stroke);
+    }
+    .topbar__inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px var(--pad);
+      display:flex;
+      gap:12px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .badge{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,0.03);
+      box-shadow: var(--shadow2);
+    }
+    .dot{ width:10px; height:10px; border-radius:999px; background:var(--neon); box-shadow:var(--glow-neon); }
+    .controls{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
+    .select,.btn{
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,0.03);
+      color:var(--ink);
+      border-radius:999px;
+      padding:10px 12px;
+      font-size:13px;
+    }
+    .btn{
+      cursor:pointer;
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      transition: transform .12s ease, border-color .2s ease, box-shadow .2s ease;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      border-color: var(--stroke2);
+      box-shadow: var(--glow-neon);
+      text-decoration:none;
+    }
+    .btn--primary{
+      border-color: rgba(34,167,255,0.35);
+      box-shadow: var(--glow-neon);
+    }
+    .btn--legendary{
+      border-color: rgba(255,196,90,0.55);
+      background: linear-gradient(180deg, rgba(255,196,90,0.16), rgba(255,196,90,0.08));
+      box-shadow: var(--glow-gold);
+      font-weight: 800;
+      letter-spacing: 0.01em;
+    }
+    .btn--legendary:hover{
+      border-color: rgba(255,224,143,0.85);
+      box-shadow: var(--glow-gold);
+    }
+
+    .wrap{ max-width:var(--max); margin:0 auto; padding:18px var(--pad) 90px; }
+    .hero{
+      border-radius:var(--radius);
+      border:1px solid var(--stroke);
+      box-shadow: var(--shadow);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02)),
+        radial-gradient(1100px 500px at 10% 0%, rgba(34,167,255,0.16), transparent 55%),
+        radial-gradient(900px 450px at 90% 20%, rgba(166,107,255,0.14), transparent 55%),
+        radial-gradient(900px 450px at 60% 120%, rgba(255,106,42,0.07), transparent 60%);
+      padding: clamp(18px, 2.8vw, 34px);
+      overflow:hidden;
+    }
+    .hero__grid{ display:grid; grid-template-columns: 1.2fr 0.8fr; gap: 18px; align-items:start; }
+    @media (max-width: 900px){ .hero__grid{ grid-template-columns: 1fr; } }
+    .h-title{ margin:0 0 10px; font-size: clamp(34px, 4.2vw, 58px); line-height:1.02; letter-spacing:-0.02em; }
+    .h-sub{ margin:0 0 16px; color:var(--muted); max-width:62ch; font-size: clamp(15px, 1.35vw, 18px); }
+    .pills{ display:flex; flex-wrap:wrap; gap:10px; }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,0.03);
+      font-size:12px;
+    }
+    .pill strong{ font-family: var(--mono); }
+    .spark{ width:8px; height:8px; border-radius:99px; background: var(--ghost); box-shadow: var(--glow-ghost); }
+
+    .card{
+      border-radius: var(--radius);
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,0.03);
+      box-shadow: var(--shadow2);
+      padding: 16px;
+    }
+    .grid{
+      margin-top: 16px;
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+    .span-8{ grid-column: span 8; }
+    .span-4{ grid-column: span 4; }
+    @media (max-width: 980px){
+      .span-8,.span-4{ grid-column: span 12; }
+    }
+
+    .k{ font-family: var(--mono); font-size: 12px; color: var(--faint); }
+    .h2{ margin: 0 0 6px; font-size: 18px; letter-spacing: -0.01em; }
+    .muted{ color: var(--muted); }
+    .tiny{ font-size: 12px; color: var(--faint); }
+
+    .episodes{
+      display:grid;
+      gap: 12px;
+    }
+    .ep{
+      border:1px solid var(--stroke);
+      border-radius: var(--radius2);
+      background: rgba(255,255,255,0.03);
+      padding: 12px;
+      display:grid;
+      gap: 10px;
+    }
+    .ep__head{
+      display:flex;
+      gap: 12px;
+      align-items:flex-start;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .ep__title{
+      margin:0;
+      font-size: 16px;
+      letter-spacing: -0.01em;
+    }
+    .ep__meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 8px;
+      align-items:center;
+      margin-top: 6px;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--stroke);
+      background: rgba(0,0,0,0.20);
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .bar{
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--stroke);
+      overflow:hidden;
+    }
+    .bar > i{
+      display:block;
+      height:100%;
+      width: 0%;
+      background: linear-gradient(90deg, rgba(34,167,255,0.85), rgba(166,107,255,0.62), rgba(255,106,42,0.42));
+      box-shadow: var(--glow-neon);
+    }
+    .banner{
+      border-radius: var(--radius2);
+      border: 1px solid rgba(255,196,90,0.38);
+      background:
+        linear-gradient(145deg, rgba(255,209,120,0.12), rgba(255,172,64,0.07)),
+        rgba(0, 0, 0, 0.2);
+      padding: 12px;
+    }
+    .banner p{ margin:0; }
+    .banner .label{ color: rgba(248,223,169,0.95); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="topbar">
+    <div class="topbar__inner">
+      <div class="badge" aria-label="ByteCast">
+        <span class="dot" aria-hidden="true"></span>
+        <div>
+          <div style="font-weight:800; letter-spacing:0.02em;">ByteCast</div>
+          <div class="k">App launcher • progress • resume</div>
+        </div>
+      </div>
+
+      <div class="controls" aria-label="Controls">
+        <label class="k" for="themeSel" style="display:flex; align-items:center; gap:10px;">
+          Theme
+          <select id="themeSel" class="select" aria-label="Theme">
+            <option value="venta-neon">Venta + Neon (Default)</option>
+            <option value="ghostwave">Ghostwave</option>
+            <option value="embercore">Embercore</option>
+          </select>
+        </label>
+        <a class="btn" href="./index.html">Workspace Entry</a>
+        <a class="btn" href="./training_hub/index.html">Training Hub</a>
+        <a class="btn" href="./seed_builder_studio/index.html">Seed Builder</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <section class="hero" aria-label="Hero">
+      <div class="hero__grid">
+        <div>
+          <h1 class="h-title">BYTECAST</h1>
+          <p class="h-sub" id="heroSub">
+            Choose an episode, finish the loop (listen -> slide -> interact), and come back stronger.
+          </p>
+          <div class="pills" id="metaPills">
+            <span class="pill"><span class="spark" aria-hidden="true"></span><strong>listen</strong> • anchor intent</span>
+            <span class="pill"><span class="spark" aria-hidden="true"></span><strong>slide</strong> • lock memory</span>
+            <span class="pill"><span class="spark" aria-hidden="true"></span><strong>interact</strong> • confirm retention</span>
+          </div>
+
+          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+            <a id="resumeBtn" class="btn btn--legendary" href="./episodes/welcome_to_bytecast/index.html">Continue Where You Left Off</a>
+            <a class="btn btn--primary" href="./episodes/welcome_to_bytecast/index.html">Start EP-001</a>
+          </div>
+
+          <p class="tiny" id="resumeHint" style="margin:12px 0 0;">
+            Resume status: loading...
+          </p>
+        </div>
+
+        <aside class="card" aria-label="Next recommended">
+          <div class="banner" id="nextBanner">
+            <p class="label">Next recommended: loading...</p>
+            <p class="tiny muted" id="nextWhy">We pick the lowest-completion active episode by default.</p>
+            <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
+              <a id="nextBtn" class="btn btn--legendary" href="./episodes/welcome_to_bytecast/index.html">Legendary Next Action</a>
+              <a class="btn" href="./.CODEX/episode_registry.json">Episode Registry</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section aria-label="Workspace app map" style="margin-top:14px; border:1px solid rgba(255,255,255,0.14); border-radius:18px; padding:14px; background:linear-gradient(140deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)); box-shadow:var(--shadow2);">
+      <div style="display:grid; gap:6px; margin-bottom:10px;">
+        <span style="display:inline-flex; width:max-content; padding:3px 10px; border-radius:999px; border:1px solid rgba(34,167,255,0.4); background:rgba(34,167,255,0.14); font:700 11px/1 var(--mono); letter-spacing:.06em; text-transform:uppercase;">App Map</span>
+        <h2 style="margin:0; font-size:18px;">Cross-App Visual Lanes</h2>
+        <p style="margin:0; color:var(--muted);">Same animated navigator across pages so app boundaries are obvious at a glance.</p>
+      </div>
+      <svg viewBox="0 0 1240 430" role="img" aria-label="Workspace map" style="width:100%; height:auto; display:block; border-radius:12px; border:1px solid rgba(255,255,255,0.14); background:rgba(0,0,0,0.24);">
+        <style>
+          .m-lane{fill:none;stroke-width:3;stroke-linecap:round;stroke-dasharray:12 12;animation:m-dash 12s linear infinite;opacity:.9}
+          .m-b{stroke:#22a7ff}.m-g{stroke:#ffc45a}.m-v{stroke:#a66bff}.m-o{stroke:#ff6a2a}
+          .m-dot{filter:drop-shadow(0 0 6px rgba(255,255,255,.45))}
+          .m-node{cursor:pointer;transform-box:fill-box;transform-origin:center;animation:m-float 5.8s ease-in-out infinite}
+          .m-n1{animation-delay:-1s}.m-n2{animation-delay:-2s}.m-n3{animation-delay:-3s}.m-n4{animation-delay:-4s}
+          .m-box{fill:rgba(8,12,18,.82);stroke-width:2}.m-sb{stroke:#22a7ff}.m-st{stroke:#ffc45a}.m-ss{stroke:#a66bff}.m-so{stroke:#ff6a2a}.m-se{stroke:#8fd9ff}
+          .m-t{fill:#f4fbff;font:700 20px Sora,Segoe UI,sans-serif}.m-s{fill:rgba(255,255,255,.72);font:14px 'IBM Plex Sans',Segoe UI,sans-serif}
+          @keyframes m-dash{from{stroke-dashoffset:220}to{stroke-dashoffset:0}}
+          @keyframes m-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+          @media (prefers-reduced-motion: reduce){.m-lane,.m-node{animation:none}}
+        </style>
+        <defs>
+          <path id="m1" d="M 420 205 C 530 118, 645 95, 780 102" />
+          <path id="m2" d="M 420 232 C 540 312, 655 334, 780 328" />
+          <path id="m3" d="M 420 220 C 500 220, 600 220, 680 220" />
+          <path id="m4" d="M 280 182 C 236 130, 206 108, 164 92" />
+          <path id="m5" d="M 300 254 C 244 306, 206 335, 164 350" />
+        </defs>
+        <rect x="0" y="0" width="1240" height="430" fill="#0c121b"/>
+        <path class="m-lane m-b" d="M 420 205 C 530 118, 645 95, 780 102" />
+        <path class="m-lane m-v" d="M 420 232 C 540 312, 655 334, 780 328" />
+        <path class="m-lane m-o" d="M 420 220 C 500 220, 600 220, 680 220" />
+        <path class="m-lane m-g" d="M 280 182 C 236 130, 206 108, 164 92" />
+        <path class="m-lane m-g" d="M 300 254 C 244 306, 206 335, 164 350" />
+        <circle class="m-dot" r="4" fill="#22a7ff"><animateMotion dur="4.6s" repeatCount="indefinite"><mpath href="#m1"/></animateMotion></circle>
+        <circle class="m-dot" r="4" fill="#a66bff"><animateMotion dur="4.9s" repeatCount="indefinite"><mpath href="#m2"/></animateMotion></circle>
+        <circle class="m-dot" r="4" fill="#ff6a2a"><animateMotion dur="5.2s" repeatCount="indefinite"><mpath href="#m3"/></animateMotion></circle>
+        <circle class="m-dot" r="3.6" fill="#ffc45a"><animateMotion dur="4.4s" repeatCount="indefinite"><mpath href="#m4"/></animateMotion></circle>
+        <circle class="m-dot" r="3.6" fill="#ffc45a"><animateMotion dur="5.1s" repeatCount="indefinite"><mpath href="#m5"/></animateMotion></circle>
+        <a href="./seed_bytecast.html"><g class="m-node m-n1"><rect class="m-box m-sb" x="210" y="160" width="220" height="120" rx="20"/><text class="m-t" x="234" y="208">ByteCast</text><text class="m-s" x="234" y="230">episode player app</text></g></a>
+        <a href="./training_hub/index.html"><g class="m-node m-n2"><rect class="m-box m-st" x="780" y="48" width="240" height="110" rx="18"/><text class="m-t" x="804" y="92">Training Hub</text><text class="m-s" x="804" y="114">onboarding and modules</text></g></a>
+        <a href="./seed_builder_studio/index.html"><g class="m-node m-n3"><rect class="m-box m-ss" x="780" y="272" width="240" height="110" rx="18"/><text class="m-t" x="804" y="316">Seed Builder</text><text class="m-s" x="804" y="338">tooling and generation</text></g></a>
+        <a href="./aerovista_offer_pack/app/index.html"><g class="m-node m-n4"><rect class="m-box m-so" x="668" y="170" width="170" height="96" rx="16"/><text class="m-t" x="690" y="208" style="font-size:18px;">Offer Pack</text><text class="m-s" x="690" y="229">sales reference</text></g></a>
+        <a href="./episodes/welcome_to_bytecast/index.html"><g class="m-node m-n2"><rect class="m-box m-se" x="36" y="48" width="210" height="72" rx="14"/><text class="m-t" x="58" y="89" style="font-size:16px;">EP-001</text></g></a>
+        <a href="./episodes/aerovista_7_division_overview/index.html"><g class="m-node m-n3"><rect class="m-box m-se" x="36" y="314" width="210" height="72" rx="14"/><text class="m-t" x="58" y="355" style="font-size:16px;">EP-002</text></g></a>
+        <a href="./index.html"><g class="m-node m-n4"><rect class="m-box m-se" x="1038" y="170" width="166" height="96" rx="16"/><text class="m-t" x="1062" y="208" style="font-size:17px;">Workspace</text><text class="m-s" x="1062" y="229">all app entry</text></g></a>
+      </svg>
+    </section>
+
+    <section class="grid" aria-label="Launcher grid">
+      <section class="card span-8" aria-label="Episodes">
+        <div class="k">Episodes</div>
+        <h2 class="h2">Pick an episode, then finish it.</h2>
+        <p class="muted" style="margin:0 0 10px;">
+          Completion is computed from Quest + Quiz progress saved in this browser.
+        </p>
+        <div id="epLoad" class="tiny muted">Loading registry...</div>
+        <div id="epList" class="episodes" aria-live="polite"></div>
+      </section>
+
+      <aside class="card span-4" aria-label="Tools">
+        <div class="k">Tools</div>
+        <h2 class="h2">Fast links</h2>
+        <p class="muted" style="margin:0 0 12px;">Keep momentum: open a module, ship a small win, repeat.</p>
+        <div style="display:grid; gap:10px;">
+          <a class="btn btn--primary" href="./aerovista_offer_pack/app/index.html">Offer Pack</a>
+          <a class="btn" href="./docs/README.md">Docs Index</a>
+          <a class="btn" href="./.CODEX/end_of_session_report_2026-02-08.md">Session Report</a>
+        </div>
+        <p class="tiny" style="margin:12px 0 0;">
+          Run via `python -m http.server 8080` for best results (fetch + JSON).
+        </p>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    const THEME_KEY = "bytecast.theme.v1";
+    const REGISTRY_URL = "./.CODEX/episode_registry.json";
+    const LAST_EP_KEY = "bytecast.last_episode.href.v1";
+    const LAST_EP_TIME_KEY = "bytecast.last_episode.time.v1";
+
+    const $ = (sel) => document.querySelector(sel);
+
+    function toId(value) {
+      return String(value || "")
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+    }
+
+    function escapeHtml(str) {
+      return String(str ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll("\"", "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    function formatWhen(ts) {
+      const n = Number(ts);
+      if (!Number.isFinite(n) || n <= 0) return "unknown";
+      try {
+        const d = new Date(n);
+        return d.toLocaleString(undefined, { year: "numeric", month: "short", day: "2-digit", hour: "2-digit", minute: "2-digit" });
+      } catch {
+        return "unknown";
+      }
+    }
+
+    function safeJsonParse(raw, fallback) {
+      try { return JSON.parse(raw); } catch { return fallback; }
+    }
+
+    function loadLocalJson(key, fallback) {
+      try {
+        const raw = localStorage.getItem(key);
+        if (!raw) return fallback;
+        return safeJsonParse(raw, fallback);
+      } catch {
+        return fallback;
+      }
+    }
+
+    async function loadJson(url) {
+      const res = await fetch(url, { cache: "no-store" });
+      if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
+      return res.json();
+    }
+
+    function computeQuizScore(profile, epId) {
+      const quiz = profile?.engagement?.quiz;
+      if (!quiz?.enabled) return null;
+      const questions = Array.isArray(quiz.questions) ? quiz.questions : [];
+      if (!questions.length) return null;
+      const state = loadLocalJson(`bytecast.${epId}.quiz.v1`, {});
+      let correct = 0;
+      for (const q of questions) {
+        const picked = state?.[q.id];
+        if (typeof picked === "number" && picked === q.answer_index) correct++;
+      }
+      return { correct, total: questions.length, threshold: Number(quiz.pass_threshold) || 0.8 };
+    }
+
+    function computeQuestProgress(profile, epId) {
+      const quest = profile?.engagement?.quest;
+      const items = Array.isArray(quest?.items) ? quest.items : [];
+      if (!items.length) return null;
+      const state = loadLocalJson(`bytecast.${epId}.quest.v1`, {});
+      let done = 0;
+      for (const it of items) if (state?.[it.id]) done++;
+      return { done, total: items.length };
+    }
+
+    function computeCompletion(profile, epId) {
+      const quest = computeQuestProgress(profile, epId);
+      const quiz = computeQuizScore(profile, epId);
+      const parts = [];
+      if (quest) parts.push(quest.done / Math.max(1, quest.total));
+      if (quiz) parts.push(quiz.correct / Math.max(1, quiz.total));
+      if (!parts.length) return { pct: 0, quest, quiz };
+      const pct = Math.round((parts.reduce((a, b) => a + b, 0) / parts.length) * 100);
+      return { pct, quest, quiz };
+    }
+
+    function setLastEpisode(href) {
+      try {
+        localStorage.setItem(LAST_EP_KEY, href);
+        localStorage.setItem(LAST_EP_TIME_KEY, String(Date.now()));
+      } catch {
+        // ignore
+      }
+    }
+
+    function getLastEpisode() {
+      try {
+        return {
+          href: localStorage.getItem(LAST_EP_KEY) || "",
+          time: localStorage.getItem(LAST_EP_TIME_KEY) || ""
+        };
+      } catch {
+        return { href: "", time: "" };
+      }
+    }
+
+    function wireTheme() {
+      const themeSel = $("#themeSel");
+      let theme = "venta-neon";
+      try {
+        const stored = localStorage.getItem(THEME_KEY);
+        if (stored) theme = stored;
+      } catch {
+        // ignore
+      }
+      document.documentElement.setAttribute("data-theme", theme);
+      themeSel.value = theme;
+      themeSel.addEventListener("change", () => {
+        const t = themeSel.value || "venta-neon";
+        document.documentElement.setAttribute("data-theme", t);
+        try { localStorage.setItem(THEME_KEY, t); } catch {}
+      });
+    }
+
+    function renderEpisode(ep, profile, completion) {
+      const href = `./${ep.primary_path}/index.html`.replaceAll("//", "/");
+      const code = ep.episode_code || profile?.episode?.code || "EP";
+      const title = ep.title || profile?.episode?.title || ep.slug || "Episode";
+      const date = profile?.episode?.date || "";
+      const runtime = profile?.episode?.runtime_target_minutes ? `${profile.episode.runtime_target_minutes}m` : "";
+      const tags = Array.isArray(profile?.content?.tags) ? profile.content.tags.slice(0, 4) : [];
+      const summary = profile?.content?.summary_short || "";
+
+      const questLine = completion.quest ? `Quest ${completion.quest.done}/${completion.quest.total}` : "Quest n/a";
+      let quizLine = "Quiz n/a";
+      if (completion.quiz) {
+        const pct = Math.round((completion.quiz.correct / Math.max(1, completion.quiz.total)) * 100);
+        quizLine = `Quiz ${pct}%`;
+      }
+
+      const pct = Math.max(0, Math.min(100, Number(completion.pct) || 0));
+      const statusChip = ep.status === "active" ? "Active" : (ep.status || "Unknown");
+
+      return `
+        <article class="ep" data-ep-href="${escapeHtml(href)}">
+          <div class="ep__head">
+            <div>
+              <p class="k" style="margin:0;">${escapeHtml(code)} • ${escapeHtml(statusChip)}</p>
+              <h3 class="ep__title">${escapeHtml(title)}</h3>
+              <div class="ep__meta">
+                ${date ? `<span class="chip"><b style="font-family:var(--mono);">DATE</b> ${escapeHtml(date)}</span>` : ""}
+                ${runtime ? `<span class="chip"><b style="font-family:var(--mono);">RUNTIME</b> ${escapeHtml(runtime)}</span>` : ""}
+                <span class="chip"><b style="font-family:var(--mono);">COMP</b> ${pct}%</span>
+                <span class="chip">${escapeHtml(questLine)}</span>
+                <span class="chip">${escapeHtml(quizLine)}</span>
+              </div>
+              ${tags.length ? `<p class="tiny" style="margin:8px 0 0;"><b style="font-family:var(--mono);">TAGS</b> ${escapeHtml(tags.join(" • "))}</p>` : ""}
+              ${summary ? `<p class="muted" style="margin:10px 0 0;">${escapeHtml(summary)}</p>` : ""}
+            </div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;">
+              <a class="btn btn--primary" href="${escapeHtml(href)}" data-open-episode="1">Open</a>
+              <a class="btn" href="./${escapeHtml(ep.primary_path)}/bytecast_ep_profile.json" target="_blank" rel="noreferrer">Profile JSON</a>
+            </div>
+          </div>
+          <div class="bar" aria-label="Completion"><i style="width:${pct}%;"></i></div>
+        </article>
+      `;
+    }
+
+    async function render() {
+      const last = getLastEpisode();
+      const resumeBtn = $("#resumeBtn");
+      const resumeHint = $("#resumeHint");
+      if (last.href) {
+        resumeBtn.setAttribute("href", last.href);
+        resumeHint.textContent = `Resume: ${last.href.replace("./", "")} • last visited ${formatWhen(last.time)}`;
+      } else {
+        resumeHint.textContent = "Resume: none yet. Open any episode to set your resume point.";
+      }
+
+      let registry;
+      try {
+        registry = await loadJson(REGISTRY_URL);
+      } catch {
+        registry = {
+          episodes: [
+            { slug: "welcome_to_bytecast", episode_code: "EP-001", title: "Welcome to ByteCast", primary_path: "episodes/welcome_to_bytecast", status: "active" },
+            { slug: "aerovista_7_division_overview", episode_code: "EP-002", title: "AeroVista Overview", primary_path: "episodes/aerovista_7_division_overview", status: "active" }
+          ]
+        };
+      }
+
+      const episodes = Array.isArray(registry.episodes) ? registry.episodes : [];
+      const active = episodes.filter((e) => e && e.status !== "retired" && e.primary_path);
+
+      const loadEl = $("#epLoad");
+      const listEl = $("#epList");
+      loadEl.textContent = active.length ? "" : "No active episodes found.";
+
+      const profiles = await Promise.all(active.map(async (ep) => {
+        try {
+          const p = await loadJson(`./${ep.primary_path}/bytecast_ep_profile.json`.replaceAll("//", "/"));
+          return { ep, profile: p };
+        } catch {
+          return { ep, profile: null };
+        }
+      }));
+
+      const computed = profiles.map(({ ep, profile }) => {
+        const code = ep.episode_code || profile?.episode?.code || "";
+        const epId = toId(code || ep.slug);
+        const completion = computeCompletion(profile, epId);
+        return { ep, profile, completion, epId };
+      });
+
+      computed.sort((a, b) => (a.ep.episode_code || "").localeCompare(b.ep.episode_code || ""));
+
+      listEl.innerHTML = computed.map((x) => renderEpisode(x.ep, x.profile, x.completion)).join("");
+
+      // Next recommended: lowest completion, then earliest episode code.
+      const next = computed
+        .slice()
+        .sort((a, b) => (a.completion.pct - b.completion.pct) || (String(a.ep.episode_code).localeCompare(String(b.ep.episode_code))))[0];
+
+      if (next) {
+        const nextHref = `./${next.ep.primary_path}/index.html`.replaceAll("//", "/");
+        $("#nextBtn").setAttribute("href", nextHref);
+        $("#nextBanner").querySelector(".label").textContent = `Next recommended: ${next.ep.episode_code || "EP"} • ${next.ep.title || next.ep.slug}`;
+        $("#nextWhy").textContent = `Completion: ${next.completion.pct}%. We recommend the lowest-completion active episode.`;
+      }
+
+      // Capture opens for resume.
+      listEl.addEventListener("click", (ev) => {
+        const a = ev.target?.closest?.("a[data-open-episode]");
+        if (!a) return;
+        const href = a.getAttribute("href");
+        if (href) setLastEpisode(href);
+      });
+    }
+
+    wireTheme();
+    render();
+  </script>
+</body>
+</html>

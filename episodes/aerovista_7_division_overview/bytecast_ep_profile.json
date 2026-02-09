@@ -1,0 +1,243 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "episode": {
+    "code": "EP-002",
+    "title": "AeroVista Overview: 7 Divisions + How They Interlock",
+    "type": "internal",
+    "date": "2026-02-07",
+    "runtime_target_minutes": 8,
+    "status": "draft"
+  },
+  "content": {
+    "tags": [
+      "aerovista",
+      "overview",
+      "divisions",
+      "handoffs",
+      "workflow",
+      "recruitment"
+    ],
+    "summary_short": "A high-signal overview of AeroVista’s 7 divisions, what each ships, and how projects flow across the ecosystem.",
+    "summary_long": "Episode 2 makes the AeroVista operating model obvious: each division has clear outputs, and projects move through predictable handoffs. You’ll learn what each division ships (bread & butter), how a Seed becomes a Drop, and where contributors can plug in immediately. Ends with a simple lane-pick quest + an alignment quiz."
+  },
+  "media": {
+    "audio_files": [
+      {
+        "path": "assets/bytecast-ep2.mp3",
+        "label": "Episode audio (main)",
+        "required": true
+      }
+    ]
+  },
+  "slides": [
+    {
+      "id": "s1",
+      "title": "The Point",
+      "goal": "Why divisions exist and how to think about them.",
+      "bullets": [
+        "AeroVista is one ecosystem with multiple ship-lanes.",
+        "Divisions protect focus and raise quality.",
+        "Everything ends as a deliverable someone can use."
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "7 Divisions — One Breath Each",
+      "goal": "Fast mental map.",
+      "bullets": [
+        "NeXuS TechWorks: build the systems and glue.",
+        "SkyForge: interactive experiences and quests.",
+        "EchoVerse: music, sound design, audio tooling.",
+        "Summit: teaching packs and training systems.",
+        "Lumina: branding, visuals, launch kits.",
+        "Vespera: docs, books/courses, packaged knowledge.",
+        "Horizon: drone/capture, mapping, visual products."
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Bread & Butter Outputs",
+      "goal": "Make outputs concrete.",
+      "bullets": [
+        "NeXuS ships apps, APIs, automation, infra hardening.",
+        "SkyForge ships playable pages, minigames, engagement modules.",
+        "EchoVerse ships tracks, stems, cover prompts, visualizers.",
+        "Summit ships curricula, SOPs, onboarding flows.",
+        "Lumina ships brand kits, templates, launch assets.",
+        "Vespera ships structured docs/products people can buy or reuse.",
+        "Horizon ships capture packages (video, maps, 3D, reports)."
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "How They Interlock",
+      "goal": "Show the handoff model.",
+      "bullets": [
+        "NeXuS provides the platform + deployment lane.",
+        "SkyForge turns ideas into interactive experiences.",
+        "EchoVerse gives it a soundtrack + vibe memory.",
+        "Lumina makes it look like a real product.",
+        "Summit documents + teaches it once for reuse.",
+        "Vespera packages the knowledge for distribution.",
+        "Horizon adds real-world capture when needed."
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "Example Flow: Seed → Drop",
+      "goal": "One canonical pipeline.",
+      "bullets": [
+        "Seed: single-file demo + clear intent + fast ship.",
+        "Signal: feedback (people finish it, share it, remember it).",
+        "Scale: graduate into a Drop (multi-file bundle, docs, polish).",
+        "Repeat: winners become products; everything else becomes lessons."
+      ]
+    },
+    {
+      "id": "s6",
+      "title": "Recruitment: Where You Plug In",
+      "goal": "Make joining obvious.",
+      "bullets": [
+        "Pick a lane: build / design / audio / docs / interactive.",
+        "Ship one improvement: problem → impact → fix.",
+        "Earn trust through proof-of-work, not permission."
+      ]
+    },
+    {
+      "id": "s7",
+      "title": "What’s Next",
+      "goal": "Tease division deep dives.",
+      "bullets": [
+        "Next: division ByteCasts — deeper workflows + starter tasks.",
+        "Each division gets quests + badges + repeatable templates.",
+        "You won’t be confused — you’ll have a lane."
+      ]
+    }
+  ],
+  "engagement": {
+    "quest": {
+      "title": "Pick Your Lane (Starter Quest)",
+      "items": [
+        {
+          "id": "q1",
+          "text": "Finish the slides (reach ‘What’s Next’)."
+        },
+        {
+          "id": "q2",
+          "text": "Pick a division lane you want to contribute to."
+        },
+        {
+          "id": "q3",
+          "text": "Choose 1 starter output you can ship in 30–90 minutes."
+        },
+        {
+          "id": "q4",
+          "text": "Write it clean: problem → impact → fix (or build → test → deliver)."
+        }
+      ],
+      "reward_badge": {
+        "label": "LANE LOCKED",
+        "style": "neon"
+      }
+    },
+    "quiz": {
+      "enabled": true,
+      "pass_threshold": 0.8,
+      "questions": [
+        {
+          "id": "k1",
+          "q": "The core purpose of divisions is to:",
+          "choices": [
+            "Create silos",
+            "Protect focus and ship clearer outputs",
+            "Make org charts",
+            "Avoid collaboration"
+          ],
+          "answer_index": 1,
+          "explain": "Divisions protect focus while still supporting clean handoffs."
+        },
+        {
+          "id": "k2",
+          "q": "A Seed is best described as:",
+          "choices": [
+            "A full product",
+            "A fast, portable demo with clear intent",
+            "A marketing campaign",
+            "A private server-only app"
+          ],
+          "answer_index": 1,
+          "explain": "Seeds ship quickly and stay portable (often single-file)."
+        },
+        {
+          "id": "k3",
+          "q": "Which division is most responsible for playable web experiences?",
+          "choices": [
+            "Vespera",
+            "SkyForge",
+            "Horizon",
+            "Summit"
+          ],
+          "answer_index": 1,
+          "explain": "SkyForge builds interactive experiences, quests, and mini-games."
+        },
+        {
+          "id": "k4",
+          "q": "The best recruitment signal inside AeroVista is:",
+          "choices": [
+            "A promise",
+            "A big resume",
+            "Proof-of-work",
+            "A perfect plan"
+          ],
+          "answer_index": 2,
+          "explain": "Small shipped wins get noticed and trusted."
+        },
+        {
+          "id": "k5",
+          "q": "The Seed → Drop flow includes:",
+          "choices": [
+            "Seed → Ignore",
+            "Seed → Signal → Scale",
+            "Seed → NDA → Launch",
+            "Seed → Rewrite forever"
+          ],
+          "answer_index": 1,
+          "explain": "We ship, measure signal, and scale winners."
+        }
+      ]
+    }
+  },
+  "aerovista_about": {
+    "summary": "AeroVista is a multi-division creative + engineering ecosystem shipping reusable experiences that blend software, storytelling, automation, music, and design.",
+    "divisions": [
+      {
+        "name": "NeXuS TechWorks",
+        "bread_and_butter": "Full-stack engineering, offline-first apps, automation pipelines, DevOps, security hardening."
+      },
+      {
+        "name": "SkyForge Creative Studios",
+        "bread_and_butter": "Interactive builds: playable sites, quests, AR/VR concepts, narrative experiences."
+      },
+      {
+        "name": "EchoVerse Audio",
+        "bread_and_butter": "Music production, sound design, album worlds, audio tooling, interactive player drops."
+      },
+      {
+        "name": "Summit Learning",
+        "bread_and_butter": "Teaching systems, tutorials, internal training, playbooks, skill paths."
+      },
+      {
+        "name": "Lumina Creative",
+        "bread_and_butter": "Branding, visuals, marketing assets, launch kits, content strategy."
+      },
+      {
+        "name": "Vespera Publishing",
+        "bread_and_butter": "Digital content, books/courses, structured knowledge products."
+      },
+      {
+        "name": "Horizon Aerial & Visual",
+        "bread_and_butter": "Drone cinematography, mapping, 3D capture, real estate/ag/visual products."
+      }
+    ]
+  }
+}

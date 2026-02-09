@@ -1,0 +1,27 @@
+name: UX feedback
+description: Suggest usability/accessibility improvements
+title: "[UX] "
+labels: ["ux", "help-wanted"]
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Page / URL
+    validations:
+      required: true
+  - type: textarea
+    id: observation
+    attributes:
+      label: What felt confusing or slow?
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested improvement
+    validations:
+      required: true
+  - type: textarea
+    id: media
+    attributes:
+      label: Screenshot / annotated image

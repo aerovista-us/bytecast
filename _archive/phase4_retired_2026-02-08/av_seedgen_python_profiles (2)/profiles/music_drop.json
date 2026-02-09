@@ -1,0 +1,55 @@
+{
+  "kicker": "Monster bass \u2022 Clean signal \u2022 Late-night clarity",
+  "subhead": "A short, punchy drop page: one headline, one intent, one action \u2014 press play and let the message hit.",
+  "description": "A one-page music drop template (static deploy) with reveal cards + progression path.",
+  "theme": {
+    "bg0": "#060608",
+    "bg1": "#0b0b12",
+    "ink": "#eef0ff",
+    "muted": "#b2b6d6",
+    "accent": "#9cffea",
+    "accent2": "#7cf0ff",
+    "paper": "#e8e6ff",
+    "paper2": "#cfcaf0",
+    "theme_color": "#070712"
+  },
+  "insights": {
+    "tags": [
+      "Track",
+      "Lore",
+      "Download"
+    ],
+    "heads": [
+      "Press play. Don\u2019t blink.",
+      "Every bar is a breadcrumb.",
+      "Keep the loop."
+    ],
+    "bodies": [
+      "Drop your player here next. This seed is built to wrap audio, lyrics, and visuals cleanly.",
+      "Use these reveals for stinger notes, story hints, or liner notes.",
+      "Add a download link, credits, and a share CTA in the final section."
+    ]
+  },
+  "steps": {
+    "titles": [
+      "Load the player",
+      "Read the lyrics",
+      "Share the drop"
+    ],
+    "descs": [
+      "Embed audio (or link to it). Keep the page fast.",
+      "Use a section for lyric highlights + meaning.",
+      "Give one clear share action and a follow link."
+    ]
+  },
+  "prompts": {
+    "hero_prompt": "Dark neon night scene with subtle waveform mist and a single glowing signal thread, cinematic minimal, high contrast, wide hero composition, no text",
+    "section_bg_prompt": "Soft abstract waveform haze, dark background, minimal detail, wide web background",
+    "card_tex_prompt": "Subtle paper-like texture with faint grid lines, light vignette, clean center for text",
+    "footer_bg_prompt": "Low light horizon glow with tiny particles drifting, dark palette, wide background",
+    "icon_ideas": "play button, waveform, equalizer, spark, link, download, badge, compass"
+  },
+  "quiz": {
+    "enabled": false
+  }
+}
