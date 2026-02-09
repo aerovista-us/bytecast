@@ -1,9 +1,10 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ByteCast Workspace Entry</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ByteCast</title>
+  <meta name="description" content="ByteCast workspace: standalone packs + thin shells. Pick your door, follow the path." />
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Sora:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap");
 
@@ -19,15 +20,14 @@
       --neon: #22a7ff;
       --ghost: #a66bff;
       --orange: #ff6a2a;
-      --legacy: #f0c262;
-      --archive: #b0bcdb;
+      --gold: #ffc45a;
       --shadow: 0 18px 65px rgba(0, 0, 0, 0.55);
       --radius: 18px;
+      --radius-sm: 14px;
+      --max: 1100px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -35,16 +35,19 @@
       color: var(--ink);
       background:
         radial-gradient(1100px 520px at 10% 0%, rgba(34, 167, 255, 0.12), transparent 60%),
-        radial-gradient(900px 500px at 90% 5%, rgba(166, 107, 255, 0.1), transparent 60%),
+        radial-gradient(900px 500px at 90% 5%, rgba(166, 107, 255, 0.10), transparent 60%),
         radial-gradient(800px 600px at 55% 100%, rgba(255, 106, 42, 0.06), transparent 65%),
         linear-gradient(180deg, var(--bg0), var(--bg1));
       min-height: 100vh;
     }
 
+    a { color: inherit; text-decoration: none; }
+    a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
     .shell {
-      max-width: 1100px;
+      max-width: var(--max);
       margin: 0 auto;
-      padding: 1.3rem 1rem 2rem;
+      padding: 1.25rem 1rem 2.2rem;
     }
 
     .hero {
@@ -59,23 +62,18 @@
     }
 
     .hero h1 {
-      margin: 0 0 0.4rem;
+      margin: 0 0 0.5rem;
       font-family: "Sora", "Segoe UI", sans-serif;
-      font-size: clamp(1.55rem, 2.5vw, 2.25rem);
+      font-size: clamp(1.7rem, 2.8vw, 2.5rem);
+      letter-spacing: -0.02em;
       text-shadow: 0 0 22px rgba(34, 167, 255, 0.15);
     }
 
     .hero p {
       margin: 0;
       color: var(--muted);
-      max-width: 75ch;
-    }
-
-    .top-actions {
-      margin-top: 0.9rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.45rem;
+      max-width: 78ch;
+      line-height: 1.55;
     }
 
     .cycle-track {
@@ -92,30 +90,16 @@
       color: var(--muted);
       padding: 0.22rem 0.55rem;
       font-size: 0.74rem;
-      font-weight: 600;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      width: fit-content;
     }
 
-    .next-hero {
-      margin-top: 0.95rem;
-      border: 1px solid rgba(255, 196, 90, 0.38);
-      background:
-        linear-gradient(145deg, rgba(255, 209, 120, 0.12), rgba(255, 172, 64, 0.07)),
-        rgba(0, 0, 0, 0.2);
-      border-radius: 14px;
-      padding: 0.8rem;
-    }
-
-    .next-hero p {
-      margin: 0 0 0.5rem;
-      color: #f8dfa9;
-      font-weight: 600;
-    }
-
-    .grid {
+    .doors {
       margin-top: 1rem;
       display: grid;
-      gap: 0.8rem;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 0.9rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     }
 
     .card {
@@ -127,7 +111,38 @@
       padding: 0.95rem;
       box-shadow: 0 10px 26px rgba(0, 0, 0, 0.34);
       display: grid;
-      gap: 0.6rem;
+      gap: 0.55rem;
+      align-content: start;
+    }
+
+    .card h2 {
+      margin: 0;
+      font-family: "Sora", "Segoe UI", sans-serif;
+      font-size: 1.08rem;
+      letter-spacing: -0.01em;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 0.16rem 0.56rem;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border: 1px solid transparent;
+      width: fit-content;
+      color: #9fe8ff;
+      border-color: rgba(34, 167, 255, 0.45);
+      background: rgba(34, 167, 255, 0.12);
     }
 
     .app-icon {
@@ -136,24 +151,13 @@
       border-radius: 14px;
       border: 1px solid rgba(255, 255, 255, 0.12);
       background: rgba(0, 0, 0, 0.18);
-      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
     }
 
-    .card h2 {
-      margin: 0;
-      font-family: "Sora", "Segoe UI", sans-serif;
-      font-size: 1.02rem;
-    }
-
-    .card p {
-      margin: 0;
-      color: var(--muted);
-    }
-
-    .btn-row {
+    .btnrow {
       display: flex;
       flex-wrap: wrap;
       gap: 0.45rem;
+      margin-top: 0.35rem;
     }
 
     .btn {
@@ -162,8 +166,8 @@
       color: var(--ink);
       text-decoration: none;
       font-weight: 700;
-      padding: 0.4rem 0.78rem;
-      font-size: 0.86rem;
+      padding: 0.45rem 0.85rem;
+      font-size: 0.9rem;
       background: rgba(255, 255, 255, 0.03);
       cursor: pointer;
       transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.12s ease;
@@ -173,6 +177,7 @@
       border-color: var(--line-strong);
       box-shadow: 0 0 18px rgba(34, 167, 255, 0.2);
       transform: translateY(-1px);
+      text-decoration: none;
     }
 
     .btn.primary {
@@ -181,882 +186,142 @@
       box-shadow: 0 0 18px rgba(34, 167, 255, 0.2);
     }
 
-    .btn.legendary {
+    .btn.gold {
       background: linear-gradient(135deg, #ffd873 0%, #ffba3d 48%, #ffa420 100%);
       border-color: #ffcf5f;
       color: #261700;
       box-shadow:
         0 0 20px rgba(255, 192, 72, 0.45),
         0 8px 26px rgba(255, 153, 0, 0.3);
-      font-weight: 800;
+      font-weight: 900;
       letter-spacing: 0.01em;
     }
 
-    .btn.legendary:hover {
+    .btn.gold:hover {
       border-color: #ffe08f;
       box-shadow:
         0 0 24px rgba(255, 205, 105, 0.55),
         0 10px 30px rgba(255, 153, 0, 0.35);
     }
 
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      border-radius: 999px;
-      padding: 0.16rem 0.56rem;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-      border: 1px solid transparent;
-      width: fit-content;
+    .featured {
+      margin-top: 0.95rem;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255, 196, 90, 0.38);
+      background:
+        linear-gradient(145deg, rgba(255, 209, 120, 0.12), rgba(255, 172, 64, 0.07)),
+        rgba(0, 0, 0, 0.2);
+      padding: 0.9rem;
     }
 
-    .pill.primary {
-      color: #9fe8ff;
-      border-color: rgba(34, 167, 255, 0.45);
-      background: rgba(34, 167, 255, 0.12);
-    }
+    .featured p { margin: 0 0 0.55rem; color: #f8dfa9; font-weight: 700; }
 
-    .pill.legacy {
-      color: #ffe0a2;
-      border-color: rgba(240, 194, 98, 0.45);
-      background: rgba(240, 194, 98, 0.11);
-    }
-
-    .pill.archive {
-      color: #d6ddf8;
-      border-color: rgba(176, 188, 219, 0.45);
-      background: rgba(176, 188, 219, 0.12);
-    }
-
-    .workflow-card {
-      margin-top: 0.9rem;
-    }
-
-    .workflow-pills {
+    .footer {
+      margin-top: 1.2rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.10);
       display: flex;
       flex-wrap: wrap;
-      gap: 0.45rem;
-    }
-
-    .workflow-pill {
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      padding: 0.24rem 0.58rem;
-      font-size: 0.75rem;
+      gap: 0.6rem;
+      align-items: center;
+      justify-content: space-between;
       color: var(--muted);
-      background: rgba(255, 255, 255, 0.03);
+      font-size: 0.9rem;
     }
 
-    .workflow-pill.done {
-      color: #9fe8ff;
-      border-color: rgba(34, 167, 255, 0.45);
-      background: rgba(34, 167, 255, 0.12);
-    }
-
-    .workflow-note {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.84rem;
-    }
-
-    .btn.is-disabled,
-    .btn:disabled {
-      opacity: 0.42;
-      pointer-events: none;
-      box-shadow: none;
-      border-color: var(--line);
-      transform: none;
-    }
-
-    .run {
-      margin-top: 1rem;
-      padding: 0.9rem;
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
-    }
-
-    .run h2 {
-      margin: 0 0 0.42rem;
-      font-family: "Sora", "Segoe UI", sans-serif;
-      font-size: 1rem;
-    }
-
+    .tinylinks { display:flex; flex-wrap:wrap; gap: 0.6rem; }
+    .tinylinks a { color: rgba(255,255,255,0.78); }
     code {
       display: inline-block;
       background: rgba(255, 255, 255, 0.08);
-      border: 1px solid var(--line);
+      border: 1px solid rgba(255, 255, 255, 0.14);
       border-radius: 8px;
-      padding: 0.17rem 0.45rem;
+      padding: 0.13rem 0.45rem;
       font-size: 0.9rem;
       color: #fff;
-    }
-
-    .app-map-card {
-      margin-top: 1rem;
-      border-radius: var(--radius);
-      border: 1px solid var(--line);
-      background:
-        linear-gradient(140deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
-        radial-gradient(920px 420px at 12% 10%, rgba(34, 167, 255, 0.15), transparent 62%),
-        radial-gradient(980px 520px at 88% 86%, rgba(255, 106, 42, 0.12), transparent 60%);
-      box-shadow: var(--shadow);
-      padding: 0.95rem;
-      overflow: hidden;
-    }
-
-    .app-map-head {
-      display: grid;
-      gap: 0.38rem;
-      margin-bottom: 0.7rem;
-    }
-
-    .app-map-head h2 {
-      margin: 0;
-      font-family: "Sora", "Segoe UI", sans-serif;
-      font-size: 1.06rem;
-    }
-
-    .app-map-head p {
-      margin: 0;
-      color: var(--muted);
-      max-width: 86ch;
-    }
-
-    .app-map-svg {
-      width: 100%;
-      height: auto;
-      border-radius: 14px;
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      background: rgba(0, 0, 0, 0.28);
-      display: block;
-    }
-
-    .flow-line {
-      fill: none;
-      stroke-width: 3.2;
-      stroke-linecap: round;
-      stroke-dasharray: 12 12;
-      animation: flowDash 14s linear infinite;
-      opacity: 0.88;
-    }
-
-    .flow-blue { stroke: rgba(34, 167, 255, 0.9); }
-    .flow-gold { stroke: rgba(255, 196, 90, 0.92); }
-    .flow-violet { stroke: rgba(166, 107, 255, 0.9); }
-    .flow-orange { stroke: rgba(255, 126, 62, 0.9); }
-
-    .flow-dot {
-      opacity: 0.95;
-      filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.58));
-    }
-
-    .node-group {
-      cursor: pointer;
-      transform-box: fill-box;
-      transform-origin: center;
-      animation: nodeFloat 6.4s ease-in-out infinite;
-    }
-
-    .delay-1 { animation-delay: -1.15s; }
-    .delay-2 { animation-delay: -2.25s; }
-    .delay-3 { animation-delay: -3.35s; }
-    .delay-4 { animation-delay: -4.15s; }
-    .delay-5 { animation-delay: -5.05s; }
-
-    .node-base {
-      fill: rgba(8, 12, 18, 0.82);
-      stroke-width: 2;
-      transition: stroke 0.2s ease, filter 0.2s ease, transform 0.2s ease;
-    }
-
-    .node-bytecast { stroke: rgba(34, 167, 255, 0.9); }
-    .node-training { stroke: rgba(255, 196, 90, 0.92); }
-    .node-seed { stroke: rgba(166, 107, 255, 0.9); }
-    .node-offer { stroke: rgba(255, 126, 62, 0.9); }
-    .node-episode { stroke: rgba(142, 220, 255, 0.78); }
-
-    .node-group:hover .node-base {
-      filter: brightness(1.16);
-      stroke: rgba(255, 255, 255, 0.95);
-    }
-
-    .node-title {
-      fill: rgba(255, 255, 255, 0.95);
-      font-family: "Sora", "Segoe UI", sans-serif;
-      font-size: 21px;
-      letter-spacing: 0.01em;
-      font-weight: 700;
-    }
-
-    .node-sub {
-      fill: rgba(255, 255, 255, 0.72);
-      font-size: 14px;
-      font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
-      letter-spacing: 0.01em;
-    }
-
-    .node-chip {
-      fill: rgba(255, 255, 255, 0.09);
-      stroke: rgba(255, 255, 255, 0.25);
-      stroke-width: 1.2;
-    }
-
-    .node-chip-text {
-      fill: rgba(255, 255, 255, 0.9);
-      font-size: 12px;
-      font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-
-    .pulse-ring {
-      fill: none;
-      stroke-width: 2;
-      opacity: 0.52;
-      transform-box: fill-box;
-      transform-origin: center;
-      animation: ringPulse 3.5s ease-out infinite;
-    }
-
-    .pulse-blue { stroke: rgba(34, 167, 255, 0.9); }
-    .pulse-gold { stroke: rgba(255, 196, 90, 0.9); }
-    .pulse-violet { stroke: rgba(166, 107, 255, 0.9); }
-    .pulse-orange { stroke: rgba(255, 126, 62, 0.9); }
-
-    @keyframes flowDash {
-      from { stroke-dashoffset: 240; }
-      to { stroke-dashoffset: 0; }
-    }
-
-    @keyframes ringPulse {
-      0% { transform: scale(0.92); opacity: 0.58; }
-      70% { transform: scale(1.08); opacity: 0.1; }
-      100% { transform: scale(1.12); opacity: 0; }
-    }
-
-    @keyframes nodeFloat {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .flow-line,
-      .pulse-ring,
-      .node-group {
-        animation: none;
-      }
     }
   </style>
 </head>
 <body>
   <main class="shell">
-    <section class="hero" aria-label="Workspace entry">
-      <h1>ByteCast Workspace Entry</h1>
+    <section class="hero" aria-label="Overview">
+      <h1>ByteCast</h1>
       <p>
-        Start from one app and move fast: ByteCast App for episode playback, Training Hub for onboarding,
-        and Seed Builder Studio for generation workflows.
+        Standalone packs connected by thin shells. Follow the path:
+        <b>Listen</b> -> <b>Slide</b> -> <b>Engage</b> -> <b>Training</b> -> <b>Seed</b> -> <b>Badge</b>.
       </p>
-      <div class="cycle-track" aria-label="Cycle sequence">
+      <div class="cycle-track" aria-label="Journey">
         <span class="cycle-chip">1. Listen</span>
         <span class="cycle-chip">2. Slide</span>
-        <span class="cycle-chip">3. Interact</span>
-        <span class="cycle-chip">4. Training Cycle</span>
-        <span class="cycle-chip">5. Seed Real Work</span>
-      </div>
-      <section class="next-hero" aria-label="Next best action">
-        <p id="hero-next-label">Next Option: loading...</p>
-        <a id="hero-next-cta" class="btn legendary" href="./episodes/welcome_to_bytecast/index.html">Legendary Next Action</a>
-      </section>
-      <div class="top-actions">
-        <a class="btn primary" href="./seed_bytecast.html">Open ByteCast App</a>
-        <a class="btn legendary" href="./episodes/welcome_to_bytecast/index.html">Start EP-001 (Listen)</a>
-        <a class="btn" href="./episodes/aerovista_7_division_overview/index.html">Start EP-002</a>
-        <a id="open-training-top" class="btn" href="./training_hub/index.html">Open Training Hub</a>
-        <a id="open-seed-top" class="btn" href="./seed_builder_studio/index.html">Open Seed Builder Studio</a>
+        <span class="cycle-chip">3. Engage</span>
+        <span class="cycle-chip">4. Training</span>
+        <span class="cycle-chip">5. Seed</span>
+        <span class="cycle-chip">6. Badge</span>
       </div>
     </section>
 
-    <section class="card workflow-card" aria-label="Smart workflow loop">
-      <span class="pill primary">Smart Workflow</span>
-      <h2>ByteCast Cycle -> Training Cycle -> Seed Builder Real Work</h2>
-      <p id="workflow-home-summary">Loading workflow status...</p>
-      <div class="workflow-pills">
-        <span id="home-wf-bytecast" class="workflow-pill">ByteCast Cycle</span>
-        <span id="home-wf-training" class="workflow-pill">Training Hub</span>
-        <span id="home-wf-seed" class="workflow-pill">Seed Builder</span>
-      </div>
-      <div class="workflow-pills">
-        <span id="home-wf-listen" class="workflow-pill">Listen</span>
-        <span id="home-wf-slide" class="workflow-pill">Slide</span>
-        <span id="home-wf-interact" class="workflow-pill">Interact</span>
-      </div>
-      <div class="btn-row">
-        <button id="mark-home-listen" type="button" class="btn primary">Mark Listen Complete</button>
-        <button id="mark-home-slide" type="button" class="btn">Mark Slide Complete</button>
-        <button id="mark-home-interact" type="button" class="btn">Mark Interact Complete</button>
-        <button id="mark-home-training" type="button" class="btn">Complete Training Cycle</button>
-        <button id="mark-home-seed" type="button" class="btn">Complete Seed Builder Real Work + Unlock Next Ability</button>
-        <button id="reset-home-workflow" type="button" class="btn">Reset Progress</button>
-      </div>
-      <p id="workflow-home-note" class="workflow-note">Progress is saved locally in this browser.</p>
-    </section>
-
-    <section class="app-map-card" aria-label="Visual app navigator">
-      <div class="app-map-head">
-        <span class="pill primary">Visual Navigator</span>
-        <h2>App and Page Lanes</h2>
-        <p>Follow the animated lanes to jump between apps. Blue: ByteCast. Gold: Training Hub. Violet: Seed Builder. Orange: Offer Pack.</p>
-      </div>
-      <svg class="app-map-svg" viewBox="0 0 1280 620" role="img" aria-labelledby="appMapTitle appMapDesc">
-        <title id="appMapTitle">Animated ByteCast workspace app map</title>
-        <desc id="appMapDesc">Interactive route map linking ByteCast app, episodes, Training Hub, Seed Builder Studio, and AeroVista Offer Pack.</desc>
-        <defs>
-          <linearGradient id="mapBgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#0d1a24" stop-opacity="0.95" />
-            <stop offset="55%" stop-color="#090d12" stop-opacity="0.92" />
-            <stop offset="100%" stop-color="#100e0c" stop-opacity="0.95" />
-          </linearGradient>
-          <pattern id="mapGrid" width="32" height="32" patternUnits="userSpaceOnUse">
-            <path d="M 32 0 L 0 0 0 32" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
-          </pattern>
-          <filter id="nodeGlow" x="-60%" y="-60%" width="220%" height="220%">
-            <feGaussianBlur stdDeviation="8" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-          <path id="flowBytecastToTraining" d="M 470 270 C 600 170, 710 138, 830 154" />
-          <path id="flowBytecastToSeed" d="M 470 324 C 610 428, 714 460, 834 450" />
-          <path id="flowBytecastToOffer" d="M 470 300 C 562 294, 640 294, 724 300" />
-          <path id="flowBytecastToEp1" d="M 252 220 C 214 176, 194 148, 182 126" />
-          <path id="flowBytecastToEp2" d="M 344 220 C 364 174, 392 144, 452 124" />
-          <path id="flowBytecastToIndex" d="M 258 398 C 218 434, 202 462, 190 500" />
-        </defs>
-
-        <rect x="0" y="0" width="1280" height="620" fill="url(#mapBgGradient)" />
-        <rect x="0" y="0" width="1280" height="620" fill="url(#mapGrid)" />
-
-        <path class="flow-line flow-blue" d="M 470 270 C 600 170, 710 138, 830 154" />
-        <path class="flow-line flow-violet" d="M 470 324 C 610 428, 714 460, 834 450" />
-        <path class="flow-line flow-orange" d="M 470 300 C 562 294, 640 294, 724 300" />
-        <path class="flow-line flow-gold" d="M 252 220 C 214 176, 194 148, 182 126" />
-        <path class="flow-line flow-gold" d="M 344 220 C 364 174, 392 144, 452 124" />
-        <path class="flow-line flow-gold" d="M 258 398 C 218 434, 202 462, 190 500" />
-
-        <circle class="flow-dot" r="4" fill="rgba(34, 167, 255, 0.95)">
-          <animateMotion dur="4.6s" repeatCount="indefinite">
-            <mpath href="#flowBytecastToTraining" />
-          </animateMotion>
-        </circle>
-        <circle class="flow-dot" r="4" fill="rgba(166, 107, 255, 0.95)">
-          <animateMotion dur="4.9s" repeatCount="indefinite">
-            <mpath href="#flowBytecastToSeed" />
-          </animateMotion>
-        </circle>
-        <circle class="flow-dot" r="4" fill="rgba(255, 126, 62, 0.95)">
-          <animateMotion dur="5.2s" repeatCount="indefinite">
-            <mpath href="#flowBytecastToOffer" />
-          </animateMotion>
-        </circle>
-        <circle class="flow-dot" r="3.6" fill="rgba(255, 196, 90, 0.95)">
-          <animateMotion dur="4.2s" repeatCount="indefinite">
-            <mpath href="#flowBytecastToEp1" />
-          </animateMotion>
-        </circle>
-        <circle class="flow-dot" r="3.6" fill="rgba(255, 196, 90, 0.95)">
-          <animateMotion dur="4.8s" repeatCount="indefinite">
-            <mpath href="#flowBytecastToEp2" />
-          </animateMotion>
-        </circle>
-        <circle class="flow-dot" r="3.6" fill="rgba(255, 196, 90, 0.95)">
-          <animateMotion dur="5.4s" repeatCount="indefinite">
-            <mpath href="#flowBytecastToIndex" />
-          </animateMotion>
-        </circle>
-
-        <circle class="pulse-ring pulse-blue" cx="330" cy="308" r="92"></circle>
-        <circle class="pulse-ring pulse-gold delay-2" cx="980" cy="160" r="82"></circle>
-        <circle class="pulse-ring pulse-violet delay-4" cx="980" cy="448" r="82"></circle>
-        <circle class="pulse-ring pulse-orange delay-1" cx="820" cy="300" r="72"></circle>
-
-        <a href="./seed_bytecast.html">
-          <g class="node-group delay-1">
-            <rect class="node-base node-bytecast" x="170" y="220" width="300" height="180" rx="24" filter="url(#nodeGlow)"></rect>
-            <rect class="node-chip" x="196" y="248" width="138" height="30" rx="15"></rect>
-            <text class="node-chip-text" x="265" y="268" text-anchor="middle">Primary App</text>
-            <text class="node-title" x="196" y="315">ByteCast App</text>
-            <text class="node-sub" x="196" y="342">Playback, slides, and interactive loop</text>
-            <text class="node-sub" x="196" y="364">Start here for episode-first execution</text>
-          </g>
-        </a>
-
-        <a href="./training_hub/index.html">
-          <g class="node-group delay-2">
-            <rect class="node-base node-training" x="830" y="92" width="300" height="136" rx="22" filter="url(#nodeGlow)"></rect>
-            <rect class="node-chip" x="856" y="118" width="128" height="30" rx="15"></rect>
-            <text class="node-chip-text" x="920" y="138" text-anchor="middle">Training</text>
-            <text class="node-title" x="856" y="178">Training Hub</text>
-            <text class="node-sub" x="856" y="202">Contributor pathways and modules</text>
-          </g>
-        </a>
-
-        <a href="./seed_builder_studio/index.html">
-          <g class="node-group delay-3">
-            <rect class="node-base node-seed" x="830" y="380" width="300" height="136" rx="22" filter="url(#nodeGlow)"></rect>
-            <rect class="node-chip" x="856" y="406" width="112" height="30" rx="15"></rect>
-            <text class="node-chip-text" x="912" y="426" text-anchor="middle">Builder</text>
-            <text class="node-title" x="856" y="466">Seed Builder Studio</text>
-            <text class="node-sub" x="856" y="490">Generator and template workflows</text>
-          </g>
-        </a>
-
-        <a href="./aerovista_offer_pack/app/index.html">
-          <g class="node-group delay-4">
-            <rect class="node-base node-offer" x="724" y="242" width="212" height="116" rx="20" filter="url(#nodeGlow)"></rect>
-            <rect class="node-chip" x="748" y="266" width="88" height="28" rx="14"></rect>
-            <text class="node-chip-text" x="792" y="285" text-anchor="middle">Tool</text>
-            <text class="node-title" x="748" y="321" style="font-size:19px;">Offer Pack</text>
-            <text class="node-sub" x="748" y="343">Commercial assets + pricing</text>
-          </g>
-        </a>
-
-        <a href="./episodes/welcome_to_bytecast/index.html">
-          <g class="node-group delay-5">
-            <rect class="node-base node-episode" x="72" y="72" width="230" height="88" rx="18"></rect>
-            <text class="node-title" x="96" y="110" style="font-size:18px;">EP-001</text>
-            <text class="node-sub" x="96" y="133">Welcome to ByteCast</text>
-          </g>
-        </a>
-
-        <a href="./episodes/aerovista_7_division_overview/index.html">
-          <g class="node-group delay-3">
-            <rect class="node-base node-episode" x="340" y="72" width="250" height="88" rx="18"></rect>
-            <text class="node-title" x="364" y="110" style="font-size:18px;">EP-002</text>
-            <text class="node-sub" x="364" y="133">AeroVista 7 Division Overview</text>
-          </g>
-        </a>
-
-        <a href="./episodes/README.md">
-          <g class="node-group delay-2">
-            <rect class="node-base node-episode" x="72" y="460" width="270" height="88" rx="18"></rect>
-            <text class="node-title" x="96" y="498" style="font-size:18px;">Episodes Index</text>
-            <text class="node-sub" x="96" y="521">All episode entry points</text>
-          </g>
-        </a>
-      </svg>
-    </section>
-
-    <section class="grid" aria-label="Primary entry links">
+    <section class="doors" aria-label="Primary doors">
       <article class="card">
         <img class="app-icon" src="./assets/icons/bytecast.svg" alt="" aria-hidden="true" />
-        <span class="pill primary">Primary App</span>
-        <h2>ByteCast App</h2>
-        <p>Dark episode player and slides engagement experience for playback-first delivery.</p>
-        <div class="btn-row">
-          <a class="btn primary" href="./seed_bytecast.html">Launch ByteCast App</a>
-          <a class="btn" href="./episodes/welcome_to_bytecast/index.html">Open EP-001</a>
-          <a class="btn" href="./episodes/aerovista_7_division_overview/index.html">Open EP-002</a>
+        <span class="pill">Primary Door</span>
+        <h2>ByteCast Playlist</h2>
+        <p>Episode discovery, resume, and handoff routing to Training and Seeder.</p>
+        <div class="btnrow">
+          <a class="btn primary" href="./seed_bytecast.html">Open Playlist</a>
           <a class="btn" href="./episodes/README.md">Episodes Index</a>
         </div>
       </article>
 
       <article class="card">
         <img class="app-icon" src="./assets/icons/training.svg" alt="" aria-hidden="true" />
-        <span class="pill primary">Training</span>
+        <span class="pill">Primary Door</span>
         <h2>Training Hub</h2>
-        <p>Onboarding, contributor pathways, training modules, and episode registry access.</p>
-        <div class="btn-row">
-          <a id="open-training-card" class="btn primary" href="./training_hub/index.html">Open Training Hub</a>
+        <p>Onboarding and module router. Lift Lab is the curriculum; this is the map.</p>
+        <div class="btnrow">
+          <a class="btn primary" href="./training_hub/index.html">Open Training Hub</a>
+          <a class="btn" href="./lift_lab_bytecast_bundle/site/index.html">Open Lift Lab</a>
         </div>
       </article>
 
       <article class="card">
         <img class="app-icon" src="./assets/icons/seed.svg" alt="" aria-hidden="true" />
-        <span class="pill primary">Builder</span>
+        <span class="pill">Primary Door</span>
         <h2>Seed Builder Studio</h2>
-        <p>Seed, template, and generator workflows with canonical module links and status badges.</p>
-        <div class="btn-row">
-          <a id="open-seed-card" class="btn primary" href="./seed_builder_studio/index.html">Open Seed Builder Studio</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <img class="app-icon" src="./assets/icons/offerpack.svg" alt="" aria-hidden="true" />
-        <span class="pill primary">Tool</span>
-        <h2>AeroVista Offer Pack</h2>
-        <p>Offer catalog, pricing grid, bundles, sales playbook, delivery SOP, and one-pager.</p>
-        <div class="btn-row">
-          <a class="btn primary" href="./aerovista_offer_pack/app/index.html">Open Offer Pack</a>
-          <a class="btn" href="./aerovista_offer_pack/app/README.md">Offer Pack README</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <img class="app-icon" src="./assets/icons/liftlab.svg" alt="" aria-hidden="true" />
-        <span class="pill primary">Bundle</span>
-        <h2>Lift Lab Bundle</h2>
-        <p>Legacy bundle shell with site, docs, and training assets (kept separate for now).</p>
-        <div class="btn-row">
-          <a class="btn primary" href="./lift_lab_bytecast_bundle/site/index.html">Open Lift Lab Site</a>
-          <a class="btn" href="./lift_lab_bytecast_bundle/README.md">Lift Lab README</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <img class="app-icon" src="./assets/icons/template.svg" alt="" aria-hidden="true" />
-        <span class="pill primary">Template</span>
-        <h2>Episode Template</h2>
-        <p>Starter episode pack: profile JSON, script stub, assets folder, and HTML shell.</p>
-        <div class="btn-row">
-          <a class="btn primary" href="./template/index.html">Open Template</a>
-          <a class="btn" href="./template/README.md">Template README</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <img class="app-icon" src="./assets/icons/docs.svg" alt="" aria-hidden="true" />
-        <span class="pill primary">Docs</span>
-        <h2>Docs and Resources</h2>
-        <p>Standards, CANON, registry, migration decisions, and core app resource links.</p>
-        <div class="btn-row">
-          <a class="btn primary" href="./docs/README.md">Docs Index</a>
-          <a class="btn" href="./aerovista_offer_pack/app/index.html">Offer Pack App</a>
-          <a class="btn" href="./docs/APP_SHELLS.md">App Shells</a>
-          <a class="btn" href="./.CODEX/bytecast_canon_map_2026-02-08.md">CANON Map</a>
-          <a class="btn" href="./.CODEX/episode_registry.json">Episode Registry</a>
-          <a class="btn" href="./.CODEX/episode_content_naming_and_2app_migration_plan_2026-02-08.md">Migration Plan</a>
-          <a class="btn" href="./.CODEX/end_of_session_report_2026-02-08.md">Session Report</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <span class="pill legacy">Compatibility</span>
-        <h2>Legacy Wrappers</h2>
-        <p>`ep1` and `ep3` remain wrapper paths until the 2026-03-08 compatibility review.</p>
-        <div class="btn-row">
-          <a class="btn" href="./ep1/index.html">Open ep1 wrapper</a>
-          <a class="btn" href="./ep3/index.html">Open ep3 wrapper</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <span class="pill archive">Archive</span>
-        <h2>Retired Paths</h2>
-        <p>Phase 4 retired directories are preserved in a read-only archive for rollback safety.</p>
-        <div class="btn-row">
-          <a class="btn" href="./_archive/phase4_retired_2026-02-08/README.md">View Archive Note</a>
+        <p>Tooling router: templates, generators, Orchard connector, and standards.</p>
+        <div class="btnrow">
+          <a class="btn primary" href="./seed_builder_studio/index.html">Open Seed Builder</a>
+          <a class="btn" href="./template/index.html">Episode Template</a>
         </div>
       </article>
     </section>
 
-    <section class="run" aria-label="Run locally">
-      <h2>Run locally</h2>
-      <p>From the `bytecast` root, run <code>python -m http.server 8080</code> and open <code>http://localhost:8080</code>.</p>
+    <section class="featured" aria-label="Featured start">
+      <p>Featured start: begin the journey with EP-001.</p>
+      <div class="btnrow">
+        <a class="btn gold" href="./episodes/welcome_to_bytecast/index.html">Start EP-001 (Listen)</a>
+        <a class="btn" href="./episodes/aerovista_7_division_overview/index.html">EP-002 (Overview)</a>
+      </div>
     </section>
+
+    <section class="featured" aria-label="Run locally">
+      <p>Local run (recommended for JSON + audio reliability):</p>
+      <div class="btnrow">
+        <span class="btn" style="cursor:default; border-style:dashed;">
+          <code>python -m http.server 8080</code> then open <code>http://localhost:8080</code>
+        </span>
+      </div>
+    </section>
+
+    <footer class="footer" aria-label="Footer">
+      <div>Builder links (tiny):</div>
+      <div class="tinylinks">
+        <a href="./docs/index.html">Docs Portal</a>
+        <a href="./docs/SITE_MAP.md">Site Map</a>
+        <a href="./.CODEX/bytecast_canon_map_2026-02-08.md">CANON</a>
+        <a href="./.CODEX/umami_analytics_standard_2026-02-09.md">Analytics</a>
+      </div>
+    </footer>
   </main>
-  <script>
-    (() => {
-      const WORKFLOW_KEY = "bytecast.workflow.v1";
-      const refs = {
-        summary: document.getElementById("workflow-home-summary"),
-        note: document.getElementById("workflow-home-note"),
-        pillBytecast: document.getElementById("home-wf-bytecast"),
-        pillTraining: document.getElementById("home-wf-training"),
-        pillSeed: document.getElementById("home-wf-seed"),
-        pillListen: document.getElementById("home-wf-listen"),
-        pillSlide: document.getElementById("home-wf-slide"),
-        pillInteract: document.getElementById("home-wf-interact"),
-        markListen: document.getElementById("mark-home-listen"),
-        markSlide: document.getElementById("mark-home-slide"),
-        markInteract: document.getElementById("mark-home-interact"),
-        markTraining: document.getElementById("mark-home-training"),
-        markSeed: document.getElementById("mark-home-seed"),
-        reset: document.getElementById("reset-home-workflow"),
-        openTrainingTop: document.getElementById("open-training-top"),
-        openTrainingCard: document.getElementById("open-training-card"),
-        openSeedTop: document.getElementById("open-seed-top"),
-        openSeedCard: document.getElementById("open-seed-card"),
-        heroNextLabel: document.getElementById("hero-next-label"),
-        heroNextCta: document.getElementById("hero-next-cta"),
-      };
-
-      function defaultState() {
-        return {
-          cycle: 1,
-          abilityLevel: 0,
-          bytecast: {
-            listen: false,
-            slide: false,
-            interact: false,
-          },
-          trainingDone: false,
-          seedDone: false,
-          updatedAt: "",
-        };
-      }
-
-      function normalizeBytecastState(rawState, legacyDone = false) {
-        const source = rawState && typeof rawState === "object" ? rawState : {};
-        return {
-          listen: legacyDone || Boolean(source.listen),
-          slide: legacyDone || Boolean(source.slide),
-          interact: legacyDone || Boolean(source.interact),
-        };
-      }
-
-      function loadState() {
-        const fallback = defaultState();
-        try {
-          const raw = localStorage.getItem(WORKFLOW_KEY);
-          if (!raw) {
-            return fallback;
-          }
-          const parsed = JSON.parse(raw);
-          const legacyDone = Boolean(parsed.bytecastDone);
-          return {
-            ...fallback,
-            ...parsed,
-            cycle: Number.isFinite(Number(parsed.cycle)) ? Math.max(1, Number(parsed.cycle)) : 1,
-            abilityLevel: Number.isFinite(Number(parsed.abilityLevel))
-              ? Math.max(0, Number(parsed.abilityLevel))
-              : 0,
-            bytecast: normalizeBytecastState(parsed.bytecast, legacyDone),
-            trainingDone: Boolean(parsed.trainingDone),
-            seedDone: Boolean(parsed.seedDone),
-          };
-        } catch (error) {
-          console.error(error);
-          return fallback;
-        }
-      }
-
-      function saveState(state) {
-        localStorage.setItem(WORKFLOW_KEY, JSON.stringify(state));
-      }
-
-      function bytecastState(state) {
-        return normalizeBytecastState(state.bytecast, Boolean(state.bytecastDone));
-      }
-
-      function bytecastCompletedCount(state) {
-        const current = bytecastState(state);
-        return Number(current.listen) + Number(current.slide) + Number(current.interact);
-      }
-
-      function bytecastComplete(state) {
-        return bytecastCompletedCount(state) === 3;
-      }
-
-      function seedUnlocked(state) {
-        return Boolean(bytecastComplete(state) && state.trainingDone);
-      }
-
-      function formatTime(isoText) {
-        if (!isoText) {
-          return "never";
-        }
-        const parsed = new Date(isoText);
-        if (Number.isNaN(parsed.getTime())) {
-          return "unknown";
-        }
-        return parsed.toLocaleString();
-      }
-
-      function toggleLaunchLink(link, enabled, lockHint) {
-        if (!link) {
-          return;
-        }
-        link.classList.toggle("is-disabled", !enabled);
-        link.setAttribute("aria-disabled", enabled ? "false" : "true");
-        link.tabIndex = enabled ? 0 : -1;
-        link.title = enabled ? "" : lockHint;
-      }
-
-      function render() {
-        const state = loadState();
-        const bytecast = bytecastState(state);
-        const bytecastCount = bytecastCompletedCount(state);
-        const trainingUnlocked = bytecastComplete(state);
-        const unlocked = seedUnlocked(state);
-        refs.summary.textContent =
-          `Cycle ${state.cycle}. ByteCast cycle ${bytecastCount}/3 (listen -> slide -> interact). ` +
-          `Seed Builder Ability Level ${state.abilityLevel}. ` +
-          `${unlocked ? "Seed Builder real work is unlocked for this cycle." : "Complete ByteCast cycle, then Training cycle, to unlock Seed Builder real work."}`;
-
-        refs.pillBytecast.classList.toggle("done", bytecastComplete(state));
-        refs.pillTraining.classList.toggle("done", Boolean(state.trainingDone));
-        refs.pillSeed.classList.toggle("done", unlocked);
-        refs.pillBytecast.textContent = bytecastComplete(state)
-          ? "ByteCast Cycle Complete"
-          : `ByteCast ${bytecastCount}/3`;
-        refs.pillSeed.textContent = unlocked ? "Seed Builder Ready" : "Seed Builder Locked";
-        refs.pillListen.classList.toggle("done", bytecast.listen);
-        refs.pillSlide.classList.toggle("done", bytecast.slide);
-        refs.pillInteract.classList.toggle("done", bytecast.interact);
-
-        refs.markListen.disabled = bytecast.listen;
-        refs.markListen.classList.toggle("is-disabled", refs.markListen.disabled);
-        refs.markSlide.disabled = !bytecast.listen || bytecast.slide;
-        refs.markSlide.classList.toggle("is-disabled", refs.markSlide.disabled);
-        refs.markInteract.disabled = !bytecast.slide || bytecast.interact;
-        refs.markInteract.classList.toggle("is-disabled", refs.markInteract.disabled);
-
-        refs.markTraining.disabled = !trainingUnlocked || Boolean(state.trainingDone);
-        refs.markTraining.classList.toggle("is-disabled", refs.markTraining.disabled);
-        refs.markSeed.disabled = !unlocked;
-        refs.markSeed.classList.toggle("is-disabled", refs.markSeed.disabled);
-
-        // Keep app entry links always active from root index.
-        toggleLaunchLink(refs.openTrainingTop, true, "");
-        toggleLaunchLink(refs.openTrainingCard, true, "");
-        toggleLaunchLink(refs.openSeedTop, true, "");
-        toggleLaunchLink(refs.openSeedCard, true, "");
-
-        const nextAction = resolveNextAction(state);
-        refs.heroNextLabel.textContent = `Next Option: ${nextAction.label}`;
-        refs.heroNextCta.textContent = nextAction.cta;
-        refs.heroNextCta.href = nextAction.href;
-
-        refs.note.textContent = `Last updated: ${formatTime(state.updatedAt)}.`;
-      }
-
-      function resolveNextAction(state) {
-        const cycleEpisodeHref = resolveCycleEpisodeHref(state);
-        const bytecast = bytecastState(state);
-        if (!bytecast.listen) {
-          return {
-            label: "Start ByteCast cycle with Listen",
-            cta: "Legendary Start: Listen",
-            href: cycleEpisodeHref,
-          };
-        }
-        if (!bytecast.slide) {
-          return {
-            label: "Continue ByteCast cycle with Slide",
-            cta: "Legendary Next: Slide",
-            href: cycleEpisodeHref,
-          };
-        }
-        if (!bytecast.interact) {
-          return {
-            label: "Finish ByteCast cycle with Interact",
-            cta: "Legendary Next: Interact",
-            href: cycleEpisodeHref,
-          };
-        }
-        if (!state.trainingDone) {
-          return {
-            label: "Complete Training cycle",
-            cta: "Legendary Next: Training",
-            href: "./training_hub/index.html",
-          };
-        }
-        return {
-          label: "Do Seed Builder real work",
-          cta: "Legendary Next: Seed Real Work",
-          href: "./seed_builder_studio/index.html",
-        };
-      }
-
-      function resolveCycleEpisodeHref(state) {
-        // Cycle 1 starts with EP-001; cycle 2+ starts with EP-002 (until more episodes exist).
-        const cycle = Number.isFinite(Number(state?.cycle)) ? Math.max(1, Number(state.cycle)) : 1;
-        if (cycle <= 1) {
-          return "./episodes/welcome_to_bytecast/index.html";
-        }
-        return "./episodes/aerovista_7_division_overview/index.html";
-      }
-
-      function markBytecastStep(stepName) {
-        const state = loadState();
-        const bytecast = bytecastState(state);
-
-        if (stepName === "slide" && !bytecast.listen) {
-          refs.note.textContent = "Complete Listen first.";
-          return;
-        }
-
-        if (stepName === "interact" && !bytecast.slide) {
-          refs.note.textContent = "Complete Slide first.";
-          return;
-        }
-
-        if (bytecast[stepName]) {
-          refs.note.textContent = `${stepName} step already completed.`;
-          return;
-        }
-
-        bytecast[stepName] = true;
-        state.bytecast = bytecast;
-        state.updatedAt = new Date().toISOString();
-        saveState(state);
-        if (bytecastComplete(state)) {
-          refs.note.textContent = "ByteCast cycle complete. Training Hub cycle is now unlocked.";
-        } else {
-          refs.note.textContent = `ByteCast ${bytecastCompletedCount(state)}/3 completed. Continue the cycle in order.`;
-        }
-        render();
-      }
-
-      function markTraining() {
-        const state = loadState();
-        if (!bytecastComplete(state)) {
-          refs.note.textContent = "Complete ByteCast cycle first: listen -> slide -> interact.";
-          return;
-        }
-        state.trainingDone = true;
-        state.updatedAt = new Date().toISOString();
-        saveState(state);
-        refs.note.textContent = "Training cycle completed. Seed Builder real work is unlocked for this cycle.";
-        render();
-      }
-
-      function markSeed() {
-        const state = loadState();
-        if (!seedUnlocked(state)) {
-          refs.note.textContent = "Complete ByteCast cycle and Training cycle first.";
-          return;
-        }
-        state.seedDone = true;
-        state.abilityLevel += 1;
-        state.cycle += 1;
-        state.bytecast = {
-          listen: false,
-          slide: false,
-          interact: false,
-        };
-        state.trainingDone = false;
-        state.seedDone = false;
-        state.updatedAt = new Date().toISOString();
-        saveState(state);
-        refs.note.textContent =
-          `Seed real work completed. Ability Level ${state.abilityLevel} unlocked. Start next cycle at ByteCast listen step.`;
-        render();
-      }
-
-      function resetWorkflow() {
-        const state = defaultState();
-        state.updatedAt = new Date().toISOString();
-        saveState(state);
-        refs.note.textContent = "Workflow reset. Start at ByteCast.";
-        render();
-      }
-
-      refs.markListen.addEventListener("click", () => markBytecastStep("listen"));
-      refs.markSlide.addEventListener("click", () => markBytecastStep("slide"));
-      refs.markInteract.addEventListener("click", () => markBytecastStep("interact"));
-      refs.markTraining.addEventListener("click", markTraining);
-      refs.markSeed.addEventListener("click", markSeed);
-      refs.reset.addEventListener("click", resetWorkflow);
-      window.addEventListener("storage", render);
-      render();
-    })();
-  </script>
 </body>
 </html>
+

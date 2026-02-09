@@ -1,0 +1,46 @@
+{
+  "schema": "episode-registry-v1",
+  "updated_on": "2026-02-08",
+  "policy": {
+    "folder_naming": "content-slug",
+    "pattern": "episodes/<content_slug>",
+    "numeric_ep_folder_creation": "frozen"
+  },
+  "episodes": [
+    {
+      "slug": "welcome_to_bytecast",
+      "episode_code": "EP-001",
+      "title": "Welcome to ByteCast: How to Use This + Why It Matters",
+      "primary_path": "episodes/welcome_to_bytecast",
+      "legacy_paths": [
+        "ep1"
+      ],
+      "status": "active",
+      "publishable": true
+    },
+    {
+      "slug": "aerovista_7_division_overview",
+      "episode_code": "EP-002",
+      "title": "AeroVista Overview: 7 Divisions + How They Interlock",
+      "primary_path": "episodes/aerovista_7_division_overview",
+      "legacy_paths": [
+        "ep3"
+      ],
+      "status": "active",
+      "publishable": true
+    },
+    {
+      "slug": "reserved_ep2_slot",
+      "episode_code": "",
+      "title": "Retired legacy slot for ep2",
+      "primary_path": "",
+      "legacy_paths": [
+        "ep2"
+      ],
+      "status": "retired",
+      "publishable": false,
+      "retired_on": "2026-02-08",
+      "archived_path": "_archive/phase4_retired_2026-02-08/ep2"
+    }
+  ]
+}

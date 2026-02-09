@@ -76,9 +76,9 @@ Orchard (connector, not a hub replacement):
    - `.CODEX/bytecast_canon_map_2026-02-08.md`
 2. Update registry:
    - `.CODEX/episode_registry.json`
+   - runtime mirror: `data/episode_registry.json`
 3. Update shell manifests:
    - `training_hub/data/modules.json`
    - `seed_builder_studio/data/modules.json`
 4. Update root doors (links only):
    - `index.html`
-

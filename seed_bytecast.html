@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ByteCast App</title>
-  <meta name="description" content="ByteCast App: episode launcher, resume, and progress overview." />
+  <title>ByteCast Playlist</title>
+  <meta name="description" content="ByteCast Playlist: episode discovery, resume, and handoff routing (listen -> learn -> seed -> badge)." />
   <style>
     :root {
       --bg0: #050607;
@@ -275,11 +275,11 @@
 
   <header class="topbar">
     <div class="topbar__inner">
-      <div class="badge" aria-label="ByteCast">
+      <div class="badge" aria-label="ByteCast Playlist">
         <span class="dot" aria-hidden="true"></span>
         <div>
-          <div style="font-weight:800; letter-spacing:0.02em;">ByteCast</div>
-          <div class="k">App launcher • progress • resume</div>
+          <div style="font-weight:800; letter-spacing:0.02em;">ByteCast Playlist</div>
+          <div class="k">Discovery • resume • handoffs</div>
         </div>
       </div>
 
@@ -292,9 +292,9 @@
             <option value="embercore">Embercore</option>
           </select>
         </label>
-        <a class="btn" href="./index.html">Workspace Entry</a>
+        <a class="btn" href="./index.html">Overview</a>
         <a class="btn" href="./training_hub/index.html">Training Hub</a>
-        <a class="btn" href="./seed_builder_studio/index.html">Seed Builder</a>
+        <a class="btn" href="./seed_builder_studio/index.html">Seed Builder Studio</a>
       </div>
     </div>
   </header>
@@ -305,7 +305,7 @@
         <div>
           <h1 class="h-title">BYTECAST</h1>
           <p class="h-sub" id="heroSub">
-            Choose an episode, finish the loop (listen -> slide -> interact), and come back stronger.
+            Playlist hub for the journey: Listen -> Slide -> Engage -> Training -> Seed -> Badge.
           </p>
           <div class="pills" id="metaPills">
             <span class="pill"><span class="spark" aria-hidden="true"></span><strong>listen</strong> • anchor intent</span>
@@ -316,6 +316,8 @@
           <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
             <a id="resumeBtn" class="btn btn--legendary" href="./episodes/welcome_to_bytecast/index.html">Continue Where You Left Off</a>
             <a class="btn btn--primary" href="./episodes/welcome_to_bytecast/index.html">Start EP-001</a>
+            <a class="btn" href="./training_hub/index.html">Go Deeper: Training Hub</a>
+            <a class="btn" href="./seed_builder_studio/index.html">Make Repeatable: Seed Builder</a>
           </div>
 
           <p class="tiny" id="resumeHint" style="margin:12px 0 0;">
@@ -329,7 +331,7 @@
             <p class="tiny muted" id="nextWhy">We pick the lowest-completion active episode by default.</p>
             <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
               <a id="nextBtn" class="btn btn--legendary" href="./episodes/welcome_to_bytecast/index.html">Legendary Next Action</a>
-              <a class="btn" href="./.CODEX/episode_registry.json">Episode Registry</a>
+              <a class="btn" href="./docs/SITE_MAP.md">Site Map</a>
             </div>
           </div>
         </aside>
@@ -400,6 +402,7 @@
         <p class="muted" style="margin:0 0 12px;">Keep momentum: open a module, ship a small win, repeat.</p>
         <div style="display:grid; gap:10px;">
           <a class="btn btn--primary" href="./aerovista_offer_pack/app/index.html">Offer Pack</a>
+          <a class="btn" href="./lift_lab_bytecast_bundle/site/index.html">Lift Lab</a>
           <a class="btn" href="./docs/README.md">Docs Index</a>
           <a class="btn" href="./.CODEX/end_of_session_report_2026-02-08.md">Session Report</a>
         </div>
@@ -412,9 +415,11 @@
 
   <script>
     const THEME_KEY = "bytecast.theme.v1";
-    const REGISTRY_URL = "./.CODEX/episode_registry.json";
+    const REGISTRY_URL = "./data/episode_registry.json";
+    const REGISTRY_FALLBACK_URL = "./.CODEX/episode_registry.json";
     const LAST_EP_KEY = "bytecast.last_episode.href.v1";
     const LAST_EP_TIME_KEY = "bytecast.last_episode.time.v1";
+    const WORKFLOW_KEY = "bytecast.workflow.v1";
 
     const $ = (sel) => document.querySelector(sel);
 
@@ -464,6 +469,37 @@
       const res = await fetch(url, { cache: "no-store" });
       if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
       return res.json();
+    }
+
+    function loadWorkflowState() {
+      const fallback = {
+        cycle: 1,
+        abilityLevel: 0,
+        bytecast: { listen: false, slide: false, interact: false },
+        trainingDone: false,
+        seedDone: false,
+      };
+      try {
+        const raw = localStorage.getItem(WORKFLOW_KEY);
+        if (!raw) return fallback;
+        const parsed = JSON.parse(raw);
+        const bytecast = parsed.bytecast && typeof parsed.bytecast === "object" ? parsed.bytecast : {};
+        return {
+          ...fallback,
+          ...parsed,
+          cycle: Number.isFinite(Number(parsed.cycle)) ? Math.max(1, Number(parsed.cycle)) : 1,
+          abilityLevel: Number.isFinite(Number(parsed.abilityLevel)) ? Math.max(0, Number(parsed.abilityLevel)) : 0,
+          bytecast: {
+            listen: Boolean(bytecast.listen),
+            slide: Boolean(bytecast.slide),
+            interact: Boolean(bytecast.interact),
+          },
+          trainingDone: Boolean(parsed.trainingDone),
+          seedDone: Boolean(parsed.seedDone),
+        };
+      } catch {
+        return fallback;
+      }
     }
 
     function computeQuizScore(profile, epId) {
@@ -599,12 +635,16 @@
       try {
         registry = await loadJson(REGISTRY_URL);
       } catch {
-        registry = {
-          episodes: [
-            { slug: "welcome_to_bytecast", episode_code: "EP-001", title: "Welcome to ByteCast", primary_path: "episodes/welcome_to_bytecast", status: "active" },
-            { slug: "aerovista_7_division_overview", episode_code: "EP-002", title: "AeroVista Overview", primary_path: "episodes/aerovista_7_division_overview", status: "active" }
-          ]
-        };
+        try {
+          registry = await loadJson(REGISTRY_FALLBACK_URL);
+        } catch {
+          registry = {
+            episodes: [
+              { slug: "welcome_to_bytecast", episode_code: "EP-001", title: "Welcome to ByteCast", primary_path: "episodes/welcome_to_bytecast", status: "active" },
+              { slug: "aerovista_7_division_overview", episode_code: "EP-002", title: "AeroVista Overview", primary_path: "episodes/aerovista_7_division_overview", status: "active" }
+            ]
+          };
+        }
       }
 
       const episodes = Array.isArray(registry.episodes) ? registry.episodes : [];
@@ -645,6 +685,19 @@
         $("#nextBanner").querySelector(".label").textContent = `Next recommended: ${next.ep.episode_code || "EP"} • ${next.ep.title || next.ep.slug}`;
         $("#nextWhy").textContent = `Completion: ${next.completion.pct}%. We recommend the lowest-completion active episode.`;
       }
+
+      // Lightweight funnel view (no hard gating): reads the same workflow key used by shells.
+      const wf = loadWorkflowState();
+      const bc = wf.bytecast || {};
+      const funnel = [
+        `Listen ${bc.listen ? "OK" : "TODO"}`,
+        `Slide ${bc.slide ? "OK" : "TODO"}`,
+        `Engage ${bc.interact ? "OK" : "TODO"}`,
+        `Training ${wf.trainingDone ? "OK" : (bc.interact ? "TODO" : "LOCKED")}`,
+        `Seed ${wf.seedDone ? "OK" : (wf.trainingDone ? "TODO" : "LOCKED")}`,
+        `Badge ${wf.seedDone ? "TODO" : "LOCKED"}`,
+      ].join(" • ");
+      $("#heroSub").textContent = `Playlist hub for the journey: Listen -> Slide -> Engage -> Training -> Seed -> Badge. (${funnel})`;
 
       // Capture opens for resume.
       listEl.addEventListener("click", (ev) => {

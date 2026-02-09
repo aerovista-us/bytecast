@@ -42,11 +42,11 @@
     },
     {
       "id": "episode_registry",
-      "name": "Episode Registry JSON",
-      "description": "Source of truth for episode slug mapping, legacy wrappers, and publishable status.",
+      "name": "Episode Registry (Runtime)",
+      "description": "Runtime-safe episode registry mirror for GitHub Pages and Playlist loading.",
       "owner": "Content Ops",
       "category": "episodes",
-      "path": "../.CODEX/episode_registry.json",
+      "path": "../data/episode_registry.json",
       "canon_path": "episodes"
     }
   ]

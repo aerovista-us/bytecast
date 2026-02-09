@@ -7,6 +7,7 @@ This `/docs` set ships with:
 - **Status reports** (what we touched, current state, next actions)
 
 ## Quick links
+- Site map (GitHub Pages): `SITE_MAP.md`
 - Seed Standard: `SEED_STANDARD.md`
 - Seed Options: `SEED_OPTIONS.md`
 - ByteCast Template Manual: `BYTECAST_TEMPLATE_MANUAL.md`
