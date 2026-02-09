@@ -119,3 +119,14 @@ Implication:
    - Phase 4 completion
    - archive-path classification
    - wrapper review date: 2026-03-08
+
+## Addendum — Workspace entry + shell parity (2026-02-09)
+1. Root workspace entry upgraded:
+   - `index.html` now links all primary apps/bundles + adds SVG icons for fast recognition.
+2. ByteCast App launcher added at root:
+   - `seed_bytecast.html` provides episode discovery + resume + completion overview (separate from individual episode packs).
+3. Training Hub promoted to root-level shell:
+   - `training_hub/` exists as a runnable orchestration shell (module manifests + CANON-derived badges).
+4. Compatibility wrappers clarified:
+   - Root `ep1/` + `ep3/` remain the intended compatibility stubs through 2026-03-08.
+   - Any redirect-only wrappers inside `episodes/` should be treated as duplicates and retired when safe.

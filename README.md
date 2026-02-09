@@ -3,9 +3,9 @@
 This is the root entrypoint for the ByteCast multi-project workspace.
 
 ## Start here
-1. Open `index.html` in a browser, or run a local server:
-   - `python -m http.server 8080`
-   - then open `http://localhost:8080`
+1. Open the workspace entry:
+   - GitHub Pages: `https://aerovista-us.github.io/bytecast/`
+   - Local server: `python -m http.server 8080` then open `http://localhost:8080`
 2. Use the Smart Workflow panel:
    - complete `ByteCast (listen -> slide -> interact) -> Training Hub -> Seed Builder real work`
    - each completed cycle unlocks the next Seed Builder ability level

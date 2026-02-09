@@ -6,6 +6,7 @@ This document defines how the two shell apps work and where module ownership bou
 ## Shell entry points
 - Training Hub: `../training_hub/index.html`
 - Seed Builder Studio: `../seed_builder_studio/index.html`
+- ByteCast App (launcher): `../seed_bytecast.html`
 
 Both shells are orchestration layers only:
 - They load `data/modules.json`
@@ -35,7 +36,7 @@ Seed Builder Studio links into:
 - `full_seed_starter/av_seedgen_python_profiles/*`
 - `full_seed_starter/bytecast_ep_profile_portrait/*`
 - `template/*`
-- `seed_orchard_ui/*`
+- `seed_builder_studio/seed_orchard_ui/*`
 - `docs/SEED_STANDARD.md`
 - `docs/SEED_OPTIONS.md`
 

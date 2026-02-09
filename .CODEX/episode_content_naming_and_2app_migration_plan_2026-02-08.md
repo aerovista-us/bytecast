@@ -75,7 +75,7 @@ Purpose:
 Combine:
 - `full_seed_starter`
 - `template`
-- `seed_orchard_ui`
+- `seed_builder_studio/seed_orchard_ui` (current location)
 
 Purpose:
 - generate, customize, and package seed/episode outputs.
@@ -83,6 +83,8 @@ Purpose:
 ## Keep Separate
 - `episodes/*` outputs (publishable content packs)
 - root `assets` support folder
+- ByteCast App launcher: `seed_bytecast.html` (episode discovery/resume)
+- Workspace indexer: `index.html` (sacred “doors + journey” page)
 
 ---
 
@@ -131,7 +133,7 @@ Acceptance:
 4. `seed_builder_studio` modules (link-orchestrate only):
    - `full_seed_starter/av_seedgen_python_profiles/README.md`
    - `template/index.html`
-   - `seed_orchard_ui/index.html`
+   - `seed_builder_studio/seed_orchard_ui/index.html`
    - `docs/SEED_STANDARD.md` + `docs/SEED_OPTIONS.md`
 5. Add shared shell capabilities in both apps:
    - consistent top navigation

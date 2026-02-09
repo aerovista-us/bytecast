@@ -28,8 +28,8 @@
       "description": "Legacy prototype for seed-to-fruit storytelling and concept flow validation.",
       "owner": "Concept Lab",
       "category": "prototype",
-      "path": "../seed_orchard_ui/index.html",
-      "canon_path": "seed_orchard_ui"
+      "path": "./seed_orchard_ui/index.html",
+      "canon_path": "seed_builder_studio/seed_orchard_ui"
     },
     {
       "id": "portrait_profile_template",

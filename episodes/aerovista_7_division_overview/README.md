@@ -8,7 +8,9 @@ This bundle uses the complete EP-001 template and makes it JSON-driven (http + f
 ```bash
 python -m http.server 8080
 ```
-Open: http://localhost:8080
+Open:
+- Local: `http://localhost:8080`
+- GitHub Pages: `https://aerovista-us.github.io/bytecast/episodes/aerovista_7_division_overview/index.html`
 
 ## Audio
 Put your audio at: `assets/bytecast-ep2.mp3`

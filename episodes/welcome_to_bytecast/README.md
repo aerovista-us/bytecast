@@ -5,7 +5,8 @@ Date: 2026-02-07
 
 ## Run
 - Double-click `index.html`
-- Or serve: `python -m http.server 8080` then open `http://localhost:8080`
+- GitHub Pages: `https://aerovista-us.github.io/bytecast/episodes/welcome_to_bytecast/index.html`
+- Or serve locally: `python -m http.server 8080` then open `http://localhost:8080`
 
 ## Audio Connection
 - Connected file: `assets/welcome_to_bytecast.aac`

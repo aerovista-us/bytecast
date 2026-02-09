@@ -11,7 +11,9 @@ Fix:
 ```bash
 python -m http.server 8080
 ```
-Open: `http://localhost:8080`
+Open:
+- Local: `http://localhost:8080`
+- GitHub Pages base: `https://aerovista-us.github.io/bytecast/`
 
 ## Audio not loading
 - Confirm the file exists at the exact relative path

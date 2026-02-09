@@ -21,7 +21,9 @@ Date: 2026-02-07
 ```bash
 python -m http.server 8080
 ```
-Open: `http://localhost:8080`
+Open:
+- Local: `http://localhost:8080`
+- GitHub Pages: `https://aerovista-us.github.io/bytecast/`
 
 ## Quality checks
 - No console errors

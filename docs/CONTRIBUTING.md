@@ -78,13 +78,15 @@ python -m http.server 8080
 Open `http://localhost:8080`.
 
 ### Seed Orchard UI
-Open `seed_orchard_ui/index.html` directly, or serve from repo root:
+Open `seed_builder_studio/seed_orchard_ui/index.html` directly, or serve from repo root:
 
 ```bash
 python -m http.server 8080
 ```
 
-Then open `http://localhost:8080/seed_orchard_ui/`.
+Then open:
+- Local: `http://localhost:8080/seed_builder_studio/seed_orchard_ui/`
+- GitHub Pages: `https://aerovista-us.github.io/bytecast/seed_builder_studio/seed_orchard_ui/`
 
 ## Labels to Use
 

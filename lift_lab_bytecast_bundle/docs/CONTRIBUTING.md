@@ -16,6 +16,9 @@ python -m http.server 8090
 
 Open `http://localhost:8090/site/index.html`.
 
+GitHub Pages:
+- `https://aerovista-us.github.io/bytecast/lift_lab_bytecast_bundle/site/index.html`
+
 ## PR Checklist
 - [ ] I kept the change small and focused
 - [ ] I tested it locally (or described how I tested)

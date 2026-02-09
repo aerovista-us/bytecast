@@ -17,8 +17,12 @@ python -m http.server 8090
 ```
 
 Then open:
-- `http://localhost:8090/site/index.html` (main page)
-- `http://localhost:8090/seed_bytecast.html` (launcher/redirect)
+- Main page: `./site/index.html`
+- Launcher/redirect: `./seed_bytecast.html`
+
+GitHub Pages (published under `/bytecast/`):
+- Main page: `https://aerovista-us.github.io/bytecast/lift_lab_bytecast_bundle/site/index.html`
+- Launcher/redirect: `https://aerovista-us.github.io/bytecast/lift_lab_bytecast_bundle/seed_bytecast.html`
 
 ## Customize
 - Edit `content/slides.json` for the slideshow

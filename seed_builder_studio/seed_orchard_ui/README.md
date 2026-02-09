@@ -4,9 +4,9 @@ A static front-end concept where you enter a few simple inputs, plant a seed, an
 
 ## Run
 - Open `index.html` directly, or
-- Serve locally:
-  - `python -m http.server 8080`
-  - open `http://localhost:8080/seed_orchard_ui/`
+- Serve locally: `python -m http.server 8080`
+  - Local: `http://localhost:8080/seed_builder_studio/seed_orchard_ui/`
+  - GitHub Pages: `https://aerovista-us.github.io/bytecast/seed_builder_studio/seed_orchard_ui/`
 
 ## Inputs
 - Seed Name

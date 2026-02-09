@@ -12,3 +12,6 @@ python -m http.server 8090
 ```
 
 Open `http://localhost:8090/site/index.html`.
+
+GitHub Pages:
+- `https://aerovista-us.github.io/bytecast/lift_lab_bytecast_bundle/site/index.html`

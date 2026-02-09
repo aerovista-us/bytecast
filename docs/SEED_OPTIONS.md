@@ -18,4 +18,6 @@ Common knobs each seed can support.
 ### Seed Options
 - Analytics (Umami): Enabled by default. Disable by setting `window.__UMAMI__.enabled = false`.
 - Theme: Default `venta-neon`. Use a theme selector (if present) or set `data-theme` on `<html>`.
-- Run mode: For best reliability, run `python -m http.server 8080` and open `http://localhost:8080`.
+- Run mode: For best reliability, serve via HTTP.
+  - Local: `python -m http.server 8080` then open `http://localhost:8080`
+  - GitHub Pages base: `https://aerovista-us.github.io/bytecast/`
