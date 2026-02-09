@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>ByteCast Playlist</title>
   <meta name="description" content="ByteCast Playlist: episode discovery, resume, and handoff routing (listen -> learn -> seed -> badge)." />
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
   <style>
     :root {
       --bg0: #050607;
@@ -416,7 +417,6 @@
   <script>
     const THEME_KEY = "bytecast.theme.v1";
     const REGISTRY_URL = "./data/episode_registry.json";
-    const REGISTRY_FALLBACK_URL = "./.CODEX/episode_registry.json";
     const LAST_EP_KEY = "bytecast.last_episode.href.v1";
     const LAST_EP_TIME_KEY = "bytecast.last_episode.time.v1";
     const WORKFLOW_KEY = "bytecast.workflow.v1";
@@ -635,16 +635,12 @@
       try {
         registry = await loadJson(REGISTRY_URL);
       } catch {
-        try {
-          registry = await loadJson(REGISTRY_FALLBACK_URL);
-        } catch {
-          registry = {
-            episodes: [
-              { slug: "welcome_to_bytecast", episode_code: "EP-001", title: "Welcome to ByteCast", primary_path: "episodes/welcome_to_bytecast", status: "active" },
-              { slug: "aerovista_7_division_overview", episode_code: "EP-002", title: "AeroVista Overview", primary_path: "episodes/aerovista_7_division_overview", status: "active" }
-            ]
-          };
-        }
+        registry = {
+          episodes: [
+            { slug: "welcome_to_bytecast", episode_code: "EP-001", title: "Welcome to ByteCast", primary_path: "episodes/welcome_to_bytecast", status: "active" },
+            { slug: "aerovista_7_division_overview", episode_code: "EP-002", title: "AeroVista Overview", primary_path: "episodes/aerovista_7_division_overview", status: "active" }
+          ]
+        };
       }
 
       const episodes = Array.isArray(registry.episodes) ? registry.episodes : [];
