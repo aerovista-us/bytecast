@@ -277,11 +277,22 @@
     }
     .chips{ display:flex; flex-wrap:wrap; gap:8px; }
     .chip--badge{
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       border-color: rgba(255,196,90,0.38);
       background: rgba(255,196,90,0.09);
       box-shadow: var(--glow-gold);
       color: rgba(255,255,255,0.92);
     }
+    .chip--badge .badge-ico{
+      width: 22px;
+      height: 22px;
+      flex: 0 0 auto;
+      filter: drop-shadow(0 0 10px rgba(255,196,90,0.22)) drop-shadow(0 0 18px rgba(34,167,255,0.12));
+    }
+    .chip--badge .badge-body{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; min-width:0; }
+    .chip--badge .badge-when{ color: rgba(255,255,255,0.72); }
   </style>
 </head>
 <body>
@@ -462,8 +473,70 @@
     const WORKFLOW_KEY = "bytecast.workflow.v1";
     const BADGES_KEY = "bytecast.badges.v1";
     const JOURNEY_URL = "./data/journey_steps.json";
+    const BADGE_CATALOG_URL = "./assets/badges/badges.json";
 
     const $ = (sel) => document.querySelector(sel);
+
+    const BADGE_ICON_OVERRIDES = {
+      p1_golden_path_v1: "initiate",
+      seed_exporter_v1: "seed_export",
+      division_aerovista_v1: "modules",
+      session_updates_2026_02_09_v1: "analytics",
+    };
+
+    let badgeCatalog = null;
+    let badgeCatalogPromise = null;
+
+    function loadBadgeCatalog() {
+      if (badgeCatalogPromise) return badgeCatalogPromise;
+      badgeCatalogPromise = (async () => {
+        try {
+          const data = await loadJson(BADGE_CATALOG_URL);
+          const badges = Array.isArray(data?.badges) ? data.badges : [];
+          const byId = {};
+          for (const b of badges) {
+            const id = String(b?.id || "").trim();
+            const file = String(b?.file || "").trim();
+            if (!id || !file) continue;
+            byId[id] = file;
+          }
+          badgeCatalog = { byId };
+          return badgeCatalog;
+        } catch {
+          badgeCatalog = null;
+          return null;
+        }
+      })();
+      return badgeCatalogPromise;
+    }
+
+    function resolveBadgeIconId(b) {
+      const id = String(b?.id || "").trim();
+      const label = String(b?.label || "").trim();
+      const idLower = id.toLowerCase();
+      const labelLower = label.toLowerCase();
+
+      if (id && BADGE_ICON_OVERRIDES[id]) return BADGE_ICON_OVERRIDES[id];
+
+      const blob = `${idLower} ${labelLower}`;
+      if (blob.includes("golden") || blob.includes("initiate")) return "initiate";
+      if (blob.includes("seed") && (blob.includes("export") || blob.includes("exporter"))) return "seed_export";
+      if (blob.includes("publish")) return "publish";
+      if (blob.includes("registry")) return "registry";
+      if (blob.includes("module")) return "modules";
+      if (blob.includes("docs") || blob.includes("documentation")) return "docs";
+      if (blob.includes("analytics") || blob.includes("umami")) return "analytics";
+      if (blob.includes("qa") || blob.includes("audit") || blob.includes("validate")) return "qa";
+      if (blob.includes("a11y") || blob.includes("accessibility")) return "a11y";
+      if (blob.includes("audio")) return "audio";
+      if (blob.includes("automation") || blob.includes("generator")) return "automation";
+      if (blob.includes("mission") || blob.includes("training")) return "missions";
+      if (blob.includes("listen")) return "listen";
+      if (blob.includes("slide")) return "slides";
+      if (blob.includes("engage") || blob.includes("quiz") || blob.includes("quest")) return "engage";
+
+      return "";
+    }
 
     function toId(value) {
       return String(value || "")
@@ -616,12 +689,45 @@
         list.innerHTML = `<span class="tiny muted">No badges yet. Complete the Golden Path to mint your first.</span>`;
         return;
       }
+
+      const catalog = badgeCatalog;
+      if (!catalog) {
+        list.innerHTML = badges
+          .slice(0, 8)
+          .map((b) => {
+            const label = b?.label || b?.id || "Badge";
+            const when = b?.issuedAt ? new Date(b.issuedAt).toLocaleDateString() : "";
+            return `<span class="chip chip--badge" title="${escapeHtml(b?.id || "")}"><b style="font-family:var(--mono);">BADGE</b> ${escapeHtml(label)}${when ? ` • ${escapeHtml(when)}` : ""}</span>`;
+          })
+          .join("");
+
+        loadBadgeCatalog().then((c) => {
+          if (c && badgeCatalog) renderBadges();
+        });
+        return;
+      }
+
       list.innerHTML = badges
         .slice(0, 8)
         .map((b) => {
           const label = b?.label || b?.id || "Badge";
           const when = b?.issuedAt ? new Date(b.issuedAt).toLocaleDateString() : "";
-          return `<span class="chip chip--badge"><b style="font-family:var(--mono);">BADGE</b> ${escapeHtml(label)}${when ? ` • ${escapeHtml(when)}` : ""}</span>`;
+          const iconId = resolveBadgeIconId(b);
+          const file = iconId ? catalog.byId?.[iconId] : "";
+          const iconSrc = file ? `./assets/badges/${file}` : "";
+          const iconHtml = iconSrc
+            ? `<img class="badge-ico" src="${escapeHtml(iconSrc)}" alt="" aria-hidden="true" loading="lazy" />`
+            : "";
+          return `
+            <span class="chip chip--badge" title="${escapeHtml(b?.id || "")}">
+              ${iconHtml}
+              <span class="badge-body">
+                <b style="font-family:var(--mono);">BADGE</b>
+                <span>${escapeHtml(label)}</span>
+                ${when ? `<span class="badge-when">• ${escapeHtml(when)}</span>` : ""}
+              </span>
+            </span>
+          `;
         })
         .join("");
     }
