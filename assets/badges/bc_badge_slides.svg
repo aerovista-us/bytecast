@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 512 512" role="img" aria-labelledby="bc_slides_t bc_slides_d">
+  <title id="bc_slides_t">Slides</title>
+  <desc id="bc_slides_d">Additive learning navigation + clarity</desc>
+  <defs>
+    <radialGradient id="bc_slides_bg" cx="30%" cy="18%" r="90%">
+      <stop offset="0" stop-color="#0f1623"/>
+      <stop offset="0.55" stop-color="#070a10"/>
+      <stop offset="1" stop-color="#050607"/>
+    </radialGradient>
+    <linearGradient id="bc_slides_rim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#a66bff"/>
+      <stop offset="0.55" stop-color="#22a7ff"/>
+      <stop offset="1" stop-color="#ffc45a"/>
+    </linearGradient>
+    <linearGradient id="bc_slides_plate" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="rgba(255,255,255,0.08)"/>
+      <stop offset="1" stop-color="rgba(255,255,255,0.02)"/>
+    </linearGradient>
+    <pattern id="bc_slides_grid" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(20)">
+      <path d="M 0 0 L 0 22" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+      <path d="M 0 0 L 22 0" stroke="rgba(255,255,255,0.035)" stroke-width="1"/>
+      <path d="M 11 0 L 11 22" stroke="rgba(255,255,255,0.025)" stroke-width="1"/>
+    </pattern>
+    <filter id="bc_slides_shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="14" stdDeviation="14" flood-color="#000" flood-opacity="0.65"/>
+    </filter>
+    <filter id="bc_slides_glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feColorMatrix in="b" type="matrix" values="
+        1 0 0 0 0
+        0 1 0 0 0
+        0 0 1 0 0
+        0 0 0 0.55 0" result="g"/>
+      <feMerge>
+        <feMergeNode in="g"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <clipPath id="bc_slides_clip">
+      <polygon points="256,26 424,120 424,312 256,486 88,312 88,120" />
+    </clipPath>
+  </defs>
+
+  <rect x="0" y="0" width="512" height="512" fill="url(#bc_slides_bg)"/>
+
+  <!-- Outer rim -->
+  <g filter="url(#bc_slides_shadow)">
+    <polygon points="256,26 424,120 424,312 256,486 88,312 88,120"
+      fill="rgba(0,0,0,0.25)" stroke="url(#bc_slides_rim)" stroke-width="10" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Inner plate -->
+  <g clip-path="url(#bc_slides_clip)">
+    <polygon points="256,50 404,130 404,304 256,454 108,304 108,130"
+      fill="url(#bc_slides_plate)" stroke="rgba(255,255,255,0.14)" stroke-width="2" stroke-linejoin="round"/>
+    <polygon points="256,50 404,130 404,304 256,454 108,304 108,130" fill="url(#bc_slides_grid)" opacity="0.65"/>
+    <circle cx="118" cy="118" r="160" fill="#a66bff" opacity="0.05"/>
+    <circle cx="420" cy="170" r="210" fill="#22a7ff" opacity="0.045"/>
+    <circle cx="256" cy="420" r="180" fill="#ffc45a" opacity="0.03"/>
+  </g>
+
+  <!-- Top gem -->
+  <g filter="url(#bc_slides_glow)">
+    <circle cx="256" cy="78" r="7.5" fill="#ffc45a" opacity="0.95"/>
+    <circle cx="256" cy="78" r="3" fill="rgba(0,0,0,0.35)"/>
+  </g>
+
+  <!-- Emblem -->
+  <g transform="translate(256 246)" filter="url(#bc_slides_glow)">
+    
+      <g>
+        <rect x="-60" y="-44" width="120" height="84" rx="14" fill="rgba(255,255,255,0.04)" stroke="url(#bc_slides_rim)" stroke-width="4"/>
+        <rect x="-48" y="-34" width="96" height="10" rx="5" fill="rgba(255,255,255,0.14)"/>
+        <rect x="-48" y="-16" width="70" height="8" rx="4" fill="rgba(255,255,255,0.10)"/>
+        <path d="M-60 42 L-42 58 L60 58 L60 42" fill="rgba(0,0,0,0.22)" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
+        <path d="M-12 58 L0 72 L12 58" fill="none" stroke="rgba(255,196,90,0.65)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+  </g>
+
+  <!-- Ribbon -->
+  <g>
+    <path d="M132 344 C 170 336, 204 332, 256 332 C 308 332, 342 336, 380 344 L 402 392 C 360 382, 320 376, 256 376 C 192 376, 152 382, 110 392 Z"
+      fill="rgba(0,0,0,0.34)" stroke="rgba(255,255,255,0.14)" stroke-width="2" />
+    <path d="M138 350 C 174 342, 206 338, 256 338 C 306 338, 338 342, 374 350"
+      fill="none" stroke="url(#bc_slides_rim)" stroke-width="3" opacity="0.9" stroke-linecap="round"/>
+    <text x="256" y="372" text-anchor="middle"
+      style="font: 900 15px/1 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; letter-spacing: .10em; fill: rgba(255,255,255,0.92);">
+      SLIDES
+    </text>
+  </g>
+
+  <!-- Micro detail corners -->
+  <g opacity="0.85">
+    <path d="M110 146 L96 138" stroke="rgba(255,255,255,0.22)" stroke-width="2" stroke-linecap="round"/>
+    <path d="M402 146 L416 138" stroke="rgba(255,255,255,0.22)" stroke-width="2" stroke-linecap="round"/>
+    <path d="M110 292 L96 300" stroke="rgba(255,255,255,0.18)" stroke-width="2" stroke-linecap="round"/>
+    <path d="M402 292 L416 300" stroke="rgba(255,255,255,0.18)" stroke-width="2" stroke-linecap="round"/>
+  </g>
+</svg>

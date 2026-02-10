@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 512 512" role="img" aria-labelledby="bc_analytics_t bc_analytics_d">
+  <title id="bc_analytics_t">Analytics</title>
+  <desc id="bc_analytics_d">Instrument the funnel with clean events</desc>
+  <defs>
+    <radialGradient id="bc_analytics_bg" cx="30%" cy="18%" r="90%">
+      <stop offset="0" stop-color="#0f1623"/>
+      <stop offset="0.55" stop-color="#070a10"/>
+      <stop offset="1" stop-color="#050607"/>
+    </radialGradient>
+    <linearGradient id="bc_analytics_rim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#00e5a8"/>
+      <stop offset="0.55" stop-color="#a66bff"/>
+      <stop offset="1" stop-color="#ffc45a"/>
+    </linearGradient>
+    <linearGradient id="bc_analytics_plate" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="rgba(255,255,255,0.08)"/>
+      <stop offset="1" stop-color="rgba(255,255,255,0.02)"/>
+    </linearGradient>
+    <pattern id="bc_analytics_grid" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(20)">
+      <path d="M 0 0 L 0 22" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+      <path d="M 0 0 L 22 0" stroke="rgba(255,255,255,0.035)" stroke-width="1"/>
+      <path d="M 11 0 L 11 22" stroke="rgba(255,255,255,0.025)" stroke-width="1"/>
+    </pattern>
+    <filter id="bc_analytics_shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="14" stdDeviation="14" flood-color="#000" flood-opacity="0.65"/>
+    </filter>
+    <filter id="bc_analytics_glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feColorMatrix in="b" type="matrix" values="
+        1 0 0 0 0
+        0 1 0 0 0
+        0 0 1 0 0
+        0 0 0 0.55 0" result="g"/>
+      <feMerge>
+        <feMergeNode in="g"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <clipPath id="bc_analytics_clip">
+      <polygon points="256,26 424,120 424,312 256,486 88,312 88,120" />
+    </clipPath>
+  </defs>
+
+  <rect x="0" y="0" width="512" height="512" fill="url(#bc_analytics_bg)"/>
+
+  <!-- Outer rim -->
+  <g filter="url(#bc_analytics_shadow)">
+    <polygon points="256,26 424,120 424,312 256,486 88,312 88,120"
+      fill="rgba(0,0,0,0.25)" stroke="url(#bc_analytics_rim)" stroke-width="10" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Inner plate -->
+  <g clip-path="url(#bc_analytics_clip)">
+    <polygon points="256,50 404,130 404,304 256,454 108,304 108,130"
+      fill="url(#bc_analytics_plate)" stroke="rgba(255,255,255,0.14)" stroke-width="2" stroke-linejoin="round"/>
+    <polygon points="256,50 404,130 404,304 256,454 108,304 108,130" fill="url(#bc_analytics_grid)" opacity="0.65"/>
+    <circle cx="118" cy="118" r="160" fill="#00e5a8" opacity="0.05"/>
+    <circle cx="420" cy="170" r="210" fill="#a66bff" opacity="0.045"/>
+    <circle cx="256" cy="420" r="180" fill="#ffc45a" opacity="0.03"/>
+  </g>
+
+  <!-- Top gem -->
+  <g filter="url(#bc_analytics_glow)">
+    <circle cx="256" cy="78" r="7.5" fill="#ffc45a" opacity="0.95"/>
+    <circle cx="256" cy="78" r="3" fill="rgba(0,0,0,0.35)"/>
+  </g>
+
+  <!-- Emblem -->
+  <g transform="translate(256 246)" filter="url(#bc_analytics_glow)">
+    
+      <g>
+        <path d="M-62 62 V-44" stroke="rgba(255,255,255,0.12)" stroke-width="3" stroke-linecap="round"/>
+        <path d="M-62 62 H62" stroke="rgba(255,255,255,0.12)" stroke-width="3" stroke-linecap="round"/>
+        <path d="M-52 40 L-22 10 L0 24 L34 -10 L54 0" fill="none" stroke="url(#bc_analytics_rim)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="-52" cy="40" r="7" fill="rgba(255,196,90,0.9)"/>
+        <circle cx="-22" cy="10" r="7" fill="rgba(34,167,255,0.9)"/>
+        <circle cx="0" cy="24" r="7" fill="rgba(0,229,168,0.9)"/>
+        <circle cx="34" cy="-10" r="7" fill="rgba(166,107,255,0.9)"/>
+        <circle cx="54" cy="0" r="7" fill="rgba(255,106,42,0.9)"/>
+        <path d="M-30 -44 H26" stroke="rgba(255,255,255,0.10)" stroke-width="3" stroke-linecap="round"/>
+      </g>
+  </g>
+
+  <!-- Ribbon -->
+  <g>
+    <path d="M132 344 C 170 336, 204 332, 256 332 C 308 332, 342 336, 380 344 L 402 392 C 360 382, 320 376, 256 376 C 192 376, 152 382, 110 392 Z"
+      fill="rgba(0,0,0,0.34)" stroke="rgba(255,255,255,0.14)" stroke-width="2" />
+    <path d="M138 350 C 174 342, 206 338, 256 338 C 306 338, 338 342, 374 350"
+      fill="none" stroke="url(#bc_analytics_rim)" stroke-width="3" opacity="0.9" stroke-linecap="round"/>
+    <text x="256" y="372" text-anchor="middle"
+      style="font: 900 15px/1 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; letter-spacing: .10em; fill: rgba(255,255,255,0.92);">
+      ANALYTICS
+    </text>
+  </g>
+
+  <!-- Micro detail corners -->
+  <g opacity="0.85">
+    <path d="M110 146 L96 138" stroke="rgba(255,255,255,0.22)" stroke-width="2" stroke-linecap="round"/>
+    <path d="M402 146 L416 138" stroke="rgba(255,255,255,0.22)" stroke-width="2" stroke-linecap="round"/>
+    <path d="M110 292 L96 300" stroke="rgba(255,255,255,0.18)" stroke-width="2" stroke-linecap="round"/>
+    <path d="M402 292 L416 300" stroke="rgba(255,255,255,0.18)" stroke-width="2" stroke-linecap="round"/>
+  </g>
+</svg>

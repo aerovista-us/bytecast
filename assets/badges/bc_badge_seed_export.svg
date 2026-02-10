@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 512 512" role="img" aria-labelledby="bc_seed_export_t bc_seed_export_d">
+  <title id="bc_seed_export_t">Seed Export</title>
+  <desc id="bc_seed_export_d">Ship a runnable artifact with proof</desc>
+  <defs>
+    <radialGradient id="bc_seed_export_bg" cx="30%" cy="18%" r="90%">
+      <stop offset="0" stop-color="#0f1623"/>
+      <stop offset="0.55" stop-color="#070a10"/>
+      <stop offset="1" stop-color="#050607"/>
+    </radialGradient>
+    <linearGradient id="bc_seed_export_rim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#00e5a8"/>
+      <stop offset="0.55" stop-color="#22a7ff"/>
+      <stop offset="1" stop-color="#ffc45a"/>
+    </linearGradient>
+    <linearGradient id="bc_seed_export_plate" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="rgba(255,255,255,0.08)"/>
+      <stop offset="1" stop-color="rgba(255,255,255,0.02)"/>
+    </linearGradient>
+    <pattern id="bc_seed_export_grid" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(20)">
+      <path d="M 0 0 L 0 22" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+      <path d="M 0 0 L 22 0" stroke="rgba(255,255,255,0.035)" stroke-width="1"/>
+      <path d="M 11 0 L 11 22" stroke="rgba(255,255,255,0.025)" stroke-width="1"/>
+    </pattern>
+    <filter id="bc_seed_export_shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="14" stdDeviation="14" flood-color="#000" flood-opacity="0.65"/>
+    </filter>
+    <filter id="bc_seed_export_glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feColorMatrix in="b" type="matrix" values="
+        1 0 0 0 0
+        0 1 0 0 0
+        0 0 1 0 0
+        0 0 0 0.55 0" result="g"/>
+      <feMerge>
+        <feMergeNode in="g"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <clipPath id="bc_seed_export_clip">
+      <polygon points="256,26 424,120 424,312 256,486 88,312 88,120" />
+    </clipPath>
+  </defs>
+
+  <rect x="0" y="0" width="512" height="512" fill="url(#bc_seed_export_bg)"/>
+
+  <!-- Outer rim -->
+  <g filter="url(#bc_seed_export_shadow)">
+    <polygon points="256,26 424,120 424,312 256,486 88,312 88,120"
+      fill="rgba(0,0,0,0.25)" stroke="url(#bc_seed_export_rim)" stroke-width="10" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Inner plate -->
+  <g clip-path="url(#bc_seed_export_clip)">
+    <polygon points="256,50 404,130 404,304 256,454 108,304 108,130"
+      fill="url(#bc_seed_export_plate)" stroke="rgba(255,255,255,0.14)" stroke-width="2" stroke-linejoin="round"/>
+    <polygon points="256,50 404,130 404,304 256,454 108,304 108,130" fill="url(#bc_seed_export_grid)" opacity="0.65"/>
+    <circle cx="118" cy="118" r="160" fill="#00e5a8" opacity="0.05"/>
+    <circle cx="420" cy="170" r="210" fill="#22a7ff" opacity="0.045"/>
+    <circle cx="256" cy="420" r="180" fill="#ffc45a" opacity="0.03"/>
+  </g>
+
+  <!-- Top gem -->
+  <g filter="url(#bc_seed_export_glow)">
+    <circle cx="256" cy="78" r="7.5" fill="#ffc45a" opacity="0.95"/>
+    <circle cx="256" cy="78" r="3" fill="rgba(0,0,0,0.35)"/>
+  </g>
+
+  <!-- Emblem -->
+  <g transform="translate(256 246)" filter="url(#bc_seed_export_glow)">
+    
+      <g>
+        <path d="M0 -58 C 28 -58, 46 -36, 46 -12 C 46 22, 22 46, 0 64 C -22 46, -46 22, -46 -12 C -46 -36, -28 -58, 0 -58 Z"
+          fill="rgba(255,255,255,0.05)" stroke="url(#bc_seed_export_rim)" stroke-width="4" stroke-linejoin="round"/>
+        <path d="M-10 -8 C-26 -22, -22 -44, -4 -44 C 10 -44, 14 -32, 8 -22"
+          fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="3" stroke-linecap="round"/>
+        <path d="M-6 0 C-22 4, -30 16, -30 30 C-30 50, -12 64, 0 70"
+          fill="none" stroke="rgba(0,229,168,0.75)" stroke-width="4" stroke-linecap="round"/>
+        <path d="M6 6 C 26 10, 34 22, 34 34 C34 52, 18 64, 0 72"
+          fill="none" stroke="rgba(34,167,255,0.75)" stroke-width="4" stroke-linecap="round"/>
+        <rect x="-34" y="14" width="68" height="44" rx="12" fill="rgba(0,0,0,0.25)" stroke="rgba(255,255,255,0.14)" stroke-width="2"/>
+        <path d="M-10 32 H10" stroke="rgba(255,196,90,0.85)" stroke-width="4" stroke-linecap="round"/>
+        <path d="M0 22 V42" stroke="rgba(255,196,90,0.85)" stroke-width="4" stroke-linecap="round"/>
+      </g>
+  </g>
+
+  <!-- Ribbon -->
+  <g>
+    <path d="M132 344 C 170 336, 204 332, 256 332 C 308 332, 342 336, 380 344 L 402 392 C 360 382, 320 376, 256 376 C 192 376, 152 382, 110 392 Z"
+      fill="rgba(0,0,0,0.34)" stroke="rgba(255,255,255,0.14)" stroke-width="2" />
+    <path d="M138 350 C 174 342, 206 338, 256 338 C 306 338, 338 342, 374 350"
+      fill="none" stroke="url(#bc_seed_export_rim)" stroke-width="3" opacity="0.9" stroke-linecap="round"/>
+    <text x="256" y="372" text-anchor="middle"
+      style="font: 900 15px/1 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; letter-spacing: .10em; fill: rgba(255,255,255,0.92);">
+      SEED EXPORT
+    </text>
+  </g>
+
+  <!-- Micro detail corners -->
+  <g opacity="0.85">
+    <path d="M110 146 L96 138" stroke="rgba(255,255,255,0.22)" stroke-width="2" stroke-linecap="round"/>
+    <path d="M402 146 L416 138" stroke="rgba(255,255,255,0.22)" stroke-width="2" stroke-linecap="round"/>
+    <path d="M110 292 L96 300" stroke="rgba(255,255,255,0.18)" stroke-width="2" stroke-linecap="round"/>
+    <path d="M402 292 L416 300" stroke="rgba(255,255,255,0.18)" stroke-width="2" stroke-linecap="round"/>
+  </g>
+</svg>

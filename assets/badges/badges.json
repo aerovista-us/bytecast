@@ -1,0 +1,155 @@
+{
+  "schema": "bytecast-badges-v1",
+  "badges": [
+    {
+      "id": "initiate",
+      "label": "Initiate",
+      "subtitle": "Complete the Golden Path",
+      "file": "bc_badge_initiate.svg",
+      "accents": {
+        "a1": "#22a7ff",
+        "a2": "#ffc45a"
+      }
+    },
+    {
+      "id": "listen",
+      "label": "Listen",
+      "subtitle": "Audio fundamentals + completion proof",
+      "file": "bc_badge_listen.svg",
+      "accents": {
+        "a1": "#22a7ff",
+        "a2": "#0be1ff"
+      }
+    },
+    {
+      "id": "slides",
+      "label": "Slides",
+      "subtitle": "Additive learning navigation + clarity",
+      "file": "bc_badge_slides.svg",
+      "accents": {
+        "a1": "#a66bff",
+        "a2": "#22a7ff"
+      }
+    },
+    {
+      "id": "engage",
+      "label": "Engage",
+      "subtitle": "Quests + quizzes + confirmations",
+      "file": "bc_badge_engage.svg",
+      "accents": {
+        "a1": "#ff6a2a",
+        "a2": "#ffc45a"
+      }
+    },
+    {
+      "id": "missions",
+      "label": "Missions",
+      "subtitle": "Training checkpoints and skill unlocks",
+      "file": "bc_badge_missions.svg",
+      "accents": {
+        "a1": "#22a7ff",
+        "a2": "#a66bff"
+      }
+    },
+    {
+      "id": "seed_export",
+      "label": "Seed Export",
+      "subtitle": "Ship a runnable artifact with proof",
+      "file": "bc_badge_seed_export.svg",
+      "accents": {
+        "a1": "#00e5a8",
+        "a2": "#22a7ff"
+      }
+    },
+    {
+      "id": "publish",
+      "label": "Publish",
+      "subtitle": "Share a URL and complete the loop",
+      "file": "bc_badge_publish.svg",
+      "accents": {
+        "a1": "#ffc45a",
+        "a2": "#ff6a2a"
+      }
+    },
+    {
+      "id": "registry",
+      "label": "Registry",
+      "subtitle": "Add episodes safely and keep canon clean",
+      "file": "bc_badge_registry.svg",
+      "accents": {
+        "a1": "#a66bff",
+        "a2": "#ffc45a"
+      }
+    },
+    {
+      "id": "modules",
+      "label": "Modules",
+      "subtitle": "Build router modules without breaking links",
+      "file": "bc_badge_modules.svg",
+      "accents": {
+        "a1": "#22a7ff",
+        "a2": "#00e5a8"
+      }
+    },
+    {
+      "id": "docs",
+      "label": "Docs",
+      "subtitle": "Write docs that reduce drift",
+      "file": "bc_badge_docs.svg",
+      "accents": {
+        "a1": "#ffc45a",
+        "a2": "#22a7ff"
+      }
+    },
+    {
+      "id": "analytics",
+      "label": "Analytics",
+      "subtitle": "Instrument the funnel with clean events",
+      "file": "bc_badge_analytics.svg",
+      "accents": {
+        "a1": "#00e5a8",
+        "a2": "#a66bff"
+      }
+    },
+    {
+      "id": "qa",
+      "label": "QA",
+      "subtitle": "Validate, gate, and prevent regressions",
+      "file": "bc_badge_qa.svg",
+      "accents": {
+        "a1": "#22a7ff",
+        "a2": "#ff6a2a"
+      }
+    },
+    {
+      "id": "a11y",
+      "label": "A11Y",
+      "subtitle": "Accessibility, contrast, keyboard nav",
+      "file": "bc_badge_a11y.svg",
+      "accents": {
+        "a1": "#a66bff",
+        "a2": "#00e5a8"
+      }
+    },
+    {
+      "id": "audio",
+      "label": "Audio",
+      "subtitle": "Mixing, editing, and track readiness",
+      "file": "bc_badge_audio.svg",
+      "accents": {
+        "a1": "#0be1ff",
+        "a2": "#a66bff"
+      }
+    },
+    {
+      "id": "automation",
+      "label": "Automation",
+      "subtitle": "Repeatable tooling and generators",
+      "file": "bc_badge_automation.svg",
+      "accents": {
+        "a1": "#00e5a8",
+        "a2": "#ffc45a"
+      }
+    }
+  ]
+}
