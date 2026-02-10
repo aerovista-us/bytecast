@@ -52,7 +52,11 @@
         {
           "id": "p1_golden_path_v1",
           "label": "P1: Golden Path",
-          "requires": ["ep001_gates", "tr001_golden_path", "seed_export_v1"]
+          "requires": ["ep001_gates", "tr001_golden_path", "seed_export_v1"],
+          "minProof": {
+            "tr001_golden_path": ["mission"],
+            "seed_export_v1": ["artifactName", "artifactHash"]
+          }
         }
       ]
     },
@@ -89,7 +93,10 @@
         {
           "id": "seed_exporter_v1",
           "label": "Seeding: Exporter",
-          "requires": ["seed_export_v1"]
+          "requires": ["seed_export_v1"],
+          "minProof": {
+            "seed_export_v1": ["artifactName", "artifactHash"]
+          }
         }
       ]
     },
@@ -150,7 +157,12 @@
         {
           "id": "division_aerovista_v1",
           "label": "Division: AeroVista",
-          "requires": ["ep002_listen", "offer_pack_visit", "seed_export_v1"]
+          "requires": ["ep002_listen", "offer_pack_visit", "seed_export_v1"],
+          "minProof": {
+            "ep002_listen": ["episode"],
+            "offer_pack_visit": ["app"],
+            "seed_export_v1": ["artifactName", "artifactHash"]
+          }
         }
       ]
     }

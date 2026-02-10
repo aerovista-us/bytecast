@@ -38,7 +38,11 @@ Journeys can declare badges:
 {
   "id": "p1_golden_path_v1",
   "label": "P1: Golden Path",
-  "requires": ["ep001_gates", "tr001_golden_path", "seed_export_v1"]
+  "requires": ["ep001_gates", "tr001_golden_path", "seed_export_v1"],
+  "minProof": {
+    "tr001_golden_path": ["mission"],
+    "seed_export_v1": ["artifactName", "artifactHash"]
+  }
 }
 ```
 

@@ -5,6 +5,7 @@
   const ANALYTICS_ONCE_PREFIX = "bc.loop.analytics.once.";
   const ACTIVE_JOURNEY_KEY = "bytecast.journey.active";
   const LEGACY_ACTIVE_JOURNEY_KEY = "bytecast.journey.active.v1";
+  const MIGRATED_GLOBAL_V2_KEY = "bytecast.workflow.v2.migrated_to_per_journey.v1";
 
   function safeJsonParse(raw, fallback) {
     try {
@@ -133,7 +134,7 @@
     if (badges.some((b) => b && b.id === id)) return false;
     badges.unshift({ id, label, issuedAt: new Date().toISOString(), meta });
     saveBadges(badges.slice(0, 50));
-    track("badge_minted", { badgeId: id, label, meta });
+    track("badge_minted", { journeyId: String(meta?.journeyId || getActiveJourneyId() || "p1_golden_path"), badgeId: id, label, meta });
     return true;
   }
 
@@ -266,14 +267,17 @@
       const wf2 = loadWorkflowV2(id);
       const v1 = loadWorkflowV1();
       let changed = false;
-      const bc = v1.bytecast || {};
-      if (bc.listen && !isStepDone(wf2, "ep001_listen")) { setStepDoneV2(wf2, "ep001_listen"); changed = true; }
-      if (bc.slide && !isStepDone(wf2, "ep001_slide")) { setStepDoneV2(wf2, "ep001_slide"); changed = true; }
-      if (bc.interact && !isStepDone(wf2, "ep001_engage")) { setStepDoneV2(wf2, "ep001_engage"); changed = true; }
-      if (bc.listen && bc.slide && bc.interact && !isStepDone(wf2, "ep001_gates")) { setStepDoneV2(wf2, "ep001_gates"); changed = true; }
-      if (v1.trainingDone && !isStepDone(wf2, "tr001_golden_path")) { setStepDoneV2(wf2, "tr001_golden_path"); changed = true; }
-      if (v1.seedDone && !isStepDone(wf2, "seed_export_v1")) { setStepDoneV2(wf2, "seed_export_v1"); changed = true; }
-      if (badgeHas("p1_golden_path_v1") && !isStepDone(wf2, "badge_p1_golden_path_v1")) { setStepDoneV2(wf2, "badge_p1_golden_path_v1"); changed = true; }
+      // Only reconcile legacy v1 fields into the canonical onboarding journey.
+      if (id === "p1_golden_path") {
+        const bc = v1.bytecast || {};
+        if (bc.listen && !isStepDone(wf2, "ep001_listen")) { setStepDoneV2(wf2, "ep001_listen"); changed = true; }
+        if (bc.slide && !isStepDone(wf2, "ep001_slide")) { setStepDoneV2(wf2, "ep001_slide"); changed = true; }
+        if (bc.interact && !isStepDone(wf2, "ep001_engage")) { setStepDoneV2(wf2, "ep001_engage"); changed = true; }
+        if (bc.listen && bc.slide && bc.interact && !isStepDone(wf2, "ep001_gates")) { setStepDoneV2(wf2, "ep001_gates"); changed = true; }
+        if (v1.trainingDone && !isStepDone(wf2, "tr001_golden_path")) { setStepDoneV2(wf2, "tr001_golden_path"); changed = true; }
+        if (v1.seedDone && !isStepDone(wf2, "seed_export_v1")) { setStepDoneV2(wf2, "seed_export_v1"); changed = true; }
+        if (badgeHas("p1_golden_path_v1") && !isStepDone(wf2, "badge_p1_golden_path_v1")) { setStepDoneV2(wf2, "badge_p1_golden_path_v1"); changed = true; }
+      }
       if (changed) {
         wf2.migratedFrom = wf2.migratedFrom || "v1-reconcile";
         saveWorkflowV2(wf2, id);
@@ -281,18 +285,24 @@
       return wf2;
     }
 
-    // Migration: if legacy global workflow exists, copy into the per-journey key once.
-    const legacyGlobalRaw = (() => {
-      try { return localStorage.getItem(WORKFLOW_V2_BASE_KEY); } catch { return ""; }
+    // Migration: if legacy global workflow exists, copy into the default onboarding journey once.
+    const shouldMigrateGlobal = (() => {
+      try { return !localStorage.getItem(MIGRATED_GLOBAL_V2_KEY); } catch { return true; }
     })();
-    if (legacyGlobalRaw) {
-      try {
-        const migrated = normalizeV2(JSON.parse(legacyGlobalRaw));
-        migrated.migratedFrom = migrated.migratedFrom || "v2-global";
-        saveWorkflowV2(migrated, id);
-        return migrated;
-      } catch {
-        // ignore
+    if (shouldMigrateGlobal && id === "p1_golden_path") {
+      const legacyGlobalRaw = (() => {
+        try { return localStorage.getItem(WORKFLOW_V2_BASE_KEY); } catch { return ""; }
+      })();
+      if (legacyGlobalRaw) {
+        try {
+          const migrated = normalizeV2(JSON.parse(legacyGlobalRaw));
+          migrated.migratedFrom = migrated.migratedFrom || "v2-global";
+          saveWorkflowV2(migrated, id);
+          try { localStorage.setItem(MIGRATED_GLOBAL_V2_KEY, new Date().toISOString()); } catch {}
+          return migrated;
+        } catch {
+          // ignore
+        }
       }
     }
 
@@ -438,16 +448,45 @@
       }
     }
 
+    function stepMeta(stepId) {
+      const s = wf2?.steps && typeof wf2.steps === "object" ? wf2.steps[stepId] : null;
+      const meta = s && typeof s === "object" ? s.meta : null;
+      return meta && typeof meta === "object" ? meta : {};
+    }
+
+    function proofOk(stepId, requiredFields) {
+      const fields = Array.isArray(requiredFields) ? requiredFields : [];
+      if (!fields.length) return { ok: true, missing: [] };
+      const meta = stepMeta(stepId);
+      const missing = fields.filter((f) => {
+        const v = meta?.[f];
+        if (typeof v === "string") return v.trim().length === 0;
+        return v == null;
+      });
+      return { ok: missing.length === 0, missing };
+    }
+
     for (const b of badges) {
       if (!b || !b.id) continue;
       const already = badgeHas(b.id);
       const req = Array.isArray(b.requires) ? b.requires : [];
-      const ok = req.length ? req.every((stepId) => {
+      const okSteps = req.length ? req.every((stepId) => {
         const step = steps.find((s) => s && s.id === stepId) || null;
         return step ? isStepComplete(journey, step, wf2) : isStepDone(wf2, stepId);
       }) : false;
+
+      const minProof = b.minProof && typeof b.minProof === "object" ? b.minProof : {};
+      const proofFailures = [];
+      if (okSteps && minProof) {
+        for (const [stepId, fields] of Object.entries(minProof)) {
+          const pr = proofOk(stepId, fields);
+          if (!pr.ok) proofFailures.push({ stepId, missing: pr.missing });
+        }
+      }
+      const ok = okSteps && proofFailures.length === 0;
+
       if (!already && ok) {
-        if (mintBadge(b.id, b.label || b.id, { journey: journey?.id || "" })) minted += 1;
+        if (mintBadge(b.id, b.label || b.id, { journeyId: journey?.id || "", proof: { requires: req } })) minted += 1;
       }
 
       // If badge exists (pre-existing or just minted), mark any "badge_has" steps that reference it.
