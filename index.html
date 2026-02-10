@@ -311,7 +311,7 @@
         <p>Episode discovery, resume, and handoff routing to Training and Seeder.</p>
         <div class="btnrow">
           <a class="btn primary" href="./seed_bytecast.html">Open Playlist</a>
-          <a class="btn" href="./episodes/README.md">Episodes Index</a>
+          <a class="btn" href="./docs/index.html">Docs Portal</a>
         </div>
       </article>
 
@@ -322,7 +322,7 @@
         <p>Onboarding and module router. Lift Lab is the curriculum; this is the map.</p>
         <div class="btnrow">
           <a class="btn primary" href="./training_hub/index.html">Open Training Hub</a>
-          <a class="btn" href="./lift_lab_bytecast_bundle/site/index.html">Open Lift Lab</a>
+          <a class="btn" href="./seed_bytecast.html">Back to Playlist</a>
         </div>
       </article>
 
@@ -333,7 +333,7 @@
         <p>Tooling router: templates, generators, Orchard connector, and standards.</p>
         <div class="btnrow">
           <a class="btn primary" href="./seed_builder_studio/index.html">Open Seed Builder</a>
-          <a class="btn" href="./template/index.html">Episode Template</a>
+          <a class="btn" href="./docs/index.html">Docs Portal</a>
         </div>
       </article>
     </section>
@@ -355,10 +355,10 @@
       </div>
     </section>
 
-    <details class="packlist" aria-label="All runnable packs">
+    <details class="packlist" aria-label="Maintainer links">
       <summary>
-        <span>All Packs (Quick Launch)</span>
-        <span class="cycle-chip" style="margin:0; border-color: rgba(255,255,255,0.18);">optional</span>
+        <span>Maintainers (Internal Links)</span>
+        <span class="cycle-chip" style="margin:0; border-color: rgba(255,196,90,0.28); color: rgba(248,223,169,0.95); background: rgba(255,196,90,0.08);">raw</span>
       </summary>
       <div class="packgrid">
         <a class="pack" href="./seed_bytecast.html">
@@ -375,13 +375,6 @@
             <div class="d">Module router + workflow loop (no content hosting).</div>
           </div>
         </a>
-        <a class="pack" href="./training_missions/tr_001_golden_path/index.html">
-          <img class="app-icon" src="./assets/icons/training.svg" alt="" aria-hidden="true" />
-          <div>
-            <div class="t">TR-001 Golden Path</div>
-            <div class="d">Two checkpoints -> mark Training done -> handoff to Seeder.</div>
-          </div>
-        </a>
         <a class="pack" href="./seed_builder_studio/index.html">
           <img class="app-icon" src="./assets/icons/seed.svg" alt="" aria-hidden="true" />
           <div>
@@ -389,39 +382,46 @@
             <div class="d">Tooling router: templates, generators, Orchard, standards.</div>
           </div>
         </a>
-        <a class="pack" href="./seed_builder_studio/seed_orchard_ui/index.html">
-          <img class="app-icon" src="./assets/icons/seed.svg" alt="" aria-hidden="true" />
-          <div>
-            <div class="t">Seed Orchard</div>
-            <div class="d">Plant -> harvest -> export artifact -> mint badge.</div>
-          </div>
-        </a>
-        <a class="pack" href="./aerovista_offer_pack/app/index.html">
-          <img class="app-icon" src="./assets/icons/offerpack.svg" alt="" aria-hidden="true" />
-          <div>
-            <div class="t">AeroVista Offer Pack</div>
-            <div class="d">Divisions, offers, SOP, pricing, bundles, one-pager.</div>
-          </div>
-        </a>
-        <a class="pack" href="./lift_lab_bytecast_bundle/site/index.html">
-          <img class="app-icon" src="./assets/icons/liftlab.svg" alt="" aria-hidden="true" />
-          <div>
-            <div class="t">Lift Lab Training</div>
-            <div class="d">Non-coder missions and contribution pathways.</div>
-          </div>
-        </a>
-        <a class="pack" href="./template/index.html">
-          <img class="app-icon" src="./assets/icons/template.svg" alt="" aria-hidden="true" />
-          <div>
-            <div class="t">Episode Template</div>
-            <div class="d">Canonical baseline for new episode packs.</div>
-          </div>
-        </a>
         <a class="pack" href="./docs/index.html">
           <img class="app-icon" src="./assets/icons/docs.svg" alt="" aria-hidden="true" />
           <div>
             <div class="t">Docs Portal</div>
             <div class="d">Standards, troubleshooting, contributor ramp, site map.</div>
+          </div>
+        </a>
+        <a class="pack" href="./template/index.html">
+          <img class="app-icon" src="./assets/icons/template.svg" alt="" aria-hidden="true" />
+          <div>
+            <div class="t">Episode Template (Internal)</div>
+            <div class="d">Canonical baseline for building new packs.</div>
+          </div>
+        </a>
+        <a class="pack" href="./training_missions/tr_001_golden_path/index.html">
+          <img class="app-icon" src="./assets/icons/training.svg" alt="" aria-hidden="true" />
+          <div>
+            <div class="t">TR-001 (Internal)</div>
+            <div class="d">Golden Path training missions pack.</div>
+          </div>
+        </a>
+        <a class="pack" href="./seed_builder_studio/seed_orchard_ui/index.html">
+          <img class="app-icon" src="./assets/icons/seed.svg" alt="" aria-hidden="true" />
+          <div>
+            <div class="t">Seed Orchard (Internal)</div>
+            <div class="d">Seeder app: plant -> harvest -> export runnable pack.</div>
+          </div>
+        </a>
+        <a class="pack" href="./aerovista_offer_pack/app/index.html">
+          <img class="app-icon" src="./assets/icons/offerpack.svg" alt="" aria-hidden="true" />
+          <div>
+            <div class="t">Offer Pack (Internal)</div>
+            <div class="d">Training/reference pack (better reached via Training Hub).</div>
+          </div>
+        </a>
+        <a class="pack" href="./lift_lab_bytecast_bundle/site/index.html">
+          <img class="app-icon" src="./assets/icons/liftlab.svg" alt="" aria-hidden="true" />
+          <div>
+            <div class="t">Lift Lab (Internal)</div>
+            <div class="d">Training site (better reached via Training Hub).</div>
           </div>
         </a>
         <a class="pack" href="./episodes/welcome_to_bytecast/index.html">
@@ -448,27 +448,27 @@
         <a class="pack" href="./data/episode_registry.json">
           <img class="app-icon" src="./assets/icons/docs.svg" alt="" aria-hidden="true" />
           <div>
-            <div class="t">Runtime Registry</div>
-            <div class="d">`data/episode_registry.json` (Playlist reads this only).</div>
+            <div class="t">Runtime Registry (Raw)</div>
+            <div class="d">`data/episode_registry.json` (maintainers only).</div>
           </div>
         </a>
         <a class="pack" href="./data/journey_steps.json">
           <img class="app-icon" src="./assets/icons/docs.svg" alt="" aria-hidden="true" />
           <div>
-            <div class="t">Journey Loop Config</div>
-            <div class="d">`data/journey_steps.json` (edit JSON to add/remove steps).</div>
+            <div class="t">Journey Loop Config (Raw)</div>
+            <div class="d">`data/journey_steps.json` (maintainers only).</div>
           </div>
         </a>
       </div>
     </details>
 
     <footer class="footer" aria-label="Footer">
-      <div>Builder links (tiny):</div>
+      <div>Links:</div>
       <div class="tinylinks">
         <a href="./docs/index.html">Docs Portal</a>
-        <a href="./docs/SITE_MAP.md">Site Map</a>
-        <a href="./.CODEX/bytecast_canon_map_2026-02-08.md">CANON</a>
-        <a href="./.CODEX/umami_analytics_standard_2026-02-09.md">Analytics</a>
+        <a href="./seed_bytecast.html">Playlist</a>
+        <a href="./training_hub/index.html">Training</a>
+        <a href="./seed_builder_studio/index.html">Seed Builder</a>
       </div>
     </footer>
   </main>

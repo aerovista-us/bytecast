@@ -2,7 +2,7 @@
   "schema": "bytecast-module-manifest-v1",
   "app_id": "seed_builder_studio",
   "app_name": "Seed Builder Studio",
-  "updated_on": "2026-02-08",
+  "updated_on": "2026-02-10",
   "modules": [
     {
       "id": "profiles_generator",
@@ -10,7 +10,8 @@
       "description": "Primary generator workflow with profile support for seed and episode pack creation.",
       "owner": "Generator Ops",
       "category": "generator",
-      "path": "../full_seed_starter/av_seedgen_python_profiles/README.md",
+      "path": "./profiles_generator/index.html",
+      "manual_path": "../full_seed_starter/av_seedgen_python_profiles/README.md",
       "canon_path": "full_seed_starter/av_seedgen_python_profiles"
     },
     {
@@ -24,10 +25,10 @@
     },
     {
       "id": "seed_orchard_ui",
-      "name": "Seed Orchard UI Concept",
-      "description": "Legacy prototype for seed-to-fruit storytelling and concept flow validation.",
-      "owner": "Concept Lab",
-      "category": "prototype",
+      "name": "Seed Orchard",
+      "description": "Seeder app: plant -> validate -> export runnable pack (ZIP) with proof payloads.",
+      "owner": "Seed Ops",
+      "category": "app",
       "path": "./seed_orchard_ui/index.html",
       "canon_path": "seed_builder_studio/seed_orchard_ui"
     },

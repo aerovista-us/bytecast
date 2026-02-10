@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Profiles Generator</title>
+  <meta name="description" content="Profiles Generator landing: how to run the seed generator and where the manual lives." />
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    .hero {
+      background:
+        radial-gradient(900px 420px at 10% 0%, rgba(34, 167, 255, 0.14), transparent 60%),
+        radial-gradient(820px 420px at 90% 5%, rgba(166, 107, 255, 0.12), transparent 60%),
+        linear-gradient(140deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+    }
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+    pre {
+      margin: 0;
+      padding: 0.85rem 0.9rem;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(0, 0, 0, 0.28);
+      overflow: auto;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.32);
+    }
+    code { color: rgba(255, 255, 255, 0.88); }
+    .hint { color: var(--muted); font-size: 0.95rem; line-height: 1.55; }
+    .btnrow { display:flex; gap:0.55rem; flex-wrap:wrap; }
+    .btnrow a {
+      text-decoration: none;
+      color: var(--ink);
+      font-weight: 700;
+      font-size: 0.92rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.46rem 0.88rem;
+      background: rgba(255, 255, 255, 0.03);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.12s ease;
+    }
+    .btnrow a:hover {
+      border-color: var(--line-strong);
+      box-shadow: 0 0 20px rgba(34, 167, 255, 0.22);
+      transform: translateY(-1px);
+    }
+    .btnrow a.primary {
+      border-color: rgba(34, 167, 255, 0.45);
+      background: rgba(34, 167, 255, 0.13);
+      box-shadow: 0 0 18px rgba(34, 167, 255, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="shell-header hero">
+    <div class="brand">
+      <p class="eyebrow">Seed Builder Studio</p>
+      <h1>Profiles Generator</h1>
+      <p class="subtitle">Run the canonical seed generator locally. Use the Manual for all flags and profiles.</p>
+    </div>
+    <nav class="top-nav" aria-label="Primary">
+      <a href="../index.html">Seed Builder</a>
+      <a href="../../seed_bytecast.html">Playlist</a>
+      <a href="../../training_hub/index.html">Training Hub</a>
+      <a href="../../docs/index.html">Docs Portal</a>
+    </nav>
+  </header>
+
+  <main id="main-content" class="shell-main">
+    <section class="panel" aria-label="What this is">
+      <h2 style="margin:0 0 0.5rem; font-family:'Sora','Segoe UI',sans-serif;">What This Is</h2>
+      <p class="hint" style="margin:0 0 0.75rem;">
+        This is a visitor-safe landing page for the generator. The actual generator lives in
+        <span class="mono">full_seed_starter/av_seedgen_python_profiles/</span>.
+      </p>
+      <div class="btnrow">
+        <a class="primary" href="../../full_seed_starter/av_seedgen_python_profiles/README.md" target="_blank" rel="noopener noreferrer">Open Manual (README)</a>
+        <a href="../../full_seed_starter/av_seedgen_python_profiles/seedgen.py" target="_blank" rel="noopener noreferrer">Open seedgen.py</a>
+        <a href="../seed_orchard_ui/index.html">Open Seed Orchard</a>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Quick start">
+      <h2 style="margin:0 0 0.5rem; font-family:'Sora','Segoe UI',sans-serif;">Quick Start (Local)</h2>
+      <p class="hint" style="margin:0 0 0.75rem;">
+        Run from the repo root. If you are serving pages locally, prefer
+        <span class="mono">python -m http.server 8080</span> to avoid <span class="mono">file://</span> fetch/audio issues.
+      </p>
+      <pre class="mono"><code>cd full_seed_starter/av_seedgen_python_profiles
+python seedgen.py --list-profiles
+
+# Example (see README for full flags)
+python seedgen.py --profile onboarding --name founder_welcome --title "Founder Welcome" --tagline "Earn your badge." --zip</code></pre>
+    </section>
+
+    <section class="panel" aria-label="Output expectations">
+      <h2 style="margin:0 0 0.5rem; font-family:'Sora','Segoe UI',sans-serif;">Outputs</h2>
+      <p class="hint" style="margin:0;">
+        The goal is a runnable pack artifact (ZIP) that follows the template contract:
+        it should load <span class="mono">data/bytecast_ep_profile.json</span> without edits, and keep links relative for GitHub Pages.
+      </p>
+    </section>
+  </main>
+</body>
+</html>

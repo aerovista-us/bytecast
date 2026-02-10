@@ -494,6 +494,7 @@ function render() {
         module.description,
         module.owner,
         module.path,
+        module.manual_path,
         module.canon_path,
         module.category,
       ]
@@ -538,12 +539,14 @@ function renderModuleCard(module) {
 
   const meta = document.createElement("div");
   meta.className = "module-meta";
-  meta.innerHTML = [
+  const metaLines = [
     `Owner: <strong>${escapeHtml(module.owner || "Unassigned")}</strong>`,
     `Category: <strong>${escapeHtml(module.category || "general")}</strong>`,
     `Path: <code>${escapeHtml(module.path || "")}</code>`,
+    module.manual_path ? `Manual: <code>${escapeHtml(module.manual_path)}</code>` : "",
     `CANON key: <code>${escapeHtml(module.canon_path || "n/a")}</code>`,
-  ].join("<br>");
+  ].filter(Boolean);
+  meta.innerHTML = metaLines.join("<br>");
   article.append(meta);
 
   const actions = document.createElement("div");
@@ -557,6 +560,16 @@ function renderModuleCard(module) {
   launch.rel = "noopener noreferrer";
   launch.textContent = "Launch";
   actions.append(launch);
+
+  if (module.manual_path) {
+    const manual = document.createElement("a");
+    manual.className = "manual-link";
+    manual.href = module.manual_path;
+    manual.target = "_blank";
+    manual.rel = "noopener noreferrer";
+    manual.textContent = "Manual";
+    actions.append(manual);
+  }
 
   const copy = document.createElement("button");
   copy.type = "button";

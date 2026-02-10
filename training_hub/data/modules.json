@@ -2,7 +2,7 @@
   "schema": "bytecast-module-manifest-v1",
   "app_id": "training_hub",
   "app_name": "Training Hub",
-  "updated_on": "2026-02-09",
+  "updated_on": "2026-02-10",
   "modules": [
     {
       "id": "aerovista_offer_pack",
@@ -33,30 +33,21 @@
     },
     {
       "id": "workspace_docs_index",
-      "name": "Workspace Docs Index",
-      "description": "Main standards and operations documents for seed, template, and publishing workflows.",
+      "name": "Docs Portal",
+      "description": "Human-friendly docs entry: getting started, standards, troubleshooting, governance (maintainers).",
       "owner": "Platform Ops",
       "category": "docs",
-      "path": "../docs/README.md",
+      "path": "../docs/index.html",
       "canon_path": "docs"
     },
     {
-      "id": "episode_index",
-      "name": "Episode Slug Index",
-      "description": "Canonical index for publishable episodes under content-based slug folders.",
+      "id": "bytecast_playlist",
+      "name": "ByteCast Playlist",
+      "description": "Visitor-safe hub: episodes + resume + next recommended step across journeys.",
       "owner": "Content Ops",
-      "category": "episodes",
-      "path": "../episodes/README.md",
-      "canon_path": "episodes"
-    },
-    {
-      "id": "episode_registry",
-      "name": "Episode Registry (Runtime)",
-      "description": "Runtime-safe episode registry mirror for GitHub Pages and Playlist loading.",
-      "owner": "Content Ops",
-      "category": "episodes",
-      "path": "../data/episode_registry.json",
-      "canon_path": "episodes"
+      "category": "hub",
+      "path": "../seed_bytecast.html",
+      "canon_path": "seed_bytecast.html"
     }
   ]
 }
