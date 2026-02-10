@@ -23,3 +23,16 @@ A static front-end concept where you enter a few simple inputs, plant a seed, an
   - reason it matters
   - first action
   - effort + signal tags
+
+## Export
+- `Export Runnable Pack (ZIP)`
+  - Requires `http(s)` (GitHub Pages or a local server), because it fetches the canonical baseline at `template/index.html`.
+  - Produces a runnable pack ZIP containing:
+    - `index.html` (template)
+    - `data/bytecast_ep_profile.json` (generated from your seed harvest)
+    - placeholder `assets/` + `docs/`
+- `Export Seed Artifact (JSON)`
+  - Exports the raw seed artifact for debugging.
+
+## Loop integration
+- Marks `seed_export_v1` complete via `ByteCastLoop.markStepDone(...)` when you export.

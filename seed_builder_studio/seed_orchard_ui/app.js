@@ -8,16 +8,21 @@
   const intensityLabel = document.getElementById("intensityLabel");
   const harvestActions = document.getElementById("harvestActions");
   const exportJsonBtn = document.getElementById("exportJson");
+  const exportZipBtn = document.getElementById("exportZip");
   const claimBadgeLink = document.getElementById("claimBadge");
   const exportNote = document.getElementById("exportNote");
 
   const Loop = window.ByteCastLoop || null;
   const LoopUI = window.ByteCastLoopUI || null;
+  const Zip = window.fflate || null;
 
   const WORKFLOW_KEY = "bytecast.workflow.v1";
   const BADGES_KEY = "bytecast.badges.v1";
   const JOURNEY_URL = "../../data/journey_steps.json";
+  const TEMPLATE_URL = "../../template/index.html";
+  const FAVICON_URL = "../../favicon.svg";
   const PRIMARY_JOURNEY_ID = "";
+  const PACK_SCHEMA_VERSION = "seed-pack-v1";
 
   let lastArtifact = null;
   let cachedJourney = null;
@@ -222,6 +227,167 @@
     setTimeout(() => URL.revokeObjectURL(url), 2500);
   }
 
+  function downloadBlob(filename, blob) {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 2500);
+  }
+
+  function buildPackManifest({ packFolder, profile, templateHash, artifactName, journeyId }) {
+    return {
+      schema: "bytecast-pack-manifest-v1",
+      packSchemaVersion: PACK_SCHEMA_VERSION,
+      packType: "bytecast_episode_pack",
+      createdAt: new Date().toISOString(),
+      packFolder,
+      artifactName,
+      journeyId: journeyId || "",
+      template: {
+        sourcePath: "template/index.html",
+        templateHash: templateHash || "",
+        expectedProfilePaths: ["data/bytecast_ep_profile.json", "bytecast_ep_profile.json"],
+      },
+      profile: {
+        schema: String(profile?.schema || ""),
+        episodeCode: String(profile?.episode?.code || ""),
+        title: String(profile?.episode?.title || ""),
+        date: String(profile?.episode?.date || ""),
+      },
+      notes: [
+        "Serve this folder over http(s) to allow fetch() to load the profile JSON.",
+        "Audio is optional; update paths in data/bytecast_ep_profile.json (or root fallback).",
+      ],
+    };
+  }
+
+  function buildEpisodeProfileFromSeed(artifact) {
+    const seed = artifact?.seed || {};
+    const seedName = String(seed.name || "Seed Orchard");
+    const goal = String(seed.goal || "ship a focused artifact");
+    const audience = String(seed.audience || "contributors");
+
+    const stamp = new Date().toISOString().slice(0, 10);
+    const code = "SEED-ORCHARD";
+
+    const slides = Array.isArray(artifact?.fruits)
+      ? artifact.fruits.map((fruit, idx) => {
+        const title = String(fruit?.title || `Fruit ${idx + 1}`);
+        const why = String(fruit?.why || "");
+        const action = String(fruit?.action || "");
+        const effort = fruit?.effort ? `${fruit.effort} effort` : "";
+        const signal = String(fruit?.signal || "");
+        const bullets = [
+          action || "Ship a tiny proof-of-work output.",
+          why || "Make the next step obvious and repeatable.",
+          [effort, signal].filter(Boolean).join(" • ") || "Keep it small. Keep it shippable.",
+        ];
+        return {
+          id: `s${idx + 1}`,
+          title,
+          goal: `${seedName}: ${goal}`,
+          bullets: bullets.filter(Boolean),
+        };
+      })
+      : [
+        {
+          id: "s1",
+          title: "Seed Orchard",
+          goal: "Turn a seed into shippable output.",
+          bullets: ["Plant → Harvest → Export", "Make it repeatable", "Prove it with an artifact"],
+        },
+      ];
+
+    // Keep this minimal but valid for template/index.html (no optional chaining for slides/engagement/divisions).
+    return {
+      schema: "bytecast-ep-profile-v1",
+      episode: {
+        code,
+        title: `${seedName}: Harvest`,
+        type: "seed",
+        date: stamp,
+        runtime_target_minutes: 5,
+        status: "draft",
+      },
+      content: {
+        tags: ["seed", "orchard", "artifact", "bytecast"],
+        summary_short: `A seed-to-fruit harvest for ${audience}: ${goal}.`,
+        summary_long: `This pack was exported from Seed Orchard. It turns a few inputs into a focused harvest you can ship, review, and iterate. Seed: ${seedName}.`,
+      },
+      media: {
+        audio_files: [
+          {
+            path: "assets/audio_placeholder.aac",
+            label: "Audio (optional)",
+            required: false,
+          },
+        ],
+        images: [
+          {
+            path: "assets/favicon.svg",
+            label: "Favicon (optional)",
+            required: false,
+          },
+        ],
+      },
+      slides,
+      engagement: {
+        quest: {
+          title: "Seed Proof Checklist",
+          items: [
+            { id: "q1", text: "Read the harvest slides end-to-end." },
+            { id: "q2", text: "Pick 1 fruit and implement it as a real change." },
+            { id: "q3", text: "Export the pack and open it via http:// (local server or GH Pages)." },
+          ],
+          reward_badge: { label: "SEED SPROUT", style: "neon" },
+        },
+        quiz: {
+          enabled: true,
+          pass_threshold: 0.67,
+          questions: [
+            {
+              id: "k1",
+              q: "What makes this output \"real\"?",
+              choices: ["It looks good", "It ships as a runnable pack", "It has lots of pages", "It uses a backend"],
+              answer_index: 1,
+              explain: "The export is a self-contained pack you can serve and publish.",
+            },
+            {
+              id: "k2",
+              q: "The fastest way to test this pack locally is:",
+              choices: ["Open file://", "Run a tiny local server", "Upload to a database", "Email the folder"],
+              answer_index: 1,
+              explain: "Some browsers block fetch() on file://. Use http:// for reliable behavior.",
+            },
+            {
+              id: "k3",
+              q: "A good \"seed\" is:",
+              choices: ["A vague big idea", "A repeatable small build with proof", "A full app rewrite", "A single screenshot"],
+              answer_index: 1,
+              explain: "Seed → artifact → proof → iteration.",
+            },
+          ],
+        },
+      },
+      aerovista_about: {
+        summary: "AeroVista ships modular packs (episodes, training, tools) connected by a thin loop engine.",
+        divisions: [
+          { name: "NeXuS TechWorks", bread_and_butter: "Automation, systems, tooling, and repeatable builders." },
+          { name: "EchoVerse Media", bread_and_butter: "Audio, narratives, and engagement that holds attention." },
+          { name: "SkyForge Creative", bread_and_butter: "Design systems, visual identity, and shippable presentation." },
+          { name: "AeroVista Offer Pack", bread_and_butter: "Clear offers, intake, delivery, and pricing truth." },
+          { name: "Lift Lab", bread_and_butter: "Training missions that unlock real contribution." },
+          { name: "Seed Builder Studio", bread_and_butter: "Templates + generators that produce artifacts." },
+          { name: "Seed Orchard", bread_and_butter: "Seed-to-fruit workflow: validate → export → badge." },
+        ],
+      },
+    };
+  }
+
   async function loadJourney() {
     if (!Loop) return null;
     const fallbackId = PRIMARY_JOURNEY_ID || "";
@@ -264,6 +430,10 @@
       ? (Loop.isStepDone(wf2, "tr001_golden_path") || (journey.steps || []).some((s) => s?.id === "tr001_golden_path" && Loop.isStepComplete(journey, s, wf2)))
       : trainingOkLegacy;
 
+    const zipOk = Boolean(Zip && Zip.zipSync) && location.protocol !== "file:";
+
+    exportZipBtn?.classList.toggle("is-disabled", !lastArtifact || !zipOk);
+    exportZipBtn && (exportZipBtn.disabled = !lastArtifact || !zipOk);
     exportJsonBtn?.classList.toggle("is-disabled", !lastArtifact);
     exportJsonBtn && (exportJsonBtn.disabled = !lastArtifact);
 
@@ -274,12 +444,31 @@
 
     harvestActions.hidden = false;
 
-    if (!bcOk) {
-      exportNote.textContent = "Golden Path locked: complete EP-001 gates first (Listen + Slide + Engage). You can still export, but badge minting will wait.";
-    } else if (!trainingOk) {
-      exportNote.textContent = "Next step: complete Training (TR-001), then export to mint the badge.";
+    const nextDeps = (() => {
+      if (!Loop || !journey || !wf2) return [];
+      const seedStep = (journey.steps || []).find((s) => s?.id === "seed_export_v1") || null;
+      const deps = Array.isArray(seedStep?.depends_on) ? seedStep.depends_on : [];
+      return deps.filter(Boolean);
+    })();
+
+    const prereqStatus = (() => {
+      if (!Loop || !journey || !wf2) return { ok: bcOk && trainingOk };
+      const ok = nextDeps.every((depId) => {
+        const dep = (journey.steps || []).find((s) => s && s.id === depId) || null;
+        if (dep) return Loop.isStepComplete(journey, dep, wf2);
+        return Loop.isStepDone(wf2, depId);
+      });
+      return { ok };
+    })();
+
+    if (!zipOk) {
+      exportNote.textContent = "ZIP export requires http(s) and the ZIP library. Open this from GitHub Pages or a local web server (python -m http.server 8080).";
+    } else if (!prereqStatus.ok) {
+      exportNote.textContent = nextDeps.length
+        ? `Locked: complete prerequisites first (${nextDeps.join(", ")}). You can still export, but badge minting will wait.`
+        : "Locked: complete prerequisites first. You can still export, but badge minting will wait.";
     } else {
-      exportNote.textContent = "Ready: export your Seed artifact. This marks Seed complete and mints the Golden Path badge.";
+      exportNote.textContent = "Ready: export a runnable ZIP pack. This marks Seed complete and checks badge minting.";
     }
 
     if (trainingOk) {
@@ -345,6 +534,192 @@
     };
 
     void refreshExportUI();
+  });
+
+  exportZipBtn?.addEventListener("click", () => {
+    if (!lastArtifact) return;
+    if (!Zip || !Zip.zipSync) {
+      exportNote.textContent = "ZIP exporter missing (fflate not loaded).";
+      return;
+    }
+    if (location.protocol === "file:") {
+      exportNote.textContent = "ZIP export requires http(s). Open from GitHub Pages or a local web server.";
+      return;
+    }
+
+    const safeName = String(lastArtifact.seed?.name || "seed")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "_")
+      .replace(/^_+|_+$/g, "")
+      .slice(0, 48) || "seed";
+
+    const stamp = new Date().toISOString().replace(/[-:]/g, "").replace(/\..+$/, "");
+    const folder = `seed_${safeName}_${stamp}/`;
+
+    const enc = (s) => new TextEncoder().encode(String(s));
+    const toHex = (buf) => Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, "0")).join("");
+    const hashFallback = (text) => `fnv1a32:${hashString(text).toString(16)}`;
+
+    (async () => {
+      try {
+        const res = await fetch(TEMPLATE_URL, { cache: "no-store" });
+        if (!res.ok) throw new Error(`Template fetch failed: ${res.status}`);
+        const templateHtml = await res.text();
+        if (!templateHtml.includes("</html>")) throw new Error("Template appears truncated (missing </html>).");
+        if (!templateHtml.includes("bytecast_ep_profile.json")) throw new Error("Template does not reference bytecast_ep_profile.json (required for fallback).");
+
+        let faviconSvg = "";
+        try {
+          const favRes = await fetch(FAVICON_URL, { cache: "no-store" });
+          if (favRes.ok) faviconSvg = await favRes.text();
+        } catch {
+          // optional
+        }
+
+        const profile = buildEpisodeProfileFromSeed(lastArtifact);
+        const profileJson = JSON.stringify(profile, null, 2);
+
+        let templateHash = "";
+        try {
+          if (window.crypto?.subtle) {
+            const data = new TextEncoder().encode(templateHtml);
+            const digest = await window.crypto.subtle.digest("SHA-256", data);
+            templateHash = `sha256:${toHex(digest)}`;
+          } else {
+            templateHash = hashFallback(templateHtml);
+          }
+        } catch {
+          templateHash = hashFallback(templateHtml);
+        }
+
+        const files = {
+          [`${folder}index.html`]: enc(templateHtml),
+          // Pack contract: profile JSON under data/ (template supports fallback to root).
+          [`${folder}data/bytecast_ep_profile.json`]: enc(profileJson),
+          [`${folder}assets/README.txt`]: enc("Put audio/media assets in this folder. Update paths in data/bytecast_ep_profile.json.\n"),
+          [`${folder}PACK_README.md`]: enc(
+            [
+              "# ByteCast Seed Pack",
+              "",
+              "This is a runnable, self-contained pack exported from Seed Orchard.",
+              "",
+              "## Run locally",
+              "",
+              "From the folder containing `index.html`:",
+              "",
+              "```bash",
+              "python -m http.server 8080",
+              "```",
+              "",
+              "Open your browser at `http://localhost:8080/` and navigate into this folder if needed.",
+              "",
+              "## Content",
+              "",
+              "- Profile JSON: `data/bytecast_ep_profile.json`",
+              "- Optional audio: update the JSON path and drop the file under `assets/`",
+              "",
+              "## Publish (GitHub Pages)",
+              "",
+              "Commit this folder into a repo and enable GitHub Pages, or drop into an existing Pages site.",
+              "",
+            ].join("\n")
+          ),
+          [`${folder}docs/README.md`]: enc(
+            [
+              "# Seed Export (Runnable Pack)",
+              "",
+              "This ZIP contains a self-contained ByteCast-style pack.",
+              "",
+              "## Run locally",
+              "",
+              "From the folder containing `index.html`:",
+              "",
+              "```bash",
+              "python -m http.server 8080",
+              "```",
+              "",
+              "Then open: `http://localhost:8080/` (navigate into the folder if needed).",
+              "",
+              "## Customize",
+              "",
+              "- Edit `data/bytecast_ep_profile.json` for slides/content.",
+              "- Drop optional audio at `assets/audio_placeholder.aac` (or update the JSON path).",
+              "",
+            ].join("\n")
+          ),
+        };
+
+        if (faviconSvg && faviconSvg.includes("<svg")) {
+          files[`${folder}assets/favicon.svg`] = enc(faviconSvg);
+        }
+
+        const journey = Loop ? await loadJourney() : null;
+        const journeyId = Loop ? (journey?.id || Loop.getActiveJourneyId?.() || "") : "";
+        const zipName = `${folder.replace(/\/$/, "")}.zip`;
+
+        const manifest = buildPackManifest({
+          packFolder: folder,
+          profile,
+          templateHash,
+          artifactName: zipName,
+          journeyId,
+        });
+        files[`${folder}pack.manifest.json`] = enc(JSON.stringify(manifest, null, 2));
+
+        // Export gate: required paths exist.
+        const required = [
+          `${folder}index.html`,
+          `${folder}data/bytecast_ep_profile.json`,
+          `${folder}assets/README.txt`,
+          `${folder}PACK_README.md`,
+          `${folder}pack.manifest.json`,
+        ];
+        const missing = required.filter((k) => !files[k]);
+        if (missing.length) throw new Error(`ZIP manifest missing required files: ${missing.join(", ")}`);
+
+        const zipped = Zip.zipSync(files, { level: 6 });
+        downloadBlob(zipName, new Blob([zipped], { type: "application/zip" }));
+
+        if (!Loop) return;
+
+        let artifactHash = "";
+        try {
+          if (window.crypto?.subtle) {
+            const digest = await window.crypto.subtle.digest("SHA-256", zipped);
+            artifactHash = `sha256:${toHex(digest)}`;
+          } else {
+            artifactHash = hashFallback(`${zipName}:${zipped.byteLength}`);
+          }
+        } catch {
+          artifactHash = hashFallback(`${zipName}:${zipped.byteLength}`);
+        }
+
+        Loop.markStepDone("seed_export_v1", {
+          seed: lastArtifact.seed?.name || "",
+          artifactName: zipName,
+          artifactType: "zip",
+          filesCount: Object.keys(files).length,
+          schema: lastArtifact.schema || "",
+          artifactHash,
+          templatePath: "template/index.html",
+          templateHash,
+          packSchemaVersion: PACK_SCHEMA_VERSION,
+          profileSchema: "bytecast-ep-profile-v1",
+          profilePath: "data/bytecast_ep_profile.json",
+        });
+
+        if (journey) {
+          const wf2 = Loop.ensureWorkflowV2(journeyId);
+          const badgeResult = Loop.ensureJourneyBadges(journey, wf2);
+          if (badgeResult?.minted || badgeResult?.marked) Loop.saveWorkflowV2?.(wf2, journey?.id || "");
+        }
+
+        exportNote.textContent = "ZIP exported. Seed step recorded with proof. Badge check executed.";
+        await refreshExportUI();
+      } catch (err) {
+        exportNote.textContent = `ZIP export failed: ${String(err?.message || err)}`;
+      }
+    })();
   });
 
   exportJsonBtn?.addEventListener("click", () => {

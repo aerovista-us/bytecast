@@ -19,6 +19,9 @@ Each journey has a `steps` array. Each step object supports:
 - `id` (string, required): stable step identifier. Never reuse an ID for a different meaning.
 - `label` (string, required): human-readable name.
 - `lane` (string, optional): `bytecast | training | seed | badge` (used for colors).
+- `group` (string, optional): UI section name (used for collapse and readability).
+- `order` (number, optional): sort key (engine + UI); lower means earlier.
+- `estimatedMinutes` (number, optional): UI-only estimate.
 - `href` (string, required): root-relative path inside this repo (example: `episodes/welcome_to_bytecast/index.html`).
 - `cta` (string, optional): button label for the primary next action.
 - `depends_on` (string[], optional): step IDs that must be complete before this step unlocks.
@@ -58,7 +61,7 @@ Any pack can mark completion like this:
 
 ```js
 const Loop = window.ByteCastLoop;
-Loop.markStepDone("seed_export_v1", { artifactName: "my_seed.json" });
+Loop.markStepDone("seed_export_v1", { artifactName: "my_seed_pack.zip" });
 ```
 
 This writes:
@@ -74,7 +77,7 @@ Recommended fields:
 
 - Episode completion: `{ episodeSlug, episodeCode, gate, durationSec }`
 - Training completion: `{ moduleId, missionId, checkpointsPassed }`
-- Seed completion: `{ artifactName, artifactHash, filesCount, schema }`
+- Seed completion: `{ artifactName, artifactHash, filesCount, schema, artifactType, packSchemaVersion, templateHash, profilePath }`
 - Badge: `{ badgeId, mintedAt, journeyId }`
 
 ## Workflow Storage Versions

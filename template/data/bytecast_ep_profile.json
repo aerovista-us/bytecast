@@ -1,0 +1,232 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "episode": {
+    "code": "EP-001",
+    "title": "Welcome to ByteCast: How to Use This + Why It Matters",
+    "type": "internal",
+    "date": "2026-02-07",
+    "runtime_target_minutes": 6,
+    "status": "draft"
+  },
+  "content": {
+    "tags": [
+      "bytecast",
+      "welcome",
+      "tutorial",
+      "recruitment",
+      "onboarding",
+      "aerovista"
+    ],
+    "summary_short": "A fast, hype-driven welcome: what ByteCast is, how to use the player + slides + quests, and how to join the mission without drama.",
+    "summary_long": "Episode 1 is a lightweight onboarding primer. It teaches the ByteCast flow (listen \u2192 slide \u2192 engage), sets expectations for contributors, and builds anticipation for upcoming drops. It includes a simple quest checklist and a mini-quiz checkpoint designed to reinforce the core idea: we ship reusable experiences fast, measure what works, and scale the winners."
+  },
+  "media": {
+    "audio_files": [
+      {
+        "path": "assets/bytecast-ep1.mp3",
+        "label": "Episode audio (main)",
+        "required": true
+      }
+    ],
+    "images": [
+      {
+        "path": "assets/hero.jpg",
+        "label": "Hero image (optional)",
+        "required": false
+      },
+      {
+        "path": "assets/favicon.svg",
+        "label": "Favicon (optional)",
+        "required": false
+      }
+    ]
+  },
+  "slides": [
+    {
+      "id": "s1",
+      "title": "Welcome",
+      "goal": "Set tone + hype. What ByteCast is in one breath.",
+      "bullets": [
+        "ByteCast = audio + slides + micro-engagement that actually sticks.",
+        "Built for captivation: finish the episode, keep the momentum.",
+        "If you\u2019re here, you\u2019re already closer than most."
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "How to Use This Page",
+      "goal": "Teach the controls and the flow.",
+      "bullets": [
+        "Press Space to play/pause; J/L to jump; M to mark key moments.",
+        "Use \u2190 / \u2192 to move slides (additive learning).",
+        "Engagement blocks are optional: quests, quiz, mini-games."
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "The AeroVista Loop",
+      "goal": "Explain the production philosophy.",
+      "bullets": [
+        "Ship small experiences fast (Seeds).",
+        "Measure what hits (optional analytics).",
+        "Scale the winners into bigger builds."
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Recruitment & Fit",
+      "goal": "Set contributor vibe and expectations.",
+      "bullets": [
+        "We value self-guidance, clarity, and clean execution.",
+        "We don\u2019t gate people with ego \u2014 we gate with follow-through.",
+        "Bring your craft. Respect the system. Ship."
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "Quest: First Win",
+      "goal": "A simple checklist to solidify commitment.",
+      "bullets": [
+        "Open one seed drop and explore it end-to-end.",
+        "Find one improvement (UX, copy, accessibility, performance).",
+        "Submit it as a clean suggestion: problem \u2192 impact \u2192 fix."
+      ]
+    },
+    {
+      "id": "s6",
+      "title": "What\u2019s Next",
+      "goal": "Anticipation + tease upcoming episodes.",
+      "bullets": [
+        "EP-002: Seed Playbook (design rules + modules).",
+        "EP-003: Contributor Path (quests, badges, \u2018proof of work\u2019).",
+        "EP-004: Command Center pulse + dashboards."
+      ]
+    }
+  ],
+  "engagement": {
+    "quest": {
+      "title": "First Win Checklist",
+      "items": [
+        {
+          "id": "q1",
+          "text": "Play the episode audio and mark 2 key moments (M)."
+        },
+        {
+          "id": "q2",
+          "text": "Complete the slide deck (reach \u2018What\u2019s Next\u2019)."
+        },
+        {
+          "id": "q3",
+          "text": "Open one AeroVista drop and write 1 improvement idea."
+        },
+        {
+          "id": "q4",
+          "text": "Pick a lane: build, design, audio, docs \u2014 choose one."
+        }
+      ],
+      "reward_badge": {
+        "label": "FIRST WIN",
+        "style": "neon"
+      }
+    },
+    "quiz": {
+      "enabled": true,
+      "pass_threshold": 0.8,
+      "questions": [
+        {
+          "id": "k1",
+          "q": "ByteCast is primarily designed for:",
+          "choices": [
+            "Long lectures",
+            "Captivation + additive learning",
+            "Hidden access control",
+            "Marketing only"
+          ],
+          "answer_index": 1,
+          "explain": "Audio anchors the intent, slides lock the memory, engagement confirms retention."
+        },
+        {
+          "id": "k2",
+          "q": "What\u2019s the correct usage flow?",
+          "choices": [
+            "Scroll randomly",
+            "Listen \u2192 Slide \u2192 Engage",
+            "Engage \u2192 Listen \u2192 Slide",
+            "Slide only"
+          ],
+          "answer_index": 1,
+          "explain": "We want forward motion without overload."
+        },
+        {
+          "id": "k3",
+          "q": "Seeds should still work when opened as file:// because:",
+          "choices": [
+            "It looks cool",
+            "We avoid build steps and keep static-first portability",
+            "We dislike servers",
+            "It improves SEO"
+          ],
+          "answer_index": 1,
+          "explain": "Static-first = fast distribution + easy testing."
+        },
+        {
+          "id": "k4",
+          "q": "Our contributor gate is mostly about:",
+          "choices": [
+            "Status",
+            "Follow-through and clean execution",
+            "Being loud",
+            "Knowing every tool"
+          ],
+          "answer_index": 1,
+          "explain": "We care about proof-of-work and self-guidance."
+        },
+        {
+          "id": "k5",
+          "q": "Optional analytics exists to:",
+          "choices": [
+            "Spy on users",
+            "Prove what resonates so we can scale winners",
+            "Replace creativity",
+            "Prevent file:// usage"
+          ],
+          "answer_index": 1,
+          "explain": "Feedback loops help decision-making without breaking offline mode."
+        }
+      ]
+    }
+  },
+  "aerovista_about": {
+    "summary": "AeroVista is a multi-division creative + engineering ecosystem shipping reusable experiences that blend software, storytelling, automation, music, and design.",
+    "divisions": [
+      {
+        "name": "NeXuS TechWorks",
+        "bread_and_butter": "Automation, systems, and repeatable tools."
+      },
+      {
+        "name": "EchoVerse Media",
+        "bread_and_butter": "Audio, engagement, and narrative delivery."
+      },
+      {
+        "name": "SkyForge Creative",
+        "bread_and_butter": "Design systems, brand kits, and visual identity."
+      },
+      {
+        "name": "AeroVista Offer Pack",
+        "bread_and_butter": "Clear offers, intake, delivery, and pricing truth."
+      },
+      {
+        "name": "Lift Lab",
+        "bread_and_butter": "Training missions that unlock contribution."
+      },
+      {
+        "name": "Seed Builder Studio",
+        "bread_and_butter": "Templates and generators that ship artifacts."
+      },
+      {
+        "name": "Seed Orchard",
+        "bread_and_butter": "Seed-to-fruit workflow: validate, export, badge."
+      }
+    ]
+  }
+}

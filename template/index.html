@@ -367,18 +367,28 @@
 
 <script>
   // JSON-driven profile loader
-  const PROFILE_URL = "bytecast_ep_profile.json"; // keep next to index.html
+  const TEMPLATE_VERSION = "bytecast-template-v1";
+  const PROFILE_URLS = [
+    "data/bytecast_ep_profile.json", // preferred contract (keeps root clean as packs grow)
+    "bytecast_ep_profile.json", // v1 compatibility
+  ];
   let PROFILE = null;
 
   async function loadProfile(){
-    try{
-      const res = await fetch(PROFILE_URL, {cache:"no-store"});
-      if(!res.ok) throw new Error("HTTP "+res.status);
-      PROFILE = await res.json();
-      return PROFILE;
-    }catch(err){
+    let lastErr = null;
+    for(const url of PROFILE_URLS){
+      try{
+        const res = await fetch(url, {cache:"no-store"});
+        if(!res.ok) throw new Error("HTTP "+res.status);
+        PROFILE = await res.json();
+        return PROFILE;
+      }catch(err){
+        lastErr = err;
+      }
+    }
+    {
       // file:// fetch may be blocked in some browsers; show a clear banner
-      console.warn("Profile fetch failed:", err);
+      console.warn("Profile fetch failed:", lastErr);
       const warn = document.createElement("div");
       warn.className = "panel";
       warn.style.marginTop = "14px";
@@ -388,17 +398,18 @@
             <h2>Profile JSON didn't load</h2>
             <p>You're probably opening this as <span style="font-family:var(--mono);">file://</span> and your browser blocked <span style="font-family:var(--mono);">fetch()</span>.
                Fix: run a tiny local server: <span style="font-family:var(--mono);">python -m http.server 8080</span> and open <span style="font-family:var(--mono);">http://localhost:8080</span>.</p>
+            <p>Expected profile JSON at: <span style="font-family:var(--mono);">${PROFILE_URLS.join("</span> or <span style=\"font-family:var(--mono);\">")}</span></p>
           </div>
           <div class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">STATUS</b> • LOAD BLOCKED</div>
         </div>
         <div class="panel__body">
-          <div class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">DETAILS</b> ${String(err).replace(/</g,"&lt;")}</div>
+          <div class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">DETAILS</b> ${String(lastErr).replace(/</g,"&lt;")}</div>
         </div>
       `;
       const wrap = document.querySelector(".wrap");
       const hero = document.querySelector(".hero");
       if(wrap && hero) wrap.insertBefore(warn, hero.nextSibling);
-      throw err;
+      throw lastErr || new Error("Profile load failed");
     }
   }
 

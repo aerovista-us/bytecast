@@ -20,8 +20,10 @@ If you want in, don’t ask for permission — ship a small win. Proof-of-work g
 
 
 ## JSON-driven template
-This build loads `bytecast_ep_profile.json` at runtime (via `fetch()`), so **use a local server**:
+This build loads a profile JSON at runtime (via `fetch()`), so **use a local server**:
 - `python -m http.server 8080`
 - open `http://localhost:8080`
 
-Edit episode content in `bytecast_ep_profile.json`.
+Preferred (pack contract): edit episode content in `data/bytecast_ep_profile.json`.
+
+Compatibility: `bytecast_ep_profile.json` at the root is still supported, but `data/` is the canonical location going forward.

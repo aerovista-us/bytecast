@@ -11,6 +11,7 @@
   const STYLE_ID = "bc-loop-ui-style-v1";
   const ACTIVE_JOURNEY_KEY = "bytecast.journey.active";
   const LEGACY_ACTIVE_JOURNEY_KEY = "bytecast.journey.active.v1";
+  const SHOW_DONE_KEY = "bytecast.loopui.show_done.v1";
 
   function shouldTrack() {
     try {
@@ -90,6 +91,27 @@
       }
 
       .bc-journey__list { margin-top: 12px; display:grid; gap: 10px; }
+      .bc-journey[data-show-done="0"] .bc-step.is-done { display: none; }
+
+      details.bc-group{
+        border-radius: 14px;
+        border: 1px solid rgba(255,255,255,0.10);
+        background: rgba(0,0,0,0.12);
+        padding: 10px 10px 12px;
+      }
+      details.bc-group > summary{
+        list-style:none;
+        cursor:pointer;
+        display:flex;
+        align-items:center;
+        justify-content: space-between;
+        gap: 12px;
+        font-weight: 900;
+        color: rgba(255,255,255,0.90);
+      }
+      details.bc-group > summary::-webkit-details-marker{ display:none; }
+      .bc-group__meta{ display:flex; gap: 8px; flex-wrap:wrap; align-items:center; justify-content:flex-end; }
+      .bc-group__body{ margin-top: 10px; display:grid; gap: 10px; }
       .bc-step {
         border-radius: 14px;
         border: 1px solid rgba(255,255,255,0.12);
@@ -147,6 +169,17 @@
     return lane || "unknown";
   }
 
+  function groupOf(step) {
+    const group = String(step?.group || "").trim();
+    if (group) return group;
+    const lane = laneOf(step);
+    if (lane === "bytecast") return "ByteCast";
+    if (lane === "training") return "Training";
+    if (lane === "seed") return "Seeding";
+    if (lane === "badge") return "Badge";
+    return "Steps";
+  }
+
   function dependsText(step) {
     const deps = Array.isArray(step?.depends_on) ? step.depends_on : [];
     if (!deps.length) return "";
@@ -172,7 +205,6 @@
     const pickerEnabled = opts?.picker !== false;
     const surface = opts?.surface || "unknown";
 
-    const wf2 = Loop.ensureWorkflowV2();
     const config = await Loop.loadJourneyConfig(configUrl, null);
     const journeys = Array.isArray(config?.journeys) ? config.journeys : [];
     const storedJourneyId = (() => {
@@ -201,12 +233,15 @@
 
     try { if (journeyId && journeyId !== storedJourneyId) localStorage.setItem(ACTIVE_JOURNEY_KEY, journeyId); } catch {}
 
+    const wf2 = Loop.ensureWorkflowV2(journeyId);
+
     const badgeResult = Loop.ensureJourneyBadges(journey, wf2);
     if (badgeResult?.minted || badgeResult?.marked) {
-      Loop.saveWorkflowV2?.(wf2);
+      Loop.saveWorkflowV2?.(wf2, journeyId);
     }
 
-    const steps = Array.isArray(journey.steps) ? journey.steps : [];
+    const rawSteps = Array.isArray(journey.steps) ? journey.steps : [];
+    const steps = Loop.sortSteps ? Loop.sortSteps(rawSteps) : rawSteps.slice();
     const next = Loop.getNextStep(journey, wf2);
     const nextId = next?.id || "";
 
@@ -218,6 +253,16 @@
 
     const primaryHref = next?.href ? Loop.resolveFromRoot(next.href) : "";
     const primaryText = next?.cta || (next ? `Open: ${next.label}` : "No next step");
+
+    const showDone = (() => {
+      try {
+        const raw = localStorage.getItem(SHOW_DONE_KEY);
+        if (!raw) return true;
+        return raw === "1";
+      } catch {
+        return true;
+      }
+    })();
 
     const pickerHtml = (pickerEnabled && journeys.length > 1) ? `
       <label style="display:flex; gap:8px; align-items:center; color: rgba(255,255,255,0.72); font: 800 11px/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; letter-spacing:.06em; text-transform:uppercase;">
@@ -233,7 +278,14 @@
       </label>
     ` : "";
 
-    const listHtml = steps.map((step) => {
+    const showDoneHtml = `
+      <label style="display:flex; gap:8px; align-items:center; color: rgba(255,255,255,0.72); font: 800 11px/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; letter-spacing:.06em; text-transform:uppercase;">
+        <input data-bc-show-done="1" type="checkbox" ${showDone ? "checked" : ""} style="width:16px;height:16px;accent-color:#22a7ff;" />
+        show done
+      </label>
+    `;
+
+    const stepHtml = (step) => {
       const done = Loop.isStepComplete(journey, step, wf2);
       const unlocked = Loop.isStepUnlocked(journey, step, wf2);
       const isNext = Boolean(step?.id && step.id === nextId);
@@ -241,6 +293,9 @@
       const href = step?.href ? Loop.resolveFromRoot(step.href) : "";
       const deps = dependsText(step);
       const lane = laneOf(step);
+      const group = groupOf(step);
+      const est = Number(step?.estimatedMinutes);
+      const estText = Number.isFinite(est) && est > 0 ? `est: ${Math.round(est)}m` : "";
 
       const chip = done
         ? `<span class="bc-chip bc-chip--done">Done</span>`
@@ -250,10 +305,11 @@
         ? `<a class="bc-step__open" data-bc-cta="1" data-step-id="${escapeHtml(step.id)}" data-lane="${escapeHtml(lane)}" href="${escapeHtml(href)}">Open</a>`
         : `<span class="bc-step__open is-disabled" title="${escapeHtml(deps || "Locked")}">Open</span>`;
 
-      const metaLine = deps ? `<div class="bc-step__meta" title="${escapeHtml(deps)}">${escapeHtml(deps)}</div>` : "";
+      const metaParts = [deps, estText].filter(Boolean);
+      const metaLine = metaParts.length ? `<div class="bc-step__meta" title="${escapeHtml(metaParts.join(" • "))}">${escapeHtml(metaParts.join(" • "))}</div>` : "";
 
       return `
-        <div class="bc-step ${done ? "is-done" : ""} ${isNext ? "is-next" : ""} ${!unlocked && !done ? "is-locked" : ""}" data-status="${escapeHtml(status)}">
+        <div class="bc-step ${done ? "is-done" : ""} ${isNext ? "is-next" : ""} ${!unlocked && !done ? "is-locked" : ""}" data-status="${escapeHtml(status)}" data-group="${escapeHtml(group)}">
           <div class="bc-step__left">
             <span class="bc-lane" data-lane="${escapeHtml(lane)}" aria-hidden="true"></span>
             <div style="min-width:0;">
@@ -267,10 +323,40 @@
           </div>
         </div>
       `;
+    };
+
+    const grouped = new Map();
+    for (const step of steps) {
+      if (!step) continue;
+      const done = Loop.isStepComplete(journey, step, wf2);
+      if (!showDone && done) continue;
+      const g = groupOf(step);
+      if (!grouped.has(g)) grouped.set(g, []);
+      grouped.get(g).push(step);
+    }
+
+    const groupEntries = [...grouped.entries()].map(([groupName, groupSteps]) => {
+      const hasNext = groupSteps.some((s) => s && s.id === nextId);
+      const doneCount = groupSteps.filter((s) => Loop.isStepComplete(journey, s, wf2)).length;
+      const totalCount = groupSteps.length;
+      const openAttr = hasNext ? "open" : "";
+      const body = groupSteps.map(stepHtml).join("");
+      return `
+        <details class="bc-group" ${openAttr}>
+          <summary>
+            <span>${escapeHtml(groupName)}</span>
+            <span class="bc-group__meta">
+              <span class="bc-chip">${escapeHtml(String(doneCount))}/${escapeHtml(String(totalCount))}</span>
+              ${hasNext ? `<span class="bc-chip bc-chip--next">Next</span>` : ``}
+            </span>
+          </summary>
+          <div class="bc-group__body">${body}</div>
+        </details>
+      `;
     }).join("");
 
     container.innerHTML = `
-      <div class="bc-journey" data-journey-id="${escapeHtml(journeyId)}">
+      <div class="bc-journey" data-journey-id="${escapeHtml(journeyId)}" data-show-done="${showDone ? "1" : "0"}">
         <div class="bc-journey__head">
           <div>
             <h3 class="bc-journey__title">${escapeHtml(journey.label || "Journey")}</h3>
@@ -278,11 +364,12 @@
           </div>
           <div class="bc-journey__cta">
             ${pickerHtml}
+            ${showDoneHtml}
             ${primaryHref ? `<a class="bc-journey__btn bc-journey__btn--legendary" data-bc-primary="1" data-step-id="${escapeHtml(nextId)}" data-lane="${escapeHtml(laneOf(next))}" href="${escapeHtml(primaryHref)}">${escapeHtml(primaryText)}</a>` : `<span class="bc-journey__btn bc-journey__btn--legendary" style="opacity:.6; pointer-events:none;">${escapeHtml(primaryText)}</span>`}
           </div>
         </div>
         <div class="bc-journey__list" role="list" aria-label="Journey steps">
-          ${listHtml}
+          ${groupEntries}
         </div>
       </div>
     `;
@@ -305,6 +392,14 @@
         if (!nextJourneyId) return;
         try { localStorage.setItem(ACTIVE_JOURNEY_KEY, nextJourneyId); } catch {}
         void renderJourneyMap({ ...opts, journeyId: nextJourneyId });
+      });
+
+      container.addEventListener("change", (ev) => {
+        const cb = ev.target?.closest?.("input[data-bc-show-done]");
+        if (!cb) return;
+        const v = cb.checked ? "1" : "0";
+        try { localStorage.setItem(SHOW_DONE_KEY, v); } catch {}
+        void renderJourneyMap({ ...opts });
       });
     }
   }

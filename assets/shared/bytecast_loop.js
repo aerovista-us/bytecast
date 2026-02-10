@@ -423,15 +423,31 @@
     });
   }
 
+  function sortSteps(steps) {
+    const list = Array.isArray(steps) ? steps : [];
+    const keyed = list.map((step, index) => ({ step, index }));
+    const toNum = (v) => {
+      const n = Number(v);
+      return Number.isFinite(n) ? n : 1e9;
+    };
+    keyed.sort((a, b) => {
+      const ao = toNum(a.step?.order);
+      const bo = toNum(b.step?.order);
+      return (ao - bo) || (a.index - b.index);
+    });
+    return keyed.map((x) => x.step);
+  }
+
   function getNextStep(journey, wf2) {
     const steps = Array.isArray(journey?.steps) ? journey.steps : [];
-    for (const step of steps) {
+    const sorted = sortSteps(steps);
+    for (const step of sorted) {
       if (!step) continue;
       if (!isStepUnlocked(journey, step, wf2)) continue;
       if (!isStepComplete(journey, step, wf2)) return step;
     }
     // If everything is complete, return last step if present.
-    return steps.length ? steps[steps.length - 1] : null;
+    return sorted.length ? sorted[sorted.length - 1] : null;
   }
 
   function ensureJourneyBadges(journey, wf2) {
@@ -505,9 +521,51 @@
   async function loadJourneyConfig(url, fallback) {
     if (!url) return fallback || { journeys: [] };
     try {
-      return await loadJson(url);
+      const config = await loadJson(url);
+      validateJourneyConfig(config);
+      return config;
     } catch {
       return fallback || { journeys: [] };
+    }
+  }
+
+  function validateJourneyConfig(config) {
+    const journeys = Array.isArray(config?.journeys) ? config.journeys : [];
+    for (const j of journeys) {
+      if (!j || typeof j !== "object") continue;
+      const steps = Array.isArray(j.steps) ? j.steps : [];
+      const ids = steps.map((s) => String(s?.id || "")).filter(Boolean);
+      const seen = new Set();
+      const dupes = new Set();
+      for (const id of ids) {
+        if (seen.has(id)) dupes.add(id);
+        seen.add(id);
+      }
+      if (dupes.size) {
+        console.warn(`[ByteCastLoop] Journey "${j.id || "unknown"}" has duplicate step ids: ${[...dupes].join(", ")}.`);
+      }
+
+      const stepIdSet = new Set(ids);
+      const badges = Array.isArray(j.badges) ? j.badges : [];
+      for (const b of badges) {
+        if (!b || typeof b !== "object") continue;
+        const requires = Array.isArray(b.requires) ? b.requires : [];
+        const missingReq = requires.filter((rid) => rid && !stepIdSet.has(rid));
+        if (missingReq.length) {
+          console.warn(`[ByteCastLoop] Badge "${b.id || "unknown"}" in journey "${j.id || "unknown"}" requires missing step ids: ${missingReq.join(", ")}.`);
+        }
+
+        const minProof = b.minProof && typeof b.minProof === "object" ? b.minProof : null;
+        if (minProof) {
+          const missingProofStep = Object.keys(minProof).filter((sid) => sid && !stepIdSet.has(sid));
+          if (missingProofStep.length) {
+            console.warn(
+              `[ByteCastLoop] Badge "${b.id || "unknown"}" in journey "${j.id || "unknown"}" has minProof for step ids not in this journey: ${missingProofStep.join(", ")}. ` +
+              `This is allowed for hidden sub-steps, but double-check your ids.`
+            );
+          }
+        }
+      }
     }
   }
 
@@ -538,5 +596,6 @@
     getActiveJourneyId,
     setActiveJourneyId,
     workflowV2KeyForJourney,
+    sortSteps,
   };
 })();

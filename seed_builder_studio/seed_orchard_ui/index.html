@@ -91,10 +91,11 @@
 
       <div id="harvestActions" class="harvest-actions" hidden>
         <div class="harvest-actions__row">
-          <button id="exportJson" type="button" class="action-btn">Export Seed Artifact (JSON)</button>
+          <button id="exportZip" type="button" class="action-btn">Export Runnable Pack (ZIP)</button>
+          <button id="exportJson" type="button" class="action-btn secondary">Export Seed Artifact (JSON)</button>
           <a id="claimBadge" class="action-btn secondary" href="../../seed_bytecast.html">Back to Playlist</a>
         </div>
-        <p id="exportNote" class="hint">Export creates a small artifact and marks your Seed step complete for the Golden Path.</p>
+        <p id="exportNote" class="hint">Export creates a small artifact and marks your Seed step complete for the active journey.</p>
       </div>
     </section>
   </main>
@@ -114,6 +115,7 @@
 
   <script src="../../assets/shared/bytecast_loop.js"></script>
   <script src="../../assets/shared/bytecast_loop_ui.js"></script>
+  <script src="../../vendor/fflate.min.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
