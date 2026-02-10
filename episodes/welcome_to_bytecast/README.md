@@ -9,7 +9,7 @@ Date: 2026-02-07
 - Or serve locally: `python -m http.server 8080` then open `http://localhost:8080`
 
 ## Audio Connection
-- Connected file: `assets/welcome_to_bytecast.aac`
+- Connected file: `assets/welcome_to_bytecast.mp3` (fallback: `assets/welcome_to_bytecast.aac`)
 
 ## Keys
 - Slides: ← / →

@@ -30,6 +30,15 @@
       "publishable": true
     },
     {
+      "slug": "eos_2026_02_09",
+      "episode_code": "EP-EOS-2026-02-09",
+      "title": "EoS ByteCast — Seed Orchard ZIP Export + Multi-Journey Quest Map",
+      "primary_path": "episodes/eos_2026_02_09",
+      "legacy_paths": [],
+      "status": "active",
+      "publishable": false
+    },
+    {
       "slug": "reserved_ep2_slot",
       "episode_code": "",
       "title": "Retired legacy slot for ep2",

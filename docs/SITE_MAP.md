@@ -18,8 +18,9 @@ Source of truth: `.CODEX/episode_registry.json`
 
 | Episode | Repo path | GitHub Pages URL | Notes |
 |---|---|---|---|
-| EP-001 | `episodes/welcome_to_bytecast/index.html` | `https://aerovista-us.github.io/bytecast/episodes/welcome_to_bytecast/index.html` | Audio expected at `episodes/welcome_to_bytecast/assets/welcome_to_bytecast.aac` |
-| EP-002 | `episodes/aerovista_7_division_overview/index.html` | `https://aerovista-us.github.io/bytecast/episodes/aerovista_7_division_overview/index.html` | Pulls Offer Pack JSON; audio at `episodes/aerovista_7_division_overview/aerovista_7_division_overview.aac` (optional fallback: `assets/bytecast-ep2.mp3`) |
+| EP-001 | `episodes/welcome_to_bytecast/index.html` | `https://aerovista-us.github.io/bytecast/episodes/welcome_to_bytecast/index.html` | Audio: `assets/welcome_to_bytecast.mp3` (fallback: `assets/welcome_to_bytecast.aac`) |
+| EP-002 | `episodes/aerovista_7_division_overview/index.html` | `https://aerovista-us.github.io/bytecast/episodes/aerovista_7_division_overview/index.html` | Pulls Offer Pack JSON; audio: `assets/bytecast-ep2.mp3` (fallback: `aerovista_7_division_overview.aac`) |
+| EP-EOS | `episodes/eos_2026_02_09/index.html` | `https://aerovista-us.github.io/bytecast/episodes/eos_2026_02_09/index.html` | EoS recap pack; audio placeholder at `assets/audio_placeholder.wav` |
 
 Runtime-safe registry mirror (used by Playlist):
 - `data/episode_registry.json`

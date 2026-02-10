@@ -1,0 +1,219 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "episode": {
+    "code": "EP-EOS-2026-02-09",
+    "title": "EoS ByteCast — Seed Orchard ZIP Export + Multi-Journey Quest Map",
+    "type": "internal",
+    "date": "2026-02-09",
+    "runtime_target_minutes": 4,
+    "status": "draft"
+  },
+  "content": {
+    "tags": [
+      "eos",
+      "bytecast",
+      "platform",
+      "journeys",
+      "quest-map",
+      "badges",
+      "seed-orchard",
+      "zip-export",
+      "umami"
+    ],
+    "summary_short": "End-of-session update: ByteCast loop v2 is live with multi-journey quest maps, proof badges, and runnable ZIP seed exports.",
+    "summary_long": "This EoS ByteCast recaps what shipped: a config-driven loop controlled by data/journey_steps.json, quest map rendering across Playlist/Training/Orchard, proof-based badge minting (with minProof), and Seed Orchard exporting runnable ZIP packs seeded from the canonical template."
+  },
+  "media": {
+    "audio_files": [
+      {
+        "path": "assets/audio_placeholder.wav",
+        "label": "Audio (placeholder)",
+        "required": false
+      }
+    ],
+    "images": [
+      {
+        "path": "assets/favicon.svg",
+        "label": "Favicon (optional)",
+        "required": false
+      }
+    ]
+  },
+  "slides": [
+    {
+      "id": "s1",
+      "title": "Today’s headline",
+      "goal": "What changed in one breath.",
+      "bullets": [
+        "ByteCast is now a platform: multi-journey + quest map + proof badges + runnable seed packs.",
+        "The loop is real, visible, and extendable without rewriting UI."
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "The Spine",
+      "goal": "What controls the loop.",
+      "bullets": [
+        "data/journey_steps.json controls steps, CTAs, order, and badge rules.",
+        "No hardcoded handoffs required for the main loop surfaces.",
+        "Progress is stored per journey: bytecast.workflow.v2.<journeyId>."
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Quest Map Everywhere",
+      "goal": "Make the loop obvious on every surface.",
+      "bullets": [
+        "Shared renderer powers Playlist, Training Hub, and Orchard.",
+        "Grouped + collapsible steps scale to longer tracks.",
+        "One primary CTA always points to the next step."
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Badges Got Teeth",
+      "goal": "Badges are enforced, not vibes.",
+      "bullets": [
+        "Central badge enforcement in the loop engine.",
+        "Optional minProof is validated before minting.",
+        "badge_minted includes journeyId for clean analytics."
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "Umami at the Loop Layer",
+      "goal": "Analytics is centralized and safe.",
+      "bullets": [
+        "loop_loaded, cta_clicked, step_done, badge_minted.",
+        "Auto-disabled on file://.",
+        "Funnel truth: CTA -> step_done -> badge_minted."
+      ]
+    },
+    {
+      "id": "s6",
+      "title": "Seed Orchard: Real Artifacts",
+      "goal": "Seeder output is runnable, not conceptual.",
+      "bullets": [
+        "Export Runnable Pack (ZIP).",
+        "Seeded from the canonical template baseline.",
+        "Profile JSON generated at data/bytecast_ep_profile.json.",
+        "Proof payload includes artifactName/filesCount/hash."
+      ]
+    },
+    {
+      "id": "s7",
+      "title": "What’s Next",
+      "goal": "The next two unlocks.",
+      "bullets": [
+        "Publish step (URL proof) -> badge.",
+        "TR-002 missions: first useful contribution.",
+        "EP-003 onboarding for non-coders."
+      ]
+    },
+    {
+      "id": "s8",
+      "title": "Call to Action",
+      "goal": "Make the loop happen.",
+      "bullets": [
+        "Run the Golden Path.",
+        "Export a runnable pack.",
+        "Mint your badge.",
+        "Submit one improvement PR."
+      ]
+    }
+  ],
+  "engagement": {
+    "quest": {
+      "title": "EoS Confirmations",
+      "items": [
+        {
+          "id": "c1",
+          "text": "I can explain what controls the loop."
+        },
+        {
+          "id": "c2",
+          "text": "I know where progress is stored per journey."
+        },
+        {
+          "id": "c3",
+          "text": "I can export a runnable ZIP from Seed Orchard."
+        }
+      ],
+      "reward_badge": {
+        "label": "EOS READY",
+        "style": "neon"
+      }
+    },
+    "quiz": {
+      "enabled": true,
+      "pass_threshold": 0.67,
+      "questions": [
+        {
+          "id": "k1",
+          "q": "What is the single source of truth for the loop?",
+          "choices": [
+            "Hardcoded links in HTML",
+            "data/journey_steps.json",
+            "The browser address bar",
+            "A hidden server setting"
+          ],
+          "answer_index": 1,
+          "explain": "The loop is config-driven from JSON so you can add/remove steps without rewriting UI."
+        },
+        {
+          "id": "k2",
+          "q": "Where is progress stored (v2)?",
+          "choices": [
+            "A single global key",
+            "Per-journey keys: bytecast.workflow.v2.<journeyId>",
+            "Only in Umami",
+            "In the episode registry"
+          ],
+          "answer_index": 1,
+          "explain": "Per-journey storage prevents collisions as journeys expand."
+        },
+        {
+          "id": "k3",
+          "q": "What makes Seed Orchard export valuable?",
+          "choices": [
+            "It saves a note",
+            "It exports a runnable pack ZIP with proof payload",
+            "It renames folders",
+            "It hides steps"
+          ],
+          "answer_index": 1,
+          "explain": "Export produces a real artifact and records proof for badges."
+        }
+      ]
+    }
+  },
+  "aerovista_about": {
+    "summary": "AeroVista ships modular packs (episodes, training, tools) connected by a thin, config-driven loop engine.",
+    "divisions": [
+      {
+        "name": "NeXuS TechWorks",
+        "bread_and_butter": "Automation, systems, tooling, and repeatable builders."
+      },
+      {
+        "name": "EchoVerse Media",
+        "bread_and_butter": "Audio, narratives, and engagement that holds attention."
+      },
+      {
+        "name": "SkyForge Creative",
+        "bread_and_butter": "Design systems, visual identity, and shippable presentation."
+      },
+      {
+        "name": "Lift Lab",
+        "bread_and_butter": "Training missions that unlock real contribution."
+      },
+      {
+        "name": "Seed Builder Studio",
+        "bread_and_butter": "Templates + generators that produce artifacts."
+      },
+      {
+        "name": "Seed Orchard",
+        "bread_and_butter": "Seed-to-fruit workflow: validate -> export -> badge."
+      }
+    ]
+  }
+}

@@ -196,5 +196,82 @@
         }
       ]
     }
+    ,
+    {
+      "id": "session_updates_2026_02_09",
+      "label": "Session Update: 2026-02-09",
+      "description": "End-of-session recap + confirmations (listen -> slide -> engage).",
+      "steps": [
+        {
+          "id": "eos_20260209_listen",
+          "label": "EoS Listen",
+          "lane": "bytecast",
+          "group": "ByteCast",
+          "order": 10,
+          "estimatedMinutes": 4,
+          "href": "episodes/eos_2026_02_09/index.html",
+          "cta": "Legendary: Play EoS",
+          "complete_when": {
+            "type": "step_done",
+            "id": "eos_20260209_listen"
+          }
+        },
+        {
+          "id": "eos_20260209_slide",
+          "label": "EoS Slides",
+          "lane": "bytecast",
+          "group": "ByteCast",
+          "order": 20,
+          "estimatedMinutes": 1,
+          "href": "episodes/eos_2026_02_09/index.html",
+          "cta": "Legendary: Finish Slides",
+          "depends_on": ["eos_20260209_listen"],
+          "complete_when": {
+            "type": "step_done",
+            "id": "eos_20260209_slide"
+          }
+        },
+        {
+          "id": "eos_20260209_engage",
+          "label": "EoS Engage",
+          "lane": "bytecast",
+          "group": "Engage",
+          "order": 30,
+          "estimatedMinutes": 1,
+          "href": "episodes/eos_2026_02_09/index.html",
+          "cta": "Legendary: Confirm",
+          "depends_on": ["eos_20260209_slide"],
+          "complete_when": {
+            "type": "step_done",
+            "id": "eos_20260209_engage"
+          }
+        },
+        {
+          "id": "badge_session_updates_2026_02_09_v1",
+          "label": "Badge",
+          "lane": "badge",
+          "group": "Badge",
+          "order": 40,
+          "estimatedMinutes": 1,
+          "href": "seed_bytecast.html",
+          "cta": "Legendary: View Badge",
+          "depends_on": ["eos_20260209_engage"],
+          "complete_when": {
+            "type": "badge_has",
+            "badge_id": "session_updates_2026_02_09_v1"
+          }
+        }
+      ],
+      "badges": [
+        {
+          "id": "session_updates_2026_02_09_v1",
+          "label": "Session Update: 2026-02-09",
+          "requires": ["eos_20260209_listen", "eos_20260209_slide", "eos_20260209_engage"],
+          "minProof": {
+            "eos_20260209_listen": ["episodeSlug"]
+          }
+        }
+      ]
+    }
   ]
 }

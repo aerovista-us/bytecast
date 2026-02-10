@@ -821,7 +821,8 @@
         registry = {
           episodes: [
             { slug: "welcome_to_bytecast", episode_code: "EP-001", title: "Welcome to ByteCast", primary_path: "episodes/welcome_to_bytecast", status: "active" },
-            { slug: "aerovista_7_division_overview", episode_code: "EP-002", title: "AeroVista Overview", primary_path: "episodes/aerovista_7_division_overview", status: "active" }
+            { slug: "aerovista_7_division_overview", episode_code: "EP-002", title: "AeroVista Overview", primary_path: "episodes/aerovista_7_division_overview", status: "active" },
+            { slug: "eos_2026_02_09", episode_code: "EP-EOS-2026-02-09", title: "EoS ByteCast — Platform Update", primary_path: "episodes/eos_2026_02_09", status: "active" }
           ]
         };
       }
@@ -834,11 +835,17 @@
       loadEl.textContent = active.length ? "" : "No active episodes found.";
 
       const profiles = await Promise.all(active.map(async (ep) => {
+        const base = `./${ep.primary_path}/`.replaceAll("//", "/");
         try {
-          const p = await loadJson(`./${ep.primary_path}/bytecast_ep_profile.json`.replaceAll("//", "/"));
+          const p = await loadJson(`${base}bytecast_ep_profile.json`.replaceAll("//", "/"));
           return { ep, profile: p };
         } catch {
-          return { ep, profile: null };
+          try {
+            const p = await loadJson(`${base}data/bytecast_ep_profile.json`.replaceAll("//", "/"));
+            return { ep, profile: p };
+          } catch {
+            return { ep, profile: null };
+          }
         }
       }));
 

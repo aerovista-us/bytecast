@@ -5,6 +5,7 @@ Use content-slug folders for all current and new episodes.
 ## Active episodes
 1. `episodes/welcome_to_bytecast` (`EP-001`)
 2. `episodes/aerovista_7_division_overview` (`EP-002`)
+3. `episodes/eos_2026_02_09` (`EP-EOS-2026-02-09`) (draft audio placeholder)
 
 ## Policy
 - New episodes must use: `episodes/<content_slug>/`
