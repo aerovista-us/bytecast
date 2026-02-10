@@ -39,6 +39,16 @@
       "publishable": false
     },
     {
+      "slug": "contributing_non_coders",
+      "episode_code": "EP-003",
+      "title": "How To Contribute (No-Code First)",
+      "primary_path": "",
+      "intended_path": "episodes/contributing_non_coders",
+      "legacy_paths": [],
+      "status": "planned",
+      "publishable": false
+    },
+    {
       "slug": "reserved_ep2_slot",
       "episode_code": "",
       "title": "Retired legacy slot for ep2",

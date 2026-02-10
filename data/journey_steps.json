@@ -1,11 +1,11 @@
 {
   "schema": "bytecast-journey-steps-v1",
-  "updated_on": "2026-02-09",
+  "updated_on": "2026-02-10",
   "journeys": [
     {
       "id": "p1_golden_path",
       "label": "Onboarding (Golden Path)",
-      "description": "EP-001 gates -> TR-001 -> Seed export -> Badge",
+      "description": "EP-001 gates -> TR-001 -> Seed export -> Publish -> Badge",
       "isDefault": true,
       "steps": [
         {
@@ -45,6 +45,21 @@
           "depends_on": ["tr001_golden_path"]
         },
         {
+          "id": "seed_publish_v1",
+          "label": "Publish Link",
+          "lane": "seed",
+          "group": "Publish",
+          "order": 35,
+          "estimatedMinutes": 2,
+          "href": "seed_builder_studio/seed_orchard_ui/index.html",
+          "cta": "Legendary: Record Publish URL",
+          "depends_on": ["seed_export_v1"],
+          "complete_when": {
+            "type": "step_done",
+            "id": "seed_publish_v1"
+          }
+        },
+        {
           "id": "badge_p1_golden_path_v1",
           "label": "Badge",
           "lane": "badge",
@@ -53,7 +68,7 @@
           "estimatedMinutes": 1,
           "href": "seed_bytecast.html",
           "cta": "Legendary: View Badge",
-          "depends_on": ["seed_export_v1"],
+          "depends_on": ["seed_publish_v1"],
           "complete_when": {
             "type": "badge_has",
             "badge_id": "p1_golden_path_v1"
@@ -64,10 +79,11 @@
         {
           "id": "p1_golden_path_v1",
           "label": "P1: Golden Path",
-          "requires": ["ep001_gates", "tr001_golden_path", "seed_export_v1"],
+          "requires": ["ep001_gates", "tr001_golden_path", "seed_export_v1", "seed_publish_v1"],
           "minProof": {
             "tr001_golden_path": ["mission"],
-            "seed_export_v1": ["artifactName", "artifactHash"]
+            "seed_export_v1": ["artifactName", "artifactHash"],
+            "seed_publish_v1": ["publishedUrl"]
           }
         }
       ]

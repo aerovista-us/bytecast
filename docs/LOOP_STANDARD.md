@@ -78,6 +78,7 @@ Recommended fields:
 - Episode completion: `{ episodeSlug, episodeCode, gate, durationSec }`
 - Training completion: `{ moduleId, missionId, checkpointsPassed }`
 - Seed completion: `{ artifactName, artifactHash, filesCount, schema, artifactType, packSchemaVersion, templateHash, profilePath }`
+- Publish completion: `{ publishedUrl, publishedAt }`
 - Badge: `{ badgeId, mintedAt, journeyId }`
 
 ## Workflow Storage Versions

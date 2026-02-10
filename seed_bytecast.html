@@ -330,7 +330,7 @@
         <div>
           <h1 class="h-title">BYTECAST</h1>
           <p class="h-sub" id="heroSub">
-            Playlist hub for the journey: Listen -> Slide -> Engage -> Training -> Seed -> Badge.
+            Playlist hub for the journey: Listen -> Slide -> Engage -> Training -> Seed -> Publish -> Badge.
           </p>
           <div class="pills" id="metaPills">
             <span class="pill"><span class="spark" aria-hidden="true"></span><strong>listen</strong> • anchor intent</span>
@@ -458,6 +458,10 @@
           <div id="badgeList" class="chips" style="margin-top:10px;">
             <span class="tiny muted">No badges yet.</span>
           </div>
+        </div>
+        <div style="margin-top:14px; padding-top:14px; border-top:1px solid var(--stroke);">
+          <div class="k">Insights</div>
+          <div id="insights" class="tiny muted" style="margin-top:10px;">Loading…</div>
         </div>
         <p class="tiny" style="margin:12px 0 0;">
           Run via `python -m http.server 8080` for best results (fetch + JSON).
@@ -739,6 +743,34 @@
         .join("");
     }
 
+    function renderInsights() {
+      const el = $("#insights");
+      if (!el) return;
+      if (!Loop) {
+        el.textContent = "Insights unavailable (loop engine missing).";
+        return;
+      }
+
+      const journeyId = Loop.getActiveJourneyId?.() || "p1_golden_path";
+      const wf2 = Loop.loadWorkflowV2?.(journeyId) || null;
+      if (!wf2 || typeof wf2 !== "object") {
+        el.textContent = `Journey: ${journeyId} • No workflow yet.`;
+        return;
+      }
+
+      const steps = wf2.steps && typeof wf2.steps === "object" ? wf2.steps : {};
+      const done = Object.entries(steps)
+        .filter(([, s]) => s && typeof s === "object" && s.done && s.doneAt)
+        .map(([id, s]) => ({ id, doneAt: String(s.doneAt || ""), meta: s.meta && typeof s.meta === "object" ? s.meta : {} }))
+        .sort((a, b) => (b.doneAt || "").localeCompare(a.doneAt || ""));
+
+      const last = done[0] || null;
+      const when = last?.doneAt ? new Date(last.doneAt).toLocaleString() : "";
+      const updated = wf2.updatedAt ? new Date(wf2.updatedAt).toLocaleString() : "";
+      const pub = last?.meta?.publishedUrl ? ` • URL: ${String(last.meta.publishedUrl).slice(0, 72)}` : "";
+      el.textContent = `Journey: ${journeyId} • ${last ? `Last done: ${last.id}` : "Last done: (none)"}${when ? ` • ${when}` : ""}${updated ? ` • Updated: ${updated}` : ""}${pub}`;
+    }
+
     const GOLDEN_FALLBACK_CONFIG = {
       journeys: [
         {
@@ -748,9 +780,10 @@
             { id: "ep001_gates", label: "EP-001 Gates", href: "episodes/welcome_to_bytecast/index.html" },
             { id: "tr001_golden_path", label: "Training (TR-001)", href: "training_missions/tr_001_golden_path/index.html", depends_on: ["ep001_gates"] },
             { id: "seed_export_v1", label: "Seed Export", href: "seed_builder_studio/seed_orchard_ui/index.html", depends_on: ["tr001_golden_path"] },
-            { id: "badge_p1_golden_path_v1", label: "Badge", href: "seed_bytecast.html", depends_on: ["seed_export_v1"], complete_when: { type: "badge_has", badge_id: "p1_golden_path_v1" } }
+            { id: "seed_publish_v1", label: "Publish Link", href: "seed_builder_studio/seed_orchard_ui/index.html", depends_on: ["seed_export_v1"] },
+            { id: "badge_p1_golden_path_v1", label: "Badge", href: "seed_bytecast.html", depends_on: ["seed_publish_v1"], complete_when: { type: "badge_has", badge_id: "p1_golden_path_v1" } }
           ],
-          badges: [{ id: "p1_golden_path_v1", label: "P1: Golden Path", requires: ["ep001_gates", "tr001_golden_path", "seed_export_v1"] }]
+          badges: [{ id: "p1_golden_path_v1", label: "P1: Golden Path", requires: ["ep001_gates", "tr001_golden_path", "seed_export_v1", "seed_publish_v1"], minProof: { "seed_publish_v1": ["publishedUrl"] } }]
         }
       ]
     };
@@ -778,15 +811,16 @@
           `Seed ${seedOk ? "OK" : (trainingOk ? "TODO" : "LOCKED")}`,
           `Badge ${badgeOk ? "OK" : (eligible ? "TODO" : "LOCKED")}`,
         ].join(" • ");
-        $("#heroSub").textContent = `Playlist hub for the journey: Listen -> Slide -> Engage -> Training -> Seed -> Badge. (${funnel})`;
+        $("#heroSub").textContent = `Playlist hub for the journey: Listen -> Slide -> Engage -> Training -> Seed -> Publish -> Badge. (${funnel})`;
 
         if (label) label.textContent = "Golden Path";
-        if (why) why.textContent = "Complete the loop: EP-001 -> Training -> Seed -> Badge.";
+        if (why) why.textContent = "Complete the loop: EP-001 -> Training -> Seed -> Publish -> Badge.";
         if (btn) {
           btn.textContent = badgeOk ? "Legendary: View Badge" : "Legendary: Continue Journey";
           btn.setAttribute("href", bcOk ? (trainingOk ? (seedOk ? "./seed_bytecast.html" : "./seed_builder_studio/seed_orchard_ui/index.html") : "./training_missions/tr_001_golden_path/index.html") : "./episodes/welcome_to_bytecast/index.html");
         }
         renderBadges();
+        renderInsights();
         return;
       }
 
@@ -818,9 +852,10 @@
       const funnel = journey.steps
         .map((s) => `${s.label} ${Loop.isStepComplete(journey, s, wf2) ? "OK" : (Loop.isStepUnlocked(journey, s, wf2) ? "TODO" : "LOCKED")}`)
         .join(" • ");
-      $("#heroSub").textContent = `Playlist hub for the journey: Listen -> Slide -> Engage -> Training -> Seed -> Badge. (${funnel})`;
+      $("#heroSub").textContent = `Playlist hub for the journey: Listen -> Slide -> Engage -> Training -> Seed -> Publish -> Badge. (${funnel})`;
 
       renderBadges();
+      renderInsights();
 
       if (LoopUI) {
         await LoopUI.renderJourneyMap({

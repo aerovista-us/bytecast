@@ -6,6 +6,32 @@
   const ACTIVE_JOURNEY_KEY = "bytecast.journey.active";
   const LEGACY_ACTIVE_JOURNEY_KEY = "bytecast.journey.active.v1";
   const MIGRATED_GLOBAL_V2_KEY = "bytecast.workflow.v2.migrated_to_per_journey.v1";
+  const LOOP_ENGINE_VERSION = "bytecast_loop_v2";
+
+  function surfaceName() {
+    try {
+      const mode = document?.body?.dataset?.appMode;
+      if (mode) return String(mode);
+    } catch {
+      // ignore
+    }
+    try {
+      const p = String(location?.pathname || "").toLowerCase();
+      if (p.endsWith("/seed_bytecast.html")) return "playlist";
+      if (p.endsWith("/bytecast/index.html")) return "workspace";
+      if (p.endsWith("/bytecast/")) return "workspace";
+      if (p.includes("/training_hub/")) return "training_hub";
+      if (p.includes("/seed_builder_studio/seed_orchard_ui/")) return "seed_orchard";
+      if (p.includes("/seed_builder_studio/")) return "seed_builder";
+      if (p.includes("/episodes/")) return "episode";
+      if (p.includes("/training_missions/")) return "training_mission";
+      if (p.includes("/aerovista_offer_pack/")) return "offer_pack";
+      if (p.includes("/docs/")) return "docs";
+      return "unknown";
+    } catch {
+      return "unknown";
+    }
+  }
 
   function safeJsonParse(raw, fallback) {
     try {
@@ -96,13 +122,20 @@
   function track(eventName, data) {
     if (!analyticsEnabled()) return;
     const um = window.umami;
+    const payload = data && typeof data === "object"
+      ? {
+        version: LOOP_ENGINE_VERSION,
+        surface: surfaceName(),
+        ...data,
+      }
+      : data;
     try {
       if (um && typeof um.track === "function") {
-        um.track(eventName, data);
+        um.track(eventName, payload);
         return;
       }
       if (typeof um === "function") {
-        um(eventName, data);
+        um(eventName, payload);
       }
     } catch {
       // ignore

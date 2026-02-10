@@ -12,6 +12,7 @@
   const ACTIVE_JOURNEY_KEY = "bytecast.journey.active";
   const LEGACY_ACTIVE_JOURNEY_KEY = "bytecast.journey.active.v1";
   const SHOW_DONE_KEY = "bytecast.loopui.show_done.v1";
+  const LOOP_UI_VERSION = "bytecast_loop_ui_v2";
 
   function shouldTrack() {
     try {
@@ -382,7 +383,7 @@
         const stepId = a.getAttribute("data-step-id") || "";
         const lane = a.getAttribute("data-lane") || "";
         const primary = Boolean(a.hasAttribute("data-bc-primary"));
-        track("cta_clicked", { surface, journeyId, stepId, lane, primary });
+        track("cta_clicked", { version: LOOP_UI_VERSION, surface, journeyId, stepId, lane, primary });
       });
 
       container.addEventListener("change", (ev) => {

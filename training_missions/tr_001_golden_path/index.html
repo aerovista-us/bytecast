@@ -312,7 +312,15 @@
       const wf = loadWorkflow();
       if (!bytecastComplete(wf)) return;
       if (Loop) {
-        Loop.markStepDone("tr001_golden_path", { mission: "tr_001_golden_path" });
+        const m = loadMissions();
+        const checkpointsPassed = Number(Boolean(m.ck1)) + Number(Boolean(m.ck2));
+        Loop.markStepDone("tr001_golden_path", {
+          mission: "tr_001_golden_path",
+          moduleId: "tr_001_golden_path",
+          checkpointsPassed,
+          checkpointsTotal: 2,
+          version: "2026-02-10",
+        });
       } else {
         wf.trainingDone = true;
         wf.updatedAt = new Date().toISOString();

@@ -11,6 +11,9 @@
   const exportZipBtn = document.getElementById("exportZip");
   const claimBadgeLink = document.getElementById("claimBadge");
   const exportNote = document.getElementById("exportNote");
+  const publishedUrlInput = document.getElementById("publishedUrl");
+  const markPublishedBtn = document.getElementById("markPublished");
+  const publishNote = document.getElementById("publishNote");
 
   const Loop = window.ByteCastLoop || null;
   const LoopUI = window.ByteCastLoopUI || null;
@@ -431,21 +434,22 @@
     const fallbackId = PRIMARY_JOURNEY_ID || "";
     const activeId = Loop.getActiveJourneyId?.() || fallbackId;
     if (cachedJourney && cachedJourney.id === activeId) return cachedJourney;
-    const fallback = {
-      journeys: [
-        {
-          id: "p1_golden_path",
-          label: "P1: Golden Path",
-          steps: [
-            { id: "ep001_gates", label: "EP-001 Gates", lane: "bytecast", href: "episodes/welcome_to_bytecast/index.html" },
-            { id: "tr001_golden_path", label: "Training (TR-001)", lane: "training", href: "training_missions/tr_001_golden_path/index.html", depends_on: ["ep001_gates"] },
-            { id: "seed_export_v1", label: "Seed Export", lane: "seed", href: "seed_builder_studio/seed_orchard_ui/index.html", depends_on: ["tr001_golden_path"] },
-            { id: "badge_p1_golden_path_v1", label: "Badge", lane: "badge", href: "seed_bytecast.html", depends_on: ["seed_export_v1"], complete_when: { type: "badge_has", badge_id: "p1_golden_path_v1" } }
-          ],
-          badges: [{ id: "p1_golden_path_v1", label: "P1: Golden Path", requires: ["ep001_gates", "tr001_golden_path", "seed_export_v1"] }]
-        }
-      ]
-    };
+      const fallback = {
+        journeys: [
+          {
+            id: "p1_golden_path",
+            label: "P1: Golden Path",
+            steps: [
+              { id: "ep001_gates", label: "EP-001 Gates", lane: "bytecast", href: "episodes/welcome_to_bytecast/index.html" },
+              { id: "tr001_golden_path", label: "Training (TR-001)", lane: "training", href: "training_missions/tr_001_golden_path/index.html", depends_on: ["ep001_gates"] },
+              { id: "seed_export_v1", label: "Seed Export", lane: "seed", href: "seed_builder_studio/seed_orchard_ui/index.html", depends_on: ["tr001_golden_path"] },
+              { id: "seed_publish_v1", label: "Publish Link", lane: "seed", href: "seed_builder_studio/seed_orchard_ui/index.html", depends_on: ["seed_export_v1"] },
+              { id: "badge_p1_golden_path_v1", label: "Badge", lane: "badge", href: "seed_bytecast.html", depends_on: ["seed_publish_v1"], complete_when: { type: "badge_has", badge_id: "p1_golden_path_v1" } }
+            ],
+            badges: [{ id: "p1_golden_path_v1", label: "P1: Golden Path", requires: ["ep001_gates", "tr001_golden_path", "seed_export_v1", "seed_publish_v1"], minProof: { "seed_publish_v1": ["publishedUrl"] } }]
+          }
+        ]
+      };
     const config = await Loop.loadJourneyConfig(JOURNEY_URL, fallback);
     const journeys = Array.isArray(config?.journeys) ? config.journeys : [];
     const defaultId = journeys.find((j) => j && j.isDefault)?.id || journeys[0]?.id || "";
@@ -482,6 +486,18 @@
 
     harvestActions.hidden = false;
 
+    const seedExportDone = (() => {
+      if (!Loop || !journey || !wf2) return Boolean(wf.seedDone);
+      const step = (journey.steps || []).find((s) => s && s.id === "seed_export_v1") || { id: "seed_export_v1" };
+      return Loop.isStepComplete(journey, step, wf2) || Loop.isStepDone(wf2, "seed_export_v1");
+    })();
+
+    const seedPublishDone = (() => {
+      if (!Loop || !journey || !wf2) return false;
+      const step = (journey.steps || []).find((s) => s && s.id === "seed_publish_v1") || { id: "seed_publish_v1" };
+      return Loop.isStepComplete(journey, step, wf2) || Loop.isStepDone(wf2, "seed_publish_v1");
+    })();
+
     const nextDeps = (() => {
       if (!Loop || !journey || !wf2) return [];
       const seedStep = (journey.steps || []).find((s) => s?.id === "seed_export_v1") || null;
@@ -509,6 +525,28 @@
       exportNote.textContent = "Ready: export a runnable ZIP pack. This marks Seed complete and checks badge minting.";
     }
 
+    if (markPublishedBtn) {
+      const enablePublish = Boolean(Loop && seedExportDone && location.protocol !== "file:");
+      markPublishedBtn.disabled = !enablePublish || seedPublishDone;
+      markPublishedBtn.classList.toggle("is-disabled", markPublishedBtn.disabled);
+    }
+    if (publishedUrlInput) {
+      publishedUrlInput.disabled = Boolean(!Loop || !seedExportDone || seedPublishDone);
+    }
+    if (publishNote) {
+      if (!Loop) {
+        publishNote.textContent = "Publish tracking requires the loop engine. Open from the main workspace, not a detached copy.";
+      } else if (location.protocol === "file:") {
+        publishNote.textContent = "Publish tracking requires http(s). Open from GitHub Pages or a local web server.";
+      } else if (!seedExportDone) {
+        publishNote.textContent = "Publish unlocks after Export. Export a pack first, then paste its public URL here.";
+      } else if (seedPublishDone) {
+        publishNote.textContent = "Published URL recorded for this journey step.";
+      } else {
+        publishNote.textContent = "Paste the public URL where you published the exported pack, then click Mark Published.";
+      }
+    }
+
     if (trainingOk) {
       claimBadgeLink.textContent = "Back to Playlist (Badge)";
     } else {
@@ -529,6 +567,51 @@
       });
     }
   }
+
+  function normalizeUrl(raw) {
+    const value = String(raw || "").trim();
+    if (!value) return "";
+    try {
+      const u = new URL(value);
+      if (u.protocol !== "http:" && u.protocol !== "https:") return "";
+      return u.toString();
+    } catch {
+      return "";
+    }
+  }
+
+  markPublishedBtn?.addEventListener("click", () => {
+    if (!Loop) return;
+    if (location.protocol === "file:") {
+      publishNote && (publishNote.textContent = "Publish tracking requires http(s). Open from GitHub Pages or a local web server.");
+      return;
+    }
+    const url = normalizeUrl(publishedUrlInput?.value || "");
+    if (!url) {
+      publishNote && (publishNote.textContent = "Enter a valid http(s) URL to mark Publish complete.");
+      return;
+    }
+
+    (async () => {
+      const journey = await loadJourney();
+      const journeyId = journey?.id || Loop.getActiveJourneyId?.() || "";
+
+      Loop.markStepDone("seed_publish_v1", {
+        publishedUrl: url,
+        publishedAt: new Date().toISOString(),
+        seed: lastArtifact?.seed?.name || "",
+      });
+
+      if (journey) {
+        const wf2 = Loop.ensureWorkflowV2(journeyId);
+        const badgeResult = Loop.ensureJourneyBadges(journey, wf2);
+        if (badgeResult?.minted || badgeResult?.marked) Loop.saveWorkflowV2?.(wf2, journey?.id || "");
+      }
+
+      publishNote && (publishNote.textContent = "Published URL recorded. Badge check executed.");
+      await refreshExportUI();
+    })();
+  });
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -604,6 +687,7 @@
         if (!res.ok) throw new Error(`Template fetch failed: ${res.status}`);
         const templateHtml = await res.text();
         if (!templateHtml.includes("</html>")) throw new Error("Template appears truncated (missing </html>).");
+        if (!templateHtml.includes("data/bytecast_ep_profile.json")) throw new Error("Template does not reference data/bytecast_ep_profile.json (required).");
         if (!templateHtml.includes("bytecast_ep_profile.json")) throw new Error("Template does not reference bytecast_ep_profile.json (required for fallback).");
 
         let faviconSvg = "";
@@ -753,7 +837,7 @@
           if (badgeResult?.minted || badgeResult?.marked) Loop.saveWorkflowV2?.(wf2, journey?.id || "");
         }
 
-        exportNote.textContent = "ZIP exported. Seed step recorded with proof. Badge check executed.";
+        exportNote.textContent = "ZIP exported. Export proof recorded. Next: paste a Publish URL to mint the badge.";
         await refreshExportUI();
       } catch (err) {
         exportNote.textContent = `ZIP export failed: ${String(err?.message || err)}`;

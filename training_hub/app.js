@@ -69,16 +69,17 @@ async function init() {
     state.journeyConfig = journeyConfig || {
       journeys: [
         {
-          id: "p1_golden_path",
-          label: "P1: Golden Path",
-          description: "Playlist -> EP-001 -> Training -> Seed -> Badge",
+           id: "p1_golden_path",
+           label: "P1: Golden Path",
+          description: "Playlist -> EP-001 -> Training -> Seed -> Publish -> Badge",
           steps: [
             { id: "ep001_gates", label: "EP-001 Gates", lane: "bytecast", href: "episodes/welcome_to_bytecast/index.html" },
             { id: "tr001_golden_path", label: "Training (TR-001)", lane: "training", href: "training_missions/tr_001_golden_path/index.html", depends_on: ["ep001_gates"] },
             { id: "seed_export_v1", label: "Seed Export", lane: "seed", href: "seed_builder_studio/seed_orchard_ui/index.html", depends_on: ["tr001_golden_path"] },
-            { id: "badge_p1_golden_path_v1", label: "Badge", lane: "badge", href: "seed_bytecast.html", depends_on: ["seed_export_v1"], complete_when: { type: "badge_has", badge_id: "p1_golden_path_v1" } }
+            { id: "seed_publish_v1", label: "Publish Link", lane: "seed", href: "seed_builder_studio/seed_orchard_ui/index.html", depends_on: ["seed_export_v1"] },
+            { id: "badge_p1_golden_path_v1", label: "Badge", lane: "badge", href: "seed_bytecast.html", depends_on: ["seed_publish_v1"], complete_when: { type: "badge_has", badge_id: "p1_golden_path_v1" } }
           ],
-          badges: [{ id: "p1_golden_path_v1", label: "P1: Golden Path", requires: ["ep001_gates", "tr001_golden_path", "seed_export_v1"] }]
+          badges: [{ id: "p1_golden_path_v1", label: "P1: Golden Path", requires: ["ep001_gates", "tr001_golden_path", "seed_export_v1", "seed_publish_v1"], minProof: { "seed_publish_v1": ["publishedUrl"] } }]
         }
       ]
     };

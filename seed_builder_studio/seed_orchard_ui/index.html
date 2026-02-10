@@ -95,6 +95,14 @@
           <button id="exportJson" type="button" class="action-btn secondary">Export Seed Artifact (JSON)</button>
           <a id="claimBadge" class="action-btn secondary" href="../../seed_bytecast.html">Back to Playlist</a>
         </div>
+        <div class="harvest-actions__row" style="margin-top:10px; gap:10px; align-items:stretch;">
+          <label style="flex:1; display:grid; gap:6px;">
+            <span class="hint" style="margin:0;">Publish URL (after export)</span>
+            <input id="publishedUrl" type="url" inputmode="url" placeholder="https://aerovista-us.github.io/bytecast/episodes/your_pack/" style="width:100%; border-radius:14px; border:1px solid rgba(255,255,255,0.14); background: rgba(0,0,0,0.18); color: rgba(255,255,255,0.92); padding:12px 12px; font: 600 14px/1.2 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;" />
+          </label>
+          <button id="markPublished" type="button" class="action-btn secondary" style="white-space:nowrap;">Mark Published</button>
+        </div>
+        <p id="publishNote" class="hint" style="margin-top:10px;">Publish is required to mint the Golden Path badge. This records a URL proof payload.</p>
         <p id="exportNote" class="hint">Export creates a small artifact and marks your Seed step complete for the active journey.</p>
       </div>
     </section>

@@ -65,7 +65,7 @@ Evidence:
 ## 4) Golden Path v1 (Config + Actual Emitters)
 
 Golden Path journey config:
-- `p1_golden_path` steps: `ep001_gates` -> `tr001_golden_path` -> `seed_export_v1` -> `badge_p1_golden_path_v1`.
+- `p1_golden_path` steps: `ep001_gates` -> `tr001_golden_path` -> `seed_export_v1` -> `seed_publish_v1` -> `badge_p1_golden_path_v1`.
   - `data/journey_steps.json:6`
 
 ### Step A: EP-001 gates (`ep001_gates`)
@@ -80,7 +80,7 @@ Emitter (episode pack):
   - `episodes/welcome_to_bytecast/index.html:694`
 
 Proof shape today:
-- `meta` is currently minimal (`{ episode: "EP-001" }`).
+- `meta` includes episode identity + which gate was completed (`gate`).
   - `episodes/welcome_to_bytecast/index.html:694`
 
 ### Step B: Training (`tr001_golden_path`)
@@ -90,13 +90,13 @@ Config:
   - `data/journey_steps.json:26`
 
 Emitter (training pack):
-- TR-001 calls `Loop.markStepDone("tr001_golden_path", { mission: "tr_001_golden_path" })`.
-  - `training_missions/tr_001_golden_path/index.html:315`
+- TR-001 calls `Loop.markStepDone("tr001_golden_path", meta)` including checkpoint counts.
+  - `training_missions/tr_001_golden_path/index.html:317`
 
 Proof shape today:
 - `meta` includes `mission` key required by `minProof`.
   - `data/journey_steps.json:68`
-  - `training_missions/tr_001_golden_path/index.html:315`
+  - `training_missions/tr_001_golden_path/index.html:317`
 
 ### Step C: Seed export (`seed_export_v1`)
 
@@ -106,12 +106,12 @@ Config:
 
 Emitter (Seed Orchard):
 - Orchard calls `Loop.markStepDone("seed_export_v1", meta)` on export.
-  - `seed_builder_studio/seed_orchard_ui/app.js:736`
-  - `seed_builder_studio/seed_orchard_ui/app.js:809`
+  - `seed_builder_studio/seed_orchard_ui/app.js:820`
+  - `seed_builder_studio/seed_orchard_ui/app.js:893`
 
 Proof shape today:
 - `meta` includes artifact proof fields like `artifactName`, `artifactHash`, `filesCount`, etc.
-  - `seed_builder_studio/seed_orchard_ui/app.js:736`
+  - `seed_builder_studio/seed_orchard_ui/app.js:820`
 
 ZIP export (runnable pack):
 - Orchard uses `fflate.zipSync` and emits a ZIP with `PACK_README.md` + `pack.manifest.json`.
@@ -122,6 +122,18 @@ ZIP export (runnable pack):
 
 ### Step D: Badge (`p1_golden_path_v1`)
 
+### Step D: Publish (`seed_publish_v1`)
+
+Config:
+- Depends on `seed_export_v1` and stores proof meta `publishedUrl`.
+  - `data/journey_steps.json:47`
+
+Emitter (Seed Orchard):
+- Orchard records publish proof via `Loop.markStepDone("seed_publish_v1", { publishedUrl, ... })`.
+  - `seed_builder_studio/seed_orchard_ui/app.js:599`
+
+### Step E: Badge (`p1_golden_path_v1`)
+
 Config:
 - Badge is minted when `requires` are satisfied and `minProof` is present.
   - `data/journey_steps.json:63`
@@ -129,7 +141,7 @@ Config:
 Engine:
 - `mintBadge()` writes to `bytecast.badges.v1` and fires `badge_minted`.
   - `assets/shared/bytecast_loop.js:132`
-  - `assets/shared/bytecast_loop.js:137`
+  - `assets/shared/bytecast_loop.js:170`
 
 Playlist rendering:
 - Playlist badge chips render matching SVG icons from `assets/badges/badges.json` with fallback to text.
@@ -158,12 +170,10 @@ Note: audio still requires serving via `http(s)` (GitHub Pages or local server) 
 
 ## 7) What’s Not Fully Aligned Yet (Gaps)
 
-1. **Publish step is not yet in the journey config.**
-   - A `bc_badge_publish.svg` exists in the badge catalog, but `seed_publish_v1` is not defined in `data/journey_steps.json`.
-2. **Episode/Training proof meta is minimal.**
-   - EP-001 writes `{ episode: "EP-001" }`, not listened percent, duration, or gate detail.
-   - TR-001 writes `{ mission: "tr_001_golden_path" }`, not checkpoints passed or duration.
-3. **Badges are global-store (not per-journey).**
+1. **Episode/Training proof meta is still lightweight.**
+   - EP-001 does not yet store listened percent or duration (only gate identity + episode identity).
+   - TR-001 stores checkpoint counts, but not duration.
+2. **Badges are global-store (not per-journey).**
    - This is OK for v1, but it means badges persist across journeys (by design).
 
 ## 8) How To Verify Completion (Manual Checklist)
@@ -183,4 +193,3 @@ Note: audio still requires serving via `http(s)` (GitHub Pages or local server) 
    - `steps.seed_export_v1.meta.artifactName` exists
    - `steps.seed_export_v1.meta.artifactHash` exists
 6. Return to Playlist and confirm the badge chip appears (SVG icon if known; text fallback otherwise).
-

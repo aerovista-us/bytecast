@@ -691,7 +691,11 @@
     if (Loop) {
       const map = { listen: "ep001_listen", slide: "ep001_slide", interact: "ep001_engage" };
       const stepId = map[flagName];
-      if (stepId) Loop.markStepDone(stepId, { episode: "EP-001" });
+      if (stepId) Loop.markStepDone(stepId, {
+        episodeSlug: "welcome_to_bytecast",
+        episodeCode: "EP-001",
+        gate: flagName,
+      });
       renderGate();
       return;
     }
