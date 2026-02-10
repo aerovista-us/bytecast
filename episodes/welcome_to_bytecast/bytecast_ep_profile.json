@@ -23,9 +23,14 @@
   "media": {
     "audio_files": [
       {
-        "path": "assets/welcome_to_bytecast.aac",
-        "label": "Episode audio (main)",
+        "path": "assets/welcome_to_bytecast.mp3",
+        "label": "Episode audio (main, mp3)",
         "required": true
+      },
+      {
+        "path": "assets/welcome_to_bytecast.aac",
+        "label": "Episode audio (fallback, aac)",
+        "required": false
       }
     ],
     "images": [
