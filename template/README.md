@@ -8,7 +8,7 @@ Date: 2026-02-07
 - Or serve: `python -m http.server 8080` then open `http://localhost:8080`
 
 ## Replace
-- `assets/bytecast-ep1.mp3`
+- `assets/audio_placeholder.wav` (placeholder)
 
 ## Keys
 - Slides: ← / →

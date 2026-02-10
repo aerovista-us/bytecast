@@ -265,6 +265,44 @@
     };
   }
 
+  function buildSilentWavBytes({ sampleRate = 8000, seconds = 1 } = {}) {
+    const sr = Math.max(8000, Math.min(48000, Number(sampleRate) || 8000));
+    const secs = Math.max(1, Math.min(10, Number(seconds) || 1));
+    const numChannels = 1;
+    const bitsPerSample = 8;
+    const bytesPerSample = bitsPerSample / 8;
+    const numSamples = sr * secs;
+    const dataSize = numSamples * numChannels * bytesPerSample;
+
+    const headerSize = 44;
+    const buf = new ArrayBuffer(headerSize + dataSize);
+    const view = new DataView(buf);
+    const out = new Uint8Array(buf);
+
+    const writeStr = (off, s) => {
+      for (let i = 0; i < s.length; i += 1) view.setUint8(off + i, s.charCodeAt(i));
+    };
+
+    writeStr(0, "RIFF");
+    view.setUint32(4, 36 + dataSize, true);
+    writeStr(8, "WAVE");
+    writeStr(12, "fmt ");
+    view.setUint32(16, 16, true); // PCM fmt chunk size
+    view.setUint16(20, 1, true); // PCM
+    view.setUint16(22, numChannels, true);
+    view.setUint32(24, sr, true);
+    view.setUint32(28, sr * numChannels * bytesPerSample, true); // byteRate
+    view.setUint16(32, numChannels * bytesPerSample, true); // blockAlign
+    view.setUint16(34, bitsPerSample, true);
+    writeStr(36, "data");
+    view.setUint32(40, dataSize, true);
+
+    // 8-bit PCM silence is 128 (unsigned).
+    out.fill(128, headerSize);
+
+    return new Uint8Array(buf);
+  }
+
   function buildEpisodeProfileFromSeed(artifact) {
     const seed = artifact?.seed || {};
     const seedName = String(seed.name || "Seed Orchard");
@@ -321,7 +359,7 @@
       media: {
         audio_files: [
           {
-            path: "assets/audio_placeholder.aac",
+            path: "assets/audio_placeholder.wav",
             label: "Audio (optional)",
             required: false,
           },
@@ -597,6 +635,7 @@
           // Pack contract: profile JSON under data/ (template supports fallback to root).
           [`${folder}data/bytecast_ep_profile.json`]: enc(profileJson),
           [`${folder}assets/README.txt`]: enc("Put audio/media assets in this folder. Update paths in data/bytecast_ep_profile.json.\n"),
+          [`${folder}assets/audio_placeholder.wav`]: buildSilentWavBytes({ seconds: 1, sampleRate: 8000 }),
           [`${folder}PACK_README.md`]: enc(
             [
               "# ByteCast Seed Pack",
@@ -616,7 +655,7 @@
               "## Content",
               "",
               "- Profile JSON: `data/bytecast_ep_profile.json`",
-              "- Optional audio: update the JSON path and drop the file under `assets/`",
+              "- Optional audio: replace `assets/audio_placeholder.wav` (or update the JSON path).",
               "",
               "## Publish (GitHub Pages)",
               "",
@@ -643,7 +682,7 @@
               "## Customize",
               "",
               "- Edit `data/bytecast_ep_profile.json` for slides/content.",
-              "- Drop optional audio at `assets/audio_placeholder.aac` (or update the JSON path).",
+              "- Replace optional audio at `assets/audio_placeholder.wav` (or update the JSON path).",
               "",
             ].join("\n")
           ),

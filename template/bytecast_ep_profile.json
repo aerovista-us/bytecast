@@ -23,9 +23,9 @@
   "media": {
     "audio_files": [
       {
-        "path": "assets/bytecast-ep1.mp3",
-        "label": "Episode audio (main)",
-        "required": true
+        "path": "assets/audio_placeholder.wav",
+        "label": "Audio (placeholder)",
+        "required": false
       }
     ],
     "images": [
