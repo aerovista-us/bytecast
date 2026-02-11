@@ -76,6 +76,12 @@
     .tagdot{ width:7px; height:7px; border-radius:99px; background:var(--neon); box-shadow:var(--glow-neon); }
     .panel__body{ padding:14px var(--pad) 18px; display:grid; gap:14px; }
     audio{ width:100%; }
+    #audioNote{ display:none; margin-top:-4px; padding:10px 12px; border-radius:14px; font-size:13px; line-height:1.35;
+      color:rgba(255,255,255,0.86); background: rgba(0,0,0,0.32); border:1px solid rgba(255,255,255,0.10); box-shadow: var(--glow-ghost);
+    }
+    #audioNote a{ color: rgba(120, 220, 255, 0.95); }
+    #audioNote[data-kind="warn"]{ border-color: rgba(255, 190, 120, 0.30); box-shadow: var(--glow-orange); }
+    #audioNote[data-kind="bad"]{ border-color: rgba(255, 120, 140, 0.32); box-shadow: 0 0 0 1px rgba(255,120,140,0.18), 0 0 22px rgba(255,120,140,0.12); }
     .seek{ display:grid; grid-template-columns:1fr auto; gap:10px; align-items:center; }
     input[type="range"]{ width:100%; accent-color: var(--neon); }
     .time{ font-family:var(--mono); font-size:12px; border:1px solid rgba(255,255,255,0.12); background: rgba(0,0,0,0.20); padding:8px 10px; border-radius:999px; min-width:126px; text-align:center; }
@@ -250,6 +256,7 @@
           <source src="assets/welcome_to_bytecast.mp3" type="audio/mpeg" />
           <source src="assets/welcome_to_bytecast.aac" type="audio/aac" />
         </audio>
+        <div id="audioNote" role="status" aria-live="polite"></div>
 
         <div class="seek">
           <input id="seek" type="range" min="0" max="1000" value="0" aria-label="Seek" />
@@ -833,6 +840,7 @@
 
   // Audio enhancements
   const audio = $("#audio");
+  const audioNote = $("#audioNote");
   const seek = $("#seek");
   const time = $("#time");
   const cPlay=$("#cPlay"), cBack=$("#cBack"), cFwd=$("#cFwd"), cSpeed=$("#cSpeed"), cLoop=$("#cLoop"), cMute=$("#cMute"), cMark=$("#cMark");
@@ -854,9 +862,37 @@
     time.textContent = `${fmt(cur)} / ${fmt(dur)}`;
     if(dur>0) seek.value = String(Math.floor((cur/dur)*1000));
   }
+  function setAudioNote(kind, html){
+    if(!audioNote) return;
+    if(!html){
+      audioNote.style.display="none";
+      audioNote.removeAttribute("data-kind");
+      audioNote.textContent="";
+      return;
+    }
+    audioNote.style.display="block";
+    if(kind) audioNote.setAttribute("data-kind", kind);
+    audioNote.innerHTML = html;
+  }
   audio.addEventListener("timeupdate", syncTime);
   audio.addEventListener("loadedmetadata", syncTime);
+  audio.addEventListener("loadedmetadata", ()=>setAudioNote("", ""), { once: true });
   audio.addEventListener("play", ()=>setGate("listen"), { once: true });
+  let audioFallbackTried = false;
+  audio.addEventListener("error", ()=>{
+    const src = String(audio.currentSrc||"").toLowerCase();
+    if(!audioFallbackTried && src.endsWith(".mp3")){
+      audioFallbackTried = true;
+      audio.src = "assets/welcome_to_bytecast.aac";
+      try{ audio.load(); }catch{}
+      setAudioNote("warn", `Audio fallback activated (AAC). If it still fails, open the file directly: <a href="assets/welcome_to_bytecast.aac" target="_blank" rel="noopener">assets/welcome_to_bytecast.aac</a>.`);
+      return;
+    }
+    const hint = (location.protocol === "file:")
+      ? `You're running on <span style="font-family:var(--mono);">file://</span>. If audio doesn't load, serve this folder over HTTP (example: <span style="font-family:var(--mono);">python -m http.server</span>).`
+      : `Try opening the audio file directly: <a href="assets/welcome_to_bytecast.mp3" target="_blank" rel="noopener">assets/welcome_to_bytecast.mp3</a>.`;
+    setAudioNote("bad", `Audio failed to load. ${hint}`);
+  });
 
   seek.addEventListener("input", ()=>{
     const dur=audio.duration||0;
@@ -866,8 +902,16 @@
   });
 
   function togglePlay(){
-    if(audio.paused) audio.play();
-    else audio.pause();
+    if(audio.paused){
+      const p = audio.play();
+      if(p && typeof p.catch === "function"){
+        p.catch(()=>{
+          setAudioNote("warn", `Audio play was blocked by the browser. Click the native play button in the audio bar, or click once anywhere on the page and try again.`);
+        });
+      }
+    }else{
+      audio.pause();
+    }
     cPlay.firstChild.textContent = audio.paused ? "▶ Play " : "⏸ Pause ";
   }
   cPlay.addEventListener("click", togglePlay);
