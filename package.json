@@ -1,0 +1,22 @@
+{
+  "name": "bytecast-tests",
+  "version": "1.0.0",
+  "description": "Playwright tests for ByteCast workspace user journeys",
+  "scripts": {
+    "test": "playwright test",
+    "test:all-browsers": "set BYTECAST_ALL_BROWSERS=1&& playwright test",
+    "test:ui": "playwright test --ui",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:golden-path": "playwright test tests/golden-path.spec.js",
+    "test:seeding": "playwright test tests/seeding-track.spec.js",
+    "test:division": "playwright test tests/division-track.spec.js",
+    "test:navigation": "playwright test tests/navigation.spec.js"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
