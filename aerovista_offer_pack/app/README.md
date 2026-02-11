@@ -1,6 +1,6 @@
 # AeroVista Offer Pack — Training & Reference App
 
-Internal web app for training, reference, and consistent use across new hires, sales, and delivery. All content is driven by `data/offer-pack-data.json` so you can adjust copy and structure without changing code.
+Internal web app for training, reference, and consistent use across new hires, sales, and delivery. All content is driven by JSON in `data/`: `offer-pack-data.json` (divisions, sales, delivery, intake, pricing, bundles, one-pager), `noncoder-onboarding.json` (onboarding pathway), and `summit_courses.json` (Summit Courses catalog). Edit any of these to adjust copy and structure without changing code.
 
 ## Run locally
 
