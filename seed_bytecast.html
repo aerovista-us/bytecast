@@ -489,6 +489,38 @@
 
     const $ = (sel) => document.querySelector(sel);
 
+    function normalizeResumeHref(input) {
+      const s = String(input || "").trim();
+      if (!s) return "";
+      // Prefer the canonical normalizer when available.
+      const Loop = window.ByteCastLoop || null;
+      if (Loop?.normalizeHref) return Loop.normalizeHref(s);
+      // Fallback: keep resume pointers portable and episode-only.
+      if (/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(s)) return "";
+      if (s.startsWith("//")) return "";
+      if (s.startsWith("/")) return "";
+      const rel = s.replace(/^\.\//, "");
+      if (!rel.includes("episodes/")) return "";
+      return rel;
+    }
+
+    // Self-heal dirty/invalid stored resume state as early as possible.
+    (function healResumeStorage() {
+      try {
+        const raw = localStorage.getItem(LAST_EP_KEY) || "";
+        if (!raw) return;
+        const normalized = normalizeResumeHref(raw);
+        if (!normalized) {
+          localStorage.removeItem(LAST_EP_KEY);
+          localStorage.removeItem(LAST_EP_TIME_KEY);
+        } else if (normalized !== raw) {
+          localStorage.setItem(LAST_EP_KEY, normalized);
+        }
+      } catch {
+        // ignore
+      }
+    })();
+
     const BADGE_ICON_OVERRIDES = {
       p1_golden_path_v1: "initiate",
       seed_exporter_v1: "seed_export",
@@ -869,8 +901,7 @@
 
     function setLastEpisode(href) {
       try {
-        const Loop = window.ByteCastLoop || null;
-        const rel = Loop?.normalizeHref ? Loop.normalizeHref(href) : String(href || "").replace(/^\.\//, "").replace(/^\/+/, "");
+        const rel = normalizeResumeHref(href);
         if (!rel) {
           localStorage.removeItem(LAST_EP_KEY);
           localStorage.removeItem(LAST_EP_TIME_KEY);
@@ -885,9 +916,8 @@
 
     function getLastEpisode() {
       try {
-        const Loop = window.ByteCastLoop || null;
         const raw = localStorage.getItem(LAST_EP_KEY) || "";
-        const normalized = Loop?.normalizeHref ? Loop.normalizeHref(raw) : raw;
+        const normalized = normalizeResumeHref(raw);
         if (raw && !normalized) {
           // Self-heal dirty/invalid stored state.
           try {
@@ -978,7 +1008,7 @@
         resumeBtn.setAttribute("href", hrefAbs);
         resumeBtn.removeAttribute("aria-disabled");
         resumeBtn.classList.remove("is-disabled");
-        resumeHint.textContent = `Resume: ${String(last.href).replace(/^\\.\\//, "")} • last visited ${formatWhen(last.time)}`;
+        resumeHint.textContent = `Resume: ${String(last.href).replace(/^\.\//, "")} • last visited ${formatWhen(last.time)}`;
       } else {
         // Keep the UI honest: when there is no resume, do not provide a clickable nav.
         resumeBtn.setAttribute("href", "#");
