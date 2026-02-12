@@ -441,8 +441,11 @@
     }
   }
 
-  // Normalize arbitrary hrefs to a ByteCast-root relative path (no scheme/host, no leading '/').
-  // This prevents "resume" links from pinning to a specific host/port (localhost vs GitHub Pages).
+  // Resume href contract:
+  // - Stored as ByteCast-root relative (no scheme/host, no leading '/').
+  // - Must point under /episodes/ only.
+  // - Absolute URLs must be same-origin http(s).
+  // - Invalid values normalize to "" and callers should clear stored resume keys.
   function normalizeHref(href) {
     const raw = String(href || "").trim();
     if (!raw) return "";

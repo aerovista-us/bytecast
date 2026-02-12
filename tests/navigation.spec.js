@@ -12,6 +12,30 @@ test.describe('ByteCast Navigation', () => {
     await clearByteCastStorage(page);
   });
 
+  test('Dirty resume storage auto-clears and Resume cannot navigate', async ({ page }) => {
+    await page.addInitScript(() => {
+      localStorage.setItem('bytecast.last_episode.href.v1', 'file:///C:/evil.html');
+      localStorage.setItem('bytecast.last_episode.time.v1', String(Date.now()));
+    });
+
+    await navigateAndWait(page, '/seed_bytecast.html');
+
+    // Storage is wiped or normalized to empty.
+    const stored = await page.evaluate(() => localStorage.getItem('bytecast.last_episode.href.v1') || '');
+    expect(stored).toBe('');
+
+    // UI is "none", and Resume is disabled.
+    await expect(page.locator('#resumeHint')).toContainText('Resume: none yet');
+    const resumeBtn = page.locator('#resumeBtn');
+    await expect(resumeBtn).toHaveAttribute('aria-disabled', 'true');
+
+    // Clicking Resume must not navigate to the injected value.
+    const before = page.url();
+    await resumeBtn.click({ force: true });
+    await page.waitForTimeout(250);
+    expect(page.url()).toBe(before);
+  });
+
   test('Root page (index.html) loads and shows primary doors', async ({ page }) => {
     const errors = [];
     page.on('console', msg => {

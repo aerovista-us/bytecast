@@ -147,6 +147,7 @@
       border-color: rgba(255,224,143,0.85);
       box-shadow: var(--glow-gold);
     }
+    .btn.is-disabled{ opacity:0.55; pointer-events:none; }
 
     .wrap{ max-width:var(--max); margin:0 auto; padding:18px var(--pad) 90px; }
     .hero{
@@ -887,6 +888,15 @@
         const Loop = window.ByteCastLoop || null;
         const raw = localStorage.getItem(LAST_EP_KEY) || "";
         const normalized = Loop?.normalizeHref ? Loop.normalizeHref(raw) : raw;
+        if (raw && !normalized) {
+          // Self-heal dirty/invalid stored state.
+          try {
+            localStorage.removeItem(LAST_EP_KEY);
+            localStorage.removeItem(LAST_EP_TIME_KEY);
+          } catch {
+            // ignore
+          }
+        }
         return {
           href: normalized,
           time: localStorage.getItem(LAST_EP_TIME_KEY) || ""
@@ -966,8 +976,14 @@
       if (last.href) {
         const hrefAbs = Loop?.resolveFromRoot ? Loop.resolveFromRoot(last.href) : (`./${String(last.href).replace(/^\/+/, "")}`);
         resumeBtn.setAttribute("href", hrefAbs);
+        resumeBtn.removeAttribute("aria-disabled");
+        resumeBtn.classList.remove("is-disabled");
         resumeHint.textContent = `Resume: ${String(last.href).replace(/^\\.\\//, "")} • last visited ${formatWhen(last.time)}`;
       } else {
+        // Keep the UI honest: when there is no resume, do not provide a clickable nav.
+        resumeBtn.setAttribute("href", "#");
+        resumeBtn.setAttribute("aria-disabled", "true");
+        resumeBtn.classList.add("is-disabled");
         resumeHint.textContent = "Resume: none yet. Open any episode to set your resume point.";
       }
 
@@ -1044,6 +1060,14 @@
 
     wireTheme();
     render();
+    // Hard disable resume nav if no resume is available.
+    document.getElementById("resumeBtn")?.addEventListener("click", (ev) => {
+      const a = ev.currentTarget;
+      if (!a) return;
+      const disabled = a.getAttribute("aria-disabled") === "true";
+      const href = a.getAttribute("href") || "";
+      if (disabled || href === "#" || !href) ev.preventDefault();
+    });
     window.addEventListener("focus", () => { void renderGoldenPath(); });
     document.addEventListener("visibilitychange", () => {
       if (!document.hidden) void renderGoldenPath();
