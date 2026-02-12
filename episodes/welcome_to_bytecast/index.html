@@ -737,7 +737,9 @@
 
   // Always update resume pointer when opening the episode directly.
   try {
-    localStorage.setItem(LAST_EP_KEY, location.href);
+    // Store a ByteCast-root relative path so resume works across GH Pages and any local port.
+    const rel = (Loop && Loop.normalizeHref) ? Loop.normalizeHref(location.href) : String(location.pathname || "").replace(/^\/+/, "");
+    localStorage.setItem(LAST_EP_KEY, rel || "episodes/welcome_to_bytecast/index.html");
     localStorage.setItem(LAST_EP_TIME_KEY, String(Date.now()));
   } catch {}
 

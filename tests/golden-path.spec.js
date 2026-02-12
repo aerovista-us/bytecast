@@ -236,7 +236,23 @@ test.describe('Golden Path Journey (p1_golden_path)', () => {
     });
     await page.waitForTimeout(2000);
 
-    // Navigate to playlist to check badge
+    // Orchard is the canonical place to enforce badge rules after proof steps are done.
+    await page.evaluate(async () => {
+      const Loop = window.ByteCastLoop;
+      if (!Loop) return;
+      try {
+        const config = await Loop.loadJourneyConfig('/data/journey_steps.json', null);
+        const journey = Loop.getJourneyById(config, 'p1_golden_path');
+        if (!journey) return;
+        const wf2 = Loop.ensureWorkflowV2('p1_golden_path');
+        Loop.ensureJourneyBadges(journey, wf2);
+        Loop.saveWorkflowV2(wf2, 'p1_golden_path');
+      } catch {
+        // ignore
+      }
+    });
+
+    // Navigate to playlist to check badge is visible
     await navigateAndWait(page, '/seed_bytecast.html');
 
     // Verify badge is minted

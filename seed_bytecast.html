@@ -868,7 +868,9 @@
 
     function setLastEpisode(href) {
       try {
-        localStorage.setItem(LAST_EP_KEY, href);
+        const Loop = window.ByteCastLoop || null;
+        const rel = Loop?.normalizeHref ? Loop.normalizeHref(href) : String(href || "").replace(/^\.\//, "").replace(/^\/+/, "");
+        localStorage.setItem(LAST_EP_KEY, rel);
         localStorage.setItem(LAST_EP_TIME_KEY, String(Date.now()));
       } catch {
         // ignore
@@ -877,8 +879,9 @@
 
     function getLastEpisode() {
       try {
+        const Loop = window.ByteCastLoop || null;
         return {
-          href: localStorage.getItem(LAST_EP_KEY) || "",
+          href: (Loop?.normalizeHref ? Loop.normalizeHref(localStorage.getItem(LAST_EP_KEY) || "") : (localStorage.getItem(LAST_EP_KEY) || "")),
           time: localStorage.getItem(LAST_EP_TIME_KEY) || ""
         };
       } catch {
@@ -954,8 +957,9 @@
       const resumeBtn = $("#resumeBtn");
       const resumeHint = $("#resumeHint");
       if (last.href) {
-        resumeBtn.setAttribute("href", last.href);
-        resumeHint.textContent = `Resume: ${last.href.replace("./", "")} • last visited ${formatWhen(last.time)}`;
+        const hrefAbs = Loop?.resolveFromRoot ? Loop.resolveFromRoot(last.href) : (`./${String(last.href).replace(/^\/+/, "")}`);
+        resumeBtn.setAttribute("href", hrefAbs);
+        resumeHint.textContent = `Resume: ${String(last.href).replace(/^\\.\\//, "")} • last visited ${formatWhen(last.time)}`;
       } else {
         resumeHint.textContent = "Resume: none yet. Open any episode to set your resume point.";
       }

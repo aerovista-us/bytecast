@@ -21,10 +21,10 @@ test.describe('ByteCast Navigation', () => {
     await navigateAndWait(page, '/index.html');
 
     // Check for primary doors
-    await expect(page.locator('text=ByteCast Playlist')).toBeVisible();
-    await expect(page.locator('text=Training Hub')).toBeVisible();
-    await expect(page.locator('text=Seed Builder Studio')).toBeVisible();
-    await expect(page.locator('text=Docs Portal')).toBeVisible();
+    await expect(page.locator('a[href="./seed_bytecast.html"]').first()).toBeVisible();
+    await expect(page.locator('a[href="./training_hub/index.html"]').first()).toBeVisible();
+    await expect(page.locator('a[href="./seed_builder_studio/index.html"]').first()).toBeVisible();
+    await expect(page.locator('a[href="./docs/index.html"]').first()).toBeVisible();
 
     // Check for no critical errors
     expect(errors.length).toBe(0);
@@ -39,12 +39,10 @@ test.describe('ByteCast Navigation', () => {
     await navigateAndWait(page, '/seed_bytecast.html');
 
     // Check playlist loads
-    await expect(page.locator('text=ByteCast Playlist').or(page.locator('h1'))).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'BYTECAST' }).first()).toBeVisible();
 
     // Check for episode links (at least EP-001 should exist)
-    await expect(page.locator('a[href*="welcome_to_bytecast"]').or(
-      page.locator('text=EP-001')
-    )).toBeVisible({ timeout: 10000 });
+    await expect(page.locator('a[href*="welcome_to_bytecast"]').first()).toBeVisible({ timeout: 10000 });
 
     expect(errors.length).toBe(0);
   });
@@ -53,25 +51,29 @@ test.describe('ByteCast Navigation', () => {
     await navigateAndWait(page, '/episodes/welcome_to_bytecast/index.html');
 
     // Check episode title
-    await expect(page.locator('h1').or(page.locator('text=BYTECAST'))).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'BYTECAST' }).first()).toBeVisible();
 
     // Check for audio player
-    await expect(page.locator('audio#audio').or(page.locator('audio'))).toBeVisible();
+    await expect(page.locator('audio#audio')).toBeVisible();
 
     // Check for slides section
     await expect(
-      page.locator('text=Episode Slides').or(page.locator('[id*="slide"]'))
+      page.locator('text=Episode Slides').first()
     ).toBeVisible({ timeout: 5000 });
+
+    // Resume pointer must be portable (ByteCast-root relative), not pinned to localhost/port.
+    const resumeHref = await page.evaluate(() => localStorage.getItem('bytecast.last_episode.href.v1') || '');
+    expect(resumeHref.startsWith('http://') || resumeHref.startsWith('https://')).toBe(false);
   });
 
   test('Training Hub loads and shows modules', async ({ page }) => {
     await navigateAndWait(page, '/training_hub/index.html');
 
     // Check hub loads
-    await expect(page.locator('text=Training Hub').or(page.locator('h1'))).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Training Hub' }).first()).toBeVisible();
 
     // Check for navigation links
-    await expect(page.locator('a[href*="index.html"]')).toBeVisible();
+    await expect(page.locator('a[href="../index.html"]').first()).toBeVisible();
   });
 
   test('Seed Orchard UI loads', async ({ page }) => {
@@ -86,7 +88,7 @@ test.describe('ByteCast Navigation', () => {
   test('Navigation between pages works', async ({ page }) => {
     // Start at root
     await navigateAndWait(page, '/index.html');
-    await expect(page.locator('text=ByteCast Playlist')).toBeVisible();
+    await expect(page.locator('a[href="./seed_bytecast.html"]').first()).toBeVisible();
 
     // Navigate to playlist
     await page.click('a[href*="seed_bytecast"]');
@@ -94,7 +96,7 @@ test.describe('ByteCast Navigation', () => {
     await expect(page.url()).toContain('seed_bytecast');
 
     // Navigate back to root
-    await page.click('a[href*="index.html"]').first();
+    await page.locator('a[href*="index.html"]').first().click();
     await page.waitForLoadState('networkidle');
     await expect(page.url()).toContain('index.html');
   });

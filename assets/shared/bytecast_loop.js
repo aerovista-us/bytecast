@@ -403,7 +403,28 @@
         const rootPath = path.slice(0, idx + marker.length);
         return new URL(rootPath, href).toString();
       }
-      // Fallback: directory of current page.
+      // Fallback: infer root by known top-level folders (works for local server and nested hosting).
+      const known = new Set([
+        "episodes",
+        "training_hub",
+        "seed_builder_studio",
+        "aerovista_offer_pack",
+        "docs",
+        "assets",
+        "data",
+        "template",
+        "full_seed_starter",
+        "lift_lab_bytecast_bundle",
+        "vendor",
+      ]);
+      const parts = path.split("/").filter(Boolean);
+      const hitIdx = parts.findIndex((p) => known.has(String(p || "").toLowerCase()));
+      if (hitIdx >= 0) {
+        const prefix = parts.slice(0, hitIdx).join("/");
+        const rootPath = `/${prefix ? `${prefix}/` : ""}`;
+        return new URL(rootPath, href).toString();
+      }
+      // Last resort: directory of current page.
       return new URL("./", href).toString();
     } catch {
       return "./";
@@ -417,6 +438,29 @@
       return new URL(clean, root).toString();
     } catch {
       return clean;
+    }
+  }
+
+  // Normalize arbitrary hrefs to a ByteCast-root relative path (no scheme/host, no leading '/').
+  // This prevents "resume" links from pinning to a specific host/port (localhost vs GitHub Pages).
+  function normalizeHref(href) {
+    const raw = String(href || "").trim();
+    if (!raw) return "";
+    try {
+      // Resolve relative refs against current location first.
+      const url = new URL(raw, String(location.href || ""));
+      const path = String(url.pathname || "");
+      const marker = "/bytecast/";
+      const idx = path.toLowerCase().lastIndexOf(marker);
+      const after = idx >= 0 ? path.slice(idx + marker.length) : path.replace(/^\/+/, "");
+      const hash = String(url.hash || "");
+      return `${after}${hash}`.replace(/^\/+/, "");
+    } catch {
+      // Best-effort normalization for non-URL inputs.
+      return raw
+        .replace(/^[a-z]+:\/\/[^/]+/i, "")
+        .replace(/^\/+/, "")
+        .replace(/^\.\//, "");
     }
   }
 
@@ -618,6 +662,7 @@
     mintBadge,
     badgeHas,
     resolveFromRoot,
+    normalizeHref,
     loadJourneyConfig,
     getJourneyById,
     getNextStep,
