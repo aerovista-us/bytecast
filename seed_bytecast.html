@@ -870,6 +870,11 @@
       try {
         const Loop = window.ByteCastLoop || null;
         const rel = Loop?.normalizeHref ? Loop.normalizeHref(href) : String(href || "").replace(/^\.\//, "").replace(/^\/+/, "");
+        if (!rel) {
+          localStorage.removeItem(LAST_EP_KEY);
+          localStorage.removeItem(LAST_EP_TIME_KEY);
+          return;
+        }
         localStorage.setItem(LAST_EP_KEY, rel);
         localStorage.setItem(LAST_EP_TIME_KEY, String(Date.now()));
       } catch {
@@ -880,8 +885,10 @@
     function getLastEpisode() {
       try {
         const Loop = window.ByteCastLoop || null;
+        const raw = localStorage.getItem(LAST_EP_KEY) || "";
+        const normalized = Loop?.normalizeHref ? Loop.normalizeHref(raw) : raw;
         return {
-          href: (Loop?.normalizeHref ? Loop.normalizeHref(localStorage.getItem(LAST_EP_KEY) || "") : (localStorage.getItem(LAST_EP_KEY) || "")),
+          href: normalized,
           time: localStorage.getItem(LAST_EP_TIME_KEY) || ""
         };
       } catch {

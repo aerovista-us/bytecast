@@ -449,18 +449,34 @@
     try {
       // Resolve relative refs against current location first.
       const url = new URL(raw, String(location.href || ""));
+      const proto = String(url.protocol || "").toLowerCase();
+      // Reject non-web schemes and non-origin contexts.
+      if (proto !== "http:" && proto !== "https:") return "";
+      if (url.origin && url.origin !== location.origin) return "";
+
       const path = String(url.pathname || "");
       const marker = "/bytecast/";
       const idx = path.toLowerCase().lastIndexOf(marker);
-      const after = idx >= 0 ? path.slice(idx + marker.length) : path.replace(/^\/+/, "");
       const hash = String(url.hash || "");
+      const afterPath = idx >= 0 ? path.slice(idx + marker.length) : path.replace(/^\/+/, "");
+
+      // Resume pointers are episode-only. If the path doesn't contain /episodes/, drop it.
+      const parts = afterPath.split("/").filter(Boolean);
+      const epIdx = parts.map((p) => String(p).toLowerCase()).lastIndexOf("episodes");
+      if (epIdx < 0) return "";
+
+      const after = parts.slice(epIdx).join("/");
       return `${after}${hash}`.replace(/^\/+/, "");
     } catch {
       // Best-effort normalization for non-URL inputs.
-      return raw
+      const s = raw.toLowerCase();
+      if (s.startsWith("about:") || s.startsWith("file:") || s.startsWith("//")) return "";
+      const cleaned = raw
         .replace(/^[a-z]+:\/\/[^/]+/i, "")
         .replace(/^\/+/, "")
         .replace(/^\.\//, "");
+      if (!/^episodes\//i.test(cleaned)) return "";
+      return cleaned;
     }
   }
 
