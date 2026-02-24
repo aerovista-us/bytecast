@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="dark light" />
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <title>Crew Check — AeroVista Onboarding</title>
+  <style>
+    :root{
+      --bg0:#05060a; --bg1:#0a0c14; --border:rgba(255,255,255,.10);
+      --muted:rgba(255,255,255,.70); --muted2:rgba(255,255,255,.55); --text:rgba(255,255,255,.92);
+      --good:#34d399; --warn:#fbbf24; --bad:#fb7185; --a:#60a5fa; --b:#a78bfa; --c:#f472b6;
+      --glow: 0 0 24px rgba(96,165,250,.20), 0 0 60px rgba(167,139,250,.12);
+      --shadow: 0 18px 55px rgba(0,0,0,.60);
+      --r: 18px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:var(--sans); color:var(--text);
+      background:
+        radial-gradient(1200px 800px at 15% 10%, rgba(96,165,250,.18), transparent 60%),
+        radial-gradient(1000px 700px at 85% 25%, rgba(167,139,250,.15), transparent 60%),
+        radial-gradient(900px 700px at 55% 95%, rgba(244,114,182,.10), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+    }
+    .wrap{max-width:1040px; margin:0 auto; padding:22px 18px 64px;}
+    .top{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(5,6,10,.88), rgba(5,6,10,.55));
+      border-bottom:1px solid var(--border);
+    }
+    .top .inner{max-width:1040px; margin:0 auto; padding:12px 18px; display:flex; gap:12px; align-items:center; justify-content:space-between;}
+    .brand{display:flex; gap:10px; align-items:center;}
+    .glyph{
+      width:34px; height:34px; border-radius:10px;
+      background:
+        radial-gradient(circle at 30% 35%, rgba(96,165,250,.55), transparent 55%),
+        radial-gradient(circle at 65% 55%, rgba(167,139,250,.45), transparent 60%),
+        radial-gradient(circle at 50% 80%, rgba(244,114,182,.25), transparent 65%),
+        linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow: var(--glow);
+    }
+    h1{margin:0; font-size:13px; letter-spacing:.14em; text-transform:uppercase;}
+    .sub{font-size:12px; color:var(--muted); margin-top:2px;}
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:12px; padding:6px 10px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.05);
+      color: rgba(255,255,255,.88);
+    }
+    .badge.good{border-color:rgba(52,211,153,.35); background:rgba(52,211,153,.10)}
+    .badge.warn{border-color:rgba(251,191,36,.35); background:rgba(251,191,36,.10)}
+    .badge.bad{border-color:rgba(251,113,133,.35); background:rgba(251,113,133,.10)}
+    .badge.b{border-color:rgba(167,139,250,.35); background:rgba(167,139,250,.10)}
+    .badge.a{border-color:rgba(96,165,250,.35); background:rgba(96,165,250,.10)}
+    .badge.c{border-color:rgba(244,114,182,.33); background:rgba(244,114,182,.10)}
+
+    .card{
+      margin-top:16px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(15,18,32,.55);
+      border-radius:18px;
+      box-shadow: 0 18px 55px rgba(0,0,0,.60);
+      overflow:hidden;
+    }
+    .cardHead{
+      padding:14px 16px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      display:flex; gap:12px; align-items:center; justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .cardBody{padding:16px;}
+    .grid2{display:grid; grid-template-columns: 1fr 1fr; gap:12px;}
+    @media (max-width: 920px){ .grid2{grid-template-columns:1fr;} }
+    .stat{
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.20);
+      border-radius:16px;
+      padding:12px;
+    }
+    .stat .k{color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.14em;}
+    .stat .v{margin-top:6px; font: 14px var(--mono); color:rgba(255,255,255,.88);}
+
+    .q{
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.22);
+      border-radius:16px;
+      padding:12px;
+      margin:12px 0;
+    }
+    .q h3{margin:0 0 10px; font-size:15px; line-height:1.35;}
+    .pillline{display:flex; gap:8px; flex-wrap:wrap; margin:0 0 10px;}
+    .pill{
+      font-size:12px; padding:5px 9px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.82);
+    }
+
+    .opt{display:flex; gap:10px; align-items:flex-start; padding:8px 8px; border-radius:12px; cursor:pointer;}
+    .opt:hover{background: rgba(255,255,255,.04);}
+    .opt input{margin-top:2px;}
+    .opt span{color:rgba(255,255,255,.88); line-height:1.45;}
+
+    .btnRow{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:12px;}
+    .btn{
+      appearance:none;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:14px;
+      cursor:pointer;
+      font-weight:800;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      text-decoration:none;
+      transition: transform .08s ease, background .2s ease, border-color .2s ease;
+      user-select:none;
+    }
+    .btn:hover{background:rgba(255,255,255,.09); border-color:rgba(255,255,255,.22)}
+    .btn:active{transform:translateY(1px)}
+    .btn.primary{
+      background: linear-gradient(90deg, rgba(96,165,250,.28), rgba(167,139,250,.22), rgba(244,114,182,.16));
+      box-shadow: var(--glow);
+    }
+    .btn.good{border-color: rgba(52,211,153,.35); background: rgba(52,211,153,.10)}
+    .btn.warn{border-color: rgba(251,191,36,.35); background: rgba(251,191,36,.10)}
+    .btn.bad{border-color: rgba(251,113,133,.35); background: rgba(251,113,133,.10)}
+    .small{color:var(--muted2); font-size:12px; line-height:1.45;}
+    .mono{font-family:var(--mono); color:rgba(255,255,255,.85); font-size:12px;}
+
+    .resultBox{
+      margin-top:12px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.22);
+      border-radius:16px;
+      padding:12px;
+    }
+    .resultBox ul{margin:10px 0 0; padding-left:18px; color:rgba(255,255,255,.84); line-height:1.45;}
+    .hint{
+      margin-top:10px;
+      padding:10px 10px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      color: rgba(255,255,255,.78);
+    }
+    .kbd{
+      font-family:var(--mono);
+      border:1px solid rgba(255,255,255,.14);
+      padding:2px 6px;
+      border-radius:8px;
+      background:rgba(255,255,255,.05);
+      color:rgba(255,255,255,.90);
+      font-size:12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="inner">
+      <div class="brand">
+        <div class="glyph" aria-hidden="true"></div>
+        <div>
+          <h1>Crew Check</h1>
+          <div class="sub">Crew Check • 80% to pass • proves you can self-guide.</div>
+        </div>
+      </div>
+      <div class="badge b" id="who">Contributor</div>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <div class="card">
+      <div class="cardHead">
+        <div>
+          <div class="badge b">Crew Check</div>
+          <div class="small">Quiz draws <b id="qCount">12</b> random questions each attempt.</div>
+        </div>
+        <div class="badge warn" id="gate">Not graded</div>
+      </div>
+
+      <div class="cardBody">
+        <div class="grid2" aria-label="Attempt stats">
+          <div class="stat">
+            <div class="k">Pass requirement</div>
+            <div class="v" id="req">≥ 80%</div>
+          </div>
+          <div class="stat">
+            <div class="k">Your stats</div>
+            <div class="v" id="stats">Attempts: 0 • Best: —</div>
+          </div>
+        </div>
+
+        <div class="hint" id="founderHint" style="display:none;">
+          ℹ️ Recommended reading: <a href="founder_welcome.html" style="color:inherit; text-decoration:underline;">Founder Welcome</a>.
+          If you want, tap <span class="kbd">Acknowledge ground rules</span> there so this page can remember you saw it.
+        </div>
+      </div>
+
+      <div class="cardBody" id="quiz"></div>
+
+      <div class="cardBody">
+        <div class="btnRow">
+          <button class="btn primary" id="gradeBtn" type="button">✅ Grade Quiz</button>
+          <button class="btn" id="newAttemptBtn" type="button">🎲 New Attempt (reshuffle)</button>
+          <button class="btn" id="resetBtn" type="button">♻️ Clear Answers</button>
+          <a class="btn" href="founder_welcome.html">↩ Back to Welcome</a>
+          <a class="btn good" id="badgeBtn" href="badge.html" style="display:none;">🏅 Get Badge</a>
+        </div>
+        <div class="resultBox" id="results" style="display:none;"></div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Shared onboarding state
+    const KEY = "av_onboarding_v2";
+    const state = {
+      name:"Contributor",
+      founderAccepted:false,
+      quiz:{
+        passed:false,
+        score:0,
+        total:0,
+        lastAttempt:null,
+        attempts:0,
+        bestPct:0
+      }
+    };
+
+    function load(){
+      try{
+        const raw = localStorage.getItem(KEY);
+        if(raw) Object.assign(state, JSON.parse(raw));
+      }catch(e){}
+      // Ensure nested defaults
+      state.quiz = Object.assign({passed:false, score:0, total:0, lastAttempt:null, attempts:0, bestPct:0}, state.quiz||{});
+    }
+    function save(){
+      try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){}
+    }
+
+    // Quiz configuration
+    const DRAW_COUNT = 12;
+    const PASS_PCT = 80;
+
+    // Question bank (18)
+    // Each question: id, tags, text, options[{k,t,correct}], explain
+    const BANK = [
+      {
+        id:"small_professional",
+        tags:["foundations","process"],
+        text:"“Small is professional” means…",
+        options:[
+          {k:"a", t:"One task = one PR = one deliverable.", correct:true},
+          {k:"b", t:"Refactor everything you notice while you’re there.", correct:false},
+          {k:"c", t:"Ship large PRs to reduce overhead.", correct:false},
+          {k:"d", t:"Skip review if it’s urgent.", correct:false},
+        ],
+        explain:"Small, scoped PRs are easier to review, test, and rollback."
+      },
+      {
+        id:"no_vibes",
+        tags:["foundations","process"],
+        text:"If a task is missing Goal/Scope/Out-of-scope/Acceptance/Done, it is…",
+        options:[
+          {k:"a", t:"Ready to build if you understand it.", correct:false},
+          {k:"b", t:"Discussion, not work.", correct:true},
+          {k:"c", t:"Fine as long as there’s a deadline.", correct:false},
+          {k:"d", t:"Only needs acceptance criteria.", correct:false},
+        ],
+        explain:"No vibes-only work. Missing clarity means pause and clarify first."
+      },
+      {
+        id:"baseline_preview",
+        tags:["quality","environments"],
+        text:"Before calling something “done,” our baseline is…",
+        options:[
+          {k:"a", t:"Works on my machine.", correct:false},
+          {k:"b", t:"Build passes locally.", correct:false},
+          {k:"c", t:"Works in preview + test notes + tiny docs note.", correct:true},
+          {k:"d", t:"Merged to main.", correct:false},
+        ],
+        explain:"Preview validation ensures the team can reproduce and verify."
+      },
+      {
+        id:"lane_a",
+        tags:["lanes"],
+        text:"Which is a Lane A (Safe + Fast) contribution?",
+        options:[
+          {k:"a", t:"Add a README section + fix typo in landing page copy.", correct:true},
+          {k:"b", t:"Change authentication middleware to support a new token.", correct:false},
+          {k:"c", t:"Deploy a new reverse proxy config.", correct:false},
+          {k:"d", t:"Run a data migration on canonical DB.", correct:false},
+        ],
+        explain:"Lane A includes UI/copy/assets/JSON/docs and non-prod scripts."
+      },
+      {
+        id:"lane_b",
+        tags:["lanes"],
+        text:"Which is Lane B (Medium Risk, review required)?",
+        options:[
+          {k:"a", t:"Add SVG stickers pack.", correct:false},
+          {k:"b", t:"Refactor player logic and add a feature flag.", correct:true},
+          {k:"c", t:"Rotate secrets and redeploy.", correct:false},
+          {k:"d", t:"Edit firewall/network routes.", correct:false},
+        ],
+        explain:"Lane B includes app logic, tooling, flags, analytics, performance—review required."
+      },
+      {
+        id:"lane_c",
+        tags:["lanes","security"],
+        text:"Which belongs in Lane C (Restricted: founder executes)?",
+        options:[
+          {k:"a", t:"Update pack description blurbs.", correct:false},
+          {k:"b", t:"Add a filter UI to browse page.", correct:false},
+          {k:"c", t:"Modify auth/secrets/deploy pipeline or migrations.", correct:true},
+          {k:"d", t:"Create a new SVG card cover.", correct:false},
+        ],
+        explain:"Lane C is infra/auth/secrets/deploy/migrations—contributors advise; founder executes final."
+      },
+      {
+        id:"where_questions",
+        tags:["process","foundations"],
+        text:"What are the 3 required “WHERE” questions before building?",
+        options:[
+          {k:"a", t:"Where is the source of truth? Where is it verified? Where is the boundary/safe lane?", correct:true},
+          {k:"b", t:"Where is the backlog? Where is the deadline? Where is the meeting?", correct:false},
+          {k:"c", t:"Where is the UI? Where is the server? Where is the database?", correct:false},
+          {k:"d", t:"Where is the repo? Where is the PR? Where is the merge button?", correct:false},
+        ],
+        explain:"Source-of-truth / verification / boundaries are the anti-chaos triad."
+      },
+      {
+        id:"honest_helper_take",
+        tags:["culture","process"],
+        text:"Best “Honest Helper” move when you’re unsure how to start?",
+        options:[
+          {k:"a", t:"Guess and push; fix it if it breaks.", correct:false},
+          {k:"b", t:"Ask for source-of-truth + example + what done looks like.", correct:true},
+          {k:"c", t:"Wait silently until someone notices.", correct:false},
+          {k:"d", t:"Do a big refactor to learn the system faster.", correct:false},
+        ],
+        explain:"Ask early. Clarity beats guessing."
+      },
+      {
+        id:"blocked_format",
+        tags:["culture","process"],
+        text:"You’re blocked. What message format do we expect?",
+        options:[
+          {k:"a", t:"“It’s broken.”", correct:false},
+          {k:"b", t:"Blocked on / Tried / Got / Next guess / Need from you", correct:true},
+          {k:"c", t:"Post only the stack trace.", correct:false},
+          {k:"d", t:"Ping everyone until someone responds.", correct:false},
+        ],
+        explain:"The blocked format shortens time-to-help and avoids back-and-forth."
+      },
+      {
+        id:"doc_as_you_go",
+        tags:["process","quality"],
+        text:"“Document as you go” means…",
+        options:[
+          {k:"a", t:"Write a long design doc for every change.", correct:false},
+          {k:"b", t:"Just enough: what changed, why, how to run/test, gotchas.", correct:true},
+          {k:"c", t:"No docs; code is self-explanatory.", correct:false},
+          {k:"d", t:"Only update docs after production issues.", correct:false},
+        ],
+        explain:"Short, useful notes are the target."
+      },
+      {
+        id:"scenario_scope_creep",
+        tags:["scenario","process"],
+        text:"Scenario: You’re fixing a bug and notice 3 other unrelated issues. What do you do?",
+        options:[
+          {k:"a", t:"Fix them all in the same PR to save time.", correct:false},
+          {k:"b", t:"Fix only the scoped bug; log the others as separate tasks.", correct:true},
+          {k:"c", t:"Refactor the entire module while you’re there.", correct:false},
+          {k:"d", t:"Ignore the bug and refactor tests.", correct:false},
+        ],
+        explain:"One task = one PR. Capture extra work as follow-ups."
+      },
+      {
+        id:"scenario_secrets",
+        tags:["scenario","security"],
+        text:"Scenario: You need an API key to test locally. What’s the correct move?",
+        options:[
+          {k:"a", t:"Commit it temporarily then remove it later.", correct:false},
+          {k:"b", t:"Paste it into an issue so the team can access it.", correct:false},
+          {k:"c", t:"Use ENV/example patterns; request access securely; never commit secrets.", correct:true},
+          {k:"d", t:"Hardcode it to speed up testing.", correct:false},
+        ],
+        explain:"No secrets in repos. Use env vars and approved secret handling."
+      },
+      {
+        id:"scenario_lane_c_touch",
+        tags:["scenario","lanes","security"],
+        text:"Scenario: Your task requires a deployment pipeline tweak (Lane C). What’s best?",
+        options:[
+          {k:"a", t:"Make the change directly on the server for speed.", correct:false},
+          {k:"b", t:"Implement and deploy it yourself if you feel confident.", correct:false},
+          {k:"c", t:"Write the plan/patch and escalate; founder executes final.", correct:true},
+          {k:"d", t:"Skip it and mark the task done anyway.", correct:false},
+        ],
+        explain:"Lane C is restricted. You can prep work, but final execution is controlled."
+      },
+      {
+        id:"dod_core",
+        tags:["quality","dod"],
+        text:"Which set matches our core Definition of Done?",
+        options:[
+          {k:"a", t:"Merged + works locally.", correct:false},
+          {k:"b", t:"Acceptance met + build ok + test notes + no security regressions + tiny docs + correct paths/naming.", correct:true},
+          {k:"c", t:"Deployed to prod + announce in chat.", correct:false},
+          {k:"d", t:"No tests needed if change is small.", correct:false},
+        ],
+        explain:"DoD is consistent quality: acceptance, build, tests, security, docs, correct locations."
+      },
+      {
+        id:"review_culture",
+        tags:["culture","process"],
+        text:"Review culture: the best critique style is…",
+        options:[
+          {k:"a", t:"Critique the person to set standards.", correct:false},
+          {k:"b", t:"Critique the change; propose alternatives; use “can we…” language.", correct:true},
+          {k:"c", t:"Block merges until everything matches personal taste.", correct:false},
+          {k:"d", t:"Avoid reviews to reduce conflict.", correct:false},
+        ],
+        explain:"We keep feedback about the work, not the person, and offer solutions."
+      },
+      {
+        id:"no_review_limbo",
+        tags:["process","culture"],
+        text:"What do we do to avoid review limbo?",
+        options:[
+          {k:"a", t:"Let PRs sit indefinitely until someone remembers.", correct:false},
+          {k:"b", t:"If stalled after X days: merge with notes or close politely.", correct:true},
+          {k:"c", t:"Delete the branch to force action.", correct:false},
+          {k:"d", t:"Rebase daily until it gets attention.", correct:false},
+        ],
+        explain:"Stalled work kills momentum. Resolve or close cleanly."
+      },
+      {
+        id:"scenario_analytics",
+        tags:["scenario","lanes"],
+        text:"Scenario: You want to add Umami analytics to a page. Which lane and action?",
+        options:[
+          {k:"a", t:"Lane A; ship without review.", correct:false},
+          {k:"b", t:"Lane B; PR + review, confirm no secrets & privacy expectations.", correct:true},
+          {k:"c", t:"Lane C; change firewall rules first.", correct:false},
+          {k:"d", t:"Any lane; paste tracking token into repo.", correct:false},
+        ],
+        explain:"Analytics is medium risk: review required; handle config safely."
+      },
+      {
+        id:"scenario_generated_files",
+        tags:["scenario","quality"],
+        text:"Scenario: You see a quick fix in generated build artifacts that would solve an issue fast. What do you do?",
+        options:[
+          {k:"a", t:"Patch the generated files directly and commit them.", correct:false},
+          {k:"b", t:"Fix the source-of-truth code and regenerate artifacts via normal build.", correct:true},
+          {k:"c", t:"Edit production files on the server.", correct:false},
+          {k:"d", t:"Ignore it and mark done.", correct:false},
+        ],
+        explain:"No quick fixes in generated artifacts. Fix at the source-of-truth."
+      }
+    ];
+
+    function shuffle(arr){
+      const a = arr.slice();
+      for(let i=a.length-1;i>0;i--){
+        const j = Math.floor(Math.random()*(i+1));
+        [a[i],a[j]] = [a[j],a[i]];
+      }
+      return a;
+    }
+
+    function pickQuestions(){
+      const pool = shuffle(BANK);
+      return pool.slice(0, Math.min(DRAW_COUNT, pool.length));
+    }
+
+    // Render
+    let drawn = [];
+    function render(){
+      document.getElementById("who").textContent = state.name || "Contributor";
+      document.getElementById("qCount").textContent = String(Math.min(DRAW_COUNT, BANK.length));
+      document.getElementById("req").textContent = `≥ ${PASS_PCT}%`;
+
+      const best = state.quiz.bestPct ? `${state.quiz.bestPct}%` : "—";
+      document.getElementById("stats").textContent = `Attempts: ${state.quiz.attempts || 0} • Best: ${best}`;
+
+      const hint = document.getElementById("founderHint");
+      hint.style.display = state.founderAccepted ? "none" : "block";
+
+      const root = document.getElementById("quiz");
+      root.innerHTML = "";
+
+      drawn.forEach((q, idx)=>{
+        const box = document.createElement("div");
+        box.className = "q";
+
+        const tags = (q.tags || []).slice(0,4).map(t=>`<span class="pill">${t}</span>`).join("");
+
+        box.innerHTML = `
+          <div class="pillline">${tags}</div>
+          <h3>${idx+1}. ${q.text}</h3>
+          ${q.options.map(o=>`
+            <label class="opt">
+              <input type="radio" name="${q.id}" value="${o.k}">
+              <span>${o.t}</span>
+            </label>
+          `).join("")}
+        `;
+        root.appendChild(box);
+      });
+
+      // Reset UI bits
+      document.getElementById("results").style.display = "none";
+      const gate = document.getElementById("gate");
+      gate.textContent = "Not graded";
+      gate.className = "badge warn";
+      document.getElementById("badgeBtn").style.display = "none";
+    }
+
+    function clearAnswers(){
+      drawn.forEach(q=>{
+        document.querySelectorAll(`input[name="${q.id}"]`).forEach(el=>el.checked=false);
+      });
+      document.getElementById("results").style.display = "none";
+      const gate = document.getElementById("gate");
+      gate.textContent = "Not graded";
+      gate.className = "badge warn";
+      document.getElementById("badgeBtn").style.display = "none";
+    }
+
+    function grade(){
+      let correct = 0;
+      const misses = [];
+
+      drawn.forEach(q=>{
+        const picked = document.querySelector(`input[name="${q.id}"]:checked`);
+        const pickedKey = picked ? picked.value : null;
+        const right = q.options.find(o=>o.correct)?.k;
+
+        if(pickedKey === right) correct++;
+        else{
+          const chosen = pickedKey ? q.options.find(o=>o.k===pickedKey)?.t : "(no answer)";
+          const rightText = q.options.find(o=>o.k===right)?.t;
+          misses.push({
+            q:q.text,
+            chosen,
+            right:rightText,
+            explain:q.explain
+          });
+        }
+      });
+
+      const total = drawn.length;
+      const pct = Math.round((correct/total)*100);
+      const passed = pct >= PASS_PCT;
+
+      // Update attempt stats
+      state.quiz.attempts = (state.quiz.attempts || 0) + 1;
+      state.quiz.bestPct = Math.max(state.quiz.bestPct || 0, pct);
+
+      state.quiz.passed = passed;
+      state.quiz.score = correct;
+      state.quiz.total = total;
+      state.quiz.lastAttempt = new Date().toISOString();
+      save();
+
+      // Gate badge
+      const gate = document.getElementById("gate");
+      gate.textContent = passed ? `PASSED (${pct}%)` : `FAILED (${pct}%)`;
+      gate.className = passed ? "badge good" : "badge bad";
+
+      // Results
+      const results = document.getElementById("results");
+      results.style.display = "block";
+
+      // Passing threshold note (with exact needed correct count)
+      const needed = Math.ceil((PASS_PCT/100)*total);
+      const passLine = `Need ≥ ${needed}/${total} correct to pass (${PASS_PCT}%).`;
+
+      results.innerHTML = `
+        <div class="mono">Score: ${correct}/${total} • ${pct}% • ${passLine}</div>
+        <div class="small" style="margin-top:8px;">
+          ${passed
+            ? `✅ Passed. Clean work only. Go claim your badge.`
+            : `❌ Not quite. Review the misses below and hit <b>New Attempt</b> for a reshuffled quiz.`
+          }
+        </div>
+        ${misses.length ? `
+          <ul>
+            ${misses.map(m=>`
+              <li>
+                <b>${m.q}</b><br/>
+                <span class="small">You chose: ${m.chosen}</span><br/>
+                <span class="small">Correct: <b>${m.right}</b></span><br/>
+                <span class="small">${m.explain}</span>
+              </li>
+            `).join("")}
+          </ul>
+        ` : ``}
+      `;
+
+      // Update top stats
+      const best = state.quiz.bestPct ? `${state.quiz.bestPct}%` : "—";
+      document.getElementById("stats").textContent = `Attempts: ${state.quiz.attempts || 0} • Best: ${best}`;
+
+      // Badge button
+      const badgeBtn = document.getElementById("badgeBtn");
+      badgeBtn.style.display = passed ? "inline-flex" : "none";
+    }
+
+    function newAttempt(){
+      drawn = pickQuestions();
+      render();
+      window.scrollTo({top:0, behavior:"smooth"});
+    }
+
+    // Init
+    load();
+    drawn = pickQuestions();
+    render();
+
+    document.getElementById("gradeBtn").addEventListener("click", grade);
+    document.getElementById("resetBtn").addEventListener("click", clearAnswers);
+    document.getElementById("newAttemptBtn").addEventListener("click", newAttempt);
+  </script>
+</body>
+</html>

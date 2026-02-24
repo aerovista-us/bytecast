@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="dark light" />
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <title>Badge + Follow-up — AeroVista Onboarding</title>
+  <style>
+    :root{
+      --bg0:#05060a; --bg1:#0a0c14; --border:rgba(255,255,255,.10);
+      --muted:rgba(255,255,255,.70); --muted2:rgba(255,255,255,.55); --text:rgba(255,255,255,.92);
+      --good:#34d399; --warn:#fbbf24; --bad:#fb7185; --a:#60a5fa; --b:#a78bfa; --c:#f472b6;
+      --glow: 0 0 24px rgba(96,165,250,.20), 0 0 60px rgba(167,139,250,.12);
+      --shadow: 0 18px 55px rgba(0,0,0,.60);
+      --r: 18px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:var(--sans); color:var(--text);
+      background:
+        radial-gradient(1200px 800px at 15% 10%, rgba(96,165,250,.18), transparent 60%),
+        radial-gradient(1000px 700px at 85% 25%, rgba(167,139,250,.15), transparent 60%),
+        radial-gradient(900px 700px at 55% 95%, rgba(244,114,182,.10), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+    }
+    .wrap{max-width:980px; margin:0 auto; padding:22px 18px 64px;}
+    .top{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(5,6,10,.88), rgba(5,6,10,.55));
+      border-bottom:1px solid var(--border);
+    }
+    .top .inner{max-width:980px; margin:0 auto; padding:12px 18px; display:flex; gap:12px; align-items:center; justify-content:space-between;}
+    .brand{display:flex; gap:10px; align-items:center;}
+    .glyph{
+      width:34px; height:34px; border-radius:10px;
+      background:
+        radial-gradient(circle at 30% 35%, rgba(96,165,250,.55), transparent 55%),
+        radial-gradient(circle at 65% 55%, rgba(167,139,250,.45), transparent 60%),
+        radial-gradient(circle at 50% 80%, rgba(244,114,182,.25), transparent 65%),
+        linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow: var(--glow);
+    }
+    h1{margin:0; font-size:13px; letter-spacing:.14em; text-transform:uppercase;}
+    .sub{font-size:12px; color:var(--muted); margin-top:2px;}
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:12px; padding:6px 10px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.05);
+      color: rgba(255,255,255,.88);
+    }
+    .badge.good{border-color:rgba(52,211,153,.35); background:rgba(52,211,153,.10)}
+    .badge.warn{border-color:rgba(251,191,36,.35); background:rgba(251,191,36,.10)}
+    .badge.bad{border-color:rgba(251,113,133,.35); background:rgba(251,113,133,.10)}
+    .badge.b{border-color:rgba(167,139,250,.35); background:rgba(167,139,250,.10)}
+    .card{
+      margin-top:16px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(15,18,32,.55);
+      border-radius:18px;
+      box-shadow: 0 18px 55px rgba(0,0,0,.60);
+      overflow:hidden;
+    }
+    .cardHead{
+      padding:14px 16px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      display:flex; gap:12px; align-items:center; justify-content:space-between;
+    }
+    .cardBody{padding:16px;}
+    .btnRow{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:12px;}
+    .btn{
+      appearance:none;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:14px;
+      cursor:pointer;
+      font-weight:800;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      text-decoration:none;
+      transition: transform .08s ease, background .2s ease, border-color .2s ease;
+      user-select:none;
+    }
+    .btn:hover{background:rgba(255,255,255,.09); border-color:rgba(255,255,255,.22)}
+    .btn:active{transform:translateY(1px)}
+    .btn.primary{
+      background: linear-gradient(90deg, rgba(96,165,250,.28), rgba(167,139,250,.22), rgba(244,114,182,.16));
+      box-shadow: var(--glow);
+    }
+    .btn.good{border-color: rgba(52,211,153,.35); background: rgba(52,211,153,.10)}
+    .btn.warn{border-color: rgba(251,191,36,.35); background: rgba(251,191,36,.10)}
+    .small{color:var(--muted2); font-size:12px; line-height:1.45;}
+    .mono{font-family:var(--mono); color:rgba(255,255,255,.85); font-size:12px;}
+    .badgeFrame{
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.22);
+      border-radius:16px;
+      padding:12px;
+      overflow:auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="inner">
+      <div class="brand">
+        <div class="glyph" aria-hidden="true"></div>
+        <div>
+          <h1>Crew Check Badge</h1>
+          <div class="sub">Generated after passing Crew Check (80%+). Not an auto-invite.</div>
+        </div>
+      </div>
+      <div class="badge b" id="who">Contributor</div>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <div class="card">
+      <div class="cardHead">
+        <div>
+          <div class="badge b">🏅 Badge + Follow-up</div>
+          <div class="small" id="status">Checking quiz status…</div>
+        </div>
+        <div class="badge warn" id="gate">Not verified</div>
+      </div>
+
+      <div class="cardBody">
+        <div class="badgeFrame" id="badgeFrame" aria-label="Badge preview"></div>
+
+        <div class="btnRow">
+          <button class="btn primary" id="downloadSvgBtn" type="button">⬇ Download SVG</button>
+          <button class="btn" id="copySvgBtn" type="button">📋 Copy SVG</button>
+          <a class="btn good" href="founder_welcome.html">↩ Back</a>
+          <a class="btn warn" href="quiz.html">🧪 Retake Crew Check</a>
+        </div>
+
+        <div class="small" style="margin-top:10px;">
+          Tip: SVG is perfect for Discord/Notion attachments and looks crisp everywhere.
+        </div>
+      </div>
+    </div>
+
+    <div class="card" aria-label="Follow-up packet">
+      <div class="cardHead">
+        <div>
+          <div class="badge b">📨 Request follow-up</div>
+          <div class="small">Paste this packet into a GitHub Discussion or Issue Form so the founder can scan fast.</div>
+        </div>
+        <div class="badge warn" id="packetStatus">Locked</div>
+      </div>
+      <div class="cardBody">
+        <div class="badgeFrame" id="packetBox" style="white-space:pre-wrap; line-height:1.45;" aria-label="Follow-up packet text"></div>
+        <div class="btnRow">
+          <button class="btn primary" id="copyPacketBtn" type="button">📋 Copy packet</button>
+          <a class="btn" href="index.html">🧭 About</a>
+          <a class="btn" href="fit.html">🪞 Fit Check</a>
+          <a class="btn" href="quiz.html">🧪 Crew Check</a>
+        </div>
+        <div class="small" style="margin-top:10px;">
+          Passing Crew Check is a strong signal — the follow-up is where we align on scope, lanes, and timing.
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const KEY = "av_onboarding_v2";
+    const state = { name:"Contributor", founderAccepted:false, quiz:{passed:false, score:0, total:0, lastAttempt:null} };
+
+    function load(){
+      try{
+        const raw = localStorage.getItem(KEY);
+        if(raw) Object.assign(state, JSON.parse(raw));
+      }catch(e){}
+    }
+
+    function esc(s){
+      return String(s || "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#39;");
+    }
+
+    function buildSvg(){
+      const name = esc(state.name || "Contributor");
+      const score = `${state.quiz.score}/${state.quiz.total}`;
+      const pct = state.quiz.total ? Math.round((state.quiz.score/state.quiz.total)*100) : 0;
+      const when = state.quiz.lastAttempt ? new Date(state.quiz.lastAttempt) : new Date();
+      const dateLabel = esc(when.toLocaleDateString(undefined, {year:"numeric", month:"short", day:"2-digit"}));
+
+      // 960x320 badge
+      return `
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="320" viewBox="0 0 960 320" role="img" aria-label="AeroVista Contributor Badge">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1">
+      <stop offset="0" stop-color="#0b1020"/>
+      <stop offset="0.55" stop-color="#0b0f1a"/>
+      <stop offset="1" stop-color="#090b14"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" x2="1">
+      <stop offset="0" stop-color="#60a5fa" stop-opacity="0.55"/>
+      <stop offset="0.5" stop-color="#a78bfa" stop-opacity="0.40"/>
+      <stop offset="1" stop-color="#f472b6" stop-opacity="0.28"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="14" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect x="14" y="14" width="932" height="292" rx="24" fill="url(#bg)" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
+  <rect x="20" y="20" width="920" height="280" rx="22" fill="none" stroke="url(#glow)" stroke-width="2" opacity="0.65"/>
+
+  <circle cx="92" cy="94" r="44" fill="url(#glow)" filter="url(#soft)"/>
+  <circle cx="92" cy="94" r="28" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.18)" stroke-width="2"/>
+
+  <text x="152" y="78" font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-size="26" fill="rgba(255,255,255,0.92)" font-weight="800">
+    AeroVista Crew Check — Passed
+  </text>
+  <text x="152" y="110" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas" font-size="14" fill="rgba(255,255,255,0.70)">
+    Passed Crew Check ≥ 80% • ${pct}% (${score}) • ${dateLabel}
+  </text>
+
+  <rect x="52" y="148" width="856" height="120" rx="18" fill="rgba(0,0,0,0.25)" stroke="rgba(255,255,255,0.10)"/>
+  <text x="78" y="188" font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-size="18" fill="rgba(255,255,255,0.86)" font-weight="700">
+    Contributor:
+  </text>
+  <text x="200" y="188" font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-size="20" fill="rgba(255,255,255,0.92)" font-weight="800">
+    ${name}
+  </text>
+
+  <text x="78" y="222" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas" font-size="13" fill="rgba(255,255,255,0.75)">
+    Small PRs • No vibes-only work • Ask “WHERE” • Preview baseline • Honest Helper
+  </text>
+
+  <text x="78" y="252" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas" font-size="12" fill="rgba(255,255,255,0.55)">
+    Lane C is restricted: infra/auth/secrets/deploy/migrations executed by founder.
+  </text>
+
+  <text x="880" y="290" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas" font-size="11" fill="rgba(255,255,255,0.45)" text-anchor="end">
+    AV-ONBOARDING v2
+  </text>
+</svg>`.trim();
+    }
+
+    async function copyText(text){
+      try{ await navigator.clipboard.writeText(text); }
+      catch(e){ alert("Copy failed. Select and copy manually."); }
+    }
+
+    function download(filename, text){
+      const blob = new Blob([text], {type:"image/svg+xml;charset=utf-8"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(()=>URL.revokeObjectURL(url), 2500);
+    }
+
+    // Init
+    load();
+    document.getElementById("who").textContent = state.name || "Contributor";
+
+    const status = document.getElementById("status");
+    const gate = document.getElementById("gate");
+    const frame = document.getElementById("badgeFrame");
+    const packetStatus = document.getElementById("packetStatus");
+    const packetBox = document.getElementById("packetBox");
+
+    function buildPacket(){
+      const name = state.name || "Contributor";
+      const score = `${state.quiz.score}/${state.quiz.total}`;
+      const pct = state.quiz.total ? Math.round((state.quiz.score/state.quiz.total)*100) : 0;
+      const when = state.quiz.lastAttempt ? new Date(state.quiz.lastAttempt) : new Date();
+      const dateLabel = when.toLocaleString(undefined, {year:"numeric", month:"short", day:"2-digit", hour:"2-digit", minute:"2-digit"});
+      const founder = state.founderAccepted ? "Yes" : "Not yet";
+
+      return `AeroVista — Crew Check follow-up request
+
+Name: ${name}
+Crew Check: PASSED (${pct}% • ${score})
+Founder Welcome: ${founder}
+Date: ${dateLabel}
+
+What I want to contribute (pick lanes + examples):
+- Lane A (UI/copy/assets/docs): ...
+- Lane B (logic/tooling/flags/analytics/perf): ...
+
+Availability:
+- Timezone: ...
+- Hours/week: ...
+
+Links:
+- GitHub: ...
+- Portfolio / samples: ...
+
+Notes:
+- (anything you want the founder to know) ...`;
+    }
+
+    if(state.quiz && state.quiz.passed){
+      gate.textContent = "Verified";
+      gate.className = "badge good";
+      status.textContent = "Crew Check passed. Badge unlocked.";
+      const svg = buildSvg();
+      frame.innerHTML = svg;
+
+      packetStatus.textContent = "Ready";
+      packetStatus.className = "badge good";
+      const packet = buildPacket();
+      packetBox.textContent = packet;
+      document.getElementById("copyPacketBtn").addEventListener("click", ()=>{
+        copyText(packet);
+      });
+
+      document.getElementById("downloadSvgBtn").addEventListener("click", ()=>{
+        const safeName = (state.name || "Contributor").replace(/[^\w\-]+/g,"_");
+        download(`aerovista_badge_${safeName}.svg`, svg);
+      });
+
+      document.getElementById("copySvgBtn").addEventListener("click", ()=>{
+        copyText(svg);
+      });
+    }else{
+      gate.textContent = "Locked";
+      gate.className = "badge bad";
+      status.textContent = "Badge locked. Pass Crew Check (≥ 80%) first.";
+      frame.innerHTML = `
+        <div style="color:rgba(255,255,255,.85); line-height:1.5;">
+          <b>Not yet.</b> Go pass Crew Check and come back.<br/>
+          <span style="color:rgba(255,255,255,.60);">Tip: the quiz is short — focus on lanes, “done,” and honest helper behaviors.</span>
+        </div>
+      `;
+      document.getElementById("downloadSvgBtn").disabled = true;
+      document.getElementById("copySvgBtn").disabled = true;
+
+      packetStatus.textContent = "Locked";
+      packetStatus.className = "badge bad";
+      packetBox.textContent =
+        "Pass Crew Check (80%+) to unlock a ready-to-paste follow-up packet.\n\nTip: Start with Fit Check if you haven’t yet — it helps you self-filter before the quiz.";
+      document.getElementById("copyPacketBtn").disabled = true;
+    }
+  </script>
+</body>
+</html>

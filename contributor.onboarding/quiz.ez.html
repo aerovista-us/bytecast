@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="dark light" />
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <title>Crew Check — AeroVista Onboarding</title>
+  <style>
+    :root{
+      --bg0:#05060a; --bg1:#0a0c14; --border:rgba(255,255,255,.10);
+      --muted:rgba(255,255,255,.70); --muted2:rgba(255,255,255,.55); --text:rgba(255,255,255,.92);
+      --good:#34d399; --warn:#fbbf24; --bad:#fb7185; --a:#60a5fa; --b:#a78bfa; --c:#f472b6;
+      --glow: 0 0 24px rgba(96,165,250,.20), 0 0 60px rgba(167,139,250,.12);
+      --shadow: 0 18px 55px rgba(0,0,0,.60);
+      --r: 18px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:var(--sans); color:var(--text);
+      background:
+        radial-gradient(1200px 800px at 15% 10%, rgba(96,165,250,.18), transparent 60%),
+        radial-gradient(1000px 700px at 85% 25%, rgba(167,139,250,.15), transparent 60%),
+        radial-gradient(900px 700px at 55% 95%, rgba(244,114,182,.10), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+    }
+    .wrap{max-width:980px; margin:0 auto; padding:22px 18px 64px;}
+    .top{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(5,6,10,.88), rgba(5,6,10,.55));
+      border-bottom:1px solid var(--border);
+    }
+    .top .inner{max-width:980px; margin:0 auto; padding:12px 18px; display:flex; gap:12px; align-items:center; justify-content:space-between;}
+    .brand{display:flex; gap:10px; align-items:center;}
+    .glyph{
+      width:34px; height:34px; border-radius:10px;
+      background:
+        radial-gradient(circle at 30% 35%, rgba(96,165,250,.55), transparent 55%),
+        radial-gradient(circle at 65% 55%, rgba(167,139,250,.45), transparent 60%),
+        radial-gradient(circle at 50% 80%, rgba(244,114,182,.25), transparent 65%),
+        linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow: var(--glow);
+    }
+    h1{margin:0; font-size:13px; letter-spacing:.14em; text-transform:uppercase;}
+    .sub{font-size:12px; color:var(--muted); margin-top:2px;}
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:12px; padding:6px 10px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.05);
+      color: rgba(255,255,255,.88);
+    }
+    .badge.good{border-color:rgba(52,211,153,.35); background:rgba(52,211,153,.10)}
+    .badge.warn{border-color:rgba(251,191,36,.35); background:rgba(251,191,36,.10)}
+    .badge.bad{border-color:rgba(251,113,133,.35); background:rgba(251,113,133,.10)}
+    .badge.b{border-color:rgba(167,139,250,.35); background:rgba(167,139,250,.10)}
+    .card{
+      margin-top:16px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(15,18,32,.55);
+      border-radius:18px;
+      box-shadow: 0 18px 55px rgba(0,0,0,.60);
+      overflow:hidden;
+    }
+    .cardHead{
+      padding:14px 16px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      display:flex; gap:12px; align-items:center; justify-content:space-between;
+    }
+    .cardBody{padding:16px;}
+    .q{
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.22);
+      border-radius:16px;
+      padding:12px;
+      margin:12px 0;
+    }
+    .q h3{margin:0 0 10px; font-size:15px;}
+    .opt{display:flex; gap:10px; align-items:flex-start; padding:8px 8px; border-radius:12px;}
+    .opt:hover{background: rgba(255,255,255,.04);}
+    .opt input{margin-top:2px;}
+    .opt span{color:rgba(255,255,255,.88); line-height:1.45;}
+    .btnRow{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:12px;}
+    .btn{
+      appearance:none;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:14px;
+      cursor:pointer;
+      font-weight:800;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      text-decoration:none;
+      transition: transform .08s ease, background .2s ease, border-color .2s ease;
+      user-select:none;
+    }
+    .btn:hover{background:rgba(255,255,255,.09); border-color:rgba(255,255,255,.22)}
+    .btn:active{transform:translateY(1px)}
+    .btn.primary{
+      background: linear-gradient(90deg, rgba(96,165,250,.28), rgba(167,139,250,.22), rgba(244,114,182,.16));
+      box-shadow: var(--glow);
+    }
+    .btn.good{border-color: rgba(52,211,153,.35); background: rgba(52,211,153,.10)}
+    .btn.warn{border-color: rgba(251,191,36,.35); background: rgba(251,191,36,.10)}
+    .btn.bad{border-color: rgba(251,113,133,.35); background: rgba(251,113,133,.10)}
+    .small{color:var(--muted2); font-size:12px; line-height:1.45;}
+    .mono{font-family:var(--mono); color:rgba(255,255,255,.85); font-size:12px;}
+    .resultBox{
+      margin-top:12px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.22);
+      border-radius:16px;
+      padding:12px;
+    }
+    .resultBox ul{margin:10px 0 0; padding-left:18px; color:rgba(255,255,255,.84); line-height:1.45;}
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="inner">
+      <div class="brand">
+        <div class="glyph" aria-hidden="true"></div>
+        <div>
+          <h1>Crew Check</h1>
+          <div class="sub">Crew Check • 80% to pass • proves you can self-guide.</div>
+        </div>
+      </div>
+      <div class="badge b" id="who">Contributor</div>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <div class="card">
+      <div class="cardHead">
+        <div>
+          <div class="badge b">Crew Check</div>
+          <div class="small">Pass to generate a follow-up packet and badge.</div>
+        </div>
+        <div class="badge warn" id="gate">Not graded</div>
+      </div>
+
+      <div class="cardBody" id="quiz"></div>
+
+      <div class="cardBody">
+        <div class="btnRow">
+          <button class="btn primary" id="gradeBtn" type="button">✅ Grade Quiz</button>
+          <button class="btn" id="resetBtn" type="button">♻️ Reset Answers</button>
+          <a class="btn" href="founder_welcome.html">↩ Back to Welcome</a>
+          <a class="btn good" id="badgeBtn" href="badge.html" style="display:none;">🏅 Get Badge</a>
+        </div>
+        <div class="resultBox" id="results" style="display:none;"></div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const KEY = "av_onboarding_v2";
+    const state = { name:"Contributor", founderAccepted:false, quiz:{passed:false, score:0, total:0, lastAttempt:null} };
+
+    function load(){
+      try{
+        const raw = localStorage.getItem(KEY);
+        if(raw) Object.assign(state, JSON.parse(raw));
+      }catch(e){}
+    }
+    function save(){
+      try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){}
+    }
+
+    const questions = [
+      {
+        id:"q1",
+        text:"What does “Small is professional” mean here?",
+        options:[
+          {k:"a", t:"One task = one PR = one deliverable.", correct:true},
+          {k:"b", t:"Refactor only what’s in scope for your task.", correct:false},
+          {k:"c", t:"Bigger PRs are better because they’re efficient.", correct:false},
+        ],
+        explain:"We keep changes scoped and reviewable: 1 task → 1 PR → 1 deliverable."
+      },
+      {
+        id:"q2",
+        text:"If a task is missing Goal/Scope/Out-of-scope/Acceptance/Done, what is it?",
+        options:[
+          {k:"a", t:"Ready to build anyway if you understand it.", correct:false},
+          {k:"b", t:"Discussion, not work.", correct:true},
+          {k:"c", t:"Only needs a Goal; the rest can be implied.", correct:false},
+        ],
+        explain:"No vibes-only work. Missing clarity means pause and clarify."
+      },
+      {
+        id:"q3",
+        text:"What’s our baseline before calling something “done”?",
+        options:[
+          {k:"a", t:"Works on my machine.", correct:false},
+          {k:"b", t:"Works in preview + test notes + tiny docs note.", correct:true},
+          {k:"c", t:"It compiles.", correct:false},
+        ],
+        explain:"Preview validation is the baseline, not just local success."
+      },
+      {
+        id:"q4",
+        text:"Which work belongs in Lane C (restricted)?",
+        options:[
+          {k:"a", t:"Docs + SVG assets.", correct:false},
+          {k:"b", t:"App logic refactor + feature flags.", correct:false},
+          {k:"c", t:"Auth/secrets/deploy/migrations/infra.", correct:true},
+        ],
+        explain:"Lane C is high risk. Contributors advise; founder executes."
+      },
+      {
+        id:"q5",
+        text:"What’s the best “Honest Helper” move when you’re unsure where to work?",
+        options:[
+          {k:"a", t:"Guess and push; fix it if it breaks.", correct:false},
+          {k:"b", t:"Ask for source-of-truth + what ‘done’ looks like.", correct:true},
+          {k:"c", t:"Wait silently until someone notices.", correct:false},
+        ],
+        explain:"Ask ‘WHERE’ early: source-of-truth, verification, boundary."
+      }
+    ];
+
+    function render(){
+      const root = document.getElementById("quiz");
+      root.innerHTML = "";
+
+      if(!state.founderAccepted){
+        const warn = document.createElement("div");
+        warn.className = "q";
+        warn.innerHTML = `
+          <h3>ℹ️ Recommended reading</h3>
+          <div class="small">
+            Take a minute on the Founder Welcome page. If you want, tap <b>“Acknowledge ground rules”</b>
+            so this quiz can remember you saw it.
+          </div>
+          <div class="btnRow" style="margin-top:10px;">
+            <a class="btn warn" href="founder_welcome.html">↩ Open Founder Welcome</a>
+          </div>
+        `;
+        root.appendChild(warn);
+      }
+
+      questions.forEach((q, idx)=>{
+        const box = document.createElement("div");
+        box.className = "q";
+        box.innerHTML = `
+          <h3>${idx+1}. ${q.text}</h3>
+          ${q.options.map(o=>`
+            <label class="opt">
+              <input type="radio" name="${q.id}" value="${o.k}">
+              <span>${o.t}</span>
+            </label>
+          `).join("")}
+        `;
+        root.appendChild(box);
+      });
+    }
+
+    function resetAnswers(){
+      questions.forEach(q=>{
+        document.querySelectorAll(`input[name="${q.id}"]`).forEach(el=>el.checked=false);
+      });
+      document.getElementById("results").style.display = "none";
+      document.getElementById("gate").textContent = "Not graded";
+      document.getElementById("gate").className = "badge warn";
+      document.getElementById("badgeBtn").style.display = "none";
+    }
+
+    function grade(){
+      let correct = 0;
+      const misses = [];
+
+      questions.forEach(q=>{
+        const picked = document.querySelector(`input[name="${q.id}"]:checked`);
+        const pickedKey = picked ? picked.value : null;
+        const right = q.options.find(o=>o.correct)?.k;
+
+        if(pickedKey === right) correct++;
+        else{
+          misses.push({ q:q.text, explain:q.explain });
+        }
+      });
+
+      const total = questions.length;
+      const pct = Math.round((correct/total)*100);
+      const passed = pct >= 80;
+
+      state.quiz = { passed, score: correct, total, lastAttempt: new Date().toISOString() };
+      save();
+
+      const gate = document.getElementById("gate");
+      gate.textContent = passed ? `PASSED (${pct}%)` : `FAILED (${pct}%)`;
+      gate.className = passed ? "badge good" : "badge bad";
+
+      const results = document.getElementById("results");
+      results.style.display = "block";
+      results.innerHTML = `
+        <div class="mono">Score: ${correct}/${total} • ${pct}% • Pass requirement: 80%</div>
+        <div class="small" style="margin-top:8px;">
+          ${passed
+            ? `✅ You passed. Nice. Go claim your badge.`
+            : `❌ Not quite. Review the misses below and try again.`
+          }
+        </div>
+        ${misses.length ? `<ul>${misses.map(m=>`<li><b>${m.q}</b><br/><span class="small">${m.explain}</span></li>`).join("")}</ul>` : ``}
+      `;
+
+      const badgeBtn = document.getElementById("badgeBtn");
+      badgeBtn.style.display = passed ? "inline-flex" : "none";
+    }
+
+    // Init
+    load();
+    document.getElementById("who").textContent = state.name || "Contributor";
+    render();
+
+    document.getElementById("gradeBtn").addEventListener("click", grade);
+    document.getElementById("resetBtn").addEventListener("click", resetAnswers);
+  </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="AeroVista">
+  <defs>
+    <radialGradient id="g1" cx="35%" cy="30%" r="75%">
+      <stop offset="0" stop-color="#60a5fa" stop-opacity="0.95"/>
+      <stop offset="0.55" stop-color="#a78bfa" stop-opacity="0.80"/>
+      <stop offset="1" stop-color="#f472b6" stop-opacity="0.65"/>
+    </radialGradient>
+    <radialGradient id="g2" cx="50%" cy="55%" r="70%">
+      <stop offset="0" stop-color="#0b1020" stop-opacity="0"/>
+      <stop offset="1" stop-color="#0b1020" stop-opacity="0.75"/>
+    </radialGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.2" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="128" height="128" rx="28" fill="#070812"/>
+  <rect x="7" y="7" width="114" height="114" rx="24" fill="url(#g1)" opacity="0.95"/>
+  <rect x="7" y="7" width="114" height="114" rx="24" fill="url(#g2)"/>
+
+  <g filter="url(#soft)">
+    <path d="M64 24l7.4 15 16.6 2.4-12 11.7 2.9 16.5L64 62.5 49.1 69.6 52 53.1 40 41.4 56.6 39z"
+          fill="rgba(255,255,255,0.92)"/>
+    <path d="M64 84c-9.4-8.6-18-14.1-18-22.3 0-5.3 4-9.7 9.4-9.7 3.2 0 6.3 1.7 8.6 4.6 2.3-2.9 5.4-4.6 8.6-4.6 5.4 0 9.4 4.4 9.4 9.7 0 8.2-8.6 13.7-18 22.3z"
+          fill="#0b1020" opacity="0.55"/>
+  </g>
+
+  <rect x="7" y="7" width="114" height="114" rx="24" fill="none" stroke="rgba(255,255,255,0.24)" stroke-width="2"/>
+</svg>

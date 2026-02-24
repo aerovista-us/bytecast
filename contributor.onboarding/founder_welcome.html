@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="dark light" />
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <title>Founder Welcome — AeroVista Contributor Onboarding</title>
+  <style>
+    :root{
+      --bg0:#05060a; --bg1:#0a0c14; --card:#0f1220cc; --border:rgba(255,255,255,.10);
+      --muted:rgba(255,255,255,.70); --muted2:rgba(255,255,255,.55); --text:rgba(255,255,255,.92);
+      --good:#34d399; --warn:#fbbf24; --bad:#fb7185; --a:#60a5fa; --b:#a78bfa; --c:#f472b6;
+      --glow: 0 0 24px rgba(96,165,250,.20), 0 0 60px rgba(167,139,250,.12);
+      --shadow: 0 18px 55px rgba(0,0,0,.60);
+      --r: 18px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:var(--sans); color:var(--text);
+      background:
+        radial-gradient(1200px 800px at 15% 10%, rgba(96,165,250,.18), transparent 60%),
+        radial-gradient(1000px 700px at 85% 25%, rgba(167,139,250,.15), transparent 60%),
+        radial-gradient(900px 700px at 55% 95%, rgba(244,114,182,.10), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+    }
+    .wrap{max-width:1040px; margin:0 auto; padding:22px 18px 64px;}
+    .topbar{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(5,6,10,.88), rgba(5,6,10,.55));
+      border-bottom:1px solid var(--border);
+    }
+    .topbar .inner{max-width:1040px; margin:0 auto; padding:12px 18px; display:flex; gap:12px; align-items:center; justify-content:space-between;}
+    .brand{display:flex; gap:10px; align-items:center; min-width:0;}
+    .glyph{
+      width:34px; height:34px; border-radius:10px;
+      background:
+        radial-gradient(circle at 30% 35%, rgba(96,165,250,.55), transparent 55%),
+        radial-gradient(circle at 65% 55%, rgba(167,139,250,.45), transparent 60%),
+        radial-gradient(circle at 50% 80%, rgba(244,114,182,.25), transparent 65%),
+        linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow: var(--glow);
+      position:relative;
+    }
+    .glyph:after{content:""; position:absolute; inset:8px; border-radius:9px; border:1px dashed rgba(255,255,255,.18); opacity:.65;}
+    .brand h1{margin:0; font-size:13px; letter-spacing:.14em; text-transform:uppercase; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+    .brand .sub{font-size:12px; color:var(--muted); letter-spacing:.02em;}
+    .pill{font-size:12px; color:var(--muted); border:1px solid var(--border); background:rgba(255,255,255,.04); padding:6px 10px; border-radius:999px;}
+    .pill b{color:var(--text)}
+    .hero{
+      margin-top:18px;
+      border:1px solid var(--border);
+      border-radius:var(--r);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .hero:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(700px 260px at 12% 18%, rgba(96,165,250,.18), transparent 60%),
+        radial-gradient(650px 260px at 92% 22%, rgba(167,139,250,.16), transparent 60%),
+        radial-gradient(650px 260px at 40% 120%, rgba(244,114,182,.12), transparent 60%);
+      pointer-events:none;
+    }
+    .heroInner{
+      position:relative;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:16px;
+      padding:18px 18px;
+      align-items:stretch;
+    }
+    @media (max-width: 920px){ .heroInner{grid-template-columns:1fr;} }
+    .scene{
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(15,18,32,.55);
+      border-radius:16px;
+      padding:16px;
+      box-shadow: 0 12px 44px rgba(0,0,0,.40);
+    }
+    .scene h2{margin:0 0 6px; font-size:22px;}
+    .scene p{margin:0 0 10px; color:var(--muted); line-height:1.55;}
+    .quote{
+      margin:12px 0 0;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.25);
+      color: rgba(255,255,255,.88);
+      line-height:1.55;
+    }
+    .quote b{color:var(--text)}
+    .btnRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; align-items:center;}
+    .btn{
+      appearance:none;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:14px;
+      cursor:pointer;
+      font-weight:750;
+      letter-spacing:.01em;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      text-decoration:none;
+      transition: transform .08s ease, background .2s ease, border-color .2s ease;
+      user-select:none;
+    }
+    .btn:hover{background:rgba(255,255,255,.09); border-color:rgba(255,255,255,.22)}
+    .btn:active{transform:translateY(1px)}
+    .btn.primary{
+      background: linear-gradient(90deg, rgba(96,165,250,.28), rgba(167,139,250,.22), rgba(244,114,182,.16));
+      border-color: rgba(255,255,255,.18);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.04) inset, var(--glow);
+    }
+    .btn.good{border-color: rgba(52,211,153,.35); background: rgba(52,211,153,.10)}
+    .btn.warn{border-color: rgba(251,191,36,.35); background: rgba(251,191,36,.10)}
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:12px; padding:6px 10px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.05);
+      color: rgba(255,255,255,.88);
+    }
+    .badge.good{border-color:rgba(52,211,153,.35); background:rgba(52,211,153,.10)}
+    .badge.b{border-color:rgba(167,139,250,.35); background:rgba(167,139,250,.10)}
+    .badge.warn{border-color:rgba(251,191,36,.35); background:rgba(251,191,36,.10)}
+    .panel{
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(11,14,24,.55);
+      border-radius:16px;
+      padding:14px;
+      box-shadow: 0 12px 44px rgba(0,0,0,.40);
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    label{display:block; font-size:12px; color:var(--muted); margin:0 0 6px;}
+    input{
+      width:100%;
+      padding:10px 10px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.25);
+      color: var(--text);
+      outline:none;
+      font-family:var(--sans);
+    }
+    input:focus{border-color: rgba(96,165,250,.55); box-shadow: 0 0 0 3px rgba(96,165,250,.22);}
+    .miniTitle{font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.14em;}
+    .small{color:var(--muted2); font-size:12px; line-height:1.45;}
+    .playerRow{display:flex; gap:10px; flex-wrap:wrap; align-items:center;}
+    .playerBtn{
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      padding:8px 10px;
+      border-radius:14px;
+      cursor:pointer;
+      font-weight:800;
+      font-size:12px;
+    }
+    .playerBtn.primary{
+      background: linear-gradient(90deg, rgba(96,165,250,.26), rgba(167,139,250,.20), rgba(244,114,182,.14));
+      box-shadow: var(--glow);
+    }
+    .playerBtn:hover{background:rgba(255,255,255,.09); border-color:rgba(255,255,255,.22)}
+    .playerBtn:active{transform:translateY(1px)}
+    .seek{
+      width:100%;
+      appearance:none;
+      height:10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.10);
+      outline:none;
+    }
+    .seek::-webkit-slider-thumb{
+      appearance:none;
+      width:16px; height:16px;
+      border-radius:999px;
+      background:rgba(255,255,255,.90);
+      border:2px solid rgba(96,165,250,.55);
+      box-shadow: 0 0 0 3px rgba(96,165,250,.18);
+      cursor:pointer;
+    }
+    .meta{display:flex; gap:10px; align-items:center; color:rgba(255,255,255,.78); font: 12px var(--mono);}
+    .meta .sep{opacity:.35}
+    .toast{
+      position:fixed; right:16px; bottom:16px; z-index:100;
+      width:min(420px, calc(100vw - 32px));
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(15,18,32,.90);
+      padding:12px 12px;
+      border-radius:16px;
+      box-shadow: 0 18px 60px rgba(0,0,0,.60);
+      backdrop-filter: blur(10px);
+      display:none;
+    }
+    .toast.show{display:block; animation: pop .18s ease;}
+    @keyframes pop{ from{transform: translateY(8px); opacity:.0} to{transform: translateY(0); opacity:1} }
+    .toast .row{display:flex; gap:10px; align-items:flex-start;}
+    .toast .dot{width:10px; height:10px; border-radius:999px; background:var(--a); margin-top:4px;}
+    .toast .msg{font-size:13px; line-height:1.4; color:rgba(255,255,255,.90);}
+    .toast .x{margin-left:auto; border:none; background:transparent; color:rgba(255,255,255,.75); cursor:pointer; font-size:16px; line-height:1; padding:2px 6px; border-radius:10px;}
+    .toast .x:hover{background:rgba(255,255,255,.06); color:rgba(255,255,255,.90)}
+  </style>
+</head>
+<body>
+  <div class="topbar" role="banner">
+    <div class="inner">
+      <div class="brand">
+        <div class="glyph" aria-hidden="true"></div>
+        <div>
+          <h1>Founder Welcome</h1>
+          <div class="sub">Mission briefing + voice + one clean set of rules.</div>
+        </div>
+      </div>
+      <div class="pill"><b id="who">Contributor</b></div>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <section class="hero" aria-label="Founder welcome scene">
+      <div class="heroInner">
+        <div class="scene">
+          <span class="badge b">🧭 Mission Briefing</span>
+          <h2>Welcome. You’re officially part of the build. ⚡</h2>
+          <p>
+            You’re stepping into a system that moves across apps, music, branding, and infrastructure.
+            That’s exciting — and it’s also why we operate with <b>clean lanes</b> and <b>safe defaults</b>.
+          </p>
+          <p>
+            Here’s the truth: most projects don’t collapse from bad people… they collapse from good people
+            doing “helpful” things in fragile places without a map.
+          </p>
+
+          <div class="quote" aria-label="Founder message">
+            <b>Founder message:</b><br/>
+            “I want you to move fast — but I need you to move <b>clean</b>. Small PRs. Clear scope.
+            Ask ‘where’ before you build. If you’re unsure, say it early. That’s not weakness —
+            that’s what keeps the ecosystem stable while we grow.”
+          </div>
+
+          <div class="btnRow">
+            <a class="btn primary" href="quiz.html">🧪 Take Crew Check</a>
+            <button class="btn good" id="acceptBtn" type="button">✅ Acknowledge ground rules</button>
+            <button class="btn warn" id="copyRulesBtn" type="button">📋 Copy 10-sec Rules</button>
+          </div>
+
+          <p class="small" style="margin-top:12px;">
+            Pro move: pass Crew Check, then generate a badge + follow-up packet you can share.
+          </p>
+        </div>
+
+        <aside class="panel" aria-label="Setup + ByteCast audio">
+          <div>
+            <div class="miniTitle">Set your display name</div>
+            <label for="name">Name</label>
+            <input id="name" placeholder="e.g., Alex / Sam / Byte’s favorite contributor 👀" />
+            <div class="btnRow" style="margin-top:10px;">
+              <button class="btn primary" id="saveNameBtn" type="button">💾 Save</button>
+              <button class="btn" id="clearNameBtn" type="button">🧼 Clear</button>
+            </div>
+          </div>
+
+          <div style="border-top:1px solid rgba(255,255,255,.10); padding-top:12px;">
+            <div class="miniTitle">Optional: ByteCast audio</div>
+            <p class="small" style="margin:6px 0 10px;">Put <b>bytecast.mp3</b> next to this HTML file to autoplay-ready load.</p>
+
+            <audio id="audio" preload="metadata">
+              <source id="src" src="bytecast.mp3" type="audio/mpeg">
+            </audio>
+
+            <div class="playerRow">
+              <button class="playerBtn primary" id="playBtn" type="button">▶ Play</button>
+              <button class="playerBtn" id="b10" type="button">⟲ -10s</button>
+              <button class="playerBtn" id="f30" type="button">+30s ⟳</button>
+            </div>
+
+            <div class="meta" style="margin-top:10px;">
+              <span id="t0">00:00</span><span class="sep">/</span><span id="t1">00:00</span>
+            </div>
+            <input id="seek" class="seek" type="range" min="0" max="1000" value="0" aria-label="Seek bar">
+
+            <p class="small" style="margin:10px 0 0;">
+              If audio fails: the MP3 isn’t present or the path is wrong. No stress — you can still take Crew Check.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <div class="row">
+      <div class="dot" id="toastDot" aria-hidden="true"></div>
+      <div class="msg" id="toastMsg">Copied.</div>
+      <button class="x" id="toastX" aria-label="Dismiss notification">×</button>
+    </div>
+  </div>
+
+  <script>
+    const KEY = "av_onboarding_v2";
+    const state = {
+      name: "Contributor",
+      founderAccepted: false,
+      quiz: { passed:false, score:0, total:0, lastAttempt:null }
+    };
+
+    function load(){
+      try{
+        const raw = localStorage.getItem(KEY);
+        if(raw) Object.assign(state, JSON.parse(raw));
+      }catch(e){}
+    }
+    function save(){
+      try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){}
+      document.getElementById("who").textContent = state.name || "Contributor";
+    }
+
+    function toast(msg, kind="info"){
+      const t = document.getElementById("toast");
+      const m = document.getElementById("toastMsg");
+      const d = document.getElementById("toastDot");
+      m.textContent = msg;
+      d.style.background =
+        (kind === "good") ? "var(--good)" :
+        (kind === "warn") ? "var(--warn)" :
+        (kind === "bad") ? "var(--bad)" : "var(--a)";
+      t.classList.add("show");
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(()=>t.classList.remove("show"), 2200);
+    }
+    document.getElementById("toastX").addEventListener("click", ()=>document.getElementById("toast").classList.remove("show"));
+
+    async function copyText(text){
+      try{ await navigator.clipboard.writeText(text); toast("Copied to clipboard.", "good"); }
+      catch(e){ toast("Copy failed. Select text and copy manually.", "warn"); }
+    }
+
+    // Name
+    document.getElementById("saveNameBtn").addEventListener("click", ()=>{
+      const v = (document.getElementById("name").value || "").trim();
+      state.name = v || "Contributor";
+      save();
+      toast("Saved.", "good");
+    });
+    document.getElementById("clearNameBtn").addEventListener("click", ()=>{
+      state.name = "Contributor";
+      document.getElementById("name").value = "";
+      save();
+      toast("Cleared.", "good");
+    });
+
+    // Accept rules
+    document.getElementById("acceptBtn").addEventListener("click", ()=>{
+      state.founderAccepted = true;
+      save();
+      toast("Rules accepted. You’re cleared to take the quiz.", "good");
+    });
+
+    // Copy rules
+    document.getElementById("copyRulesBtn").addEventListener("click", ()=>{
+      const txt =
+`AeroVista Rules (10 seconds):
+• 1 task = 1 PR = 1 deliverable
+• No vibes-only work (Goal/Scope/Out-of-scope/Acceptance/Done)
+• Ask “WHERE” first: source-of-truth / verify / safe boundary
+• Lane A: UI/copy/assets/JSON/docs
+• Lane B: logic/tooling/flags/analytics/perf (review)
+• Lane C: infra/auth/secrets/deploy/migrations (founder executes)
+• “Works in preview” is done
+• Be honest early (no silent guessing)`;
+      copyText(txt);
+    });
+
+    // Audio player
+    (function(){
+      const audio = document.getElementById("audio");
+      const playBtn = document.getElementById("playBtn");
+      const b10 = document.getElementById("b10");
+      const f30 = document.getElementById("f30");
+      const seek = document.getElementById("seek");
+      const t0 = document.getElementById("t0");
+      const t1 = document.getElementById("t1");
+
+      function fmt(t){
+        if(!isFinite(t) || t < 0) return "00:00";
+        const m = Math.floor(t/60);
+        const s = Math.floor(t%60);
+        return String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+      }
+      function update(){
+        t0.textContent = fmt(audio.currentTime);
+        t1.textContent = fmt(audio.duration);
+        if(isFinite(audio.duration) && audio.duration > 0){
+          seek.value = String(Math.round((audio.currentTime / audio.duration)*1000));
+        }
+      }
+      playBtn.addEventListener("click", async ()=>{
+        try{
+          if(audio.paused){ await audio.play(); playBtn.textContent="⏸ Pause"; }
+          else{ audio.pause(); playBtn.textContent="▶ Play"; }
+        }catch(e){
+          toast("Audio failed to play (bytecast.mp3 missing?)", "warn");
+        }
+      });
+      b10.addEventListener("click", ()=>{ audio.currentTime = Math.max(0,(audio.currentTime||0)-10); update(); });
+      f30.addEventListener("click", ()=>{
+        const d = audio.duration || 0;
+        audio.currentTime = Math.min(d ? d : (audio.currentTime+30),(audio.currentTime||0)+30);
+        update();
+      });
+      seek.addEventListener("input", ()=>{
+        if(!isFinite(audio.duration) || audio.duration<=0) return;
+        audio.currentTime = (parseInt(seek.value,10)/1000)*audio.duration;
+        update();
+      });
+      audio.addEventListener("timeupdate", update);
+      audio.addEventListener("loadedmetadata", update);
+      audio.addEventListener("ended", ()=>{ playBtn.textContent="▶ Play"; });
+    })();
+
+    // Init
+    load();
+    document.getElementById("who").textContent = state.name || "Contributor";
+    document.getElementById("name").value = (state.name && state.name !== "Contributor") ? state.name : "";
+  </script>
+</body>
+</html>

@@ -12,7 +12,7 @@
   --shadow: 0 14px 36px rgba(43, 26, 17, 0.18);
   --radius-lg: 24px;
   --radius-md: 16px;
-  --max: 980px;
+  --max: 1120px;
 }
 
 * {
@@ -383,7 +383,7 @@ input[type="range"] {
 
 @media (min-width: 860px) {
   .app {
-    grid-template-columns: 380px 1fr;
+    grid-template-columns: 360px minmax(0, 1fr);
     align-items: start;
     padding-top: 28px;
   }
@@ -395,6 +395,10 @@ input[type="range"] {
 
   .row {
     grid-template-columns: 1fr 150px;
+  }
+
+  .harvest-panel {
+    grid-column: 1 / -1;
   }
 
   .fruit-grid {

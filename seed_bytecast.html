@@ -444,6 +444,7 @@
         <div style="display:grid; gap:10px;">
           <a class="btn btn--primary" href="./training_hub/index.html">Training Hub</a>
           <a class="btn" href="./seed_builder_studio/index.html">Seed Builder Studio</a>
+          <button id="apparelJourneyBtn" type="button" class="btn">Apparel Ops Onboarding</button>
           <a class="btn" href="./docs/index.html">Docs Portal</a>
         </div>
         <details style="margin-top:14px; border-top:1px solid var(--stroke); padding-top:14px;">
@@ -1089,6 +1090,23 @@
     }
 
     wireTheme();
+
+    const apparelBtn = document.getElementById("apparelJourneyBtn");
+    if (apparelBtn && Loop) {
+      apparelBtn.addEventListener("click", () => {
+        try {
+          Loop.setActiveJourneyId?.("apparel_onboarding_v1");
+        } catch {
+          // ignore
+        }
+        void renderGoldenPath();
+        const map = document.getElementById("journeyMap");
+        if (map && typeof map.scrollIntoView === "function") {
+          map.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    }
+
     render();
     // Hard disable resume nav if no resume is available.
     document.getElementById("resumeBtn")?.addEventListener("click", (ev) => {

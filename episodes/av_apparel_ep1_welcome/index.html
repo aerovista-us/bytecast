@@ -1,0 +1,1034 @@
+<!doctype html>
+<html lang="en" data-theme="venta-neon">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ByteCast — EP-APP-001 • AV Apparel Welcome</title>
+  <meta name="description" content="Welcome to AV Apparel: culture, expectations, and how to win your first catalog contribution fast." />
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+  <style>
+    :root {
+      --bg0: #050607; --bg1: #0b0f14;
+      --card: rgba(255,255,255,0.06); --stroke: rgba(255,255,255,0.12);
+      --ink: rgba(255,255,255,0.93); --muted: rgba(255,255,255,0.66);
+      --neon: #22a7ff; --orange:#ff6a2a; --ghost:#a66bff;
+      --shadow: 0 18px 80px rgba(0,0,0,0.55);
+      --radius: 20px; --radius2: 14px; --max: 1100px;
+      --pad: clamp(16px, 2.2vw, 26px);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--ink);
+      background:
+        radial-gradient(900px 500px at 10% 0%, rgba(34,167,255,0.16), transparent 60%),
+        radial-gradient(900px 500px at 90% 20%, rgba(166,107,255,0.12), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+    }
+    .topbar{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(180deg, rgba(5,6,7,0.88), rgba(5,6,7,0.70));
+      border-bottom:1px solid rgba(255,255,255,0.14);
+    }
+    .topbar__inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px var(--pad);
+      display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+    }
+    .badge{
+      display:flex; gap:10px; align-items:center;
+      padding:8px 12px; border-radius:999px;
+      border:1px solid rgba(255,255,255,0.18);
+      background:rgba(0,0,0,0.35);
+    }
+    .dot{ width:10px; height:10px; border-radius:999px; background:var(--neon); box-shadow:0 0 12px rgba(34,167,255,0.6); }
+    .controls{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
+    .select,.btn{
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.22);
+      background:rgba(0,0,0,0.35);
+      color:var(--ink);
+      padding:8px 12px;
+      font-size:13px;
+    }
+    .btn{
+      cursor:pointer;
+      display:inline-flex; align-items:center; gap:8px;
+      text-decoration:none;
+      transition: transform .12s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .btn--primary{
+      border-color:rgba(34,167,255,0.45);
+      box-shadow:0 0 18px rgba(34,167,255,0.40);
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      border-color: rgba(34,167,255,0.65);
+      box-shadow:0 0 20px rgba(34,167,255,0.55);
+    }
+    main.wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:18px var(--pad) 72px;
+      display:grid;
+      gap:18px;
+    }
+    .hero{
+      border-radius:var(--radius);
+      border:1px solid rgba(255,255,255,0.18);
+      background:linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+      padding:18px var(--pad) 20px;
+      box-shadow:var(--shadow);
+    }
+    .hero__grid{
+      display:grid;
+      grid-template-columns: 1.4fr 0.9fr;
+      gap:18px;
+    }
+    @media (max-width:900px){
+      .hero__grid{ grid-template-columns:1fr; }
+    }
+    .hero h1{
+      margin:0 0 10px;
+      font-size:clamp(32px, 4vw, 46px);
+      letter-spacing:-0.02em;
+    }
+    .hero p{
+      margin:0 0 12px;
+      color:var(--muted);
+      max-width:65ch;
+    }
+    .pillRow{
+      display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.20);
+      background:rgba(0,0,0,0.40);
+      font-size:11px;
+    }
+    .spark{ width:7px; height:7px; border-radius:999px; background:var(--orange); box-shadow:0 0 10px rgba(255,106,42,0.6); }
+    .card{
+      border-radius:var(--radius2);
+      border:1px solid rgba(255,255,255,0.16);
+      background:rgba(0,0,0,0.40);
+      padding:14px 14px 16px;
+    }
+    .card h3{ margin:0 0 6px; font-size:15px; }
+    .card p{ margin:0; color:var(--muted); font-size:13px; line-height:1.6; }
+    section.panel{
+      border-radius:var(--radius);
+      border:1px solid rgba(255,255,255,0.18);
+      background:rgba(0,0,0,0.40);
+      overflow:hidden;
+    }
+    .panel__top{
+      padding:12px var(--pad);
+      border-bottom:1px solid rgba(255,255,255,0.16);
+      display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;
+    }
+    .panel__top h2{ margin:0; font-size:14px; letter-spacing:0.08em; text-transform:uppercase; }
+    .panel__top p{ margin:2px 0 0; color:var(--muted); font-size:12px; }
+    .panel__body{
+      padding:14px var(--pad) 16px;
+      display:grid;
+      gap:14px;
+    }
+    audio{ width:100%; }
+    #audioNote{
+      display:none;
+      padding:10px 12px;
+      border-radius:var(--radius2);
+      font-size:13px;
+      line-height:1.4;
+      color:var(--ink);
+      background:rgba(0,0,0,0.55);
+      border:1px solid rgba(255,255,255,0.20);
+    }
+    #audioNote[data-kind="warn"]{ border-color:rgba(255,190,120,0.40); }
+    #audioNote[data-kind="bad"]{ border-color:rgba(255,120,140,0.45); }
+    .seek{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:10px;
+      align-items:center;
+    }
+    input[type="range"]{ width:100%; accent-color:var(--neon); }
+    .time{
+      font-family:var(--mono);
+      font-size:12px;
+      border-radius:999px;
+      padding:7px 10px;
+      border:1px solid rgba(255,255,255,0.22);
+      background:rgba(0,0,0,0.55);
+      min-width:120px;
+      text-align:center;
+    }
+    .ctrlRow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .ctrlGroup{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      align-items:center;
+    }
+    .kbtn{
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.22);
+      background:rgba(0,0,0,0.55);
+      padding:8px 11px;
+      color:var(--ink);
+      font-size:12px;
+      cursor:pointer;
+      display:inline-flex; align-items:center; gap:6px;
+      transition: transform .12s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+    .kbtn:hover{
+      transform: translateY(-1px);
+      border-color:rgba(34,167,255,0.65);
+      box-shadow:0 0 16px rgba(34,167,255,0.55);
+    }
+    .mini{
+      font-family:var(--mono);
+      font-size:10px;
+      color:rgba(255,255,255,0.6);
+    }
+    .tag{
+      font-size:10px;
+      padding:3px 7px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.22);
+    }
+    .tag--neon{ border-color:rgba(34,167,255,0.55); }
+    .tag--ghost{ border-color:rgba(166,107,255,0.55); }
+    .deck__bar{
+      padding:10px var(--pad);
+      border-bottom:1px solid rgba(255,255,255,0.18);
+      display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;
+    }
+    .deck__bar h3{ margin:0; font-size:13px; letter-spacing:0.09em; text-transform:uppercase; }
+    .dots{
+      display:flex; gap:7px; flex-wrap:wrap;
+    }
+    .dotBtn{
+      width:10px; height:10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.24);
+      background:rgba(255,255,255,0.16);
+      cursor:pointer;
+      transition: transform .12s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+    }
+    .dotBtn[aria-current="true"]{
+      background:var(--neon);
+      border-color:rgba(34,167,255,0.70);
+      box-shadow:0 0 14px rgba(34,167,255,0.65);
+      transform:scale(1.1);
+    }
+    .slides{ min-height:280px; }
+    .slide{
+      display:none;
+      padding:14px var(--pad) 16px;
+    }
+    .slide.is-active{ display:block; }
+    .slideGrid{
+      display:grid;
+      grid-template-columns: minmax(0,1.2fr) minmax(0,0.9fr);
+      gap:14px;
+    }
+    @media (max-width:920px){
+      .slideGrid{ grid-template-columns:1fr; }
+    }
+    .card h4{ margin:0 0 6px; font-size:15px; }
+    .card ul{ margin:8px 0 0; padding-left:18px; color:rgba(255,255,255,0.86); font-size:13px; }
+    .callout{
+      border-radius:var(--radius2);
+      border:1px solid rgba(34,167,255,0.45);
+      background:rgba(0,0,0,0.65);
+      padding:12px 13px 14px;
+      box-shadow:0 0 18px rgba(34,167,255,0.55);
+      font-size:13px;
+    }
+    .callout .k{ font-family:var(--mono); font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(180,225,255,0.95); }
+    #questList label{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding:8px 0;
+      border-bottom:1px solid rgba(255,255,255,0.10);
+      font-size:13px;
+    }
+    #questList input[type="checkbox"]{
+      margin-top:3px;
+      width:18px; height:18px;
+      accent-color:var(--neon);
+    }
+    #quiz .card{ border-style:solid; }
+    footer{
+      margin-top:6px;
+      font-size:11px;
+      color:rgba(255,255,255,0.55);
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      padding:6px 2px 0;
+    }
+    :focus-visible{ outline:2px solid rgba(34,167,255,0.75); outline-offset:3px; border-radius:12px; }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar__inner">
+      <div class="badge">
+        <span class="dot"></span>
+        <div>
+          <div style="font-weight:900; letter-spacing:-0.01em;">ByteCast • EP-APP-001</div>
+          <small style="color:rgba(255,255,255,0.70);">AV Apparel — Welcome + How You Win Fast</small>
+        </div>
+      </div>
+      <div class="controls">
+        <select class="select" id="themeSelect" aria-label="Theme">
+          <option value="venta-neon">Venta • Neon Blue</option>
+          <option value="embercore">Embercore (Warm)</option>
+        </select>
+        <button class="btn btn--primary" id="btnPrev" type="button">◀ <span style="font-family:var(--mono);">Prev</span></button>
+        <button class="btn btn--primary" id="btnNext" type="button"><span style="font-family:var(--mono);">Next</span> ▶</button>
+      </div>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero__grid">
+        <div>
+          <h1 id="heroTitle">AV Apparel — Welcome</h1>
+          <p>This ByteCast sets expectations for AV Apparel contributors: how the catalog works, what “clean” looks like, and what your first safe win should be.</p>
+          <p>Use this as the entry point for anyone touching apparel products, pricing, or collections.</p>
+          <div class="pillRow" aria-label="Episode metadata">
+            <span class="pill"><span class="spark"></span><strong style="font-family:var(--mono);">EP-APP-001</strong> • Internal</span>
+            <span class="pill"><span class="spark"></span>Lane: <strong>Apparel Ops</strong></span>
+            <span class="pill"><span class="spark"></span>Gates: Listen • Slide • Engage</span>
+          </div>
+          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+            <button class="btn btn--primary" type="button" id="jumpPlayer">Jump to Player</button>
+            <button class="btn" type="button" id="jumpEngage">Quest + Quiz</button>
+          </div>
+        </div>
+        <aside class="card">
+          <h3>For AV Apparel contributors</h3>
+          <p>Objective: explain what AV Apparel is, how catalog hygiene works, and give each new helper a tiny, safe first task to ship.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="panel" id="player" aria-label="Episode audio">
+      <div class="panel__top">
+        <div>
+          <h2>Listen — ByteCast Audio</h2>
+          <p>Play the AV Apparel welcome ByteCast. Mark 2–3 key moments as you go.</p>
+        </div>
+        <span class="pill"><span class="spark"></span><strong style="font-family:var(--mono);">GATE</strong> Listen</span>
+      </div>
+      <div class="panel__body">
+        <audio id="audio" preload="metadata" controls>
+          <source src="../av_apparel/av apparel_welcome.aac" type="audio/aac" />
+        </audio>
+        <div id="audioNote" role="status" aria-live="polite"></div>
+        <div class="seek">
+          <input id="seek" type="range" min="0" max="1000" value="0" aria-label="Seek" />
+          <div class="time" id="time">00:00 / 00:00</div>
+        </div>
+        <div class="ctrlRow">
+          <div class="ctrlGroup">
+            <button class="kbtn" id="cPlay" type="button">▶ Play <span class="mini">Space</span>
+              <span class="tag tag--neon">audio</span>
+            </button>
+            <button class="kbtn" id="cBack" type="button">↺ -10s <span class="mini">J</span></button>
+            <button class="kbtn" id="cFwd" type="button">+10s ↻ <span class="mini">L</span></button>
+            <button class="kbtn" id="cMark" type="button">✦ Mark <span class="mini">M</span></button>
+          </div>
+          <div class="ctrlGroup">
+            <button class="kbtn" id="cSpeed" type="button">1.0× Speed <span class="mini">S</span></button>
+            <button class="kbtn" id="cMute" type="button">🔊 Mute <span class="mini">K</span></button>
+          </div>
+        </div>
+        <div class="ctrlRow">
+          <div class="pill"><span class="spark"></span><strong style="font-family:var(--mono);">Markers</strong> <span id="marksCount">0</span></div>
+          <div class="pill"><span class="spark"></span><strong style="font-family:var(--mono);">Last Mark</strong> <span id="lastMark">—</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Episode slides">
+      <div class="deck__bar">
+        <h3 id="deckTitle">Slides — AV Apparel Onboarding</h3>
+        <div class="dots" id="dots" aria-label="Slide navigation"></div>
+      </div>
+      <div class="slides" id="slides"></div>
+    </section>
+
+    <section class="panel" id="engage" aria-label="Engagement">
+      <div class="deck__bar">
+        <h3>Engage — Quest + Quiz</h3>
+        <div class="pill"><span class="spark"></span><strong style="font-family:var(--mono);">PASS</strong> 80% • Badge: APPAREL FIRST WIN</div>
+      </div>
+      <div class="slide" style="display:block;">
+        <div class="slideGrid">
+          <div class="card">
+            <h3>Quest — First Apparel Win</h3>
+            <p>Check off each item as you complete it. These are tiny, safe commitments.</p>
+            <div id="questList"></div>
+          </div>
+          <div class="card">
+            <h3>Quiz — Readiness Check</h3>
+            <p>Quick knowledge check on lanes, catalog hygiene, and “no drift”.</p>
+            <div id="quiz"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Next step">
+      <div class="deck__bar">
+        <h3>Next Step — Training + Seed</h3>
+        <div class="pill"><span class="spark"></span><strong style="font-family:var(--mono);">GATES</strong> Listen • Slide • Engage</div>
+      </div>
+      <div class="panel__body">
+        <div class="card">
+          <p>Once you complete all three gates here, your quest map will unlock the next Apparel step: Catalog Maintainer Bootcamp, then practice work and a Seed artifact.</p>
+          <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn btn--primary" href="../../seed_bytecast.html">Back to Playlist</a>
+            <a id="nextTrainingBtn" class="btn" href="../../training_hub/index.html">Open Training Hub</a>
+            <span id="gateNote" class="pill">Loading gate status...</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>EP-APP-001 • AV Apparel Welcome • file:// safe episode</div>
+      <div style="font-family:var(--mono);">Keys: Space play/pause • J/L seek • M mark • ←/→ slides</div>
+    </footer>
+  </main>
+
+  <script src="../../assets/shared/bytecast_loop.js"></script>
+  <script>
+    const Loop = window.ByteCastLoop || null;
+
+    const PROFILE = {
+      schema: "bytecast-ep-profile-v1",
+      episode: {
+        code: "EP-APP-001",
+        title: "AV Apparel Welcome — Culture + First Win",
+        type: "internal",
+        date: "2026-02-24",
+        runtime_target_minutes: 8,
+        status: "draft"
+      },
+      content: {
+        tags: ["apparel", "onboarding", "catalog", "culture", "expectations"],
+        summary_short: "AV Apparel welcome: what the brand is, what catalog hygiene means, and how to earn your first safe win.",
+        summary_long: "This ByteCast is the entry point for AV Apparel contributors. It explains the brand, the three core tools, what catalog hygiene means, and the golden rule of no drift. It closes with a small, safe first task so new helpers can ship proof-of-work without breaking anything."
+      },
+      slides: [
+        {
+          id: "s1",
+          title: "What AV Apparel Is",
+          goal: "Anchor what AV Apparel is and why the catalog matters.",
+          bullets: [
+            "AV Apparel = the clothing arm of AeroVista: drops, staples, and collabs.",
+            "The catalog is how customers experience the brand — messy catalog = broken trust.",
+            "Your work lives where design, catalog data, and store UX meet."
+          ]
+        },
+        {
+          id: "s2",
+          title: "Catalog Hygiene Basics",
+          goal: "Define catalog hygiene in one slide.",
+          bullets: [
+            "Every product has clean: title, price, variants, images, tags, collections.",
+            "No duplicates, no orphaned products, no surprise prices.",
+            "If something feels off in the storefront, you are allowed to flag it."
+          ]
+        },
+        {
+          id: "s3",
+          title: "The Three Core Tools",
+          goal: "Show how Printful, Square, and the site catalog fit together.",
+          bullets: [
+            "Printful: production truth — what gets printed and in what variants.",
+            "Square: retail truth — prices, availability, and customer-facing data.",
+            "Site catalog: presentation truth — how things are grouped and discovered."
+          ]
+        },
+        {
+          id: "s4",
+          title: "Golden Rule: No Drift",
+          goal: "Explain drift and why it kills trust.",
+          bullets: [
+            "Drift = when Printful, Square, and the storefront disagree on price or details.",
+            "Customers notice: different prices, wrong sizes, weird images.",
+            "Your job is to prevent drift by following the playbooks and checklists."
+          ]
+        },
+        {
+          id: "s5",
+          title: "Pick Your Lane",
+          goal: "Help contributors choose where they help first.",
+          bullets: [
+            "Lanes: Maintainer, Copy & Naming, Pricing, Collections, QA.",
+            "You do not need access to everything on day one.",
+            "We graduate access as you ship clean work across a few tasks."
+          ]
+        },
+        {
+          id: "s6",
+          title: "First Win Checklist",
+          goal: "Define a tiny, safe first contribution.",
+          bullets: [
+            "Open the apparel catalog and find one small issue (typo, tag, or grouping).",
+            "Write a clear change request using the suggested template.",
+            "Pair with a maintainer to apply it safely — then log it as your first win."
+          ]
+        }
+      ],
+      engagement: {
+        quest: {
+          title: "First Apparel Win",
+          items: [
+            { id: "q1", text: "Play the episode and mark 2–3 key timestamps you want to remember." },
+            { id: "q2", text: "Pick your starting lane (Maintainer / Copy & Naming / Pricing / Collections / QA)." },
+            { id: "q3", text: "Open the live apparel catalog and identify one small issue you could safely help fix." },
+            { id: "q4", text: "Draft a one-paragraph change request describing the issue and the desired outcome." }
+          ],
+          reward_badge: {
+            label: "APPAREL FIRST WIN",
+            style: "neon"
+          }
+        },
+        quiz: {
+          enabled: true,
+          pass_threshold: 0.8,
+          questions: [
+            {
+              id: "k1",
+              q: "What does 'catalog hygiene' mean for AV Apparel?",
+              choices: [
+                "Having as many products as possible, even if messy",
+                "Clean titles, prices, variants, images, tags, and collections that match across systems",
+                "Letting Printful handle everything automatically",
+                "Only caring about the photos"
+              ],
+              answer_index: 1,
+              explain: "Hygiene is about consistency and correctness across Printful, Square, and the site catalog."
+            },
+            {
+              id: "k2",
+              q: "Which set of tools is considered the 'three core tools' in this episode?",
+              choices: [
+                "GitHub, Figma, Discord",
+                "Printful, Square, Site catalog",
+                "Slack, Notion, Email",
+                "Photoshop, Premiere, After Effects"
+              ],
+              answer_index: 1,
+              explain: "Printful (production), Square (retail), and the site catalog (presentation) form the triangle you care about."
+            },
+            {
+              id: "k3",
+              q: "Why is drift dangerous?",
+              choices: [
+                "It makes the catalog visually boring",
+                "It slows down designers",
+                "Customers see different prices or details in different places and stop trusting the store",
+                "It only affects internal reports"
+              ],
+              answer_index: 2,
+              explain: "Trust breaks when prices, sizes, or products don’t match across systems."
+            },
+            {
+              id: "k4",
+              q: "What is the goal of a 'first win' in this onboarding?",
+              choices: [
+                "To prove you can memorize every workflow",
+                "To ship one tiny, safe improvement using the catalog playbooks",
+                "To redesign the entire apparel line",
+                "To get full production access on day one"
+              ],
+              answer_index: 1,
+              explain: "A first win is deliberately small, safe, and rooted in the existing workflows."
+            },
+            {
+              id: "k5",
+              q: "How should new contributors think about access?",
+              choices: [
+                "Ask for all permissions immediately",
+                "Avoid asking for access and work anonymously",
+                "Earn more access as they ship clean, reviewable work in a lane",
+                "Only work through someone else’s account"
+              ],
+              answer_index: 2,
+              explain: "Access increases as you prove you can follow the system and keep the catalog clean."
+            }
+          ]
+        }
+      }
+    };
+
+    const $ = (s, r = document) => r.querySelector(s);
+    const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+
+    const WORKFLOW_KEY = "bytecast.workflow.v1";
+    const LAST_EP_KEY = "bytecast.last_episode.href.v1";
+    const LAST_EP_TIME_KEY = "bytecast.last_episode.time.v1";
+
+    function defaultWorkflow() {
+      return {
+        cycle: 1,
+        abilityLevel: 0,
+        bytecast: { listen: false, slide: false, interact: false },
+        trainingDone: false,
+        seedDone: false,
+        updatedAt: ""
+      };
+    }
+
+    function loadWorkflow() {
+      const fallback = defaultWorkflow();
+      try {
+        const raw = localStorage.getItem(WORKFLOW_KEY);
+        if (!raw) return fallback;
+        const parsed = JSON.parse(raw);
+        const bc = parsed.bytecast && typeof parsed.bytecast === "object" ? parsed.bytecast : {};
+        return {
+          ...fallback,
+          ...parsed,
+          cycle: Number.isFinite(Number(parsed.cycle)) ? Math.max(1, Number(parsed.cycle)) : 1,
+          abilityLevel: Number.isFinite(Number(parsed.abilityLevel)) ? Math.max(0, Number(parsed.abilityLevel)) : 0,
+          bytecast: {
+            listen: Boolean(bc.listen),
+            slide: Boolean(bc.slide),
+            interact: Boolean(bc.interact)
+          },
+          trainingDone: Boolean(parsed.trainingDone),
+          seedDone: Boolean(parsed.seedDone)
+        };
+      } catch {
+        return fallback;
+      }
+    }
+
+    function saveWorkflow(wf) {
+      try { localStorage.setItem(WORKFLOW_KEY, JSON.stringify(wf)); } catch {}
+    }
+
+    const GATE_STEP_MAP = {
+      listen: "epapp1_listen",
+      slide: "epapp1_slide",
+      interact: "epapp1_engage"
+    };
+
+    function setGate(flagName) {
+      if (Loop) {
+        const stepId = GATE_STEP_MAP[flagName];
+        if (stepId) {
+          Loop.markStepDone(stepId, {
+            episodeSlug: "av_apparel_ep1_welcome",
+            episodeCode: "EP-APP-001",
+            gate: flagName
+          });
+        }
+        renderGate();
+        return;
+      }
+      const wf = loadWorkflow();
+      wf.bytecast = wf.bytecast || { listen: false, slide: false, interact: false };
+      if (!wf.bytecast[flagName]) {
+        wf.bytecast[flagName] = true;
+        wf.updatedAt = new Date().toISOString();
+        saveWorkflow(wf);
+      }
+      renderGate();
+    }
+
+    function renderGate() {
+      const wf = loadWorkflow();
+      const bc = wf.bytecast || {};
+      const note = $("#gateNote");
+      const ok = Boolean(bc.listen && bc.slide && bc.interact);
+      if (note) {
+        note.textContent = ok
+          ? "Gates complete. Next: Catalog Maintainer Bootcamp (EP-APP-002)."
+          : `Gates: Listen ${bc.listen ? "OK" : "TODO"} • Slide ${bc.slide ? "OK" : "TODO"} • Engage ${bc.interact ? "OK" : "TODO"}`;
+      }
+      const btn = $("#nextTrainingBtn");
+      if (btn) {
+        btn.classList.toggle("is-disabled", !ok);
+        btn.setAttribute("aria-disabled", ok ? "false" : "true");
+        btn.tabIndex = ok ? 0 : -1;
+        btn.title = ok ? "" : "Locked: complete Listen + Slide + Engage first.";
+      }
+    }
+
+    try {
+      const rel = (Loop && Loop.normalizeHref)
+        ? Loop.normalizeHref(location.href)
+        : String(location.pathname || "").replace(/^\/+/, "");
+      localStorage.setItem(LAST_EP_KEY, rel || "episodes/av_apparel_ep1_welcome/index.html");
+      localStorage.setItem(LAST_EP_TIME_KEY, String(Date.now()));
+    } catch {}
+
+    const themeSelect = $("#themeSelect");
+    const THEME_KEY = "bytecast_theme";
+    const savedTheme = localStorage.getItem(THEME_KEY);
+    if (savedTheme) document.documentElement.setAttribute("data-theme", savedTheme);
+    themeSelect.value = document.documentElement.getAttribute("data-theme") || "venta-neon";
+    themeSelect.addEventListener("change", () => {
+      const v = themeSelect.value;
+      document.documentElement.setAttribute("data-theme", v);
+      localStorage.setItem(THEME_KEY, v);
+    });
+
+    $("#jumpPlayer").addEventListener("click", () => $("#player").scrollIntoView({ behavior: "smooth" }));
+    $("#jumpEngage").addEventListener("click", () => $("#engage").scrollIntoView({ behavior: "smooth" }));
+
+    const slidesEl = $("#slides");
+    PROFILE.slides.forEach((s, i) => {
+      const art = document.createElement("article");
+      art.className = "slide" + (i === 0 ? " is-active" : "");
+      art.dataset.title = s.title;
+      art.innerHTML = `
+        <div class="slideGrid">
+          <div class="card">
+            <h4>${s.title}</h4>
+            <p style="margin:0 0 6px; color:var(--muted);"><span style="font-family:var(--mono); color:rgba(180,225,255,0.9);">Goal:</span> ${s.goal}</p>
+            <ul>${s.bullets.map(b => `<li>${b}</li>`).join("")}</ul>
+          </div>
+          <div class="callout">
+            <div class="k">TAKEAWAY</div>
+            <p style="margin:8px 0 0;">${s.bullets[0]}</p>
+            <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
+              <span class="pill"><span class="spark"></span><strong style="font-family:var(--mono);">SLIDE</strong> ${i + 1}/${PROFILE.slides.length}</span>
+              <span class="pill"><span class="spark"></span><strong style="font-family:var(--mono);">TITLE</strong> ${s.title}</span>
+            </div>
+          </div>
+        </div>
+      `;
+      slidesEl.appendChild(art);
+    });
+
+    const slides = $$("#slides .slide");
+    const dots = $("#dots");
+    let idx = 0;
+
+    function renderDots() {
+      dots.innerHTML = "";
+      slides.forEach((sl, i) => {
+        const b = document.createElement("button");
+        b.className = "dotBtn";
+        b.type = "button";
+        b.title = sl.dataset.title || `Slide ${i + 1}`;
+        b.setAttribute("aria-label", `Go to slide ${i + 1}`);
+        b.addEventListener("click", () => goTo(i));
+        dots.appendChild(b);
+      });
+      syncDots();
+    }
+
+    function syncDots() {
+      const btns = $$("#dots .dotBtn");
+      btns.forEach((b, i) => b.setAttribute("aria-current", String(i === idx)));
+      const title = slides[idx]?.dataset?.title
+        ? `Slides — ${slides[idx].dataset.title}`
+        : "Slides — AV Apparel Onboarding";
+      $("#deckTitle").textContent = title;
+    }
+
+    function goTo(n) {
+      idx = (n + slides.length) % slides.length;
+      slides.forEach((sl, i) => sl.classList.toggle("is-active", i === idx));
+      syncDots();
+      if (idx === slides.length - 1) {
+        setGate("slide");
+      }
+    }
+
+    $("#btnPrev").addEventListener("click", () => goTo(idx - 1));
+    $("#btnNext").addEventListener("click", () => goTo(idx + 1));
+    renderDots();
+
+    window.addEventListener("keydown", (e) => {
+      const t = e.target?.tagName?.toLowerCase();
+      const inField = (t === "input" || t === "textarea" || e.target?.isContentEditable);
+      if (inField) return;
+      if (e.key === "ArrowLeft") goTo(idx - 1);
+      if (e.key === "ArrowRight") goTo(idx + 1);
+    });
+
+    const audio = $("#audio");
+    const audioNote = $("#audioNote");
+    const seek = $("#seek");
+    const time = $("#time");
+    const cPlay = $("#cPlay");
+    const cBack = $("#cBack");
+    const cFwd = $("#cFwd");
+    const cSpeed = $("#cSpeed");
+    const cMute = $("#cMute");
+    const cMark = $("#cMark");
+    const marksCount = $("#marksCount");
+    const lastMark = $("#lastMark");
+
+    let marks = [];
+    const speeds = [1.0, 1.15, 1.25, 1.35, 1.5];
+    let speedIdx = 0;
+
+    function fmt(t) {
+      if (!isFinite(t)) return "00:00";
+      const m = Math.floor(t / 60);
+      const s = Math.floor(t % 60);
+      return String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0");
+    }
+
+    function syncTime() {
+      const cur = audio.currentTime || 0;
+      const dur = audio.duration || 0;
+      time.textContent = `${fmt(cur)} / ${fmt(dur)}`;
+      if (dur > 0) seek.value = String(Math.floor((cur / dur) * 1000));
+    }
+
+    function setAudioNote(kind, html) {
+      if (!audioNote) return;
+      if (!html) {
+        audioNote.style.display = "none";
+        audioNote.removeAttribute("data-kind");
+        audioNote.textContent = "";
+        return;
+      }
+      audioNote.style.display = "block";
+      if (kind) audioNote.setAttribute("data-kind", kind);
+      audioNote.innerHTML = html;
+    }
+
+    audio.addEventListener("timeupdate", syncTime);
+    audio.addEventListener("loadedmetadata", syncTime);
+    audio.addEventListener("loadedmetadata", () => setAudioNote("", ""), { once: true });
+    audio.addEventListener("play", () => setGate("listen"), { once: true });
+
+    let audioErrorShown = false;
+    audio.addEventListener("error", () => {
+      if (audioErrorShown) return;
+      audioErrorShown = true;
+      const hint = (location.protocol === "file:")
+        ? `You're running on <span style="font-family:var(--mono);">file://</span>. If audio does not load, serve this folder over HTTP (for example: <span style="font-family:var(--mono);">python -m http.server 8080</span>).`
+        : `Try opening the audio file directly: <a href="../av_apparel/av apparel_welcome.aac" target="_blank" rel="noopener">../av_apparel/av apparel_welcome.aac</a>.`;
+      setAudioNote("bad", `Audio failed to load. ${hint}`);
+    });
+
+    seek.addEventListener("input", () => {
+      const dur = audio.duration || 0;
+      if (dur <= 0) return;
+      const pct = Number(seek.value) / 1000;
+      audio.currentTime = pct * dur;
+    });
+
+    function togglePlay() {
+      if (audio.paused) {
+        const p = audio.play();
+        if (p && typeof p.catch === "function") {
+          p.catch(() => {
+            setAudioNote("warn", `Audio play was blocked by the browser. Click the native play button in the audio bar, or click once anywhere on the page and try again.`);
+          });
+        }
+      } else {
+        audio.pause();
+      }
+      cPlay.firstChild.textContent = audio.paused ? "▶ Play " : "⏸ Pause ";
+    }
+
+    cPlay.addEventListener("click", togglePlay);
+    audio.addEventListener("play", () => { cPlay.firstChild.textContent = "⏸ Pause "; });
+    audio.addEventListener("pause", () => { cPlay.firstChild.textContent = "▶ Play "; });
+
+    cBack.addEventListener("click", () => { audio.currentTime = Math.max(0, (audio.currentTime || 0) - 10); });
+    cFwd.addEventListener("click", () => { audio.currentTime = Math.min((audio.duration || Infinity), (audio.currentTime || 0) + 10); });
+
+    cSpeed.addEventListener("click", () => {
+      speedIdx = (speedIdx + 1) % speeds.length;
+      audio.playbackRate = speeds[speedIdx];
+      cSpeed.childNodes[0].textContent = `${audio.playbackRate.toFixed(2)}× Speed `;
+    });
+
+    cMute.addEventListener("click", () => {
+      audio.muted = !audio.muted;
+      cMute.childNodes[0].textContent = audio.muted ? "🔇 Muted " : "🔊 Mute ";
+    });
+
+    const MARK_KEY = "bytecast_epapp1_marks";
+    cMark.addEventListener("click", () => {
+      const t = audio.currentTime || 0;
+      const stamp = fmt(t);
+      marks.push({ t, stamp, at: new Date().toISOString() });
+      marksCount.textContent = String(marks.length);
+      lastMark.textContent = stamp;
+      try { localStorage.setItem(MARK_KEY, JSON.stringify(marks.slice(-50))); } catch {}
+    });
+
+    window.addEventListener("keydown", (e) => {
+      const t = e.target?.tagName?.toLowerCase();
+      const inField = (t === "input" || t === "textarea" || e.target?.isContentEditable);
+      if (inField) return;
+      if (e.code === "Space") { e.preventDefault(); togglePlay(); }
+      if (e.key.toLowerCase() === "j") cBack.click();
+      if (e.key.toLowerCase() === "l") cFwd.click();
+      if (e.key.toLowerCase() === "m") cMark.click();
+      if (e.key.toLowerCase() === "s") cSpeed.click();
+      if (e.key.toLowerCase() === "k") cMute.click();
+    });
+
+    try {
+      const saved = JSON.parse(localStorage.getItem(MARK_KEY) || "[]");
+      if (Array.isArray(saved) && saved.length) {
+        marks = saved;
+        marksCount.textContent = String(marks.length);
+        lastMark.textContent = saved[saved.length - 1]?.stamp || "—";
+      }
+    } catch {}
+
+    const QUEST_KEY = "bytecast_epapp1_quest";
+    const questState = new Set((() => {
+      try { return JSON.parse(localStorage.getItem(QUEST_KEY) || "[]"); } catch { return []; }
+    })());
+    const questList = $("#questList");
+    questList.innerHTML = PROFILE.engagement.quest.items.map(item => {
+      const checked = questState.has(item.id) ? "checked" : "";
+      return `
+        <label>
+          <input type="checkbox" data-qid="${item.id}" ${checked} />
+          <div>
+            <div style="font-weight:700; letter-spacing:-0.01em;">${item.text}</div>
+            <div style="color:rgba(255,255,255,0.60); font-size:11px; margin-top:3px;">tag: <span style="font-family:var(--mono);">${item.id}</span></div>
+          </div>
+        </label>
+      `;
+    }).join("") + `
+      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:10px;">
+        <span class="pill"><span class="spark"></span><strong style="font-family:var(--mono);">BADGE</strong> ${PROFILE.engagement.quest.reward_badge.label}</span>
+      </div>
+    `;
+
+    questList.addEventListener("change", (e) => {
+      const cb = e.target;
+      if (cb && cb.matches('input[type="checkbox"][data-qid]')) {
+        const id = cb.getAttribute("data-qid");
+        if (cb.checked) questState.add(id);
+        else questState.delete(id);
+        try { localStorage.setItem(QUEST_KEY, JSON.stringify([...questState])); } catch {}
+      }
+    });
+
+    const QUIZ_KEY = "bytecast_epapp1_quiz";
+    let quizState = (() => {
+      try { return JSON.parse(localStorage.getItem(QUIZ_KEY) || "{}"); } catch { return {}; }
+    })();
+    const quizEl = $("#quiz");
+    const Q = PROFILE.engagement.quiz.questions;
+    const passThresh = PROFILE.engagement.quiz.pass_threshold;
+
+    function renderQuiz() {
+      const answers = quizState.answers || {};
+      const score = quizState.score ?? null;
+      const passed = quizState.passed ?? false;
+
+      quizEl.innerHTML = `
+        <div style="display:grid; gap:10px;">
+          ${Q.map(q => {
+            const picked = answers[q.id];
+            return `
+              <div class="card" style="border-style:solid;">
+                <div style="display:flex; justify-content:space-between; gap:10px; align-items:center; margin-bottom:6px;">
+                  <b>${q.q}</b>
+                  <span class="pill"><span class="spark"></span><strong style="font-family:var(--mono);">${q.id}</strong></span>
+                </div>
+                <div style="display:grid; gap:6px;">
+                  ${q.choices.map((c, ix) => {
+                    const sel = (picked === ix) ? "checked" : "";
+                    return `
+                      <label style="display:flex; gap:8px; align-items:flex-start;">
+                        <input type="radio" name="${q.id}" value="${ix}" ${sel} style="margin-top:3px; accent-color:var(--neon);" />
+                        <span>${c}</span>
+                      </label>
+                    `;
+                  }).join("")}
+                </div>
+              </div>
+            `;
+          }).join("")}
+
+          <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+            <button class="btn btn--primary" type="button" id="gradeQuiz">Grade Quiz</button>
+            <button class="btn" type="button" id="resetQuiz">Reset</button>
+            <span class="pill"><span class="spark"></span><strong style="font-family:var(--mono);">THRESH</strong> ${Math.round(passThresh * 100)}%</span>
+            <span class="pill"><span class="spark"></span><strong style="font-family:var(--mono);">SCORE</strong> ${score === null ? "—" : Math.round(score * 100) + "%"}</span>
+            <span class="pill" style="${passed ? "box-shadow:0 0 16px rgba(34,167,255,0.7); border-color:rgba(34,167,255,0.80);" : ""}">
+              <span class="spark"></span><strong style="font-family:var(--mono);">STATUS</strong> ${passed ? "PASS" : (score === null ? "—" : "TRY AGAIN")}
+            </span>
+          </div>
+
+          ${passed ? `
+            <div class="callout">
+              <div class="k">COMPLETION</div>
+              <p style="margin:8px 0 0;">Badge unlocked: ${PROFILE.engagement.quest.reward_badge.label}. Log your first catalog win and move to Catalog Maintainer Bootcamp.</p>
+            </div>
+          ` : ``}
+        </div>
+      `;
+
+      quizEl.querySelectorAll('input[type="radio"]').forEach(r => {
+        r.addEventListener("change", () => {
+          const qid = r.name;
+          const v = Number(r.value);
+          quizState.answers = quizState.answers || {};
+          quizState.answers[qid] = v;
+          try { localStorage.setItem(QUIZ_KEY, JSON.stringify(quizState)); } catch {}
+        });
+      });
+
+      $("#gradeQuiz").addEventListener("click", () => {
+        const ans = quizState.answers || {};
+        let correct = 0;
+        Q.forEach(q => {
+          if (ans[q.id] === q.answer_index) correct++;
+        });
+        const scoreNow = correct / Q.length;
+        quizState.score = scoreNow;
+        quizState.passed = scoreNow >= passThresh;
+        try { localStorage.setItem(QUIZ_KEY, JSON.stringify(quizState)); } catch {}
+        if (quizState.passed) setGate("interact");
+        renderQuiz();
+      });
+
+      $("#resetQuiz").addEventListener("click", () => {
+        quizState = {};
+        try { localStorage.removeItem(QUIZ_KEY); } catch {}
+        renderQuiz();
+      });
+    }
+
+    renderQuiz();
+    renderGate();
+  </script>
+</body>
+</html>
+

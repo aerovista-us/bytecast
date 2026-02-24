@@ -2,9 +2,9 @@
   "schema": "episode-registry-v1",
   "updated_on": "2026-02-08",
   "policy": {
-    "folder_naming": "content-slug",
-    "pattern": "episodes/<content_slug>",
-    "numeric_ep_folder_creation": "frozen"
+  "folder_naming": "content-slug",
+  "pattern": "episodes/<content_slug>",
+  "numeric_ep_folder_creation": "frozen"
   },
   "episodes": [
     {
@@ -60,6 +60,33 @@
       "publishable": false,
       "retired_on": "2026-02-08",
       "archived_path": "_archive/phase4_retired_2026-02-08/ep2"
+    },
+    {
+      "slug": "av_apparel_ep1_welcome",
+      "episode_code": "EP-APP-001",
+      "title": "AV Apparel Welcome — Culture + First Win",
+      "primary_path": "episodes/av_apparel_ep1_welcome",
+      "legacy_paths": [],
+      "status": "active",
+      "publishable": true
+    },
+    {
+      "slug": "av_apparel_ep2_catalog",
+      "episode_code": "EP-APP-002",
+      "title": "Catalog Maintainer Bootcamp — Your Day-to-Day",
+      "primary_path": "episodes/av_apparel_ep2_catalog",
+      "legacy_paths": [],
+      "status": "active",
+      "publishable": true
+    },
+    {
+      "slug": "av_apparel_ep3_ops_standards",
+      "episode_code": "EP-APP-003",
+      "title": "Apparel Ops Standards — Naming, Copy, Collections, QA, Access",
+      "primary_path": "episodes/av_apparel_ep3_ops_standards",
+      "legacy_paths": [],
+      "status": "active",
+      "publishable": true
     }
   ]
 }

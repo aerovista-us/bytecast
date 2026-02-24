@@ -1,6 +1,6 @@
 {
   "schema": "bytecast-journey-steps-v1",
-  "updated_on": "2026-02-10",
+  "updated_on": "2026-02-24",
   "journeys": [
     {
       "id": "p1_golden_path",
@@ -285,6 +285,310 @@
           "requires": ["eos_20260209_listen", "eos_20260209_slide", "eos_20260209_engage"],
           "minProof": {
             "eos_20260209_listen": ["episodeSlug"]
+          }
+        }
+      ]
+    },
+    {
+      "id": "art_localized_training",
+      "label": "The Art Localized — Training",
+      "description": "Listen → Slide → Engage. Episodes 0–4 + final assessment. Badges: Listener, Foundation, Division Ally, Partner Ready, Amplifier, Certified.",
+      "isDefault": false,
+      "steps": [
+        {"id": "ep0_listen", "label": "Ep 0 Listen", "lane": "bytecast", "group": "Collaboration 0", "order": 10, "estimatedMinutes": 6, "href": "episodes/art_localized_ep0/index.html", "cta": "Listen: Collaboration 0", "complete_when": {"type": "step_done", "id": "ep0_listen"}},
+        {"id": "ep0_slide", "label": "Ep 0 Slide", "lane": "bytecast", "group": "Collaboration 0", "order": 20, "estimatedMinutes": 2, "href": "episodes/art_localized_ep0/index.html", "cta": "View slides", "depends_on": ["ep0_listen"], "complete_when": {"type": "step_done", "id": "ep0_slide"}},
+        {"id": "ep0_engage", "label": "Ep 0 Engage", "lane": "bytecast", "group": "Collaboration 0", "order": 30, "estimatedMinutes": 5, "href": "episodes/art_localized_ep0/index.html", "cta": "Quiz + reflection", "depends_on": ["ep0_slide"], "complete_when": {"type": "step_done", "id": "ep0_engage"}},
+        {"id": "ep0_gates", "label": "Ep 0 Complete", "lane": "bytecast", "group": "Collaboration 0", "order": 35, "estimatedMinutes": 0, "href": "episodes/art_localized_ep0/index.html", "cta": "Foundation", "complete_when": {"type": "steps_all", "ids": ["ep0_listen", "ep0_slide", "ep0_engage"]}},
+        {"id": "ep1_listen", "label": "Ep 1 Listen", "lane": "bytecast", "group": "Divisions", "order": 40, "estimatedMinutes": 2, "href": "episodes/art_localized_ep1/index.html", "cta": "Listen: Divisions", "depends_on": ["ep0_gates"], "complete_when": {"type": "step_done", "id": "ep1_listen"}},
+        {"id": "ep1_slide", "label": "Ep 1 Slide", "lane": "bytecast", "group": "Divisions", "order": 50, "estimatedMinutes": 2, "href": "episodes/art_localized_ep1/index.html", "cta": "View slides", "depends_on": ["ep1_listen"], "complete_when": {"type": "step_done", "id": "ep1_slide"}},
+        {"id": "ep1_engage", "label": "Ep 1 Engage", "lane": "bytecast", "group": "Divisions", "order": 60, "estimatedMinutes": 5, "href": "episodes/art_localized_ep1/index.html", "cta": "Match + scenario", "depends_on": ["ep1_slide"], "complete_when": {"type": "step_done", "id": "ep1_engage"}},
+        {"id": "ep1_gates", "label": "Ep 1 Complete", "lane": "bytecast", "group": "Divisions", "order": 65, "estimatedMinutes": 0, "href": "episodes/art_localized_ep1/index.html", "complete_when": {"type": "steps_all", "ids": ["ep1_listen", "ep1_slide", "ep1_engage"]}},
+        {"id": "ep2_listen", "label": "Ep 2 Listen", "lane": "bytecast", "group": "Partnership Tiers", "order": 70, "estimatedMinutes": 2, "href": "episodes/art_localized_ep2/index.html", "cta": "Listen", "depends_on": ["ep1_gates"], "complete_when": {"type": "step_done", "id": "ep2_listen"}},
+        {"id": "ep2_slide", "label": "Ep 2 Slide", "lane": "bytecast", "group": "Partnership Tiers", "order": 80, "estimatedMinutes": 2, "href": "episodes/art_localized_ep2/index.html", "cta": "View slides", "depends_on": ["ep2_listen"], "complete_when": {"type": "step_done", "id": "ep2_slide"}},
+        {"id": "ep2_engage", "label": "Ep 2 Engage", "lane": "bytecast", "group": "Partnership Tiers", "order": 90, "estimatedMinutes": 5, "href": "episodes/art_localized_ep2/index.html", "cta": "Sort + quiz", "depends_on": ["ep2_slide"], "complete_when": {"type": "step_done", "id": "ep2_engage"}},
+        {"id": "ep2_gates", "label": "Ep 2 Complete", "lane": "bytecast", "group": "Partnership Tiers", "order": 95, "estimatedMinutes": 0, "complete_when": {"type": "steps_all", "ids": ["ep2_listen", "ep2_slide", "ep2_engage"]}},
+        {"id": "ep3_listen", "label": "Ep 3 Listen", "lane": "bytecast", "group": "Amplification", "order": 100, "estimatedMinutes": 2, "href": "episodes/art_localized_ep3/index.html", "cta": "Listen", "depends_on": ["ep2_gates"], "complete_when": {"type": "step_done", "id": "ep3_listen"}},
+        {"id": "ep3_slide", "label": "Ep 3 Slide", "lane": "bytecast", "group": "Amplification", "order": 110, "estimatedMinutes": 2, "href": "episodes/art_localized_ep3/index.html", "cta": "View slides", "depends_on": ["ep3_listen"], "complete_when": {"type": "step_done", "id": "ep3_slide"}},
+        {"id": "ep3_engage", "label": "Ep 3 Engage", "lane": "bytecast", "group": "Amplification", "order": 120, "estimatedMinutes": 5, "href": "episodes/art_localized_ep3/index.html", "cta": "Timeline + numbers", "depends_on": ["ep3_slide"], "complete_when": {"type": "step_done", "id": "ep3_engage"}},
+        {"id": "ep3_gates", "label": "Ep 3 Complete", "lane": "bytecast", "group": "Amplification", "order": 125, "estimatedMinutes": 0, "complete_when": {"type": "steps_all", "ids": ["ep3_listen", "ep3_slide", "ep3_engage"]}},
+        {"id": "ep4_listen", "label": "Ep 4 Listen", "lane": "bytecast", "group": "Your Role", "order": 130, "estimatedMinutes": 2, "href": "episodes/art_localized_ep4/index.html", "cta": "Listen", "depends_on": ["ep3_gates"], "complete_when": {"type": "step_done", "id": "ep4_listen"}},
+        {"id": "ep4_slide", "label": "Ep 4 Slide", "lane": "bytecast", "group": "Your Role", "order": 140, "estimatedMinutes": 2, "href": "episodes/art_localized_ep4/index.html", "cta": "View slides", "depends_on": ["ep4_listen"], "complete_when": {"type": "step_done", "id": "ep4_slide"}},
+        {"id": "ep4_engage", "label": "Ep 4 Engage", "lane": "bytecast", "group": "Your Role", "order": 150, "estimatedMinutes": 3, "href": "episodes/art_localized_ep4/index.html", "cta": "Pledge", "depends_on": ["ep4_slide"], "complete_when": {"type": "step_done", "id": "ep4_engage"}},
+        {"id": "final_assessment", "label": "Final Assessment", "lane": "training", "group": "Your Role", "order": 160, "estimatedMinutes": 10, "href": "episodes/art_localized_ep4/index.html", "cta": "Pass 80%", "depends_on": ["ep4_engage"], "complete_when": {"type": "step_done", "id": "final_assessment"}},
+        {"id": "ep4_gates", "label": "Ep 4 + Assessment Complete", "lane": "bytecast", "group": "Your Role", "order": 165, "estimatedMinutes": 0, "complete_when": {"type": "steps_all", "ids": ["ep4_listen", "ep4_slide", "ep4_engage", "final_assessment"]}},
+        {"id": "badge_art_localized_listener_v1", "label": "Badge: Listener", "lane": "badge", "group": "Badge", "order": 200, "estimatedMinutes": 1, "href": "seed_bytecast.html", "cta": "View Badge", "depends_on": ["ep0_listen"], "complete_when": {"type": "badge_has", "badge_id": "listener_v1"}},
+        {"id": "badge_art_localized_foundation_v1", "label": "Badge: Foundation", "lane": "badge", "group": "Badge", "order": 210, "href": "seed_bytecast.html", "complete_when": {"type": "badge_has", "badge_id": "foundation_v1"}},
+        {"id": "badge_art_localized_division_ally_v1", "label": "Badge: Division Ally", "lane": "badge", "group": "Badge", "order": 220, "href": "seed_bytecast.html", "complete_when": {"type": "badge_has", "badge_id": "division_ally_v1"}},
+        {"id": "badge_art_localized_partner_ready_v1", "label": "Badge: Partner Ready", "lane": "badge", "group": "Badge", "order": 230, "href": "seed_bytecast.html", "complete_when": {"type": "badge_has", "badge_id": "partner_ready_v1"}},
+        {"id": "badge_art_localized_amplifier_v1", "label": "Badge: Amplifier", "lane": "badge", "group": "Badge", "order": 240, "href": "seed_bytecast.html", "complete_when": {"type": "badge_has", "badge_id": "amplifier_v1"}},
+        {"id": "badge_art_localized_certified_v1", "label": "Badge: Certified", "lane": "badge", "group": "Badge", "order": 250, "href": "seed_bytecast.html", "complete_when": {"type": "badge_has", "badge_id": "art_localized_certified_v1"}}
+      ],
+      "badges": [
+        {"id": "listener_v1", "label": "Listener", "requires": ["ep0_listen"]},
+        {"id": "foundation_v1", "label": "Foundation", "requires": ["ep0_gates"]},
+        {"id": "division_ally_v1", "label": "Division Ally", "requires": ["ep1_gates"]},
+        {"id": "partner_ready_v1", "label": "Partner Ready", "requires": ["ep2_gates"]},
+        {"id": "amplifier_v1", "label": "Amplifier", "requires": ["ep3_gates"]},
+        {"id": "art_localized_certified_v1", "label": "Art Localized Certified", "requires": ["ep4_gates", "final_assessment"]}
+      ]
+    },
+    {
+      "id": "apparel_onboarding_v1",
+      "label": "Apparel Ops Onboarding",
+      "description": "AV Apparel ByteCasts + practice + work order + seed. Listen → Slide → Engage → Training → Seed → Badge.",
+      "isDefault": false,
+      "steps": [
+        {
+          "id": "epapp1_listen",
+          "label": "EP-APP-001 Listen",
+          "lane": "bytecast",
+          "group": "Apparel",
+          "order": 10,
+          "estimatedMinutes": 6,
+          "href": "episodes/av_apparel_ep1_welcome/index.html",
+          "cta": "Legendary: Start AV Apparel Welcome",
+          "complete_when": {
+            "type": "step_done",
+            "id": "epapp1_listen"
+          }
+        },
+        {
+          "id": "epapp1_slide",
+          "label": "EP-APP-001 Slides",
+          "lane": "bytecast",
+          "group": "Apparel",
+          "order": 20,
+          "estimatedMinutes": 3,
+          "href": "episodes/av_apparel_ep1_welcome/index.html",
+          "cta": "Legendary: Finish Slides",
+          "depends_on": ["epapp1_listen"],
+          "complete_when": {
+            "type": "step_done",
+            "id": "epapp1_slide"
+          }
+        },
+        {
+          "id": "epapp1_engage",
+          "label": "EP-APP-001 Engage",
+          "lane": "bytecast",
+          "group": "Apparel",
+          "order": 30,
+          "estimatedMinutes": 5,
+          "href": "episodes/av_apparel_ep1_welcome/index.html",
+          "cta": "Legendary: Quest + Quiz",
+          "depends_on": ["epapp1_slide"],
+          "complete_when": {
+            "type": "step_done",
+            "id": "epapp1_engage"
+          }
+        },
+        {
+          "id": "epapp1_gates",
+          "label": "EP-APP-001 Gates",
+          "lane": "bytecast",
+          "group": "Apparel",
+          "order": 35,
+          "estimatedMinutes": 0,
+          "href": "episodes/av_apparel_ep1_welcome/index.html",
+          "cta": "Welcome Complete",
+          "complete_when": {
+            "type": "steps_all",
+            "ids": ["epapp1_listen", "epapp1_slide", "epapp1_engage"]
+          }
+        },
+        {
+          "id": "epapp2_listen",
+          "label": "EP-APP-002 Listen",
+          "lane": "bytecast",
+          "group": "Apparel",
+          "order": 40,
+          "estimatedMinutes": 8,
+          "href": "episodes/av_apparel_ep2_catalog/index.html",
+          "cta": "Legendary: Catalog Maintainer Bootcamp",
+          "depends_on": ["epapp1_gates"],
+          "complete_when": {
+            "type": "step_done",
+            "id": "epapp2_listen"
+          }
+        },
+        {
+          "id": "epapp2_slide",
+          "label": "EP-APP-002 Slides",
+          "lane": "bytecast",
+          "group": "Apparel",
+          "order": 50,
+          "estimatedMinutes": 4,
+          "href": "episodes/av_apparel_ep2_catalog/index.html",
+          "cta": "Legendary: Finish Slides",
+          "depends_on": ["epapp2_listen"],
+          "complete_when": {
+            "type": "step_done",
+            "id": "epapp2_slide"
+          }
+        },
+        {
+          "id": "epapp2_engage",
+          "label": "EP-APP-002 Engage",
+          "lane": "bytecast",
+          "group": "Apparel",
+          "order": 60,
+          "estimatedMinutes": 6,
+          "href": "episodes/av_apparel_ep2_catalog/index.html",
+          "cta": "Legendary: Spot the Drift + Quiz",
+          "depends_on": ["epapp2_slide"],
+          "complete_when": {
+            "type": "step_done",
+            "id": "epapp2_engage"
+          }
+        },
+        {
+          "id": "epapp2_gates",
+          "label": "EP-APP-002 Gates",
+          "lane": "bytecast",
+          "group": "Apparel",
+          "order": 65,
+          "estimatedMinutes": 0,
+          "href": "episodes/av_apparel_ep2_catalog/index.html",
+          "cta": "Maintainer Bootcamp Complete",
+          "complete_when": {
+            "type": "steps_all",
+            "ids": ["epapp2_listen", "epapp2_slide", "epapp2_engage"]
+          }
+        },
+        {
+          "id": "epapp3_listen",
+          "label": "EP-APP-003 Listen",
+          "lane": "bytecast",
+          "group": "Apparel",
+          "order": 70,
+          "estimatedMinutes": 6,
+          "href": "episodes/av_apparel_ep3_ops_standards/index.html",
+          "cta": "Legendary: Apparel Ops Standards",
+          "depends_on": ["epapp2_gates"],
+          "complete_when": {
+            "type": "step_done",
+            "id": "epapp3_listen"
+          }
+        },
+        {
+          "id": "epapp3_slide",
+          "label": "EP-APP-003 Slides",
+          "lane": "bytecast",
+          "group": "Apparel",
+          "order": 80,
+          "estimatedMinutes": 4,
+          "href": "episodes/av_apparel_ep3_ops_standards/index.html",
+          "cta": "Legendary: Finish Slides",
+          "depends_on": ["epapp3_listen"],
+          "complete_when": {
+            "type": "step_done",
+            "id": "epapp3_slide"
+          }
+        },
+        {
+          "id": "epapp3_engage",
+          "label": "EP-APP-003 Engage",
+          "lane": "bytecast",
+          "group": "Apparel",
+          "order": 90,
+          "estimatedMinutes": 6,
+          "href": "episodes/av_apparel_ep3_ops_standards/index.html",
+          "cta": "Legendary: Apply Standards + Quiz",
+          "depends_on": ["epapp3_slide"],
+          "complete_when": {
+            "type": "step_done",
+            "id": "epapp3_engage"
+          }
+        },
+        {
+          "id": "epapp3_gates",
+          "label": "EP-APP-003 Gates",
+          "lane": "bytecast",
+          "group": "Apparel",
+          "order": 95,
+          "estimatedMinutes": 0,
+          "href": "episodes/av_apparel_ep3_ops_standards/index.html",
+          "cta": "Ops Standards Complete",
+          "complete_when": {
+            "type": "steps_all",
+            "ids": ["epapp3_listen", "epapp3_slide", "epapp3_engage"]
+          }
+        },
+        {
+          "id": "apparel_practice_fix",
+          "label": "Practice Catalog Fix",
+          "lane": "training",
+          "group": "Practice",
+          "order": 100,
+          "estimatedMinutes": 15,
+          "href": "episodes/av_apparel/workflows.md",
+          "cta": "Run a practice catalog clean-up",
+          "depends_on": ["epapp3_gates"],
+          "complete_when": {
+            "type": "step_done",
+            "id": "apparel_practice_fix"
+          }
+        },
+        {
+          "id": "apparel_real_work_order",
+          "label": "Real Work Order",
+          "lane": "training",
+          "group": "Work Order",
+          "order": 110,
+          "estimatedMinutes": 20,
+          "href": "episodes/av_apparel/onboarding.md",
+          "cta": "Submit a real apparel change request",
+          "depends_on": ["apparel_practice_fix"],
+          "complete_when": {
+            "type": "step_done",
+            "id": "apparel_real_work_order"
+          }
+        },
+        {
+          "id": "apparel_seed_export",
+          "label": "Seed: Apparel Workflow",
+          "lane": "seed",
+          "group": "Seeding",
+          "order": 120,
+          "estimatedMinutes": 10,
+          "href": "seed_builder_studio/seed_orchard_ui/index.html",
+          "cta": "Legendary: Export Apparel Workflow Seed",
+          "depends_on": ["apparel_real_work_order"],
+          "complete_when": {
+            "type": "step_done",
+            "id": "apparel_seed_export"
+          }
+        },
+        {
+          "id": "badge_apparel_ops_ready_v1",
+          "label": "Badge",
+          "lane": "badge",
+          "group": "Badge",
+          "order": 130,
+          "estimatedMinutes": 1,
+          "href": "seed_bytecast.html",
+          "cta": "Legendary: View Apparel Ops Badge",
+          "depends_on": ["apparel_seed_export"],
+          "complete_when": {
+            "type": "badge_has",
+            "badge_id": "apparel_ops_ready_v1"
+          }
+        }
+      ],
+      "badges": [
+        {
+          "id": "apparel_ops_ready_v1",
+          "label": "Apparel Ops Ready",
+          "requires": [
+            "epapp1_gates",
+            "epapp2_gates",
+            "epapp3_gates",
+            "apparel_practice_fix",
+            "apparel_real_work_order",
+            "apparel_seed_export"
+          ],
+          "minProof": {
+            "apparel_seed_export": ["artifactName", "artifactHash"]
           }
         }
       ]

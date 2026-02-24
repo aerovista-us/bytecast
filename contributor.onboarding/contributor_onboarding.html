@@ -1,0 +1,1399 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="dark light" />
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <title>AeroVista — Contributor Onboarding</title>
+  <style>
+    :root{
+      --bg0:#05060a;
+      --bg1:#0a0c14;
+      --card:#0f1220cc;
+      --card2:#0b0e18cc;
+      --border:rgba(255,255,255,.10);
+      --muted:rgba(255,255,255,.70);
+      --muted2:rgba(255,255,255,.55);
+      --text:rgba(255,255,255,.92);
+      --good:#34d399;
+      --warn:#fbbf24;
+      --bad:#fb7185;
+      --a:#60a5fa;
+      --b:#a78bfa;
+      --c:#f472b6;
+      --glow: 0 0 24px rgba(96,165,250,.20), 0 0 60px rgba(167,139,250,.12);
+      --shadow: 0 18px 55px rgba(0,0,0,.60);
+      --r: 18px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--text);
+      background:
+        radial-gradient(1200px 800px at 15% 10%, rgba(96,165,250,.18), transparent 60%),
+        radial-gradient(1000px 700px at 85% 25%, rgba(167,139,250,.15), transparent 60%),
+        radial-gradient(900px 700px at 55% 95%, rgba(244,114,182,.10), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+    }
+
+    a{color:inherit}
+    .wrap{max-width:1120px; margin:0 auto; padding:22px 18px 64px;}
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(5,6,10,.88), rgba(5,6,10,.55));
+      border-bottom:1px solid var(--border);
+    }
+    .topbar .inner{max-width:1120px; margin:0 auto; padding:12px 18px; display:flex; gap:12px; align-items:center; justify-content:space-between;}
+    .brand{display:flex; gap:10px; align-items:center; min-width:0;}
+    .glyph{
+      width:34px; height:34px; border-radius:10px;
+      background:
+        radial-gradient(circle at 30% 35%, rgba(96,165,250,.55), transparent 55%),
+        radial-gradient(circle at 65% 55%, rgba(167,139,250,.45), transparent 60%),
+        radial-gradient(circle at 50% 80%, rgba(244,114,182,.25), transparent 65%),
+        linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow: var(--glow);
+      position:relative;
+    }
+    .glyph:after{
+      content:"";
+      position:absolute; inset:8px;
+      border-radius:9px;
+      border:1px dashed rgba(255,255,255,.18);
+      opacity:.65;
+    }
+    .brand h1{
+      margin:0;
+      font-size:14px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .brand .sub{
+      font-size:12px;
+      color:var(--muted);
+      letter-spacing:.02em;
+    }
+
+    .pillrow{display:flex; gap:8px; flex-wrap:wrap; align-items:center; justify-content:flex-end;}
+    .pill{
+      font-size:12px;
+      color:var(--muted);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      padding:6px 10px;
+      border-radius:999px;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+    }
+    .pill b{color:var(--text); font-weight:600}
+    .progressWrap{display:flex; align-items:center; gap:10px; min-width:240px;}
+    .bar{
+      height:9px; flex:1;
+      background:rgba(255,255,255,.07);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:999px;
+      overflow:hidden;
+    }
+    .bar > div{
+      height:100%;
+      width:0%;
+      background:linear-gradient(90deg, rgba(96,165,250,.95), rgba(167,139,250,.85), rgba(244,114,182,.75));
+      transition:width .35s ease;
+    }
+    .pct{font: 12px var(--mono); color:var(--muted); min-width:44px; text-align:right;}
+
+    .hero{
+      margin-top:18px;
+      padding:22px 20px;
+      border-radius:var(--r);
+      border:1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(600px 240px at 10% 15%, rgba(96,165,250,.16), transparent 60%),
+        radial-gradient(520px 240px at 90% 20%, rgba(167,139,250,.14), transparent 60%),
+        radial-gradient(520px 240px at 40% 110%, rgba(244,114,182,.10), transparent 60%);
+      pointer-events:none;
+      filter:saturate(1.15);
+    }
+    .hero .grid{
+      position:relative;
+      display:grid;
+      grid-template-columns: 1.35fr .65fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){ .hero .grid{grid-template-columns:1fr; } }
+
+    .hero h2{
+      margin:0 0 6px;
+      font-size:22px;
+      letter-spacing:.01em;
+    }
+    .hero p{margin:0 0 12px; color:var(--muted); line-height:1.5;}
+    .ctaRow{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:10px;}
+    .btn{
+      appearance:none;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:14px;
+      cursor:pointer;
+      font-weight:650;
+      letter-spacing:.01em;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      transition: transform .08s ease, background .2s ease, border-color .2s ease;
+      user-select:none;
+      text-decoration:none;
+    }
+    .btn:hover{background:rgba(255,255,255,.09); border-color:rgba(255,255,255,.22)}
+    .btn:active{transform:translateY(1px)}
+    .btn.primary{
+      background: linear-gradient(90deg, rgba(96,165,250,.28), rgba(167,139,250,.22), rgba(244,114,182,.16));
+      border-color: rgba(255,255,255,.18);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.04) inset, var(--glow);
+    }
+    .btn.good{border-color: rgba(52,211,153,.35); background: rgba(52,211,153,.10)}
+    .btn.warn{border-color: rgba(251,191,36,.35); background: rgba(251,191,36,.10)}
+    .btn.bad{border-color: rgba(251,113,133,.35); background: rgba(251,113,133,.10)}
+    .btn:focus{outline:none}
+    .btn:focus-visible{box-shadow: 0 0 0 3px rgba(96,165,250,.35);}
+
+    .sideCard{
+      border-radius:16px;
+      border:1px solid var(--border);
+      background: rgba(15,18,32,.55);
+      padding:14px 14px 12px;
+      box-shadow: 0 10px 40px rgba(0,0,0,.45);
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      min-height:100%;
+    }
+    .miniTitle{font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.14em;}
+    .tagList{display:flex; gap:8px; flex-wrap:wrap;}
+    .tag{
+      font-size:12px; color:rgba(255,255,255,.86);
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.05);
+      padding:6px 10px; border-radius:999px;
+    }
+    .tag strong{font-weight:700}
+    .tag.a{border-color:rgba(96,165,250,.30)}
+    .tag.b{border-color:rgba(167,139,250,.30)}
+    .tag.c{border-color:rgba(244,114,182,.28)}
+    .tag.k{border-color:rgba(52,211,153,.28)}
+
+    .poster{
+      border-radius:14px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.03);
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:220px;
+      position:relative;
+    }
+    .poster img{
+      width:100%;
+      height:auto;
+      display:block;
+      max-height:360px;
+      object-fit:cover;
+    }
+    .poster .placeholder{
+      padding:14px;
+      text-align:center;
+      color:var(--muted2);
+      font-size:12px;
+      line-height:1.45;
+    }
+    .poster code{font-family:var(--mono); color:rgba(255,255,255,.85)}
+
+    .section{
+      margin-top:18px;
+      border:1px solid var(--border);
+      border-radius:var(--r);
+      background: rgba(255,255,255,.03);
+      overflow:hidden;
+      box-shadow: 0 14px 50px rgba(0,0,0,.45);
+    }
+    .sectionHeader{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:14px 16px;
+      border-bottom:1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+    }
+    .sectionHeader h3{margin:0; font-size:14px; letter-spacing:.06em; text-transform:uppercase;}
+    .sectionHeader .desc{margin:0; color:var(--muted); font-size:12px;}
+    .sectionBody{padding:16px;}
+    .grid2{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+    @media (max-width: 860px){ .grid2{grid-template-columns:1fr;} }
+
+    .card{
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:16px;
+      background: rgba(15,18,32,.55);
+      padding:14px;
+      box-shadow: 0 12px 44px rgba(0,0,0,.40);
+      position:relative;
+    }
+    .card h4{margin:0 0 6px; font-size:16px;}
+    .card p{margin:0; color:var(--muted); line-height:1.5;}
+    .list{margin:10px 0 0; padding:0 0 0 18px; color:rgba(255,255,255,.85); line-height:1.5;}
+    .list li{margin:6px 0;}
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      color: rgba(255,255,255,.88);
+      margin:8px 8px 0 0;
+    }
+    .badge.good{border-color:rgba(52,211,153,.35); background:rgba(52,211,153,.10)}
+    .badge.warn{border-color:rgba(251,191,36,.35); background:rgba(251,191,36,.10)}
+    .badge.bad{border-color:rgba(251,113,133,.35); background:rgba(251,113,133,.10)}
+    .badge.a{border-color:rgba(96,165,250,.35); background:rgba(96,165,250,.10)}
+    .badge.b{border-color:rgba(167,139,250,.35); background:rgba(167,139,250,.10)}
+    .badge.c{border-color:rgba(244,114,182,.33); background:rgba(244,114,182,.10)}
+    .kbd{
+      font-family:var(--mono);
+      border:1px solid rgba(255,255,255,.14);
+      padding:2px 6px;
+      border-radius:8px;
+      background:rgba(255,255,255,.05);
+      color:rgba(255,255,255,.90);
+      font-size:12px;
+    }
+
+    .wizard{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      align-items:start;
+    }
+    @media (max-width: 860px){ .wizard{grid-template-columns:1fr;} }
+
+    .lanePick{
+      display:flex; flex-direction:column; gap:10px;
+    }
+    .laneBtn{
+      text-align:left;
+      padding:12px 12px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.05);
+      cursor:pointer;
+      transition: transform .08s ease, border-color .2s ease, background .2s ease;
+    }
+    .laneBtn:hover{background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.24)}
+    .laneBtn:active{transform:translateY(1px)}
+    .laneBtn strong{display:block; font-size:14px; margin-bottom:4px;}
+    .laneBtn span{display:block; color:var(--muted); font-size:12px; line-height:1.4;}
+    .laneBtn[data-lane="A"]{border-color:rgba(96,165,250,.28)}
+    .laneBtn[data-lane="B"]{border-color:rgba(167,139,250,.28)}
+    .laneBtn[data-lane="C"]{border-color:rgba(244,114,182,.26)}
+    .laneBtn.active{background:rgba(255,255,255,.09); box-shadow: 0 0 0 3px rgba(96,165,250,.18);}
+
+    .panel{
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:16px;
+      background: rgba(11,14,24,.55);
+      padding:14px;
+    }
+    .panel h5{margin:0 0 8px; font-size:14px;}
+    .panel .muted{color:var(--muted); font-size:12px; line-height:1.5;}
+    .panel ul{margin:10px 0 0; padding-left:18px; color:rgba(255,255,255,.86); line-height:1.5;}
+    .divider{height:1px; background:rgba(255,255,255,.10); margin:12px 0;}
+
+    .formRow{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+    @media (max-width: 700px){ .formRow{grid-template-columns:1fr;} }
+    label{display:block; font-size:12px; color:var(--muted); margin:0 0 6px;}
+    input, textarea, select{
+      width:100%;
+      padding:10px 10px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.25);
+      color: var(--text);
+      outline:none;
+      font-family:var(--sans);
+    }
+    textarea{min-height:96px; resize:vertical;}
+    input:focus, textarea:focus, select:focus{
+      border-color: rgba(96,165,250,.55);
+      box-shadow: 0 0 0 3px rgba(96,165,250,.22);
+    }
+
+    .copyBox{
+      font-family:var(--mono);
+      font-size:12px;
+      line-height:1.45;
+      background: rgba(0,0,0,.28);
+      border:1px solid rgba(255,255,255,.12);
+      padding:10px 10px;
+      border-radius:14px;
+      white-space:pre-wrap;
+      user-select:text;
+    }
+
+    .checklist{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    @media (max-width: 860px){ .checklist{grid-template-columns:1fr;} }
+    .chk{
+      display:flex; gap:10px;
+      align-items:flex-start;
+      padding:10px 10px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      border-radius:14px;
+    }
+    .chk input{width:auto; margin-top:3px}
+    .chk .t{font-size:13px; line-height:1.4;}
+    .chk .t b{font-weight:750}
+    .chk .t small{display:block; color:var(--muted); margin-top:3px;}
+
+    .toast{
+      position:fixed; right:16px; bottom:16px; z-index:100;
+      width:min(420px, calc(100vw - 32px));
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(15,18,32,.90);
+      padding:12px 12px;
+      border-radius:16px;
+      box-shadow: 0 18px 60px rgba(0,0,0,.60);
+      backdrop-filter: blur(10px);
+      display:none;
+    }
+    .toast.show{display:block; animation: pop .18s ease;}
+    @keyframes pop{ from{transform: translateY(8px); opacity:.0} to{transform: translateY(0); opacity:1} }
+    .toast .row{display:flex; gap:10px; align-items:flex-start;}
+    .toast .dot{width:10px; height:10px; border-radius:999px; background:var(--a); margin-top:4px;}
+    .toast .msg{font-size:13px; line-height:1.4; color:rgba(255,255,255,.90);}
+    .toast .x{
+      margin-left:auto; border:none; background:transparent; color:rgba(255,255,255,.75);
+      cursor:pointer; font-size:16px; line-height:1;
+      padding:2px 6px; border-radius:10px;
+    }
+    .toast .x:hover{background:rgba(255,255,255,.06); color:rgba(255,255,255,.90)}
+    .foot{
+      margin-top:18px;
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+      color:var(--muted2);
+      font-size:12px;
+    }
+    .foot .links{display:flex; gap:8px; flex-wrap:wrap; align-items:center;}
+    .hr{height:1px; background:rgba(255,255,255,.10); margin:18px 0 10px;}
+    .sr{position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;}
+/* ---------- ByteCast Player ---------- */
+.playerCard{
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:16px;
+  background: rgba(11,14,24,.55);
+  padding:14px;
+  box-shadow: 0 12px 44px rgba(0,0,0,.40);
+}
+.playerTop{display:flex; align-items:flex-start; justify-content:space-between; gap:10px;}
+.playerTitle{margin:0; font-size:14px; letter-spacing:.06em; text-transform:uppercase;}
+.playerSub{margin:6px 0 0; color:var(--muted); font-size:12px; line-height:1.45;}
+.playerRow{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:12px;}
+.playerBtn{
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.06);
+  color:var(--text);
+  padding:8px 10px;
+  border-radius:14px;
+  cursor:pointer;
+  font-weight:700;
+  font-size:12px;
+}
+.playerBtn:hover{background:rgba(255,255,255,.09); border-color:rgba(255,255,255,.22)}
+.playerBtn:active{transform:translateY(1px)}
+.playerBtn.primary{
+  background: linear-gradient(90deg, rgba(96,165,250,.26), rgba(167,139,250,.20), rgba(244,114,182,.14));
+  box-shadow: var(--glow);
+}
+
+.playerMeta{
+  display:flex; gap:10px; align-items:center;
+  margin-top:10px; color:rgba(255,255,255,.78);
+  font: 12px var(--mono);
+}
+.playerMeta span{opacity:.9}
+.playerMeta .sep{opacity:.35}
+
+.seekWrap{margin-top:10px;}
+.seek{
+  width:100%;
+  appearance:none;
+  height:10px;
+  border-radius:999px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.10);
+  outline:none;
+}
+.seek::-webkit-slider-thumb{
+  appearance:none;
+  width:16px; height:16px;
+  border-radius:999px;
+  background:rgba(255,255,255,.90);
+  border:2px solid rgba(96,165,250,.55);
+  box-shadow: 0 0 0 3px rgba(96,165,250,.18);
+  cursor:pointer;
+}
+.seek::-moz-range-thumb{
+  width:16px; height:16px;
+  border-radius:999px;
+  background:rgba(255,255,255,.90);
+  border:2px solid rgba(96,165,250,.55);
+  cursor:pointer;
+}
+
+.smallInput{
+  width:100%;
+  padding:10px 10px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(0,0,0,.25);
+  color: var(--text);
+  outline:none;
+}
+.smallInput:focus{
+  border-color: rgba(96,165,250,.55);
+  box-shadow: 0 0 0 3px rgba(96,165,250,.22);
+}
+.playerCols{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap:10px;
+  margin-top:10px;
+}
+.playerHint{color:var(--muted2); font-size:12px; line-height:1.45}
+.playerAudio{display:none;}
+  </style>
+</head>
+<body>
+  <div class="topbar" role="banner">
+    <div class="inner">
+      <div class="brand">
+        <div class="glyph" aria-hidden="true"></div>
+        <div>
+          <h1>AeroVista Contributor Onboarding</h1>
+          <div class="sub">One screen. One mission. Ship clean.</div>
+        </div>
+      </div>
+
+      <div class="pillrow">
+        <div class="pill progressWrap" aria-label="Onboarding progress">
+          <span class="pct" id="pct">0%</span>
+          <div class="bar" aria-hidden="true"><div id="barFill"></div></div>
+          <span class="pct" id="status">Not started</span>
+        </div>
+        <div class="pill"><b id="laneChip">Lane: —</b></div>
+      </div>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <section class="hero" aria-label="Welcome">
+      <div class="grid">
+        <div>
+          <h2>Welcome to the crew. Let’s ship without chaos. ⚡</h2>
+          <p>
+            AeroVista is a multi-division ecosystem: apps, music, branding, infra.
+            Your superpower here isn’t “big heroic commits.” It’s <b>small, safe, traceable wins</b>.
+          </p>
+
+          <div class="tagList" aria-label="Principles">
+            <span class="tag k"><strong>Small</strong> = professional</span>
+            <span class="tag a"><strong>Ask “WHERE”</strong> before you build</span>
+            <span class="tag b"><strong>Preview</strong> is baseline</span>
+            <span class="tag c"><strong>Honest Helper</strong> always</span>
+          </div>
+
+          <div class="ctaRow">
+            <button class="btn primary" id="startBtn" type="button" aria-label="Start onboarding">
+              🚀 Start Mission
+            </button>
+            <button class="btn" id="resetBtn" type="button" aria-label="Reset onboarding">
+              ♻️ Reset
+            </button>
+            <a class="btn" href="#download" aria-label="Jump to downloads">📦 Templates & Files</a>
+          </div>
+
+          <div class="hr"></div>
+          <p style="margin:0; color: var(--muted2);">
+            Pro tip: if you’re unsure at any point, say it early. We prefer <b>honest uncertainty</b> over silent guessing.
+          </p>
+        </div>
+
+        <aside class="sideCard" aria-label="Poster and quick pin">
+          <div>
+            <div class="miniTitle">Pinned Poster</div>
+            <div class="poster" style="margin-top:8px">
+              <!-- Put the generated poster image in the same folder and name it like below -->
+              <img id="posterImg" src="aerovista_contributor_expectations.png"
+                   alt="AeroVista Contributor Expectations poster"
+                   onerror="this.remove(); document.getElementById('posterFallback').style.display='block';" />
+              <div class="placeholder" id="posterFallback" style="display:none">
+                Poster not found.<br/>
+                Place the image next to this HTML file and name it:<br/>
+                <code>aerovista_contributor_expectations.png</code>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="miniTitle">Quick Pin (Discord/Notion)</div>
+            <div class="copyBox" id="quickPin" aria-label="Quick pin text">📌 AeroVista Contributor Expectations
+• 1 task = 1 PR = 1 deliverable
+• No vibes-only work (Goal/Scope/Out-of-scope/Acceptance/Done)
+• Ask “WHERE” first: source-of-truth / verify / safe boundary
+• Lane A: UI/copy/assets/JSON/docs
+• Lane B: logic/tooling/flags/analytics/perf (review)
+• Lane C: infra/auth/secrets/deploy/migrations (founder executes)
+• “Works in preview” is done
+• Be the Honest Helper: say what you know + what you need</div>
+
+            <div class="ctaRow" style="margin-top:10px;">
+              <button class="btn good" id="copyPinBtn" type="button">📋 Copy Pin</button>
+              <button class="btn" id="copyLinkBtn" type="button">🔗 Copy Page Link</button>
+            </div>
+          </div>
+<div class="playerCard" aria-label="ByteCast audio player">
+  <div class="playerTop">
+    <div>
+      <div class="miniTitle">ByteCast</div>
+      <h3 class="playerTitle">Welcome to the Crew — Audio</h3>
+      <p class="playerSub">Play the onboarding ByteCast right here. Use URL or load a local AAC.</p>
+    </div>
+    <span class="badge b" id="audioStatus">No audio loaded</span>
+  </div>
+
+  <!-- Hidden audio element (we control it with custom UI) -->
+  <audio id="bytecastAudio" class="playerAudio" preload="metadata">
+    <source id="bytecastSource" src="bytecast.mp3" type="audio/mp3">
+  </audio>
+
+  <div class="playerRow">
+    <button class="playerBtn primary" id="playPauseBtn" type="button">▶ Play</button>
+    <button class="playerBtn" id="back10Btn" type="button">⟲ -10s</button>
+    <button class="playerBtn" id="fwd30Btn" type="button">+30s ⟳</button>
+
+    <select id="speedSel" class="smallInput" style="max-width:140px" aria-label="Playback speed">
+      <option value="1">1.0x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+      <option value="2">2.0x</option>
+    </select>
+
+    <a class="playerBtn" id="downloadBtn" href="bytecast.aac" download>⬇ Download</a>
+  </div>
+
+  <div class="playerMeta">
+    <span id="curTime">00:00</span>
+    <span class="sep">/</span>
+    <span id="durTime">00:00</span>
+  </div>
+
+  <div class="seekWrap">
+    <input id="seek" class="seek" type="range" min="0" max="1000" value="0" aria-label="Seek bar">
+  </div>
+
+  <div class="playerCols">
+    <div>
+      <label for="audioUrl">AAC URL (optional)</label>
+      <input id="audioUrl" class="smallInput" placeholder="https://.../bytecast.aac  (or leave blank)" />
+      <div class="playerRow" style="margin-top:8px;">
+        <button class="playerBtn" id="loadUrlBtn" type="button">🔗 Load URL</button>
+        <button class="playerBtn" id="useDefaultBtn" type="button">↩ Use default (bytecast.aac)</button>
+      </div>
+    </div>
+
+    <div>
+      <label for="audioFile">Load local AAC</label>
+      <input id="audioFile" class="smallInput" type="file" accept="audio/aac" />
+      <p class="playerHint" style="margin:8px 0 0;">
+        Tip: put <span class="kbd">bytecast.aac</span> next to this HTML file for “just works” mode.
+      </p>
+    </div>
+  </div>
+</div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- SECTION: Lanes Wizard -->
+    <section class="section" id="lanes" aria-label="Choose lane">
+      <div class="sectionHeader">
+        <div>
+          <h3>Choose Your Lane</h3>
+          <p class="desc">Pick your lane so you don’t collide with fragile systems.</p>
+        </div>
+        <span class="badge a">Ask “WHERE” first</span>
+      </div>
+      <div class="sectionBody">
+        <div class="wizard">
+          <div class="lanePick" role="group" aria-label="Lane choices">
+            <button class="laneBtn" data-lane="A" type="button">
+              <strong>Lane A — Safe + Fast</strong>
+              <span>UI tweaks, copy, SVG/art, JSON pack data, docs, non-prod scripts.</span>
+            </button>
+            <button class="laneBtn" data-lane="B" type="button">
+              <strong>Lane B — Medium Risk (review)</strong>
+              <span>App logic, tooling, feature flags, analytics, performance refactors.</span>
+            </button>
+            <button class="laneBtn" data-lane="C" type="button">
+              <strong>Lane C — High Risk (restricted)</strong>
+              <span>Infra/auth/secrets/networking/reverse proxy/deploy/migrations — founder executes.</span>
+            </button>
+          </div>
+
+          <div class="panel" aria-live="polite">
+            <h5 id="laneTitle">Lane: —</h5>
+            <div class="muted" id="laneExplain">
+              Choose a lane to see what’s safe, what requires review, and what’s restricted.
+            </div>
+            <div class="divider"></div>
+            <div class="muted"><b>Default safe question:</b> “Which repo/file is the source of truth for this?”</div>
+            <ul id="laneList"></ul>
+
+            <div class="divider"></div>
+            <div class="ctaRow">
+              <button class="btn primary" id="markLanesDone" type="button">✅ Mark Lane Selected</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: Working Agreements -->
+    <section class="section" id="agreements" aria-label="Working agreements">
+      <div class="sectionHeader">
+        <div>
+          <h3>Working Agreements</h3>
+          <p class="desc">Minimum rules that prevent chaos.</p>
+        </div>
+        <span class="badge good">Small = professional</span>
+      </div>
+      <div class="sectionBody">
+        <div class="grid2">
+          <div class="card">
+            <h4>1) Small is Professional</h4>
+            <p>One task = one PR = one deliverable. No stealth refactors.</p>
+            <ul class="list">
+              <li>Keep changes scoped.</li>
+              <li>Ship a clean win, then grab the next win.</li>
+              <li>If you found “extra fixes,” log them as separate tasks.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h4>2) We Don’t Build on Vibes</h4>
+            <p>If a task is missing clarity, it’s discussion—not implementation.</p>
+            <div style="margin-top:10px;">
+              <span class="badge warn">Goal</span>
+              <span class="badge warn">Scope</span>
+              <span class="badge warn">Out-of-scope</span>
+              <span class="badge warn">Acceptance</span>
+              <span class="badge warn">Done</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <h4>3) Decisions Have Owners</h4>
+            <p>Founder owns product direction + final calls. You own implementation within scope.</p>
+            <ul class="list">
+              <li>Want to change scope? Propose it—don’t stealth it.</li>
+              <li>Subjective UI? Founder decides quickly; we move on.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h4>4) Document As You Go</h4>
+            <p>No essays. Just the essentials.</p>
+            <ul class="list">
+              <li><b>What changed</b></li>
+              <li><b>Why</b></li>
+              <li><b>How to run/test</b></li>
+              <li><b>Gotchas</b></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="ctaRow" style="margin-top:12px;">
+          <button class="btn primary" id="markAgreementsDone" type="button">✅ Mark Agreements Read</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: Honest Helper Generator -->
+    <section class="section" id="honest" aria-label="Honest Helper scripts">
+      <div class="sectionHeader">
+        <div>
+          <h3>The Honest Helper</h3>
+          <p class="desc">Confidence with humility. Ask early. No guessing in risky zones.</p>
+        </div>
+        <span class="badge c">Trust speedrun</span>
+      </div>
+      <div class="sectionBody">
+        <div class="grid2">
+          <div class="card">
+            <h4>Take the task (script generator)</h4>
+            <p>Fill this out and it generates a clean “I can help + here’s what I need” message.</p>
+
+            <div class="formRow" style="margin-top:10px;">
+              <div>
+                <label for="taskName">Task / Ticket</label>
+                <input id="taskName" placeholder="e.g., Add filter to pack browser" />
+              </div>
+              <div>
+                <label for="unknowns">What you’re not fully familiar with</label>
+                <input id="unknowns" placeholder="e.g., repo layout / build steps / routing" />
+              </div>
+            </div>
+
+            <div class="formRow" style="margin-top:10px;">
+              <div>
+                <label for="needWhat">What you need to start</label>
+                <select id="needWhat">
+                  <option value="source-of-truth repo/file + an example + what 'done' looks like">Source-of-truth + example + done definition</option>
+                  <option value="the right folder/file to edit + how to verify in preview">Where to edit + how to verify</option>
+                  <option value="access or credentials (if required), or confirmation this is Lane C">Access/credentials or Lane C confirmation</option>
+                </select>
+              </div>
+              <div>
+                <label for="tone">Tone</label>
+                <select id="tone">
+                  <option value="neutral">Neutral</option>
+                  <option value="hype">Hype / swagger (still pro)</option>
+                  <option value="super_formal">Formal</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="ctaRow" style="margin-top:10px;">
+              <button class="btn primary" id="genTakeMsg" type="button">✨ Generate Message</button>
+              <button class="btn" id="copyTakeMsg" type="button">📋 Copy</button>
+            </div>
+
+            <div class="copyBox" id="takeMsg" style="margin-top:10px;" aria-label="Generated take message">
+I can help with this. I’m not fully familiar with ___ yet, but I can take it on if you point me to the right repo/file and what “done” looks like.
+            </div>
+          </div>
+
+          <div class="card">
+            <h4>Blocked? Don’t spin. Post this.</h4>
+            <p>Paste logs, show what you tried, and ask for a pointer.</p>
+
+            <label for="blockedOn" style="margin-top:10px;">Blocked on</label>
+            <input id="blockedOn" placeholder="e.g., preview build fails on deploy" />
+
+            <label for="tried" style="margin-top:10px;">Tried</label>
+            <textarea id="tried" placeholder="Steps you tried, commands run, files touched..."></textarea>
+
+            <label for="got" style="margin-top:10px;">Got (error / result)</label>
+            <textarea id="got" placeholder="Paste the error / output..."></textarea>
+
+            <label for="nextGuess" style="margin-top:10px;">Next guess</label>
+            <input id="nextGuess" placeholder="e.g., path mismatch or missing config" />
+
+            <div class="ctaRow" style="margin-top:10px;">
+              <button class="btn primary" id="genBlockedMsg" type="button">🧩 Generate Blocked Message</button>
+              <button class="btn" id="copyBlockedMsg" type="button">📋 Copy</button>
+            </div>
+
+            <div class="copyBox" id="blockedMsg" style="margin-top:10px;" aria-label="Generated blocked message">
+Blocked on:
+Tried:
+Got:
+Next guess:
+Need from you:
+            </div>
+          </div>
+        </div>
+
+        <div class="ctaRow" style="margin-top:12px;">
+          <button class="btn primary" id="markHonestDone" type="button">✅ Mark Honest Helper Ready</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: Definition of Done Checklist -->
+    <section class="section" id="dod" aria-label="Definition of done checklist">
+      <div class="sectionHeader">
+        <div>
+          <h3>Definition of Done</h3>
+          <p class="desc">“Works in preview” is the baseline. Add test notes + tiny docs note.</p>
+        </div>
+        <span class="badge good">Preview is baseline</span>
+      </div>
+      <div class="sectionBody">
+        <div class="checklist" role="group" aria-label="Done checklist">
+          <div class="chk"><input type="checkbox" class="dchk" /> <div class="t"><b>Matches acceptance criteria</b><small>It does what the task said—no surprises.</small></div></div>
+          <div class="chk"><input type="checkbox" class="dchk" /> <div class="t"><b>Build isn’t broken</b><small>CI/preview doesn’t fail.</small></div></div>
+          <div class="chk"><input type="checkbox" class="dchk" /> <div class="t"><b>Test notes included</b><small>Manual steps are fine—just write them.</small></div></div>
+          <div class="chk"><input type="checkbox" class="dchk" /> <div class="t"><b>No security regressions</b><small>No secrets, no unsafe inputs, no sketchy defaults.</small></div></div>
+          <div class="chk"><input type="checkbox" class="dchk" /> <div class="t"><b>Docs/update note added</b><small>What changed / why / how to test.</small></div></div>
+          <div class="chk"><input type="checkbox" class="dchk" /> <div class="t"><b>Correct file locations + naming</b><small>Don’t scatter. Don’t duplicate “source of truth.”</small></div></div>
+          <div class="chk"><input type="checkbox" class="dchk" /> <div class="t"><b>(Optional) Screenshot/clip</b><small>UI work? Make it reviewable in 5 seconds.</small></div></div>
+          <div class="chk"><input type="checkbox" class="dchk" /> <div class="t"><b>(Optional) Metrics before/after</b><small>Perf work? Show impact.</small></div></div>
+        </div>
+
+        <div class="ctaRow" style="margin-top:12px;">
+          <button class="btn primary" id="markDoDDone" type="button">✅ Mark DoD Completed</button>
+          <button class="btn" id="checkAllDod" type="button">☑️ Check All</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: Downloads / Links -->
+    <section class="section" id="download" aria-label="Downloads and links">
+      <div class="sectionHeader">
+        <div>
+          <h3>Templates & Files</h3>
+          <p class="desc">Link these to your repo or drop them next to this HTML file.</p>
+        </div>
+        <span class="badge a">Source-of-truth matters</span>
+      </div>
+      <div class="sectionBody">
+        <div class="grid2">
+          <div class="card">
+            <h4>Drop-in links (edit these)</h4>
+            <p>Replace the <span class="kbd">href</span> values to point to your repo paths.</p>
+                    <ul class="list">
+                      <li><a class="btn" href="/docs/CONTRIBUTING.md">📘 CONTRIBUTING.md</a></li>
+                      <li><a class="btn" href="/docs/WORK_ORDERS_TEMPLATE.md">🧾 Work Order Template</a></li>
+                      <li><a class="btn" href="/docs/DECISIONS_LOG.md">🧠 Decisions Log</a></li>
+                      <li><a class="btn" href="/docs/SECURITY_BOUNDARIES.md">🔒 Security Boundaries</a></li>
+                      <li><a class="btn" href="/docs/PULL_REQUEST_TEMPLATE.md">✅ PR Template</a></li>
+                    </ul>          </div>
+
+          <div class="card">
+            <h4>Fast “where to start” checklist</h4>
+            <p>Before you touch files, answer these:</p>
+            <ul class="list">
+              <li><b>Where is the source of truth?</b> (repo/folder/file)</li>
+              <li><b>Where does it get verified?</b> (local + preview steps)</li>
+              <li><b>What lane is this?</b> (A / B / C)</li>
+              <li><b>What is “done”?</b> (acceptance + DoD)</li>
+            </ul>
+            <div class="ctaRow" style="margin-top:10px;">
+              <button class="btn primary" id="markLinksDone" type="button">✅ Mark Ready to Contribute</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="foot" aria-label="Footer">
+      <div>
+        <span class="badge good" id="doneBadge" style="display:none;">✅ Onboarding complete</span>
+        <span id="doneText">Finish steps above to hit 100%.</span>
+      </div>
+      <div class="links">
+        <a class="btn" href="#lanes">🧭 Lanes</a>
+        <a class="btn" href="#honest">🗣️ Honest Helper</a>
+        <a class="btn" href="#dod">✅ DoD</a>
+        <a class="btn" href="#download">📦 Links</a>
+      </div>
+    </div>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <div class="row">
+      <div class="dot" id="toastDot" aria-hidden="true"></div>
+      <div class="msg" id="toastMsg">Copied.</div>
+      <button class="x" id="toastX" aria-label="Dismiss notification">×</button>
+    </div>
+  </div>
+
+  <script>
+    // ---------- State ----------
+    const KEY = "av_onboarding_v1";
+    const state = {
+      started:false,
+      lane:null,
+      done: {
+        lane:false,
+        agreements:false,
+        honest:false,
+        dod:false,
+        links:false
+      }
+    };
+
+    function load(){
+      try{
+        const raw = localStorage.getItem(KEY);
+        if(raw){
+          const obj = JSON.parse(raw);
+          Object.assign(state, obj);
+        }
+      }catch(e){}
+    }
+    function save(){
+      try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){}
+      updateUI();
+    }
+
+    // ---------- UI helpers ----------
+    const pctEl = document.getElementById("pct");
+    const statusEl = document.getElementById("status");
+    const fillEl = document.getElementById("barFill");
+    const laneChip = document.getElementById("laneChip");
+    const doneBadge = document.getElementById("doneBadge");
+    const doneText = document.getElementById("doneText");
+
+    function computeProgress(){
+      let total = 1 + Object.keys(state.done).length; // started + done flags
+      let got = (state.started ? 1 : 0) + Object.values(state.done).filter(Boolean).length;
+      return Math.round((got / total) * 100);
+    }
+
+    function updateUI(){
+      const pct = computeProgress();
+      pctEl.textContent = pct + "%";
+      fillEl.style.width = pct + "%";
+
+      laneChip.textContent = "Lane: " + (state.lane ? state.lane : "—");
+      statusEl.textContent = state.started ? (pct === 100 ? "Complete" : "In progress") : "Not started";
+
+      // lane buttons
+      document.querySelectorAll(".laneBtn").forEach(b=>{
+        b.classList.toggle("active", b.dataset.lane === state.lane);
+      });
+
+      // done badge
+      const complete = (pct === 100);
+      doneBadge.style.display = complete ? "inline-flex" : "none";
+      doneText.textContent = complete
+        ? "You’re cleared. Pick a task, ask “where,” ship a clean PR."
+        : "Finish steps above to hit 100%.";
+
+      // Update lane panel content
+      renderLanePanel(state.lane);
+    }
+
+    function toast(msg, kind="info"){
+      const t = document.getElementById("toast");
+      const m = document.getElementById("toastMsg");
+      const d = document.getElementById("toastDot");
+      m.textContent = msg;
+      d.style.background = (kind === "good") ? "var(--good)"
+        : (kind === "warn") ? "var(--warn)"
+        : (kind === "bad") ? "var(--bad)"
+        : "var(--a)";
+      t.classList.add("show");
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(()=>t.classList.remove("show"), 2200);
+    }
+    document.getElementById("toastX").addEventListener("click", ()=>document.getElementById("toast").classList.remove("show"));
+
+    async function copyText(text){
+      try{
+        await navigator.clipboard.writeText(text);
+        toast("Copied to clipboard.", "good");
+      }catch(e){
+        toast("Copy failed. Select text and copy manually.", "warn");
+      }
+    }
+
+    function scrollToFirst(){
+      const target = document.getElementById("lanes");
+      target?.scrollIntoView({behavior:"smooth", block:"start"});
+    }
+
+    // ---------- Lane panel ----------
+    const laneTitle = document.getElementById("laneTitle");
+    const laneExplain = document.getElementById("laneExplain");
+    const laneList = document.getElementById("laneList");
+
+    function renderLanePanel(lane){
+      laneList.innerHTML = "";
+      if(!lane){
+        laneTitle.textContent = "Lane: —";
+        laneExplain.textContent = "Choose a lane to see what’s safe, what requires review, and what’s restricted.";
+        return;
+      }
+      if(lane === "A"){
+        laneTitle.textContent = "Lane A — Safe + Fast";
+        laneExplain.textContent = "Best place to start. Move quickly. Keep changes small. Still document test notes.";
+        addList([
+          "UI tweaks, copy/marketing pages, docs",
+          "SVG packs / art assets",
+          "JSON pack data",
+          "Non-prod scripts",
+          "Ask: source-of-truth + how to verify in preview"
+        ]);
+      }else if(lane === "B"){
+        laneTitle.textContent = "Lane B — Medium Risk (review required)";
+        laneExplain.textContent = "Logic/tooling changes need guardrails. Expect review + test notes before merge.";
+        addList([
+          "App logic changes",
+          "Build tooling",
+          "Feature flags",
+          "Analytics integration",
+          "Performance refactors",
+          "Always include: test notes + rollback note (if applicable)"
+        ]);
+      }else if(lane === "C"){
+        laneTitle.textContent = "Lane C — High Risk (restricted)";
+        laneExplain.textContent = "You can advise/prototype/write plans—but final execution is controlled.";
+        addList([
+          "Infra, auth, secrets, networking, reverse proxy",
+          "Deployment pipelines",
+          "Data migrations / canonical DB writes",
+          "Never commit secrets to repos",
+          "If unsure: stop and ask for explicit direction"
+        ]);
+      }
+    }
+
+    function addList(items){
+      items.forEach(x=>{
+        const li = document.createElement("li");
+        li.textContent = x;
+        laneList.appendChild(li);
+      });
+    }
+
+    // ---------- Buttons ----------
+    document.getElementById("startBtn").addEventListener("click", ()=>{
+      state.started = true;
+      save();
+      toast("Mission started. Pick a lane.", "good");
+      scrollToFirst();
+    });
+
+    document.getElementById("resetBtn").addEventListener("click", ()=>{
+      if(!confirm("Reset onboarding progress?")) return;
+      localStorage.removeItem(KEY);
+      location.reload();
+    });
+
+    document.getElementById("copyPinBtn").addEventListener("click", ()=>{
+      copyText(document.getElementById("quickPin").textContent.trim());
+    });
+
+    document.getElementById("copyLinkBtn").addEventListener("click", ()=>{
+      copyText(location.href);
+    });
+
+    document.querySelectorAll(".laneBtn").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        state.lane = btn.dataset.lane;
+        save();
+        toast(`Lane ${state.lane} selected.`, "good");
+      });
+    });
+
+    document.getElementById("markLanesDone").addEventListener("click", ()=>{
+      if(!state.lane){
+        toast("Pick a lane first.", "warn");
+        return;
+      }
+      state.done.lane = true;
+      save();
+      toast("Lane locked in. ✅", "good");
+      document.getElementById("agreements").scrollIntoView({behavior:"smooth", block:"start"});
+    });
+
+    document.getElementById("markAgreementsDone").addEventListener("click", ()=>{
+      state.done.agreements = true;
+      save();
+      toast("Agreements acknowledged. ✅", "good");
+      document.getElementById("honest").scrollIntoView({behavior:"smooth", block:"start"});
+    });
+
+    document.getElementById("markHonestDone").addEventListener("click", ()=>{
+      state.done.honest = true;
+      save();
+      toast("Honest Helper ready. ✅", "good");
+      document.getElementById("dod").scrollIntoView({behavior:"smooth", block:"start"});
+    });
+
+    document.getElementById("markDoDDone").addEventListener("click", ()=>{
+      // Require at least the core 6 checks (first 6) to be checked
+      const checks = Array.from(document.querySelectorAll(".dchk"));
+      const core = checks.slice(0,6);
+      const ok = core.every(c=>c.checked);
+      if(!ok){
+        toast("Check the core DoD items first (top 6).", "warn");
+        return;
+      }
+      state.done.dod = true;
+      save();
+      toast("DoD confirmed. ✅", "good");
+      document.getElementById("download").scrollIntoView({behavior:"smooth", block:"start"});
+    });
+
+    document.getElementById("checkAllDod").addEventListener("click", ()=>{
+      document.querySelectorAll(".dchk").forEach(c=>c.checked=true);
+      toast("All items checked.", "good");
+    });
+
+    document.getElementById("markLinksDone").addEventListener("click", ()=>{
+      state.done.links = true;
+      save();
+      toast("You’re ready to contribute. ✅", "good");
+      window.scrollTo({top:0, behavior:"smooth"});
+    });
+
+    // ---------- Honest helper generators ----------
+    const takeMsgBox = document.getElementById("takeMsg");
+    document.getElementById("genTakeMsg").addEventListener("click", ()=>{
+      const task = (document.getElementById("taskName").value || "this task").trim();
+      const unk = (document.getElementById("unknowns").value || "a few parts of the stack").trim();
+      const need = document.getElementById("needWhat").value;
+      const tone = document.getElementById("tone").value;
+
+      let msg = "";
+      if(tone === "hype"){
+        msg =
+`Crew-ready — I can take on **${task}**.
+I’m not fully familiar with **${unk}** yet, so I want to do this the clean way:
+Can you point me to the **source-of-truth** and ${need}?`;
+      }else if(tone === "super_formal"){
+        msg =
+`I can assist with **${task}**.
+I am not yet fully familiar with **${unk}**. To proceed safely and efficiently, please provide the ${need}.`;
+      }else{
+        msg =
+`I can help with **${task}**.
+I’m not fully familiar with **${unk}** yet, but I can take it on if you point me to the ${need}.`;
+      }
+      takeMsgBox.textContent = msg;
+      toast("Message generated.", "good");
+    });
+
+    document.getElementById("copyTakeMsg").addEventListener("click", ()=>{
+      copyText(takeMsgBox.textContent.trim());
+    });
+
+    const blockedMsgBox = document.getElementById("blockedMsg");
+    document.getElementById("genBlockedMsg").addEventListener("click", ()=>{
+      const blockedOn = (document.getElementById("blockedOn").value || "").trim();
+      const tried = (document.getElementById("tried").value || "").trim();
+      const got = (document.getElementById("got").value || "").trim();
+      const nextGuess = (document.getElementById("nextGuess").value || "").trim();
+
+      const msg =
+`Blocked on: ${blockedOn || "(describe issue)"}
+
+Tried:
+${tried || "(steps you tried / commands / files)"}
+
+Got:
+${got || "(error / output / result)"}
+
+Next guess:
+${nextGuess || "(your best guess)"}
+
+Need from you:
+- Confirm the right direction OR point me to the correct file/repo (source of truth)
+- Any constraints (lane / safety boundaries / acceptance criteria)`;
+      blockedMsgBox.textContent = msg;
+      toast("Blocked message generated.", "good");
+    });
+
+    document.getElementById("copyBlockedMsg").addEventListener("click", ()=>{
+      copyText(blockedMsgBox.textContent.trim());
+    });
+
+// ---------- ByteCast Player ----------
+(function(){
+  const audio = document.getElementById("bytecastAudio");
+  const source = document.getElementById("bytecastSource");
+  const playBtn = document.getElementById("playPauseBtn");
+  const back10 = document.getElementById("back10Btn");
+  const fwd30 = document.getElementById("fwd30Btn");
+  const speedSel = document.getElementById("speedSel");
+  const seek = document.getElementById("seek");
+  const curTime = document.getElementById("curTime");
+  const durTime = document.getElementById("durTime");
+  const status = document.getElementById("audioStatus");
+  const audioUrl = document.getElementById("audioUrl");
+  const loadUrlBtn = document.getElementById("loadUrlBtn");
+  const useDefaultBtn = document.getElementById("useDefaultBtn");
+  const audioFile = document.getElementById("audioFile");
+  const downloadBtn = document.getElementById("downloadBtn");
+
+  if(!audio || !source) return;
+
+  function fmt(t){
+    if(!isFinite(t) || t < 0) return "00:00";
+    const m = Math.floor(t/60);
+    const s = Math.floor(t%60);
+    return String(m).padStart(2,"0") + ":" + String(s).padStart(2,"0");
+  }
+
+  function setStatus(text, kind="b"){
+    status.textContent = text;
+    status.className = "badge " + (kind || "b");
+  }
+
+  function setSrc(url, downloadable=true){
+    try { audio.pause(); } catch(e){}
+    audio.currentTime = 0;
+    source.src = url;
+    audio.load();
+
+    // download link
+    downloadBtn.href = url;
+    downloadBtn.style.display = downloadable ? "inline-flex" : "none";
+
+    // update status
+    setStatus("Loading…", "warn");
+  }
+
+  function updateSeek(){
+    if(!isFinite(audio.duration) || audio.duration <= 0) return;
+    const v = Math.round((audio.currentTime / audio.duration) * 1000);
+    seek.value = String(Math.max(0, Math.min(1000, v)));
+    curTime.textContent = fmt(audio.currentTime);
+    durTime.textContent = fmt(audio.duration);
+  }
+
+  function setPlayLabel(){
+    playBtn.textContent = audio.paused ? "▶ Play" : "⏸ Pause";
+  }
+
+  // Events
+  playBtn.addEventListener("click", async ()=>{
+    try{
+      if(audio.paused){
+        await audio.play();
+        setStatus("Playing", "good");
+      } else {
+        audio.pause();
+        setStatus("Paused", "b");
+      }
+      setPlayLabel();
+    }catch(e){
+      setStatus("Cannot play (check file/URL)", "bad");
+      toast("Audio play failed. Verify the AAC path or URL.", "warn");
+    }
+  });
+
+  back10.addEventListener("click", ()=>{
+    audio.currentTime = Math.max(0, (audio.currentTime || 0) - 10);
+    updateSeek();
+  });
+
+  fwd30.addEventListener("click", ()=>{
+    const d = audio.duration || 0;
+    audio.currentTime = Math.min(d ? d : (audio.currentTime + 30), (audio.currentTime || 0) + 30);
+    updateSeek();
+  });
+
+  speedSel.addEventListener("change", ()=>{
+    audio.playbackRate = parseFloat(speedSel.value || "1") || 1;
+    toast(`Speed set to ${audio.playbackRate}x`, "good");
+  });
+
+  seek.addEventListener("input", ()=>{
+    if(!isFinite(audio.duration) || audio.duration <= 0) return;
+    const pct = (parseInt(seek.value,10) || 0) / 1000;
+    audio.currentTime = pct * audio.duration;
+    updateSeek();
+  });
+
+  audio.addEventListener("timeupdate", updateSeek);
+  audio.addEventListener("loadedmetadata", ()=>{
+    durTime.textContent = fmt(audio.duration);
+    curTime.textContent = fmt(0);
+    seek.value = "0";
+    setStatus("Ready", "good");
+    setPlayLabel();
+  });
+  audio.addEventListener("pause", ()=>{
+    setPlayLabel();
+    if(audio.currentTime > 0) setStatus("Paused", "b");
+  });
+  audio.addEventListener("play", ()=>{
+    setPlayLabel();
+    setStatus("Playing", "good");
+  });
+  audio.addEventListener("ended", ()=>{
+    setPlayLabel();
+    setStatus("Finished", "good");
+  });
+  audio.addEventListener("error", ()=>{
+    setPlayLabel();
+    setStatus("Audio not found", "bad");
+  });
+
+  // Load from URL
+  loadUrlBtn.addEventListener("click", ()=>{
+    const url = (audioUrl.value || "").trim();
+    if(!url){
+      toast("Paste an AAC URL first (or use default).", "warn");
+      return;
+    }
+    setSrc(url, true);
+    toast("Loading AAC from URL…", "good");
+  });
+
+  // Use default bytecast.aac next to HTML
+  useDefaultBtn.addEventListener("click", ()=>{
+    setSrc("bytecast.aac", true);
+    toast("Using default bytecast.aac (same folder).", "good");
+  });
+
+  // Load local file
+  audioFile.addEventListener("change", ()=>{
+    const f = audioFile.files && audioFile.files[0];
+    if(!f) return;
+    const url = URL.createObjectURL(f);
+    setSrc(url, false); // object URLs can't be downloaded reliably via href
+    setStatus("Local file loaded", "good");
+    toast("Local AAC loaded.", "good");
+  });
+
+  // Default: try bytecast.aac
+  setSrc("bytecast.aac", true);
+  setPlayLabel();
+})();
+
+    // ---------- Init ----------
+    load();
+    updateUI();
+
+    // Nudge if not started
+    if(!state.started){
+      setTimeout(()=>toast("Hit “Start Mission” to begin onboarding.", "info"), 500);
+    }
+  </script>
+</body>
+</html>

@@ -97,3 +97,29 @@ Do not delete v1 usage until all active packs have been updated and a retirement
 2. Add a step entry in `data/journey_steps.json` pointing to the pack.
 3. In the pack, call `ByteCastLoop.markStepDone("<stepId>", meta)` at the moment completion is earned.
 4. Reload Playlist; the quest map should show the new step automatically.
+
+### Example: Apparel Ops Journey
+
+The `apparel_onboarding_v1` journey shows the full shell flow:
+
+- Listen → Slide → Engage across three AV Apparel ByteCasts:
+  - `episodes/av_apparel_ep1_welcome/index.html` (EP-APP-001)
+  - `episodes/av_apparel_ep2_catalog/index.html` (EP-APP-002)
+  - `episodes/av_apparel_ep3_ops_standards/index.html` (EP-APP-003)
+- Training:
+  - `apparel_practice_fix` (practice catalog clean-up anchored in `episodes/av_apparel/workflows.md`)
+  - `apparel_real_work_order` (real change request anchored in `episodes/av_apparel/onboarding.md`)
+- Seed:
+  - `apparel_seed_export` (Apparel-specific workflow Seed via Seed Orchard)
+- Badge:
+  - `apparel_ops_ready_v1` badge once all gates + practice + work order + seed are complete.
+
+Each ByteCast emits:
+
+```js
+ByteCastLoop.markStepDone("epapp1_listen", { episodeSlug: "av_apparel_ep1_welcome", episodeCode: "EP-APP-001", gate: "listen" });
+ByteCastLoop.markStepDone("epapp1_slide",  { episodeSlug: "av_apparel_ep1_welcome", episodeCode: "EP-APP-001", gate: "slide" });
+ByteCastLoop.markStepDone("epapp1_engage", { episodeSlug: "av_apparel_ep1_welcome", episodeCode: "EP-APP-001", gate: "engage" });
+```
+
+The journey config then uses `steps_all` rules (for example, `epapp1_gates`) to keep the Quest Map simple while still giving you per-gate visibility in storage.

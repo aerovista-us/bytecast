@@ -599,6 +599,7 @@
       const journeyId = journey?.id || Loop.getActiveJourneyId?.() || "";
 
       Loop.markStepDone("seed_publish_v1", {
+        journeyId,
         publishedUrl: url,
         publishedAt: new Date().toISOString(),
         seed: lastArtifact?.seed?.name || "",
@@ -847,6 +848,7 @@
         }
 
         Loop.markStepDone("seed_export_v1", {
+          journeyId,
           seed: lastArtifact.seed?.name || "",
           artifactName: zipName,
           artifactType: "zip",
@@ -928,13 +930,17 @@
           artifactHash = hashFallback(json);
         }
 
-        Loop.markStepDone("seed_export_v1", { ...metaBase, artifactHash });
-        loadJourney().then((journey) => {
-          if (!journey) return;
-          const wf2 = Loop.ensureWorkflowV2();
+        const journey = await loadJourney();
+        const journeyId = journey?.id || Loop.getActiveJourneyId?.() || "";
+
+        Loop.markStepDone("seed_export_v1", { journeyId, ...metaBase, artifactHash });
+
+        if (journey) {
+          const wf2 = Loop.ensureWorkflowV2(journeyId);
           const badgeResult = Loop.ensureJourneyBadges(journey, wf2);
           if (badgeResult?.minted || badgeResult?.marked) Loop.saveWorkflowV2?.(wf2, journey?.id || "");
-        });
+        }
+
         void refreshExportUI();
       })();
     } else {
