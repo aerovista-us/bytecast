@@ -14,6 +14,8 @@
   const publishedUrlInput = document.getElementById("publishedUrl");
   const markPublishedBtn = document.getElementById("markPublished");
   const publishNote = document.getElementById("publishNote");
+  const copyPublishUrlBtn = document.getElementById("copyPublishUrl");
+  const constraintsInput = document.getElementById("constraints");
 
   const Loop = window.ByteCastLoop || null;
   const LoopUI = window.ByteCastLoopUI || null;
@@ -616,6 +618,12 @@
   form.addEventListener("submit", (event) => {
     event.preventDefault();
 
+    const constraintsFn = window.__bytecastSeedConstraints;
+    const constraints =
+      typeof constraintsFn === "function"
+        ? constraintsFn()
+        : (constraintsInput?.value || "").trim();
+
     const data = {
       seedName: form.seedName.value.trim(),
       goal: form.goal.value.trim(),
@@ -650,12 +658,25 @@
         audience: data.audience,
         harvestSize: data.harvestSize,
         intensity: data.intensity,
+        constraints,
       },
       fruits,
     };
 
     void refreshExportUI();
   });
+
+  function getExportBaseName(defaultBase) {
+    try {
+      if (typeof window.__bytecastSeedExportName === "function") {
+        const custom = window.__bytecastSeedExportName();
+        if (custom && typeof custom === "string") return custom;
+      }
+    } catch {
+      // ignore and fall back
+    }
+    return defaultBase;
+  }
 
   exportZipBtn?.addEventListener("click", () => {
     if (!lastArtifact) return;
@@ -668,14 +689,22 @@
       return;
     }
 
-    const safeName = String(lastArtifact.seed?.name || "seed")
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "_")
-      .replace(/^_+|_+$/g, "")
-      .slice(0, 48) || "seed";
+    const safeName =
+      String(lastArtifact.seed?.name || "seed")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "_")
+        .replace(/^_+|_+$/g, "")
+        .slice(0, 48) || "seed";
 
-    const stamp = new Date().toISOString().replace(/[-:]/g, "").replace(/\..+$/, "");
-    const folder = `seed_${safeName}_${stamp}/`;
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, "0");
+    const dd = String(today.getDate()).padStart(2, "0");
+    const defaultBase = `seed_${safeName}__${yyyy}-${mm}-${dd}__${String(
+      lastArtifact.seed?.harvestSize || ""
+    ).trim() || "0"}fruits`;
+    const baseName = getExportBaseName(defaultBase);
+    const folder = `${baseName}/`;
 
     const enc = (s) => new TextEncoder().encode(String(s));
     const toHex = (buf) => Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, "0")).join("");
@@ -778,7 +807,7 @@
 
         const journey = Loop ? await loadJourney() : null;
         const journeyId = Loop ? (journey?.id || Loop.getActiveJourneyId?.() || "") : "";
-        const zipName = `${folder.replace(/\/$/, "")}.zip`;
+        const zipName = `${baseName}.zip`;
 
         const manifest = buildPackManifest({
           packFolder: folder,
@@ -847,13 +876,22 @@
 
   exportJsonBtn?.addEventListener("click", () => {
     if (!lastArtifact) return;
-    const safeName = String(lastArtifact.seed?.name || "seed")
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "_")
-      .replace(/^_+|_+$/g, "")
-      .slice(0, 48) || "seed";
+    const safeName =
+      String(lastArtifact.seed?.name || "seed")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "_")
+        .replace(/^_+|_+$/g, "")
+        .slice(0, 48) || "seed";
 
-    const filename = `${safeName}_artifact.json`;
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, "0");
+    const dd = String(today.getDate()).padStart(2, "0");
+    const defaultBase = `seed_${safeName}__${yyyy}-${mm}-${dd}__${String(
+      lastArtifact.seed?.harvestSize || ""
+    ).trim() || "0"}fruits`;
+    const baseName = getExportBaseName(defaultBase);
+    const filename = `${baseName}.json`;
     downloadJson(filename, lastArtifact);
 
     if (Loop) {
@@ -919,7 +957,48 @@
     if (!Loop) void refreshExportUI();
   });
 
+  copyPublishUrlBtn?.addEventListener("click", () => {
+    const value = (publishedUrlInput?.value || "").trim();
+    if (!value) {
+      if (publishNote) {
+        publishNote.textContent = "Nothing to copy yet. Paste or generate a Publish URL first.";
+      }
+      return;
+    }
+    (async () => {
+      try {
+        if (navigator.clipboard?.writeText) {
+          await navigator.clipboard.writeText(value);
+        } else {
+          const temp = document.createElement("textarea");
+          temp.value = value;
+          temp.setAttribute("readonly", "true");
+          temp.style.position = "absolute";
+          temp.style.left = "-9999px";
+          document.body.append(temp);
+          temp.select();
+          document.execCommand("copy");
+          temp.remove();
+        }
+        if (publishNote) publishNote.textContent = "Publish URL copied to clipboard.";
+      } catch {
+        if (publishNote) {
+          publishNote.textContent = "Copy failed. You can still select and copy the field manually.";
+        }
+      }
+    })();
+  });
+
   intensityInput.addEventListener("input", setIntensityLabel);
   setIntensityLabel();
+
+  if (window.initSeedTemplates) {
+    try {
+      window.initSeedTemplates();
+    } catch (err) {
+      console.warn("[Seed Orchard] initSeedTemplates failed:", err);
+    }
+  }
+
   void refreshExportUI();
 })();

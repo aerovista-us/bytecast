@@ -1,0 +1,189 @@
+{
+    "version": "1.0.0",
+    "domain": "apparel",
+    "title": "AV Apparel Contributor Seeds",
+    "description": "Templates for catalog maintenance, pricing, copy, collections, QA, and merch UX.",
+    "roles": [
+      { "id": "maintainer", "label": "Catalog Maintainer", "defaultHarvestSize": 5 },
+      { "id": "pricing", "label": "Pricing Maintainer", "defaultHarvestSize": 4 },
+      { "id": "copy", "label": "Copy + Naming", "defaultHarvestSize": 4 },
+      { "id": "collections", "label": "Collections Curator", "defaultHarvestSize": 5 },
+      { "id": "qa", "label": "QA", "defaultHarvestSize": 4 },
+      { "id": "dropops", "label": "Drop Operator", "defaultHarvestSize": 5 },
+      { "id": "frontend", "label": "Frontend Helper", "defaultHarvestSize": 4 },
+      { "id": "lead", "label": "Maintainer Lead", "defaultHarvestSize": 3 }
+    ],
+    "harvestOutputsStandard": [
+      {
+        "id": "rooting_intent",
+        "label": "Rooting intent",
+        "description": "What matters, constraints, and definition of done."
+      },
+      {
+        "id": "action_checklist",
+        "label": "Action checklist",
+        "description": "Step-by-step actions contributor will take."
+      },
+      {
+        "id": "change_set",
+        "label": "Change set",
+        "description": "Exactly what fields/files to edit and what to verify."
+      },
+      {
+        "id": "qa_script",
+        "label": "QA script",
+        "description": "How to test the storefront like a customer."
+      },
+      {
+        "id": "proof_payload",
+        "label": "Proof payload",
+        "description": "What to attach to Mark Published: URLs, screenshots, diffs, notes."
+      }
+    ],
+    "templates": [
+      {
+        "id": "catalog_hygiene_sweep",
+        "seedName": "Catalog Hygiene Sweep",
+        "coreGoal": "Identify and fix the top 10 trust-killers across listings.",
+        "audience": "Catalog Maintainer",
+        "roleId": "maintainer",
+        "suggestedHarvestSize": 5,
+        "suggestedIntensity": "Balanced growth",
+        "defaultConstraints": "No pricing changes unless explicitly approved.",
+        "recommendedOutputs": ["rooting_intent", "action_checklist", "change_set", "qa_script", "proof_payload"],
+        "tags": ["catalog", "cleanup", "consistency", "trust"]
+      },
+      {
+        "id": "pricing_drift_audit",
+        "seedName": "Pricing Drift Audit",
+        "coreGoal": "Detect pricing inconsistencies and flag underwater items.",
+        "audience": "Pricing Maintainer",
+        "roleId": "pricing",
+        "suggestedHarvestSize": 4,
+        "suggestedIntensity": "Balanced growth",
+        "defaultConstraints": "Report + propose changes; do not publish price changes without approval.",
+        "recommendedOutputs": ["rooting_intent", "action_checklist", "change_set", "qa_script", "proof_payload"],
+        "tags": ["pricing", "audit", "margin", "drift"]
+      },
+      {
+        "id": "add_product_safely",
+        "seedName": "Add Product Safely",
+        "coreGoal": "Add a new product end-to-end without breaking collections or variants.",
+        "audience": "Catalog Maintainer",
+        "roleId": "maintainer",
+        "suggestedHarvestSize": 5,
+        "suggestedIntensity": "Balanced growth",
+        "defaultConstraints": "Add only one product/variant family. Do not touch existing pricing ladders.",
+        "recommendedOutputs": ["rooting_intent", "action_checklist", "change_set", "qa_script", "proof_payload"],
+        "tags": ["catalog", "add", "variants", "collections"]
+      },
+      {
+        "id": "remove_product_without_orphans",
+        "seedName": "Remove Product Without Orphans",
+        "coreGoal": "Remove/retire products and ensure no broken collections, links, or featured sections.",
+        "audience": "Catalog Maintainer",
+        "roleId": "maintainer",
+        "suggestedHarvestSize": 4,
+        "suggestedIntensity": "Balanced growth",
+        "defaultConstraints": "Remove only items marked retired/out-of-stock. Verify no orphaned collection tiles.",
+        "recommendedOutputs": ["rooting_intent", "action_checklist", "change_set", "qa_script", "proof_payload"],
+        "tags": ["catalog", "remove", "orphan-check", "stability"]
+      },
+      {
+        "id": "variant_sanity_pass",
+        "seedName": "Variant Sanity Pass",
+        "coreGoal": "Normalize sizes/colors/images so cart behavior matches expectations.",
+        "audience": "QA + Maintainer",
+        "roleId": "qa",
+        "suggestedHarvestSize": 4,
+        "suggestedIntensity": "Balanced growth",
+        "defaultConstraints": "No new variants. Only fix mismatches and missing assets.",
+        "recommendedOutputs": ["rooting_intent", "action_checklist", "change_set", "qa_script", "proof_payload"],
+        "tags": ["variants", "qa", "cart", "images"]
+      },
+      {
+        "id": "collection_curation_refresh",
+        "seedName": "Collection Curation Refresh",
+        "coreGoal": "Rebuild collections so the store feels curated (Core / Drops / Seasonal).",
+        "audience": "Collections Curator",
+        "roleId": "collections",
+        "suggestedHarvestSize": 5,
+        "suggestedIntensity": "Balanced growth",
+        "defaultConstraints": "Do not change product prices. Only rearrange and tag/collect.",
+        "recommendedOutputs": ["rooting_intent", "action_checklist", "change_set", "qa_script", "proof_payload"],
+        "tags": ["collections", "curation", "navigation", "discoverability"]
+      },
+      {
+        "id": "copy_upgrade_sprint",
+        "seedName": "Copy Upgrade Sprint",
+        "coreGoal": "Rewrite product descriptions to match AV voice and improve conversion.",
+        "audience": "Copy + Naming",
+        "roleId": "copy",
+        "suggestedHarvestSize": 4,
+        "suggestedIntensity": "Balanced growth",
+        "defaultConstraints": "Do not change pricing or variants. Keep descriptions short and consistent.",
+        "recommendedOutputs": ["rooting_intent", "action_checklist", "change_set", "qa_script", "proof_payload"],
+        "tags": ["copy", "conversion", "voice", "consistency"]
+      },
+      {
+        "id": "title_tag_standardization",
+        "seedName": "Title + Tag Standardization",
+        "coreGoal": "Enforce naming format + tagging taxonomy across a selected set of products.",
+        "audience": "Copy + Maintainer",
+        "roleId": "copy",
+        "suggestedHarvestSize": 3,
+        "suggestedIntensity": "Balanced growth",
+        "defaultConstraints": "Only touch titles/tags. No pricing. Verify search + filters still make sense.",
+        "recommendedOutputs": ["rooting_intent", "action_checklist", "change_set", "qa_script", "proof_payload"],
+        "tags": ["titles", "tags", "taxonomy", "search"]
+      },
+      {
+        "id": "image_consistency_pass",
+        "seedName": "Image Consistency Pass",
+        "coreGoal": "Ensure thumbnails and galleries match the correct design/color/variant.",
+        "audience": "QA",
+        "roleId": "qa",
+        "suggestedHarvestSize": 4,
+        "suggestedIntensity": "Balanced growth",
+        "defaultConstraints": "No copy/pricing changes. Only image fixes and missing asset repair.",
+        "recommendedOutputs": ["rooting_intent", "action_checklist", "change_set", "qa_script", "proof_payload"],
+        "tags": ["images", "thumbnails", "qa", "trust"]
+      },
+      {
+        "id": "drop_readiness_checklist",
+        "seedName": "Drop Readiness Checklist",
+        "coreGoal": "Prepare a drop page: products, ordering, pricing ladder, and QA gates.",
+        "audience": "Drop Operator",
+        "roleId": "dropops",
+        "suggestedHarvestSize": 5,
+        "suggestedIntensity": "Balanced growth",
+        "defaultConstraints": "Limit to one drop. Ensure featured placement + rollback notes.",
+        "recommendedOutputs": ["rooting_intent", "action_checklist", "change_set", "qa_script", "proof_payload"],
+        "tags": ["drop", "launch", "featured", "qa"]
+      },
+      {
+        "id": "site_navigation_merch_ux",
+        "seedName": "Merch UX Pass",
+        "coreGoal": "Improve browse flow: featured, filters, sorting, empty-states, and trust signals.",
+        "audience": "Frontend Helper",
+        "roleId": "frontend",
+        "suggestedHarvestSize": 4,
+        "suggestedIntensity": "Balanced growth",
+        "defaultConstraints": "No catalog edits unless paired with a maintainer. Keep changes small and reversible.",
+        "recommendedOutputs": ["rooting_intent", "action_checklist", "change_set", "qa_script", "proof_payload"],
+        "tags": ["ux", "navigation", "filters", "frontend"]
+      },
+      {
+        "id": "weekly_store_health_report",
+        "seedName": "Weekly Store Health Report",
+        "coreGoal": "Generate a weekly snapshot: changes, issues found, fixes made, risks.",
+        "audience": "Maintainer Lead",
+        "roleId": "lead",
+        "suggestedHarvestSize": 3,
+        "suggestedIntensity": "Balanced growth",
+        "defaultConstraints": "Report only unless explicitly asked to publish fixes.",
+        "recommendedOutputs": ["rooting_intent", "action_checklist", "change_set", "qa_script", "proof_payload"],
+        "tags": ["report", "health", "audit", "ops"]
+      }
+    ]
+  }

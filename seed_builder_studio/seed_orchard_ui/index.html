@@ -39,6 +39,21 @@
     <section class="panel input-panel" aria-label="Plant your seed">
       <h2>Plant</h2>
       <form id="seedForm" class="seed-form">
+        <div class="row">
+          <label>
+            Role preset
+            <select id="rolePreset" name="rolePreset">
+              <option value="">All roles</option>
+            </select>
+          </label>
+          <label>
+            Template
+            <select id="templatePicker" name="templatePicker">
+              <option value="">Choose a template…</option>
+            </select>
+          </label>
+        </div>
+
         <label>
           Seed Name
           <input id="seedName" name="seedName" type="text" maxlength="60" placeholder="Example: ByteCast Growth Engine" required />
@@ -70,6 +85,12 @@
           <input id="intensity" name="intensity" type="range" min="1" max="5" value="3" />
           <span id="intensityLabel" class="hint">Balanced growth</span>
         </label>
+
+        <label>
+          Constraints (optional)
+          <textarea id="constraints" name="constraints" rows="2" maxlength="240" placeholder="Example: No price changes • Only hoodies • Only remove out-of-stock"></textarea>
+        </label>
+        <p id="outputsHint" class="hint">Standard harvest: rooting intent • action checklist • change set • QA script • proof payload.</p>
 
         <button type="submit" class="plant-btn">Plant Seed</button>
       </form>
@@ -104,6 +125,11 @@
         </div>
         <p id="publishNote" class="hint" style="margin-top:10px;">Publish is required to mint the Golden Path badge. This records a URL proof payload.</p>
         <p id="exportNote" class="hint">Export creates a small artifact and marks your Seed step complete for the active journey.</p>
+        <div class="harvest-actions__row" style="margin-top:10px; gap:10px; flex-wrap:wrap;">
+          <a id="openWorkOrder" class="action-btn secondary" href="../../contributor.onboarding/docs/WORK_ORDERS_TEMPLATE.md" target="_blank" rel="noopener noreferrer">Open Work Order Template</a>
+          <a id="openPrTemplate" class="action-btn secondary" href="../../contributor.onboarding/docs/.github/PULL_REQUEST_TEMPLATE.md" target="_blank" rel="noopener noreferrer">Open PR Template</a>
+          <button id="copyPublishUrl" type="button" class="action-btn secondary">Copy Publish URL</button>
+        </div>
       </div>
     </section>
   </main>
@@ -124,6 +150,7 @@
   <script src="../../assets/shared/bytecast_loop.js"></script>
   <script src="../../assets/shared/bytecast_loop_ui.js"></script>
   <script src="../../vendor/fflate.min.js"></script>
+  <script src="../seed_templates_loader.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
