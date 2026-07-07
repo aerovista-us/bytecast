@@ -1,0 +1,95 @@
+<script>
+  // Existing expand/collapse + nav code should already be here.
+  // Append this after it:
+
+  (function () {
+    const nowTitle = document.getElementById("nowPlayingTitle");
+    const nowEp = document.getElementById("nowPlayingEpisode");
+    const nowDur = document.getElementById("nowPlayingDuration");
+    const shareLinkBtn = document.getElementById("shareLinkBtn");
+    const shareEmailBtn = document.getElementById("shareEmailBtn");
+
+    let currentAnchor = null;
+
+    // Helper: update Now Playing from an episode card
+    function setNowPlayingFromCard(card) {
+      const epIdEl = card.querySelector(".ep-id");
+      const titleEl = card.querySelector(".ep-title");
+      const timeEl = card.querySelector(".audio-time");
+
+      if (!epIdEl || !titleEl) return;
+
+      const epId = epIdEl.textContent.trim();
+      const epTitle = titleEl.textContent.trim();
+      const duration = timeEl ? timeEl.textContent.trim() : "–:––";
+
+      nowTitle.textContent = epTitle;
+      nowEp.textContent = epId + " · BYTECAST Season One";
+      nowDur.textContent = duration;
+
+      // Anchor link target for sharing
+      const group = card.closest(".episode-group");
+      if (group && group.id) {
+        currentAnchor = "#" + group.id;
+      } else if (card.id) {
+        currentAnchor = "#" + card.id;
+      } else {
+        currentAnchor = null;
+      }
+    }
+
+    // When an episode card itself (not the play button) is clicked
+    document.querySelectorAll(".episode-card").forEach(card => {
+      card.addEventListener("click", function (e) {
+        // ignore clicks that are play buttons (handled separately)
+        if (e.target.closest(".play-toggle")) return;
+        setNowPlayingFromCard(card);
+      });
+    });
+
+    // When any in-episode play button is clicked, also update Now Playing
+    document.querySelectorAll(".episode-card .play-toggle").forEach(btn => {
+      btn.addEventListener("click", function (e) {
+        const card = e.target.closest(".episode-card");
+        if (card) setNowPlayingFromCard(card);
+      });
+    });
+
+    // Simple share helpers
+    function copyToClipboard(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).catch(() => {});
+      } else {
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand("copy"); } catch (err) {}
+        document.body.removeChild(ta);
+      }
+    }
+
+    shareLinkBtn.addEventListener("click", () => {
+      const base = window.location.href.split("#")[0];
+      const link = currentAnchor ? base + currentAnchor : base;
+      copyToClipboard(link);
+      shareLinkBtn.textContent = "Link copied";
+      setTimeout(() => (shareLinkBtn.textContent = "Copy link"), 1500);
+    });
+
+    shareEmailBtn.addEventListener("click", () => {
+      const base = window.location.href.split("#")[0];
+      const link = currentAnchor ? base + currentAnchor : base;
+      const subject = encodeURIComponent("BYTECAST episode for review");
+      const body = encodeURIComponent(
+        `Here’s a BYTECAST episode that captures current context:\n\n` +
+        `${nowTitle.textContent} (${nowEp.textContent})\n${link}\n\n` +
+        `Use this for: team alignment, shareholder context, or onboarding.`
+      );
+      const emailBlurb = `Subject: ${decodeURIComponent(subject)}\n\n${decodeURIComponent(body)}`;
+      copyToClipboard(emailBlurb);
+      shareEmailBtn.textContent = "Blurb copied";
+      setTimeout(() => (shareEmailBtn.textContent = "Copy email blurb"), 1500);
+    });
+  })();
+</script>

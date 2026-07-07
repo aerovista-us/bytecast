@@ -1,0 +1,2072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EchoStory — BYTECAST Season One</title>
+  <style>
+    :root {
+      --bg: #0a0e1a;
+      --bg-elevated: #131827;
+      --bg-elevated-soft: #1a1f2e;
+      --bg-elevated-strong: #1f2535;
+      --accent: #8b5cf6;
+      --accent-soft: rgba(139, 92, 246, 0.15);
+      --accent-strong: #c4b5fd;
+      --accent-glow: rgba(139, 92, 246, 0.4);
+      --success: #10b981;
+      --success-glow: rgba(16, 185, 129, 0.3);
+      --text-main: #f8fafc;
+      --text-soft: #94a3b8;
+      --text-muted: #64748b;
+      --border-subtle: rgba(148, 163, 184, 0.2);
+      --border-medium: rgba(148, 163, 184, 0.3);
+      --audio-track: rgba(148, 163, 184, 0.25);
+      --audio-fill: #8b5cf6;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.5);
+      --shadow-glow: 0 0 32px rgba(139, 92, 246, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", "SF Pro Display", system-ui, sans-serif;
+      background: 
+        radial-gradient(ellipse at top, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at bottom right, rgba(16, 185, 129, 0.05) 0%, transparent 50%),
+        linear-gradient(180deg, #0a0e1a 0%, #050711 50%, #000000 100%);
+      background-attachment: fixed;
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Layout */
+    .layout {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      .sidebar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+      }
+    }
+
+    /* Animated Header / Sidebar */
+    .sidebar {
+      background: linear-gradient(180deg, rgba(19, 24, 39, 0.95) 0%, rgba(10, 14, 26, 0.98) 100%);
+      border-right: 1px solid var(--border-subtle);
+      padding: 2rem 1.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      position: relative;
+      overflow: hidden;
+      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
+    }
+
+    .sidebar::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(124, 58, 237, 0.09), transparent 60%),
+        radial-gradient(circle at 80% 20%, rgba(56, 189, 248, 0.08), transparent 55%),
+        radial-gradient(circle at 50% 90%, rgba(248, 250, 252, 0.02), transparent 60%);
+      opacity: 0.9;
+      mix-blend-mode: screen;
+      animation: floatGlow 26s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    @keyframes floatGlow {
+      0% { transform: translate3d(-8px, 0, 0) scale(1); }
+      50% { transform: translate3d(8px, -6px, 0) scale(1.03); }
+      100% { transform: translate3d(-4px, 4px, 0) scale(1.01); }
+    }
+
+    .sidebar-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      height: 100%;
+    }
+
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-orbit {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(circle at 30% 0%, rgba(148, 163, 255, 0.4), transparent 55%), #020617;
+    }
+
+    .brand-orbit::after {
+      content: "";
+      position: absolute;
+      width: 120%;
+      height: 120%;
+      border-radius: inherit;
+      border-top: 1px solid rgba(248, 250, 252, 0.45);
+      border-left: 1px solid rgba(148, 163, 255, 0.35);
+      border-right: 1px solid transparent;
+      border-bottom: 1px solid transparent;
+      transform: rotate(-24deg);
+      opacity: 0.85;
+    }
+
+    .brand-initials {
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .brand-text h1 {
+      margin: 0;
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .brand-text p {
+      margin: 0.25rem 0 0;
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .series-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      padding: 0.35rem 0.75rem;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      font-size: 0.75rem;
+      color: var(--text-soft);
+    }
+
+    .series-pill span.dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
+    }
+
+    .sidebar-section-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-soft);
+      margin-bottom: 0.35rem;
+    }
+
+    .nav-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .nav-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-soft);
+      margin-top: 0.75rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .nav-item {
+      border-radius: 0.625rem;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.875rem;
+      color: var(--text-soft);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid transparent;
+    }
+
+    .nav-item span.code {
+      font-size: 0.76rem;
+      opacity: 0.7;
+    }
+
+    .nav-item:hover {
+      background: rgba(26, 31, 46, 0.8);
+      color: var(--text-main);
+      transform: translateX(2px);
+      border-color: var(--border-subtle);
+    }
+
+    .nav-item.active {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(139, 92, 246, 0.08) 100%);
+      color: var(--accent-strong);
+      border-color: var(--accent);
+      box-shadow: 0 2px 8px rgba(139, 92, 246, 0.15);
+    }
+
+    .sidebar-footer {
+      margin-top: auto;
+      font-size: 0.75rem;
+      color: var(--text-soft);
+      border-top: 1px solid rgba(15, 23, 42, 0.9);
+      padding-top: 1rem;
+    }
+
+    /* Main content */
+    .main {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .hero {
+      padding: 2rem 2.5rem 1.75rem;
+      border-bottom: 1px solid var(--border-subtle);
+      background: linear-gradient(180deg, rgba(19, 24, 39, 0.95) 0%, rgba(10, 14, 26, 0.85) 100%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      backdrop-filter: blur(24px) saturate(180%);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        padding: 1rem 1.25rem 1.1rem;
+      }
+    }
+
+    .hero-topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-title-block h2 {
+      margin: 0 0 0.35rem;
+      font-size: 1.6rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, var(--text-main) 0%, var(--text-soft) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-title-block p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--text-soft);
+    }
+
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: var(--text-soft);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .tag.accent {
+      border-color: rgba(123, 92, 255, 0.7);
+      color: var(--accent-strong);
+      background: rgba(123, 92, 255, 0.16);
+    }
+
+    .episode-list {
+      padding: 2rem 2.5rem 3rem;
+      max-width: 1000px;
+    }
+
+    @media (max-width: 900px) {
+      .episode-list {
+        padding: 1.25rem 1.25rem 2rem;
+      }
+    }
+
+    .episode-group {
+      margin-bottom: 2rem;
+    }
+
+    .group-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      font-weight: 600;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .episode-card {
+      background: linear-gradient(135deg, var(--bg-elevated) 0%, var(--bg-elevated-soft) 100%);
+      border-radius: 1rem;
+      border: 1px solid var(--border-subtle);
+      padding: 1.25rem 1.5rem 1.15rem;
+      margin-bottom: 1rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .episode-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .episode-card:hover {
+      border-color: var(--border-medium);
+      box-shadow: var(--shadow-md), var(--shadow-glow);
+      transform: translateY(-2px);
+      background: linear-gradient(135deg, var(--bg-elevated-soft) 0%, var(--bg-elevated-strong) 100%);
+    }
+
+    .episode-card:hover::before {
+      opacity: 1;
+    }
+
+    .episode-header-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .ep-id {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .ep-title {
+      margin: 0.2rem 0 0.3rem;
+      font-size: 1.1rem;
+      font-weight: 500;
+      line-height: 1.4;
+      letter-spacing: -0.01em;
+    }
+
+    .ep-subline {
+      margin: 0;
+      font-size: 0.86rem;
+      color: var(--text-soft);
+    }
+
+    .chevron {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      color: var(--text-soft);
+      background: rgba(15, 23, 42, 0.9);
+      flex-shrink: 0;
+      transition: transform 0.16s ease, background 0.16s ease;
+    }
+
+    .episode-card.expanded .chevron {
+      transform: rotate(90deg);
+      background: rgba(123, 92, 255, 0.2);
+    }
+
+    .episode-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.26s ease;
+    }
+
+    .episode-card.expanded .episode-body {
+      max-height: 460px; /* enough for text preview */
+    }
+
+    .body-inner {
+      border-top: 1px solid rgba(148, 163, 184, 0.25);
+      margin-top: 0.5rem;
+      padding-top: 0.6rem;
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    .ep-summary {
+      font-size: 0.88rem;
+      color: var(--text-soft);
+      line-height: 1.5;
+    }
+
+    /* Audio Player */
+    .audio-player {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.85rem 1rem;
+      border-radius: 0.875rem;
+      background: linear-gradient(135deg, rgba(19, 24, 39, 0.8) 0%, rgba(26, 31, 46, 0.9) 100%);
+      border: 1px solid var(--border-subtle);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+    }
+
+    .audio-player:hover {
+      border-color: var(--border-medium);
+      box-shadow: var(--shadow-md);
+    }
+
+    .play-toggle {
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--accent) 0%, #7c3aed 100%);
+      color: white;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+      flex-shrink: 0;
+    }
+
+    .play-toggle:hover {
+      background: linear-gradient(135deg, #9d6ff8 0%, #8b5cf6 100%);
+      transform: scale(1.08);
+      box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4);
+    }
+
+    .play-toggle:active {
+      transform: scale(0.96);
+    }
+
+    .play-toggle:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .audio-meta {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.16rem;
+    }
+
+    .audio-title {
+      font-size: 0.85rem;
+      color: var(--text-main);
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    .audio-track {
+      position: relative;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--audio-track);
+      overflow: hidden;
+      cursor: pointer;
+      transition: height 0.2s ease, background 0.2s ease;
+    }
+
+    .audio-track:hover {
+      height: 8px;
+      background: rgba(148, 163, 184, 0.35);
+    }
+
+    .audio-progress {
+      position: absolute;
+      inset: 0;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent) 0%, #a78bfa 50%, var(--success) 100%);
+      transition: width 0.1s linear;
+      box-shadow: 0 0 8px rgba(139, 92, 246, 0.5);
+    }
+
+    .audio-time {
+      font-size: 0.72rem;
+      color: var(--text-soft);
+      text-align: right;
+      min-width: 70px;
+    }
+
+    .ep-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.15rem;
+    }
+
+    .ep-tag {
+      font-size: 0.72rem;
+      padding: 0.15rem 0.45rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--text-soft);
+    }
+
+    .ep-tag.focus {
+      border-color: rgba(123, 92, 255, 0.8);
+      color: var(--accent-strong);
+      background: rgba(123, 92, 255, 0.12);
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 1.25rem 2.25rem 1.75rem;
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      border-top: 1px solid rgba(15, 23, 42, 0.9);
+    }
+
+    @media (max-width: 900px) {
+      footer {
+        padding: 1rem 1.25rem 1.5rem;
+      }
+    }
+
+    /* Now Playing bar */
+    .now-playing-bar {
+      position: fixed;
+      inset-inline: 0;
+      bottom: 0;
+      z-index: 30;
+      display: flex;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .now-playing-inner {
+      pointer-events: auto;
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 1rem 1rem;
+      padding: 1rem 1.25rem;
+      border-radius: 1rem;
+      background: linear-gradient(135deg, rgba(19, 24, 39, 0.98) 0%, rgba(26, 31, 46, 0.95) 100%);
+      border: 1px solid var(--border-medium);
+      box-shadow: var(--shadow-lg), 0 0 0 1px rgba(139, 92, 246, 0.1);
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 1rem;
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      backdrop-filter: blur(24px) saturate(180%);
+    }
+
+    .now-playing-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #9ca3af;
+    }
+
+    .now-playing-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+      line-height: 1.4;
+      letter-spacing: -0.01em;
+    }
+
+    .now-playing-episode {
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
+
+    .now-playing-main {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .now-playing-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.25rem;
+    }
+
+    .share-row {
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .share-label {
+      font-size: 0.75rem;
+      color: #9ca3af;
+    }
+
+    .share-btn {
+      font-size: 0.75rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-medium);
+      background: rgba(19, 24, 39, 0.8);
+      color: var(--text-soft);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-weight: 500;
+    }
+
+    .share-btn:hover {
+      background: rgba(26, 31, 46, 0.9);
+      border-color: var(--accent);
+      color: var(--text-main);
+      transform: translateY(-1px);
+    }
+
+    .share-btn.primary {
+      border-color: var(--accent);
+      color: var(--accent-strong);
+      background: rgba(139, 92, 246, 0.1);
+    }
+
+    .share-btn.primary:hover {
+      background: rgba(139, 92, 246, 0.15);
+      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+    }
+
+    /* Visual state management for playing episodes */
+    .episode-card.playing {
+      border-color: var(--accent);
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.12) 0%, var(--bg-elevated-soft) 100%);
+      box-shadow: var(--shadow-md), 0 0 0 1px rgba(139, 92, 246, 0.3), var(--shadow-glow);
+      transform: translateY(-1px);
+    }
+
+    .episode-card.playing::before {
+      opacity: 1;
+    }
+
+    .episode-card.playing .play-toggle {
+      background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+    }
+
+    .episode-card.playing .play-toggle:hover {
+      background: linear-gradient(135deg, #34d399 0%, var(--success) 100%);
+      box-shadow: 0 6px 16px rgba(16, 185, 129, 0.5);
+    }
+
+    .episode-card.loading .play-toggle {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    .episode-card.loading .play-toggle::after {
+      content: '';
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-inner">
+        <div class="brand-lockup">
+          <div class="brand-orbit">
+            <div class="brand-initials">ES</div>
+          </div>
+          <div class="brand-text">
+            <h1>EchoStory Engine</h1>
+            <p>BYTECAST • Season One</p>
+          </div>
+        </div>
+
+        <div>
+          <div class="series-pill">
+            <span class="dot"></span>
+            <span>Series status: In active build</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="sidebar-section-title">Navigate Episodes</div>
+
+          <div class="nav-label">Origin Arc</div>
+          <ul class="nav-list">
+            <li class="nav-item active" data-target="ep-01">
+              <span>EP 01 — Why We&apos;re Building</span>
+              <span class="code">01</span>
+            </li>
+            <li class="nav-item" data-target="ep-1-1"><span>EP 1.1 — System Weight</span><span class="code">1.1</span></li>
+            <li class="nav-item" data-target="ep-1-2"><span>EP 1.2 — First Inventory</span><span class="code">1.2</span></li>
+            <li class="nav-item" data-target="ep-1-3"><span>EP 1.3 — One Voice</span><span class="code">1.3</span></li>
+            <li class="nav-item" data-target="ep-1-4"><span>EP 1.4 — Reporting as Story</span><span class="code">1.4</span></li>
+            <li class="nav-item" data-target="ep-1-5"><span>EP 1.5 — Split the Giant File</span><span class="code">1.5</span></li>
+            <li class="nav-item" data-target="ep-1-6"><span>EP 1.6 — Self-Protecting System</span><span class="code">1.6</span></li>
+            <li class="nav-item" data-target="ep-1-7"><span>EP 1.7 — Mapping Connections</span><span class="code">1.7</span></li>
+            <li class="nav-item" data-target="ep-1-8"><span>EP 1.8 — From Fixing to Designing</span><span class="code">1.8</span></li>
+            <li class="nav-item" data-target="ep-1-9"><span>EP 1.9 — More Than a Project</span><span class="code">1.9</span></li>
+          </ul>
+
+          <div class="nav-label">Structure Arc</div>
+          <ul class="nav-list">
+            <li class="nav-item" data-target="ep-02"><span>EP 02 — From Scatter to Structure</span><span class="code">02</span></li>
+            <li class="nav-item" data-target="ep-2-1"><span>EP 2.1 — Clarifying the Build</span><span class="code">2.1</span></li>
+            <li class="nav-item" data-target="ep-2-2"><span>EP 2.2 — Roles & Ownership</span><span class="code">2.2</span></li>
+            <li class="nav-item" data-target="ep-2-3"><span>EP 2.3 — Templates in Motion</span><span class="code">2.3</span></li>
+            <li class="nav-item" data-target="ep-2-4"><span>EP 2.4 — Filesystem with Intention</span><span class="code">2.4</span></li>
+            <li class="nav-item" data-target="ep-2-5"><span>EP 2.5 — Repeatable Flows</span><span class="code">2.5</span></li>
+            <li class="nav-item" data-target="ep-2-6"><span>EP 2.6 — Trust by Design</span><span class="code">2.6</span></li>
+            <li class="nav-item" data-target="ep-2-7"><span>EP 2.7 — Aggregators & Links</span><span class="code">2.7</span></li>
+            <li class="nav-item" data-target="ep-2-8"><span>EP 2.8 — Metrics that Matter</span><span class="code">2.8</span></li>
+            <li class="nav-item" data-target="ep-2-9"><span>EP 2.9 — Ready for Season One</span><span class="code">2.9</span></li>
+          </ul>
+
+          <div class="nav-label">State of the Build</div>
+          <ul class="nav-list">
+            <li class="nav-item" data-target="ep-03"><span>EP 03 — Big Picture & What&apos;s Next</span><span class="code">03</span></li>
+          </ul>
+
+          <div class="nav-label">Bonus</div>
+          <ul class="nav-list">
+            <li class="nav-item" data-target="bonus"><span>Behind the Build</span><span class="code">BONUS</span></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-footer">
+          EchoStory is the narrative layer of AeroVista — capturing not just what we built, but why it matters.
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section class="hero">
+        <div class="hero-topline">
+          <div class="hero-title-block">
+            <h2>BYTECAST • Season One</h2>
+            <p>From the first question of "Why build our own?" to a fully aligned ecosystem with a clear future.</p>
+          </div>
+          <div class="hero-meta">
+            <span class="tag accent">EchoStory Series</span>
+            <span class="tag">Episodes: 3 + 18 minis</span>
+            <span class="tag">Format: Narrative · Audio-ready</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="episode-list" id="episode-list">
+        <!-- ORIGIN ARC -->
+        <div class="episode-group" id="ep-01">
+          <div class="group-label">Origin Arc · Why This Exists</div>
+
+          <!-- EP 01 -->
+          <article class="episode-card expanded" data-episode="EP 01" data-audio="audio/ep1.mp3">
+            <div class="episode-header-row">
+              <div>
+                <div class="ep-id">EP 01</div>
+                <h3 class="ep-title">Why We&apos;re Building AeroVista</h3>
+                <p class="ep-subline">The origin story: why building our own systems matters in a world increasingly run by invisible automation.</p>
+              </div>
+              <div class="chevron">▶</div>
+            </div>
+            <div class="episode-body">
+              <div class="body-inner">
+                <div class="audio-player">
+                  <button class="play-toggle" aria-label="Play episode" type="button">▶</button>
+                  <div class="audio-meta">
+                    <div class="audio-title">BYTECAST EP 01 — Why We&apos;re Building AeroVista</div>
+                    <div class="audio-track" role="slider" aria-label="Audio progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                      <div class="audio-progress" aria-hidden="true"></div>
+                    </div>
+                  </div>
+                  <div class="audio-time" aria-live="polite">08:24</div>
+                </div>
+                <p class="ep-summary">
+                  This episode sets the stage for everything that follows. It explains the shift happening in the world — where more and more decisions are being made by systems we don&apos;t control — and makes the case for why AeroVista exists as a deliberate alternative. Instead of accepting opaque platforms and one-size-fits-all automation, we commit to building tools, workflows, and creative spaces that keep humans at the center.
+                </p>
+                <div class="ep-tags">
+                  <span class="ep-tag focus">Why it matters</span>
+                  <span class="ep-tag">Parallel infrastructure</span>
+                  <span class="ep-tag">Human in the loop</span>
+                  <span class="ep-tag">Origin story</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- EP 1.1 - 1.9 MINIS -->
+          <article class="episode-card" id="ep-1-1" data-episode="EP 1.1" data-audio="audio/ep1.1.mp3">
+            <div class="episode-header-row">
+              <div>
+                <div class="ep-id">EP 1.1</div>
+                <h3 class="ep-title">When We Realized the System Was Working Against Us</h3>
+                <p class="ep-subline">The first honest look at where the friction really lived.</p>
+              </div>
+              <div class="chevron">▶</div>
+            </div>
+            <div class="episode-body">
+              <div class="body-inner">
+                <div class="audio-player">
+                  <button class="play-toggle" aria-label="Play episode">▶</button>
+                  <div class="audio-meta">
+                    <div class="audio-title">EP 1.1 — System Weight</div>
+                    <div class="audio-track" role="slider" aria-label="Audio progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><div class="audio-progress" aria-hidden="true"></div></div>
+                  </div>
+                  <div class="audio-time">03:02</div>
+                </div>
+                <p class="ep-summary">
+                  This mini-episode marks the moment we separated the work from the weight. The ideas were strong, the intent was clear, but the way everything was wired together made even simple changes feel heavy. EP 1.1 captures that turning point where we stopped blaming effort and started questioning structure.
+                </p>
+                <div class="ep-tags">
+                  <span class="ep-tag focus">Friction</span>
+                  <span class="ep-tag">Honest assessment</span>
+                  <span class="ep-tag">Pre-cleanup insight</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="episode-card" id="ep-1-2" data-episode="EP 1.2" data-audio="audio/ep1.2.mp3">
+            <div class="episode-header-row">
+              <div>
+                <div class="ep-id">EP 1.2</div>
+                <h3 class="ep-title">The First True Inventory of the Build</h3>
+                <p class="ep-subline">Seeing the full landscape for the first time.</p>
+              </div>
+              <div class="chevron">▶</div>
+            </div>
+            <div class="episode-body">
+              <div class="body-inner">
+                <div class="audio-player">
+                  <button class="play-toggle" aria-label="Play episode">▶</button>
+                  <div class="audio-meta">
+                    <div class="audio-title">EP 1.2 — First Inventory</div>
+                    <div class="audio-track" role="slider" aria-label="Audio progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><div class="audio-progress" aria-hidden="true"></div></div>
+                  </div>
+                  <div class="audio-time">02:47</div>
+                </div>
+                <p class="ep-summary">
+                  In EP 1.2, we stop guessing and start counting. This episode walks through the first deep inventory of the ecosystem — what existed, what repeated, what was fragile, and what was quietly brilliant. It&apos;s the moment we discovered we weren&apos;t starting from scratch at all; we were standing on top of a rich, if disorganized, foundation.
+                </p>
+                <div class="ep-tags">
+                  <span class="ep-tag focus">Visibility</span>
+                  <span class="ep-tag">System audit</span>
+                  <span class="ep-tag">Hidden strengths</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="episode-card" id="ep-1-3" data-episode="EP 1.3" data-audio="audio/ep1.3.mp3">
+            <div class="episode-header-row">
+              <div>
+                <div class="ep-id">EP 1.3</div>
+                <h3 class="ep-title">Choosing One Voice for the System</h3>
+                <p class="ep-subline">From many formats and styles to a single, coherent language.</p>
+              </div>
+              <div class="chevron">▶</div>
+            </div>
+            <div class="episode-body">
+              <div class="body-inner">
+                <div class="audio-player">
+                  <button class="play-toggle" aria-label="Play episode">▶</button>
+                  <div class="audio-meta">
+                    <div class="audio-title">EP 1.3 — One Voice</div>
+                    <div class="audio-track" role="slider" aria-label="Audio progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><div class="audio-progress" aria-hidden="true"></div></div>
+                  </div>
+                  <div class="audio-time">03:15</div>
+                </div>
+                <p class="ep-summary">
+                  This episode covers the decision to standardize. Not to constrain creativity, but to give everyone — and every tool — a common language. Templates, naming patterns, and a single source of truth turned a patchwork of content into something predictable, maintainable, and far easier to scale.
+                </p>
+                <div class="ep-tags">
+                  <span class="ep-tag focus">Standardization</span>
+                  <span class="ep-tag">Single source of truth</span>
+                  <span class="ep-tag">System language</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- For brevity, remaining 1.4 - 1.9 cards follow the same pattern with distinct copy -->
+
+          <article class="episode-card" id="ep-1-4" data-episode="EP 1.4" data-audio="audio/ep1.4.mp3">
+            <div class="episode-header-row">
+              <div>
+                <div class="ep-id">EP 1.4</div>
+                <h3 class="ep-title">When Reporting Turned into Storytelling</h3>
+                <p class="ep-subline">EODs, EOWs, and EOMs become the narrative spine of the build.</p>
+              </div>
+              <div class="chevron">▶</div>
+            </div>
+            <div class="episode-body">
+              <div class="body-inner">
+                <div class="audio-player">
+                  <button class="play-toggle" aria-label="Play episode">▶</button>
+                  <div class="audio-meta">
+                    <div class="audio-title">EP 1.4 — Reporting as Story</div>
+                    <div class="audio-track" role="slider" aria-label="Audio progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><div class="audio-progress" aria-hidden="true"></div></div>
+                  </div>
+                  <div class="audio-time">03:41</div>
+                </div>
+                <p class="ep-summary">
+                  EP 1.4 captures the moment reports stopped being chores and started becoming chapters. Instead of just logging activity, we began telling the story of the ecosystem as it evolved. That shift turned documentation into alignment — and made it possible for everyone to understand not just what changed, but why.
+                </p>
+                <div class="ep-tags">
+                  <span class="ep-tag focus">Narrative reporting</span>
+                  <span class="ep-tag">Team alignment</span>
+                  <span class="ep-tag">Memory system</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="episode-card" id="ep-1-5" data-episode="EP 1.5" data-audio="audio/ep1.5.mp3">
+            <div class="episode-header-row">
+              <div>
+                <div class="ep-id">EP 1.5</div>
+                <h3 class="ep-title">The Day One File Stopped Doing All the Work</h3>
+                <p class="ep-subline">Retiring the overloaded giant and letting the architecture breathe.</p>
+              </div>
+              <div class="chevron">▶</div>
+            </div>
+            <div class="episode-body">
+              <div class="body-inner">
+                <div class="audio-player">
+                  <button class="play-toggle" aria-label="Play episode">▶</button>
+                  <div class="audio-meta">
+                    <div class="audio-title">EP 1.5 — Split the Giant File</div>
+                    <div class="audio-track" role="slider" aria-label="Audio progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><div class="audio-progress" aria-hidden="true"></div></div>
+                  </div>
+                  <div class="audio-time">03:08</div>
+                </div>
+                <p class="ep-summary">
+                  In EP 1.5, we talk through the decision to break apart the monolithic HTML file that had quietly become responsible for everything. By separating content, layout, and logic, the system became easier to reason about and far less fragile. This is the episode where the architecture finally gets room to stretch.
+                </p>
+                <div class="ep-tags">
+                  <span class="ep-tag focus">Refactor moment</span>
+                  <span class="ep-tag">Architecture clarity</span>
+                  <span class="ep-tag">Maintainability</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="episode-card" id="ep-1-6" data-episode="EP 1.6" data-audio="audio/ep1.6.mp3">
+            <div class="episode-header-row">
+              <div>
+                <div class="ep-id">EP 1.6</div>
+                <h3 class="ep-title">The Spark Behind a Self-Protecting System</h3>
+                <p class="ep-subline">From hero work to built-in safeguards.</p>
+              </div>
+              <div class="chevron">▶</div>
+            </div>
+            <div class="episode-body">
+              <div class="body-inner">
+                <div class="audio-player">
+                  <button class="play-toggle" aria-label="Play episode">▶</button>
+                  <div class="audio-meta">
+                    <div class="audio-title">EP 1.6 — Self-Protecting System</div>
+                    <div class="audio-track" role="slider" aria-label="Audio progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><div class="audio-progress" aria-hidden="true"></div></div>
+                  </div>
+                  <div class="audio-time">02:58</div>
+                </div>
+                <p class="ep-summary">
+                  This mini-episode explores the moment we decided the system itself should help guard against errors. Backups before changes, validation, rollbacks, and logs weren&apos;t just nice-to-haves — they became part of how trust gets built into the infrastructure layer.
+                </p>
+                <div class="ep-tags">
+                  <span class="ep-tag focus">Resilience</span>
+                  <span class="ep-tag">Safety nets</span>
+                  <span class="ep-tag">Operational trust</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="episode-card" id="ep-1-7" data-episode="EP 1.7" data-audio="audio/ep1.7.mp3">
+            <div class="episode-header-row">
+              <div>
+                <div class="ep-id">EP 1.7</div>
+                <h3 class="ep-title">Seeing AeroVista as a Network, Not a List</h3>
+                <p class="ep-subline">When the ecosystem revealed its web of connections.</p>
+              </div>
+              <div class="chevron">▶</div>
+            </div>
+            <div class="episode-body">
+              <div class="body-inner">
+                <div class="audio-player">
+                  <button class="play-toggle" aria-label="Play episode">▶</button>
+                  <div class="audio-meta">
+                    <div class="audio-title">EP 1.7 — Mapping Connections</div>
+                    <div class="audio-track" role="slider" aria-label="Audio progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><div class="audio-progress" aria-hidden="true"></div></div>
+                  </div>
+                  <div class="audio-time">03:26</div>
+                </div>
+                <p class="ep-summary">
+                  EP 1.7 documents the moment when AeroVista stopped looking like a list of initiatives and started looking like a true network. We trace how music influences branding, how reporting shapes decisions, and how each division feeds the others — turning isolated projects into an interdependent world.
+                </p>
+                <div class="ep-tags">
+                  <span class="ep-tag focus">System thinking</span>
+                  <span class="ep-tag">Interconnectedness</span>
+                  <span class="ep-tag">Ecosystem view</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="episode-card" id="ep-1-8" data-episode="EP 1.8" data-audio="audio/ep1.8.mp3">
+            <div class="episode-header-row">
+              <div>
+                <div class="ep-id">EP 1.8</div>
+                <h3 class="ep-title">Shifting from Fixing Problems to Designing Futures</h3>
+                <p class="ep-subline">Decisions made with tomorrow firmly in view.</p>
+              </div>
+              <div class="chevron">▶</div>
+            </div>
+            <div class="episode-body">
+              <div class="body-inner">
+                <div class="audio-player">
+                  <button class="play-toggle" aria-label="Play episode">▶</button>
+                  <div class="audio-meta">
+                    <div class="audio-title">EP 1.8 — From Fixing to Designing</div>
+                    <div class="audio-track" role="slider" aria-label="Audio progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><div class="audio-progress" aria-hidden="true"></div></div>
+                  </div>
+                  <div class="audio-time">03:05</div>
+                </div>
+                <p class="ep-summary">
+                  In this episode, we move from reactive patching to proactive design. Every change starts carrying a second question: what does this unlock later? It&apos;s the mindset pivot that turns the ecosystem from something we&apos;re constantly repairing into something we&apos;re confidently evolving.
+                </p>
+                <div class="ep-tags">
+                  <span class="ep-tag focus">Foresight</span>
+                  <span class="ep-tag">Design thinking</span>
+                  <span class="ep-tag">Future-ready</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="episode-card" id="ep-1-9" data-episode="EP 1.9" data-audio="audio/ep1.9.mp3">
+            <div class="episode-header-row">
+              <div>
+                <div class="ep-id">EP 1.9</div>
+                <h3 class="ep-title">When AeroVista Became More Than a Project</h3>
+                <p class="ep-subline">The moment the system could finally carry some of its own weight.</p>
+              </div>
+              <div class="chevron">▶</div>
+            </div>
+            <div class="episode-body">
+              <div class="body-inner">
+                <div class="audio-player">
+                  <button class="play-toggle" aria-label="Play episode">▶</button>
+                  <div class="audio-meta">
+                    <div class="audio-title">EP 1.9 — More Than a Project</div>
+                    <div class="audio-track" role="slider" aria-label="Audio progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><div class="audio-progress" aria-hidden="true"></div></div>
+                  </div>
+                  <div class="audio-time">02:52</div>
+                </div>
+                <p class="ep-summary">
+                  EP 1.9 marks the quiet but powerful milestone where AeroVista stopped depending on constant manual correction and started functioning as a self-sustaining ecosystem. Not finished, not flawless — but finally strong enough to support new growth without buckling.
+                </p>
+                <div class="ep-tags">
+                  <span class="ep-tag focus">Threshold moment</span>
+                  <span class="ep-tag">Self-sustaining</span>
+                  <span class="ep-tag">Pre-structure plateau</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- STRUCTURE ARC -->
+        <div class="episode-group" id="ep-02">
+          <div class="group-label">Structure Arc · From Scatter to System</div>
+
+          <article class="episode-card" data-episode="EP 02" data-audio="audio/ep2.mp3">
+            <div class="episode-header-row">
+              <div>
+                <div class="ep-id">EP 02</div>
+                <h3 class="ep-title">From Scatter to Structure</h3>
+                <p class="ep-subline">How the Organization & Update Workflow Strategy turned chaos into a modular, trustworthy engine.</p>
+              </div>
+              <div class="chevron">▶</div>
+            </div>
+            <div class="episode-body">
+              <div class="body-inner">
+                <div class="audio-player">
+                  <button class="play-toggle" aria-label="Play episode">▶</button>
+                  <div class="audio-meta">
+                    <div class="audio-title">EP 02 — From Scatter to Structure</div>
+                    <div class="audio-track" role="slider" aria-label="Audio progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><div class="audio-progress" aria-hidden="true"></div></div>
+                  </div>
+                  <div class="audio-time">09:12</div>
+                </div>
+                <p class="ep-summary">
+                  This core episode walks through the consolidation of workflows, content structures, and update paths. We move from ad-hoc edits and fragile pages into a system of clear ownership, templates, automated checks, and safe rollbacks – the architecture of trust that supports everything else.
+                </p>
+                <div class="ep-tags">
+                  <span class="ep-tag focus">Architecture of trust</span>
+                  <span class="ep-tag">Workflow strategy</span>
+                  <span class="ep-tag">Modular structure</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- EP 2.1–2.9 mini-episodes (high-level stubs, can be deepened later) -->
+          <article class="episode-card" id="ep-2-1" data-episode="EP 2.1" data-audio="audio/ep2.1.mp3">
+            <div class="episode-header-row">
+              <div>
+                <div class="ep-id">EP 2.1</div>
+                <h3 class="ep-title">Clarifying the Build Surface</h3>
+                <p class="ep-subline">Defining exactly what the system is responsible for — and what it isn&apos;t.</p>
+              </div>
+              <div class="chevron">▶</div>
+            </div>
+            <div class="episode-body">
+              <div class="body-inner">
+                <div class="audio-player">
+                  <button class="play-toggle">▶</button>
+                  <div class="audio-meta">
+                    <div class="audio-title">EP 2.1 — Clarifying the Build</div>
+                    <div class="audio-track" role="slider" aria-label="Audio progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><div class="audio-progress" aria-hidden="true"></div></div>
+                  </div>
+                  <div class="audio-time">02:59</div>
+                </div>
+                <p class="ep-summary">
+                  EP 2.1 documents the moment we drew a clean outline around what the system needed to own: reports, content, flows, and automation boundaries. By clarifying that surface, every later decision snapped into sharper focus.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="episode-card" id="ep-2-2" data-episode="EP 2.2" data-audio="audio/ep2.2.mp3">
+            <div class="episode-header-row">
+              <div>
+                <div class="ep-id">EP 2.2</div>
+                <h3 class="ep-title">Roles, Ownership, and Rhythm</h3>
+                <p class="ep-subline">Who touches what, and how often.</p>
+              </div>
+              <div class="chevron">▶</div>
+            </div>
+            <div class="episode-body">
+              <div class="body-inner">
+                <div class="audio-player">
+                  <button class="play-toggle">▶</button>
+                  <div class="audio-meta">
+                    <div class="audio-title">EP 2.2 — Roles & Ownership</div>
+                    <div class="audio-track" role="slider" aria-label="Audio progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><div class="audio-progress" aria-hidden="true"></div></div>
+                  </div>
+                  <div class="audio-time">03:12</div>
+                </div>
+                <p class="ep-summary">
+                  In this mini-episode we set expectations around cadence and responsibility: daily, weekly, and monthly touchpoints, and who is accountable for each piece. It&apos;s the difference between &quot;someone should update this&quot; and &quot;this always gets updated here, by this person, on this schedule.&quot;
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="episode-card" id="ep-2-3" data-episode="EP 2.3" data-audio="audio/ep2.3.mp3">
+            <div class="episode-header-row">
+              <div>
+                <div class="ep-id">EP 2.3</div>
+                <h3 class="ep-title">Templates That Move as Fast as the Work</h3>
+                <p class="ep-subline">How shared patterns turned one-off updates into simple repetitions.</p>
+              </div>
+              <div class="chevron">▶</div>
+            </div>
+            <div class="episode-body">
+              <div class="body-inner">
+                <div class="audio-player">
+                  <button class="play-toggle">▶</button>
+                  <div class="audio-meta">
+                    <div class="audio-title">EP 2.3 — Templates in Motion</div>
+                    <div class="audio-track" role="slider" aria-label="Audio progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><div class="audio-progress" aria-hidden="true"></div></div>
+                  </div>
+                  <div class="audio-time">02:46</div>
+                </div>
+                <p class="ep-summary">
+                  EP 2.3 focuses on the moment templates stopped being theoretical and started actually driving content. Status sections, next steps, and summaries all began from shared patterns — massively reducing decision fatigue and inconsistency.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="episode-card" id="ep-2-4" data-episode="EP 2.4" data-audio="audio/ep2.4.mp3">
+            <div class="episode-header-row">
+              <div>
+                <div class="ep-id">EP 2.4</div>
+                <h3 class="ep-title">A Filesystem with a Point of View</h3>
+                <p class="ep-subline">Putting every doc, script, and page where it actually belongs.</p>
+              </div>
+              <div class="chevron">▶</div>
+            </div>
+            <div class="episode-body">
+              <div class="body-inner">
+                <div class="audio-player">
+                  <button class="play-toggle">▶</button>
+                  <div class="audio-meta">
+                    <div class="audio-title">EP 2.4 — Filesystem with Intention</div>
+                    <div class="audio-track" role="slider" aria-label="Audio progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><div class="audio-progress" aria-hidden="true"></div></div>
+                  </div>
+                  <div class="audio-time">03:04</div>
+                </div>
+                <p class="ep-summary">
+                  This episode recounts the cleanup that gave us /docs, /analysis, /scripts, and /pages — and why that simple separation changed how fast we can move.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="episode-card" id="ep-2-5" data-episode="EP 2.5" data-audio="audio/ep2.5.mp3">
+            <div class="episode-header-row">
+              <div>
+                <div class="ep-id">EP 2.5</div>
+                <h3 class="ep-title">Repeatable Flows Instead of One-Off Heroics</h3>
+                <p class="ep-subline">Flows for adding, updating, summarizing, and archiving.</p>
+              </div>
+              <div class="chevron">▶</div>
+            </div>
+            <div class="episode-body">
+              <div class="body-inner">
+                <div class="audio-player">
+                  <button class="play-toggle">▶</button>
+                  <div class="audio-meta">
+                    <div class="audio-title">EP 2.5 — Repeatable Flows</div>
+                    <div class="audio-track" role="slider" aria-label="Audio progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><div class="audio-progress" aria-hidden="true"></div></div>
+                  </div>
+                  <div class="audio-time">03:21</div>
+                </div>
+                <p class="ep-summary">
+                  EP 2.5 describes the move away from ad-hoc steps into defined flows: how new resources come in, how summaries are generated, and how changes are safely captured.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="episode-card" id="ep-2-6" data-episode="EP 2.6" data-audio="audio/ep2.6.mp3">
+            <div class="episode-header-row">
+              <div>
+                <div class="ep-id">EP 2.6</div>
+                <h3 class="ep-title">Trust as a Feature, Not a Feeling</h3>
+                <p class="ep-subline">Why backups, rollbacks, and logs became non-negotiable.</p>
+              </div>
+              <div class="chevron">▶</div>
+            </div>
+            <div class="episode-body">
+              <div class="body-inner">
+                <div class="audio-player">
+                  <button class="play-toggle">▶</button>
+                  <div class="audio-meta">
+                    <div class="audio-title">EP 2.6 — Trust by Design</div>
+                    <div class="audio-track" role="slider" aria-label="Audio progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><div class="audio-progress" aria-hidden="true"></div></div>
+                  </div>
+                  <div class="audio-time">02:53</div>
+                </div>
+                <p class="ep-summary">
+                  This mini-episode is about treating reliability as a product requirement. The outcome: a system that doesn&apos;t just work on good days, but defends itself on bad ones.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="episode-card" id="ep-2-7" data-episode="EP 2.7" data-audio="audio/ep2.7.mp3">
+            <div class="episode-header-row">
+              <div>
+                <div class="ep-id">EP 2.7</div>
+                <h3 class="ep-title">Aggregators and Cross-Links</h3>
+                <p class="ep-subline">How the system began to pull its own threads together.</p>
+              </div>
+              <div class="chevron">▶</div>
+            </div>
+            <div class="episode-body">
+              <div class="body-inner">
+                <div class="audio-player">
+                  <button class="play-toggle">▶</button>
+                  <div class="audio-meta">
+                    <div class="audio-title">EP 2.7 — Aggregators & Links</div>
+                    <div class="audio-track" role="slider" aria-label="Audio progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><div class="audio-progress" aria-hidden="true"></div></div>
+                  </div>
+                  <div class="audio-time">03:09</div>
+                </div>
+                <p class="ep-summary">
+                  EP 2.7 follows the emergence of aggregators — components that gather &quot;Next Steps,&quot; related sections, and cross references to make the ecosystem feel connected instead of fragmented.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="episode-card" id="ep-2-8" data-episode="EP 2.8" data-audio="audio/ep2.8.mp3">
+            <div class="episode-header-row">
+              <div>
+                <div class="ep-id">EP 2.8</div>
+                <h3 class="ep-title">When Progress Became Measurable</h3>
+                <p class="ep-subline">Tracking update time, duplication, and coverage like real metrics.</p>
+              </div>
+              <div class="chevron">▶</div>
+            </div>
+            <div class="episode-body">
+              <div class="body-inner">
+                <div class="audio-player">
+                  <button class="play-toggle">▶</button>
+                  <div class="audio-meta">
+                    <div class="audio-title">EP 2.8 — Metrics that Matter</div>
+                    <div class="audio-track" role="slider" aria-label="Audio progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><div class="audio-progress" aria-hidden="true"></div></div>
+                  </div>
+                  <div class="audio-time">02:44</div>
+                </div>
+                <p class="ep-summary">
+                  This episode talks about making success visible: how long updates take, how often we duplicate content, how complete our docs are. Once we could see those numbers, we could intentionally improve them.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="episode-card" id="ep-2-9" data-episode="EP 2.9" data-audio="audio/ep2.9.mp3">
+            <div class="episode-header-row">
+              <div>
+                <div class="ep-id">EP 2.9</div>
+                <h3 class="ep-title">Ready for a Season Worth Documenting</h3>
+                <p class="ep-subline">The last checkpoint before the big-picture storyline of EP 03.</p>
+              </div>
+              <div class="chevron">▶</div>
+            </div>
+            <div class="episode-body">
+              <div class="body-inner">
+                <div class="audio-player">
+                  <button class="play-toggle">▶</button>
+                  <div class="audio-meta">
+                    <div class="audio-title">EP 2.9 — Ready for Season One</div>
+                    <div class="audio-track" role="slider" aria-label="Audio progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><div class="audio-progress" aria-hidden="true"></div></div>
+                  </div>
+                  <div class="audio-time">02:51</div>
+                </div>
+                <p class="ep-summary">
+                  EP 2.9 is the breathing space before EP 03 — the point where the system is structured, reliable, and expressive enough to support a full narrative season about what AeroVista has become.
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- STATE OF THE BUILD ARC -->
+        <div class="episode-group" id="ep-03">
+          <div class="group-label">State of the Build · Big Picture</div>
+
+          <article class="episode-card" data-episode="EP 03">
+            <div class="episode-header-row">
+              <div>
+                <div class="ep-id">EP 03</div>
+                <h3 class="ep-title">The Big Picture: What We&apos;ve Built, Why It Matters, and What&apos;s Next</h3>
+                <p class="ep-subline">A plain-language overview of AeroVista as it stands today — foundation, direction, and what people will feel next.</p>
+              </div>
+              <div class="chevron">▶</div>
+            </div>
+            <div class="episode-body">
+              <div class="body-inner">
+                <div class="audio-player" data-audio="audio/ep3.pt1.mp3">
+                  <button class="play-toggle" aria-label="Play episode part 1">▶</button>
+                  <div class="audio-meta">
+                    <div class="audio-title">EP 03 — Part 1: Big Picture & What&apos;s Next</div>
+                    <div class="audio-track" role="slider" aria-label="Audio progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><div class="audio-progress" aria-hidden="true"></div></div>
+                  </div>
+                  <div class="audio-time">–:––</div>
+                </div>
+                <div class="audio-player" data-audio="audio/ep3.pt2.mp3" style="margin-top: 0.75rem;">
+                  <button class="play-toggle" aria-label="Play episode part 2">▶</button>
+                  <div class="audio-meta">
+                    <div class="audio-title">EP 03 — Part 2: Big Picture & What&apos;s Next</div>
+                    <div class="audio-track" role="slider" aria-label="Audio progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><div class="audio-progress" aria-hidden="true"></div></div>
+                  </div>
+                  <div class="audio-time">–:––</div>
+                </div>
+                <p class="ep-summary">
+                  This episode pulls together everything built so far — from infrastructure and divisions to music, tools, and reporting — and explains in everyday language why it all matters. It focuses on what team members, partners, and end users will actually notice as AeroVista moves from internal buildout into lived experience.
+                </p>
+                <div class="ep-tags">
+                  <span class="ep-tag focus">Big picture</span>
+                  <span class="ep-tag">User experience</span>
+                  <span class="ep-tag">Forward-looking</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- BONUS CONTENT -->
+        <div class="episode-group" id="bonus">
+          <div class="group-label">Bonus Content</div>
+
+          <article class="episode-card" data-episode="BONUS" data-audio="audio/behind_the_build.mp3">
+            <div class="episode-header-row">
+              <div>
+                <div class="ep-id">BONUS</div>
+                <h3 class="ep-title">Behind the Build</h3>
+                <p class="ep-subline">A special track from the AeroVista creative ecosystem.</p>
+              </div>
+              <div class="chevron">▶</div>
+            </div>
+            <div class="episode-body">
+              <div class="body-inner">
+                <div class="audio-player">
+                  <button class="play-toggle" aria-label="Play episode" type="button">▶</button>
+                  <div class="audio-meta">
+                    <div class="audio-title">Behind the Build</div>
+                    <div class="audio-track" role="slider" aria-label="Audio progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                      <div class="audio-progress" aria-hidden="true"></div>
+                    </div>
+                  </div>
+                  <div class="audio-time" aria-live="polite">–:––</div>
+                </div>
+                <p class="ep-summary">
+                  A bonus track from the AeroVista creative ecosystem.
+                </p>
+                <div class="ep-tags">
+                  <span class="ep-tag focus">Bonus</span>
+                  <span class="ep-tag">Music</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <footer>
+        EchoStory · BYTECAST Season One · Designed for listening, reflection, and alignment — across the entire AeroVista ecosystem.
+      </footer>
+    </main>
+  </div>
+
+  <div class="now-playing-bar" id="nowPlayingBar">
+    <div class="now-playing-inner">
+      <button class="play-toggle" id="nowPlayingToggle" aria-label="Play / pause">
+        ▶
+      </button>
+
+      <div class="now-playing-main">
+        <div class="now-playing-label">Now Playing</div>
+        <div class="now-playing-title" id="nowPlayingTitle">
+          Select an episode to start listening
+        </div>
+        <div class="now-playing-episode" id="nowPlayingEpisode">
+          BYTECAST · Season One
+        </div>
+      </div>
+
+      <div class="now-playing-actions">
+        <div class="share-row">
+          <span class="share-label">Share this episode:</span>
+          <button class="share-btn primary" id="shareLinkBtn">Copy link</button>
+          <button class="share-btn" id="shareEmailBtn">Copy email blurb</button>
+        </div>
+        <div class="audio-time" id="nowPlayingDuration">–:––</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Dynamic card expand / collapse
+    document.querySelectorAll('.episode-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        // Avoid toggling when directly clicking play button
+        if ((e.target).closest && (e.target).closest('.play-toggle')) {
+          return;
+        }
+        card.classList.toggle('expanded');
+      });
+    });
+
+    // Sidebar navigation scroll + active state
+    const navItems = document.querySelectorAll('.nav-item');
+    const groups = document.querySelectorAll('.episode-group');
+
+    navItems.forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const targetId = item.getAttribute('data-target');
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        navItems.forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+      });
+    });
+
+    // Audio Player Module
+    (function() {
+      // Core Audio Management
+      const audio = new Audio();
+      audio.preload = 'metadata';
+      let currentEpisodeCard = null;
+      let currentAudioPlayer = null;
+      let currentAudioSrc = null;
+      let isPlaying = false;
+      let isLoading = false;
+      let isSeeking = false;
+
+      // DOM Elements
+      const nowTitle = document.getElementById('nowPlayingTitle');
+      const nowEp = document.getElementById('nowPlayingEpisode');
+      const nowDur = document.getElementById('nowPlayingDuration');
+      const nowPlayingToggle = document.getElementById('nowPlayingToggle');
+      const shareLinkBtn = document.getElementById('shareLinkBtn');
+      const shareEmailBtn = document.getElementById('shareEmailBtn');
+      let currentAnchor = null;
+
+      // Time Formatting Utility
+      function formatTime(seconds) {
+        if (!isFinite(seconds) || isNaN(seconds)) return '–:––';
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
+      }
+
+      // Update Now Playing bar from episode card
+      function setNowPlayingFromCard(card, audioPlayer) {
+        const epIdEl = card.querySelector('.ep-id');
+        const titleEl = card.querySelector('.ep-title');
+        
+        // If audioPlayer is provided, use its title instead of card title
+        let audioTitleEl = null;
+        let timeEl = null;
+        if (audioPlayer) {
+          audioTitleEl = audioPlayer.querySelector('.audio-title');
+          timeEl = audioPlayer.querySelector('.audio-time');
+        } else {
+          timeEl = card.querySelector('.audio-time');
+        }
+
+        if (!epIdEl || !titleEl) return;
+
+        const epId = epIdEl.textContent.trim();
+        // Use audio player title if available, otherwise use card title
+        const epTitle = audioTitleEl ? audioTitleEl.textContent.trim() : titleEl.textContent.trim();
+        const duration = timeEl ? timeEl.textContent.trim() : '–:––';
+
+        if (nowTitle) nowTitle.textContent = epTitle;
+        if (nowEp) nowEp.textContent = epId + ' · BYTECAST Season One';
+        if (nowDur) nowDur.textContent = duration;
+
+        // Anchor link target for sharing
+        const group = card.closest('.episode-group');
+        if (group && group.id) {
+          currentAnchor = '#' + group.id;
+        } else if (card.id) {
+          currentAnchor = '#' + card.id;
+        } else {
+          currentAnchor = null;
+        }
+      }
+
+      // Load audio from source
+      function loadAudio(audioSrc) {
+        return new Promise((resolve, reject) => {
+          // If already loaded and ready, resolve immediately
+          // readyState: 0=HAVE_NOTHING, 1=HAVE_METADATA, 2=HAVE_CURRENT_DATA, 3=HAVE_FUTURE_DATA, 4=HAVE_ENOUGH_DATA
+          if (currentAudioSrc === audioSrc && audio.src && audio.readyState >= 2) {
+            resolve(); // Already loaded and ready
+            return;
+          }
+          
+          isLoading = true;
+          if (currentEpisodeCard) {
+            currentEpisodeCard.classList.add('loading');
+          }
+          
+          // Set up one-time event listeners
+          const cleanup = () => {
+            audio.removeEventListener('canplay', onCanPlay);
+            audio.removeEventListener('canplaythrough', onCanPlayThrough);
+            audio.removeEventListener('error', onError);
+          };
+          
+          const removeLoading = () => {
+            isLoading = false;
+            if (currentEpisodeCard) {
+              currentEpisodeCard.classList.remove('loading');
+            }
+          };
+          
+          const onCanPlay = () => {
+            cleanup();
+            removeLoading();
+            resolve();
+          };
+          
+          const onCanPlayThrough = () => {
+            // Also handle canplaythrough for better reliability
+            cleanup();
+            removeLoading();
+            resolve();
+          };
+          
+          const onError = (e) => {
+            cleanup();
+            removeLoading();
+            reject(e);
+          };
+          
+          audio.addEventListener('canplay', onCanPlay, { once: true });
+          audio.addEventListener('canplaythrough', onCanPlayThrough, { once: true });
+          audio.addEventListener('error', onError, { once: true });
+          
+          audio.src = audioSrc;
+          currentAudioSrc = audioSrc;
+          audio.load();
+        });
+      }
+
+      // Update progress bars
+      function updateProgress() {
+        if (isSeeking) return; // Don't update while seeking
+        if (!audio.duration || !isFinite(audio.currentTime)) return;
+
+        const percent = (audio.currentTime / audio.duration) * 100;
+
+        // Update progress in current audio player (or fall back to card if no specific player)
+        const targetElement = currentAudioPlayer || currentEpisodeCard;
+        if (targetElement) {
+          const progressBar = targetElement.querySelector('.audio-progress');
+          const trackBar = targetElement.querySelector('.audio-track');
+          if (progressBar) {
+            progressBar.style.width = percent + '%';
+          }
+          if (trackBar) {
+            trackBar.setAttribute('aria-valuenow', Math.round(percent));
+            trackBar.setAttribute('aria-valuetext', formatTime(audio.currentTime) + ' of ' + formatTime(audio.duration));
+          }
+          const timeEl = targetElement.querySelector('.audio-time');
+          if (timeEl) {
+            timeEl.textContent = formatTime(audio.currentTime) + ' / ' + formatTime(audio.duration);
+          }
+        }
+
+        // Update Now Playing bar duration
+        if (nowDur) {
+          nowDur.textContent = formatTime(audio.currentTime) + ' / ' + formatTime(audio.duration);
+        }
+      }
+
+      // Seek to position in audio
+      function seekToPosition(percent) {
+        if (!audio.duration) return;
+        isSeeking = true;
+        audio.currentTime = (percent / 100) * audio.duration;
+        setTimeout(() => {
+          isSeeking = false;
+          updateProgress();
+        }, 100);
+      }
+
+      // Toggle playback
+      function togglePlayback() {
+        if (isLoading) return; // Prevent clicks while loading
+        if (isPlaying) {
+          audio.pause();
+        } else {
+          if (!currentAudioSrc) return;
+          audio.play().catch(err => {
+            console.error('Playback failed:', err);
+            isLoading = false;
+            if (currentEpisodeCard) {
+              currentEpisodeCard.classList.remove('loading');
+            }
+            // Show user-friendly error
+            if (nowTitle) {
+              const originalText = nowTitle.textContent;
+              nowTitle.textContent = 'Error loading audio. Please try again.';
+              setTimeout(() => {
+                if (nowTitle) nowTitle.textContent = originalText;
+              }, 3000);
+            }
+          });
+        }
+      }
+
+      // Update play button states
+      function updatePlayButtonStates() {
+        const playButtons = document.querySelectorAll('.play-toggle');
+        playButtons.forEach(btn => {
+          const btnAudioPlayer = btn.closest('.audio-player');
+          const isCurrentAudioPlayerButton = currentAudioPlayer && btnAudioPlayer === currentAudioPlayer;
+          const isCurrentCardButton = currentEpisodeCard && btn.closest('.episode-card') === currentEpisodeCard && !currentAudioPlayer;
+          const isNowPlayingButton = btn.id === 'nowPlayingToggle';
+          
+          if (isPlaying && (isCurrentAudioPlayerButton || isCurrentCardButton || isNowPlayingButton)) {
+            btn.textContent = '⏸';
+            btn.setAttribute('aria-label', 'Pause episode');
+          } else {
+            btn.textContent = '▶';
+            btn.setAttribute('aria-label', 'Play episode');
+          }
+          
+          // Disable button while loading
+          if (isLoading && (isCurrentAudioPlayerButton || isCurrentCardButton || isNowPlayingButton)) {
+            btn.disabled = true;
+          } else {
+            btn.disabled = false;
+          }
+        });
+      }
+
+      // Set active episode card
+      function setActiveEpisode(card, audioPlayer) {
+        // Remove playing class from all cards and reset all audio players' progress
+        document.querySelectorAll('.episode-card').forEach(c => {
+          c.classList.remove('playing', 'loading');
+          // Reset all audio players in each card
+          c.querySelectorAll('.audio-player').forEach(player => {
+            const progressBar = player.querySelector('.audio-progress');
+            const trackBar = player.querySelector('.audio-track');
+            if (progressBar) {
+              progressBar.style.width = '0%';
+            }
+            if (trackBar) {
+              trackBar.setAttribute('aria-valuenow', '0');
+            }
+          });
+        });
+
+        // Add playing class to current card
+        if (card) {
+          card.classList.add('playing');
+          currentEpisodeCard = card;
+          currentAudioPlayer = audioPlayer || null;
+          // Reset progress for the active audio player
+          const targetElement = audioPlayer || card;
+          const progressBar = targetElement.querySelector('.audio-progress');
+          const trackBar = targetElement.querySelector('.audio-track');
+          if (progressBar) {
+            progressBar.style.width = '0%';
+          }
+          if (trackBar) {
+            trackBar.setAttribute('aria-valuenow', '0');
+          }
+        }
+      }
+
+      // Audio event handlers
+      audio.addEventListener('loadstart', () => {
+        isLoading = true;
+        if (currentEpisodeCard) {
+          currentEpisodeCard.classList.add('loading');
+        }
+      });
+
+      audio.addEventListener('loadedmetadata', () => {
+        isLoading = false;
+        if (currentEpisodeCard) {
+          currentEpisodeCard.classList.remove('loading');
+        }
+        updateProgress();
+        if (nowDur && currentEpisodeCard) {
+          const timeEl = currentEpisodeCard.querySelector('.audio-time');
+          if (timeEl && timeEl.textContent.includes(' / ')) {
+            // Already formatted, just update
+          } else {
+            nowDur.textContent = formatTime(0) + ' / ' + formatTime(audio.duration);
+          }
+        }
+      });
+
+      audio.addEventListener('canplay', () => {
+        // This is handled by the promise in loadAudio, but keep for other cases
+        if (!isLoading) return; // Already handled
+        isLoading = false;
+        if (currentEpisodeCard) {
+          currentEpisodeCard.classList.remove('loading');
+        }
+      });
+
+      audio.addEventListener('timeupdate', updateProgress);
+
+      audio.addEventListener('play', () => {
+        isPlaying = true;
+        updatePlayButtonStates();
+      });
+
+      audio.addEventListener('pause', () => {
+        isPlaying = false;
+        updatePlayButtonStates();
+      });
+
+      audio.addEventListener('ended', () => {
+        isPlaying = false;
+        updatePlayButtonStates();
+        const targetElement = currentAudioPlayer || currentEpisodeCard;
+        if (targetElement) {
+          const progressBar = targetElement.querySelector('.audio-progress');
+          if (progressBar) progressBar.style.width = '0%';
+        }
+      });
+
+      audio.addEventListener('error', (e) => {
+        console.error('Audio error:', e);
+        isLoading = false;
+        isPlaying = false;
+        if (currentEpisodeCard) {
+          currentEpisodeCard.classList.remove('loading');
+        }
+        updatePlayButtonStates();
+        // Show user-friendly error
+        if (nowTitle) {
+          const originalText = nowTitle.textContent;
+          nowTitle.textContent = 'Error loading audio. Please check your connection.';
+          setTimeout(() => {
+            if (nowTitle) nowTitle.textContent = originalText;
+          }, 3000);
+        }
+      });
+
+      // Handle play button clicks in episode cards
+      document.querySelectorAll('.episode-card .play-toggle').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          if (isLoading) return; // Prevent rapid clicks
+          
+          const card = this.closest('.episode-card');
+          if (!card) return;
+
+          // Check for data-audio on the audio-player container first, then fall back to card
+          const audioPlayer = this.closest('.audio-player');
+          let audioSrc = audioPlayer ? audioPlayer.getAttribute('data-audio') : null;
+          if (!audioSrc) {
+            audioSrc = card.getAttribute('data-audio');
+          }
+          
+          if (!audioSrc) {
+            console.warn('No audio source found for episode card');
+            if (nowTitle) {
+              const originalText = nowTitle.textContent;
+              nowTitle.textContent = 'Audio file not found for this episode.';
+              setTimeout(() => {
+                if (nowTitle) nowTitle.textContent = originalText;
+              }, 2000);
+            }
+            return;
+          }
+
+          // If clicking the same audio source, toggle play/pause
+          if (currentAudioSrc === audioSrc) {
+            togglePlayback();
+            return;
+          }
+
+          // Load and play new episode
+          setActiveEpisode(card, audioPlayer);
+          setNowPlayingFromCard(card, audioPlayer);
+          loadAudio(audioSrc).then(() => {
+            // Audio is ready, now play it
+            return audio.play();
+          }).catch(err => {
+            console.error('Playback failed:', err);
+            isLoading = false;
+            if (currentEpisodeCard) {
+              currentEpisodeCard.classList.remove('loading');
+            }
+            // Show user-friendly error
+            if (nowTitle) {
+              const originalText = nowTitle.textContent;
+              nowTitle.textContent = 'Error loading audio. Please try again.';
+              setTimeout(() => {
+                if (nowTitle) nowTitle.textContent = originalText;
+              }, 3000);
+            }
+          });
+        });
+      });
+
+      // Handle progress bar clicks for seeking
+      document.querySelectorAll('.audio-track').forEach(track => {
+        track.addEventListener('click', function(e) {
+          if (!audio.duration || isLoading) return;
+          const rect = this.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const percent = (x / rect.width) * 100;
+          seekToPosition(Math.max(0, Math.min(100, percent)));
+        });
+
+        // Keyboard accessibility for progress bar
+        track.addEventListener('keydown', function(e) {
+          if (!audio.duration || isLoading) return;
+          if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+            e.preventDefault();
+            const currentPercent = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+            const step = e.key === 'ArrowLeft' ? -5 : 5;
+            seekToPosition(Math.max(0, Math.min(100, currentPercent + step)));
+          } else if (e.key === 'Home') {
+            e.preventDefault();
+            seekToPosition(0);
+          } else if (e.key === 'End') {
+            e.preventDefault();
+            seekToPosition(100);
+          }
+        });
+      });
+
+      // Handle Now Playing bar play/pause button
+      if (nowPlayingToggle) {
+        nowPlayingToggle.addEventListener('click', () => {
+          if (currentAudioSrc) {
+            togglePlayback();
+          }
+        });
+      }
+
+      // Update Now Playing when episode card is clicked (not play button)
+      document.querySelectorAll('.episode-card').forEach(card => {
+        card.addEventListener('click', function(e) {
+          if (e.target.closest('.play-toggle')) return;
+          setNowPlayingFromCard(card);
+        });
+      });
+
+      // Share functionality
+      function copyToClipboard(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).catch(() => {});
+        } else {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand('copy'); } catch (err) {}
+          document.body.removeChild(ta);
+        }
+      }
+
+      if (shareLinkBtn) {
+        shareLinkBtn.addEventListener('click', () => {
+          const base = window.location.href.split('#')[0];
+          const link = currentAnchor ? base + currentAnchor : base;
+          copyToClipboard(link);
+          shareLinkBtn.textContent = 'Link copied';
+          setTimeout(() => (shareLinkBtn.textContent = 'Copy link'), 1500);
+        });
+      }
+
+      if (shareEmailBtn) {
+        shareEmailBtn.addEventListener('click', () => {
+          const base = window.location.href.split('#')[0];
+          const link = currentAnchor ? base + currentAnchor : base;
+          const subject = encodeURIComponent('BYTECAST episode for review');
+          const body = encodeURIComponent(
+            `Here's a BYTECAST episode that captures current context:\n\n` +
+            `${nowTitle ? nowTitle.textContent : ''} (${nowEp ? nowEp.textContent : ''})\n${link}\n\n` +
+            `Use this for: team alignment, shareholder context, or onboarding.`
+          );
+          const emailBlurb = `Subject: ${decodeURIComponent(subject)}\n\n${decodeURIComponent(body)}`;
+          copyToClipboard(emailBlurb);
+          shareEmailBtn.textContent = 'Blurb copied';
+          setTimeout(() => (shareEmailBtn.textContent = 'Copy email blurb'), 1500);
+        });
+      }
+
+      // Keyboard accessibility
+      document.addEventListener('keydown', (e) => {
+        // Space bar to play/pause (when not in input/textarea)
+        if (e.code === 'Space' && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          if (currentAudioSrc) {
+            togglePlayback();
+          }
+        }
+      });
+
+      // Clean up on page unload
+      window.addEventListener('beforeunload', () => {
+        audio.pause();
+        audio.src = '';
+      });
+
+      // Ensure Now Playing bar is visible when playing
+      const nowPlayingBar = document.getElementById('nowPlayingBar');
+      function ensureNowPlayingVisible() {
+        if (isPlaying && nowPlayingBar) {
+          nowPlayingBar.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }
+
+      // Check visibility periodically when playing
+      setInterval(() => {
+        if (isPlaying) {
+          ensureNowPlayingVisible();
+        }
+      }, 5000);
+    })();
+  </script>
+</body>
+</html>

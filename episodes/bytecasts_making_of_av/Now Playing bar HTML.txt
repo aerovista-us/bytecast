@@ -1,0 +1,26 @@
+<div class="now-playing-bar" id="nowPlayingBar">
+  <div class="now-playing-inner">
+    <button class="play-toggle" id="nowPlayingToggle" aria-label="Play / pause">
+      ▶
+    </button>
+
+    <div class="now-playing-main">
+      <div class="now-playing-label">Now Playing</div>
+      <div class="now-playing-title" id="nowPlayingTitle">
+        Select an episode to start listening
+      </div>
+      <div class="now-playing-episode" id="nowPlayingEpisode">
+        BYTECAST · Season One
+      </div>
+    </div>
+
+    <div class="now-playing-actions">
+      <div class="share-row">
+        <span class="share-label">Share this episode:</span>
+        <button class="share-btn primary" id="shareLinkBtn">Copy link</button>
+        <button class="share-btn" id="shareEmailBtn">Copy email blurb</button>
+      </div>
+      <div class="audio-time" id="nowPlayingDuration">–:––</div>
+    </div>
+  </div>
+</div>

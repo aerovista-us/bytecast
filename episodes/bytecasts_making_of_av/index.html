@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EchoStory · BYTECAST Season One</title>
+  <style>
+    :root {
+      --bg: #020617;
+      --bg-elevated: #020617;
+      --accent: #7b5cff;
+      --accent-soft: rgba(123, 92, 255, 0.2);
+      --accent-strong: #d0c2ff;
+      --text-main: #f9fafb;
+      --text-soft: #9ca3af;
+      --border-subtle: rgba(148, 163, 184, 0.35);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #020617 55%, #000 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: 1120px;
+      padding: 2.5rem 1.5rem 2.5rem;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    @media (max-width: 900px) {
+      .shell {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 2rem 1.25rem 2.5rem;
+      }
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.85);
+      font-size: 0.75rem;
+      color: var(--text-soft);
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.2rem, 3vw, 2.7rem);
+      letter-spacing: 0.04em;
+    }
+
+    .hero-sub {
+      margin-top: 0.7rem;
+      font-size: 0.98rem;
+      color: var(--text-soft);
+      line-height: 1.6;
+      max-width: 32rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .meta-pill {
+      font-size: 0.78rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: var(--text-soft);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .meta-pill.accent {
+      border-color: rgba(123, 92, 255, 0.9);
+      color: var(--accent-strong);
+      background: var(--accent-soft);
+    }
+
+    .cta-row {
+      margin-top: 1.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 1.3rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(120deg, var(--accent), #22c55e);
+      color: white;
+      font-size: 0.9rem;
+      text-decoration: none;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.9);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      font-weight: 500;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 36px rgba(15, 23, 42, 0.95), 0 0 20px rgba(123, 92, 255, 0.3);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .btn-primary span.icon {
+      font-size: 1rem;
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1.1rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-soft);
+      font-size: 0.85rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(123, 92, 255, 0.6);
+      background: rgba(26, 31, 46, 0.95);
+      color: var(--text-main);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary:active {
+      transform: translateY(0);
+    }
+
+    .cta-caption {
+      font-size: 0.82rem;
+      color: var(--text-soft);
+      margin-top: 0.4rem;
+      max-width: 24rem;
+    }
+
+    /* Right panel / visual card */
+    .panel {
+      position: relative;
+      border-radius: 1.2rem;
+      border: 1px solid var(--border-subtle);
+      background: radial-gradient(circle at top left, rgba(148, 163, 255, 0.25), transparent 60%), #020617;
+      padding: 1.25rem 1.25rem 1.4rem;
+      overflow: hidden;
+    }
+
+    .panel-orbit {
+      position: absolute;
+      inset: -30%;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(148, 163, 255, 0.3), transparent 60%),
+        radial-gradient(circle at 85% 20%, rgba(56, 189, 248, 0.25), transparent 60%),
+        radial-gradient(circle at 50% 90%, rgba(15, 23, 42, 0.95), transparent 60%);
+      opacity: 0.9;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .panel-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .panel-title {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-soft);
+    }
+
+    .panel-chip {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-soft);
+    }
+
+    .ep-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 0.35rem;
+      font-size: 0.85rem;
+    }
+
+    .ep-list li {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .ep-list a {
+      text-decoration: none;
+      display: block;
+    }
+
+    .ep-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.45rem 0.5rem;
+      border-radius: 0.6rem;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--text-soft);
+      text-decoration: none;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      position: relative;
+    }
+
+    .ep-item::after {
+      content: "→";
+      font-size: 0.75rem;
+      opacity: 0;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      transform: translateX(-4px);
+      color: var(--accent);
+    }
+
+    .ep-item:hover {
+      background: rgba(26, 31, 46, 0.95);
+      border-color: rgba(123, 92, 255, 0.5);
+      color: var(--text-main);
+      transform: translateX(2px);
+      box-shadow: 0 2px 8px rgba(123, 92, 255, 0.15);
+    }
+
+    .ep-item:hover::after {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .ep-item:active {
+      transform: translateX(1px);
+    }
+
+    .ep-item span.code {
+      font-size: 0.75rem;
+      opacity: 0.8;
+      transition: opacity 0.2s ease;
+    }
+
+    .ep-item:hover span.code {
+      opacity: 1;
+    }
+
+    .panel-foot {
+      margin-top: 0.8rem;
+      font-size: 0.78rem;
+      color: var(--text-soft);
+    }
+
+    footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      padding: 0.55rem 1rem;
+      font-size: 0.75rem;
+      color: rgba(148, 163, 184, 0.7);
+      background: linear-gradient(to top, rgba(2, 6, 23, 0.96), rgba(2, 6, 23, 0.75), transparent);
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <section>
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        <span>EchoStory · Narrative Series</span>
+      </div>
+      <h1>BYTECAST · Season One</h1>
+      <p class="hero-sub">
+        A guided, audio-ready narrative series documenting how AeroVista is being built — from the foundational question of "Why build our own?" to a fully aligned ecosystem with clear direction. Each episode is written in clear, everyday language and optimized for voice playback, making complex technical decisions accessible to team members, investors, and stakeholders.
+      </p>
+
+      <div class="hero-meta">
+        <div class="meta-pill accent">3 core episodes</div>
+        <div class="meta-pill">18 mini-episodes</div>
+        <div class="meta-pill">Audio-ready format</div>
+        <div class="meta-pill">Team & shareholder friendly</div>
+      </div>
+
+      <div class="cta-row">
+        <a href="bytecast.html" class="btn-primary">
+          <span class="icon">▶</span>
+          <span>Enter BYTECAST Library</span>
+        </a>
+        <a href="bytecast.html#ep-03" class="btn-secondary">
+          <span>Jump to State of the Build (EP 03)</span>
+        </a>
+      </div>
+      <p class="cta-caption">
+        <strong>Perfect for:</strong> New team onboarding, investor presentations, stakeholder alignment, and understanding the "why" behind AeroVista's architecture. Start with the three core episodes for the full story, then use mini-episodes as quick context anchors when reviewing specific changes or decisions.
+      </p>
+    </section>
+
+    <aside class="panel">
+      <div class="panel-orbit"></div>
+      <div class="panel-inner">
+        <div class="panel-header">
+          <div class="panel-title">Season Snapshot</div>
+          <div class="panel-chip">Ready for listening</div>
+        </div>
+        <ul class="ep-list">
+          <li>
+            <a href="bytecast.html#ep-01" class="ep-item">
+              <span>EP 01 · Why We're Building AeroVista</span>
+              <span class="code">Origin</span>
+            </a>
+          </li>
+          <li>
+            <a href="bytecast.html#ep-02" class="ep-item">
+              <span>EP 02 · From Scatter to Structure</span>
+              <span class="code">System</span>
+            </a>
+          </li>
+          <li>
+            <a href="bytecast.html#ep-03" class="ep-item">
+              <span>EP 03 · Big Picture & What's Next</span>
+              <span class="code">State</span>
+            </a>
+          </li>
+          <li>
+            <a href="bytecast.html#ep-01" class="ep-item">
+              <span>Minis · EP 1.1–1.9 & 2.1–2.9</span>
+              <span class="code">Bridges</span>
+            </a>
+          </li>
+        </ul>
+        <p class="panel-foot">
+          <strong>Recommended flow:</strong> Start with EP 01–03 for the complete narrative arc. Then use the mini-episodes (1.1–1.9 and 2.1–2.9) as quick reference points when you need context on specific decisions, infrastructure changes, or reporting updates.
+        </p>
+      </div>
+    </aside>
+  </div>
+
+  <footer>
+    EchoStory · BYTECAST Season One · AeroVista internal narrative channel
+  </footer>
+</body>
+</html>
