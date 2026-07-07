@@ -1,0 +1,81 @@
+{
+  "schema": "bytecast-voiceover-sections-v1",
+  "slug": "lumina_rev_106",
+  "code": "EP-LUM-106",
+  "sections": [
+    {
+      "id": "cold-open",
+      "title": "Cold open",
+      "displayText": "Welcome to EP-LUM-106. A qualified lead can still stall if the follow-up is vague or the handoff is messy. This episode teaches the last operational move in the lane: how to carry momentum forward without losing clarity.",
+      "speakText": "Welcome to EP-LUM-106. A qualified lead can still stall if the follow-up is vague or the handoff is messy. This episode teaches the last operational move in the lane: how to carry momentum forward without losing clarity."
+    },
+    {
+      "id": "slide-dies_without_motion",
+      "title": "Interest dies without motion",
+      "displayText": "Interest dies without motion. Show why follow-up matters. Qualification alone does not create growth. Leads stall when the next step is fuzzy, generic, or delayed. Momentum needs a message and an action.",
+      "speakText": "Interest dies without motion. Show why follow-up matters. Qualification alone does not create growth. Leads stall when the next step is fuzzy, generic, or delayed. Momentum needs a message and an action."
+    },
+    {
+      "id": "slide-formula",
+      "title": "The follow-up formula",
+      "displayText": "The follow-up formula. Give the learner a repeatable message shape. Recap the problem. State the recommendation and the next step clearly. Use a simple CTA that makes response easy.",
+      "speakText": "The follow-up formula. Give the learner a repeatable message shape. Recap the problem. State the recommendation and the next step clearly. Use a simple CTA that makes response easy."
+    },
+    {
+      "id": "slide-marketing_pipeline",
+      "title": "Marketing supports pipeline",
+      "displayText": "Marketing supports pipeline. Connect messaging to revenue motion. Good follow-up is part of growth, not just polish. Campaign framing and message consistency keep the lead moving with less friction. Weak messaging can reopen confusion that discovery already solved.",
+      "speakText": "Marketing supports pipeline. Connect messaging to revenue motion. Good follow-up is part of growth, not just polish. Campaign framing and message consistency keep the lead moving with less friction. Weak messaging can reopen confusion that discovery already solved."
+    },
+    {
+      "id": "slide-consistency",
+      "title": "Message consistency across divisions",
+      "displayText": "Message consistency across divisions. Keep the ecosystem coherent. Different division voices can still feel like one credible ecosystem. The follow-up should match the recommended lane while staying recognizably AeroVista. Consistency reduces handoff confusion internally too.",
+      "speakText": "Message consistency across divisions. Keep the ecosystem coherent. Different division voices can still feel like one credible ecosystem. The follow-up should match the recommended lane while staying recognizably AeroVista. Consistency reduces handoff confusion internally too."
+    },
+    {
+      "id": "slide-proposal_tone",
+      "title": "Proposal tone and next step",
+      "displayText": "Proposal tone and next step. Train specific and realistic CTAs. Keep next steps concrete and easy to act on. Avoid vague lines like let us know your thoughts if the path needs a real owner. A stronger CTA sounds like: If this direction fits, we can outline the Lumina + Nexus scope and assign the intake workflow owner in the next working session.",
+      "speakText": "Proposal tone and next step. Train specific and realistic CTAs. Keep next steps concrete and easy to act on. Avoid vague lines like let us know your thoughts if the path needs a real owner. A stronger CTA sounds like: If this direction fits, we can outline the Lumina + Nexus scope and assign the intake workflow owner in the next working session."
+    },
+    {
+      "id": "slide-handoff_notes",
+      "title": "Delivery handoff notes",
+      "displayText": "Delivery handoff notes. Prepare delivery for a clean start. Delivery needs the problem, desired outcome, recommended path, and open questions. A clean handoff note saves rework and protects buyer trust. Useful note example: Lead wants faster response to inbound requests; message angle is trust plus speed; likely first build is intake flow before full site redesign.",
+      "speakText": "Delivery handoff notes. Prepare delivery for a clean start. Delivery needs the problem, desired outcome, recommended path, and open questions. A clean handoff note saves rework and protects buyer trust. Useful note example: Lead wants faster response to inbound requests; message angle is trust plus speed; likely first build is intake flow before full site redesign."
+    },
+    {
+      "id": "slide-before_after",
+      "title": "Weak follow-up versus strong follow-up",
+      "displayText": "Weak follow-up versus strong follow-up. Make quality visible. Weak follow-up: Thanks for chatting. We do a lot in this space and would love to help however makes sense. Why it fails: no recap, no route, no owner, no next step. Strong follow-up: Based on the gaps in offer clarity and intake flow, we recommend Lumina + Nexus. Lumina sharpens the message and sales path; Nexus maps the intake workflow. If that fits, next step is a scoped working session this week. This is the bridge into TR-LUM-001 and the sales brief seed artifact.",
+      "speakText": "Weak follow-up versus strong follow-up. Make quality visible. Weak follow-up: Thanks for chatting. We do a lot in this space and would love to help however makes sense. Why it fails: no recap, no route, no owner, no next step. Strong follow-up: Based on the gaps in offer clarity and intake flow, we recommend Lumina + Nexus. Lumina sharpens the message and sales path; Nexus maps the intake workflow. If that fits, next step is a scoped working session this week. This is the bridge into TR-LUM-001 and the sales brief seed artifact."
+    },
+    {
+      "id": "end",
+      "title": "End",
+      "displayText": "End.",
+      "speakText": "End."
+    }
+  ],
+  "overviewOrder": [
+    "cold-open",
+    "slide-dies_without_motion",
+    "slide-formula",
+    "slide-marketing_pipeline",
+    "slide-consistency",
+    "slide-proposal_tone",
+    "slide-handoff_notes",
+    "slide-before_after"
+  ],
+  "heroSectionId": "cold-open",
+  "slideSectionMap": {
+    "dies_without_motion": "slide-dies_without_motion",
+    "formula": "slide-formula",
+    "marketing_pipeline": "slide-marketing_pipeline",
+    "consistency": "slide-consistency",
+    "proposal_tone": "slide-proposal_tone",
+    "handoff_notes": "slide-handoff_notes",
+    "before_after": "slide-before_after"
+  }
+}

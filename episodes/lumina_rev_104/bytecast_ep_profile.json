@@ -1,0 +1,256 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "episode": {
+    "code": "EP-LUM-104",
+    "title": "Find the Real Need",
+    "type": "episode pack",
+    "date": "2026-03-29",
+    "runtime_target_minutes": 12,
+    "status": "active"
+  },
+  "content": {
+    "tags": [
+      "discovery",
+      "qualification",
+      "needs",
+      "readiness"
+    ],
+    "summary_short": "Learn discovery questions that reveal the actual need instead of chasing the first surface request or promising before evidence is clear.",
+    "summary_long": "This episode teaches commercial discovery: problem, outcome, timeline, readiness, budget/authority signals, and the difference between the surface request and the deeper need that should guide routing.",
+    "start_here": "Use the listen pass to hear the discovery mindset, then use the slides to practice wants-versus-needs thinking.",
+    "hero_kicker": "Discovery Judgment",
+    "key_line": "Do not pitch too early. Find the problem shape first."
+  },
+  "media": {
+    "audio_files": []
+  },
+  "slides": [
+    {
+      "id": "pitch_early",
+      "title": "Do not pitch too early",
+      "goal": "Slow the learner down at the right moment.",
+      "bullets": [
+        "Early pitching often solves the wrong problem.",
+        "A surface request may be inaccurate, incomplete, or too narrow.",
+        "Discovery protects both routing quality and trust."
+      ]
+    },
+    {
+      "id": "rule",
+      "title": "The discovery rule",
+      "goal": "Give a repeatable starting frame.",
+      "bullets": [
+        "Start with the problem, desired outcome, and timeline.",
+        "Those three anchors tell you much more than a feature request alone.",
+        "Until those are clearer, recommendations stay provisional."
+      ]
+    },
+    {
+      "id": "wants_needs",
+      "title": "Wants versus needs",
+      "goal": "Teach the difference directly.",
+      "bullets": [
+        "A lead may ask for a website when the deeper need is lead flow or trust repair.",
+        "A lead may ask for content when the deeper need is a learning path or sales clarity.",
+        "Surface wants matter, but they are not always the primary route signal."
+      ],
+      "takeaway": "The first request is often a clue, not the full answer."
+    },
+    {
+      "id": "questions",
+      "title": "Questions that find truth",
+      "goal": "Train useful discovery prompts.",
+      "bullets": [
+        "What problem are you trying to solve?",
+        "What changes after success, and what timeline matters?",
+        "What have you already tried, who is affected if nothing changes, and who can approve the next step?"
+      ],
+      "takeaway": "Ask for the problem, the outcome, the decision owner, and the cost of inaction."
+    },
+    {
+      "id": "readiness",
+      "title": "Readiness signals",
+      "goal": "Separate ready leads from blurry ones.",
+      "bullets": [
+        "Some leads are ready now. Others need more clarity. Some are not ready at all.",
+        "Readiness changes the next step you recommend.",
+        "Pushing a not-ready lead into a fake solution is still a sales failure.",
+        "Budget and decision authority are signals, not pressure points."
+      ]
+    },
+    {
+      "id": "primary_support",
+      "title": "Primary lane versus support lane",
+      "goal": "Teach bundle discipline.",
+      "bullets": [
+        "A lead can have one primary need and still benefit from support lanes.",
+        "The primary lane should address the core problem, not just the nicest add-on.",
+        "Support lanes are real, but they should not hide the core route."
+      ]
+    },
+    {
+      "id": "worked_example",
+      "title": "Worked discovery example",
+      "goal": "Turn the framework into a real scenario.",
+      "bullets": [
+        "Surface request: We need a website refresh. Real issue after discovery: the owner has weak follow-up, no clear offer, and no lead intake automation.",
+        "Better qualification summary: primary need is commercial clarity plus lead-flow structure, so Lumina + Nexus is more plausible than a design-only refresh.",
+        "Good discovery changed the route because it exposed the real business problem, not just the front-end symptom."
+      ],
+      "takeaway": "Discovery should rewrite the problem statement before you recommend the lane."
+    },
+    {
+      "id": "summary",
+      "title": "Write the qualification summary",
+      "goal": "Turn conversation into usable routing notes.",
+      "bullets": [
+        "Capture the real problem, desired outcome, likely primary division, readiness, and bundle signals.",
+        "That summary becomes the bridge into recommendation and handoff.",
+        "If the summary is muddy, the next step will be muddy too.",
+        "Mark what is confirmed, what is assumed, and what still needs permission."
+      ]
+    }
+  ],
+  "references": {
+    "blurb": "Use the original lane docs plus ByteCast standards to reinforce this episode.",
+    "links": [
+      {
+        "label": "Lane Overview",
+        "href": "../../building blocks/LUM_BUILD_PACKS/LUM-REV-001/00_lane_overview.md",
+        "primary": true
+      },
+      {
+        "label": "Training Standard",
+        "href": "../../docs/BYTECAST_TRAINING_STANDARD.md"
+      },
+      {
+        "label": "Proof Schema",
+        "href": "../../docs/BYTECAST_PROOF_SCHEMA.md"
+      },
+      {
+        "label": "Playlist",
+        "href": "../../seed_bytecast.html"
+      },
+      {
+        "label": "EP-LUM-104 plan",
+        "href": "../../building blocks/LUM_BUILD_PACKS/LUM-REV-001/episodes/EP-LUM-104.md"
+      }
+    ]
+  },
+  "navigation": {
+    "previous_href": "../lumina_rev_103/index.html",
+    "previous_label": "Back: EP-LUM-103"
+  },
+  "advance": {
+    "href": "../lumina_rev_105/index.html",
+    "label": "EP-LUM-105",
+    "cta": "Open EP-LUM-105",
+    "tag": "THEN",
+    "description": "Complete EP-LUM-104 gates, then continue into Recommend the Right Path."
+  },
+  "routing": {
+    "slug": "lumina_rev_104",
+    "journey_id": "lumina_revenue_v1",
+    "listen_step": "lum104_listen",
+    "slide_step": "lum104_slide",
+    "engage_step": "lum104_engage",
+    "storage_prefix": "lumina_rev_104"
+  },
+  "engagement": {
+    "quest": {
+      "title": "EP-LUM-104 practice checklist",
+      "prompt": "Use the checklist to train discovery discipline before you recommend a path.",
+      "items": [
+        {
+          "id": "q1",
+          "text": "Ask the discovery rule aloud: problem, outcome, timeline."
+        },
+        {
+          "id": "q2",
+          "text": "Turn one surface request into a deeper need statement."
+        },
+        {
+          "id": "q3",
+          "text": "Name one signal that a lead may not be ready for a recommendation yet."
+        },
+        {
+          "id": "q4",
+          "text": "Write one sentence describing the primary lane and one possible support lane for a sample lead."
+        }
+      ]
+    },
+    "quiz": {
+      "enabled": true,
+      "pass_threshold": 0.8,
+      "prompt": "Pass the discovery check before you move into recommendation logic.",
+      "questions": [
+        {
+          "id": "lum104_q1",
+          "q": "Best first move in discovery?",
+          "choices": [
+            "Pitch the strongest offer immediately",
+            "Ask about problem, outcome, and timeline",
+            "Skip straight to pricing"
+          ],
+          "answer_index": 1,
+          "explain": "That frame reveals the real need."
+        },
+        {
+          "id": "lum104_q2",
+          "q": "A lead asks for a website, but the real issue is lead flow automation. The website request is:",
+          "choices": [
+            "The deeper need",
+            "A surface request",
+            "Proof that Nexus is wrong"
+          ],
+          "answer_index": 1,
+          "explain": "The first request is not always the core need."
+        },
+        {
+          "id": "lum104_q3",
+          "q": "Why do readiness signals matter?",
+          "choices": [
+            "They change the next step and recommendation quality",
+            "They remove the need for notes",
+            "They make every lead urgent"
+          ],
+          "answer_index": 0,
+          "explain": "Readiness affects how you move the opportunity forward."
+        },
+        {
+          "id": "lum104_q4",
+          "q": "How should support lanes be used?",
+          "choices": [
+            "To hide the main problem",
+            "To support the primary route without replacing it",
+            "To make every opportunity bigger"
+          ],
+          "answer_index": 1,
+          "explain": "Support lanes help, but the primary need still leads."
+        },
+        {
+          "id": "lum104_q5",
+          "q": "In the worked website-refresh example, what changed after discovery?",
+          "choices": [
+            "The lead no longer needed help",
+            "The issue became clearer as commercial clarity plus lead-flow structure",
+            "The safest route became Horizon only"
+          ],
+          "answer_index": 1,
+          "explain": "Discovery exposed the deeper commercial and systems need behind the website request."
+        },
+        {
+          "id": "lum104_q6",
+          "q": "What should a discovery note separate before handoff?",
+          "choices": [
+            "Confirmed facts, assumptions, and open permission or decision questions",
+            "Only the most exciting possible package",
+            "A final promise before scope review"
+          ],
+          "answer_index": 0,
+          "explain": "Good discovery makes uncertainty visible instead of turning it into a hidden promise."
+        }
+      ]
+    }
+  }
+}

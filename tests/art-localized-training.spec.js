@@ -19,18 +19,23 @@ const ART_LOCALIZED_STEPS = [
   'ep0_listen',
   'ep0_slide',
   'ep0_engage',
+  'ep0_mission',
   'ep1_listen',
   'ep1_slide',
   'ep1_engage',
+  'ep1_mission',
   'ep2_listen',
   'ep2_slide',
   'ep2_engage',
+  'ep2_mission',
   'ep3_listen',
   'ep3_slide',
   'ep3_engage',
+  'ep3_mission',
   'ep4_listen',
   'ep4_slide',
   'ep4_engage',
+  'ep4_mission',
   'final_assessment',
 ];
 
@@ -40,9 +45,16 @@ async function completeArtLocalizedPathAndMintBadges(page) {
     async ({ journeyId, steps }) => {
       const Loop = window.ByteCastLoop;
       if (!Loop) return { error: 'ByteCastLoop not found' };
-      const meta = { journeyId };
+      const proofMeta = {
+        ep0_mission: { localizedPromise: 'AI amplifies local creators without flattening voice or ownership.', nextOwner: 'Lumina', proofArtifact: 'Manifesto landing section' },
+        ep1_mission: { artistRegion: 'Pacific Northwest muralist', leadDivision: 'Lumina', spotlightDeliverable: 'Short reel plus artist profile' },
+        ep2_mission: { partnerTier: 'Cultural Partner', requiredProofArtifact: 'Press kit and metric snapshot', reviewerPath: 'Lumina lead review' },
+        ep3_mission: { audience: 'Regional artists and venue partners', channel: 'Microsite plus launch reel', successMetric: 'Artist signup and partner reply count' },
+        ep4_mission: { creatorRoute: 'PNW artist through Lumina spotlight', nextStepPath: 'Profile page, workshop, and partner conversation path', creatorEquitySafeguard: 'Consent, attribution, and review before publication' },
+        final_assessment: { mission: 'art_localized_final', understandingCheckPassed: true, finalAssessmentPassed: true, finalAssessmentAt: new Date().toISOString() },
+      };
       for (const stepId of steps) {
-        Loop.markStepDone(stepId, meta);
+        Loop.markStepDone(stepId, { journeyId, ...(proofMeta[stepId] || {}) });
       }
       await new Promise((r) => setTimeout(r, 300));
       const wf2 = Loop.ensureWorkflowV2(journeyId);
@@ -100,7 +112,7 @@ test.describe('Art Localized Training Path (art_localized_training)', () => {
       if (!Loop) return;
       const meta = { journeyId };
       steps.forEach((id) => Loop.markStepDone(id, meta));
-    }, { journeyId: JOURNEY_ID, steps: ART_LOCALIZED_STEPS.slice(0, 6) }); // ep0 + ep1
+    }, { journeyId: JOURNEY_ID, steps: ART_LOCALIZED_STEPS.slice(0, 8) }); // ep0 + ep1
 
     await page.waitForTimeout(800);
 
@@ -121,7 +133,7 @@ test.describe('Art Localized Training Path (art_localized_training)', () => {
       if (!Loop) return;
       const meta = { journeyId };
       steps.forEach((id) => Loop.markStepDone(id, meta));
-    }, { journeyId: JOURNEY_ID, steps: ART_LOCALIZED_STEPS.slice(0, 9) }); // ep0, ep1, ep2
+    }, { journeyId: JOURNEY_ID, steps: ART_LOCALIZED_STEPS.slice(0, 12) }); // ep0, ep1, ep2
 
     await page.waitForTimeout(800);
 
@@ -140,7 +152,7 @@ test.describe('Art Localized Training Path (art_localized_training)', () => {
       if (!Loop) return;
       const meta = { journeyId };
       steps.forEach((id) => Loop.markStepDone(id, meta));
-    }, { journeyId: JOURNEY_ID, steps: ART_LOCALIZED_STEPS.slice(0, 12) }); // ep0–3
+    }, { journeyId: JOURNEY_ID, steps: ART_LOCALIZED_STEPS.slice(0, 16) }); // ep0-3
 
     await page.waitForTimeout(800);
 

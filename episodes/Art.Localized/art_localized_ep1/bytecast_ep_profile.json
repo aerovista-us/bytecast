@@ -1,0 +1,30 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "episode": {
+    "code": "ART-EP-1",
+    "title": "The Art Localized — Ep 1 — Divisions",
+    "type": "training",
+    "date": "2026-03-30",
+    "runtime_target_minutes": 6,
+    "status": "active"
+  },
+  "content": {
+    "tags": ["art-localized", "training", "divisions"],
+    "summary_short": "Phase 2 onboarding, spotlight routing, and division ownership for creator activation."
+  },
+  "engagement": {
+    "quest": { "title": "Ep 1", "items": [] },
+    "quiz": {
+      "enabled": true,
+      "pass_threshold": 0.8,
+      "questions": [
+        {
+          "id": "art_ep1_q1",
+          "q": "Divisions primarily help you:",
+          "choices": ["Pick brand colors", "Choose proof lanes and reviewers"],
+          "answer_index": 1
+        }
+      ]
+    }
+  }
+}

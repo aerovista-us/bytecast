@@ -1,3 +1,6 @@
+# Local Compose overrides (see .env.example)
+.env
+
 # Dependencies
 node_modules/
 package-lock.json
@@ -22,3 +25,25 @@ Thumbs.db
 # Logs
 *.log
 npm-debug.log*
+
+# Python
+__pycache__/
+*.pyc
+
+# Agent / local audit temp files
+bc_git_*.txt
+
+# Large business source drops (keep in shipping share, not git)
+/*.docx
+/*.zip
+/*.pdf
+/*.mp4
+/feilthmp3*.mp3
+/AV_Onboarding_and_Training/
+/building blocks/
+/03.quiz.html
+/05.pdf
+/ep02.pdf
+/ep05.pdf
+/build_lumina_lane.py
+/journey_steps.json

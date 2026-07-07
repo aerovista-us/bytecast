@@ -1,0 +1,97 @@
+{
+  "schema": "bytecast-voiceover-sections-v1",
+  "slug": "lumina_rev_105",
+  "code": "EP-LUM-105",
+  "sections": [
+    {
+      "id": "cold-open",
+      "title": "Cold open",
+      "displayText": "Welcome to EP-LUM-105. Discovery is only useful if it turns into direction. This episode teaches the learner how to recommend the right path, explain why, name assumptions, and avoid promising more than the real fit supports.",
+      "speakText": "Welcome to EP-LUM-105. Discovery is only useful if it turns into direction. This episode teaches the learner how to recommend the right path, explain why, name assumptions, and avoid promising more than the real fit supports."
+    },
+    {
+      "id": "slide-direction",
+      "title": "Discovery must turn into direction",
+      "displayText": "Discovery must turn into direction. Show why recommendation is the next skill. Good sales process ends in a clear next-step recommendation. If discovery ends in fog, the prospect still feels lost. Clear direction is part of commercial value.",
+      "speakText": "Discovery must turn into direction. Show why recommendation is the next skill. Good sales process ends in a clear next-step recommendation. If discovery ends in fog, the prospect still feels lost. Clear direction is part of commercial value."
+    },
+    {
+      "id": "slide-single_bundle",
+      "title": "Single division versus bundle",
+      "displayText": "Single division versus bundle. Make the recommendation fork explicit. Some opportunities have one obvious primary lane. Others need a primary lane plus support lanes to actually solve the problem. The recommendation should match the real shape of the need.",
+      "speakText": "Single division versus bundle. Make the recommendation fork explicit. Some opportunities have one obvious primary lane. Others need a primary lane plus support lanes to actually solve the problem. The recommendation should match the real shape of the need."
+    },
+    {
+      "id": "slide-lumina_led",
+      "title": "Lumina-led is not Lumina-delivered",
+      "displayText": "Lumina-led is not Lumina-delivered. Protect the ownership line during recommendations. Lumina can lead the commercial framing and still point delivery elsewhere. That is a strength, not a weakness. A clean recommendation makes the delivery owner explicit.",
+      "speakText": "Lumina-led is not Lumina-delivered. Protect the ownership line during recommendations. Lumina can lead the commercial framing and still point delivery elsewhere. That is a strength, not a weakness. A clean recommendation makes the delivery owner explicit."
+    },
+    {
+      "id": "slide-patterns",
+      "title": "Common bundle patterns",
+      "displayText": "Common bundle patterns. Give learners reusable examples. Lumina + Nexus for positioning plus systems. Lumina + EchoVerse for rollout plus sound or release experience. Lumina + Horizon for campaign packaging plus visual proof.",
+      "speakText": "Common bundle patterns. Give learners reusable examples. Lumina + Nexus for positioning plus systems. Lumina + EchoVerse for rollout plus sound or release experience. Lumina + Horizon for campaign packaging plus visual proof."
+    },
+    {
+      "id": "slide-hold_back",
+      "title": "Hold back when needed",
+      "displayText": "Hold back when needed. Teach scope discipline. Sometimes the strongest recommendation is narrower than the lead expects. If the real need is simple, do not inflate it into a vague mega-bundle. Honest scope improves trust and close quality.",
+      "speakText": "Hold back when needed. Teach scope discipline. Sometimes the strongest recommendation is narrower than the lead expects. If the real need is simple, do not inflate it into a vague mega-bundle. Honest scope improves trust and close quality."
+    },
+    {
+      "id": "slide-why",
+      "title": "Explain the why",
+      "displayText": "Explain the why. Keep recommendations defensible. The recommendation language should tie directly to the problem and outcome. If you cannot explain why the lane fits, the recommendation is not ready. A clear why keeps internal handoff stronger too. Name assumptions and open decisions before anyone treats the recommendation as a promise.",
+      "speakText": "Explain the why. Keep recommendations defensible. The recommendation language should tie directly to the problem and outcome. If you cannot explain why the lane fits, the recommendation is not ready. A clear why keeps internal handoff stronger too. Name assumptions and open decisions before anyone treats the recommendation as a promise."
+    },
+    {
+      "id": "slide-worked_path",
+      "title": "Worked recommendation example",
+      "displayText": "Worked recommendation example. Make the recommendation formula concrete. Lead: a regional service company asks for a new site, but discovery reveals weak offer clarity, poor lead follow-up, and manual intake. Clean recommendation: Lumina + Nexus. Why: Lumina clarifies the commercial offer and message; Nexus handles the intake flow and automation layer. What to avoid promising: a full rebuild of everything at once before the scope and operations constraints are understood.",
+      "speakText": "Worked recommendation example. Make the recommendation formula concrete. Lead: a regional service company asks for a new site, but discovery reveals weak offer clarity, poor lead follow-up, and manual intake. Clean recommendation: Lumina + Nexus. Why: Lumina clarifies the commercial offer and message; Nexus handles the intake flow and automation layer. What to avoid promising: a full rebuild of everything at once before the scope and operations constraints are understood."
+    },
+    {
+      "id": "slide-formula",
+      "title": "Recommendation formula",
+      "displayText": "Recommendation formula. Give the learner a repeatable structure. Problem -> recommended lane or bundle -> reason -> next step. This formula keeps the recommendation short, useful, and hard to fake. Use it before you send anything externally. Add guardrail language: based on current discovery, pending scope review.",
+      "speakText": "Recommendation formula. Give the learner a repeatable structure. Problem -> recommended lane or bundle -> reason -> next step. This formula keeps the recommendation short, useful, and hard to fake. Use it before you send anything externally. Add guardrail language: based on current discovery, pending scope review."
+    },
+    {
+      "id": "slide-guardrails",
+      "title": "Recommendation guardrails",
+      "displayText": "Recommendation guardrails. Make client-safe recommendation language practical. Say what is recommended now, not everything AeroVista could eventually do. Separate a likely path from a committed deliverable. Use plain limits: pending scope review, access review, timeline review, or partner confirmation. A recommendation earns trust when it is clear about both fit and limits.",
+      "speakText": "Recommendation guardrails. Make client-safe recommendation language practical. Say what is recommended now, not everything AeroVista could eventually do. Separate a likely path from a committed deliverable. Use plain limits: pending scope review, access review, timeline review, or partner confirmation. A recommendation earns trust when it is clear about both fit and limits."
+    },
+    {
+      "id": "end",
+      "title": "End",
+      "displayText": "End.",
+      "speakText": "End."
+    }
+  ],
+  "overviewOrder": [
+    "cold-open",
+    "slide-direction",
+    "slide-single_bundle",
+    "slide-lumina_led",
+    "slide-patterns",
+    "slide-hold_back",
+    "slide-why",
+    "slide-worked_path",
+    "slide-formula",
+    "slide-guardrails"
+  ],
+  "heroSectionId": "cold-open",
+  "slideSectionMap": {
+    "direction": "slide-direction",
+    "single_bundle": "slide-single_bundle",
+    "lumina_led": "slide-lumina_led",
+    "patterns": "slide-patterns",
+    "hold_back": "slide-hold_back",
+    "why": "slide-why",
+    "worked_path": "slide-worked_path",
+    "formula": "slide-formula",
+    "guardrails": "slide-guardrails"
+  }
+}

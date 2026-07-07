@@ -1,0 +1,251 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "episode": {
+    "code": "EP-LUM-103",
+    "title": "Brand by Division",
+    "type": "episode pack",
+    "date": "2026-03-29",
+    "runtime_target_minutes": 12,
+    "status": "active"
+  },
+  "content": {
+    "tags": [
+      "brand",
+      "tone",
+      "positioning",
+      "trust-style"
+    ],
+    "summary_short": "Learn how each division should feel and sound so sales messaging does not flatten the whole board into one generic pitch.",
+    "summary_long": "This episode teaches division-specific tone, promise, and trust style so recommendations feel commercially credible and aligned to the actual lane.",
+    "start_here": "Use Listen, then practice the feel of each division before you write recommendations in later episodes.",
+    "hero_kicker": "Brand Fit",
+    "key_line": "One ecosystem can still have distinct voices by division."
+  },
+  "media": {
+    "audio_files": []
+  },
+  "slides": [
+    {
+      "id": "brand_more",
+      "title": "Brand is more than a logo",
+      "goal": "Broaden the learner's definition.",
+      "bullets": [
+        "Brand includes language, confidence level, promise shape, trust style, and presentation energy.",
+        "Sales messaging should match the lane it is pointing toward.",
+        "A technically serious lane and an expressive creative lane should not sound identical."
+      ]
+    },
+    {
+      "id": "why_diff",
+      "title": "Why brand differences matter",
+      "goal": "Tie tone to commercial trust.",
+      "bullets": [
+        "Flattened language makes offers blur together.",
+        "Division-specific tone helps the buyer feel that AeroVista understands the category of work being discussed.",
+        "That is not fragmentation. That is precision."
+      ]
+    },
+    {
+      "id": "nexus_summit",
+      "title": "Nexus and Summit",
+      "goal": "Set technical and educational tones clearly.",
+      "bullets": [
+        "Nexus should feel capable, technical, reliable, and systems-minded.",
+        "A Nexus-flavored line sounds like: We help operations teams replace manual workflow with dependable systems and automation.",
+        "Summit should feel clear, educational, structured, and growth-focused, like: We help teams turn expertise into guided learner journeys people can actually complete."
+      ]
+    },
+    {
+      "id": "echo_sky",
+      "title": "EchoVerse and SkyForge",
+      "goal": "Separate expressive from immersive.",
+      "bullets": [
+        "EchoVerse should feel emotional, sonic, expressive, and artist-aware.",
+        "A strong EchoVerse line might say: We help artists shape a release experience people can hear, feel, and remember.",
+        "SkyForge should feel imaginative, interactive, exploratory, and experience-driven, more like: We build interactive worlds people can step into, not just watch."
+      ]
+    },
+    {
+      "id": "lumina_vespera",
+      "title": "Lumina and Vespera",
+      "goal": "Place market-facing persuasion beside authored clarity.",
+      "bullets": [
+        "Lumina should feel polished, strategic, persuasive, and market-facing.",
+        "A Lumina-flavored line sounds like: We help you clarify the offer, sharpen the message, and move the right buyers forward.",
+        "Vespera should feel thoughtful, authored, editorial, and narrative-driven, like: We turn your expertise into a crafted, readable body of published work."
+      ]
+    },
+    {
+      "id": "horizon_umbrella",
+      "title": "Horizon and the umbrella brand",
+      "goal": "Keep field proof distinct while preserving ecosystem cohesion.",
+      "bullets": [
+        "Horizon should feel field-ready, visual, precise, and proof-driven.",
+        "A Horizon line should sound grounded, like: We capture clean aerial proof that helps the audience trust what is actually there.",
+        "The AeroVista umbrella should still feel cohesive, credible, and cross-division capable without forcing every division into the same voice."
+      ]
+    },
+    {
+      "id": "wrong_sound",
+      "title": "What sounds wrong",
+      "goal": "Train mismatch detection.",
+      "bullets": [
+        "Overly poetic language can weaken a technical lane.",
+        "Cold feature-heavy language can weaken a narrative or expressive lane.",
+        "Wrong tone is a routing clue as much as a copy problem."
+      ]
+    },
+    {
+      "id": "rewrite_examples",
+      "title": "Worked rewrite examples",
+      "goal": "Show what better fit actually sounds like.",
+      "bullets": [
+        "Weak generic line: We build bold digital experiences for any organization. Why it fails: it hides the lane and sounds interchangeable.",
+        "Better Nexus line: We help teams replace spreadsheet chaos with dependable systems, automation, and reporting clarity.",
+        "Better Vespera line: We help authors and brands turn rough expertise into clear, publishable content people can follow and trust."
+      ],
+      "takeaway": "The right lane should sound recognizable before it is even named."
+    },
+    {
+      "id": "brand_route",
+      "title": "Use brand fit to improve routing",
+      "goal": "Connect tone back to sales judgment.",
+      "bullets": [
+        "If the message sounds off, the path may also be off.",
+        "Brand fit helps you catch weak proposals before they go out.",
+        "Good sales language reinforces the right lane instead of hiding it."
+      ]
+    }
+  ],
+  "references": {
+    "blurb": "Use the original lane docs plus ByteCast standards to reinforce this episode.",
+    "links": [
+      {
+        "label": "Lane Overview",
+        "href": "../../building blocks/LUM_BUILD_PACKS/LUM-REV-001/00_lane_overview.md",
+        "primary": true
+      },
+      {
+        "label": "Training Standard",
+        "href": "../../docs/BYTECAST_TRAINING_STANDARD.md"
+      },
+      {
+        "label": "Proof Schema",
+        "href": "../../docs/BYTECAST_PROOF_SCHEMA.md"
+      },
+      {
+        "label": "Playlist",
+        "href": "../../seed_bytecast.html"
+      },
+      {
+        "label": "EP-LUM-103 plan",
+        "href": "../../building blocks/LUM_BUILD_PACKS/LUM-REV-001/episodes/EP-LUM-103.md"
+      }
+    ]
+  },
+  "navigation": {
+    "previous_href": "../lumina_rev_102/index.html",
+    "previous_label": "Back: EP-LUM-102"
+  },
+  "advance": {
+    "href": "../lumina_rev_104/index.html",
+    "label": "EP-LUM-104",
+    "cta": "Open EP-LUM-104",
+    "tag": "THEN",
+    "description": "Complete EP-LUM-103 gates, then continue into Find the Real Need."
+  },
+  "routing": {
+    "slug": "lumina_rev_103",
+    "journey_id": "lumina_revenue_v1",
+    "listen_step": "lum103_listen",
+    "slide_step": "lum103_slide",
+    "engage_step": "lum103_engage",
+    "storage_prefix": "lumina_rev_103"
+  },
+  "engagement": {
+    "quest": {
+      "title": "EP-LUM-103 practice checklist",
+      "prompt": "Use the quest to sharpen division voice before you move into discovery.",
+      "items": [
+        {
+          "id": "q1",
+          "text": "Pick three divisions and describe how each one should feel in a sales conversation."
+        },
+        {
+          "id": "q2",
+          "text": "Say one phrase that would sound wrong for Nexus and why."
+        },
+        {
+          "id": "q3",
+          "text": "Say one phrase that would sound wrong for Vespera and why."
+        },
+        {
+          "id": "q4",
+          "text": "Rewrite one generic line so it sounds clearly like the correct division."
+        }
+      ]
+    },
+    "quiz": {
+      "enabled": true,
+      "pass_threshold": 0.8,
+      "prompt": "Pass the brand-fit check before moving into discovery and qualification.",
+      "questions": [
+        {
+          "id": "lum103_q1",
+          "q": "Which lane should feel most systems-minded and technically reliable?",
+          "choices": [
+            "Nexus",
+            "EchoVerse",
+            "Horizon"
+          ],
+          "answer_index": 0,
+          "explain": "That tone belongs to Nexus."
+        },
+        {
+          "id": "lum103_q2",
+          "q": "Which lane should sound most editorial and authored?",
+          "choices": [
+            "Vespera",
+            "Lumina",
+            "SkyForge"
+          ],
+          "answer_index": 0,
+          "explain": "Vespera carries the authored-content trust style."
+        },
+        {
+          "id": "lum103_q3",
+          "q": "Which pair best matches expressive sonic work and interactive experience work?",
+          "choices": [
+            "EchoVerse then SkyForge",
+            "Summit then Horizon",
+            "Lumina then Nexus"
+          ],
+          "answer_index": 0,
+          "explain": "EchoVerse is sonic; SkyForge is interactive."
+        },
+        {
+          "id": "lum103_q4",
+          "q": "Why are brand differences useful in sales?",
+          "choices": [
+            "They make every lane sound the same",
+            "They help the buyer trust the right kind of work",
+            "They remove the need for discovery"
+          ],
+          "answer_index": 1,
+          "explain": "Tone helps the offer feel credible for the actual lane."
+        },
+        {
+          "id": "lum103_q5",
+          "q": "Which rewrite sounds most like Nexus?",
+          "choices": [
+            "We create unforgettable story worlds that audiences can step into",
+            "We replace manual workflow with dependable systems and automation",
+            "We craft editorial experiences that read like a polished imprint"
+          ],
+          "answer_index": 1,
+          "explain": "That line fits the technical, systems-minded Nexus voice."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,698 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TR-001A â€¢ Day 1 Foundations Check</title>
+  <meta name="description" content="Day 1 understanding check after EP-001â€“004: 8 MC (â‰¥80%), two short answers, and one routing scenario." />
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml" />
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Sora:wght@500;700&family=IBM+Plex+Sans:wght@400;600&display=swap");
+    :root {
+      --bg0:#050607; --bg1:#0b0f14; --line:rgba(255,255,255,0.14); --ink:rgba(255,255,255,0.93); --muted:rgba(255,255,255,0.66);
+      --gold:#ffc45a; --neon:#22a7ff; --ok:rgba(120,255,180,0.92); --bad:rgba(255,160,160,0.92);
+      --max:980px; --radius:18px; --mono:ui-monospace,Menlo,monospace;
+    }
+    *{box-sizing:border-box;}
+    body{margin:0;font-family:"IBM Plex Sans",sans-serif;color:var(--ink);min-height:100vh;padding:18px;
+      background:radial-gradient(1000px 500px at 10% 0%,rgba(34,167,255,0.12),transparent),linear-gradient(180deg,var(--bg0),var(--bg1));}
+    .shell{max-width:var(--max);margin:0 auto;}
+    .skip{position:absolute;left:-999px;top:8px;background:#000;color:#fff;padding:10px 12px;border-radius:10px;z-index:99;}
+    .skip:focus{left:12px;}
+    .navtop{position:sticky;top:0;z-index:20;margin:-8px -8px 14px;padding:10px 8px;
+      backdrop-filter:blur(10px);background:linear-gradient(180deg,rgba(5,6,7,0.9),rgba(5,6,7,0.75));border-bottom:1px solid var(--line);border-radius:0 0 12px 12px;}
+    .navtop__inner{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
+    .navtop a{font-size:0.82rem;padding:6px 12px;border-radius:999px;border:1px solid var(--line);color:var(--ink);text-decoration:none;background:rgba(255,255,255,0.04);}
+    .navtop a:hover{border-color:rgba(34,167,255,0.4);}
+    h1{margin:0 0 4px;font-family:Sora,sans-serif;font-size:clamp(1.35rem,2.5vw,2.05rem);letter-spacing:-0.02em;}
+    .title-block{text-align:center;padding:8px 0 4px;}
+    .title-block .k{font-family:var(--mono);font-size:0.75rem;color:var(--gold);letter-spacing:0.12em;}
+    .sub{margin:0 auto;color:var(--muted);line-height:1.55;max-width:52ch;text-align:center;font-size:1.02rem;}
+    .hero{border-radius:var(--radius);border:1px solid var(--line);padding:20px 18px;margin-bottom:16px;
+      background:linear-gradient(135deg,rgba(255,255,255,0.07),rgba(255,255,255,0.02));box-shadow:0 20px 60px rgba(0,0,0,0.35);}
+    .row{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;justify-content:center;}
+    .btn{border-radius:999px;border:1px solid var(--line);padding:0.5rem 1rem;font-weight:700;background:rgba(255,255,255,0.04);color:var(--ink);cursor:pointer;text-decoration:none;font-size:0.9rem;display:inline-flex;align-items:center;gap:8px;}
+    .btn.primary{border-color:rgba(34,167,255,0.45);background:rgba(34,167,255,0.12);}
+    .btn.gold{background:linear-gradient(135deg,#ffd873,#ffba3d);color:#261700;border-color:#ffcf5f;}
+    .btn:disabled{opacity:0.45;pointer-events:none;}
+    .grid{display:grid;gap:14px;}
+    .card{border-radius:var(--radius);border:1px solid var(--line);padding:16px;background:rgba(255,255,255,0.04);}
+    h2{margin:0 0 8px;font-family:Sora,sans-serif;font-size:1.08rem;}
+    h3{margin:0 0 8px;font-family:Sora,sans-serif;font-size:0.98rem;color:var(--gold);}
+    .scene-tag{font-family:var(--mono);font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;}
+    .q{margin:0 0 8px;font-weight:600;line-height:1.45;}
+    .qopts label{display:flex;gap:10px;margin:8px 0;cursor:pointer;font-weight:400;align-items:flex-start;line-height:1.4;}
+    .qopts input{margin-top:3px;accent-color:var(--neon);}
+    textarea{width:100%;min-height:92px;border-radius:12px;border:1px solid var(--line);background:rgba(0,0,0,0.28);color:var(--ink);padding:12px;font:inherit;line-height:1.45;}
+    .status{border-radius:12px;border:1px solid rgba(255,196,90,0.35);background:rgba(255,196,90,0.1);padding:12px 14px;margin-top:10px;font-size:0.92rem;line-height:1.45;}
+    .status.ok{border-color:rgba(34,167,255,0.4);background:rgba(34,167,255,0.1);}
+    code{font-family:var(--mono);font-size:0.88rem;background:rgba(255,255,255,0.08);padding:2px 6px;border-radius:6px;}
+    ul.check{margin:8px 0 0;padding-left:1.25rem;color:var(--muted);line-height:1.55;}
+    ul.check li{margin:4px 0;}
+    details.vo{margin-top:10px;border-radius:12px;border:1px solid rgba(255,255,255,0.1);background:rgba(0,0,0,0.2);}
+    details.vo summary{cursor:pointer;padding:10px 12px;font-weight:700;list-style:none;}
+    details.vo summary::-webkit-details-marker{display:none;}
+    details.vo .vo-body{padding:0 12px 12px;color:var(--muted);font-size:0.9rem;line-height:1.55;white-space:pre-wrap;}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+    .chip{font-size:0.78rem;padding:6px 10px;border-radius:999px;border:1px solid rgba(34,167,255,0.35);background:rgba(0,0,0,0.25);}
+    .fb{margin-top:8px;padding:10px 12px;border-radius:10px;font-size:0.88rem;line-height:1.45;border:1px solid rgba(255,255,255,0.1);}
+    .fb.ok{color:var(--ok);background:rgba(0,40,24,0.35);}
+    .fb.bad{color:var(--bad);background:rgba(48,12,12,0.35);}
+    .path-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;}
+    @media(max-width:640px){.path-grid{grid-template-columns:1fr;}}
+    .path-card{border-radius:12px;border:1px solid var(--line);padding:12px;background:rgba(0,0,0,0.22);}
+    .path-card strong{display:block;margin-bottom:4px;color:var(--gold);}
+    .muted{color:var(--muted);font-size:0.9rem;line-height:1.5;}
+    .part-head{font-family:Sora,sans-serif;font-size:1.15rem;margin:0 0 10px;color:var(--ink);}
+    hr{border:none;border-top:1px solid rgba(255,255,255,0.1);margin:14px 0;}
+    .tr001a-listen-mount{margin-bottom:16px;}
+  </style>
+  <link rel="stylesheet" href="../../../assets/shared/listen_mode.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to check</a>
+  <main class="shell" id="main">
+    <nav class="navtop" aria-label="On this page">
+      <div class="navtop__inner">
+        <a href="#read-tr001a-opening">Intro</a>
+        <a href="#part1">Part 1</a>
+        <a href="#part2">Part 2</a>
+        <a href="#part3">Part 3</a>
+        <a href="#eval">Score</a>
+        <a href="#submit">Submit</a>
+      </div>
+    </nav>
+
+    <div id="listenModeMount" class="tr001a-listen-mount bytecast-listen-dim-exempt" aria-label="Listen and narration"></div>
+
+    <section class="hero" id="read-tr001a-opening">
+      <div class="title-block">
+        <div class="k">ON SCREEN</div>
+        <h1>TR-001A<br />Day 1 Foundations Check</h1>
+        <p class="sub"><strong style="color:var(--ink);">Show what you understood. Not just what you clicked.</strong></p>
+      </div>
+      <details class="vo"><summary>Voiceover â€” opening</summary>
+        <div class="vo-body">Welcome to TR-001A.
+
+This is your Day 1 Foundations Check.
+
+Up to this point, you have completed four episodes:
+Welcome to ByteCast, AeroVista 7-Division Overview, The Main Doors, and Current Truth Basics.
+
+Now it is time to confirm understanding.
+
+This matters because ByteCast is built as a sequence. The current journey loop is Listen â†’ Slide â†’ Engage â†’ Training â†’ Seed â†’ Badge, and the workflow logic places training after the earlier ByteCast cycle and before later seed work. In other words, training is where exposure turns into demonstrated understanding.
+
+Todayâ€™s check is not here to trick you.
+
+It is here to confirm five things:
+
+You understand what ByteCast is.
+You understand what AeroVista is.
+You understand the main learner-facing doors.
+You understand the difference between visibility and ownership.
+And you understand why current truth must be declared instead of guessed. The earlier Day 1 episodes were built directly around those concepts, and the internal operating model makes them central to safe onboarding.</div>
+      </details>
+      <div class="row">
+        <a class="btn" href="../../../seed_bytecast.html">Playlist</a>
+        <a class="btn" href="../../training_hub/index.html">Training Hub</a>
+        <a class="btn" href="../../../docs/day1/TR-001A_SCRIPT.md">Day 1 Review Notes</a>
+      </div>
+      <p class="muted" style="margin:14px 0 0;text-align:center;font-size:0.85rem;">Need a refresher before you submit? Review the Day 1 notes and question bank in the docs.</p>
+    </section>
+
+    <div class="grid">
+      <article class="card">
+        <span class="scene-tag">Scene 1</span>
+        <h2>What this check measures</h2>
+        <p class="muted" style="margin:0 0 8px;">On screen: checklist</p>
+        <ul class="check">
+          <li>ByteCast basics</li>
+          <li>AeroVista basics</li>
+          <li>Main doors</li>
+          <li>Current truth</li>
+          <li>Safe beginner judgment</li>
+        </ul>
+        <details class="vo"><summary>Voiceover</summary>
+          <div class="vo-body">This check measures understanding, not technical depth.
+
+You are not being asked to troubleshoot infrastructure.
+You are not being asked to use advanced tools.
+You are not being asked to do maintainer work.
+
+You are being asked to show that you understand the foundation.
+
+That foundation is enough for Day 1.
+
+If you can show that clearly, you are ready to continue.</div>
+        </details>
+      </article>
+
+      <article class="card">
+        <span class="scene-tag">Scene 2</span>
+        <h2>Instructions</h2>
+        <p class="muted" style="margin:0 0 8px;"><strong>Format</strong></p>
+        <ul class="check">
+          <li>Multiple choice (Part 1)</li>
+          <li>Short answer (Part 2)</li>
+          <li>One scenario (Part 3)</li>
+        </ul>
+        <details class="vo"><summary>Voiceover</summary>
+          <div class="vo-body">This check has three parts.
+
+First, a short multiple-choice section.
+
+Second, a short written response section.
+
+Third, one simple scenario.
+
+Take your time.
+
+The goal is not speed.
+The goal is clarity.
+
+If you are unsure, do not guess wildly.
+Use the mental model from Day 1:
+What is the job?
+Which door fits that job?
+Which system owns the truth?
+What should be verified instead of assumed?</div>
+        </details>
+      </article>
+
+      <article class="card" id="part1">
+        <span class="scene-tag">Scene 3 Â· Part 1</span>
+        <h2 class="part-head">Part 1 â€” Quick Check</h2>
+        <p class="muted" style="margin:0 0 12px;">Eight questions. Use <strong>Grade Part 1</strong> to see feedback. Need <strong>â‰¥80%</strong> (at least 7 of 8 correct) to finish this check.</p>
+        <details class="vo"><summary>Voiceover</summary>
+          <div class="vo-body">Letâ€™s begin.</div>
+        </details>
+        <div id="mc"></div>
+        <div class="row" style="justify-content:flex-start;margin-top:14px;">
+          <button type="button" class="btn primary" id="gradeMc">Grade Part 1</button>
+        </div>
+      </article>
+
+      <article class="card" id="part2">
+        <span class="scene-tag">Scene 4 Â· Part 2</span>
+        <h2 class="part-head">Part 2 â€” Explain it in your own words</h2>
+        <details class="vo"><summary>Voiceover</summary>
+          <div class="vo-body">Now the written section.
+
+This is where you show that the ideas make sense to you in plain language.
+
+Short, clear, and honest is better than long and vague.</div>
+        </details>
+        <label class="q" for="w1">Prompt 1: In one or two sentences, explain what ACOS is.</label>
+        <textarea id="w1" placeholder="At least 20 characters." autocomplete="off"></textarea>
+        <p class="muted" style="margin:8px 0 0;font-size:0.82rem;"><strong>Review guide:</strong> Strong answers name ACOS as the cockpit / awareness layer for cross-system visibility, with drill-in â€” not owning every raw record.</p>
+
+        <label class="q" for="w2" style="margin-top:16px;display:block;">Prompt 2: In one or two sentences, explain what SOT is protecting against.</label>
+        <textarea id="w2" placeholder="At least 20 characters." autocomplete="off"></textarea>
+        <p class="muted" style="margin:8px 0 0;font-size:0.82rem;"><strong>Review guide:</strong> Strong answers mention declared current trust, ambiguity, drift, or accidental trust.</p>
+      </article>
+
+      <article class="card" id="part3">
+        <span class="scene-tag">Scene 5 Â· Part 3</span>
+        <h2 class="part-head">Part 3 â€” Choose the path</h2>
+        <details class="vo"><summary>Voiceover</summary>
+          <div class="vo-body">Now the scenario.
+
+This is the part that checks judgment.</div>
+        </details>
+        <p class="q">You return tomorrow and need to do two things: (1) resume your learning path, (2) find organized standards or governance information. <strong>Which two doors do you use, in order?</strong></p>
+        <div class="qopts" id="scenario"></div>
+      </article>
+
+      <article class="card" id="eval">
+        <span class="scene-tag">Scene 6â€“7</span>
+        <h2>How this is evaluated</h2>
+        <p class="muted" style="margin:0;">Multiple choice â†’ baseline recognition. Short answers â†’ plain language. Scenario â†’ judgment.</p>
+        <p class="muted" style="margin:10px 0 0;"><strong>Pass target:</strong> â‰¥80% on Part 1, <strong>both</strong> short answers completed (20+ characters each), scenario correct.</p>
+        <hr />
+        <h3>If you need to retry</h3>
+        <p class="muted" style="margin:0 0 10px;">Review the episode that matches the gap â€” calm guidance, not friction:</p>
+        <ul class="check">
+          <li><strong>EP-001</strong> â€” journey loop or doors unclear</li>
+          <li><strong>EP-002</strong> â€” ecosystem / divisions unclear</li>
+          <li><strong>EP-003</strong> â€” doors and purposes unclear</li>
+          <li><strong>EP-004</strong> â€” ACOS, SOT, Reporting, or current truth unclear</li>
+        </ul>
+        <div class="path-grid" style="margin-top:12px;">
+          <div class="path-card"><strong>Pass</strong><span class="muted">Continue toward Seed export &amp; publish on the Golden Path.</span></div>
+          <div class="path-card"><strong>Retry</strong><span class="muted">Revisit the episodes above, then return here.</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="scene-tag">Scene 8 Â· Save</span>
+        <h2>What gets saved</h2>
+        <p class="muted" style="margin:0 0 10px;">When you submit, your learning path saves the essentials so you can continue cleanly:</p>
+        <ul class="check">
+          <li>Score (Part 1)</li>
+          <li>Short answers</li>
+          <li>Scenario response</li>
+          <li>Timestamp</li>
+          <li>Pass / pending</li>
+          <li>Recommended next step</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <span class="scene-tag">Scene 9</span>
+        <h2>Quick recap</h2>
+        <div class="chips">
+          <span class="chip">ByteCast = modular learning</span>
+          <span class="chip">Playlist = discovery + resume</span>
+          <span class="chip">Training Hub = router</span>
+          <span class="chip">AeroVista = 7 peer divisions</span>
+          <span class="chip">ACOS = awareness</span>
+          <span class="chip">SOT = declared trust</span>
+          <span class="chip">Reporting = rollups</span>
+          <span class="chip">newest â‰  official</span>
+        </div>
+        <details class="vo" style="margin-top:12px;"><summary>Voiceover â€” recap</summary>
+          <div class="vo-body">Quick recap.
+
+To pass Day 1, the learner should understand these fundamentals:
+
+ByteCast is a modular learning system. 
+The Playlist is the safest learner-facing place to resume and continue. 
+Training Hub is the module router. 
+AeroVista is one ecosystem with seven peer divisions and HQ direction.
+ACOS is for awareness. 
+SOT is for declared current trust. 
+Reporting owns interpreted outputs and rollups. 
+And the newest file is not automatically the official file. 
+
+If they can hold those clearly, Day 1 worked.</div>
+        </details>
+      </article>
+
+      <article class="card" id="closing">
+        <div class="title-block">
+          <h2 style="font-size:1.35rem;">TR-001A Complete</h2>
+          <p class="sub" style="font-size:0.95rem;">After you pass and submit: <strong>Day 1 complete</strong> â€” foundation in place.</p>
+        </div>
+        <details class="vo"><summary>Voiceover â€” closing</summary>
+          <div class="vo-body">You have completed TR-001A.
+
+If you passed, you have done more than finish Day 1.
+
+You have shown that you understand the basic shape of the system, the learner path, the ecosystem, the main doors, and the safety rules around current truth.
+
+That is a strong first day.
+
+From here, the next stage can go deeper â€” but only because the foundation is now in place.
+
+When youâ€™re ready, continue to Day 2.</div>
+        </details>
+      </article>
+
+      <article class="card" id="submit">
+        <div id="lockNote" class="status">Loadingâ€¦</div>
+        <div class="row" style="margin-top:14px;justify-content:center;">
+          <button type="button" class="btn gold" id="submitProof">Save Day 1 Check</button>
+          <a class="btn primary" id="nextSeed" href="../../seed_builder_studio/seed_orchard_ui/index.html">Continue â€” Seed Orchard (Day 2 path)</a>
+        </div>
+        <p class="muted" style="margin:12px 0 0;text-align:center;font-size:0.85rem;">Your score, written responses, scenario choice, and next step are saved when this check is complete.</p>
+      </article>
+    </div>
+  </main>
+  <script src="../../../assets/shared/bytecast_loop.js"></script>
+  <script src="../../../assets/shared/listen_mode.js"></script>
+  <script>
+    const Loop = window.ByteCastLoop || null;
+    const STORAGE = "bytecast.tr001a.v2";
+
+    const MC = [
+      {
+        id: "mc1",
+        q: "1. ByteCast is best described as:",
+        choices: [
+          "one giant app that holds everything",
+          "a modular learning system made of connected packs",
+          "a raw document archive",
+          "a runtime dashboard",
+        ],
+        a: 1,
+        okFb: "Correct. ByteCast is a modular learning system built from connected packs and guided surfaces, not one giant undifferentiated app.",
+        badFb: "Not quite. ByteCast was introduced as standalone packs connected by thin shells, with the learner moving through a defined journey rather than one giant surface.",
+      },
+      {
+        id: "mc2",
+        q: "2. The safest learner-facing door to return to when you are unsure what comes next is usually:",
+        choices: [
+          "Seed Builder Studio",
+          "raw runtime registry",
+          "ByteCast Playlist",
+          "internal maintainer links",
+        ],
+        a: 2,
+        okFb: "Correct. The Playlist is designed for discovery, resume, handoff routing, and next recommended action.",
+        badFb: "Not quite. The Playlist is the learnerâ€™s main operating surface for discovery, resume, and next recommended action.",
+      },
+      {
+        id: "mc3",
+        q: "3. Training Hub is best described as:",
+        choices: [
+          "the raw data archive",
+          "the full lesson content living in one page",
+          "the learner-facing module router and quest map",
+          "the system that owns workflow truth",
+        ],
+        a: 2,
+        okFb: "Correct. Training Hub is the router and map for learning modules. It points into the packs; it is not the whole lesson library by itself.",
+        badFb: "Not quite. Training Hub is the learner-facing module router. The content lives in the packs.",
+      },
+      {
+        id: "mc4",
+        q: "4. AeroVista is best understood as:",
+        choices: [
+          "one single product with temporary side projects",
+          "a unified ecosystem with seven peer divisions and shared direction",
+          "only a publishing company",
+          "only a software platform",
+        ],
+        a: 1,
+        okFb: "Correct. AeroVista is documented as a unified platform with seven specialized peer divisions and HQ oversight.",
+        badFb: "Not quite. The key idea is one ecosystem, seven peer divisions, and shared direction.",
+      },
+      {
+        id: "mc5",
+        q: "5. ACOS is primarily for:",
+        choices: [
+          "owning every raw record in the ecosystem",
+          "unified awareness across systems",
+          "replacing all domain systems",
+          "acting as the hidden database beneath all work",
+        ],
+        a: 1,
+        okFb: "Correct. ACOS is the cockpit for awareness and cross-system visibility. Domain systems keep ownership of their own truth.",
+        badFb: "Not quite. Remember the Day 1 rule: ACOS shows the board. Domain systems own the truth.",
+      },
+      {
+        id: "mc6",
+        q: "6. SOT exists to:",
+        choices: [
+          "replace the Playlist",
+          "declare what should be treated as current and trusted",
+          "own every report in the system",
+          "hide old files from users",
+        ],
+        a: 1,
+        okFb: "Correct. SOT is the declared-trust layer for current summaries, canon paths, active-versus-legacy labeling, and project-level trust.",
+        badFb: "Not quite. SOT exists so current truth is declared instead of guessed.",
+      },
+      {
+        id: "mc7",
+        q: "7. Reporting should primarily own:",
+        choices: [
+          "raw domain truth",
+          "interpreted outputs and rollups",
+          "every workflow state change",
+          "all canon path declarations",
+        ],
+        a: 1,
+        okFb: "Correct. Reporting should own rollups and interpreted outputs rather than the raw underlying records.",
+        badFb: "Not quite. Reporting helps interpret and summarize. It should not quietly become the hidden owner of raw truth.",
+      },
+      {
+        id: "mc8",
+        q: "8. A beginner should avoid assuming that:",
+        choices: [
+          "the right door depends on the job",
+          "the newest touched file is automatically the official one",
+          "ByteCast has a defined learning sequence",
+          "the Playlist is used for resume and discovery",
+        ],
+        a: 1,
+        okFb: "Correct. One of the core Day 1 rules is that newest does not automatically mean official. Current truth must be declared.",
+        badFb: "Not quite. The operating model explicitly warns against assuming the newest touched file is the right file.",
+      },
+    ];
+
+    function loadState() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE) || "{}");
+      } catch {
+        return {};
+      }
+    }
+    function saveState(s) {
+      try {
+        localStorage.setItem(STORAGE, JSON.stringify(s));
+      } catch {}
+    }
+
+    function ep004ProofOk() {
+      if (!Loop) return true;
+      const jid = Loop.getActiveJourneyId?.() || "p1_golden_path";
+      const wf2 = Loop.ensureWorkflowV2(jid);
+      return Loop.proofMetaOk(wf2, "ep004_engage", ["engageQuizPassed", "engageQuizScore"]).ok;
+    }
+
+    function tr001aProofOk() {
+      if (!Loop) return false;
+      const jid = Loop.getActiveJourneyId?.() || "p1_golden_path";
+      const wf2 = Loop.ensureWorkflowV2(jid);
+      return Loop.proofMetaOk(wf2, "tr001a_day1_foundations", [
+        "mission",
+        "understandingCheckPassed",
+        "tr001aQuizPassed",
+        "tr001aQuizScore",
+        "tr001aWritten1",
+        "tr001aWritten2",
+        "tr001aScenarioRouting",
+        "tr001aCompletedAt",
+      ]).ok;
+    }
+
+    function mcScore() {
+      const st = loadState();
+      st.mc = st.mc || {};
+      let c = 0;
+      MC.forEach((q) => {
+        if (st.mc[q.id] === q.a) c++;
+      });
+      return c / MC.length;
+    }
+
+    function renderMC() {
+      const st = loadState();
+      st.mc = st.mc || {};
+      const graded = Boolean(st.mcGraded);
+      const el = document.getElementById("mc");
+      el.innerHTML = MC.map((item, idx) => {
+        const sel = st.mc[item.id];
+        let fb = "";
+        if (graded) {
+          if (sel === undefined || sel === null) {
+            fb = `<div class="fb bad">Pick an answer for question ${idx + 1}.</div>`;
+          } else {
+            const ok = sel === item.a;
+            fb = `<div class="fb ${ok ? "ok" : "bad"}">${ok ? item.okFb : item.badFb}</div>`;
+          }
+        }
+        return `
+        <div style="margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.08);">
+          <p class="q">${item.q}</p>
+          <div class="qopts">
+          ${item.choices
+            .map(
+              (c, ix) => `
+            <label><input type="radio" name="${item.id}" value="${ix}" ${sel === ix ? "checked" : ""} />
+            <span>${String.fromCharCode(65 + ix)}. ${c}</span></label>`
+            )
+            .join("")}
+          </div>
+          ${fb}
+        </div>`;
+      }).join("");
+
+      el.querySelectorAll("input[type=radio]").forEach((r) => {
+        r.addEventListener("change", () => {
+          const s = loadState();
+          s.mc = s.mc || {};
+          s.mc[r.name] = Number(r.value);
+          saveState(s);
+          renderMC();
+          renderLock();
+        });
+      });
+    }
+
+    function scenarioHtml(st) {
+      const opts = [
+        { v: "wrong_a", t: "Seed Builder Studio â†’ Workspace Entry" },
+        { v: "playlist_then_docs", t: "ByteCast Playlist â†’ Docs Portal" },
+        { v: "wrong_c", t: "Docs Portal â†’ Seed Builder Studio" },
+        { v: "wrong_d", t: "Training Hub â†’ Seed Builder Studio" },
+      ];
+      return opts
+        .map(
+          (o) =>
+            `<label><input type="radio" name="scen" value="${o.v}" ${st.scenario === o.v ? "checked" : ""} /> ${o.t}</label>`
+        )
+        .join("");
+    }
+
+    function renderScenario() {
+      const st = loadState();
+      const box = document.getElementById("scenario");
+      box.innerHTML = scenarioHtml(st);
+      box.querySelectorAll('input[name="scen"]').forEach((r) => {
+        r.addEventListener("change", () => {
+          const s = loadState();
+          s.scenario = r.value;
+          saveState(s);
+          renderScenario();
+          renderLock();
+        });
+      });
+    }
+
+    let inputsWired = false;
+    function wireTextareas() {
+      if (inputsWired) return;
+      inputsWired = true;
+      const w1 = document.getElementById("w1");
+      const w2 = document.getElementById("w2");
+      w1.addEventListener("input", () => {
+        const s = loadState();
+        s.w1 = w1.value;
+        saveState(s);
+        renderLock();
+      });
+      w2.addEventListener("input", () => {
+        const s = loadState();
+        s.w2 = w2.value;
+        saveState(s);
+        renderLock();
+      });
+    }
+
+    function syncTextFromState() {
+      const st = loadState();
+      const w1 = document.getElementById("w1");
+      const w2 = document.getElementById("w2");
+      if (st.w1 != null) w1.value = st.w1;
+      if (st.w2 != null) w2.value = st.w2;
+    }
+
+    function renderLock() {
+      const lock = document.getElementById("lockNote");
+      const nextSeed = document.getElementById("nextSeed");
+      const submit = document.getElementById("submitProof");
+      const st = loadState();
+      const w1 = String(document.getElementById("w1").value || "").trim();
+      const w2 = String(document.getElementById("w2").value || "").trim();
+      const score = mcScore();
+      const mcOk = score >= 0.799;
+      const scenOk = st.scenario === "playlist_then_docs";
+      const wOk = w1.length >= 20 && w2.length >= 20;
+      const pct = Math.round(score * 100);
+
+      if (!Loop) {
+        lock.textContent = "Open this page from the Playlist or local training site so your progress can be saved.";
+        lock.className = "status";
+        submit.disabled = true;
+        return;
+      }
+      if (!ep004ProofOk()) {
+        lock.textContent = "Locked: finish the EP-004 engage quiz first, then return here.";
+        lock.className = "status";
+      } else if (tr001aProofOk()) {
+        lock.textContent = "TR-001A saved. Continue to Seed Orchard when ready.";
+        lock.className = "status ok";
+      } else {
+        const parts = [];
+        parts.push(`Part 1: ${pct}% (need â‰¥80%, i.e. 7/8+)`);
+        parts.push(st.mcGraded ? "Feedback shown below each question." : 'Click "Grade Part 1" for feedback.');
+        parts.push(`Part 2: ${wOk ? "OK" : "need 20+ chars each"}`);
+        parts.push(`Part 3: ${scenOk ? "OK" : "pick correct door order"}`);
+        lock.textContent = parts.join(" Â· ");
+        lock.className = mcOk && scenOk && wOk ? "status ok" : "status";
+      }
+
+      const canSubmit = ep004ProofOk() && !tr001aProofOk() && mcOk && scenOk && wOk;
+      submit.disabled = !canSubmit;
+
+      const seedOn = tr001aProofOk();
+      nextSeed.style.pointerEvents = seedOn ? "" : "none";
+      nextSeed.style.opacity = seedOn ? "" : "0.45";
+      nextSeed.setAttribute("aria-disabled", seedOn ? "false" : "true");
+    }
+
+    document.getElementById("gradeMc").addEventListener("click", () => {
+      const s = loadState();
+      s.mcGraded = true;
+      saveState(s);
+      renderMC();
+      renderLock();
+    });
+
+    document.getElementById("submitProof").addEventListener("click", () => {
+      if (!Loop) return;
+      const st = loadState();
+      const w1 = String(document.getElementById("w1").value || "").trim();
+      const w2 = String(document.getElementById("w2").value || "").trim();
+      const score = mcScore();
+      if (score < 0.799 || st.scenario !== "playlist_then_docs" || w1.length < 20 || w2.length < 20) return;
+      if (!ep004ProofOk()) return;
+
+      const recommendedNext = "seed_orchard â€” Seed export & publish (Golden Path Day 2 track)";
+      Loop.markStepDone("tr001a_day1_foundations", {
+        mission: "tr_001a_day1_foundations",
+        moduleId: "tr_001a_day1_foundations",
+        understandingCheckPassed: true,
+        tr001aQuizPassed: true,
+        tr001aQuizScore: score,
+        tr001aMcCount: MC.length,
+        tr001aWritten1: w1,
+        tr001aWritten2: w2,
+        tr001aScenarioRouting: st.scenario,
+        tr001aCompletedAt: new Date().toISOString(),
+        tr001aRecommendedNext: recommendedNext,
+        tr001aPassOutcome: "pass",
+        version: "2026-03-22-tr001a-v2",
+      });
+      saveState({ ...st, w1, w2, submittedAt: new Date().toISOString(), mcGraded: true });
+      renderMC();
+      renderLock();
+    });
+
+    renderMC();
+    renderScenario();
+    wireTextareas();
+    syncTextFromState();
+    renderLock();
+
+    const Listen = window.ByteCastListenMode;
+    const listenMount = document.getElementById("listenModeMount");
+    if (Listen && listenMount) {
+      Listen.init({
+        mount: listenMount,
+        jsonUrl: "assets/voiceover_sections.json",
+        listenPanelId: false,
+        onListenGate: function () {},
+        hiddenAudio: null,
+        showListenTab: function () {
+          listenMount.scrollIntoView({ behavior: "smooth", block: "start" });
+        },
+        onReady(api, data) {
+          const map = data.domSectionMap || {};
+          Object.keys(map).forEach(function (domId) {
+            const el = document.getElementById(domId);
+            if (!el) return;
+            Listen.attachSectionButton(el, api, map[domId]);
+          });
+        },
+      });
+    }
+  </script>
+</body>
+</html>
+
+
+

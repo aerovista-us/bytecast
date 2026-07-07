@@ -1,6 +1,6 @@
-/**
+﻿/**
  * Division Track Journey Tests (division_aerovista_v1)
- * Tests: EP-002 listen → Offer Pack visit → Seed export → Badge
+ * Tests: EP-002 listen â†’ Offer Pack visit â†’ Seed export â†’ Badge
  */
 
 const { test, expect } = require('@playwright/test');
@@ -55,7 +55,7 @@ test.describe('Division Track Journey (division_aerovista_v1)', () => {
     await page.waitForTimeout(500);
 
     // Navigate to Offer Pack
-    await navigateAndWait(page, '/aerovista_offer_pack/app/index.html');
+    await navigateAndWait(page, '/episodes/aerovista_offer_pack/app/index.html');
 
     // Simulate offer pack visit completion
     await page.evaluate(() => {
@@ -74,7 +74,7 @@ test.describe('Division Track Journey (division_aerovista_v1)', () => {
     expect(visitDone).toBe(true);
   });
 
-  test('Full Division Track: All steps → Badge minted', async ({ page }) => {
+  test('Full Division Track: All steps â†’ Badge minted', async ({ page }) => {
     // Complete EP-002 listen
     await navigateAndWait(page, '/episodes/aerovista_7_division_overview/index.html');
     await waitForAudioReady(page);
@@ -89,7 +89,7 @@ test.describe('Division Track Journey (division_aerovista_v1)', () => {
     await page.waitForTimeout(500);
 
     // Complete Offer Pack visit
-    await navigateAndWait(page, '/aerovista_offer_pack/app/index.html');
+    await navigateAndWait(page, '/episodes/aerovista_offer_pack/app/index.html');
     await page.evaluate(() => {
       if (window.ByteCastLoop) {
         window.ByteCastLoop.markStepDone('offer_pack_visit', {
@@ -101,7 +101,7 @@ test.describe('Division Track Journey (division_aerovista_v1)', () => {
     await page.waitForTimeout(500);
 
     // Complete Seed export
-    await navigateAndWait(page, '/seed_builder_studio/seed_orchard_ui/index.html');
+    await navigateAndWait(page, '/episodes/seed_builder_studio/seed_orchard_ui/index.html');
     await page.waitForTimeout(2000);
     await page.evaluate(() => {
       if (window.ByteCastLoop) {
@@ -142,3 +142,6 @@ test.describe('Division Track Journey (division_aerovista_v1)', () => {
     expect(badgeMinted).toBe(true);
   });
 });
+
+
+

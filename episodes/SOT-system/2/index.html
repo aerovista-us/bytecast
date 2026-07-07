@@ -1,0 +1,905 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ByteCast — AeroVista: The Story Over Time</title>
+  <meta name="description" content="More entertaining ByteCast story with desktop dual-voice controls and simplified mobile single-voice mode." />
+  <style>
+    :root {
+      --bg:#06070b; --panel:rgba(12,17,31,.90); --line:rgba(137,170,255,.16); --text:#eef4ff; --muted:#9fafce;
+      --cyan:#61dfff; --blue:#6f93ff; --violet:#a07cff; --green:#54da92; --pink:#ff8fca; --amber:#ffbe68;
+      --shadow:0 24px 70px rgba(0,0,0,.46); --max:1280px;
+    }
+    * { box-sizing:border-box; }
+    html,body {
+      margin:0; padding:0; color:var(--text);
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(106,144,255,.18), transparent 30%),
+        radial-gradient(circle at top right, rgba(97,223,255,.10), transparent 24%),
+        linear-gradient(180deg, #05060a 0%, #0a0e18 42%, #06070b 100%);
+    }
+    body.embed-safe[data-embedded="true"] .embed-note { display:block; }
+    body[data-device="mobile"] .desktop-only { display:none !important; }
+    body[data-device="desktop"] .mobile-only { display:none !important; }
+    code { color:#f2f7ff; background:rgba(255,255,255,.05); padding:2px 7px; border-radius:8px; border:1px solid rgba(160,186,255,.08); }
+    .shell { width:min(calc(100% - 28px), var(--max)); margin:0 auto; padding:24px 0 72px; }
+    .hero,.panel {
+      border:1px solid var(--line); border-radius:34px; box-shadow:var(--shadow);
+      background:var(--panel); backdrop-filter:blur(14px);
+    }
+    .hero {
+      position:relative; overflow:hidden; padding:24px;
+      background:linear-gradient(135deg, rgba(106,144,255,.16), rgba(160,124,255,.08) 42%, rgba(97,223,255,.12)), rgba(9,13,24,.88);
+    }
+    .hero::before,.hero::after { content:""; position:absolute; border-radius:999px; filter:blur(18px); pointer-events:none; }
+    .hero::before { width:260px;height:260px;top:-110px;right:-90px;background:rgba(97,223,255,.18); }
+    .hero::after { width:220px;height:220px;bottom:-100px;left:-70px;background:rgba(106,144,255,.16); }
+    .brand-row { display:flex; align-items:center; justify-content:space-between; gap:18px; margin-bottom:18px; }
+    .brand-badge {
+      display:inline-flex; align-items:center; gap:12px; padding:10px 14px; border-radius:999px;
+      border:1px solid rgba(137,171,255,.2); background:rgba(7,11,23,.6);
+    }
+    .brand-mark {
+      width:26px;height:26px;border-radius:9px;position:relative;
+      background:linear-gradient(135deg,var(--cyan),var(--blue) 52%,var(--violet));
+      box-shadow:0 0 0 1px rgba(255,255,255,.05), 0 8px 24px rgba(95,140,255,.35);
+    }
+    .brand-mark::before {
+      content:""; position:absolute; inset:6px; clip-path:polygon(50% 0%,100% 100%,0% 100%);
+      background:rgba(7,11,23,.95);
+    }
+    .eyebrow { text-transform:uppercase; letter-spacing:.16em; font-size:12px; color:var(--cyan); font-weight:800; }
+    .hero-grid { display:grid; grid-template-columns:1.02fr .98fr; gap:22px; }
+    .title { font-size:clamp(34px,5vw,66px); line-height:.94; letter-spacing:-.05em; margin:10px 0 12px; max-width:10ch; }
+    .subtitle { color:var(--muted); font-size:clamp(16px,2vw,21px); line-height:1.55; margin:0 0 22px; max-width:60ch; }
+    .pill-row { display:flex; flex-wrap:wrap; gap:10px; }
+    .pill {
+      display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:999px;
+      background:rgba(255,255,255,.04); border:1px solid rgba(160,186,255,.14); color:#d7e4ff; font-size:13px;
+    }
+    .player-card { padding:18px; display:flex; flex-direction:column; gap:16px; }
+    .player-top { display:flex; align-items:center; justify-content:space-between; gap:14px; }
+    .status-chip {
+      display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px;
+      background:rgba(84,218,146,.12); color:#bff6cf; border:1px solid rgba(84,218,146,.2); font-size:12px; font-weight:800;
+    }
+    .status-dot { width:8px; height:8px; border-radius:999px; background:var(--green); box-shadow:0 0 14px rgba(84,218,146,.8); }
+    .cover {
+      position:relative; border-radius:24px; overflow:hidden; aspect-ratio:1/1; width:100%;
+      border:1px solid rgba(145,176,255,.14);
+      background:radial-gradient(circle at 18% 18%, rgba(97,223,255,.38), transparent 30%), radial-gradient(circle at 82% 18%, rgba(106,144,255,.36), transparent 30%), linear-gradient(135deg, rgba(9,14,32,.95), rgba(17,22,42,.94));
+    }
+    .cover-grid {
+      position:absolute; inset:0;
+      background-image:linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+      background-size:28px 28px;
+      mask-image:linear-gradient(180deg, rgba(255,255,255,.8), rgba(255,255,255,.08));
+    }
+    .cover-center {
+      position:absolute; inset:18px; border-radius:24px; border:1px solid rgba(149,178,255,.12);
+      display:grid; place-items:center; text-align:center; background:rgba(4,8,18,.46); padding:20px;
+    }
+    .cover-stat {
+      font-size:clamp(30px,5vw,52px); font-weight:800; letter-spacing:-.06em; line-height:1.02; margin:0;
+      background:linear-gradient(135deg,#eff8ff,#8ac8ff 55%,#beb3ff); -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+    .cover-label { margin-top:8px; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:#b8c9ea; }
+    .settings-grid { display:grid; gap:10px; grid-template-columns:1fr 1fr; }
+    .voice-layout { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .speaker-card, .mobile-card {
+      padding:14px; border-radius:18px; border:1px solid rgba(160,186,255,.12); background:rgba(255,255,255,.03);
+    }
+    .speaker-card.byte { border-color:rgba(255,143,202,.22); background:rgba(255,143,202,.06); }
+    .speaker-card.narrator { border-color:rgba(97,223,255,.22); background:rgba(97,223,255,.05); }
+    .speaker-card h4, .mobile-card h4 { margin:0 0 6px; font-size:15px; }
+    .speaker-card p, .mobile-card p { margin:0 0 12px; color:var(--muted); font-size:13px; line-height:1.5; }
+    .speaker-actions { display:grid; grid-template-columns:1fr auto; gap:8px; }
+    .speaker-status, .mobile-status { margin-top:8px; font-size:12px; color:#cad6f6; }
+    .mobile-card { border-color:rgba(255,190,104,.22); background:rgba(255,190,104,.06); }
+    .control-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+    button, select {
+      appearance:none; border:1px solid rgba(160,186,255,.14); background:rgba(255,255,255,.05); color:var(--text);
+      border-radius:14px; padding:12px 14px; font:inherit; font-size:14px; font-weight:700; cursor:pointer;
+      transition:transform 120ms ease, background 120ms ease, border-color 120ms ease;
+    }
+    button:hover, select:hover { transform:translateY(-1px); background:rgba(255,255,255,.08); border-color:rgba(160,186,255,.24); }
+    button.primary { background:linear-gradient(135deg, rgba(97,223,255,.18), rgba(106,144,255,.22)); border-color:rgba(97,223,255,.3); }
+    button:disabled { opacity:.55; cursor:not-allowed; transform:none; }
+    .progress-wrap { margin-top:2px; }
+    .progress-meta, .tts-status {
+      display:flex; justify-content:space-between; gap:12px; font-size:12px; color:#cad6f6;
+    }
+    .progress-meta { margin-bottom:8px; }
+    .progress-bar {
+      width:100%; height:10px; border-radius:999px; background:rgba(255,255,255,.08);
+      overflow:hidden; border:1px solid rgba(155,181,255,.08);
+    }
+    .progress-fill {
+      width:0%; height:100%; border-radius:inherit;
+      background:linear-gradient(90deg, var(--cyan), var(--blue), var(--violet), var(--pink));
+      transition:width 120ms linear;
+    }
+    .now-playing {
+      margin-top:12px; padding:14px; border-radius:18px; background:rgba(255,255,255,.03);
+      border:1px solid rgba(160,186,255,.1);
+    }
+    .now-kicker { font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#8fa5d6; margin-bottom:8px; }
+    .now-speaker {
+      display:inline-flex; align-items:center; gap:8px; padding:7px 10px; border-radius:999px;
+      border:1px solid rgba(160,186,255,.14); background:rgba(7,11,23,.42); font-size:12px; color:#d3e1ff; margin-bottom:10px;
+    }
+    .now-text { font-size:15px; line-height:1.7; color:#edf5ff; }
+    .player-note, .embed-note, .warning-note {
+      font-size:13px; line-height:1.58; color:var(--muted); padding:12px 14px; border-radius:14px;
+      background:rgba(255,255,255,.03); border:1px solid rgba(155,181,255,.1);
+    }
+    .embed-note { display:none; border-color:rgba(255,190,104,.24); background:rgba(255,190,104,.08); color:#ffe1bb; }
+    .warning-note { display:none; border-color:rgba(255,122,134,.24); background:rgba(255,122,134,.08); color:#ffd7dd; }
+    .content-grid { display:grid; grid-template-columns:1fr 330px; gap:20px; margin-top:22px; }
+    .section { padding:24px; margin-top:20px; }
+    .section h2 { margin:0 0 14px; font-size:clamp(26px, 3vw, 36px); letter-spacing:-.03em; }
+    .section p { margin:0; font-size:16px; line-height:1.78; color:#d8e3ff; }
+    .lede { font-size:18px!important; color:#edf5ff!important; }
+    .chapter-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin-top:18px; }
+    .chapter-card { padding:18px; border-radius:20px; background:rgba(255,255,255,.03); border:1px solid rgba(160,186,255,.10); }
+    .card-kicker { display:block; font-size:11px; text-transform:uppercase; letter-spacing:.14em; color:#8fa5d6; margin-bottom:8px; }
+    .chapter-card h3 { margin:0 0 10px; font-size:20px; letter-spacing:-.03em; }
+    .chapter-card p { color:#d6e2ff; }
+    .meta-stack { display:grid; gap:16px; position:sticky; top:18px; align-self:start; }
+    .meta-card { padding:18px; }
+    .meta-title { font-size:12px; text-transform:uppercase; letter-spacing:.14em; color:var(--cyan); margin:0 0 12px; font-weight:800; }
+    .meta-list { display:grid; gap:10px; }
+    .meta-item { background:rgba(255,255,255,.03); border:1px solid rgba(160,186,255,.1); border-radius:18px; padding:14px; }
+    .meta-label { display:block; font-size:11px; text-transform:uppercase; letter-spacing:.14em; color:#8fa5d6; margin-bottom:8px; }
+    .meta-value { display:block; font-size:15px; color:#f0f5ff; line-height:1.45; }
+    .footer { padding:24px; margin-top:24px; color:var(--muted); font-size:14px; line-height:1.7; }
+    @media (max-width:1100px) { .chapter-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:980px) {
+      .hero-grid, .content-grid { grid-template-columns:1fr; }
+      .meta-stack { position:static; }
+    }
+    @media (max-width:700px) {
+      .voice-layout, .settings-grid { grid-template-columns:1fr; }
+    }
+    @media (max-width:640px) {
+      .shell { width:min(calc(100% - 18px), var(--max)); padding-top:10px; }
+      .hero, .section, .footer { padding:18px; }
+      .chapter-grid, .control-grid, .speaker-actions { grid-template-columns:1fr; }
+      .brand-row { align-items:flex-start; flex-direction:column; }
+    }
+  </style>
+</head>
+<body class="embed-safe">
+  <main class="shell">
+    <section class="hero">
+      <div class="brand-row">
+        <div class="brand-badge">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <div>
+            <div class="eyebrow">ByteCast · More entertaining</div>
+            <div style="font-weight:700; letter-spacing:-.02em;">AeroVista — The Story Over Time</div>
+          </div>
+        </div>
+        <div class="pill-row">
+          <span class="pill">Livelier script</span>
+          <span class="pill">Desktop dual voice</span>
+          <span class="pill">Mobile single voice</span>
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">More story, less report</div>
+          <h1 class="title">Give the system a little drama.</h1>
+          <p class="subtitle">
+            This pass leans harder into tension, personality, and scene-setting. Desktop keeps the richer Narrator-plus-Byte setup. Mobile gets a lighter experience: auto-choose and one story voice, because less friction usually sounds better there.
+          </p>
+          <div class="pill-row">
+            <span class="pill">Sharper hooks</span>
+            <span class="pill">Cleaner mobile UI</span>
+            <span class="pill">Same-origin fallback</span>
+          </div>
+        </div>
+
+        <aside class="panel player-card">
+          <div class="player-top">
+            <div>
+              <div class="eyebrow">ByteCast player</div>
+              <div style="font-size:20px; font-weight:800; margin-top:4px;">Tune it to the device</div>
+            </div>
+            <span class="status-chip"><span class="status-dot"></span> Ready</span>
+          </div>
+
+          <div class="cover" aria-hidden="true">
+            <div class="cover-grid"></div>
+            <div class="cover-center">
+              <div>
+                <p class="cover-stat">Story with teeth</p>
+                <div class="cover-label">Desktop personality · mobile simplicity</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="desktop-only">
+            <div class="settings-grid">
+              <select id="modeSelect" aria-label="Playback mode"></select>
+              <button id="autoModeBtn" type="button">Auto-pick device mode</button>
+            </div>
+
+            <div class="voice-layout">
+              <div class="speaker-card narrator">
+                <h4>Narrator</h4>
+                <p>Steady spine for the bigger arc.</p>
+                <div class="speaker-actions">
+                  <select id="narratorVoiceSelect" aria-label="Narrator voice"></select>
+                  <button id="testNarratorBtn" type="button">Test</button>
+                </div>
+                <div class="speaker-status" id="narratorVoiceStatus">Loading voices…</div>
+              </div>
+
+              <div class="speaker-card byte">
+                <h4>Byte</h4>
+                <p>Color, heat, humor, and translation.</p>
+                <div class="speaker-actions">
+                  <select id="byteVoiceSelect" aria-label="Byte voice"></select>
+                  <button id="testByteBtn" type="button">Test</button>
+                </div>
+                <div class="speaker-status" id="byteVoiceStatus">Loading voices…</div>
+              </div>
+            </div>
+
+            <div class="warning-note" id="sameVoiceWarning">
+              Both roles are currently set to the same voice. That still works, but the contrast gets weaker.
+            </div>
+          </div>
+
+          <div class="mobile-only">
+            <div class="mobile-card">
+              <h4>Mobile story voice</h4>
+              <p>On mobile, one selected voice is used for the whole story to keep playback cleaner and less fiddly.</p>
+              <div class="settings-grid">
+                <button id="mobileAutoBtn" type="button">Auto-choose mobile setup</button>
+                <select id="mobileVoiceSelect" aria-label="Mobile story voice"></select>
+              </div>
+              <div class="mobile-status" id="mobileVoiceStatus">Loading voice…</div>
+            </div>
+          </div>
+
+          <div class="control-grid">
+            <button class="primary" id="ttsPlay" type="button">Start</button>
+            <button id="ttsPause" type="button">Pause</button>
+            <button id="ttsStop" type="button">Stop</button>
+          </div>
+
+          <div class="progress-wrap">
+            <div class="progress-meta">
+              <span id="currentPos">Turn 0</span>
+              <span id="duration">0 / 0</span>
+            </div>
+            <div class="progress-bar" aria-hidden="true">
+              <div class="progress-fill" id="progressFill"></div>
+            </div>
+          </div>
+
+          <div class="tts-status">
+            <span id="dataModePill">Data: loading…</span>
+            <span id="deviceModePill">Device: detecting…</span>
+          </div>
+
+          <div class="now-playing">
+            <div class="now-kicker" id="nowChapter">Waiting to start</div>
+            <div class="now-speaker" id="nowSpeaker">Speaker</div>
+            <div class="now-text" id="nowText">Pick a voice if you want, then press Start.</div>
+          </div>
+
+          <div class="player-note" id="playerNote">
+            External narration loads from <strong>./merged_story_bundle_dual_voice_v3.json</strong> when available. If fetch is blocked, the embedded fallback takes over automatically.
+          </div>
+
+          <div class="embed-note" id="embedNote">
+            Embedded mode detected. For full same-origin behavior in an iframe host, use <code>sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-downloads"</code>. Narration still works here because the story is embedded inline too.
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <div class="content-grid">
+      <div>
+        <section class="panel section">
+          <div class="eyebrow">Main story arc</div>
+          <h2>The entertaining version</h2>
+          <p class="lede">
+            The architecture is still true. It is just delivered with more teeth, more tension, and more room for Byte to make the audience feel the stakes instead of only hearing the facts.
+          </p>
+          <div class="chapter-grid">
+            
+    <article class="chapter-card">
+      <span class="card-kicker">Opening</span>
+      <h3>Before the clean architecture</h3>
+      <p>A founder story with a little swagger and a lot of hidden wiring.</p>
+    </article>
+    
+
+    <article class="chapter-card">
+      <span class="card-kicker">Beginning</span>
+      <h3>The original impulse</h3>
+      <p>The first phase was fast, useful, and a little dangerous.</p>
+    </article>
+    
+
+    <article class="chapter-card">
+      <span class="card-kicker">Pressure</span>
+      <h3>When useful things start piling up</h3>
+      <p>Success multiplies faster than structure.</p>
+    </article>
+    
+
+    <article class="chapter-card">
+      <span class="card-kicker">Complication</span>
+      <h3>The hidden cost of dependency and drift</h3>
+      <p>The monster was not scale alone. It was drift, copy-shadow, and half-visible truth.</p>
+    </article>
+    
+
+    <article class="chapter-card">
+      <span class="card-kicker">Turning Point</span>
+      <h3>From separate apps toward a platform</h3>
+      <p>The separate pieces start behaving like one machine.</p>
+    </article>
+    
+
+    <article class="chapter-card">
+      <span class="card-kicker">Turning Point</span>
+      <h3>The source of truth shift</h3>
+      <p>The islands start connecting.</p>
+    </article>
+    
+
+    <article class="chapter-card">
+      <span class="card-kicker">Turning Point</span>
+      <h3>Identity becomes a shared plane</h3>
+      <p>AVCC stops being just a screen and starts becoming presence.</p>
+    </article>
+    
+
+    <article class="chapter-card">
+      <span class="card-kicker">Maturity</span>
+      <h3>When status starts meaning something</h3>
+      <p>This is the chapter where grown-up systems are made.</p>
+    </article>
+    
+
+    <article class="chapter-card">
+      <span class="card-kicker">Maturity</span>
+      <h3>The founder changes too</h3>
+      <p>The builder becomes an operator with a narrative instinct.</p>
+    </article>
+    
+
+    <article class="chapter-card">
+      <span class="card-kicker">Now</span>
+      <h3>What the system feels like now</h3>
+      <p>The shape is finally visible, even if the cleanup is not finished.</p>
+    </article>
+    
+          </div>
+        </section>
+
+        <section class="panel section">
+          <div class="eyebrow">Operational proof</div>
+          <h2>The queue gets a memory</h2>
+          <p class="lede">
+            MMV2 is where the story cashes out. Less archaeology. Less folklore. More action plus evidence.
+          </p>
+          <div class="chapter-grid">
+            
+    <article class="chapter-card">
+      <span class="card-kicker">Operational Proof</span>
+      <h3>Where MMV2 changes the feeling of work</h3>
+      <p>The story stops being abstract and starts saving human time.</p>
+    </article>
+    
+
+    <article class="chapter-card">
+      <span class="card-kicker">Operational Scene</span>
+      <h3>Lane review triage</h3>
+      <p>The queue gets a memory and the archaeology starts dying off.</p>
+    </article>
+    
+
+    <article class="chapter-card">
+      <span class="card-kicker">Operational Scene</span>
+      <h3>Missing portfolio block completion</h3>
+      <p>No more polite fiction in the metadata.</p>
+    </article>
+    
+
+    <article class="chapter-card">
+      <span class="card-kicker">Operational Scene</span>
+      <h3>Host bound service remediation</h3>
+      <p>Routing stops depending on whoever remembers the old magic words.</p>
+    </article>
+    
+          </div>
+        </section>
+      </div>
+
+      <aside class="meta-stack">
+        <section class="panel meta-card">
+          <p class="meta-title">What changed</p>
+          <div class="meta-list">
+            <div class="meta-item">
+              <span class="meta-label">Story upgrade</span>
+              <span class="meta-value">Byte lines are punchier, more vivid, and more audience-facing. The arc feels more like a narrated build story and less like a report readout.</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Mobile simplification</span>
+              <span class="meta-value">Mobile now shows auto-choose plus one story voice instead of the full dual-voice control panel.</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Desktop control</span>
+              <span class="meta-value">Desktop still keeps separate Narrator and Byte voice selection with tests and mode presets.</span>
+            </div>
+          </div>
+        </section>
+      </aside>
+    </div>
+
+    <footer class="panel footer">
+      Keep this file as <code>index.html</code> next to <code>merged_story_bundle_dual_voice_v3.json</code>. Voice choices stay saved in the browser.
+    </footer>
+  </main>
+
+  <script id="embeddedStoryData" type="application/json">{"episodeId": "bytecast-aerovista-over-time-dual-voice", "series": "ByteCast", "title": "AeroVista — The Story Over Time", "subtitle": "A livelier ByteCast story about how scattered builds turned into a connected operating environment", "version": 4, "status": "draft", "speakers": [{"id": "narrator", "displayName": "Narrator", "role": "documentary spine", "persona": "steady, cinematic, grounded", "preferredVoiceHints": ["Microsoft Guy", "Microsoft Davis", "Google US English", "Daniel"], "rate": 0.93, "pitch": 0.96, "volume": 1.0, "sampleLine": "This is the narrator voice. Steady, grounded, and cinematic."}, {"id": "byte", "displayName": "Byte", "role": "guide, color, and audience bridge", "persona": "warm, witty, lively, a little playful", "preferredVoiceHints": ["Microsoft Aria", "Microsoft Jenny", "Samantha", "Google US English"], "rate": 1.01, "pitch": 1.08, "volume": 1.0, "sampleLine": "Hey, I am Byte. A little more sparkle, a little more personality, and a better bridge to the audience."}], "tts": {"lang": "en-US", "modeDefaultDesktop": "desktop_cinematic", "modeDefaultMobile": "mobile_story", "modePresets": {"desktop_cinematic": {"label": "Desktop · Cinematic", "rateMultiplier": 1.0, "pauseMultiplier": 1.0, "description": "Best when desktop voices sound rich and distinct."}, "desktop_tight": {"label": "Desktop · Tight", "rateMultiplier": 1.08, "pauseMultiplier": 0.72, "description": "Snappier pacing, still preserves personality."}, "mobile_balanced": {"label": "Mobile · Balanced", "rateMultiplier": 0.98, "pauseMultiplier": 0.82, "description": "Helps mobile browsers avoid sounding rushed or choppy."}, "mobile_clarity": {"label": "Mobile · Clarity", "rateMultiplier": 0.93, "pauseMultiplier": 0.95, "description": "A little slower and cleaner when mobile voices flatten too much."}, "mobile_story": {"label": "Mobile · Story", "rateMultiplier": 0.95, "pauseMultiplier": 0.9, "description": "Single-voice mobile mode with cleaner pacing and less switching strain."}}, "pauseSuggestions": {"betweenTurnsMs": 260, "betweenChaptersMs": 700, "afterBigTurnMs": 950}, "deliveryStyle": "two-voice, immersive, story-first", "mobileSingleVoice": {"enabled": true, "description": "On mobile, one selected voice is used for both Narrator and Byte to keep playback cleaner."}}, "embed": {"sameOriginNote": "If this page is embedded in an iframe, the parent host should use sandbox='allow-scripts allow-same-origin allow-forms allow-popups allow-downloads'. This page also includes an inline story fallback so narration still works when external fetch is blocked.", "dataStrategy": "external-first with inline JSON fallback"}, "chapters": [{"id": "opening", "label": "Opening", "title": "Before the clean architecture", "summary": "A founder story with a little swagger and a lot of hidden wiring.", "turns": [{"speaker": "narrator", "text": "AeroVista did not become more serious all at once. It grew from isolated builds, experiments, and tactical fixes into a more governed ecosystem.", "pauseAfterMs": 600}, {"speaker": "byte", "text": "So here is the fun part: this was never born as one elegant cathedral. It started the way real founder systems start — one fix, one tool, one late-night save at a time — until suddenly the room had become a whole city with its own weather.", "pauseAfterMs": 700}, {"speaker": "narrator", "text": "Over time, the center of gravity shifted toward shared identity, source of truth decisions, business suite extraction, cleaner ownership boundaries, and status checkpoints that made the whole system easier to trust.", "pauseAfterMs": 900}]}, {"id": "vision", "label": "Beginning", "title": "The original impulse", "summary": "The first phase was fast, useful, and a little dangerous.", "turns": [{"speaker": "narrator", "text": "The early impulse was simple: build useful things fast. Apps, tools, dashboards, sites, music systems, reporting surfaces, whatever solved a real problem in the moment.", "pauseAfterMs": 500}, {"speaker": "byte", "text": "And honestly, that chapter rules. It is creative, scrappy, slightly unhinged in the best way, and full of real momentum. The only catch is that each win carries its own tiny gravity, so the business intelligence starts living in pockets instead of one skyline.", "pauseAfterMs": 700}, {"speaker": "narrator", "text": "Much of that early strength lived as individual builds, not yet as one governed platform.", "pauseAfterMs": 850}]}, {"id": "fragmentation", "label": "Pressure", "title": "When useful things start piling up", "summary": "Success multiplies faster than structure.", "turns": [{"speaker": "narrator", "text": "As more systems came online, the work began to feel less like one product and more like a growing estate. Different apps carried different assumptions. Data handling could be local and app specific. Paths were not always consistent.", "pauseAfterMs": 550}, {"speaker": "byte", "text": "This is where the ghost story starts. Nothing explodes. Nothing even looks especially broken. But paths drift, copies get promoted above originals, and a dashboard can keep smiling while the truth quietly slips out the back door.", "pauseAfterMs": 800}]}, {"id": "dependencies", "label": "Complication", "title": "The hidden cost of dependency and drift", "summary": "The monster was not scale alone. It was drift, copy-shadow, and half-visible truth.", "turns": [{"speaker": "narrator", "text": "The strain did not come only from scale. It came from path inconsistency, repo drift, service boundaries, sync gaps, infrastructure recovery work, and questions about where the real source of truth should live.", "pauseAfterMs": 550}, {"speaker": "byte", "text": "This is the part where the soundtrack changes. You are not just shipping features anymore. You are deciding what is canon, what is a duplicate wearing lipstick, and what needs to be lovingly escorted offstage.", "pauseAfterMs": 900}]}, {"id": "convergence", "label": "Turning Point", "title": "From separate apps toward a platform", "summary": "The separate pieces start behaving like one machine.", "turns": [{"speaker": "narrator", "text": "AeroCoreOS, AVCC, NXCal, and related systems began to read less like disconnected efforts and more like parts of a converging operating environment.", "pauseAfterMs": 500}, {"speaker": "byte", "text": "That shift is huge. The question stops being, what does this app do by itself? The question becomes, what job does it hold in the larger machine, and can the rest of the ecosystem trust it under pressure?", "pauseAfterMs": 650}, {"speaker": "narrator", "text": "The goal became clearer: shared contracts, shared routing, shared reporting, clearer service boundaries, and a business layer strong enough to support many surfaces.", "pauseAfterMs": 900}]}, {"id": "source_of_truth", "label": "Turning Point", "title": "The source of truth shift", "summary": "The islands start connecting.", "turns": [{"speaker": "narrator", "text": "One of the biggest changes over time was the move away from each app reading and writing files directly as its own little island.", "pauseAfterMs": 500}, {"speaker": "byte", "text": "Old way: every app hauling around its own backpack, folders, and tiny private mythology. New way: shared business logic, explicit ownership, cleaner borders, fewer secret trap doors.", "pauseAfterMs": 900}]}, {"id": "identity", "label": "Turning Point", "title": "Identity becomes a shared plane", "summary": "AVCC stops being just a screen and starts becoming presence.", "turns": [{"speaker": "narrator", "text": "Another major step was the emergence of AVCC as a cross app identity and business plane. Shared login, profile, and badge direction started getting anchored there.", "pauseAfterMs": 600}, {"speaker": "byte", "text": "And that is not a cosmetic upgrade. Once identity becomes shared, the ecosystem stops feeling like a stack of tabs and starts feeling like an actual place where people, permissions, and progress can recognize each other on sight.", "pauseAfterMs": 950}]}, {"id": "governance", "label": "Maturity", "title": "When status starts meaning something", "summary": "This is the chapter where grown-up systems are made.", "turns": [{"speaker": "narrator", "text": "Milestones, cutovers, extraction plans, status checkpoints, work orders, and current state reports became part of the normal rhythm.", "pauseAfterMs": 450}, {"speaker": "byte", "text": "This is the adulthood chapter. Not loud. Not flashy. But this is where a system stops being impressive in demos and starts being dependable on a Tuesday when people are tired and still need the truth.", "pauseAfterMs": 850}]}, {"id": "founder_shift", "label": "Maturity", "title": "The founder changes too", "summary": "The builder becomes an operator with a narrative instinct.", "turns": [{"speaker": "narrator", "text": "The human story changed alongside the technical one. The posture evolved from rapid maker energy into operator storyteller architect energy.", "pauseAfterMs": 450}, {"speaker": "byte", "text": "Speed stays, but it gets wiser. Less pure sprint, more shape. Less can we make it work tonight, more will this still make sense six weeks from now when everyone is moving fast and nobody remembers the original workaround.", "pauseAfterMs": 900}]}, {"id": "current_state", "label": "Now", "title": "What the system feels like now", "summary": "The shape is finally visible, even if the cleanup is not finished.", "turns": [{"speaker": "narrator", "text": "Today the strongest pattern is platform convergence. The system increasingly behaves like a portfolio with divisions, shared identity, shared business logic, shared reporting surfaces, and more explicit boundaries between responsibilities.", "pauseAfterMs": 550}, {"speaker": "byte", "text": "It is still messy in places, sure. But now the mess has edges. The destination is visible. Cleanup starts feeling less like random labor and more like tuning an engine that finally wants to run as one thing.", "pauseAfterMs": 950}]}, {"id": "mmv2_intro", "label": "Operational Proof", "title": "Where MMV2 changes the feeling of work", "summary": "The story stops being abstract and starts saving human time.", "turns": [{"speaker": "narrator", "text": "The practical value of the new operating model becomes easier to understand through MMV2. Context gets attached to the queue, and suddenly the work changes shape.", "pauseAfterMs": 500}, {"speaker": "byte", "text": "This is my favorite turn in the whole story, because the architecture finally cashes out in human time. The queue stops saying, good luck. It starts saying, here is the thing, here is the context, now go make the call.", "pauseAfterMs": 950}]}, {"id": "mmv2_lane_review", "label": "Operational Scene", "title": "Lane review triage", "summary": "The queue gets a memory and the archaeology starts dying off.", "turns": [{"speaker": "narrator", "text": "Before enrichment, a mismatch is visible but the reason is not. AeroVista Pitch Studio shows assigned lane fund and suggested lane lumina. The reviewer sees the action, but not the explanation.", "pauseAfterMs": 520}, {"speaker": "byte", "text": "That old flow was not review. That was archaeology with tabs. Open docs, open repos, search history, summon an old memory, hope the answer shows up before your patience dies.", "pauseAfterMs": 700}, {"speaker": "narrator", "text": "After enrichment, nearby memory includes prior decision notes, related stack references, and architectural notes tied to that project root. The reviewer can keep fund, move to lumina, or defer with an explicit reason in one pass.", "pauseAfterMs": 950}]}, {"id": "mmv2_metadata", "label": "Operational Scene", "title": "Missing portfolio block completion", "summary": "No more polite fiction in the metadata.", "turns": [{"speaker": "narrator", "text": "Before enrichment, fields like system role, commercial status, and decision notes often get filled from memory. That creates uneven quality and follow up cleanup work.", "pauseAfterMs": 480}, {"speaker": "byte", "text": "And that is how polite fiction sneaks into a system. Not because people are careless. Because the context is missing, so the human has to improvise and call it structure.", "pauseAfterMs": 700}, {"speaker": "narrator", "text": "After enrichment, the reviewer gets project purpose text, owner clues, and similar project metadata. The block is filled from nearby evidence, not approximation.", "pauseAfterMs": 950}]}, {"id": "mmv2_routing", "label": "Operational Scene", "title": "Host bound service remediation", "summary": "Routing stops depending on whoever remembers the old magic words.", "turns": [{"speaker": "narrator", "text": "Before enrichment, a host bound service list shows ports, but not enough story to fix routing cleanly. Remediation depends on tribal knowledge.", "pauseAfterMs": 480}, {"speaker": "byte", "text": "Which is great if your infrastructure strategy is folklore. Terrible if your goal is repeatability. The right answer should not require a campfire, a senior engineer, and a lucky guess.", "pauseAfterMs": 700}, {"speaker": "narrator", "text": "After enrichment, route conventions, infrastructure notes, and linked app or domain references arrive with the queue item. The path from host bound to front door route gets faster and more consistent.", "pauseAfterMs": 1000}]}, {"id": "outro", "label": "Outro", "title": "The line worth keeping", "summary": "The pile of smart moves becomes a place with judgment.", "turns": [{"speaker": "narrator", "text": "Over time, AeroVista changed from a collection of useful builds into a more connected operating environment. The biggest change was not just more apps. It was shared identity, source of truth architecture, business suite extraction, status discipline, and platform thinking.", "pauseAfterMs": 650}, {"speaker": "byte", "text": "So that is the real upgrade. Not just more apps. Not just more movement. The system stopped being a pile of clever saves and started becoming a place with memory, posture, and better judgment. That is a much better story.", "pauseAfterMs": 1200}]}], "narrationOrder": ["opening", "vision", "fragmentation", "dependencies", "convergence", "source_of_truth", "identity", "governance", "founder_shift", "current_state", "mmv2_intro", "mmv2_lane_review", "mmv2_metadata", "mmv2_routing", "outro"]}</script>
+  <script>
+    const STORAGE_KEYS = {
+      narratorVoice: 'bytecast.voice.narrator',
+      byteVoice: 'bytecast.voice.byte',
+      mobileVoice: 'bytecast.voice.mobile',
+      mode: 'bytecast.mode'
+    };
+
+    const synth = window.speechSynthesis;
+    const playBtn = document.getElementById('ttsPlay');
+    const pauseBtn = document.getElementById('ttsPause');
+    const stopBtn = document.getElementById('ttsStop');
+    const modeSelect = document.getElementById('modeSelect');
+    const autoModeBtn = document.getElementById('autoModeBtn');
+    const narratorVoiceSelect = document.getElementById('narratorVoiceSelect');
+    const byteVoiceSelect = document.getElementById('byteVoiceSelect');
+    const testNarratorBtn = document.getElementById('testNarratorBtn');
+    const testByteBtn = document.getElementById('testByteBtn');
+    const narratorVoiceStatus = document.getElementById('narratorVoiceStatus');
+    const byteVoiceStatus = document.getElementById('byteVoiceStatus');
+    const sameVoiceWarning = document.getElementById('sameVoiceWarning');
+    const mobileAutoBtn = document.getElementById('mobileAutoBtn');
+    const mobileVoiceSelect = document.getElementById('mobileVoiceSelect');
+    const mobileVoiceStatus = document.getElementById('mobileVoiceStatus');
+    const currentPosEl = document.getElementById('currentPos');
+    const durationEl = document.getElementById('duration');
+    const progressFill = document.getElementById('progressFill');
+    const nowChapterEl = document.getElementById('nowChapter');
+    const nowSpeakerEl = document.getElementById('nowSpeaker');
+    const nowTextEl = document.getElementById('nowText');
+    const playerNote = document.getElementById('playerNote');
+    const dataModePill = document.getElementById('dataModePill');
+    const deviceModePill = document.getElementById('deviceModePill');
+    const embedNote = document.getElementById('embedNote');
+
+    let bundle = null;
+    let voices = [];
+    let queue = [];
+    let currentIndex = 0;
+    let paused = false;
+    let speaking = false;
+    let activeTimeout = null;
+    let dataMode = 'none';
+    let deviceType = 'desktop';
+
+    function detectEmbedded() {
+      try {
+        const embedded = window.self !== window.top;
+        document.body.dataset.embedded = embedded ? 'true' : 'false';
+        if (embedded) embedNote.style.display = 'block';
+      } catch (e) {
+        document.body.dataset.embedded = 'true';
+        embedNote.style.display = 'block';
+      }
+    }
+
+    function isMobileDevice() {
+      const ua = navigator.userAgent || '';
+      return /Android|iPhone|iPad|iPod|Mobile|Silk|Kindle|BlackBerry|Opera Mini|IEMobile/i.test(ua) || window.innerWidth < 768;
+    }
+
+    function setDeviceType() {
+      deviceType = isMobileDevice() ? 'mobile' : 'desktop';
+      document.body.dataset.device = deviceType;
+      deviceModePill.textContent = `Device: ${deviceType}`;
+    }
+
+    function getSaved(key) {
+      try { return localStorage.getItem(key); } catch (e) { return null; }
+    }
+
+    function saveSetting(key, value) {
+      try { localStorage.setItem(key, value); } catch (e) {}
+    }
+
+    function clearDelay() {
+      if (activeTimeout) {
+        clearTimeout(activeTimeout);
+        activeTimeout = null;
+      }
+    }
+
+    function stopPlayback(resetIndex = false) {
+      clearDelay();
+      if (synth) synth.cancel();
+      speaking = false;
+      paused = false;
+      if (resetIndex) currentIndex = 0;
+      if (resetIndex) setNowPlaying(null);
+      updateButtons();
+      updateProgress();
+    }
+
+    function updateButtons() {
+      playBtn.disabled = !queue.length;
+      pauseBtn.disabled = !queue.length || (!speaking && !paused);
+      stopBtn.disabled = !queue.length || (!speaking && !paused && currentIndex === 0);
+      pauseBtn.textContent = paused ? 'Resume' : 'Pause';
+    }
+
+    function updateProgress() {
+      const total = queue.length || 0;
+      const shown = total ? Math.min(currentIndex + (speaking || paused ? 1 : 0), total) : 0;
+      currentPosEl.textContent = total ? `Turn ${shown}` : 'Turn 0';
+      durationEl.textContent = `${shown} / ${total}`;
+      const pct = total ? (shown / total) * 100 : 0;
+      progressFill.style.width = `${Math.max(0, Math.min(pct, 100))}%`;
+    }
+
+    function getSpeakerById(id) {
+      return (bundle?.speakers || []).find(s => s.id === id);
+    }
+
+    function escapeHtml(s) {
+      return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function getVoiceByName(name) {
+      if (!name) return null;
+      return voices.find(v => v.name === name) || null;
+    }
+
+    function pickAutoVoice(speakerId) {
+      const speaker = getSpeakerById(speakerId);
+      if (!speaker || !voices.length) return voices[0] || null;
+      const hints = (speaker.preferredVoiceHints || []).map(h => h.toLowerCase());
+      for (const hint of hints) {
+        const found = voices.find(v => v.name.toLowerCase().includes(hint));
+        if (found) return found;
+      }
+      if (speakerId === 'byte') {
+        return voices.find(v => /^en[-_]/i.test(v.lang) && /aria|jenny|samantha|zira|female/i.test(v.name))
+            || voices.find(v => /^en[-_]/i.test(v.lang))
+            || voices[0];
+      }
+      return voices.find(v => /^en[-_]/i.test(v.lang) && /guy|davis|david|mark|male/i.test(v.name))
+          || voices.find(v => /^en[-_]/i.test(v.lang))
+          || voices[0];
+    }
+
+    function pickAutoMobileVoice() {
+      if (!voices.length) return null;
+      const hintOrder = ['jenny', 'aria', 'samantha', 'google us english', 'zira', 'davis', 'guy'];
+      for (const hint of hintOrder) {
+        const found = voices.find(v => v.name.toLowerCase().includes(hint));
+        if (found) return found;
+      }
+      return voices.find(v => /^en[-_]/i.test(v.lang)) || voices[0];
+    }
+
+    function selectedVoiceFor(speakerId) {
+      if (deviceType === 'mobile') {
+        return getVoiceByName(getSaved(STORAGE_KEYS.mobileVoice)) || pickAutoMobileVoice();
+      }
+      const storageKey = speakerId === 'byte' ? STORAGE_KEYS.byteVoice : STORAGE_KEYS.narratorVoice;
+      return getVoiceByName(getSaved(storageKey)) || pickAutoVoice(speakerId);
+    }
+
+    function populateDesktopSelect(selectEl, speakerId) {
+      if (!selectEl) return;
+      selectEl.innerHTML = ['<option value="">Auto-pick best match</option>']
+        .concat(voices.map(v => `<option value="${escapeHtml(v.name)}">${escapeHtml(v.name)} · ${escapeHtml(v.lang)}</option>`))
+        .join('');
+      selectEl.value = getSaved(speakerId === 'byte' ? STORAGE_KEYS.byteVoice : STORAGE_KEYS.narratorVoice) || '';
+    }
+
+    function populateMobileSelect() {
+      if (!mobileVoiceSelect) return;
+      mobileVoiceSelect.innerHTML = ['<option value="">Auto-pick story voice</option>']
+        .concat(voices.map(v => `<option value="${escapeHtml(v.name)}">${escapeHtml(v.name)} · ${escapeHtml(v.lang)}</option>`))
+        .join('');
+      mobileVoiceSelect.value = getSaved(STORAGE_KEYS.mobileVoice) || '';
+    }
+
+    function refreshVoices() {
+      voices = synth ? synth.getVoices() : [];
+      populateDesktopSelect(narratorVoiceSelect, 'narrator');
+      populateDesktopSelect(byteVoiceSelect, 'byte');
+      populateMobileSelect();
+      updateVoiceStatus();
+    }
+
+    function updateVoiceStatus() {
+      const narratorVoice = selectedVoiceFor('narrator');
+      const byteVoice = selectedVoiceFor('byte');
+      if (narratorVoiceStatus) narratorVoiceStatus.textContent = narratorVoice ? `Using: ${narratorVoice.name}` : 'Using browser default';
+      if (byteVoiceStatus) byteVoiceStatus.textContent = byteVoice ? `Using: ${byteVoice.name}` : 'Using browser default';
+      if (mobileVoiceStatus) mobileVoiceStatus.textContent = narratorVoice ? `Using: ${narratorVoice.name} for the full story` : 'Using browser default';
+      if (sameVoiceWarning) {
+        sameVoiceWarning.style.display = deviceType === 'desktop' && narratorVoice && byteVoice && narratorVoice.name === byteVoice.name ? 'block' : 'none';
+      }
+    }
+
+    function fillModeSelect() {
+      if (!modeSelect) return;
+      const presets = bundle?.tts?.modePresets || {};
+      const desktopPresets = Object.entries(presets).filter(([key]) => !key.startsWith('mobile_'));
+      modeSelect.innerHTML = desktopPresets.map(([key, preset]) => `<option value="${key}">${preset.label}</option>`).join('');
+      const saved = getSaved(STORAGE_KEYS.mode);
+      modeSelect.value = (saved && presets[saved] && !saved.startsWith('mobile_')) ? saved : (bundle?.tts?.modeDefaultDesktop || 'desktop_cinematic');
+      saveSetting(STORAGE_KEYS.mode, modeSelect.value);
+    }
+
+    function applyAutoDesktopMode() {
+      if (!modeSelect) return;
+      modeSelect.value = bundle?.tts?.modeDefaultDesktop || 'desktop_cinematic';
+      saveSetting(STORAGE_KEYS.mode, modeSelect.value);
+      const label = bundle?.tts?.modePresets?.[modeSelect.value]?.label || modeSelect.value;
+      playerNote.innerHTML = `Auto-picked <strong>${label}</strong> for desktop.`;
+    }
+
+    function applyAutoMobileSetup() {
+      const autoVoice = pickAutoMobileVoice();
+      if (autoVoice) {
+        saveSetting(STORAGE_KEYS.mobileVoice, autoVoice.name);
+        if (mobileVoiceSelect) mobileVoiceSelect.value = autoVoice.name;
+      } else {
+        saveSetting(STORAGE_KEYS.mobileVoice, '');
+        if (mobileVoiceSelect) mobileVoiceSelect.value = '';
+      }
+      updateVoiceStatus();
+      playerNote.innerHTML = 'Auto-picked the mobile story voice and simplified the playback path.';
+    }
+
+    function getModePreset() {
+      if (deviceType === 'mobile') {
+        return bundle?.tts?.modePresets?.[bundle?.tts?.modeDefaultMobile || 'mobile_story'] || { rateMultiplier: .95, pauseMultiplier: .9 };
+      }
+      const key = modeSelect?.value || bundle?.tts?.modeDefaultDesktop || 'desktop_cinematic';
+      return bundle?.tts?.modePresets?.[key] || { rateMultiplier: 1, pauseMultiplier: 1 };
+    }
+
+    function buildQueue() {
+      if (!bundle) return [];
+      const items = [];
+      (bundle.chapters || []).forEach((chapter, chapterIndex) => {
+        (chapter.turns || []).forEach((turn, turnIndex) => {
+          items.push({
+            chapterId: chapter.id,
+            chapterLabel: chapter.label,
+            chapterTitle: chapter.title,
+            chapterIndex,
+            turnIndex,
+            speaker: turn.speaker,
+            text: turn.text,
+            pauseAfterMs: turn.pauseAfterMs || bundle.tts?.pauseSuggestions?.betweenTurnsMs || 250
+          });
+        });
+      });
+      return items;
+    }
+
+    function setNowPlaying(item) {
+      if (!item) {
+        nowChapterEl.textContent = 'Waiting to start';
+        nowSpeakerEl.textContent = 'Speaker';
+        nowTextEl.textContent = 'Pick a voice if you want, then press Start.';
+        return;
+      }
+      nowChapterEl.textContent = `${item.chapterLabel} · ${item.chapterTitle}`;
+      nowSpeakerEl.textContent = deviceType === 'mobile' ? 'Story voice' : (item.speaker === 'byte' ? 'Byte speaking' : 'Narrator speaking');
+      nowTextEl.textContent = item.text;
+    }
+
+    function utteranceForSpeaker(speakerId, text) {
+      const speaker = getSpeakerById(speakerId) || bundle.speakers[0];
+      const mode = getModePreset();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = bundle.tts?.lang || 'en-US';
+      utterance.rate = Math.min(1.4, (speaker.rate || 1) * (mode.rateMultiplier || 1));
+      utterance.pitch = deviceType === 'mobile' ? 1.0 : (speaker.pitch || 1);
+      utterance.volume = speaker.volume ?? 1;
+      const voice = selectedVoiceFor(speakerId);
+      if (voice) utterance.voice = voice;
+      return utterance;
+    }
+
+    function testSpeakerVoice(speakerId) {
+      if (!synth || !bundle) return;
+      clearDelay();
+      synth.cancel();
+      const speaker = getSpeakerById(speakerId);
+      const utterance = utteranceForSpeaker(speakerId, speaker?.sampleLine || `${speaker?.displayName || 'Voice'} test.`);
+      synth.speak(utterance);
+    }
+
+    function speakNext(index) {
+      if (!synth || !bundle || index >= queue.length) {
+        speaking = false;
+        paused = false;
+        playerNote.innerHTML = 'Narration finished. Your voice choices stay saved in this browser.';
+        updateButtons();
+        updateProgress();
+        return;
+      }
+
+      const item = queue[index];
+      currentIndex = index;
+      speaking = true;
+      paused = false;
+      updateButtons();
+      updateProgress();
+      setNowPlaying(item);
+
+      const speaker = getSpeakerById(item.speaker) || bundle.speakers[0];
+      const utterance = utteranceForSpeaker(item.speaker, item.text);
+      utterance.onstart = () => {
+        const modeLabel = deviceType === 'mobile'
+          ? (bundle?.tts?.modePresets?.[bundle?.tts?.modeDefaultMobile || 'mobile_story']?.label || 'Mobile · Story')
+          : (bundle?.tts?.modePresets?.[modeSelect.value]?.label || modeSelect.value);
+        playerNote.innerHTML = `Reading <strong>${item.chapterTitle}</strong> with <strong>${deviceType === 'mobile' ? 'Story voice' : speaker.displayName}</strong> · mode: <strong>${modeLabel}</strong> · data: <strong>${dataMode}</strong>.`;
+      };
+      utterance.onend = () => {
+        if (paused) return;
+        const mode = getModePreset();
+        const delay = Math.round((item.pauseAfterMs || 250) * (mode.pauseMultiplier || 1));
+        activeTimeout = setTimeout(() => {
+          activeTimeout = null;
+          speakNext(index + 1);
+        }, delay);
+      };
+      utterance.onerror = () => {
+        playerNote.innerHTML = 'Browser TTS hit an error, but the story bundle is still loaded for later tries.';
+        speaking = false;
+        paused = false;
+        updateButtons();
+      };
+
+      clearDelay();
+      synth.cancel();
+      synth.speak(utterance);
+    }
+
+    async function loadBundle() {
+      const inlineText = document.getElementById('embeddedStoryData')?.textContent || '';
+      const inlineBundle = inlineText ? JSON.parse(inlineText) : null;
+      try {
+        const res = await fetch('./merged_story_bundle_dual_voice_v3.json');
+        if (!res.ok) throw new Error('external bundle fetch failed');
+        bundle = await res.json();
+        dataMode = 'external json';
+      } catch (err) {
+        bundle = inlineBundle;
+        dataMode = 'inline fallback';
+      }
+
+      if (!bundle) {
+        playerNote.innerHTML = 'No story bundle could be loaded.';
+        return;
+      }
+
+      dataModePill.textContent = `Data: ${dataMode}`;
+      setDeviceType();
+      fillModeSelect();
+      queue = buildQueue();
+      refreshVoices();
+      if (deviceType === 'mobile' && !getSaved(STORAGE_KEYS.mobileVoice)) {
+        applyAutoMobileSetup();
+      }
+      updateButtons();
+      updateProgress();
+      playerNote.innerHTML = `Loaded <strong>${queue.length}</strong> spoken turns from <strong>${dataMode}</strong>.`;
+    }
+
+    playBtn.addEventListener('click', () => {
+      if (!synth) {
+        playerNote.innerHTML = 'This browser does not support speech synthesis.';
+        return;
+      }
+      if (paused) {
+        synth.resume();
+        paused = false;
+        speaking = true;
+        playerNote.innerHTML = 'Narration resumed.';
+        updateButtons();
+        return;
+      }
+      stopPlayback(false);
+      speakNext(currentIndex);
+    });
+
+    pauseBtn.addEventListener('click', () => {
+      if (!synth || !queue.length) return;
+      clearDelay();
+      if (speaking && !paused) {
+        synth.pause();
+        paused = true;
+        speaking = false;
+        playerNote.innerHTML = 'Narration paused.';
+      } else if (paused) {
+        synth.resume();
+        paused = false;
+        speaking = true;
+        playerNote.innerHTML = 'Narration resumed.';
+      }
+      updateButtons();
+    });
+
+    stopBtn.addEventListener('click', () => {
+      stopPlayback(true);
+      playerNote.innerHTML = 'Narration stopped. Press Start to begin again from the opening.';
+    });
+
+    if (autoModeBtn) autoModeBtn.addEventListener('click', applyAutoDesktopMode);
+    if (mobileAutoBtn) mobileAutoBtn.addEventListener('click', applyAutoMobileSetup);
+
+    if (modeSelect) modeSelect.addEventListener('change', () => {
+      saveSetting(STORAGE_KEYS.mode, modeSelect.value);
+      const label = bundle?.tts?.modePresets?.[modeSelect.value]?.label || modeSelect.value;
+      playerNote.innerHTML = `Playback mode changed to <strong>${label}</strong>.`;
+    });
+
+    if (narratorVoiceSelect) narratorVoiceSelect.addEventListener('change', () => {
+      saveSetting(STORAGE_KEYS.narratorVoice, narratorVoiceSelect.value);
+      updateVoiceStatus();
+    });
+
+    if (byteVoiceSelect) byteVoiceSelect.addEventListener('change', () => {
+      saveSetting(STORAGE_KEYS.byteVoice, byteVoiceSelect.value);
+      updateVoiceStatus();
+    });
+
+    if (mobileVoiceSelect) mobileVoiceSelect.addEventListener('change', () => {
+      saveSetting(STORAGE_KEYS.mobileVoice, mobileVoiceSelect.value);
+      updateVoiceStatus();
+    });
+
+    if (testNarratorBtn) testNarratorBtn.addEventListener('click', () => testSpeakerVoice('narrator'));
+    if (testByteBtn) testByteBtn.addEventListener('click', () => testSpeakerVoice('byte'));
+
+    window.addEventListener('resize', () => {
+      const prior = deviceType;
+      setDeviceType();
+      if (prior !== deviceType) {
+        updateVoiceStatus();
+      }
+    });
+
+    detectEmbedded();
+    setDeviceType();
+    if (synth) {
+      window.speechSynthesis.onvoiceschanged = refreshVoices;
+    }
+    setNowPlaying(null);
+    updateButtons();
+    updateProgress();
+    loadBundle();
+  </script>
+</body>
+</html>

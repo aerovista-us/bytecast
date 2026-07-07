@@ -1,0 +1,233 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "episode": {
+    "code": "EP-LUM-106",
+    "title": "Turn Qualified Interest into Growth",
+    "type": "episode pack",
+    "date": "2026-03-27",
+    "runtime_target_minutes": 12,
+    "status": "active"
+  },
+  "content": {
+    "tags": [
+      "follow-up",
+      "growth",
+      "handoff",
+      "pipeline"
+    ],
+    "summary_short": "Move a qualified opportunity forward with a clear follow-up, concrete next step, and clean internal handoff.",
+    "summary_long": "This episode teaches the motion after qualification and recommendation: follow-up messaging, next-step clarity, pipeline support, and what delivery needs in the handoff.",
+    "start_here": "Listen first, then use the slides to compare weak follow-up with strong follow-up.",
+    "hero_kicker": "Growth Motion",
+    "key_line": "Interest still dies if the next step is weak."
+  },
+  "media": {
+    "audio_files": []
+  },
+  "slides": [
+    {
+      "id": "dies_without_motion",
+      "title": "Interest dies without motion",
+      "goal": "Show why follow-up matters.",
+      "bullets": [
+        "Qualification alone does not create growth.",
+        "Leads stall when the next step is fuzzy, generic, or delayed.",
+        "Momentum needs a message and an action."
+      ]
+    },
+    {
+      "id": "formula",
+      "title": "The follow-up formula",
+      "goal": "Give the learner a repeatable message shape.",
+      "bullets": [
+        "Recap the problem.",
+        "State the recommendation and the next step clearly.",
+        "Use a simple CTA that makes response easy."
+      ],
+      "takeaway": "Recap -> recommendation -> next step -> CTA."
+    },
+    {
+      "id": "marketing_pipeline",
+      "title": "Marketing supports pipeline",
+      "goal": "Connect messaging to revenue motion.",
+      "bullets": [
+        "Good follow-up is part of growth, not just polish.",
+        "Campaign framing and message consistency keep the lead moving with less friction.",
+        "Weak messaging can reopen confusion that discovery already solved."
+      ]
+    },
+    {
+      "id": "consistency",
+      "title": "Message consistency across divisions",
+      "goal": "Keep the ecosystem coherent.",
+      "bullets": [
+        "Different division voices can still feel like one credible ecosystem.",
+        "The follow-up should match the recommended lane while staying recognizably AeroVista.",
+        "Consistency reduces handoff confusion internally too."
+      ]
+    },
+    {
+      "id": "proposal_tone",
+      "title": "Proposal tone and next step",
+      "goal": "Train specific and realistic CTAs.",
+      "bullets": [
+        "Keep next steps concrete and easy to act on.",
+        "Avoid vague lines like let us know your thoughts if the path needs a real owner.",
+        "A stronger CTA sounds like: If this direction fits, we can outline the Lumina + Nexus scope and assign the intake workflow owner in the next working session."
+      ],
+      "takeaway": "Specific CTAs carry momentum better than polite vagueness."
+    },
+    {
+      "id": "handoff_notes",
+      "title": "Delivery handoff notes",
+      "goal": "Prepare delivery for a clean start.",
+      "bullets": [
+        "Delivery needs the problem, desired outcome, recommended path, and open questions.",
+        "A clean handoff note saves rework and protects buyer trust.",
+        "Useful note example: Lead wants faster response to inbound requests; message angle is trust plus speed; likely first build is intake flow before full site redesign."
+      ]
+    },
+    {
+      "id": "before_after",
+      "title": "Weak follow-up versus strong follow-up",
+      "goal": "Make quality visible.",
+      "bullets": [
+        "Weak follow-up: Thanks for chatting. We do a lot in this space and would love to help however makes sense. Why it fails: no recap, no route, no owner, no next step.",
+        "Strong follow-up: Based on the gaps in offer clarity and intake flow, we recommend Lumina + Nexus. Lumina sharpens the message and sales path; Nexus maps the intake workflow. If that fits, next step is a scoped working session this week.",
+        "This is the bridge into TR-LUM-001 and the sales brief seed artifact."
+      ],
+      "takeaway": "Strong follow-up sounds like direction, not polite drift."
+    }
+  ],
+  "references": {
+    "blurb": "Use the original lane docs plus ByteCast standards to reinforce this episode.",
+    "links": [
+      {
+        "label": "Lane Overview",
+        "href": "../../building blocks/LUM_BUILD_PACKS/LUM-REV-001/00_lane_overview.md",
+        "primary": true
+      },
+      {
+        "label": "Training Standard",
+        "href": "../../docs/BYTECAST_TRAINING_STANDARD.md"
+      },
+      {
+        "label": "Proof Schema",
+        "href": "../../docs/BYTECAST_PROOF_SCHEMA.md"
+      },
+      {
+        "label": "Playlist",
+        "href": "../../seed_bytecast.html"
+      },
+      {
+        "label": "EP-LUM-106 plan",
+        "href": "../../building blocks/LUM_BUILD_PACKS/LUM-REV-001/episodes/EP-LUM-106.md"
+      }
+    ]
+  },
+  "navigation": {
+    "previous_href": "../lumina_rev_105/index.html",
+    "previous_label": "Back: EP-LUM-105"
+  },
+  "advance": {
+    "href": "../../training_missions/tr_lum_001_revenue_routing/index.html",
+    "label": "TR-LUM-001",
+    "cta": "Open TR-LUM-001",
+    "tag": "THEN",
+    "description": "Complete the lane episodes, then prove the full workflow in the Revenue Routing Mission."
+  },
+  "routing": {
+    "slug": "lumina_rev_106",
+    "journey_id": "lumina_revenue_v1",
+    "listen_step": "lum106_listen",
+    "slide_step": "lum106_slide",
+    "engage_step": "lum106_engage",
+    "storage_prefix": "lumina_rev_106"
+  },
+  "engagement": {
+    "quest": {
+      "title": "EP-LUM-106 practice checklist",
+      "prompt": "Use the checklist to turn a recommendation into forward motion.",
+      "items": [
+        {
+          "id": "q1",
+          "text": "Write one recap sentence for a qualified lead."
+        },
+        {
+          "id": "q2",
+          "text": "Write one next-step CTA that is specific enough to act on."
+        },
+        {
+          "id": "q3",
+          "text": "Name one handoff detail delivery should always receive."
+        },
+        {
+          "id": "q4",
+          "text": "Explain why weak follow-up can waste a good discovery call."
+        }
+      ]
+    },
+    "quiz": {
+      "enabled": true,
+      "pass_threshold": 0.8,
+      "prompt": "Pass the growth-motion check before you open the capstone mission.",
+      "questions": [
+        {
+          "id": "lum106_q1",
+          "q": "What is the best first line in a follow-up?",
+          "choices": [
+            "A recap of the real problem or goal",
+            "A random feature list",
+            "An apology for asking questions"
+          ],
+          "answer_index": 0,
+          "explain": "Strong follow-up reconnects to the need immediately."
+        },
+        {
+          "id": "lum106_q2",
+          "q": "Why do next steps need to be specific?",
+          "choices": [
+            "Specific steps keep momentum easier to act on",
+            "Specificity is unprofessional",
+            "Because every lead needs the same CTA"
+          ],
+          "answer_index": 0,
+          "explain": "Specific CTAs reduce drift."
+        },
+        {
+          "id": "lum106_q3",
+          "q": "What helps delivery start cleanly?",
+          "choices": [
+            "A handoff note with context and open questions",
+            "No notes at all",
+            "Only the prospect's first message"
+          ],
+          "answer_index": 0,
+          "explain": "Handoff quality protects time and trust."
+        },
+        {
+          "id": "lum106_q4",
+          "q": "What should message consistency do?",
+          "choices": [
+            "Erase division identity",
+            "Keep the ecosystem credible while matching the lane",
+            "Make all follow-up sound identical"
+          ],
+          "answer_index": 1,
+          "explain": "Consistency and division fit can coexist."
+        },
+        {
+          "id": "lum106_q5",
+          "q": "Which follow-up line is strongest?",
+          "choices": [
+            "We would love to help however makes sense",
+            "If this direction fits, we can scope the Lumina + Nexus next step this week",
+            "Let us know your thoughts sometime"
+          ],
+          "answer_index": 1,
+          "explain": "The strongest line names the direction and gives an actionable next step."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "schema": "bytecast-infographic-voiceover-v1",
+  "slug": "av_ecosystem_map_pilot",
+  "heroSectionId": "intro",
+  "sections": [
+    {
+      "id": "intro",
+      "title": "Intro - what this pilot is for",
+      "hotspotId": "left-column",
+      "displayText": "This pilot is not asking you to admire the map. It is asking you to learn what the map helps you decide. We are using the image as a training surface, then adding the judgment layer that a poster alone cannot carry.",
+      "speakText": "This pilot is not asking you to admire the map. It is asking you to learn what the map helps you decide. We are using the image as a training surface, then adding the judgment layer that a poster alone cannot carry."
+    },
+    {
+      "id": "left-column-section",
+      "title": "The promise column as a review rubric",
+      "hotspotId": "left-column",
+      "displayText": "Start with the left column. Integrated, secure, automated, owned, and built to ship. Those should behave like review criteria. If a new tool weakens those promises, the ecosystem got noisier even if the screenshot looks better.",
+      "speakText": "Start with the left column. Integrated, secure, automated, owned, and built to ship. Those should behave like review criteria. If a new tool weakens those promises, the ecosystem got noisier even if the screenshot looks better."
+    },
+    {
+      "id": "core-platform-section",
+      "title": "Core platform and multiplied leverage",
+      "hotspotId": "core-platform",
+      "displayText": "Now look at the platform band. The useful question is not whether the platform sounds impressive. The useful question is whether the next improvement removes friction for several apps at once. If it does, it belongs in a platform conversation.",
+      "speakText": "Now look at the platform band. The useful question is not whether the platform sounds impressive. The useful question is whether the next improvement removes friction for several apps at once. If it does, it belongs in a platform conversation."
+    },
+    {
+      "id": "command-center-section",
+      "title": "Command center as coordination plane",
+      "hotspotId": "command-center",
+      "displayText": "At the center, the training layer matters most. A command center should coordinate and route. It should not swallow ownership. If a meeting ends in the center with no named owner and no proof path, the central node became confusion with better branding.",
+      "speakText": "At the center, the training layer matters most. A command center should coordinate and route. It should not swallow ownership. If a meeting ends in the center with no named owner and no proof path, the central node became confusion with better branding."
+    },
+    {
+      "id": "division-section",
+      "title": "Reading division lanes as routing cues",
+      "hotspotId": "division-lanes",
+      "displayText": "The division cards are not there to look expansive. They help you route work by outcome. Ask what is being produced, who experiences it first, and what proof should remain. Route from operating outcome, not from whichever lane name sounds most glamorous.",
+      "speakText": "The division cards are not there to look expansive. They help you route work by outcome. Ask what is being produced, who experiences it first, and what proof should remain. Route from operating outcome, not from whichever lane name sounds most glamorous."
+    },
+    {
+      "id": "shared-services-section",
+      "title": "Shared services prevent fragmentation",
+      "hotspotId": "shared-services",
+      "displayText": "The right column shows the services that stop the ecosystem from collapsing into disconnected portals. Identity, automation, notifications, shared data, and local AI are not garnish. They are the difference between a platform and a pile of apps.",
+      "speakText": "The right column shows the services that stop the ecosystem from collapsing into disconnected portals. Identity, automation, notifications, shared data, and local AI are not garnish. They are the difference between a platform and a pile of apps."
+    },
+    {
+      "id": "foundation-section",
+      "title": "Infrastructure as a risk map",
+      "hotspotId": "foundation-stack",
+      "displayText": "The foundation strip is where the claims become testable. Containers, routing, DNS, networking, databases, backups, monitoring, and source control teach the order an operator should think in when systems misbehave.",
+      "speakText": "The foundation strip is where the claims become testable. Containers, routing, DNS, networking, databases, backups, monitoring, and source control teach the order an operator should think in when systems misbehave."
+    },
+    {
+      "id": "story-section",
+      "title": "Portfolio story versus operating proof",
+      "hotspotId": "operating-story",
+      "displayText": "Finally, the bottom strip reminds us that posters tell stories faster than systems prove them. That is fine. The training win is knowing where the story ends and where accountable proof must begin.",
+      "speakText": "Finally, the bottom strip reminds us that posters tell stories faster than systems prove them. That is fine. The training win is knowing where the story ends and where accountable proof must begin."
+    }
+  ]
+}

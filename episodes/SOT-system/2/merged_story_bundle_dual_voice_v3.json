@@ -1,0 +1,412 @@
+{
+  "episodeId": "bytecast-aerovista-over-time-dual-voice",
+  "series": "ByteCast",
+  "title": "AeroVista — The Story Over Time",
+  "subtitle": "A livelier ByteCast story about how scattered builds turned into a connected operating environment",
+  "version": 4,
+  "status": "draft",
+  "speakers": [
+    {
+      "id": "narrator",
+      "displayName": "Narrator",
+      "role": "documentary spine",
+      "persona": "steady, cinematic, grounded",
+      "preferredVoiceHints": [
+        "Microsoft Guy",
+        "Microsoft Davis",
+        "Google US English",
+        "Daniel"
+      ],
+      "rate": 0.93,
+      "pitch": 0.96,
+      "volume": 1.0,
+      "sampleLine": "This is the narrator voice. Steady, grounded, and cinematic."
+    },
+    {
+      "id": "byte",
+      "displayName": "Byte",
+      "role": "guide, color, and audience bridge",
+      "persona": "warm, witty, lively, a little playful",
+      "preferredVoiceHints": [
+        "Microsoft Aria",
+        "Microsoft Jenny",
+        "Samantha",
+        "Google US English"
+      ],
+      "rate": 1.01,
+      "pitch": 1.08,
+      "volume": 1.0,
+      "sampleLine": "Hey, I am Byte. A little more sparkle, a little more personality, and a better bridge to the audience."
+    }
+  ],
+  "tts": {
+    "lang": "en-US",
+    "modeDefaultDesktop": "desktop_cinematic",
+    "modeDefaultMobile": "mobile_story",
+    "modePresets": {
+      "desktop_cinematic": {
+        "label": "Desktop · Cinematic",
+        "rateMultiplier": 1.0,
+        "pauseMultiplier": 1.0,
+        "description": "Best when desktop voices sound rich and distinct."
+      },
+      "desktop_tight": {
+        "label": "Desktop · Tight",
+        "rateMultiplier": 1.08,
+        "pauseMultiplier": 0.72,
+        "description": "Snappier pacing, still preserves personality."
+      },
+      "mobile_balanced": {
+        "label": "Mobile · Balanced",
+        "rateMultiplier": 0.98,
+        "pauseMultiplier": 0.82,
+        "description": "Helps mobile browsers avoid sounding rushed or choppy."
+      },
+      "mobile_clarity": {
+        "label": "Mobile · Clarity",
+        "rateMultiplier": 0.93,
+        "pauseMultiplier": 0.95,
+        "description": "A little slower and cleaner when mobile voices flatten too much."
+      },
+      "mobile_story": {
+        "label": "Mobile · Story",
+        "rateMultiplier": 0.95,
+        "pauseMultiplier": 0.9,
+        "description": "Single-voice mobile mode with cleaner pacing and less switching strain."
+      }
+    },
+    "pauseSuggestions": {
+      "betweenTurnsMs": 260,
+      "betweenChaptersMs": 700,
+      "afterBigTurnMs": 950
+    },
+    "deliveryStyle": "two-voice, immersive, story-first",
+    "mobileSingleVoice": {
+      "enabled": true,
+      "description": "On mobile, one selected voice is used for both Narrator and Byte to keep playback cleaner."
+    }
+  },
+  "embed": {
+    "sameOriginNote": "If this page is embedded in an iframe, the parent host should use sandbox='allow-scripts allow-same-origin allow-forms allow-popups allow-downloads'. This page also includes an inline story fallback so narration still works when external fetch is blocked.",
+    "dataStrategy": "external-first with inline JSON fallback"
+  },
+  "chapters": [
+    {
+      "id": "opening",
+      "label": "Opening",
+      "title": "Before the clean architecture",
+      "summary": "A founder story with a little swagger and a lot of hidden wiring.",
+      "turns": [
+        {
+          "speaker": "narrator",
+          "text": "AeroVista did not become more serious all at once. It grew from isolated builds, experiments, and tactical fixes into a more governed ecosystem.",
+          "pauseAfterMs": 600
+        },
+        {
+          "speaker": "byte",
+          "text": "So here is the fun part: this was never born as one elegant cathedral. It started the way real founder systems start — one fix, one tool, one late-night save at a time — until suddenly the room had become a whole city with its own weather.",
+          "pauseAfterMs": 700
+        },
+        {
+          "speaker": "narrator",
+          "text": "Over time, the center of gravity shifted toward shared identity, source of truth decisions, business suite extraction, cleaner ownership boundaries, and status checkpoints that made the whole system easier to trust.",
+          "pauseAfterMs": 900
+        }
+      ]
+    },
+    {
+      "id": "vision",
+      "label": "Beginning",
+      "title": "The original impulse",
+      "summary": "The first phase was fast, useful, and a little dangerous.",
+      "turns": [
+        {
+          "speaker": "narrator",
+          "text": "The early impulse was simple: build useful things fast. Apps, tools, dashboards, sites, music systems, reporting surfaces, whatever solved a real problem in the moment.",
+          "pauseAfterMs": 500
+        },
+        {
+          "speaker": "byte",
+          "text": "And honestly, that chapter rules. It is creative, scrappy, slightly unhinged in the best way, and full of real momentum. The only catch is that each win carries its own tiny gravity, so the business intelligence starts living in pockets instead of one skyline.",
+          "pauseAfterMs": 700
+        },
+        {
+          "speaker": "narrator",
+          "text": "Much of that early strength lived as individual builds, not yet as one governed platform.",
+          "pauseAfterMs": 850
+        }
+      ]
+    },
+    {
+      "id": "fragmentation",
+      "label": "Pressure",
+      "title": "When useful things start piling up",
+      "summary": "Success multiplies faster than structure.",
+      "turns": [
+        {
+          "speaker": "narrator",
+          "text": "As more systems came online, the work began to feel less like one product and more like a growing estate. Different apps carried different assumptions. Data handling could be local and app specific. Paths were not always consistent.",
+          "pauseAfterMs": 550
+        },
+        {
+          "speaker": "byte",
+          "text": "This is where the ghost story starts. Nothing explodes. Nothing even looks especially broken. But paths drift, copies get promoted above originals, and a dashboard can keep smiling while the truth quietly slips out the back door.",
+          "pauseAfterMs": 800
+        }
+      ]
+    },
+    {
+      "id": "dependencies",
+      "label": "Complication",
+      "title": "The hidden cost of dependency and drift",
+      "summary": "The monster was not scale alone. It was drift, copy-shadow, and half-visible truth.",
+      "turns": [
+        {
+          "speaker": "narrator",
+          "text": "The strain did not come only from scale. It came from path inconsistency, repo drift, service boundaries, sync gaps, infrastructure recovery work, and questions about where the real source of truth should live.",
+          "pauseAfterMs": 550
+        },
+        {
+          "speaker": "byte",
+          "text": "This is the part where the soundtrack changes. You are not just shipping features anymore. You are deciding what is canon, what is a duplicate wearing lipstick, and what needs to be lovingly escorted offstage.",
+          "pauseAfterMs": 900
+        }
+      ]
+    },
+    {
+      "id": "convergence",
+      "label": "Turning Point",
+      "title": "From separate apps toward a platform",
+      "summary": "The separate pieces start behaving like one machine.",
+      "turns": [
+        {
+          "speaker": "narrator",
+          "text": "AeroCoreOS, AVCC, NXCal, and related systems began to read less like disconnected efforts and more like parts of a converging operating environment.",
+          "pauseAfterMs": 500
+        },
+        {
+          "speaker": "byte",
+          "text": "That shift is huge. The question stops being, what does this app do by itself? The question becomes, what job does it hold in the larger machine, and can the rest of the ecosystem trust it under pressure?",
+          "pauseAfterMs": 650
+        },
+        {
+          "speaker": "narrator",
+          "text": "The goal became clearer: shared contracts, shared routing, shared reporting, clearer service boundaries, and a business layer strong enough to support many surfaces.",
+          "pauseAfterMs": 900
+        }
+      ]
+    },
+    {
+      "id": "source_of_truth",
+      "label": "Turning Point",
+      "title": "The source of truth shift",
+      "summary": "The islands start connecting.",
+      "turns": [
+        {
+          "speaker": "narrator",
+          "text": "One of the biggest changes over time was the move away from each app reading and writing files directly as its own little island.",
+          "pauseAfterMs": 500
+        },
+        {
+          "speaker": "byte",
+          "text": "Old way: every app hauling around its own backpack, folders, and tiny private mythology. New way: shared business logic, explicit ownership, cleaner borders, fewer secret trap doors.",
+          "pauseAfterMs": 900
+        }
+      ]
+    },
+    {
+      "id": "identity",
+      "label": "Turning Point",
+      "title": "Identity becomes a shared plane",
+      "summary": "AVCC stops being just a screen and starts becoming presence.",
+      "turns": [
+        {
+          "speaker": "narrator",
+          "text": "Another major step was the emergence of AVCC as a cross app identity and business plane. Shared login, profile, and badge direction started getting anchored there.",
+          "pauseAfterMs": 600
+        },
+        {
+          "speaker": "byte",
+          "text": "And that is not a cosmetic upgrade. Once identity becomes shared, the ecosystem stops feeling like a stack of tabs and starts feeling like an actual place where people, permissions, and progress can recognize each other on sight.",
+          "pauseAfterMs": 950
+        }
+      ]
+    },
+    {
+      "id": "governance",
+      "label": "Maturity",
+      "title": "When status starts meaning something",
+      "summary": "This is the chapter where grown-up systems are made.",
+      "turns": [
+        {
+          "speaker": "narrator",
+          "text": "Milestones, cutovers, extraction plans, status checkpoints, work orders, and current state reports became part of the normal rhythm.",
+          "pauseAfterMs": 450
+        },
+        {
+          "speaker": "byte",
+          "text": "This is the adulthood chapter. Not loud. Not flashy. But this is where a system stops being impressive in demos and starts being dependable on a Tuesday when people are tired and still need the truth.",
+          "pauseAfterMs": 850
+        }
+      ]
+    },
+    {
+      "id": "founder_shift",
+      "label": "Maturity",
+      "title": "The founder changes too",
+      "summary": "The builder becomes an operator with a narrative instinct.",
+      "turns": [
+        {
+          "speaker": "narrator",
+          "text": "The human story changed alongside the technical one. The posture evolved from rapid maker energy into operator storyteller architect energy.",
+          "pauseAfterMs": 450
+        },
+        {
+          "speaker": "byte",
+          "text": "Speed stays, but it gets wiser. Less pure sprint, more shape. Less can we make it work tonight, more will this still make sense six weeks from now when everyone is moving fast and nobody remembers the original workaround.",
+          "pauseAfterMs": 900
+        }
+      ]
+    },
+    {
+      "id": "current_state",
+      "label": "Now",
+      "title": "What the system feels like now",
+      "summary": "The shape is finally visible, even if the cleanup is not finished.",
+      "turns": [
+        {
+          "speaker": "narrator",
+          "text": "Today the strongest pattern is platform convergence. The system increasingly behaves like a portfolio with divisions, shared identity, shared business logic, shared reporting surfaces, and more explicit boundaries between responsibilities.",
+          "pauseAfterMs": 550
+        },
+        {
+          "speaker": "byte",
+          "text": "It is still messy in places, sure. But now the mess has edges. The destination is visible. Cleanup starts feeling less like random labor and more like tuning an engine that finally wants to run as one thing.",
+          "pauseAfterMs": 950
+        }
+      ]
+    },
+    {
+      "id": "mmv2_intro",
+      "label": "Operational Proof",
+      "title": "Where MMV2 changes the feeling of work",
+      "summary": "The story stops being abstract and starts saving human time.",
+      "turns": [
+        {
+          "speaker": "narrator",
+          "text": "The practical value of the new operating model becomes easier to understand through MMV2. Context gets attached to the queue, and suddenly the work changes shape.",
+          "pauseAfterMs": 500
+        },
+        {
+          "speaker": "byte",
+          "text": "This is my favorite turn in the whole story, because the architecture finally cashes out in human time. The queue stops saying, good luck. It starts saying, here is the thing, here is the context, now go make the call.",
+          "pauseAfterMs": 950
+        }
+      ]
+    },
+    {
+      "id": "mmv2_lane_review",
+      "label": "Operational Scene",
+      "title": "Lane review triage",
+      "summary": "The queue gets a memory and the archaeology starts dying off.",
+      "turns": [
+        {
+          "speaker": "narrator",
+          "text": "Before enrichment, a mismatch is visible but the reason is not. AeroVista Pitch Studio shows assigned lane fund and suggested lane lumina. The reviewer sees the action, but not the explanation.",
+          "pauseAfterMs": 520
+        },
+        {
+          "speaker": "byte",
+          "text": "That old flow was not review. That was archaeology with tabs. Open docs, open repos, search history, summon an old memory, hope the answer shows up before your patience dies.",
+          "pauseAfterMs": 700
+        },
+        {
+          "speaker": "narrator",
+          "text": "After enrichment, nearby memory includes prior decision notes, related stack references, and architectural notes tied to that project root. The reviewer can keep fund, move to lumina, or defer with an explicit reason in one pass.",
+          "pauseAfterMs": 950
+        }
+      ]
+    },
+    {
+      "id": "mmv2_metadata",
+      "label": "Operational Scene",
+      "title": "Missing portfolio block completion",
+      "summary": "No more polite fiction in the metadata.",
+      "turns": [
+        {
+          "speaker": "narrator",
+          "text": "Before enrichment, fields like system role, commercial status, and decision notes often get filled from memory. That creates uneven quality and follow up cleanup work.",
+          "pauseAfterMs": 480
+        },
+        {
+          "speaker": "byte",
+          "text": "And that is how polite fiction sneaks into a system. Not because people are careless. Because the context is missing, so the human has to improvise and call it structure.",
+          "pauseAfterMs": 700
+        },
+        {
+          "speaker": "narrator",
+          "text": "After enrichment, the reviewer gets project purpose text, owner clues, and similar project metadata. The block is filled from nearby evidence, not approximation.",
+          "pauseAfterMs": 950
+        }
+      ]
+    },
+    {
+      "id": "mmv2_routing",
+      "label": "Operational Scene",
+      "title": "Host bound service remediation",
+      "summary": "Routing stops depending on whoever remembers the old magic words.",
+      "turns": [
+        {
+          "speaker": "narrator",
+          "text": "Before enrichment, a host bound service list shows ports, but not enough story to fix routing cleanly. Remediation depends on tribal knowledge.",
+          "pauseAfterMs": 480
+        },
+        {
+          "speaker": "byte",
+          "text": "Which is great if your infrastructure strategy is folklore. Terrible if your goal is repeatability. The right answer should not require a campfire, a senior engineer, and a lucky guess.",
+          "pauseAfterMs": 700
+        },
+        {
+          "speaker": "narrator",
+          "text": "After enrichment, route conventions, infrastructure notes, and linked app or domain references arrive with the queue item. The path from host bound to front door route gets faster and more consistent.",
+          "pauseAfterMs": 1000
+        }
+      ]
+    },
+    {
+      "id": "outro",
+      "label": "Outro",
+      "title": "The line worth keeping",
+      "summary": "The pile of smart moves becomes a place with judgment.",
+      "turns": [
+        {
+          "speaker": "narrator",
+          "text": "Over time, AeroVista changed from a collection of useful builds into a more connected operating environment. The biggest change was not just more apps. It was shared identity, source of truth architecture, business suite extraction, status discipline, and platform thinking.",
+          "pauseAfterMs": 650
+        },
+        {
+          "speaker": "byte",
+          "text": "So that is the real upgrade. Not just more apps. Not just more movement. The system stopped being a pile of clever saves and started becoming a place with memory, posture, and better judgment. That is a much better story.",
+          "pauseAfterMs": 1200
+        }
+      ]
+    }
+  ],
+  "narrationOrder": [
+    "opening",
+    "vision",
+    "fragmentation",
+    "dependencies",
+    "convergence",
+    "source_of_truth",
+    "identity",
+    "governance",
+    "founder_shift",
+    "current_state",
+    "mmv2_intro",
+    "mmv2_lane_review",
+    "mmv2_metadata",
+    "mmv2_routing",
+    "outro"
+  ]
+}

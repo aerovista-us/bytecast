@@ -17,7 +17,7 @@ test.describe('Seeding Track Journey (seeding_v1)', () => {
   });
 
   test('Seed export step completion', async ({ page }) => {
-    await navigateAndWait(page, '/seed_builder_studio/seed_orchard_ui/index.html');
+    await navigateAndWait(page, '/episodes/seed_builder_studio/seed_orchard_ui/index.html');
 
     // Wait for orchard to load
     await page.waitForTimeout(2000);
@@ -42,7 +42,7 @@ test.describe('Seeding Track Journey (seeding_v1)', () => {
   });
 
   test('Seeding badge minted after export', async ({ page }) => {
-    await navigateAndWait(page, '/seed_builder_studio/seed_orchard_ui/index.html');
+    await navigateAndWait(page, '/episodes/seed_builder_studio/seed_orchard_ui/index.html');
     await page.waitForTimeout(2000);
 
     // Complete seed export
@@ -66,3 +66,4 @@ test.describe('Seeding Track Journey (seeding_v1)', () => {
     expect(badgeMinted).toBe(true);
   });
 });
+

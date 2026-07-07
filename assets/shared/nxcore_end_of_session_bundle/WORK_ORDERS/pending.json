@@ -1,0 +1,28 @@
+[
+  {
+    "id": "WO-STATS-0001",
+    "title": "Expose stats.aerocoreos.com publicly (locked down) via Cloudflare Tunnel + Access/WAF",
+    "status": "PENDING",
+    "priority": "P1",
+    "project": "AeroVista Analytics / Umami",
+    "tags": [
+      "umami",
+      "access",
+      "waf",
+      "tunnel"
+    ],
+    "acceptance_criteria": [
+      "stats.aerocoreos.com resolves publicly",
+      "HTTPS works",
+      "Dashboard protected",
+      "Tracking endpoint handled safely"
+    ],
+    "notes": "",
+    "next_steps": [
+      "Run cloudflared tunnel login",
+      "Rerun setup script",
+      "Create Access/WAF rules"
+    ],
+    "evidence": []
+  }
+]

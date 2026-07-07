@@ -8,6 +8,8 @@ const path = require('path');
  * @see https://playwright.dev/docs/test-configuration
  */
 const allBrowsers = String(process.env.BYTECAST_ALL_BROWSERS || "").trim() === "1";
+/** When "1", do not spawn Python http.server — use BYTECAST_URL (e.g. Docker Compose on :8080). */
+const useExternalServer = String(process.env.BYTECAST_USE_EXTERNAL_SERVER || "").trim() === "1";
 const outputDir = process.env.BYTECAST_PW_OUTPUT_DIR
   ? String(process.env.BYTECAST_PW_OUTPUT_DIR)
   : path.join(os.tmpdir(), 'bytecast-test-results');
@@ -49,11 +51,15 @@ module.exports = defineConfig({
     ...(allBrowsers ? [{ name: 'webkit', use: { ...devices['Desktop Safari'] } }] : []),
   ],
 
-  /* Run your local dev server before starting the tests */
-  webServer: {
-    command: 'python -m http.server 8080',
-    url: 'http://localhost:8080',
-    reuseExistingServer: !process.env.CI,
-    timeout: 120 * 1000,
-  },
+  /* Run your local dev server before starting the tests (skip when using Docker Compose). */
+  ...(useExternalServer
+    ? {}
+    : {
+        webServer: {
+          command: 'python -m http.server 8080',
+          url: 'http://localhost:8080',
+          reuseExistingServer: !process.env.CI,
+          timeout: 120 * 1000,
+        },
+      }),
 });

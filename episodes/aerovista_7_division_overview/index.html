@@ -1,10 +1,10 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en" data-theme="venta-neon">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>ByteCast EP-002</title>
-  <meta name="description" content="A high-signal overview of AeroVista's 7 divisions and how they interlock." />
+  <meta name="description" content="AeroVista mission, seven peer divisions, HQ, cross-division collaboration â€” Day 1 ecosystem map." />
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
   <style>
     :root {
@@ -137,6 +137,34 @@
       box-shadow: var(--glow-neon);
     }
 
+    .btn--quiet {
+      background: rgba(255,255,255,0.02);
+      border-color: rgba(255,255,255,0.10);
+      box-shadow: none;
+    }
+
+    .btn--quiet:hover {
+      box-shadow: none;
+      border-color: rgba(255,255,255,0.20);
+    }
+
+    .topbar .btn {
+      padding: 8px 11px;
+      font-size: 12px;
+      background: rgba(255,255,255,0.02);
+      box-shadow: none;
+      border-color: rgba(255,255,255,0.10);
+    }
+
+    .topbar .btn:hover {
+      box-shadow: none;
+      border-color: rgba(255,255,255,0.18);
+    }
+
+    .topbar .btn--primary {
+      border-color: rgba(255,255,255,0.16);
+    }
+
     .wrap {
       max-width: var(--max);
       margin: 0 auto;
@@ -179,6 +207,79 @@
       font-size: clamp(15px, 1.35vw, 18px);
       color: var(--muted);
       max-width: 62ch;
+    }
+
+    .startCard {
+      margin-top: 16px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(34,167,255,0.18);
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      box-shadow: 0 12px 40px rgba(0,0,0,0.20);
+    }
+
+    .startCard__eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: var(--faint);
+      text-transform: uppercase;
+    }
+
+    .startCard__title {
+      margin: 8px 0 6px;
+      font-size: clamp(18px, 2.1vw, 22px);
+      letter-spacing: -0.02em;
+    }
+
+    .startCard__copy {
+      margin: 0;
+      color: var(--muted);
+      max-width: 62ch;
+      line-height: 1.55;
+    }
+
+    .startCard__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .startCard__steps {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .startCard__step {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.03);
+      font-size: 12px;
+      color: rgba(255,255,255,0.74);
+    }
+
+    .startCard__step strong {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: rgba(255,255,255,0.96);
+    }
+
+    .startCard__step.is-active {
+      border-color: rgba(34,167,255,0.28);
+      background: rgba(34,167,255,0.08);
+      color: rgba(255,255,255,0.92);
+    }
+
+    .startCard__note {
+      margin: 12px 0 0;
+      max-width: 68ch;
     }
 
     .pills { display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0 0; }
@@ -281,8 +382,25 @@
     .slide.is-active { display: block; animation: slideIn .22s ease; }
     @keyframes slideIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0px); } }
 
-    .slideGrid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 16px; }
+    .slideGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
     @media (max-width: 920px) { .slideGrid { grid-template-columns: 1fr; } }
+    .slide-visual-wrap { display: grid; gap: 12px; align-content: start; min-height: 0; }
+    .slide-visual {
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.42);
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: min(220px, 42vw);
+      overflow: hidden;
+    }
+    .slide-visual svg { max-width: 100%; height: auto; display: block; }
+    .slide:not(.is-active) .bc-art :is(animate, animateTransform) { visibility: hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      .slide-visual .bc-art :is(animate, animateTransform) { display: none !important; }
+    }
 
     .card {
       border-radius: 14px;
@@ -359,6 +477,37 @@
       border-radius: 12px;
     }
 
+    .tabsHost { margin-top: 14px; }
+    .tabs__bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 14px var(--pad);
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.22);
+    }
+    .tabs__btn {
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,0.04);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-size: 13px;
+      cursor: pointer;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      transition: transform .12s ease, border-color .2s ease, box-shadow .2s ease;
+    }
+    .tabs__btn:hover {
+      transform: translateY(-1px);
+      border-color: var(--stroke2);
+    }
+    .tabs__btn.is-active {
+      border-color: rgba(34,167,255,0.4);
+      box-shadow: var(--glow-neon);
+    }
+    .tabs__panel[hidden] { display: none !important; }
+
     footer {
       margin-top: 18px;
       color: var(--faint);
@@ -370,6 +519,7 @@
       padding: 10px 2px;
     }
   </style>
+  <link rel="stylesheet" href="../../assets/shared/listen_mode.css" />
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -379,17 +529,17 @@
       <div class="badge">
         <span class="dot"></span>
         <div>
-          <div style="font-weight:900; letter-spacing:-0.01em;" id="topEp">ByteCast • EP-002</div>
-          <small style="color:var(--muted);" id="topTitle">AeroVista Overview: 7 Divisions + How They Interlock</small>
+          <div style="font-weight:900; letter-spacing:-0.01em;" id="topEp">ByteCast â€¢ EP-002</div>
+          <small style="color:var(--muted);" id="topTitle">AeroVista 7-Division Overview</small>
         </div>
       </div>
       <div class="controls">
         <a class="btn" href="../../index.html">Workspace</a>
         <a class="btn" href="../../seed_bytecast.html">ByteCast App</a>
-        <a class="btn" href="../../training_hub/index.html">Training Hub</a>
-        <a class="btn" href="../../seed_builder_studio/index.html">Seed Builder</a>
-        <button class="btn btn--primary" id="btnPrev" type="button">◀ <span style="font-family:var(--mono);">Prev</span></button>
-        <button class="btn btn--primary" id="btnNext" type="button"><span style="font-family:var(--mono);">Next</span> ▶</button>
+        <a class="btn" href="../../episodes/training_hub/index.html">Training Hub</a>
+        <a class="btn" href="../../episodes/seed_builder_studio/index.html">Seed Builder</a>
+        <button class="btn" id="btnPrev" type="button">â—€ Slide</button>
+        <button class="btn" id="btnNext" type="button">Slide â–¶</button>
       </div>
     </div>
   </div>
@@ -398,134 +548,135 @@
     <section class="hero" aria-labelledby="heroTitle">
       <div class="hero__grid">
         <div>
-          <h1 class="h-title" id="heroTitle">BYTECAST</h1>
+          <h1 class="h-title" id="heroTitle">EP-002</h1>
           <p class="h-sub" id="heroSub">Loading episode profile...</p>
 
           <div class="pills" aria-label="Episode metadata" id="metaPills"></div>
 
-          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
-            <button class="btn btn--primary" type="button" id="jumpPlayer">Jump to Player</button>
-            <button class="btn" type="button" id="jumpDivisions">Divisions + Offers</button>
-            <button class="btn" type="button" id="jumpEngage">Quest + Quiz</button>
-          </div>
-
-          <p style="margin:14px 0 0; color:var(--muted); max-width:70ch;" id="heroNote">
-            Flow: listen -> slide -> interact. Then training cycle. Then seed builder real work.
-          </p>
+          <section class="startCard" aria-label="Start here">
+            <div class="startCard__eyebrow">Start Here</div>
+            <h2 class="startCard__title">Listen first, then move across the ecosystem map.</h2>
+            <p class="startCard__copy">Start with the narrated overview, then use Slides, Divisions, and Engage in order so the company structure lands before the quiz.</p>
+            <div class="startCard__actions">
+              <button class="btn btn--primary" type="button" id="jumpListen">Start with Listen</button>
+              <button class="btn btn--quiet" type="button" id="jumpSlides">2 Slides</button>
+              <button class="btn btn--quiet" type="button" id="jumpDivisions">3 Divisions</button>
+              <button class="btn btn--quiet" type="button" id="jumpEngage">4 Engage</button>
+            </div>
+            <div class="startCard__steps" aria-label="Recommended order">
+              <span class="startCard__step is-active"><strong>1</strong> Listen</span>
+              <span class="startCard__step"><strong>2</strong> Slides</span>
+              <span class="startCard__step"><strong>3</strong> Divisions</span>
+              <span class="startCard__step"><strong>4</strong> Engage</span>
+            </div>
+            <div id="heroListenAttach" class="bytecast-listen-dim-exempt"></div>
+            <p class="muted startCard__note" id="heroNote">
+              Day 1 flow: listen â†’ slides â†’ division explorer â†’ engage quiz (80%). Then EP-003 â€” The Main Doors.
+            </p>
+          </section>
         </div>
 
         <aside class="card" aria-label="Episode status">
           <div class="callout" style="padding:16px; border-radius:18px;">
             <div class="k">AEROVISTA MAP</div>
             <p style="margin:10px 0 0; color:rgba(255,255,255,0.86); line-height:1.55;" id="keyLine">
-              Divisions protect focus and ship clearer outputs.
+              One ecosystem â€” seven peer divisions â€” HQ at the center.
             </p>
             <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
               <span class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">EP</b> EP-002</span>
-              <span class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">MODE</b> Internal</span>
+              <span class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">MODE</b> Guided Learning</span>
             </div>
           </div>
         </aside>
       </div>
     </section>
 
-    <section class="panel" aria-label="Workspace app map">
-      <div class="panel__top">
-        <div class="panel__meta">
-          <h2>Cross-App Visual Lanes</h2>
-          <p>EP-002 now uses the same animated SVG navigator as the rest of the core pages.</p>
-        </div>
+    <section class="panel tabsHost" id="lessonTabs" aria-label="Episode lesson">
+      <div class="tabs__bar" role="tablist" aria-label="Lesson sections">
+        <button type="button" class="tabs__btn is-active" role="tab" id="tab-listen" aria-selected="true" aria-controls="listen-panel">1 Listen</button>
+        <button type="button" class="tabs__btn" role="tab" id="tab-lesson-slides" aria-selected="false" aria-controls="lesson-slides">2 Slides</button>
+        <button type="button" class="tabs__btn" role="tab" id="tab-divisions" aria-selected="false" aria-controls="divisions">3 Divisions</button>
+        <button type="button" class="tabs__btn" role="tab" id="tab-engage" aria-selected="false" aria-controls="engage">4 Engage</button>
       </div>
-      <div class="panel__body">
-        <svg viewBox="0 0 1240 430" role="img" aria-label="Workspace map" style="width:100%; height:auto; display:block; border-radius:12px; border:1px solid rgba(255,255,255,0.14); background:rgba(0,0,0,0.24);">
-          <style>
-            .m-lane{fill:none;stroke-width:3;stroke-linecap:round;stroke-dasharray:12 12;animation:m-dash 12s linear infinite;opacity:.9}
-            .m-b{stroke:#22a7ff}.m-g{stroke:#ffc45a}.m-v{stroke:#a66bff}.m-o{stroke:#ff6a2a}
-            .m-dot{filter:drop-shadow(0 0 6px rgba(255,255,255,.45))}
-            .m-node{cursor:pointer;transform-box:fill-box;transform-origin:center;animation:m-float 5.8s ease-in-out infinite}
-            .m-n1{animation-delay:-1s}.m-n2{animation-delay:-2s}.m-n3{animation-delay:-3s}.m-n4{animation-delay:-4s}
-            .m-box{fill:rgba(8,12,18,.82);stroke-width:2}.m-sb{stroke:#22a7ff}.m-st{stroke:#ffc45a}.m-ss{stroke:#a66bff}.m-so{stroke:#ff6a2a}.m-se{stroke:#8fd9ff}
-            .m-t{fill:#f4fbff;font:700 20px Sora,Segoe UI,sans-serif}.m-s{fill:rgba(255,255,255,.72);font:14px 'IBM Plex Sans',Segoe UI,sans-serif}
-            @keyframes m-dash{from{stroke-dashoffset:220}to{stroke-dashoffset:0}}
-            @keyframes m-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
-            @media (prefers-reduced-motion: reduce){.m-lane,.m-node{animation:none}}
-          </style>
-          <defs>
-            <path id="m1" d="M 420 205 C 530 118, 645 95, 780 102" />
-            <path id="m2" d="M 420 232 C 540 312, 655 334, 780 328" />
-            <path id="m3" d="M 420 220 C 500 220, 600 220, 680 220" />
-            <path id="m4" d="M 280 182 C 236 130, 206 108, 164 92" />
-            <path id="m5" d="M 300 254 C 244 306, 206 335, 164 350" />
-          </defs>
-          <rect x="0" y="0" width="1240" height="430" fill="#0c121b"/>
-          <path class="m-lane m-b" d="M 420 205 C 530 118, 645 95, 780 102" />
-          <path class="m-lane m-v" d="M 420 232 C 540 312, 655 334, 780 328" />
-          <path class="m-lane m-o" d="M 420 220 C 500 220, 600 220, 680 220" />
-          <path class="m-lane m-g" d="M 280 182 C 236 130, 206 108, 164 92" />
-          <path class="m-lane m-g" d="M 300 254 C 244 306, 206 335, 164 350" />
-          <circle class="m-dot" r="4" fill="#22a7ff"><animateMotion dur="4.6s" repeatCount="indefinite"><mpath href="#m1"/></animateMotion></circle>
-          <circle class="m-dot" r="4" fill="#a66bff"><animateMotion dur="4.9s" repeatCount="indefinite"><mpath href="#m2"/></animateMotion></circle>
-          <circle class="m-dot" r="4" fill="#ff6a2a"><animateMotion dur="5.2s" repeatCount="indefinite"><mpath href="#m3"/></animateMotion></circle>
-          <circle class="m-dot" r="3.6" fill="#ffc45a"><animateMotion dur="4.4s" repeatCount="indefinite"><mpath href="#m4"/></animateMotion></circle>
-          <circle class="m-dot" r="3.6" fill="#ffc45a"><animateMotion dur="5.1s" repeatCount="indefinite"><mpath href="#m5"/></animateMotion></circle>
-          <a href="../../seed_bytecast.html"><g class="m-node m-n1"><rect class="m-box m-sb" x="210" y="160" width="220" height="120" rx="20"/><text class="m-t" x="234" y="208">ByteCast</text><text class="m-s" x="234" y="230">episode player app</text></g></a>
-          <a href="../../training_hub/index.html"><g class="m-node m-n2"><rect class="m-box m-st" x="780" y="48" width="240" height="110" rx="18"/><text class="m-t" x="804" y="92">Training Hub</text><text class="m-s" x="804" y="114">onboarding and modules</text></g></a>
-          <a href="../../seed_builder_studio/index.html"><g class="m-node m-n3"><rect class="m-box m-ss" x="780" y="272" width="240" height="110" rx="18"/><text class="m-t" x="804" y="316">Seed Builder</text><text class="m-s" x="804" y="338">tooling and generation</text></g></a>
-          <a href="../../aerovista_offer_pack/app/index.html"><g class="m-node m-n4"><rect class="m-box m-so" x="668" y="170" width="170" height="96" rx="16"/><text class="m-t" x="690" y="208" style="font-size:18px;">Offer Pack</text><text class="m-s" x="690" y="229">sales reference</text></g></a>
-          <a href="../../episodes/welcome_to_bytecast/index.html"><g class="m-node m-n2"><rect class="m-box m-se" x="36" y="48" width="210" height="72" rx="14"/><text class="m-t" x="58" y="89" style="font-size:16px;">EP-001</text></g></a>
-          <a href="../../episodes/aerovista_7_division_overview/index.html"><g class="m-node m-n3"><rect class="m-box m-se" x="36" y="314" width="210" height="72" rx="14"/><text class="m-t" x="58" y="355" style="font-size:16px;">EP-002</text></g></a>
-          <a href="../../index.html"><g class="m-node m-n4"><rect class="m-box m-se" x="1038" y="170" width="166" height="96" rx="16"/><text class="m-t" x="1062" y="208" style="font-size:17px;">Workspace</text><text class="m-s" x="1062" y="229">all app entry</text></g></a>
-        </svg>
-      </div>
-    </section>
 
-    <section class="panel" id="player">
+      <div id="listen-panel" class="tabs__panel" role="tabpanel" aria-labelledby="tab-listen">
       <div class="panel__top">
         <div class="panel__meta">
-          <h2>Episode Audio</h2>
-          <p>Episode AAC: <span style="font-family:var(--mono);">aerovista_7_division_overview.aac</span> (fallback: <span style="font-family:var(--mono);">assets/bytecast-ep2.mp3</span>).</p>
+          <h2>Listen</h2>
+          <p id="audioLine">Narration from <span style="font-family:var(--mono);">docs/day1/EP-002_VOICEOVER.md</span> via <span style="font-family:var(--mono);">assets/voiceover_sections.json</span>. Optional MP3/AAC still counts toward the listen gate when played.</p>
         </div>
-        <div class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">MODE</b> • Internal • Additive</div>
+        <div class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">MODE</b> â€¢ Guided Learning â€¢ Additive</div>
       </div>
 
       <div class="panel__body">
-        <audio id="audio" preload="metadata" controls>
+        <div id="listenModeMount" class="bytecast-listen-dim-exempt"></div>
+        <audio id="audio" preload="metadata" aria-hidden="true" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;left:-9999px;">
           <source id="audioSourceAac" src="aerovista_7_division_overview.aac" type="audio/aac" />
           <source id="audioSourceMp3" src="assets/bytecast-ep2.mp3" type="audio/mpeg" />
         </audio>
-        <p class="muted" id="audioHint">If audio does not load, run: <span style="font-family:var(--mono);">python -m http.server 8080</span></p>
+        <p class="muted" id="audioHint" style="font-size:12px;">If bundled audio fails to load, the listen gate still unlocks when you finish <b>Read episode overview</b>.</p>
+        <div id="listenHandoff" class="bytecast-guidance-card" aria-live="polite">
+          <div>
+            <p class="bytecast-guidance-card__eyebrow">Section Handoff</p>
+            <h3 id="listenHandoffTitle" class="bytecast-guidance-card__title">Next click: 2 Slides</h3>
+            <p id="listenHandoffCopy" class="bytecast-guidance-card__copy">Move into the slides next so the seven-division map is clear before you open the offer cards.</p>
+          </div>
+          <div class="bytecast-guidance-card__actions">
+            <a id="listenHandoffBtn" class="btn btn--primary" href="#lesson-slides">Open 2 Slides</a>
+          </div>
+        </div>
       </div>
-    </section>
+      </div>
 
-    <section class="panel" aria-label="Episode slideshow">
+      <div id="lesson-slides" class="tabs__panel" role="tabpanel" aria-labelledby="tab-lesson-slides" hidden>
       <div class="deck__bar">
         <h3 id="deckTitle">Episode Slides</h3>
         <div class="dots" id="dots" aria-label="Slide navigation"></div>
       </div>
       <div class="slides" id="slides"></div>
-    </section>
+      <div id="slideHandoff" class="bytecast-guidance-card" aria-live="polite">
+        <div>
+          <p class="bytecast-guidance-card__eyebrow">Section Handoff</p>
+          <h3 id="slideHandoffTitle" class="bytecast-guidance-card__title">Next click: 3 Divisions</h3>
+          <p id="slideHandoffCopy" class="bytecast-guidance-card__copy">Open the division explorer next so the abstract map turns into named lanes and offers.</p>
+        </div>
+        <div class="bytecast-guidance-card__actions">
+          <a id="slideHandoffBtn" class="btn btn--primary" href="#divisions">Open 3 Divisions</a>
+        </div>
+      </div>
+      </div>
 
-    <section class="panel" id="divisions" aria-label="Divisions and offers">
+      <div id="divisions" class="tabs__panel" role="tabpanel" aria-labelledby="tab-divisions" hidden aria-label="Divisions and offers">
       <div class="panel__top">
         <div class="panel__meta">
-          <h2>Divisions + Offers (from Offer Pack)</h2>
+          <h2>Division card explorer</h2>
           <p>
-            Powered by <span style="font-family:var(--mono);">aerovista_offer_pack/app/data/offer-pack-data.json</span>.
-            Jump from overview to concrete offers.
+            Tap a division to expand â€” role, sample offers, links into the Offer Pack. Data:
+            <span style="font-family:var(--mono);">episodes/aerovista_offer_pack/app/data/offer-pack-data.json</span>.
           </p>
         </div>
         <div style="display:flex; gap:10px; flex-wrap:wrap;">
-          <a class="btn btn--primary" href="../../aerovista_offer_pack/app/index.html#divisions" target="_blank" rel="noreferrer">Open Offer Pack</a>
-          <a class="btn" href="../../aerovista_offer_pack/app/index.html#pricing" target="_blank" rel="noreferrer">Pricing</a>
+          <a class="btn btn--primary" href="../../episodes/aerovista_offer_pack/app/index.html#divisions" target="_blank" rel="noreferrer">Open Offer Pack</a>
+          <a class="btn" href="../../episodes/aerovista_offer_pack/app/index.html#pricing" target="_blank" rel="noreferrer">Pricing</a>
         </div>
       </div>
       <div class="panel__body">
         <p class="muted" id="offerLoad">Loading divisions and offers...</p>
         <div id="divisionList" class="offerGrid"></div>
+        <div id="divisionsHandoff" class="bytecast-guidance-card" aria-live="polite">
+          <div>
+            <p class="bytecast-guidance-card__eyebrow">Section Handoff</p>
+            <h3 id="divisionsHandoffTitle" class="bytecast-guidance-card__title">Next click: 4 Engage</h3>
+            <p id="divisionsHandoffCopy" class="bytecast-guidance-card__copy">Use Engage now to prove you can identify the right lane and role at a glance.</p>
+          </div>
+          <div class="bytecast-guidance-card__actions">
+            <a id="divisionsHandoffBtn" class="btn btn--primary" href="#engage">Open 4 Engage</a>
+          </div>
+        </div>
       </div>
-    </section>
+      </div>
 
-    <section class="panel" id="engage" aria-label="Quest and quiz">
+      <div id="engage" class="tabs__panel" role="tabpanel" aria-labelledby="tab-engage" hidden aria-label="Quest and quiz">
       <div class="deck__bar">
         <h3>Engagement</h3>
         <div class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">PASS</b> 80%</div>
@@ -539,27 +690,78 @@
           </div>
 
           <div class="card">
-            <h4>Quiz</h4>
-            <p>Quick alignment check.</p>
+            <h4>Engage quiz</h4>
+            <p>Four checks â€” same distractors as voiceover micro-check (â‰¥80% to pass).</p>
             <div id="quiz"></div>
           </div>
         </div>
       </div>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Next episode">
+      <div class="deck__bar">
+        <h3>After This Episode</h3>
+      </div>
+      <div class="card" style="margin:14px var(--pad) 18px;">
+        <p class="muted" style="margin:0 0 12px;">After EP-002 gates + quiz, continue to <strong>EP-003 â€” The Main Doors</strong>.</p>
+        <a class="btn btn--primary" id="nextEp" href="#lesson-slides">Open 2 Slides</a>
+        <a class="btn" href="../../seed_bytecast.html" style="margin-left:10px;">Playlist</a>
+        <span class="chip" id="gateNote" style="margin-left:10px;">Loading gate status...</span>
+      </div>
     </section>
 
     <footer>
-      <div id="footerLeft">ByteCast EP-002 • v1 • Venta/Neon default</div>
-      <div style="font-family:var(--mono);">Keys: Left/Right slides</div>
+      <div id="footerLeft">ByteCast EP-002 â€¢ v1 â€¢ Venta/Neon default</div>
+      <div style="font-family:var(--mono);">Tabs: Listen / Slides / Divisions / Engagement â€¢ â†/â†’ slides or tab bar</div>
     </footer>
   </main>
 
   <script src="../../assets/shared/bytecast_loop.js"></script>
+  <script src="../../assets/shared/bytecast_slide_art.js"></script>
+  <script src="../../assets/shared/listen_mode.js"></script>
   <script>
     const PROFILE_URL = "./bytecast_ep_profile.json";
-    const OFFER_PACK_URL = "../../aerovista_offer_pack/app/data/offer-pack-data.json";
+    const OFFER_PACK_URL = "../../episodes/aerovista_offer_pack/app/data/offer-pack-data.json";
     const Loop = window.ByteCastLoop || null;
 
     const $ = (s, r = document) => r.querySelector(s);
+    const lessonTabs = $("#lessonTabs");
+    const TAB_DEF = [
+      { id: "listen-panel", tab: "#tab-listen" },
+      { id: "lesson-slides", tab: "#tab-lesson-slides" },
+      { id: "divisions", tab: "#tab-divisions" },
+      { id: "engage", tab: "#tab-engage" },
+    ];
+    const CONTINUE_TARGET = {
+      href: "../the_main_doors/index.html",
+      label: "Continue to EP-003",
+    };
+    const PANEL_GUIDES = {
+      "listen-panel": {
+        title: "Next click: 2 Slides",
+        copy: "Move into the slides next so the seven-division map is clear before you open the offer cards.",
+        action: { href: "#lesson-slides", label: "Open 2 Slides", panelId: "lesson-slides" },
+      },
+      "lesson-slides": {
+        title: "Next click: 3 Divisions",
+        copy: "Open the division explorer next so the abstract map turns into named lanes and offers.",
+        action: { href: "#divisions", label: "Open 3 Divisions", panelId: "divisions" },
+      },
+      "divisions": {
+        title: "Next click: 4 Engage",
+        copy: "Use Engage now to prove you can identify the right lane and role at a glance.",
+        action: { href: "#engage", label: "Open 4 Engage", panelId: "engage" },
+      },
+      "engage": {
+        title: "Finish 4 Engage",
+        copy: "Complete the checklist and quiz here to clear EP-002 and unlock The Main Doors.",
+        action: { href: "#engage", label: "Stay in 4 Engage", panelId: "engage" },
+      },
+    };
+    const viewState = {
+      activePanelId: "listen-panel",
+    };
 
     function escapeHtml(value) {
       return String(value)
@@ -585,6 +787,100 @@
       return await response.json();
     }
 
+    function focusPanel(panelId) {
+      const panel = document.getElementById(panelId);
+      if (!panel) return;
+      const target = panel.querySelector("h2, h3, button, a, input, [tabindex]") || panel;
+      if (target === panel && !panel.hasAttribute("tabindex")) {
+        panel.setAttribute("tabindex", "-1");
+      }
+      try {
+        target.focus({ preventScroll: true });
+      } catch (_) {}
+    }
+
+    function scrollLesson() {
+      lessonTabs?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function showTab(panelId) {
+      viewState.activePanelId = panelId;
+      TAB_DEF.forEach(({ id, tab }) => {
+        const t = document.querySelector(tab);
+        const p = document.getElementById(id);
+        const on = id === panelId;
+        if (t) {
+          t.classList.toggle("is-active", on);
+          t.setAttribute("aria-selected", String(on));
+        }
+        if (p) {
+          if (on) p.removeAttribute("hidden");
+          else p.setAttribute("hidden", "");
+        }
+      });
+      renderGate();
+    }
+
+    function openPanel(panelId) {
+      showTab(panelId);
+      scrollLesson();
+      window.setTimeout(() => focusPanel(panelId), 180);
+    }
+
+    function configureActionLink(link, config) {
+      if (!link || !config) return;
+      link.textContent = config.label;
+      link.setAttribute("href", config.href);
+      if (config.panelId) link.dataset.panelId = config.panelId;
+      else delete link.dataset.panelId;
+      link.classList.remove("is-disabled");
+      link.removeAttribute("aria-disabled");
+    }
+
+    function wireActionLink(link) {
+      if (!link || link.dataset.handoffBound === "true") return;
+      link.dataset.handoffBound = "true";
+      link.addEventListener("click", (event) => {
+        const panelId = link.dataset.panelId;
+        const href = link.getAttribute("href") || "";
+        if (!panelId || !href.startsWith("#")) return;
+        event.preventDefault();
+        openPanel(panelId);
+      });
+    }
+
+    function renderGuidanceCard(ids, config) {
+      const title = document.getElementById(ids.titleId);
+      const copy = document.getElementById(ids.copyId);
+      const button = document.getElementById(ids.buttonId);
+      if (title) title.textContent = config.title;
+      if (copy) copy.textContent = config.copy;
+      if (button) {
+        configureActionLink(button, config.action);
+        wireActionLink(button);
+      }
+    }
+
+    function renderPanelHandoffs(isComplete) {
+      const completeConfig = {
+        title: "Episode complete. Continue to EP-003",
+        copy: "You cleared Listen, Slides, and Engage. The next move is The Main Doors.",
+        action: CONTINUE_TARGET,
+      };
+      renderGuidanceCard(
+        { titleId: "listenHandoffTitle", copyId: "listenHandoffCopy", buttonId: "listenHandoffBtn" },
+        isComplete ? completeConfig : PANEL_GUIDES["listen-panel"]
+      );
+      renderGuidanceCard(
+        { titleId: "slideHandoffTitle", copyId: "slideHandoffCopy", buttonId: "slideHandoffBtn" },
+        isComplete ? completeConfig : PANEL_GUIDES["lesson-slides"]
+      );
+      renderGuidanceCard(
+        { titleId: "divisionsHandoffTitle", copyId: "divisionsHandoffCopy", buttonId: "divisionsHandoffBtn" },
+        isComplete ? completeConfig : PANEL_GUIDES.divisions
+      );
+    }
+
     function pill(label, value) {
       return `<span class="pill"><span class="spark"></span><strong>${escapeHtml(label)}</strong> ${escapeHtml(value)}</span>`;
     }
@@ -601,11 +897,37 @@
         return;
       }
 
+      const SlideArt = window.ByteCastSlideArt || null;
+
       slides.forEach((slide, index) => {
         const art = document.createElement("article");
         art.className = "slide" + (index === 0 ? " is-active" : "");
         art.dataset.title = slide.title || `Slide ${index + 1}`;
         const bullets = Array.isArray(slide.bullets) ? slide.bullets : [];
+        const sid = slide.id || `s${index}`;
+        art.dataset.slideId = sid;
+        const svg = SlideArt && SlideArt.ep002 ? SlideArt.ep002(sid) : "";
+        const takeaway = escapeHtml(bullets[0] || slide.goal || "");
+        const rightCol = svg
+          ? `<div class="slide-visual-wrap">
+              <div class="slide-visual" aria-hidden="true">${svg}</div>
+              <div class="callout">
+                <div class="k">TAKEAWAY</div>
+                <p style="margin:10px 0 0; color:rgba(255,255,255,0.86); line-height:1.55;"><strong>${takeaway}</strong></p>
+                <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+                  <span class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">SLIDE</b> ${index + 1}/${slides.length}</span>
+                  <span class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">TITLE</b> ${escapeHtml(slide.title || "")}</span>
+                </div>
+              </div>
+            </div>`
+          : `<div class="callout">
+              <div class="k">TAKEAWAY</div>
+              <p style="margin:10px 0 0; color:rgba(255,255,255,0.86); line-height:1.55;"><strong>${takeaway}</strong></p>
+              <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+                <span class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">SLIDE</b> ${index + 1}/${slides.length}</span>
+                <span class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">TITLE</b> ${escapeHtml(slide.title || "")}</span>
+              </div>
+            </div>`;
 
         art.innerHTML = `
           <div class="slideGrid">
@@ -614,16 +936,7 @@
               <p style="margin-top:-4px;"><span style="font-family:var(--mono); color:rgba(255,255,255,0.78);">Goal:</span> ${escapeHtml(slide.goal || "")}</p>
               <ul>${bullets.map((b) => `<li>${escapeHtml(b)}</li>`).join("")}</ul>
             </div>
-            <div class="callout">
-              <div class="k">TAKEAWAY</div>
-              <p style="margin:10px 0 0; color:rgba(255,255,255,0.86); line-height:1.55;">
-                <strong>${escapeHtml(bullets[0] || slide.goal || "")}</strong>
-              </p>
-              <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
-                <span class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">SLIDE</b> ${index + 1}/${slides.length}</span>
-                <span class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">TITLE</b> ${escapeHtml(slide.title || "")}</span>
-              </div>
-            </div>
+            ${rightCol}
           </div>
         `;
 
@@ -638,13 +951,17 @@
         dotsEl.appendChild(dot);
       });
 
+      if (SlideArt && SlideArt.applyReducedMotion) {
+        SlideArt.applyReducedMotion(slidesEl);
+      }
+
       const slideEls = Array.from(document.querySelectorAll("#slides .slide"));
       let idx = 0;
 
       function syncDots() {
         const dotEls = Array.from(document.querySelectorAll("#dots .dotBtn"));
         dotEls.forEach((b, i) => b.setAttribute("aria-current", String(i === idx)));
-        const title = slideEls[idx]?.dataset?.title ? `Episode Slides • ${slideEls[idx].dataset.title}` : "Episode Slides";
+        const title = slideEls[idx]?.dataset?.title ? `Episode Slides â€¢ ${slideEls[idx].dataset.title}` : "Episode Slides";
         $("#deckTitle").textContent = title;
       }
 
@@ -652,6 +969,19 @@
         idx = (n + slideEls.length) % slideEls.length;
         slideEls.forEach((sl, i) => sl.classList.toggle("is-active", i === idx));
         syncDots();
+        if (idx === slideEls.length - 1) {
+          try {
+            const L = window.ByteCastLoop;
+            if (L) {
+              L.markStepDone("ep002_slide", {
+                episodeSlug: "aerovista_7_division_overview",
+                episodeCode: "EP-002",
+                gate: "slide",
+              });
+            }
+          } catch (_) {}
+          renderGate();
+        }
       }
 
       $("#btnPrev").addEventListener("click", () => goTo(idx - 1));
@@ -684,7 +1014,7 @@
         return;
       }
 
-      $("#questTitle").textContent = `Quest — ${quest.title || ""}`.trim();
+      $("#questTitle").textContent = `Quest â€” ${quest.title || ""}`.trim();
       const QUEST_KEY = `${prefix}_quest`;
 
       const questState = new Set((() => {
@@ -780,9 +1110,9 @@
               <button class="btn btn--primary" type="button" id="gradeQuiz">Grade Quiz</button>
               <button class="btn" type="button" id="resetQuiz">Reset</button>
               <span class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">THRESH</b> ${Math.round(passThresh * 100)}%</span>
-              <span class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">SCORE</b> ${score === null ? "—" : Math.round(score * 100) + "%"}</span>
+              <span class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">SCORE</b> ${score === null ? "â€”" : Math.round(score * 100) + "%"}</span>
               <span class="chip" style="${passed ? "box-shadow: var(--glow-neon); border-color: rgba(34,167,255,0.35);" : ""}">
-                <span class="tagdot"></span> <b style="font-family:var(--mono);">STATUS</b> ${passed ? "PASS" : (score === null ? "—" : "TRY AGAIN")}
+                <span class="tagdot"></span> <b style="font-family:var(--mono);">STATUS</b> ${passed ? "PASS" : (score === null ? "â€”" : "TRY AGAIN")}
               </span>
             </div>
           </div>
@@ -818,6 +1148,17 @@
           } catch {
             // ignore
           }
+          if (quizState.passed && Loop) {
+            try {
+              Loop.markStepDone("ep002_engage", {
+                episodeSlug: "aerovista_7_division_overview",
+                episodeCode: "EP-002",
+                engageQuizPassed: true,
+                engageQuizScore: scoreNow,
+              });
+            } catch (_) {}
+          }
+          renderGate();
           render();
         });
 
@@ -828,11 +1169,55 @@
           } catch {
             // ignore
           }
+          renderGate();
           render();
         });
       }
 
       render();
+    }
+
+    function renderGate() {
+      const note = $("#gateNote");
+      const nextActionBtn = $("#nextEp");
+      const guidance = document.querySelector('section[aria-label="Next episode"] .card p.muted');
+      let ok = false;
+      let listenOk = false;
+      let slideOk = false;
+      let engageOk = false;
+
+      if (Loop) {
+        try {
+          const wf2 = Loop.ensureWorkflowV2(Loop.getActiveJourneyId?.() || "p1_golden_path");
+          listenOk = Loop.isStepDone(wf2, "ep002_listen");
+          slideOk = Loop.isStepDone(wf2, "ep002_slide");
+          engageOk = Loop.isStepDone(wf2, "ep002_engage");
+          ok = Boolean(listenOk && slideOk && engageOk);
+        } catch (_) {
+          ok = false;
+        }
+      }
+
+      renderPanelHandoffs(ok);
+      const current = ok
+        ? {
+            copy: "You cleared Listen, Slides, and Engage. Continue to EP-003 when you are ready.",
+            action: CONTINUE_TARGET,
+          }
+        : (PANEL_GUIDES[viewState.activePanelId] || PANEL_GUIDES["listen-panel"]);
+      if (guidance) guidance.textContent = current.copy;
+      if (nextActionBtn) {
+        configureActionLink(nextActionBtn, current.action);
+        wireActionLink(nextActionBtn);
+        nextActionBtn.classList.add("btn--primary");
+      }
+      if (note) {
+        note.textContent = Loop
+          ? (ok
+              ? "EP-002 complete. Next episode: EP-003 The Main Doors."
+              : `Gates: Listen ${listenOk ? "OK" : "TODO"} Ã¢â‚¬Â¢ Slide ${slideOk ? "OK" : "TODO"} Ã¢â‚¬Â¢ Engage ${engageOk ? "OK" : "TODO"}`)
+          : "Open with Playlist / journey for gate tracking.";
+      }
     }
 
     async function renderOfferPack() {
@@ -851,7 +1236,7 @@
         loadEl.textContent = "";
         listEl.innerHTML = divisions.map((div) => {
           const offers = Array.isArray(div.offers) ? div.offers : [];
-          const openDivisions = `../../aerovista_offer_pack/app/index.html#divisions`;
+          const openDivisions = `../../episodes/aerovista_offer_pack/app/index.html#divisions`;
           const divLabel = `${div.name || div.id || "Division"}`;
 
           return `
@@ -868,7 +1253,7 @@
                 <div style="display:grid; gap:10px;">
                   ${offers.slice(0, 6).map((offer) => {
                     const offerAnchor = offer?.id ? `#offer-${encodeURIComponent(offer.id)}` : "";
-                    const offerUrl = `../../aerovista_offer_pack/app/index.html${offerAnchor}`;
+                    const offerUrl = `../../episodes/aerovista_offer_pack/app/index.html${offerAnchor}`;
                     return `
                       <div class="offer">
                         <div class="offerHead">
@@ -908,41 +1293,117 @@
       const tags = Array.isArray(profile?.content?.tags) ? profile.content.tags : [];
       const summary = profile?.content?.summary_short || "";
 
-      document.title = `ByteCast ${epCode} • ${title}`;
-      $("#topEp").textContent = `ByteCast • ${epCode}`;
+      document.title = `ByteCast ${epCode} â€¢ ${title}`;
+      $("#topEp").textContent = `ByteCast â€¢ ${epCode}`;
       $("#topTitle").textContent = title;
-      $("#heroSub").textContent = summary;
-      $("#keyLine").textContent = (profile?.slides?.[0]?.bullets?.[0]) || "Divisions protect focus and ship clearer outputs.";
-      $("#footerLeft").textContent = `ByteCast ${epCode} • ${date || ""} • Venta/Neon default`;
+      $("#heroTitle").textContent = epCode;
+      $("#heroSub").textContent = title;
+      $("#heroNote").textContent = summary || $("#heroNote").textContent;
+      $("#keyLine").textContent = (profile?.slides?.[3]?.bullets?.[0]) || (profile?.slides?.[0]?.bullets?.[0]) || "One ecosystem â€” seven peer divisions â€” HQ at the center.";
+      $("#footerLeft").textContent = `ByteCast ${epCode} â€¢ ${date || ""} â€¢ Venta/Neon default`;
 
       const meta = $("#metaPills");
       meta.innerHTML = [
-        pill(epCode, "Internal"),
+        pill(epCode, "Guided Learning"),
         pill(date || "Date", "Timestamped"),
-        pill("tags", tags.slice(0, 3).join(" • ") || ""),
+        pill("tags", tags.slice(0, 3).join(" â€¢ ") || ""),
       ].join("");
 
-      $("#jumpPlayer").addEventListener("click", () => $("#player").scrollIntoView({ behavior: "smooth" }));
-      $("#jumpDivisions").addEventListener("click", () => $("#divisions").scrollIntoView({ behavior: "smooth" }));
-      $("#jumpEngage").addEventListener("click", () => $("#engage").scrollIntoView({ behavior: "smooth" }));
+      TAB_DEF.forEach(({ id, tab }) => {
+        const t = document.querySelector(tab);
+        if (t) t.addEventListener("click", () => showTab(id));
+      });
+      const tabBar = document.querySelector("#lessonTabs .tabs__bar");
+      if (tabBar) {
+        tabBar.addEventListener("keydown", (e) => {
+          if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+          const cur = TAB_DEF.findIndex(({ id }) => !document.getElementById(id)?.hasAttribute("hidden"));
+          if (cur < 0) return;
+          e.preventDefault();
+          const next = e.key === "ArrowRight" ? (cur + 1) % TAB_DEF.length : (cur - 1 + TAB_DEF.length) % TAB_DEF.length;
+          showTab(TAB_DEF[next].id);
+          document.querySelector(TAB_DEF[next].tab)?.focus();
+        });
+      }
+      $("#jumpListen").addEventListener("click", () => { showTab("listen-panel"); scrollLesson(); });
+      $("#jumpSlides").addEventListener("click", () => { showTab("lesson-slides"); scrollLesson(); });
+      $("#jumpDivisions").addEventListener("click", () => { showTab("divisions"); scrollLesson(); });
+      $("#jumpEngage").addEventListener("click", () => { showTab("engage"); scrollLesson(); });
 
       const audioPath = profile?.media?.audio_files?.[0]?.path || "assets/bytecast-ep2.mp3";
       const aacPath = profile?.media?.audio_aac || "aerovista_7_division_overview.aac";
       $("#audioSourceMp3").setAttribute("src", audioPath);
       $("#audioSourceAac").setAttribute("src", aacPath);
+      try {
+        $("#audio").load();
+      } catch (_) {}
 
       const epPrefix = toId(epCode || "ep");
       renderSlides(profile);
       renderQuest(profile, epPrefix);
       renderQuiz(profile, epPrefix);
       await renderOfferPack();
+      renderGate();
+
+      function markListenGate() {
+        try {
+          Loop?.markStepDone?.("ep002_listen", {
+            episodeSlug: "aerovista_7_division_overview",
+            episodeCode: profile?.episode?.code || "EP-002",
+            gate: "listen",
+          });
+        } catch (_) {}
+        renderGate();
+      }
 
       const audioEl = $("#audio");
-      audioEl.addEventListener("play", () => {
-        try { Loop?.markStepDone?.("ep002_listen", { episode: profile?.episode?.code || "EP-002" }); } catch {}
-      }, { once: true });
+      const Listen = window.ByteCastListenMode;
+      const listenMount = $("#listenModeMount");
+      if (listenMount && Listen) {
+        Listen.init({
+          mount: listenMount,
+          jsonUrl: "assets/voiceover_sections.json",
+          onListenGate: markListenGate,
+          hiddenAudio: audioEl,
+          audioListenSeconds: 30,
+          showListenTab: () => {
+            showTab("listen-panel");
+            scrollLesson();
+          },
+          onReady(api, data) {
+            const heroAttach = $("#heroListenAttach");
+            if (heroAttach && data.heroSectionId) {
+              Listen.attachSectionButton(heroAttach, api, data.heroSectionId);
+            }
+            const slideMap = data.slideSectionMap || {};
+            Array.from(document.querySelectorAll("#slides .slide")).forEach((slide) => {
+              const sid = slide.dataset.slideId;
+              const secId = slideMap[sid];
+              if (!secId) return;
+              const card = slide.querySelector(".slideGrid .card");
+              if (card) Listen.attachSectionButton(card, api, secId);
+            });
+          },
+        });
+      }
+
+      try {
+        const qk = `${toId(profile?.episode?.code || "ep-002")}_quiz`;
+        const rawQ = localStorage.getItem(qk);
+        const qs = rawQ ? JSON.parse(rawQ) : {};
+        if (qs.passed === true && Loop) {
+          Loop.markStepDone("ep002_engage", {
+            episodeSlug: "aerovista_7_division_overview",
+            episodeCode: "EP-002",
+            engageQuizPassed: true,
+            engageQuizScore: typeof qs.score === "number" ? qs.score : undefined,
+          });
+        }
+      } catch (_) {}
+      renderGate();
       audioEl.addEventListener("error", () => {
-        $("#audioHint").textContent = "Audio missing or blocked. Place assets/bytecast-ep2.mp3 and serve via http://";
+        const h = $("#audioHint");
+        if (h) h.textContent = "Optional MP3/AAC missing â€” use Read episode overview to clear the listen gate.";
       });
     }
 
@@ -950,3 +1411,7 @@
   </script>
 </body>
 </html>
+
+
+
+

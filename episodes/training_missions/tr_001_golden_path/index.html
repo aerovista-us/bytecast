@@ -1,0 +1,456 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TR-001 â€¢ Golden Path Missions</title>
+  <meta name="description" content="Golden Path v1: Playlist -> EP-001 -> Training -> Seed -> Badge â€” with understanding check and proof." />
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml" />
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Sora:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap");
+    :root {
+      --bg0: #050607;
+      --bg1: #0b0f14;
+      --panel: rgba(255, 255, 255, 0.05);
+      --panel-soft: rgba(255, 255, 255, 0.035);
+      --line: rgba(255, 255, 255, 0.14);
+      --line-strong: rgba(34, 167, 255, 0.32);
+      --ink: rgba(255, 255, 255, 0.93);
+      --muted: rgba(255, 255, 255, 0.66);
+      --gold: #ffc45a;
+      --shadow: 0 18px 65px rgba(0, 0, 0, 0.55);
+      --radius: 18px;
+      --radius-sm: 14px;
+      --max: 980px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(1100px 520px at 10% 0%, rgba(34, 167, 255, 0.12), transparent 60%),
+        radial-gradient(900px 500px at 90% 5%, rgba(166, 107, 255, 0.10), transparent 60%),
+        radial-gradient(800px 600px at 55% 100%, rgba(255, 106, 42, 0.06), transparent 65%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      min-height: 100vh;
+      padding: 18px;
+    }
+    a { color: inherit; text-decoration: none; }
+    a:hover { text-decoration: underline; text-underline-offset: 3px; }
+    .shell { max-width: var(--max); margin: 0 auto; }
+    .hero {
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02)),
+        radial-gradient(850px 380px at 0% 0%, rgba(34, 167, 255, 0.16), transparent 60%),
+        radial-gradient(720px 360px at 95% 10%, rgba(166, 107, 255, 0.14), transparent 62%);
+      box-shadow: var(--shadow);
+      padding: 16px;
+    }
+    h1 {
+      margin: 0 0 6px;
+      font-family: "Sora", "Segoe UI", sans-serif;
+      font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+      letter-spacing: -0.02em;
+    }
+    .sub { margin: 0; color: var(--muted); line-height: 1.55; max-width: 82ch; }
+    .row { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn {
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 700;
+      padding: 0.45rem 0.85rem;
+      font-size: 0.9rem;
+      background: rgba(255, 255, 255, 0.03);
+      cursor: pointer;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.12s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .btn:hover {
+      border-color: var(--line-strong);
+      box-shadow: 0 0 18px rgba(34, 167, 255, 0.2);
+      transform: translateY(-1px);
+      text-decoration: none;
+    }
+    .btn.primary {
+      background: rgba(34, 167, 255, 0.13);
+      border-color: rgba(34, 167, 255, 0.45);
+      box-shadow: 0 0 18px rgba(34, 167, 255, 0.2);
+    }
+    .btn.gold {
+      background: linear-gradient(135deg, #ffd873 0%, #ffba3d 48%, #ffa420 100%);
+      border-color: #ffcf5f;
+      color: #261700;
+      box-shadow:
+        0 0 20px rgba(255, 192, 72, 0.45),
+        0 8px 26px rgba(255, 153, 0, 0.3);
+      font-weight: 900;
+      letter-spacing: 0.01em;
+    }
+    .btn:disabled,
+    .btn.is-disabled {
+      opacity: 0.45;
+      pointer-events: none;
+      box-shadow: none;
+      transform: none;
+    }
+    .grid { margin-top: 14px; display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .card {
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(140deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+        var(--panel-soft);
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.34);
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+    h2 { margin: 0; font-family: "Sora", "Segoe UI", sans-serif; font-size: 1.05rem; }
+    .hint { margin: 0; color: var(--muted); font-size: 0.92rem; line-height: 1.5; }
+    .check {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .check:last-child { border-bottom: none; }
+    input[type="checkbox"] { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--gold); }
+    code {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 8px;
+      padding: 0.12rem 0.45rem;
+      font-size: 0.9rem;
+      color: #fff;
+      font-family: var(--mono);
+    }
+    .status {
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255, 196, 90, 0.35);
+      background: rgba(255, 196, 90, 0.10);
+      padding: 10px 12px;
+      color: rgba(255, 237, 198, 0.95);
+    }
+    .status.ok { border-color: rgba(34, 167, 255, 0.4); background: rgba(34, 167, 255, 0.1); color: rgba(210, 240, 255, 0.95); }
+    .field label { display: block; font-weight: 700; font-size: 0.85rem; margin-bottom: 6px; }
+    textarea.field-input {
+      width: 100%;
+      min-height: 88px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,0.25);
+      color: var(--ink);
+      padding: 10px 12px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      resize: vertical;
+    }
+    .qblock { border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 10px 12px; background: rgba(0,0,0,0.2); }
+    .qblock p { margin: 0 0 8px; font-weight: 600; }
+    .qopts { display: grid; gap: 6px; }
+    .qopts label { display: flex; gap: 8px; align-items: flex-start; cursor: pointer; font-weight: 400; }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero" aria-label="TR-001">
+      <h1>TR-001 â€¢ Golden Path Missions</h1>
+      <p class="sub">
+        Short training pack: checkpoints + understanding quiz + one-line proof for your journey record.
+        Completion without understanding is not enough for the next lane.
+      </p>
+      <div class="row">
+        <a class="btn" href="../../../index.html">Overview</a>
+        <a class="btn" href="../../../seed_bytecast.html">Playlist</a>
+        <a class="btn" href="../../training_hub/index.html">Training Hub</a>
+        <a class="btn" href="../../seed_builder_studio/index.html">Seed Builder</a>
+      </div>
+      <ul class="hint" style="margin:12px 0 0; padding-left:18px;">
+        <li><b>Objective:</b> Confirm you can navigate EP-001, skim the Offer Pack, and explain the loop in your own words.</li>
+        <li><b>Check:</b> Two-question quiz (100% required) + mission checkpoints.</li>
+        <li><b>Prove:</b> Short written response stored as <code>proofExplain</code>.</li>
+        <li><b>Advance:</b> Unlocks Seed Export when EP-001 engage proof exists and this stepâ€™s meta is complete.</li>
+      </ul>
+    </section>
+
+    <section class="grid" aria-label="Missions">
+      <article class="card">
+        <h2>Understanding check</h2>
+        <p class="hint">Select the best answer for both. Both must be correct before you can complete training.</p>
+        <div class="qblock" data-tr-q="0">
+          <p>1) What must be true before Training (TR-001) unlocks?</p>
+          <div class="qopts">
+            <label><input type="radio" name="trq0" value="0" /> Listen only</label>
+            <label><input type="radio" name="trq0" value="1" /> Listen + Slide + Engage + engage quiz pass (proof in journey)</label>
+            <label><input type="radio" name="trq0" value="2" /> Slides only</label>
+          </div>
+        </div>
+        <div class="qblock" data-tr-q="1">
+          <p>2) Where does Golden Path proof live today?</p>
+          <div class="qopts">
+            <label><input type="radio" name="trq1" value="0" /> Only on a central server (no local copy)</label>
+            <label><input type="radio" name="trq1" value="1" /> In this browserâ€™s local storage (export bundle for teachers)</label>
+            <label><input type="radio" name="trq1" value="2" /> Only in email</label>
+          </div>
+        </div>
+        <p class="hint" id="quizHint"></p>
+      </article>
+
+      <article class="card">
+        <h2>Apply â€” checkpoints</h2>
+        <p class="hint">Proof-of-work beats theory. Check each when done.</p>
+
+        <label class="check">
+          <input id="ck1" type="checkbox" />
+          <span>
+            <b>Checkpoint 1:</b> Open EP-001 and complete the gates (Listen, Slide, Engage + quiz).
+            <div class="hint">Link: <a href="../../welcome_to_bytecast/index.html" target="_blank" rel="noreferrer">EP-001</a></div>
+          </span>
+        </label>
+
+        <label class="check">
+          <input id="ck2" type="checkbox" />
+          <span>
+            <b>Checkpoint 2:</b> Open the Offer Pack and skim the 7 divisions.
+            <div class="hint">Link: <a href="../../aerovista_offer_pack/app/index.html" target="_blank" rel="noreferrer">Offer Pack</a></div>
+          </span>
+        </label>
+
+        <div class="field">
+          <label for="proofExplain">Prove â€” one sentence (min 20 characters)</label>
+          <textarea id="proofExplain" class="field-input" placeholder="In your own words: what is the ByteCast loop and what will you do next?"></textarea>
+        </div>
+
+        <div class="status" id="lockNote">Loading workflow lock state...</div>
+
+        <div class="row">
+          <button id="markTraining" class="btn gold" type="button">Complete training (record proof)</button>
+          <a id="nextSeed" class="btn primary" href="../../seed_builder_studio/seed_orchard_ui/index.html">Next: Seed Orchard</a>
+        </div>
+        <p class="hint">Writes <code>ByteCastLoop.markStepDone("tr001_golden_path", meta)</code> and syncs legacy workflow v1.</p>
+      </article>
+
+      <article class="card">
+        <h2>What â€œdoneâ€ means now</h2>
+        <p class="hint">Golden Path requires <b>completion + understanding + proof</b>:</p>
+        <div class="hint">
+          <div>1. EP-001 gates + quiz proof on <code>ep001_engage</code></div>
+          <div>2. TR-001: checkpoints + quiz + <code>proofExplain</code></div>
+          <div>3. Seed artifact exported (<code>artifactName</code> / <code>artifactHash</code>)</div>
+          <div>4. Publish URL + badge mint</div>
+        </div>
+        <p class="hint" style="margin-top:10px;">Teacher review: Docs â†’ Proof Review (paste export bundle).</p>
+      </article>
+    </section>
+  </main>
+
+  <script src="../../../assets/shared/bytecast_loop.js"></script>
+  <script>
+    const WORKFLOW_KEY = "bytecast.workflow.v1";
+    const MISSIONS_KEY = "bytecast.tr001.v1";
+    const TR_QUIZ_ANSWERS = [1, 1];
+    const Loop = window.ByteCastLoop || null;
+
+    function defaultWorkflow() {
+      return {
+        cycle: 1,
+        abilityLevel: 0,
+        bytecast: { listen: false, slide: false, interact: false },
+        trainingDone: false,
+        seedDone: false,
+        updatedAt: "",
+      };
+    }
+
+    function loadWorkflow() {
+      const fallback = defaultWorkflow();
+      try {
+        const raw = localStorage.getItem(WORKFLOW_KEY);
+        if (!raw) return fallback;
+        const parsed = JSON.parse(raw);
+        const bytecast = parsed.bytecast && typeof parsed.bytecast === "object" ? parsed.bytecast : {};
+        return {
+          ...fallback,
+          ...parsed,
+          cycle: Number.isFinite(Number(parsed.cycle)) ? Math.max(1, Number(parsed.cycle)) : 1,
+          abilityLevel: Number.isFinite(Number(parsed.abilityLevel)) ? Math.max(0, Number(parsed.abilityLevel)) : 0,
+          bytecast: { listen: Boolean(bytecast.listen), slide: Boolean(bytecast.slide), interact: Boolean(bytecast.interact) },
+          trainingDone: Boolean(parsed.trainingDone),
+          seedDone: Boolean(parsed.seedDone),
+        };
+      } catch {
+        return fallback;
+      }
+    }
+
+    function saveWorkflow(wf) {
+      try { localStorage.setItem(WORKFLOW_KEY, JSON.stringify(wf)); } catch {}
+    }
+
+    function bytecastComplete(wf) {
+      const bc = wf.bytecast || {};
+      return Boolean(bc.listen && bc.slide && bc.interact);
+    }
+
+    function loadMissions() {
+      try {
+        const raw = localStorage.getItem(MISSIONS_KEY);
+        return raw ? JSON.parse(raw) : { ck1: false, ck2: false, proofExplain: "" };
+      } catch {
+        return { ck1: false, ck2: false, proofExplain: "" };
+      }
+    }
+
+    function saveMissions(m) {
+      try { localStorage.setItem(MISSIONS_KEY, JSON.stringify(m)); } catch {}
+    }
+
+    function readTrQuizAnswers() {
+      const a0 = document.querySelector('input[name="trq0"]:checked');
+      const a1 = document.querySelector('input[name="trq1"]:checked');
+      const v0 = a0 ? Number(a0.value) : null;
+      const v1 = a1 ? Number(a1.value) : null;
+      return { v0, v1 };
+    }
+
+    function trQuizPassed() {
+      const { v0, v1 } = readTrQuizAnswers();
+      if (v0 == null || v1 == null) return false;
+      return v0 === TR_QUIZ_ANSWERS[0] && v1 === TR_QUIZ_ANSWERS[1];
+    }
+
+    function ep001EngageProofOk() {
+      if (!Loop) return bytecastComplete(loadWorkflow());
+      const jid = Loop.getActiveJourneyId?.() || "p1_golden_path";
+      const wf2 = Loop.ensureWorkflowV2(jid);
+      const pr = Loop.proofMetaOk(wf2, "ep001_engage", ["engageQuizPassed", "engageQuizScore"]);
+      return pr.ok;
+    }
+
+    function tr001ProofOk() {
+      if (!Loop) return Boolean(loadWorkflow().trainingDone);
+      const jid = Loop.getActiveJourneyId?.() || "p1_golden_path";
+      const wf2 = Loop.ensureWorkflowV2(jid);
+      return Loop.proofMetaOk(wf2, "tr001_golden_path", ["mission", "understandingCheckPassed", "proofExplain"]).ok;
+    }
+
+    function render() {
+      const wf = loadWorkflow();
+      const m = loadMissions();
+      const bcOk = bytecastComplete(wf);
+      const engageProof = ep001EngageProofOk();
+      const allChecks = Boolean(m.ck1 && m.ck2);
+      const explain = String(document.getElementById("proofExplain").value || "").trim();
+      const quizOk = trQuizPassed();
+      const trDone = tr001ProofOk();
+
+      document.getElementById("ck1").checked = Boolean(m.ck1);
+      document.getElementById("ck2").checked = Boolean(m.ck2);
+      if (m.proofExplain) document.getElementById("proofExplain").value = m.proofExplain;
+
+      const lock = document.getElementById("lockNote");
+      const quizHint = document.getElementById("quizHint");
+      if (!bcOk) {
+        lock.textContent = "Locked: complete EP-001 gates (Listen + Slide + Engage).";
+        lock.className = "status";
+      } else if (!engageProof) {
+        lock.textContent = "Locked: EP-001 engage quiz proof missing. Open EP-001, pass the quiz (â‰¥80%), return here.";
+        lock.className = "status";
+      } else if (trDone) {
+        lock.textContent = "Training proof recorded. Next: Seed Orchard.";
+        lock.className = "status ok";
+      } else if (!quizOk || !allChecks || explain.length < 20) {
+        lock.textContent = "Complete: both quiz answers, both checkpoints, and 20+ chars in Prove field â€” then click Complete.";
+        lock.className = "status";
+      } else {
+        lock.textContent = "Ready: click Complete training (record proof).";
+        lock.className = "status ok";
+      }
+
+      quizHint.textContent = quizOk ? "Understanding check: PASS" : "Understanding check: answer both questions correctly.";
+
+      const btn = document.getElementById("markTraining");
+      const needProof = !trDone;
+      const canComplete = bcOk && engageProof && needProof && quizOk && allChecks && explain.length >= 20;
+      btn.disabled = !canComplete;
+
+      const nextSeed = document.getElementById("nextSeed");
+      const seedUnlocked = trDone;
+      nextSeed.classList.toggle("is-disabled", !seedUnlocked);
+      nextSeed.setAttribute("aria-disabled", seedUnlocked ? "false" : "true");
+      nextSeed.tabIndex = seedUnlocked ? 0 : -1;
+      nextSeed.title = seedUnlocked ? "" : "Locked: complete training proof first.";
+    }
+
+    document.getElementById("ck1").addEventListener("change", (e) => {
+      const m = loadMissions();
+      m.ck1 = Boolean(e.target.checked);
+      saveMissions(m);
+      render();
+    });
+    document.getElementById("ck2").addEventListener("change", (e) => {
+      const m = loadMissions();
+      m.ck2 = Boolean(e.target.checked);
+      saveMissions(m);
+      render();
+    });
+    document.querySelectorAll('input[name="trq0"], input[name="trq1"]').forEach((el) => {
+      el.addEventListener("change", render);
+    });
+    document.getElementById("proofExplain").addEventListener("input", () => {
+      const m = loadMissions();
+      m.proofExplain = document.getElementById("proofExplain").value;
+      saveMissions(m);
+      render();
+    });
+
+    document.getElementById("markTraining").addEventListener("click", () => {
+      const wf = loadWorkflow();
+      if (!bytecastComplete(wf)) return;
+      if (!ep001EngageProofOk()) return;
+      const explain = String(document.getElementById("proofExplain").value || "").trim();
+      if (!trQuizPassed() || explain.length < 20) return;
+
+      const m = loadMissions();
+      if (!m.ck1 || !m.ck2) return;
+
+      const checkpointsPassed = 2;
+      if (Loop) {
+        Loop.markStepDone("tr001_golden_path", {
+          mission: "tr_001_golden_path",
+          moduleId: "tr_001_golden_path",
+          checkpointsPassed,
+          checkpointsTotal: 2,
+          understandingCheckPassed: true,
+          trQuizScore: 1,
+          proofExplain: explain,
+          version: "2026-03-22",
+        });
+      } else {
+        wf.trainingDone = true;
+        wf.updatedAt = new Date().toISOString();
+        saveWorkflow(wf);
+      }
+      render();
+    });
+
+    window.addEventListener("storage", render);
+    render();
+  </script>
+</body>
+</html>
+
+
+

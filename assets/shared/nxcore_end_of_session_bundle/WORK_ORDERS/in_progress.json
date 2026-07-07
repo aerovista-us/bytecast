@@ -1,0 +1,52 @@
+[
+  {
+    "id": "WO-TRAEFIK-0002",
+    "title": "Configure Traefik DNS-01 via Cloudflare token and ACME storage",
+    "status": "IN_PROGRESS",
+    "priority": "P1",
+    "project": "NXCore / Edge",
+    "tags": [
+      "traefik",
+      "acme",
+      "dns-01",
+      "cloudflare"
+    ],
+    "acceptance_criteria": [
+      "Cert issuance succeeds for test hostname",
+      "Cert stored in /srv/core/ops/traefik_acme/acme.json",
+      "Hostname resolves publicly"
+    ],
+    "notes": "Config block present; issuance success not shown; previous propagation/NS issues observed.",
+    "next_steps": [
+      "Ensure hostname exists in public DNS",
+      "Avoid tailnet DNS for public hostnames during validation",
+      "Re-attempt ACME and confirm cert appears in acme.json"
+    ],
+    "evidence": []
+  },
+  {
+    "id": "WO-DNS-0001",
+    "title": "Finalize aerovista.us public DNS to Firebase Hosting target",
+    "status": "IN_PROGRESS",
+    "priority": "P1",
+    "project": "AeroVista Public Web",
+    "tags": [
+      "dns",
+      "cloudflare",
+      "firebase",
+      "ssl"
+    ],
+    "acceptance_criteria": [
+      "aerovista.us HTTPS valid",
+      "www works",
+      "No conflicting DNS"
+    ],
+    "notes": "Target mapping confirmed but browser showed cert warning at least once.",
+    "next_steps": [
+      "Confirm Cloudflare DNS records (no legacy A)",
+      "Ensure Firebase domain mode set correctly",
+      "Wait for Cloudflare Universal SSL then retest"
+    ],
+    "evidence": []
+  }
+]

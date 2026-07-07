@@ -117,6 +117,12 @@
     @media (max-width:900px){ .twoCol{ grid-template-columns:1fr; } }
     footer{ margin-top:18px; color:rgba(255,255,255,0.42); display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; font-size:12px; padding:10px 2px; }
     :focus-visible{ outline:2px solid rgba(34,167,255,0.55); outline-offset:3px; border-radius:12px; }
+    .tabsHost{ margin-top:14px; }
+    .tabs__bar{ display:flex; flex-wrap:wrap; gap:8px; padding:14px var(--pad); border-bottom:1px solid rgba(255,255,255,0.10); background:rgba(0,0,0,0.22); }
+    .tabs__btn{ border:1px solid rgba(255,255,255,0.12); background:rgba(255,255,255,0.04); color:var(--ink); border-radius:999px; padding:10px 16px; font-size:13px; cursor:pointer; font-weight:800; letter-spacing:-0.01em; transition: transform .12s ease, border-color .2s ease, box-shadow .2s ease; }
+    .tabs__btn:hover{ transform:translateY(-1px); border-color:rgba(100,180,255,0.25); }
+    .tabs__btn.is-active{ border-color:rgba(34,167,255,0.4); box-shadow:var(--glow-neon); }
+    .tabs__panel[hidden]{ display:none !important; }
   </style>
 </head>
 <body>
@@ -155,9 +161,10 @@
           </div>
 
           <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
-            <button class="btn btn--primary" type="button" id="jumpPlayer">Jump to Player</button>
-            <button class="btn" type="button" id="jumpEngage">Quest + Quiz</button>
-            <button class="btn" type="button" id="jumpAbout">About / AeroVista</button>
+            <button class="btn btn--primary" type="button" id="jumpPlayer">Jump to Audio</button>
+            <button class="btn" type="button" id="jumpSlides">Jump to Slides</button>
+            <button class="btn" type="button" id="jumpEngage">Jump to Engagement</button>
+            <button class="btn" type="button" id="jumpAbout">Jump to About AV</button>
           </div>
 
           <p style="margin:14px 0 0; color:rgba(255,255,255,0.66); max-width:70ch;">
@@ -185,57 +192,15 @@
       </div>
     </section>
 
-    <section class="panel" aria-label="Workspace app map">
-      <div class="panel__top">
-        <div class="panel__meta">
-          <h2>Cross-App Visual Lanes</h2>
-          <p>Template page now includes the same animated SVG navigator used across core workspace pages.</p>
-        </div>
+    <section class="panel tabsHost" id="lessonTabs" aria-label="Episode lesson">
+      <div class="tabs__bar" role="tablist" aria-label="Lesson sections">
+        <button type="button" class="tabs__btn is-active" role="tab" id="tab-player" aria-selected="true" aria-controls="player">Audio</button>
+        <button type="button" class="tabs__btn" role="tab" id="tab-lesson-slides" aria-selected="false" aria-controls="lesson-slides">Slides</button>
+        <button type="button" class="tabs__btn" role="tab" id="tab-engage" aria-selected="false" aria-controls="engage">Engagement</button>
+        <button type="button" class="tabs__btn" role="tab" id="tab-about" aria-selected="false" aria-controls="about">About AV</button>
       </div>
-      <div class="panel__body">
-        <svg viewBox="0 0 1240 430" role="img" aria-label="Workspace map" style="width:100%; height:auto; display:block; border-radius:12px; border:1px solid rgba(255,255,255,0.14); background:rgba(0,0,0,0.24);">
-          <style>
-            .m-lane{fill:none;stroke-width:3;stroke-linecap:round;stroke-dasharray:12 12;animation:m-dash 12s linear infinite;opacity:.9}
-            .m-b{stroke:#22a7ff}.m-g{stroke:#ffc45a}.m-v{stroke:#a66bff}.m-o{stroke:#ff6a2a}
-            .m-dot{filter:drop-shadow(0 0 6px rgba(255,255,255,.45))}
-            .m-node{cursor:pointer;transform-box:fill-box;transform-origin:center;animation:m-float 5.8s ease-in-out infinite}
-            .m-n1{animation-delay:-1s}.m-n2{animation-delay:-2s}.m-n3{animation-delay:-3s}.m-n4{animation-delay:-4s}
-            .m-box{fill:rgba(8,12,18,.82);stroke-width:2}.m-sb{stroke:#22a7ff}.m-st{stroke:#ffc45a}.m-ss{stroke:#a66bff}.m-so{stroke:#ff6a2a}.m-se{stroke:#8fd9ff}
-            .m-t{fill:#f4fbff;font:700 20px Sora,Segoe UI,sans-serif}.m-s{fill:rgba(255,255,255,.72);font:14px 'IBM Plex Sans',Segoe UI,sans-serif}
-            @keyframes m-dash{from{stroke-dashoffset:220}to{stroke-dashoffset:0}}
-            @keyframes m-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
-            @media (prefers-reduced-motion: reduce){.m-lane,.m-node{animation:none}}
-          </style>
-          <defs>
-            <path id="m1" d="M 420 205 C 530 118, 645 95, 780 102" />
-            <path id="m2" d="M 420 232 C 540 312, 655 334, 780 328" />
-            <path id="m3" d="M 420 220 C 500 220, 600 220, 680 220" />
-            <path id="m4" d="M 280 182 C 236 130, 206 108, 164 92" />
-            <path id="m5" d="M 300 254 C 244 306, 206 335, 164 350" />
-          </defs>
-          <rect x="0" y="0" width="1240" height="430" fill="#0c121b"/>
-          <path class="m-lane m-b" d="M 420 205 C 530 118, 645 95, 780 102" />
-          <path class="m-lane m-v" d="M 420 232 C 540 312, 655 334, 780 328" />
-          <path class="m-lane m-o" d="M 420 220 C 500 220, 600 220, 680 220" />
-          <path class="m-lane m-g" d="M 280 182 C 236 130, 206 108, 164 92" />
-          <path class="m-lane m-g" d="M 300 254 C 244 306, 206 335, 164 350" />
-          <circle class="m-dot" r="4" fill="#22a7ff"><animateMotion dur="4.6s" repeatCount="indefinite"><mpath href="#m1"/></animateMotion></circle>
-          <circle class="m-dot" r="4" fill="#a66bff"><animateMotion dur="4.9s" repeatCount="indefinite"><mpath href="#m2"/></animateMotion></circle>
-          <circle class="m-dot" r="4" fill="#ff6a2a"><animateMotion dur="5.2s" repeatCount="indefinite"><mpath href="#m3"/></animateMotion></circle>
-          <circle class="m-dot" r="3.6" fill="#ffc45a"><animateMotion dur="4.4s" repeatCount="indefinite"><mpath href="#m4"/></animateMotion></circle>
-          <circle class="m-dot" r="3.6" fill="#ffc45a"><animateMotion dur="5.1s" repeatCount="indefinite"><mpath href="#m5"/></animateMotion></circle>
-          <a href="../seed_bytecast.html"><g class="m-node m-n1"><rect class="m-box m-sb" x="210" y="160" width="220" height="120" rx="20"/><text class="m-t" x="234" y="208">ByteCast</text><text class="m-s" x="234" y="230">episode player app</text></g></a>
-          <a href="../training_hub/index.html"><g class="m-node m-n2"><rect class="m-box m-st" x="780" y="48" width="240" height="110" rx="18"/><text class="m-t" x="804" y="92">Training Hub</text><text class="m-s" x="804" y="114">onboarding and modules</text></g></a>
-          <a href="../seed_builder_studio/index.html"><g class="m-node m-n3"><rect class="m-box m-ss" x="780" y="272" width="240" height="110" rx="18"/><text class="m-t" x="804" y="316">Seed Builder</text><text class="m-s" x="804" y="338">tooling and generation</text></g></a>
-          <a href="../aerovista_offer_pack/app/index.html"><g class="m-node m-n4"><rect class="m-box m-so" x="668" y="170" width="170" height="96" rx="16"/><text class="m-t" x="690" y="208" style="font-size:18px;">Offer Pack</text><text class="m-s" x="690" y="229">sales reference</text></g></a>
-          <a href="../episodes/welcome_to_bytecast/index.html"><g class="m-node m-n2"><rect class="m-box m-se" x="36" y="48" width="210" height="72" rx="14"/><text class="m-t" x="58" y="89" style="font-size:16px;">EP-001</text></g></a>
-          <a href="../episodes/aerovista_7_division_overview/index.html"><g class="m-node m-n3"><rect class="m-box m-se" x="36" y="314" width="210" height="72" rx="14"/><text class="m-t" x="58" y="355" style="font-size:16px;">EP-002</text></g></a>
-          <a href="../index.html"><g class="m-node m-n4"><rect class="m-box m-se" x="1038" y="170" width="166" height="96" rx="16"/><text class="m-t" x="1062" y="208" style="font-size:17px;">Workspace</text><text class="m-s" x="1062" y="229">all app entry</text></g></a>
-        </svg>
-      </div>
-    </section>
 
-    <section class="panel" id="player">
+      <div id="player" class="tabs__panel" role="tabpanel" aria-labelledby="tab-player">
       <div class="panel__top">
         <div class="panel__meta">
           <h2>Episode Audio</h2>
@@ -288,17 +253,17 @@
           <div class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">LAST</b> <span id="lastMark">—</span></div>
         </div>
       </div>
-    </section>
+      </div>
 
-    <section class="panel" aria-label="Episode slideshow">
+      <div id="lesson-slides" class="tabs__panel" role="tabpanel" aria-labelledby="tab-lesson-slides" hidden>
       <div class="deck__bar">
         <h3 id="deckTitle">Episode Slides</h3>
         <div class="dots" id="dots" aria-label="Slide navigation"></div>
       </div>
       <div class="slides" id="slides"></div>
-    </section>
+      </div>
 
-    <section class="panel" id="engage" aria-label="Quest and quiz">
+      <div id="engage" class="tabs__panel" role="tabpanel" aria-labelledby="tab-engage" hidden aria-label="Quest and quiz">
       <div class="deck__bar">
         <h3>Engagement</h3>
         <div class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">PASS</b> 80% • Badge: FIRST WIN</div>
@@ -318,9 +283,9 @@
           </div>
         </div>
       </div>
-    </section>
+      </div>
 
-    <section class="panel about" id="about">
+      <div class="about tabs__panel" id="about" role="tabpanel" aria-labelledby="tab-about" hidden>
       <details open>
         <summary>About AeroVista <span class="hint">summary + bread & butter</span></summary>
         <div class="about__content">
@@ -357,11 +322,12 @@
           </div>
         </div>
       </details>
+      </div>
     </section>
 
     <footer>
       <div>ByteCast EP-001 • v1 • Venta/Neon default • http:// recommended</div>
-      <div style="font-family:var(--mono);">Keys: ←/→ slides • Space play/pause • J/L seek • M mark</div>
+      <div style="font-family:var(--mono);">Tabs: Audio / Slides / Engagement / About AV • ←/→ slides or tab bar • Space J/L M</div>
     </footer>
   </main>
 
@@ -481,10 +447,51 @@
     localStorage.setItem(THEME_KEY, v);
   });
 
-  // Jumps
-  $("#jumpPlayer").addEventListener("click", ()=>$("#player").scrollIntoView({behavior:"smooth"}));
-  $("#jumpEngage").addEventListener("click", ()=>$("#engage").scrollIntoView({behavior:"smooth"}));
-  $("#jumpAbout").addEventListener("click", ()=>$("#about").scrollIntoView({behavior:"smooth"}));
+  const TAB_DEF = [
+    { id: "player", tab: "#tab-player" },
+    { id: "lesson-slides", tab: "#tab-lesson-slides" },
+    { id: "engage", tab: "#tab-engage" },
+    { id: "about", tab: "#tab-about" },
+  ];
+  function showTab(panelId){
+    TAB_DEF.forEach(({ id, tab }) => {
+      const t = document.querySelector(tab);
+      const p = document.getElementById(id);
+      const on = id === panelId;
+      if(t){
+        t.classList.toggle("is-active", on);
+        t.setAttribute("aria-selected", String(on));
+      }
+      if(p){
+        if(on) p.removeAttribute("hidden");
+        else p.setAttribute("hidden", "");
+      }
+    });
+  }
+  TAB_DEF.forEach(({ id, tab }) => {
+    const t = document.querySelector(tab);
+    if(t) t.addEventListener("click", ()=> showTab(id));
+  });
+  const tabBar = document.querySelector(".tabs__bar");
+  if(tabBar){
+    tabBar.addEventListener("keydown", (e)=>{
+      if(e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+      const cur = TAB_DEF.findIndex(({ id }) => !document.getElementById(id)?.hasAttribute("hidden"));
+      if(cur < 0) return;
+      e.preventDefault();
+      const next = e.key === "ArrowRight" ? (cur + 1) % TAB_DEF.length : (cur - 1 + TAB_DEF.length) % TAB_DEF.length;
+      showTab(TAB_DEF[next].id);
+      document.querySelector(TAB_DEF[next].tab)?.focus();
+    });
+  }
+
+  function scrollLesson(){ $("#lessonTabs")?.scrollIntoView({ behavior: "smooth" }); }
+  $("#jumpPlayer").addEventListener("click", ()=>{ showTab("player"); scrollLesson(); });
+  $("#jumpSlides").addEventListener("click", ()=>{ showTab("lesson-slides"); scrollLesson(); });
+  $("#jumpEngage").addEventListener("click", ()=>{ showTab("engage"); scrollLesson(); });
+  $("#jumpAbout").addEventListener("click", ()=>{ showTab("about"); scrollLesson(); });
+  window.addEventListener("hashchange", ()=>{ if(location.hash === "#about") showTab("about"); });
+  if(location.hash === "#about") showTab("about");
 
   // Slides render
   const slidesEl = $("#slides");

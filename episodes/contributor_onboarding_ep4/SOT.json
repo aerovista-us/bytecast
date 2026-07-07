@@ -1,0 +1,10 @@
+{
+  "schema": "bytecast-episode-sot-v1",
+  "slug": "contributor_onboarding_ep4",
+  "episode_code": "CO-EP-4",
+  "title": "Contributor Onboarding - Ep 4 - Crew Check and Final Readiness",
+  "series_id": "contributor_onboarding",
+  "sequence": 5,
+  "status": "active",
+  "entry": "index.html"
+}

@@ -1,0 +1,30 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "episode": {
+    "code": "ART-EP-2",
+    "title": "The Art Localized — Ep 2 — Partnership tiers",
+    "type": "training",
+    "date": "2026-03-30",
+    "runtime_target_minutes": 6,
+    "status": "active"
+  },
+  "content": {
+    "tags": ["art-localized", "training", "partnership"],
+    "summary_short": "Phase 3 partnership tiers, division collaboration, and press-kit proof expectations."
+  },
+  "engagement": {
+    "quest": { "title": "Ep 2", "items": [] },
+    "quiz": {
+      "enabled": true,
+      "pass_threshold": 0.8,
+      "questions": [
+        {
+          "id": "art_ep2_q1",
+          "q": "Tiers should:",
+          "choices": ["Be cosmetic only", "Change artifacts and review paths"],
+          "answer_index": 1
+        }
+      ]
+    }
+  }
+}

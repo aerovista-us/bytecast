@@ -1,0 +1,10 @@
+{
+  "schema": "bytecast-episode-sot-v1",
+  "slug": "art_localized_ep0",
+  "episode_code": "ART-EP-0",
+  "title": "The Art Localized - Ep 0 - Collaboration",
+  "series_id": "art_localized_training",
+  "sequence": 0,
+  "status": "active",
+  "entry": "index.html"
+}

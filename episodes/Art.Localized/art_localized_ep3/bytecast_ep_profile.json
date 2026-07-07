@@ -1,0 +1,30 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "episode": {
+    "code": "ART-EP-3",
+    "title": "The Art Localized — Ep 3 — Amplification",
+    "type": "training",
+    "date": "2026-03-30",
+    "runtime_target_minutes": 6,
+    "status": "active"
+  },
+  "content": {
+    "tags": ["art-localized", "training", "amplification"],
+    "summary_short": "Campaign amplification via launch video, ambassadors, microsite, education, and impact loops."
+  },
+  "engagement": {
+    "quest": { "title": "Ep 3", "items": [] },
+    "quiz": {
+      "enabled": true,
+      "pass_threshold": 0.8,
+      "questions": [
+        {
+          "id": "art_ep3_q1",
+          "q": "Good amplification:",
+          "choices": ["Ties to proof and next steps", "Is only about posting more often"],
+          "answer_index": 0
+        }
+      ]
+    }
+  }
+}

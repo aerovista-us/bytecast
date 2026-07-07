@@ -21,6 +21,36 @@ npx playwright install
 npm test
 ```
 
+Playwright starts a temporary `python -m http.server` on port 8080 unless the site is already served (see `reuseExistingServer` in `playwright.config.js`). To use **Docker Compose** instead: `docker compose up -d` from the bytecast root, then set `BYTECAST_USE_EXTERNAL_SERVER=1` and run `npm test`. Details: [docs/DOCKER_COMPOSE.md](../docs/DOCKER_COMPOSE.md).
+
+### Run the learning-environment guardrails
+```bash
+python scripts/validate_learning_env.py
+```
+
+For the live Docker-served site on port `18080`:
+```bash
+python scripts/validate_learning_env.py --base-url http://127.0.0.1:18080
+```
+
+### One-command deploy plus smoke check
+```bash
+python scripts/deploy_and_smoke_check.py
+```
+
+Defaults:
+- syncs the repo to `glyph@100.115.9.61:/srv/Collab/mini.shops/bytecast`
+- preserves the remote `.env` by not packaging local `.env`
+- runs the live guardrail against `http://127.0.0.1:18080`
+- runs `node --check tests/navigation.spec.js` on the remote host after deploy
+
+Useful flags:
+```bash
+python scripts/deploy_and_smoke_check.py --skip-local-validate
+python scripts/deploy_and_smoke_check.py --skip-remote-node-check
+python scripts/deploy_and_smoke_check.py --base-url http://127.0.0.1:8092
+```
+
 ### Run specific test suite
 ```bash
 npm run test:golden-path    # Golden Path journey
@@ -47,7 +77,7 @@ npm run test:debug
 ## Test Structure
 
 - `navigation.spec.js` - Basic navigation smoke tests (Root → Playlist → Episode → Training → Orchard)
-- `golden-path.spec.js` - Full Golden Path journey (EP-001 → TR-001 → Seed Export → Publish → Badge)
+- `golden-path.spec.js` - Full Golden Path / Day 1 spine (EP-001–004 → TR-001A → Seed Export → Publish → Badge)
 - `seeding-track.spec.js` - Seeding Track journey (Seed Export → Badge)
 - `division-track.spec.js` - Division Track journey (EP-002 → Offer Pack → Seed Export → Badge)
 - `helpers.js` - Shared utilities for localStorage checks, navigation, etc.
@@ -67,8 +97,8 @@ The config automatically starts a local HTTP server (`python -m http.server 8080
 ### User Paths Tested
 
 1. **Golden Path (p1_golden_path)**
-   - EP-001 gates completion (listen, slide, engage)
-   - TR-001 training completion
+   - EP-001 through EP-004 gates (listen, slide, engage each)
+   - TR-001A Day 1 foundations (replaces TR-001 on this journey)
    - Seed export
    - Publish step
    - Badge minting

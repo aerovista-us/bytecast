@@ -1,19 +1,19 @@
-# ByteCast EP-002 (Fixed)
+# ByteCast EP-002 — AeroVista 7-Division Overview
 
-## Why EP-2 looked "not built"
-The `seed_bytecast.html` file you sent is **truncated** (it ends mid-slide), so the UI never fully rendered.
-This bundle uses the complete EP-001 template and makes it JSON-driven (http + file:// fallback).
+Day 1 pack: ecosystem map, seven peer divisions + HQ, cross-division collaboration, four-question engage quiz (80%), handoff to EP-003.
 
-## Run (recommended)
-```bash
-python -m http.server 8080
-```
-Open:
-- Local: `http://localhost:8080`
-- GitHub Pages: `https://aerovista-us.github.io/bytecast/episodes/aerovista_7_division_overview/index.html`
+## Run
+
+Serve the `bytecast/` root (e.g. `python -m http.server 8080` or Docker Compose). Then open:
+
+`episodes/aerovista_7_division_overview/index.html`
+
+## Content source
+
+- **`bytecast_ep_profile.json`** — slides, quest, quiz (single source for the deck UI).
+- **`bytecast_ep_script.md`** — pointer to authoring docs.
+- **`docs/day1/EP-002_SCRIPT.md`** — scene ↔ slide map + quiz key.
 
 ## Audio
-Put your audio at: `assets/bytecast-ep2.mp3`
 
-## Edit content
-Edit `bytecast_ep_profile.json` (slides, tags, quiz, quest).
+`assets/bytecast-ep2.mp3` (fallback: `aerovista_7_division_overview.aac`).

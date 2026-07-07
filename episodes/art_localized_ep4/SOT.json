@@ -1,0 +1,10 @@
+{
+  "schema": "bytecast-episode-sot-v1",
+  "slug": "art_localized_ep4",
+  "episode_code": "ART-EP-4",
+  "title": "The Art Localized - Ep 4 - Your Role",
+  "series_id": "art_localized_training",
+  "sequence": 4,
+  "status": "active",
+  "entry": "index.html"
+}

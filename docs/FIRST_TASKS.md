@@ -1,11 +1,11 @@
-# First Tasks
+﻿# First Tasks
 
 Safe, high-impact starter tasks with clear completion criteria.
 
 ## Level 0 - Testing and Bug Reports
 
 1. Offer Pack app smoke test
-   - Path: `aerovista_offer_pack/app/index.html`
+   - Path: `episodes/aerovista_offer_pack/app/index.html`
    - Do:
      - test Home, Divisions, Sales, Delivery, Intake, Pricing, Bundles, One-pager
      - test Search (`Ctrl+K`), theme toggle, print button
@@ -14,7 +14,7 @@ Safe, high-impact starter tasks with clear completion criteria.
      - you submit one issue with reproducible steps and screenshots/video
 
 2. Edge-case input test
-   - Path: `aerovista_offer_pack/app/app.js`
+   - Path: `episodes/aerovista_offer_pack/app/app.js`
    - Do:
      - try very long filter/search input
      - test empty states and no-results behavior
@@ -24,7 +24,7 @@ Safe, high-impact starter tasks with clear completion criteria.
 ## Level 1 - No-Code Tasks
 
 1. Improve app onboarding copy
-   - Path: `aerovista_offer_pack/app/README.md`
+   - Path: `episodes/aerovista_offer_pack/app/README.md`
    - Do:
      - tighten quick-start wording for non-coders
      - add a "common mistakes" section
@@ -42,7 +42,7 @@ Safe, high-impact starter tasks with clear completion criteria.
      - FAQ answers each in 2-4 lines
 
 3. Improve content quality in offer data
-   - Path: `aerovista_offer_pack/app/data/offer-pack-data.json`
+   - Path: `episodes/aerovista_offer_pack/app/data/offer-pack-data.json`
    - Do:
      - pick 2-3 offers and improve clarity:
        - outcomes
@@ -54,14 +54,14 @@ Safe, high-impact starter tasks with clear completion criteria.
 ## Level 2 - UI-Only Tasks
 
 1. Improve small-screen readability
-   - Path: `aerovista_offer_pack/app/styles.css`
+   - Path: `episodes/aerovista_offer_pack/app/styles.css`
    - Do:
      - adjust spacing/font sizes for <= 420px
    - Done when:
      - no clipped buttons or text overlap
 
 2. Accessibility pass on focus styles
-   - Path: `aerovista_offer_pack/app/styles.css`
+   - Path: `episodes/aerovista_offer_pack/app/styles.css`
    - Do:
      - verify all interactive controls have visible `:focus-visible`
    - Done when:
@@ -70,14 +70,14 @@ Safe, high-impact starter tasks with clear completion criteria.
 ## Level 3 - Small Code Fixes
 
 1. Search relevance tuning
-   - Path: `aerovista_offer_pack/app/app.js`
+   - Path: `episodes/aerovista_offer_pack/app/app.js`
    - Do:
      - rank exact matches above partial matches
    - Done when:
      - first result is usually the most likely target
 
 2. Persistent "last view" restore
-   - Path: `aerovista_offer_pack/app/app.js`
+   - Path: `episodes/aerovista_offer_pack/app/app.js`
    - Do:
      - save last visited non-offer view in localStorage
      - restore it on next load
@@ -94,8 +94,10 @@ Safe, high-impact starter tasks with clear completion criteria.
      - newcomers can complete one task in <20 minutes
 
 2. Guided issue intake wizard
-   - Path: `aerovista_offer_pack/app/`
+   - Path: `episodes/aerovista_offer_pack/app/`
    - Do:
      - create a lightweight "report a bug" guided flow
    - Done when:
      - reports include consistent context fields
+
+

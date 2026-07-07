@@ -1,0 +1,35 @@
+# ByteCast static workspace — same layout as `python -m http.server 8080`.
+# Default host port: 8080 (matches Playwright baseURL). If bind fails, something
+# else already owns 8080 — e.g. on nxcore `av-catalog-console` maps 8080→80.
+# Fix: BYTECAST_PORT=18080 docker compose up   or put BYTECAST_PORT in `.env`.
+#
+# Usage: from this directory run `docker compose up` → http://localhost:8080
+#
+# Tests on the host (reuse container instead of Playwright’s Python server):
+#   docker compose up -d
+#   set BYTECAST_USE_EXTERNAL_SERVER=1   (PowerShell: $env:BYTECAST_USE_EXTERNAL_SERVER=1)
+#   npm test
+
+services:
+  bytecast:
+    image: nginx:alpine
+    container_name: bytecast-web
+    ports:
+      - "${BYTECAST_PORT:-8080}:80"
+    volumes:
+      - .:/usr/share/nginx/html:ro
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    networks:
+      - default
+      - gateway
+    restart: unless-stopped
+
+networks:
+  gateway:
+    external: true
+    name: gateway

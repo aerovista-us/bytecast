@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AeroVista | Revenue Engine Training</title>
+  <meta name="theme-color" content="#0b1020" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <style>
+    :root {
+      --bg: #08101d;
+      --bg2: #0f1a2e;
+      --card: rgba(18, 28, 49, 0.72);
+      --card-strong: rgba(20, 32, 56, 0.92);
+      --line: rgba(124, 169, 255, 0.22);
+      --text: #e9f1ff;
+      --muted: #a9bbda;
+      --blue: #55b7ff;
+      --cyan: #67f0ff;
+      --silver: #d8e5ff;
+      --gold: #ffd36b;
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+      --radius: 24px;
+      --max: 1200px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(71, 139, 255, 0.18), transparent 28%),
+        radial-gradient(circle at 85% 10%, rgba(103, 240, 255, 0.15), transparent 24%),
+        linear-gradient(180deg, #060c17 0%, #0a1424 45%, #08101d 100%);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    .gridfx, .gridfx::before { position: fixed; inset: 0; pointer-events: none; }
+    .gridfx {
+      background-image:
+        linear-gradient(rgba(90, 139, 255, .05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(90, 139, 255, .05) 1px, transparent 1px);
+      background-size: 34px 34px;
+      mask-image: linear-gradient(to bottom, rgba(255,255,255,.6), transparent 85%);
+    }
+    .gridfx::before {
+      content: "";
+      background: radial-gradient(circle at center, rgba(103,240,255,.14), transparent 48%);
+      animation: pulse 9s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100% { opacity: .4; transform: scale(1); } 50% { opacity: .9; transform: scale(1.08); } }
+    @keyframes bob { 0%,100%{ transform: translateY(0px);} 50%{ transform: translateY(-10px);} }
+    .shell { width: min(calc(100% - 32px), var(--max)); margin: 0 auto; position: relative; z-index: 1; }
+    .nav {
+      position: sticky; top: 0; z-index: 30; backdrop-filter: blur(18px);
+      background: rgba(6, 12, 23, .65); border-bottom: 1px solid rgba(103, 240, 255, .12);
+    }
+    .nav-inner {
+      width: min(calc(100% - 32px), var(--max)); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 14px 0;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: .04em; }
+    .logo {
+      width: 42px; height: 42px; border-radius: 14px;
+      background: linear-gradient(145deg, rgba(85,183,255,.25), rgba(103,240,255,.08));
+      border: 1px solid rgba(103,240,255,.24);
+      display: grid; place-items: center; box-shadow: inset 0 1px 0 rgba(255,255,255,.08), var(--shadow);
+    }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 10px; }
+    .nav-links a, .chip {
+      color: var(--silver); text-decoration: none; padding: 10px 14px; border-radius: 999px;
+      border: 1px solid rgba(103,240,255,.16); background: rgba(255,255,255,.04);
+      font-size: .92rem;
+    }
+    .hero { display: grid; grid-template-columns: 1.2fr .8fr; gap: 24px; padding: 42px 0 24px; align-items: stretch; }
+    .panel {
+      background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); position: relative; overflow: hidden;
+    }
+    .panel::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(255,255,255,.06), transparent 28%); pointer-events: none; }
+    .hero-main { padding: 34px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px;
+      background: rgba(103,240,255,.08); border: 1px solid rgba(103,240,255,.18); color: var(--cyan); font-weight: 700; letter-spacing: .05em; text-transform: uppercase; font-size: .8rem;
+    }
+    h1 { font-size: clamp(2.4rem, 5vw, 4.6rem); line-height: .96; margin: 16px 0 16px; }
+    .lead { font-size: 1.08rem; line-height: 1.7; color: var(--muted); max-width: 64ch; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+    .btn {
+      appearance: none; border: 0; border-radius: 999px; cursor: pointer; padding: 14px 18px; font-weight: 800; letter-spacing: .02em;
+      color: #06101d; background: linear-gradient(135deg, var(--cyan), var(--blue)); box-shadow: 0 10px 30px rgba(85,183,255,.28);
+      text-decoration: none; display: inline-flex; align-items: center; gap: 10px;
+    }
+    .btn.secondary { background: rgba(255,255,255,.04); color: var(--silver); border: 1px solid rgba(103,240,255,.16); box-shadow: none; }
+    .hero-side { padding: 20px; display: grid; gap: 16px; }
+    .player-card { padding: 18px; background: var(--card-strong); border-radius: 22px; border: 1px solid rgba(103,240,255,.16); }
+    .player-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+    .small { font-size: .84rem; color: var(--muted); }
+    .art {
+      height: 180px; border-radius: 20px; overflow: hidden; border: 1px solid rgba(103,240,255,.16);
+      background: linear-gradient(135deg, rgba(85,183,255,.12), rgba(103,240,255,.05)); margin-bottom: 14px; position: relative;
+    }
+    .audio-wrap { display: grid; gap: 10px; }
+    audio { width: 100%; }
+    .badges { display: flex; flex-wrap: wrap; gap: 10px; }
+    .badge { padding: 10px 12px; border-radius: 14px; border: 1px solid rgba(255,211,107,.25); background: rgba(255,211,107,.08); color: #ffe5a8; font-weight: 700; font-size: .9rem; }
+    .section { padding: 18px 0 4px; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin: 12px 0 18px; }
+    h2 { font-size: clamp(1.6rem, 3vw, 2.5rem); margin: 0; }
+    .muted { color: var(--muted); }
+    .cards { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; }
+    .card { grid-column: span 4; padding: 22px; }
+    .card h3 { margin-top: 10px; margin-bottom: 8px; }
+    .card p, .card li { color: var(--muted); line-height: 1.6; }
+    .kicker { color: var(--cyan); text-transform: uppercase; letter-spacing: .08em; font-weight: 800; font-size: .8rem; }
+    .icon {
+      width: 60px; height: 60px; border-radius: 18px; display: grid; place-items: center;
+      background: linear-gradient(145deg, rgba(85,183,255,.18), rgba(103,240,255,.06));
+      border: 1px solid rgba(103,240,255,.18);
+    }
+    .offer-card { grid-column: span 3; padding: 22px; min-height: 100%; }
+    .offer-number { font-size: 2rem; font-weight: 900; color: var(--gold); }
+    .qa-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    details { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 18px; box-shadow: var(--shadow); }
+    summary { cursor: pointer; font-weight: 800; color: var(--silver); }
+    details p { color: var(--muted); line-height: 1.65; }
+    .talking-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .quote { font-size: 1.05rem; font-weight: 700; line-height: 1.5; }
+    .footer { padding: 32px 0 80px; color: var(--muted); }
+    .float-orb {
+      position: absolute; inset: auto -50px -40px auto; width: 180px; height: 180px; opacity: .65; filter: blur(0.4px);
+      animation: bob 7s ease-in-out infinite;
+    }
+    .reveal { opacity: 0; transform: translateY(24px); transition: .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .pill-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    .pill { padding: 8px 12px; border-radius: 999px; background: rgba(85,183,255,.08); color: var(--silver); border: 1px solid rgba(85,183,255,.16); font-size: .88rem; }
+    .unlock { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px 20px; border-radius: 20px; background: linear-gradient(135deg, rgba(255,211,107,.12), rgba(85,183,255,.06)); border: 1px solid rgba(255,211,107,.24); }
+    .unlock strong { color: #ffe6a9; }
+    .wavebars rect { animation: bars 1.2s ease-in-out infinite; transform-origin: center bottom; }
+    .wavebars rect:nth-child(2) { animation-delay: .15s; }
+    .wavebars rect:nth-child(3) { animation-delay: .3s; }
+    .wavebars rect:nth-child(4) { animation-delay: .45s; }
+    .wavebars rect:nth-child(5) { animation-delay: .6s; }
+    @keyframes bars { 0%,100%{ transform: scaleY(.55);} 50%{ transform: scaleY(1.15);} }
+    @media (max-width: 1040px) {
+      .hero { grid-template-columns: 1fr; }
+      .card, .offer-card { grid-column: span 6; }
+      .talking-cards { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 760px) {
+      .nav-inner { flex-direction: column; align-items: stretch; }
+      .card, .offer-card { grid-column: span 12; }
+      .qa-grid, .talking-cards { grid-template-columns: 1fr; }
+      .hero-main, .hero-side { padding: 22px; }
+      h1 { font-size: 2.35rem; }
+      .unlock { flex-direction: column; align-items: stretch; }
+    }
+  </style>
+</head>
+<body>
+  <div class="gridfx"></div>
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <div class="logo">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 18L12 4L20 18" stroke="url(#g1)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs><linearGradient id="g1" x1="4" y1="18" x2="20" y2="4" gradientUnits="userSpaceOnUse"><stop stop-color="#67F0FF"/><stop offset="1" stop-color="#55B7FF"/></linearGradient></defs>
+          </svg>
+        </div>
+        <div><div>AeroVista</div><div class="small">Revenue Engine Training</div></div>
+      </div>
+      <div class="nav-links">
+        <a href="#roles">Division Roles</a>
+        <a href="#ladder">Offer Ladder</a>
+        <a href="#questions">Questions</a>
+        <a href="#objections">Objections</a>
+        <a href="#cards">Talking Cards</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="shell">
+    <section class="hero reveal visible">
+      <div class="panel hero-main">
+        <span class="eyebrow">Internal Sales + Training Experience</span>
+        <h1>Revenue Engine</h1>
+        <p class="lead">AeroVista wins by selling the right first step, proving fit, connecting systems, and expanding into a durable lane the client can keep growing through. This training page turns that model into a visual, playable, installable rep tool.</p>
+        <div class="pill-row"><span class="pill">Foundation</span><span class="pill">Integration</span><span class="pill">Flagship</span><span class="pill">Retention</span></div>
+        <div class="hero-actions"><a class="btn" href="#ladder">View Offer Ladder</a><a class="btn secondary" href="#player">Go to Player</a></div>
+        <svg class="float-orb" viewBox="0 0 200 200" aria-hidden="true">
+          <defs><linearGradient id="orb" x1="0" x2="1"><stop offset="0" stop-color="#67F0FF" stop-opacity=".9"/><stop offset="1" stop-color="#55B7FF" stop-opacity=".5"/></linearGradient></defs>
+          <circle cx="100" cy="100" r="70" fill="url(#orb)" opacity=".28"/>
+          <circle cx="100" cy="100" r="46" fill="none" stroke="#67F0FF" stroke-opacity=".45" stroke-width="2"><animate attributeName="r" values="42;52;42" dur="5s" repeatCount="indefinite"/></circle>
+          <circle cx="100" cy="100" r="24" fill="none" stroke="#FFD36B" stroke-opacity=".5" stroke-width="2"><animate attributeName="stroke-opacity" values=".3;.8;.3" dur="4s" repeatCount="indefinite"/></circle>
+        </svg>
+      </div>
+      <div id="player" class="panel hero-side">
+        <div class="player-card">
+          <div class="player-top">
+            <div><div class="kicker">ByteCast Spoken Version</div><strong>Episode 3 · Revenue Engine</strong></div>
+            <span class="chip">Offline-ready lane</span>
+          </div>
+          <div class="art">
+            <svg viewBox="0 0 640 320" width="100%" height="100%" preserveAspectRatio="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="bgWave" x1="0" x2="1"><stop offset="0" stop-color="#0c1830"/><stop offset="1" stop-color="#13284b"/></linearGradient>
+                <linearGradient id="wave" x1="0" x2="1"><stop offset="0" stop-color="#67F0FF" stop-opacity=".8"/><stop offset="1" stop-color="#55B7FF" stop-opacity=".3"/></linearGradient>
+              </defs>
+              <rect width="640" height="320" fill="url(#bgWave)"/>
+              <g opacity=".7">
+                <path d="M0 230 C80 180, 140 260, 220 220 S360 160, 430 210 560 270, 640 210" fill="none" stroke="url(#wave)" stroke-width="6"><animate attributeName="d" dur="7s" repeatCount="indefinite" values="M0 230 C80 180, 140 260, 220 220 S360 160, 430 210 560 270, 640 210;M0 220 C80 200, 140 250, 220 210 S360 170, 430 225 560 250, 640 215;M0 230 C80 180, 140 260, 220 220 S360 160, 430 210 560 270, 640 210"/></path>
+                <path d="M0 255 C90 220, 150 290, 240 250 S390 205, 470 248 570 290, 640 240" fill="none" stroke="#FFD36B" stroke-opacity=".55" stroke-width="3"><animate attributeName="stroke-opacity" values=".2;.75;.2" dur="6s" repeatCount="indefinite"/></path>
+              </g>
+              <g transform="translate(52 42)"><rect x="0" y="0" rx="18" ry="18" width="168" height="168" fill="rgba(255,255,255,.06)" stroke="rgba(103,240,255,.22)"/><path d="M60 120V48l58 36-58 36Z" fill="#67F0FF" fill-opacity=".86"/></g>
+              <g class="wavebars" transform="translate(270 210)">
+                <rect x="0" y="20" width="16" height="54" rx="8" fill="#67F0FF" />
+                <rect x="28" y="8" width="16" height="66" rx="8" fill="#8df6ff" />
+                <rect x="56" y="0" width="16" height="74" rx="8" fill="#ffd36b" />
+                <rect x="84" y="14" width="16" height="60" rx="8" fill="#8df6ff" />
+                <rect x="112" y="26" width="16" height="48" rx="8" fill="#67F0FF" />
+              </g>
+              <text x="260" y="118" fill="#E9F1FF" font-size="34" font-weight="800">Revenue Engine</text>
+              <text x="260" y="158" fill="#A9BBDA" font-size="18">Cleaner • Slower • More Executive</text>
+              <text x="260" y="188" fill="#A9BBDA" font-size="18">ByteCast Spoken Version</text>
+            </svg>
+          </div>
+          <div class="audio-wrap">
+            <audio controls preload="metadata">
+              <source src="assets/bytecast-ep3-revenue-spoken.mp3" type="audio/mpeg" />
+            </audio>
+            <div class="badges">
+              <a class="btn secondary" href="assets/bytecast-ep3-revenue-spoken.mp3" download>Download MP3</a>
+              <button class="btn secondary" id="installBtn" hidden>Install App</button>
+            </div>
+            <p class="small">Drop your final spoken-audio MP3 into <code>assets/bytecast-ep3-revenue-spoken.mp3</code>. The player and download button will use the same file for offline listening.</p>
+          </div>
+        </div>
+        <div class="unlock">
+          <div><strong>PWA unlock lane</strong><div class="small">This bundle includes a manifest and service worker, so once hosted over HTTP/HTTPS it can show an install badge and cache the training shell for repeat/offline use.</div></div>
+          <span class="badge">Install badge when supported</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="roles">
+      <div class="section-head"><div><h2>Division Roles</h2><p class="muted">Use divisions as solution lanes, not random name-drops.</p></div></div>
+      <div class="cards">
+        <article class="panel card"><div class="icon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M4 18h16M7 15V6m5 9V3m5 12V9" stroke="#67F0FF" stroke-width="2" stroke-linecap="round"/></svg></div><div class="kicker">Lumina</div><h3>Brand clarity + market-facing polish</h3><p>Use when the client needs visual consistency, messaging clarity, better presentation, or stronger market signal.</p></article>
+        <article class="panel card"><div class="icon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M8 7h8M8 12h8M8 17h8M5 7h.01M5 12h.01M5 17h.01" stroke="#67F0FF" stroke-width="2" stroke-linecap="round"/></svg></div><div class="kicker">Nexus</div><h3>Systems + workflow integration</h3><p>Use when the value comes from dashboards, automations, APIs, internal tools, reporting, or making disconnected systems work together.</p></article>
+        <article class="panel card"><div class="icon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M5 12a7 7 0 1 0 14 0a7 7 0 1 0-14 0Zm7-4v8m-4-4h8" stroke="#67F0FF" stroke-width="2" stroke-linecap="round"/></svg></div><div class="kicker">EchoVerse</div><h3>Story + emotional signal</h3><p>Use when the offer needs memorability, music, narrative atmosphere, identity, or a stronger emotional connection.</p></article>
+        <article class="panel card"><div class="icon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 4v10l-7 4-7-4V7l7-4Z" stroke="#67F0FF" stroke-width="2"/><path d="M9 12l2 2 4-4" stroke="#FFD36B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="kicker">Summit</div><h3>Training + adoption</h3><p>Use when success depends on onboarding, team understanding, playbooks, or making sure the build actually gets used.</p></article>
+        <article class="panel card"><div class="icon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M4 16l8-10 8 10M7 13h10" stroke="#67F0FF" stroke-width="2" stroke-linecap="round"/></svg></div><div class="kicker">SkyForge</div><h3>Interactive + immersive experience</h3><p>Use when the client needs engagement, gamification, immersive storytelling, or a more dynamic digital experience.</p></article>
+        <article class="panel card"><div class="icon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M3 17l7-7 4 4 7-7" stroke="#67F0FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="kicker">Horizon + Vespera</div><h3>Proof + documentation</h3><p>Horizon handles place-based visuals and real-world proof. Vespera turns knowledge into durable written assets, frameworks, and case studies.</p></article>
+      </div>
+    </section>
+
+    <section class="section reveal" id="ladder">
+      <div class="section-head"><div><h2>Offer Ladder</h2><p class="muted">AeroVista sells the right first win, then expands through logic and demonstrated value.</p></div></div>
+      <div class="cards">
+        <article class="panel offer-card"><div class="offer-number">01</div><h3>Foundation</h3><p>Low-friction entry offer that proves fit, builds trust, and creates momentum.</p><ul><li>Focused scope</li><li>Fast visible win</li><li>Creates the next conversation</li></ul></article>
+        <article class="panel offer-card"><div class="offer-number">02</div><h3>Integration</h3><p>Connects the first win to the wider system so the original purchase works harder.</p><ul><li>Reduce friction</li><li>Align channels</li><li>Increase ROI on prior work</li></ul></article>
+        <article class="panel offer-card"><div class="offer-number">03</div><h3>Flagship</h3><p>Multi-division, coordinated ecosystem build for premium and durable transformation.</p><ul><li>Cross-functional value</li><li>Harder to replace</li><li>Strategic partner positioning</li></ul></article>
+        <article class="panel offer-card"><div class="offer-number">04</div><h3>Retention</h3><p>Protects and extends the system after launch through support, reporting, refinement, and growth.</p><ul><li>Recurring value</li><li>Maintained quality</li><li>Ongoing optimization</li></ul></article>
+      </div>
+    </section>
+
+    <section class="section reveal" id="questions">
+      <div class="section-head"><div><h2>Qualification Questions</h2><p class="muted">Use questions to discover the correct rung on the ladder.</p></div></div>
+      <div class="qa-grid">
+        <details open><summary>Reveal deeper need</summary><p>What are you trying to improve right now? Is this a one-off need or part of something bigger? What happens after this piece is delivered?</p></details>
+        <details open><summary>Find integration signals</summary><p>What tools, teams, or assets does this need to connect with? Where do you feel friction today? What is currently fragmented?</p></details>
+        <details open><summary>Validate adoption</summary><p>Who will use this after it is built? What would stop your team from fully using it? Does training, documentation, or rollout support matter here?</p></details>
+        <details open><summary>Expose upsell path</summary><p>Have you already paid for work that did not fully connect? What would success look like 30 to 90 days after launch? What would make this more valuable over time?</p></details>
+      </div>
+    </section>
+
+    <section class="section reveal" id="objections">
+      <div class="section-head"><div><h2>Objection Handling</h2><p class="muted">Move from pressure selling to logic selling.</p></div></div>
+      <div class="qa-grid">
+        <details><summary>“We only need this one thing.”</summary><p>That is fine. Keep the scope tight, but frame the deliverable so it works on its own and still supports the client’s next move if they choose to expand later.</p></details>
+        <details><summary>“The bigger package costs too much.”</summary><p>Start with the highest-impact first step. Use the first win to prove value, then build from there instead of asking for a large leap of trust upfront.</p></details>
+        <details><summary>“Why not hire separate vendors?”</summary><p>Multiple vendors can work, but handoffs, inconsistencies, and rework usually increase. AeroVista’s advantage is coordinated solutions where the parts reinforce each other.</p></details>
+        <details><summary>“Why should we expand this?”</summary><p>Because the surrounding system determines how well the first deliverable performs. Expansion should protect and increase the return on what the client already bought.</p></details>
+      </div>
+    </section>
+
+    <section class="section reveal" id="cards">
+      <div class="section-head"><div><h2>Talking-Point Cards</h2><p class="muted">Memorable lines reps can use in real conversations.</p></div></div>
+      <div class="talking-cards">
+        <article class="panel card"><div class="kicker">Card 01</div><p class="quote">“We do not just make assets. We build lanes.”</p><p>The client is buying a more functional future state, not just a file.</p></article>
+        <article class="panel card"><div class="kicker">Card 02</div><p class="quote">“The first offer proves fit. The next offer creates lift.”</p><p>Use this to explain why small projects are valuable without underselling larger opportunity.</p></article>
+        <article class="panel card"><div class="kicker">Card 03</div><p class="quote">“You are not buying a deliverable. You are entering a system.”</p><p>Best line for reframing value when a client is stuck thinking in disconnected line items.</p></article>
+        <article class="panel card"><div class="kicker">Card 04</div><p class="quote">“The upsell is not more stuff. The upsell is better use of what you already bought.”</p><p>Use this to make expansion feel logical and trust-building.</p></article>
+        <article class="panel card"><div class="kicker">Card 05</div><p class="quote">“The more connected the solution, the more durable the value.”</p><p>Great for integration conversations and multi-division positioning.</p></article>
+        <article class="panel card"><div class="kicker">Card 06</div><p class="quote">“Our goal is not to oversell. Our goal is to sell the right next step.”</p><p>Useful for calming prospects who fear being pushed into an oversized package.</p></article>
+      </div>
+    </section>
+
+    <footer class="footer reveal">
+      <div class="panel" style="padding:24px;">
+        <strong>AeroVista Revenue Engine · Sales Training Bundle</strong>
+        <p class="muted">Includes HTML shell, installable PWA pieces, animated SVG visuals, spoken ByteCast player, and MP3 download link for offline listening.</p>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('./service-worker.js').catch(() => {}));
+    }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    let deferredPrompt;
+    const installBtn = document.getElementById('installBtn');
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.hidden = false;
+    });
+    installBtn?.addEventListener('click', async () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      installBtn.hidden = true;
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "schema": "bytecast-episode-sot-v1",
+  "slug": "bytecast_aerovista_story_site",
+  "title": "ByteCast AeroVista Story Site",
+  "type": "story-site",
+  "status": "active",
+  "entry": "index.html",
+  "owner": "Content Ops"
+}

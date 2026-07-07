@@ -1,0 +1,10 @@
+{
+  "schema": "bytecast-episode-sot-v1",
+  "slug": "art_localized_ep1",
+  "episode_code": "ART-EP-1",
+  "title": "The Art Localized - Ep 1 - Divisions",
+  "series_id": "art_localized_training",
+  "sequence": 1,
+  "status": "active",
+  "entry": "index.html"
+}

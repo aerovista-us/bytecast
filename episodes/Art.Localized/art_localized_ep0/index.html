@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en" data-theme="art-localized">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ByteCast — The Art Localized • Ep 0 — Collaboration foundations</title>
+  <meta
+    name="description"
+    content="The Art Localized Training — Ep 0. Collaboration foundations built from the Phase 1 manifesto, cue notes, and handoff pack."
+  />
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml" />
+  <style>
+    :root {
+      --bg0: #071019;
+      --bg1: #0d1823;
+      --panel: rgba(8, 14, 20, 0.82);
+      --ink: rgba(245, 241, 233, 0.96);
+      --muted: rgba(245, 241, 233, 0.72);
+      --line: rgba(162, 214, 249, 0.18);
+      --accent: #e1c16e;
+      --accent-2: #a2d6f9;
+      --accent-3: #7ae6c7;
+      --max: 980px;
+      --pad: clamp(16px, 2.5vw, 26px);
+      --display: "Aptos Display", "Segoe UI Variable Display", "Trebuchet MS", sans-serif;
+      --sans: "Aptos", "Segoe UI Variable Text", "Segoe UI", sans-serif;
+      --mono: ui-monospace, "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      color: var(--ink);
+      background:
+        radial-gradient(900px 520px at 0% 0%, rgba(225, 193, 110, 0.16), transparent 58%),
+        radial-gradient(900px 540px at 100% 0%, rgba(162, 214, 249, 0.13), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      min-height: 100vh;
+    }
+    a { color: inherit; }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(7, 16, 25, 0.84);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar__inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 12px var(--pad);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .k {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .btn {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font: inherit;
+      font-size: 13px;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn--primary {
+      border-color: rgba(225, 193, 110, 0.5);
+      box-shadow: 0 0 22px rgba(225, 193, 110, 0.16);
+    }
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 24px var(--pad) 72px;
+    }
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: var(--panel);
+      padding: 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 18px 46px rgba(0, 0, 0, 0.2);
+    }
+    .hero {
+      padding: 24px;
+      background:
+        linear-gradient(135deg, rgba(225, 193, 110, 0.14), rgba(162, 214, 249, 0.1)),
+        rgba(8, 14, 20, 0.84);
+    }
+    .eyebrow {
+      margin: 0 0 10px;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-2);
+    }
+    h1, h2, h3 {
+      margin: 0 0 10px;
+      font-family: var(--display);
+      letter-spacing: -0.02em;
+    }
+    h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); }
+    h2 { font-size: 1.05rem; }
+    h3 { font-size: 0.96rem; }
+    .sub {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 72ch;
+    }
+    .chips, .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+    .chips { margin-top: 16px; }
+    .chip {
+      border: 1px solid rgba(225, 193, 110, 0.28);
+      background: rgba(225, 193, 110, 0.08);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+    }
+    .status {
+      margin: 12px 0 0;
+      font-size: 13px;
+      color: var(--accent-2);
+    }
+    .script {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .script p,
+    .mini,
+    .choice,
+    .source-list li {
+      line-height: 1.6;
+    }
+    .script p {
+      margin: 0;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .slide-visual {
+      margin-bottom: 14px;
+      padding: 12px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+    }
+    .slide-visual svg { max-width: 100%; height: auto; display: block; }
+    .slides { min-height: 240px; }
+    .slide { display: none; }
+    .slide.is-active { display: block; }
+    .slide:not(.is-active) .bc-art :is(animate, animateTransform) { visibility: hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      .slide-visual .bc-art :is(animate, animateTransform) { display: none !important; }
+    }
+    .note-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .mini {
+      border-radius: 16px;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--muted);
+    }
+    .source-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+    .choice {
+      display: block;
+      margin: 10px 0;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+      cursor: pointer;
+    }
+    .choice input { margin-right: 10px; }
+    .mission-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .mission-field {
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .mission-field input,
+    .mission-field textarea {
+      width: 100%;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
+      padding: 12px 14px;
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.04);
+      font: inherit;
+    }
+    .mission-field textarea {
+      min-height: 104px;
+      resize: vertical;
+    }
+    .field-guide {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .guide-card {
+      padding: 14px;
+      border-radius: 16px;
+      background: rgba(122, 230, 199, 0.07);
+      border: 1px solid rgba(122, 230, 199, 0.16);
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .guide-card strong { color: var(--ink); }
+    #engageHint, #missionHint {
+      margin-top: 12px;
+      color: var(--accent-3);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body data-bc-ep="0" data-bc-slug="art_localized_ep0">
+  <header class="topbar">
+    <div class="topbar__inner">
+      <span class="k">The Art Localized — Training</span>
+      <div class="row">
+        <a class="btn" href="../../../seed_bytecast.html">Playlist</a>
+        <a class="btn" href="../../../episodes/training_hub/index.html">Training Hub</a>
+        <a class="btn btn--primary" href="../../../index.html">Workspace</a>
+      </div>
+    </div>
+  </header>
+  <main class="wrap">
+    <section class="panel hero">
+      <p class="eyebrow">ART-EP-0 • Phase 1 Seeding Protocol</p>
+      <h1>Ep 0 — Collaboration foundations</h1>
+      <p class="sub">
+        Phase 1 establishes the movement logic behind Art Localized: AI should amplify local creators,
+        preserve human signal, and turn collaboration into a real handoff system instead of vague enthusiasm.
+      </p>
+      <div class="chips">
+        <span class="chip">Manifesto</span>
+        <span class="chip">Storyboard</span>
+        <span class="chip">Cue Notes</span>
+        <span class="chip">Visual Identity</span>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Listen">
+      <h2>Listen</h2>
+      <p class="sub">
+        This episode uses browser read-aloud instead of MP3. Start the script with the best free voice available
+        on this device, or mark listen complete manually after you review it.
+      </p>
+      <div class="row" style="margin-top:14px;">
+        <button type="button" class="btn btn--primary" id="btnReadAloud">Read Aloud</button>
+        <button type="button" class="btn" id="btnPauseReadAloud">Pause</button>
+        <button type="button" class="btn" id="btnStopReadAloud">Stop</button>
+        <button type="button" class="btn" id="btnListenDone">Mark listen complete</button>
+      </div>
+      <p class="status" id="readStatus" aria-live="polite">Ready to read the Phase 1 script aloud.</p>
+      <div id="readScript" class="script">
+        <p>
+          The Art Localized starts with a manifesto: AI does not replace artists, it localizes creativity.
+          The point is not generic content at scale. The point is giving local creators studio-level leverage
+          without stripping away their voice, place, or intent.
+        </p>
+        <p>
+          Phase 1 defines the values that collaboration has to protect. Empowerment means creators gain power.
+          Authenticity means regional stories stay visible. Efficiency with soul means tools can speed the work
+          without flattening the human signal. Resistance to homogenization means local art should not collapse
+          into corporate sameness.
+        </p>
+        <p>
+          The source pack turns those values into assets: a thirty-second manifesto spot, the EchoVerse cue
+          called Localized Frequencies, and a visual system built from brass sunlight, midnight code, sky
+          reflection, and canvas base. Even the aesthetic is hybrid on purpose: analog texture plus digital lift.
+        </p>
+        <p>
+          Collaboration becomes real when the handoff is explicit. Lumina finalizes script and captions,
+          EchoVerse drafts the cue, Nexus prepares the landing page, and the preview cuts are staged for public
+          activation. The operating model is simple: shared context in, routed deliverables out.
+        </p>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Slides">
+      <h2>Slides</h2>
+      <p class="eyebrow" id="slideTitle">Core promise</p>
+      <div id="slides" class="slides">
+        <div class="slide is-active" data-title="Core promise">
+          <div class="slide-visual" data-slide-art="s1" aria-hidden="true"></div>
+          <p class="sub">
+            The manifesto is a guardrail: AeroVista wins only if technology amplifies locality instead of erasing it.
+          </p>
+          <div class="note-grid">
+            <article class="mini"><strong>Empowerment.</strong> Local creators gain studio-grade leverage.</article>
+            <article class="mini"><strong>Authenticity.</strong> Regional stories stay visible and specific.</article>
+            <article class="mini"><strong>Collaboration.</strong> Machines amplify human intention; they do not overwrite it.</article>
+          </div>
+        </div>
+        <div class="slide" data-title="What collaboration means">
+          <div class="slide-visual" data-slide-art="s2" aria-hidden="true"></div>
+          <p class="sub">
+            Collaboration here is not “more meetings.” It is shared context, clear owners, and proof-bearing assets.
+          </p>
+          <div class="note-grid">
+            <article class="mini"><strong>Input.</strong> Manifesto, storyboard, cue notes, and moodboard.</article>
+            <article class="mini"><strong>Output.</strong> Finalized script, cue draft, visual kit, and landing page draft.</article>
+            <article class="mini"><strong>Proof.</strong> Every contribution maps to a named owner and due window.</article>
+          </div>
+        </div>
+        <div class="slide" data-title="Signal system">
+          <div class="slide-visual" data-slide-art="s3" aria-hidden="true"></div>
+          <p class="sub">
+            Phase 1 combines narrative, sound, and visual identity so the movement reads as one system instead of isolated artifacts.
+          </p>
+          <div class="note-grid">
+            <article class="mini"><strong>Video.</strong> Local streets, makers, and analog textures set the tone.</article>
+            <article class="mini"><strong>Audio.</strong> Field recordings, pads, and a hopeful lift anchor the cue.</article>
+            <article class="mini"><strong>Visuals.</strong> Warm imperfection beats polished corporate sameness.</article>
+          </div>
+        </div>
+        <div class="slide" data-title="Handoff discipline">
+          <div class="slide-visual" data-slide-art="s4" aria-hidden="true"></div>
+          <p class="sub">
+            The pack is already structured for a Lumina handoff. That is the model to copy across the rest of the journey.
+          </p>
+          <div class="note-grid">
+            <article class="mini"><strong>Week 1.</strong> Finalize voiceover and captions.</article>
+            <article class="mini"><strong>Week 2.</strong> Build cue draft and visual kit.</article>
+            <article class="mini"><strong>Week 3-4.</strong> Stage the landing page and short-form previews.</article>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="margin-top:14px;">
+        <button type="button" class="btn" id="btnSlidePrev">Previous</button>
+        <button type="button" class="btn btn--primary" id="btnSlideNext">Next</button>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Built from">
+      <h2>Built From</h2>
+      <ul class="source-list">
+        <li><code>The_Art_Localized_Phase1_Pack_AVHQ/manifesto.md</code> for the operating promise and value language.</li>
+        <li><code>The_Art_Localized_Phase1_Pack_AVHQ/the_art_localized_phase_1_pack (1).md</code> for storyboard and handoff actions.</li>
+        <li><code>The_Art_Localized_Phase1_Pack_AVHQ/echoverse-cue-notes.md</code> for the sound system and cue framing.</li>
+        <li><code>The_Art_Localized_Phase1_Pack_AVHQ/visual-moodboard.txt</code> for palette, typography, and imagery direction.</li>
+      </ul>
+    </section>
+
+    <section class="panel" aria-label="Field guide">
+      <h2>Field guide</h2>
+      <p class="sub">
+        Use this when you are shaping public copy, artist intake, or an internal handoff. The point is to protect
+        the creator while still making the launch concrete enough to ship.
+      </p>
+      <div class="field-guide">
+        <article class="guide-card"><strong>Ask before framing.</strong> Start with the creator's goal: visibility, collaboration, teaching, preservation, or experimentation. Do not assume every artist wants the same type of exposure.</article>
+        <article class="guide-card"><strong>Separate assistance from authorship.</strong> AI can help draft, edit, render, translate, or package. The artist's authorship, consent, and final review still need to stay explicit.</article>
+        <article class="guide-card"><strong>Write a useful handoff.</strong> A good handoff names the promise, owner, next artifact, deadline, and proof. If another operator cannot act on it, it is still just enthusiasm.</article>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Engage">
+      <h2>Engage</h2>
+      <form id="engageForm">
+        <p class="sub">Pick the answer that matches the operating model.</p>
+        <label class="choice"><input type="radio" name="engage" value="meetings" /> Collaboration in this journey is mainly about adding more meetings and chat threads.</label>
+        <label class="choice"><input type="radio" name="engage" value="proof" data-correct="true" /> Collaboration here means shared context, clear handoffs, and proof-bearing deliverables.</label>
+        <div class="row" style="margin-top:14px;">
+          <button type="submit" class="btn btn--primary" id="engageSubmit">Submit Engage</button>
+        </div>
+        <p id="engageHint"></p>
+      </form>
+    </section>
+
+    <section class="panel" aria-label="Proof mission">
+      <h2>Proof mission</h2>
+      <p class="sub">
+        Draft the operating promise for the public Art Localized page. The goal is to prove that the campaign protects
+        local voice while giving a named team a shippable next artifact.
+      </p>
+      <form id="missionForm">
+        <div class="mission-grid">
+          <label class="mission-field">
+            <span>Localized promise</span>
+            <textarea data-proof-field="localizedPromise" placeholder="Example: AI amplifies local creators without flattening their place, voice, or ownership."></textarea>
+          </label>
+          <label class="mission-field">
+            <span>Next owner</span>
+            <input data-proof-field="nextOwner" type="text" placeholder="Lumina, EchoVerse, Nexus, etc." />
+          </label>
+          <label class="mission-field">
+            <span>Proof artifact</span>
+            <input data-proof-field="proofArtifact" type="text" placeholder="Manifesto spot, cue draft, landing-page section, visual kit..." />
+          </label>
+        </div>
+        <div class="row" style="margin-top:14px;">
+          <button type="submit" class="btn btn--primary">Record proof mission</button>
+        </div>
+        <p id="missionHint"></p>
+      </form>
+    </section>
+  </main>
+  <script src="../../../assets/shared/bytecast_loop.js"></script>
+  <script src="../../../assets/shared/art_localized_episode.js"></script>
+</body>
+</html>

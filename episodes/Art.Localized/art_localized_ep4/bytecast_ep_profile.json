@@ -1,0 +1,30 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "episode": {
+    "code": "ART-EP-4",
+    "title": "The Art Localized — Ep 4 — Your role + final assessment",
+    "type": "training",
+    "date": "2026-03-30",
+    "runtime_target_minutes": 8,
+    "status": "active"
+  },
+  "content": {
+    "tags": ["art-localized", "training", "assessment"],
+    "summary_short": "Phase 4 pathways, rights review, ecosystem roles, and final assessment."
+  },
+  "engagement": {
+    "quest": { "title": "Ep 4", "items": [] },
+    "quiz": {
+      "enabled": true,
+      "pass_threshold": 0.8,
+      "questions": [
+        {
+          "id": "art_ep4_q1",
+          "q": "Your role emphasizes:",
+          "choices": ["Chat-only memory", "Clear artifacts and routing"],
+          "answer_index": 1
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "schema": "bytecast-voiceover-sections-v1",
+  "slug": "lumina_rev_104",
+  "code": "EP-LUM-104",
+  "sections": [
+    {
+      "id": "cold-open",
+      "title": "Cold open",
+      "displayText": "Welcome to EP-LUM-104. Strong sales judgment usually looks quieter at the beginning. Instead of pitching fast, it asks better questions. This episode trains the learner to find the real need, not just the first request that lands in the conversation, and not to promise before the evidence is clear.",
+      "speakText": "Welcome to EP-LUM-104. Strong sales judgment usually looks quieter at the beginning. Instead of pitching fast, it asks better questions. This episode trains the learner to find the real need, not just the first request that lands in the conversation, and not to promise before the evidence is clear."
+    },
+    {
+      "id": "slide-pitch_early",
+      "title": "Do not pitch too early",
+      "displayText": "Do not pitch too early. Slow the learner down at the right moment. Early pitching often solves the wrong problem. A surface request may be inaccurate, incomplete, or too narrow. Discovery protects both routing quality and trust.",
+      "speakText": "Do not pitch too early. Slow the learner down at the right moment. Early pitching often solves the wrong problem. A surface request may be inaccurate, incomplete, or too narrow. Discovery protects both routing quality and trust."
+    },
+    {
+      "id": "slide-rule",
+      "title": "The discovery rule",
+      "displayText": "The discovery rule. Give a repeatable starting frame. Start with the problem, desired outcome, and timeline. Those three anchors tell you much more than a feature request alone. Until those are clearer, recommendations stay provisional.",
+      "speakText": "The discovery rule. Give a repeatable starting frame. Start with the problem, desired outcome, and timeline. Those three anchors tell you much more than a feature request alone. Until those are clearer, recommendations stay provisional."
+    },
+    {
+      "id": "slide-wants_needs",
+      "title": "Wants versus needs",
+      "displayText": "Wants versus needs. Teach the difference directly. A lead may ask for a website when the deeper need is lead flow or trust repair. A lead may ask for content when the deeper need is a learning path or sales clarity. Surface wants matter, but they are not always the primary route signal.",
+      "speakText": "Wants versus needs. Teach the difference directly. A lead may ask for a website when the deeper need is lead flow or trust repair. A lead may ask for content when the deeper need is a learning path or sales clarity. Surface wants matter, but they are not always the primary route signal."
+    },
+    {
+      "id": "slide-questions",
+      "title": "Questions that find truth",
+      "displayText": "Questions that find truth. Train useful discovery prompts. What problem are you trying to solve? What changes after success, and what timeline matters? What have you already tried, who is affected if nothing changes, and who can approve the next step?",
+      "speakText": "Questions that find truth. Train useful discovery prompts. What problem are you trying to solve? What changes after success, and what timeline matters? What have you already tried, who is affected if nothing changes, and who can approve the next step?"
+    },
+    {
+      "id": "slide-readiness",
+      "title": "Readiness signals",
+      "displayText": "Readiness signals. Separate ready leads from blurry ones. Some leads are ready now. Others need more clarity. Some are not ready at all. Readiness changes the next step you recommend. Pushing a not-ready lead into a fake solution is still a sales failure. Budget and decision authority are signals, not pressure points.",
+      "speakText": "Readiness signals. Separate ready leads from blurry ones. Some leads are ready now. Others need more clarity. Some are not ready at all. Readiness changes the next step you recommend. Pushing a not-ready lead into a fake solution is still a sales failure. Budget and decision authority are signals, not pressure points."
+    },
+    {
+      "id": "slide-primary_support",
+      "title": "Primary lane versus support lane",
+      "displayText": "Primary lane versus support lane. Teach bundle discipline. A lead can have one primary need and still benefit from support lanes. The primary lane should address the core problem, not just the nicest add-on. Support lanes are real, but they should not hide the core route.",
+      "speakText": "Primary lane versus support lane. Teach bundle discipline. A lead can have one primary need and still benefit from support lanes. The primary lane should address the core problem, not just the nicest add-on. Support lanes are real, but they should not hide the core route."
+    },
+    {
+      "id": "slide-worked_example",
+      "title": "Worked discovery example",
+      "displayText": "Worked discovery example. Turn the framework into a real scenario. Surface request: We need a website refresh. Real issue after discovery: the owner has weak follow-up, no clear offer, and no lead intake automation. Better qualification summary: primary need is commercial clarity plus lead-flow structure, so Lumina + Nexus is more plausible than a design-only refresh. Good discovery changed the route because it exposed the real business problem, not just the front-end symptom.",
+      "speakText": "Worked discovery example. Turn the framework into a real scenario. Surface request: We need a website refresh. Real issue after discovery: the owner has weak follow-up, no clear offer, and no lead intake automation. Better qualification summary: primary need is commercial clarity plus lead-flow structure, so Lumina + Nexus is more plausible than a design-only refresh. Good discovery changed the route because it exposed the real business problem, not just the front-end symptom."
+    },
+    {
+      "id": "slide-summary",
+      "title": "Write the qualification summary",
+      "displayText": "Write the qualification summary. Turn conversation into usable routing notes. Capture the real problem, desired outcome, likely primary division, readiness, and bundle signals. That summary becomes the bridge into recommendation and handoff. If the summary is muddy, the next step will be muddy too. Mark what is confirmed, what is assumed, and what still needs permission.",
+      "speakText": "Write the qualification summary. Turn conversation into usable routing notes. Capture the real problem, desired outcome, likely primary division, readiness, and bundle signals. That summary becomes the bridge into recommendation and handoff. If the summary is muddy, the next step will be muddy too. Mark what is confirmed, what is assumed, and what still needs permission."
+    },
+    {
+      "id": "end",
+      "title": "End",
+      "displayText": "End.",
+      "speakText": "End."
+    }
+  ],
+  "overviewOrder": [
+    "cold-open",
+    "slide-pitch_early",
+    "slide-rule",
+    "slide-wants_needs",
+    "slide-questions",
+    "slide-readiness",
+    "slide-primary_support",
+    "slide-worked_example",
+    "slide-summary"
+  ],
+  "heroSectionId": "cold-open",
+  "slideSectionMap": {
+    "pitch_early": "slide-pitch_early",
+    "rule": "slide-rule",
+    "wants_needs": "slide-wants_needs",
+    "questions": "slide-questions",
+    "readiness": "slide-readiness",
+    "primary_support": "slide-primary_support",
+    "worked_example": "slide-worked_example",
+    "summary": "slide-summary"
+  }
+}

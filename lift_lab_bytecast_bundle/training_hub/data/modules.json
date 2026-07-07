@@ -1,4 +1,4 @@
-{
+﻿{
   "schema": "bytecast-module-manifest-v1",
   "app_id": "training_hub",
   "app_name": "Training Hub",
@@ -10,8 +10,8 @@
       "description": "Primary training and sales operations app for divisions, offers, and execution playbooks.",
       "owner": "Offers and Sales Ops",
       "category": "app",
-      "path": "../aerovista_offer_pack/app/index.html",
-      "canon_path": "aerovista_offer_pack"
+      "path": "../../episodes/aerovista_offer_pack/app/index.html",
+      "canon_path": "episodes/aerovista_offer_pack"
     },
     {
       "id": "lift_lab_training_site",
@@ -19,7 +19,7 @@
       "description": "Non-coder onboarding bundle with missions, contribution lanes, and guided workflows.",
       "owner": "Training and Community",
       "category": "app",
-      "path": "../lift_lab_bytecast_bundle/site/index.html",
+      "path": "../../lift_lab_bytecast_bundle/site/index.html",
       "canon_path": "lift_lab_bytecast_bundle"
     },
     {
@@ -51,3 +51,6 @@
     }
   ]
 }
+
+
+

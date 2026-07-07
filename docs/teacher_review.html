@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Teacher &amp; reviewer hub — ByteCast Docs</title>
+  <meta name="description" content="Entry point for teachers and reviewers: proof bundles, checklists, rubrics, and standards." />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Sora:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap");
+    :root {
+      --bg0: #050607;
+      --bg1: #0b0f14;
+      --line: rgba(255, 255, 255, 0.14);
+      --line-strong: rgba(34, 167, 255, 0.32);
+      --ink: rgba(255, 255, 255, 0.93);
+      --muted: rgba(255, 255, 255, 0.66);
+      --warn-bg: rgba(255, 196, 90, 0.12);
+      --warn-border: rgba(255, 196, 90, 0.4);
+      --warn-ink: rgba(255, 237, 198, 0.96);
+      --radius: 18px;
+      --max: 900px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(1100px 520px at 10% 0%, rgba(34, 167, 255, 0.12), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      min-height: 100vh;
+      padding: 1.1rem 1rem 2rem;
+    }
+    .shell { max-width: var(--max); margin: 0 auto; }
+    h1 {
+      margin: 0 0 0.4rem;
+      font-family: "Sora", "Segoe UI", sans-serif;
+      font-size: clamp(1.45rem, 4vw, 2rem);
+      letter-spacing: -0.02em;
+    }
+    .lede { margin: 0 0 1rem; color: var(--muted); line-height: 1.55; max-width: 72ch; }
+    a { color: #9fe8ff; }
+    a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+    /* Shown only on narrow viewports (typical phones / small tablets in portrait). */
+    .mobile-experience-notice {
+      display: none;
+      margin-bottom: 1rem;
+      padding: 0.85rem 1rem;
+      border-radius: 14px;
+      border: 1px solid var(--warn-border);
+      background: var(--warn-bg);
+      color: var(--warn-ink);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .mobile-experience-notice strong { color: #fff; }
+    @media (max-width: 768px) {
+      .mobile-experience-notice { display: block; }
+    }
+
+    .btnrow { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0 1rem; }
+    .btn {
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 700;
+      padding: 0.45rem 0.85rem;
+      font-size: 0.9rem;
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .btn:hover { border-color: var(--line-strong); text-decoration: none; }
+    .btn.primary {
+      background: rgba(34, 167, 255, 0.14);
+      border-color: rgba(34, 167, 255, 0.45);
+    }
+
+    .grid {
+      display: grid;
+      gap: 0.85rem;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .card h2 { margin: 0 0 0.35rem; font-family: "Sora", sans-serif; font-size: 1.02rem; }
+    .card p { margin: 0; color: var(--muted); font-size: 0.92rem; line-height: 1.5; }
+    .card .btnrow { margin-top: 0.65rem; }
+    code { font-family: var(--mono); font-size: 0.82em; }
+    .steps { margin: 0.5rem 0 0; padding-left: 1.2rem; color: var(--muted); font-size: 0.92rem; line-height: 1.55; }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="mobile-experience-notice" role="status" aria-live="polite">
+      <strong>Tip:</strong> For the best experience reviewing learner proof—JSON paste, wide tables, and checklists—open this hub on a <strong>PC or laptop</strong> (or a large tablet in landscape). You can continue on mobile; layout will feel cramped.
+    </div>
+
+    <h1>Teacher &amp; reviewer hub</h1>
+    <p class="lede">
+      Review Golden Path evidence without using the learner’s browser. Start from a learner-exported proof bundle, then use the interactive proof checker and written checklists.
+    </p>
+
+    <div class="btnrow">
+      <a class="btn primary" href="./proof_review.html">Open proof review (paste JSON)</a>
+      <a class="btn" href="./index.html">Docs Portal</a>
+      <a class="btn" href="../seed_bytecast.html">Playlist</a>
+    </div>
+
+    <section class="grid" aria-label="Reviewer resources">
+      <article class="card">
+        <h2>Proof review tool</h2>
+        <p>Paste a <code>bytecast-proof-bundle-v1</code> object and run the pilot checklist against stored step meta.</p>
+        <div class="btnrow">
+          <a class="btn primary" href="./proof_review.html">Proof Review</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>Sign-off &amp; rubrics</h2>
+        <p>Structured pass/rework criteria for modules and per-learner submissions.</p>
+        <div class="btnrow">
+          <a class="btn primary" href="./TEACHER_REVIEW_CHECKLIST.md">Review checklist</a>
+          <a class="btn" href="./TRAINING_RUBRICS.md">Rubrics</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>Standards &amp; contract</h2>
+        <p>What “proof” means in config and what fields packs must write.</p>
+        <div class="btnrow">
+          <a class="btn" href="./BYTECAST_PROOF_SCHEMA.md">Proof schema</a>
+          <a class="btn" href="./BYTECAST_TRAINING_STANDARD.md">Training standard</a>
+          <a class="btn" href="./LOOP_STANDARD.md">Loop standard</a>
+        </div>
+      </article>
+    </section>
+
+    <article class="card" style="margin-top:1rem;">
+      <h2>How learners export proof</h2>
+      <p style="margin-bottom:0.5rem;">On any page that loads <code>bytecast_loop.js</code> (e.g. Playlist), DevTools console:</p>
+      <ol class="steps">
+        <li><code>copy(JSON.stringify(ByteCastLoop.buildProofBundle(&quot;p1_golden_path&quot;), null, 2))</code></li>
+        <li>Paste into a file or message to you, then open <a href="./proof_review.html">Proof Review</a> and paste there.</li>
+      </ol>
+    </article>
+  </main>
+</body>
+</html>

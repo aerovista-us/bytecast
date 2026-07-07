@@ -410,7 +410,7 @@
           <p>After these gates, the Apparel journey will push you into a guided “Practice Catalog Fix” and then into a Seed artifact that captures your workflow proof.</p>
           <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
             <a class="btn btn--primary" href="../../seed_bytecast.html">Back to Playlist</a>
-            <a id="nextTrainingBtn" class="btn" href="../../training_hub/index.html">Open Training Hub</a>
+            <a id="nextTrainingBtn" class="btn" href="../../episodes/training_hub/index.html">Open Training Hub</a>
             <span id="gateNote" class="pill">Loading gate status...</span>
           </div>
         </div>
@@ -502,6 +502,16 @@
             "Titles, tags, and collections follow the standard format.",
             "You have re-exported the catalog and confirmed storefront behavior."
           ]
+        },
+        {
+          id: "s7",
+          title: "Change Log + Rollback",
+          goal: "Make catalog maintenance reversible.",
+          bullets: [
+            "Record the export or snapshot used before the change.",
+            "List product IDs or SKUs touched and the exact fields changed.",
+            "Name the rollback path: restore old value, unpublish, or revert from the prior export."
+          ]
         }
       ],
       engagement: {
@@ -511,7 +521,8 @@
             { id: "q1", text: "Open your current apparel grid and find one duplicate or near-duplicate product." },
             { id: "q2", text: "Find one example where price, size, or title looks inconsistent across pages." },
             { id: "q3", text: "Write down which workflow (Add / Remove / Update) would safely fix each issue." },
-            { id: "q4", text: "Identify one product that should probably be archived or hidden instead of left live." }
+            { id: "q4", text: "Identify one product that should probably be archived or hidden instead of left live." },
+            { id: "q5", text: "For one sample product, record product ID, field changed, before value, after value, and rollback path." }
           ],
           reward_badge: {
             label: "APPAREL MAINTAINER READY",
@@ -581,6 +592,18 @@
               ],
               answer_index: 2,
               explain: "If the same product shows different prices or details in different places, you likely have drift."
+            },
+            {
+              id: "k6",
+              q: "What should a maintainer record after a catalog update?",
+              choices: [
+                "Only that it looks better",
+                "Product or SKU, changed fields, before/after values, and rollback path",
+                "Nothing if the storefront loads",
+                "Only a screenshot"
+              ],
+              answer_index: 1,
+              explain: "Catalog changes need enough recordkeeping to audit or reverse safely."
             }
           ]
         }
@@ -1031,4 +1054,6 @@
   </script>
 </body>
 </html>
+
+
 

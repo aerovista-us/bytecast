@@ -1,0 +1,217 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "episode": {
+    "code": "EP-004",
+    "title": "Current Truth Basics - Visibility, Ownership, and Trust",
+    "type": "internal",
+    "date": "2026-03-25",
+    "runtime_target_minutes": 13,
+    "status": "active"
+  },
+  "content": {
+    "tags": [
+      "acos",
+      "sot",
+      "current-truth",
+      "day1",
+      "golden-path"
+    ],
+    "summary_short": "Learn the three truth layers - see through ACOS, own through domain systems, trust through SOT - and use real ByteCast examples to avoid the newest-file trap.",
+    "summary_long": "EP-004 closes the Day 1 thinking loop with practical truth boundaries. It explains why visibility is not the same as authority, why domain systems still own operational records, and why Source of Truth documentation must explicitly label active, legacy, and canonical paths. The lesson now includes real ByteCast-flavored examples, such as canon labels like Primary and Legacy, the rule that new episodes publish under episodes/<slug>/, and why governed docs beat random timestamps when the organization needs a stable answer."
+  },
+  "media": {
+    "audio_files": [
+      {
+        "path": "assets/ep004_voiceover.mp3",
+        "label": "Narration (generate via scripts/vo_md_to_mp3.py or scripts/vo_openai_tts.py)",
+        "required": false
+      },
+      {
+        "path": "../welcome_to_bytecast/assets/welcome_to_bytecast.mp3",
+        "label": "Fallback: EP-001 placeholder if generated MP3 is missing",
+        "required": false
+      }
+    ]
+  },
+  "slides": [
+    {
+      "id": "s_open",
+      "title": "EP-004 - Current Truth Basics",
+      "goal": "Learn why declared truth beats improvised truth.",
+      "bullets": [
+        "Fast-moving teams create drift when nobody labels what is current, canonical, or retired.",
+        "This episode gives three truth layers: ACOS for visibility, domain systems for records, and SOT for declared trust.",
+        "The goal is not just to define them, but to help the learner route decisions to the right layer."
+      ]
+    },
+    {
+      "id": "s1",
+      "title": "Why current truth matters",
+      "goal": "See the cost of ambiguity before you touch the deeper systems.",
+      "bullets": [
+        "Ambiguous truth creates duplicate work, reversed decisions, and avoidable learner confusion long before it becomes a formal incident.",
+        "Good visibility lowers meeting load because people stop arguing from memory and start checking declared guidance.",
+        "The operational habit is simple: confirm the truth layer before you broadcast certainty."
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "ACOS - visibility cockpit",
+      "goal": "Use visibility correctly without mistaking it for ownership.",
+      "bullets": [
+        "ACOS is the cockpit: alerts, signals, and cross-lane orientation that help leaders and operators see what is happening.",
+        "A cockpit is useful because it summarizes, but it does not replace the underlying systems that own detailed records.",
+        "If the question turns binding, legal, or operationally exact, visibility alone is not enough."
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Domain systems - ownership",
+      "goal": "Keep authority with the system that owns the record.",
+      "bullets": [
+        "Finance, inventory, CRM, support queues, delivery trackers, and similar domain tools own the operational record for their lane.",
+        "Cockpits and dashboards can surface summaries, but they should not silently become the source of record just because they are easier to look at.",
+        "When commitments, money, or compliance are involved, confirm with the owning team and the owning system."
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "SOT - declared trust",
+      "goal": "Make official guidance explicit instead of social.",
+      "bullets": [
+        "Source of Truth documentation labels what is active, canonical, legacy, duplicate, or archived right now.",
+        "In the ByteCast workspace, labels like Primary, Legacy, Duplicate, and Archive are examples of trust language that reduces arguments.",
+        "If two files disagree, the governed source and its labels beat whichever file was saved most recently."
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "Visibility vs ownership - mental sort",
+      "goal": "Memorize the jobs so the learner can route questions fast.",
+      "bullets": [
+        "ACOS means visibility. SOT means declared trust. Work Orders mean execution. Reporting means interpretation and signals. Domain systems mean records of fact.",
+        "A governed docs standard or canon map belongs in the trust layer, not in the cockpit layer.",
+        "A publish rule like 'new episodes go under episodes/<slug>/' is a trust and governance rule, not a dashboard metric."
+      ]
+    },
+    {
+      "id": "s6",
+      "title": "Misuse to avoid",
+      "goal": "Spot the traps that feel fast but create drift.",
+      "bullets": [
+        "Trap one: newest file equals official. Timestamps can help, but they do not replace governance labels.",
+        "Trap two: opening legacy wrappers or random folders instead of the canonical path because they happen to be nearby.",
+        "Trap three: treating clicks as proof when the journey explicitly expects listen, slides, and Engage with quiz evidence."
+      ]
+    },
+    {
+      "id": "s7",
+      "title": "Before TR-001A",
+      "goal": "Turn the truth model into plain-language judgment.",
+      "bullets": [
+        "Explain ACOS in one line, domain ownership in one line, and SOT in one line.",
+        "If two references disagree, say what you would check before you forward either one.",
+        "The next step, TR-001A, asks the learner to prove the model in quiz, writing, and routing form."
+      ]
+    }
+  ],
+  "engagement": {
+    "quest": {
+      "title": "EP-004 current-truth checklist",
+      "items": [
+        {
+          "id": "q1",
+          "text": "Use Listen or Read episode overview once, then reach the final slide."
+        },
+        {
+          "id": "q2",
+          "text": "Open Docs from the Reference strip and identify one governed standard or proof document."
+        },
+        {
+          "id": "q3",
+          "text": "Say aloud why 'newest file wins' is not a trust policy."
+        },
+        {
+          "id": "q4",
+          "text": "Name one example of a trust label, such as Primary, Legacy, Duplicate, or Archive."
+        }
+      ],
+      "reward_badge": {
+        "label": "TRUTH LAYER",
+        "style": "ghost"
+      }
+    },
+    "quiz": {
+      "enabled": true,
+      "pass_threshold": 0.8,
+      "questions": [
+        {
+          "id": "ep4_q1_acos",
+          "q": "Which statement best fits ACOS?",
+          "choices": [
+            "It privately stores every invoice line item forever",
+            "It is a cockpit for unified visibility across lanes",
+            "It replaces division-specific tools entirely"
+          ],
+          "answer_index": 1,
+          "explain": "ACOS is for visibility and orientation, not for replacing domain ownership."
+        },
+        {
+          "id": "ep4_q2_sot",
+          "q": "SOT primarily helps teams:",
+          "choices": [
+            "Auto-delete legacy files",
+            "Know what is treated as current and trusted",
+            "Hide documentation"
+          ],
+          "answer_index": 1,
+          "explain": "Trust becomes explicit when paths and statuses are declared."
+        },
+        {
+          "id": "ep4_q3_conflict",
+          "q": "Two handbooks disagree. Safest default:",
+          "choices": [
+            "Trust the one edited most recently",
+            "Verify against declared SOT or governance guidance",
+            "Use whichever your manager saw first"
+          ],
+          "answer_index": 1,
+          "explain": "Governance labels beat recency alone."
+        },
+        {
+          "id": "ep4_q4_domain",
+          "q": "Authoritative inventory quantities should live in:",
+          "choices": [
+            "A personal draft doc",
+            "The domain's system of record",
+            "Whichever slide deck was used in the last meeting"
+          ],
+          "answer_index": 1,
+          "explain": "Records stay with the owning domain system."
+        },
+        {
+          "id": "ep4_q5_work_orders",
+          "q": "Work Orders are best described as:",
+          "choices": [
+            "The company branding wiki",
+            "Execution tracking - who does what, by when",
+            "A replacement for the docs portal"
+          ],
+          "answer_index": 1,
+          "explain": "Work Orders are an execution layer, not visibility or trust governance."
+        },
+        {
+          "id": "ep4_q6_publish_root",
+          "q": "If governance says new ByteCast episodes publish under episodes/<slug>/, that rule belongs to:",
+          "choices": [
+            "The trust and canon layer",
+            "A dashboard-only visibility layer",
+            "A personal preference note"
+          ],
+          "answer_index": 0,
+          "explain": "Canonical path rules are governance decisions that belong in declared trust guidance."
+        }
+      ]
+    }
+  }
+}

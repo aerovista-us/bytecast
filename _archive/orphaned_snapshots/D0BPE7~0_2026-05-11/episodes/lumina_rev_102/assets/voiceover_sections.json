@@ -1,0 +1,89 @@
+{
+  "schema": "bytecast-voiceover-sections-v1",
+  "slug": "lumina_rev_102",
+  "code": "EP-LUM-102",
+  "sections": [
+    {
+      "id": "cold-open",
+      "title": "Cold open",
+      "displayText": "Welcome to EP-LUM-102. Lumina cannot route well without knowing the board. This episode is not about becoming a deep specialist in every lane. It is about building clean sales language for each division so you can hear a need and place it intelligently.",
+      "speakText": "Welcome to EP-LUM-102. Lumina cannot route well without knowing the board. This episode is not about becoming a deep specialist in every lane. It is about building clean sales language for each division so you can hear a need and place it intelligently."
+    },
+    {
+      "id": "slide-board_model",
+      "title": "AeroVista is a board, not a bucket",
+      "displayText": "AeroVista is a board, not a bucket. Anchor the peer-division model. Each division has its own delivery strengths, trust style, and offer logic. Lumina sits across the board commercially, but it still routes into specific lanes. That means the board matters more than memorizing slogans.",
+      "speakText": "AeroVista is a board, not a bucket. Anchor the peer-division model. Each division has its own delivery strengths, trust style, and offer logic. Lumina sits across the board commercially, but it still routes into specific lanes. That means the board matters more than memorizing slogans."
+    },
+    {
+      "id": "slide-nexus",
+      "title": "Nexus = build, systems, AI",
+      "displayText": "Nexus = build, systems, AI. Give Nexus a clean sales shorthand. Think custom software, automation, integration, and AI-enabled systems. The buyer usually has an operational or technical problem that needs structure. Words like workflow, system, portal, automation, and integration are strong clues.",
+      "speakText": "Nexus = build, systems, AI. Give Nexus a clean sales shorthand. Think custom software, automation, integration, and AI-enabled systems. The buyer usually has an operational or technical problem that needs structure. Words like workflow, system, portal, automation, and integration are strong clues."
+    },
+    {
+      "id": "slide-echo_sky",
+      "title": "EchoVerse and SkyForge",
+      "displayText": "EchoVerse and SkyForge. Separate sonic work from interactive experiences. EchoVerse fits music, sound, audio identity, release support, and expressive sonic experiences. SkyForge fits immersive, playful, interactive, or game-like work. A lead may mention content generally, but the format tells you which lane is primary.",
+      "speakText": "EchoVerse and SkyForge. Separate sonic work from interactive experiences. EchoVerse fits music, sound, audio identity, release support, and expressive sonic experiences. SkyForge fits immersive, playful, interactive, or game-like work. A lead may mention content generally, but the format tells you which lane is primary."
+    },
+    {
+      "id": "slide-summit_vespera",
+      "title": "Summit and Vespera",
+      "displayText": "Summit and Vespera. Distinguish learning systems from authored content. Summit is the learning and training systems lane: courses, learner journeys, education experiences. Vespera is the publishing and authored-content lane: books, editorial packages, narrative content systems. Both can package information, but they do not do it the same way.",
+      "speakText": "Summit and Vespera. Distinguish learning systems from authored content. Summit is the learning and training systems lane: courses, learner journeys, education experiences. Vespera is the publishing and authored-content lane: books, editorial packages, narrative content systems. Both can package information, but they do not do it the same way."
+    },
+    {
+      "id": "slide-lumina_horizon",
+      "title": "Lumina and Horizon",
+      "displayText": "Lumina and Horizon. Place the market-facing and field-proof lanes together. Lumina owns the commercial story, positioning, and growth motion. Horizon brings field-ready aerial or visual proof when that proof is part of the opportunity. Aerial capture alone is not the same as campaign strategy, and campaign strategy alone is not field proof.",
+      "speakText": "Lumina and Horizon. Place the market-facing and field-proof lanes together. Lumina owns the commercial story, positioning, and growth motion. Horizon brings field-ready aerial or visual proof when that proof is part of the opportunity. Aerial capture alone is not the same as campaign strategy, and campaign strategy alone is not field proof."
+    },
+    {
+      "id": "slide-one_line",
+      "title": "The board in one line each",
+      "displayText": "The board in one line each. Make the map reusable in conversation. Nexus builds systems. EchoVerse shapes sound. SkyForge creates interactive experiences. Summit builds learning journeys. Vespera packages authored content. Horizon captures field proof. Lumina leads commercial clarity. If you can say that cleanly, you can start qualifying faster.",
+      "speakText": "The board in one line each. Make the map reusable in conversation. Nexus builds systems. EchoVerse shapes sound. SkyForge creates interactive experiences. Summit builds learning journeys. Vespera packages authored content. Horizon captures field proof. Lumina leads commercial clarity. If you can say that cleanly, you can start qualifying faster."
+    },
+    {
+      "id": "slide-bundle",
+      "title": "Single lane or bundle",
+      "displayText": "Single lane or bundle. Introduce bundle thinking. Some leads are clearly single-lane. Others point to one primary lane plus support. A rebrand plus automation may be Lumina + Nexus. A release rollout may be Lumina + EchoVerse. The job is not to over-bundle everything. The job is to hear when more than one lane is real.",
+      "speakText": "Single lane or bundle. Introduce bundle thinking. Some leads are clearly single-lane. Others point to one primary lane plus support. A rebrand plus automation may be Lumina + Nexus. A release rollout may be Lumina + EchoVerse. The job is not to over-bundle everything. The job is to hear when more than one lane is real."
+    },
+    {
+      "id": "slide-route_need",
+      "title": "Route by need, not by buzzword",
+      "displayText": "Route by need, not by buzzword. Protect the learner from shallow routing. People say website when they actually need positioning, automation, proof assets, or a course flow. Surface wording helps, but problem shape matters more. Good routing listens for the underlying need first.",
+      "speakText": "Route by need, not by buzzword. Protect the learner from shallow routing. People say website when they actually need positioning, automation, proof assets, or a course flow. Surface wording helps, but problem shape matters more. Good routing listens for the underlying need first."
+    },
+    {
+      "id": "end",
+      "title": "End",
+      "displayText": "End.",
+      "speakText": "End."
+    }
+  ],
+  "overviewOrder": [
+    "cold-open",
+    "slide-board_model",
+    "slide-nexus",
+    "slide-echo_sky",
+    "slide-summit_vespera",
+    "slide-lumina_horizon",
+    "slide-one_line",
+    "slide-bundle",
+    "slide-route_need"
+  ],
+  "heroSectionId": "cold-open",
+  "slideSectionMap": {
+    "board_model": "slide-board_model",
+    "nexus": "slide-nexus",
+    "echo_sky": "slide-echo_sky",
+    "summit_vespera": "slide-summit_vespera",
+    "lumina_horizon": "slide-lumina_horizon",
+    "one_line": "slide-one_line",
+    "bundle": "slide-bundle",
+    "route_need": "slide-route_need"
+  }
+}

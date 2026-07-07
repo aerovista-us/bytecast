@@ -1,0 +1,10 @@
+{
+  "schema": "bytecast-episode-sot-v1",
+  "slug": "art_localized_ep3",
+  "episode_code": "ART-EP-3",
+  "title": "The Art Localized - Ep 3 - Amplification",
+  "series_id": "art_localized_training",
+  "sequence": 3,
+  "status": "active",
+  "entry": "index.html"
+}

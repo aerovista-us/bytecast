@@ -1,0 +1,88 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "episode": {
+    "code": "CO-EP-2",
+    "title": "Contributor Onboarding — Ep 2 — Lanes and the Honest Helper",
+    "type": "training",
+    "date": "2026-03-30",
+    "runtime_target_minutes": 6,
+    "status": "active"
+  },
+  "content": {
+    "tags": ["contributor-onboarding", "lanes", "communication"],
+    "summary_short": "Lane A, B, and C define risk boundaries; the Honest Helper standard defines how contributors take work and ask for help.",
+    "summary_long": "Before touching files, contributors need two things: the correct lane and the correct communication pattern. That is how AeroVista gets speed without chaos."
+  },
+  "training": {
+    "eyebrow": "Lanes + Honest Helper",
+    "chips": ["Lane A", "Lane B", "Lane C", "Ask WHERE first"],
+    "sources": [
+      "episodes/contributor.onboarding/docs/CONTRIBUTING.md",
+      "episodes/contributor.onboarding/docs/SECURITY_BOUNDARIES.md"
+    ],
+    "transcript": [
+      "AeroVista uses lanes to separate safe work from reviewed work and from founder-controlled execution. Contributors move faster when they know which kind of surface they are touching before they open an editor.",
+      "Lane A is the safe default for UI, copy, art assets, docs, JSON pack data, and other low-risk work. Lane B covers logic, tooling, analytics, feature flags, and performance changes that require review. Lane C is restricted: auth, secrets, networking, deploy pipelines, and canonical data writes.",
+      "The second part of the model is the Honest Helper standard. When taking work, contributors say what they can do, what they do not fully know yet, and what they need in order to proceed safely.",
+      "That is why the three WHERE questions matter: where is the source of truth, where is the verification path, and where is the safety boundary. Those questions replace guessing with alignment.",
+      "When blocked, the expected format is explicit: blocked on, tried, got, next guess, need from you. That message shortens review loops and makes support actionable."
+    ],
+    "slides": [
+      {
+        "id": "s1",
+        "title": "Pick a lane before touching files",
+        "body": "Risk is managed by classifying the task first, not by hoping a risky change stays small.",
+        "notes": [
+          "Lane A: UI, copy, docs, assets, JSON, non-prod scripts.",
+          "Lane B: app logic, tooling, flags, analytics, performance.",
+          "Lane C: auth, secrets, infra, deploy, migrations, canonical writes."
+        ]
+      },
+      {
+        "id": "s2",
+        "title": "Ask WHERE before you build",
+        "body": "The anti-chaos triad is source of truth, verification path, and boundary.",
+        "notes": [
+          "Find the correct repo, folder, and file first.",
+          "Know how the change is verified locally and in preview.",
+          "Confirm whether the surface is safe, reviewed, or restricted."
+        ]
+      },
+      {
+        "id": "s3",
+        "title": "Honest Helper take-on format",
+        "body": "A clean take-on statement combines willingness, transparency, and a specific request for the missing context.",
+        "notes": [
+          "Capability: I can take this on.",
+          "Unknowns: I am not fully familiar with part of the stack yet.",
+          "Need: point me to source of truth, an example, and what done looks like."
+        ]
+      },
+      {
+        "id": "s4",
+        "title": "Blocked message format",
+        "body": "Useful help requests show the current obstacle, what was tried, what happened, the next guess, and the exact help needed.",
+        "notes": [
+          "Blocked on makes the issue concrete.",
+          "Tried and Got reduce repeated troubleshooting.",
+          "Need from you tells reviewers exactly how to unblock the work."
+        ]
+      }
+    ],
+    "engage": {
+      "prompt": "A task needs a deployment pipeline change. What is the correct move?",
+      "options": [
+        {
+          "label": "Treat it as Lane C: prepare the plan or patch, then escalate because founder executes the final change.",
+          "correct": true
+        },
+        {
+          "label": "Ship it directly if the diff is small enough."
+        },
+        {
+          "label": "Reclassify it as Lane A because deployment is just housekeeping."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,13 @@
+Color Palette:
+- #E1C16E (Brass Sunlight)
+- #1C1F26 (Midnight Code)
+- #A2D6F9 (Sky Reflection)
+- #F6F1E9 (Canvas Base)
+
+Typography:
+- Header: Orbitron SemiBold
+- Body: Inter Regular
+- Accent: DM Sans Italic
+
+Style: Organic • Local • Hybrid • Honest • Forward-thinking
+Imagery: Real artists, analog textures, AI overlays, human imperfection.

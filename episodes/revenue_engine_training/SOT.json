@@ -1,0 +1,9 @@
+{
+  "schema": "bytecast-episode-sot-v1",
+  "slug": "revenue_engine_training",
+  "title": "Revenue Engine Training",
+  "type": "training",
+  "status": "active",
+  "entry": "index.html",
+  "owner": "Offers and Sales Ops"
+}

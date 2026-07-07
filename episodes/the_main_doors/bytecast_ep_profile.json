@@ -1,0 +1,217 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "episode": {
+    "code": "EP-003",
+    "title": "The Main Doors - Where to Go for Which Job",
+    "type": "internal",
+    "date": "2026-03-25",
+    "runtime_target_minutes": 13,
+    "status": "active"
+  },
+  "content": {
+    "tags": [
+      "bytecast",
+      "navigation",
+      "doors",
+      "day1",
+      "golden-path"
+    ],
+    "summary_short": "Match the job to the correct door: Entry for orientation, Playlist for progress, Hub for routes, Builder for repeatable artifacts, and Docs for governed answers.",
+    "summary_long": "EP-003 turns the learner's map into an action model. Each main surface gets a concrete use case, an honest 'not for this' boundary, and a few real examples pulled from the current ByteCast workspace: Entry for orientation, Playlist for gates and next action, Training Hub for route discovery, Seed Builder for export-oriented work, and Docs for standards like the training standard, proof schema, and site map. The goal is to help the learner stop opening random apps and start routing questions cleanly."
+  },
+  "media": {
+    "audio_files": [
+      {
+        "path": "assets/ep003_voiceover.mp3",
+        "label": "Narration (generate via scripts/vo_md_to_mp3.py or scripts/vo_openai_tts.py)",
+        "required": false
+      },
+      {
+        "path": "../welcome_to_bytecast/assets/welcome_to_bytecast.mp3",
+        "label": "Fallback: EP-001 placeholder if generated MP3 is missing",
+        "required": false
+      }
+    ]
+  },
+  "slides": [
+    {
+      "id": "s_open",
+      "title": "EP-003 - The Main Doors",
+      "goal": "Turn the map into a routing reflex.",
+      "bullets": [
+        "The question for this whole episode is simple: what door matches what I need right now?",
+        "Entry is the map. Playlist is the learner control room. Hub is the route map. Builder is repeatable output. Docs is governed truth.",
+        "Everything else may be real, but those five doors are the Day 1 contract."
+      ]
+    },
+    {
+      "id": "s1",
+      "title": "Workspace Entry",
+      "goal": "Orient before you execute.",
+      "bullets": [
+        "Open Workspace Entry when you need the lay of the land: what exists, how the major surfaces relate, and where the safe learner path begins.",
+        "It is strong for first visits, handoffs, and 'where does this live?' questions.",
+        "It is not the best place to resume personal progress once you already know the task."
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "ByteCast Playlist",
+      "goal": "Use the real Golden Path control room for learner progress.",
+      "bullets": [
+        "Playlist is where a learner checks gate status, resumes episodes, and sees the next recommended action.",
+        "It keeps proof attached to the journey, which is why it is the cleanest surface after a break or interruption.",
+        "If the question is 'what step am I on now?' the answer is usually Playlist first."
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Training Hub",
+      "goal": "Use the router when the question is about routes and modules.",
+      "bullets": [
+        "Training Hub organizes missions, routes, and prerequisites rather than trying to host every lesson paragraph inline.",
+        "It is the right door when you are asking which mission exists, what comes after a prerequisite, or what path fits a role.",
+        "ByteCast gives the narrated spine; Training Hub gives breadth and structure."
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Seed Builder Studio",
+      "goal": "Recognize repeatable artifact work early, even if mastery comes later.",
+      "bullets": [
+        "Builder is for templates, generators, Orchard-connected export work, and other repeatable artifact flows.",
+        "If the task is to create or package something reusable, Builder is a better fit than a random docs folder or ad hoc scratchpad.",
+        "The day-one lesson is not to live there. It is to know that repeatable build work has a home."
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "Docs Portal",
+      "goal": "Use docs when the answer must be official.",
+      "bullets": [
+        "Docs is where governed references live, including standards, proof rules, troubleshooting, and workspace maps.",
+        "Current examples include the training standard, proof schema, site map, and other canon-facing guidance.",
+        "If a teammate sends a random file and a docs standard disagrees, the docs standard is your safer first anchor."
+      ]
+    },
+    {
+      "id": "s6",
+      "title": "Learner vs internal surfaces",
+      "goal": "Understand why some visibility is not the same as permission or priority.",
+      "bullets": [
+        "Internal dashboards, raw registries, and maintainer views can be useful later, but they are not the Day 1 front door.",
+        "Jumping to internals too early creates the feeling of progress without the clarity needed to interpret what you are seeing.",
+        "Depth is something the learner earns after the public routing model is stable."
+      ]
+    },
+    {
+      "id": "s7",
+      "title": "Before you continue",
+      "goal": "Lock the routing reflex before truth rules arrive.",
+      "bullets": [
+        "Practice the five doors and one sentence for when each wins.",
+        "If you need progress, open Playlist. If you need route discovery, open Hub. If you need standards, open Docs.",
+        "Next: EP-004 teaches current truth, ownership, and why good routing still needs governed trust."
+      ]
+    }
+  ],
+  "engagement": {
+    "quest": {
+      "title": "EP-003 navigation checklist",
+      "items": [
+        {
+          "id": "q1",
+          "text": "Use Listen once, then reach the final slide."
+        },
+        {
+          "id": "q2",
+          "text": "Open the Playlist and confirm it shows a learner-facing progress view."
+        },
+        {
+          "id": "q3",
+          "text": "Open Docs and identify one governed document title."
+        },
+        {
+          "id": "q4",
+          "text": "Open Training Hub or Seed Builder and say which kind of question that surface answers better than Playlist."
+        }
+      ],
+      "reward_badge": {
+        "label": "DOORS UNLOCKED",
+        "style": "neon"
+      }
+    },
+    "quiz": {
+      "enabled": true,
+      "pass_threshold": 0.8,
+      "questions": [
+        {
+          "id": "ep3_q1_resume",
+          "q": "You returned from PTO and need your next ByteCast step with proof intact. Best first door?",
+          "choices": [
+            "Seed Builder Studio",
+            "ByteCast Playlist",
+            "Docs Portal"
+          ],
+          "answer_index": 1,
+          "explain": "Playlist is the learner control room for gates, resume, and next action."
+        },
+        {
+          "id": "ep3_q2_standards",
+          "q": "Legal asks for the current access-control standard. Best first door?",
+          "choices": [
+            "Training Hub only",
+            "Docs Portal",
+            "A random note someone sent in chat"
+          ],
+          "answer_index": 1,
+          "explain": "Governed references belong in docs, not in ad hoc handoffs."
+        },
+        {
+          "id": "ep3_q3_modules",
+          "q": "You want to see which training missions exist and how they chain. Best door?",
+          "choices": [
+            "ByteCast Playlist only",
+            "Training Hub",
+            "Workspace Entry only"
+          ],
+          "answer_index": 1,
+          "explain": "Hub organizes routes and modules; Playlist executes the learner spine."
+        },
+        {
+          "id": "ep3_q4_seed",
+          "q": "You are about to package a repeatable seed export. Best door?",
+          "choices": [
+            "Docs Portal",
+            "Seed Builder Studio",
+            "Workspace Entry"
+          ],
+          "answer_index": 1,
+          "explain": "Builder is the home for reusable artifact and generator work."
+        },
+        {
+          "id": "ep3_q5_start",
+          "q": "Brand-new hire, zero context, needs the map before clicking deeper. Best door?",
+          "choices": [
+            "Raw runtime JSON",
+            "Workspace Entry",
+            "Internal-only ops dashboards"
+          ],
+          "answer_index": 1,
+          "explain": "Workspace Entry is the humane front door for orientation."
+        },
+        {
+          "id": "ep3_q6_docs_example",
+          "q": "Which of these belongs most naturally in Docs Portal?",
+          "choices": [
+            "Training standard and proof schema",
+            "Resume gate status",
+            "Seed export packaging run"
+          ],
+          "answer_index": 0,
+          "explain": "Docs holds governed references; the other two belong to learner progress and builder work."
+        }
+      ]
+    }
+  }
+}

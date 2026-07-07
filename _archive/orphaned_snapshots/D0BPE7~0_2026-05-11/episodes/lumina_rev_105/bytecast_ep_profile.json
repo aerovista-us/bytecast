@@ -1,0 +1,241 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "episode": {
+    "code": "EP-LUM-105",
+    "title": "Recommend the Right Path",
+    "type": "episode pack",
+    "date": "2026-03-27",
+    "runtime_target_minutes": 12,
+    "status": "active"
+  },
+  "content": {
+    "tags": [
+      "recommendation",
+      "bundles",
+      "scope",
+      "overpromising"
+    ],
+    "summary_short": "Turn discovery into a clean recommendation without overpromising, collapsing scope, or hiding who actually delivers.",
+    "summary_long": "This episode teaches how to recommend a single lane or bundle, explain why, and keep scope honest so the next step stays commercially useful and operationally safe.",
+    "start_here": "Listen first, then use the slides to practice single-lane versus bundle recommendations.",
+    "hero_kicker": "Recommendation Logic",
+    "key_line": "Discovery should end in direction, not in vagueness."
+  },
+  "media": {
+    "audio_files": []
+  },
+  "slides": [
+    {
+      "id": "direction",
+      "title": "Discovery must turn into direction",
+      "goal": "Show why recommendation is the next skill.",
+      "bullets": [
+        "Good sales process ends in a clear next-step recommendation.",
+        "If discovery ends in fog, the prospect still feels lost.",
+        "Clear direction is part of commercial value."
+      ]
+    },
+    {
+      "id": "single_bundle",
+      "title": "Single division versus bundle",
+      "goal": "Make the recommendation fork explicit.",
+      "bullets": [
+        "Some opportunities have one obvious primary lane.",
+        "Others need a primary lane plus support lanes to actually solve the problem.",
+        "The recommendation should match the real shape of the need."
+      ]
+    },
+    {
+      "id": "lumina_led",
+      "title": "Lumina-led is not Lumina-delivered",
+      "goal": "Protect the ownership line during recommendations.",
+      "bullets": [
+        "Lumina can lead the commercial framing and still point delivery elsewhere.",
+        "That is a strength, not a weakness.",
+        "A clean recommendation makes the delivery owner explicit."
+      ]
+    },
+    {
+      "id": "patterns",
+      "title": "Common bundle patterns",
+      "goal": "Give learners reusable examples.",
+      "bullets": [
+        "Lumina + Nexus for positioning plus systems.",
+        "Lumina + EchoVerse for rollout plus sound or release experience.",
+        "Lumina + Horizon for campaign packaging plus visual proof."
+      ]
+    },
+    {
+      "id": "hold_back",
+      "title": "Hold back when needed",
+      "goal": "Teach scope discipline.",
+      "bullets": [
+        "Sometimes the strongest recommendation is narrower than the lead expects.",
+        "If the real need is simple, do not inflate it into a vague mega-bundle.",
+        "Honest scope improves trust and close quality."
+      ]
+    },
+    {
+      "id": "why",
+      "title": "Explain the why",
+      "goal": "Keep recommendations defensible.",
+      "bullets": [
+        "The recommendation language should tie directly to the problem and outcome.",
+        "If you cannot explain why the lane fits, the recommendation is not ready.",
+        "A clear why keeps internal handoff stronger too."
+      ]
+    },
+    {
+      "id": "worked_path",
+      "title": "Worked recommendation example",
+      "goal": "Make the recommendation formula concrete.",
+      "bullets": [
+        "Lead: a regional service company asks for a new site, but discovery reveals weak offer clarity, poor lead follow-up, and manual intake.",
+        "Clean recommendation: Lumina + Nexus. Why: Lumina clarifies the commercial offer and message; Nexus handles the intake flow and automation layer.",
+        "What to avoid promising: a full rebuild of everything at once before the scope and operations constraints are understood."
+      ],
+      "takeaway": "The best recommendation names the lane, the reason, and the guardrail."
+    },
+    {
+      "id": "formula",
+      "title": "Recommendation formula",
+      "goal": "Give the learner a repeatable structure.",
+      "bullets": [
+        "Problem -> recommended lane or bundle -> reason -> next step.",
+        "This formula keeps the recommendation short, useful, and hard to fake.",
+        "Use it before you send anything externally."
+      ]
+    }
+  ],
+  "references": {
+    "blurb": "Use the original lane docs plus ByteCast standards to reinforce this episode.",
+    "links": [
+      {
+        "label": "Lane Overview",
+        "href": "../../building blocks/LUM_BUILD_PACKS/LUM-REV-001/00_lane_overview.md",
+        "primary": true
+      },
+      {
+        "label": "Training Standard",
+        "href": "../../docs/BYTECAST_TRAINING_STANDARD.md"
+      },
+      {
+        "label": "Proof Schema",
+        "href": "../../docs/BYTECAST_PROOF_SCHEMA.md"
+      },
+      {
+        "label": "Playlist",
+        "href": "../../seed_bytecast.html"
+      },
+      {
+        "label": "EP-LUM-105 plan",
+        "href": "../../building blocks/LUM_BUILD_PACKS/LUM-REV-001/episodes/EP-LUM-105.md"
+      }
+    ]
+  },
+  "navigation": {
+    "previous_href": "../lumina_rev_104/index.html",
+    "previous_label": "Back: EP-LUM-104"
+  },
+  "advance": {
+    "href": "../lumina_rev_106/index.html",
+    "label": "EP-LUM-106",
+    "cta": "Open EP-LUM-106",
+    "tag": "THEN",
+    "description": "Complete EP-LUM-105 gates, then continue into Turn Qualified Interest into Growth."
+  },
+  "routing": {
+    "slug": "lumina_rev_105",
+    "journey_id": "lumina_revenue_v1",
+    "listen_step": "lum105_listen",
+    "slide_step": "lum105_slide",
+    "engage_step": "lum105_engage",
+    "storage_prefix": "lumina_rev_105"
+  },
+  "engagement": {
+    "quest": {
+      "title": "EP-LUM-105 practice checklist",
+      "prompt": "Use the checklist to turn discovery notes into a clean recommendation.",
+      "items": [
+        {
+          "id": "q1",
+          "text": "Say the recommendation formula once from memory."
+        },
+        {
+          "id": "q2",
+          "text": "Choose one sample lead and decide whether it is single-lane or bundle."
+        },
+        {
+          "id": "q3",
+          "text": "State one thing the sales team should not promise too early."
+        },
+        {
+          "id": "q4",
+          "text": "Explain why Lumina-led does not mean Lumina-delivered."
+        }
+      ]
+    },
+    "quiz": {
+      "enabled": true,
+      "pass_threshold": 0.8,
+      "prompt": "Pass the recommendation check before you move into growth motion and follow-up.",
+      "questions": [
+        {
+          "id": "lum105_q1",
+          "q": "What should discovery produce next?",
+          "choices": [
+            "A clear recommendation",
+            "A random list of features",
+            "No direction until delivery starts"
+          ],
+          "answer_index": 0,
+          "explain": "Discovery should resolve into direction."
+        },
+        {
+          "id": "lum105_q2",
+          "q": "What is the safest reading of Lumina-led?",
+          "choices": [
+            "Lumina always delivers the work",
+            "Lumina may lead commercially while another division delivers",
+            "Lumina should hide the delivery owner"
+          ],
+          "answer_index": 1,
+          "explain": "Commercial leadership and delivery ownership are distinct."
+        },
+        {
+          "id": "lum105_q3",
+          "q": "When is a bundle appropriate?",
+          "choices": [
+            "When the real need spans more than one lane",
+            "On every lead",
+            "Never"
+          ],
+          "answer_index": 0,
+          "explain": "Bundles should follow need shape, not habit."
+        },
+        {
+          "id": "lum105_q4",
+          "q": "What does strong scope discipline look like?",
+          "choices": [
+            "Inflate every opportunity",
+            "Narrow the recommendation when that is the honest fit",
+            "Promise everything and sort it out later"
+          ],
+          "answer_index": 1,
+          "explain": "Holding back can strengthen trust."
+        },
+        {
+          "id": "lum105_q5",
+          "q": "In the worked service-company example, why is Lumina + Nexus plausible?",
+          "choices": [
+            "Because the lead only needs aerial footage",
+            "Because the need includes message clarity plus intake-flow structure",
+            "Because every lead should become a two-lane bundle"
+          ],
+          "answer_index": 1,
+          "explain": "The recommendation follows the discovered combination of commercial and systems problems."
+        }
+      ]
+    }
+  }
+}

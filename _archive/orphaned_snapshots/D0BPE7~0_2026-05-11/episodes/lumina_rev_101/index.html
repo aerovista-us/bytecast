@@ -1,0 +1,101 @@
+
+<!doctype html>
+<html lang="en" data-theme="venta-neon">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ByteCast - Lumina Revenue Lane</title>
+  <meta name="description" content="Lumina revenue lane episode pack for ByteCast." />
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../assets/shared/lumina_episode.css" />
+  <link rel="stylesheet" href="../../assets/shared/listen_mode.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="topbar"><div class="topbar__inner">
+    <div class="badge"><span class="dot"></span><div><div id="topEp" style="font-weight:800;">ByteCast - Loading</div><small class="muted" id="topTitle">Lumina Revenue Lane</small></div></div>
+    <div class="controls">
+      <a class="btn" id="prevEpisodeBtn" href="#" hidden>Previous</a>
+      <a class="btn" href="../../seed_bytecast.html">Playlist</a>
+      <a class="btn" href="../training_hub/index.html">Training Hub</a>
+      <button class="btn" id="btnPrev" type="button" hidden>Prev Slide</button>
+      <button class="btn" id="btnNext" type="button" hidden>Next Slide</button>
+    </div>
+  </div></div>
+  <main class="wrap" id="main">
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero__grid">
+        <div>
+          <h1 class="h-title" id="heroTitle">Lumina Revenue Lane</h1>
+          <p class="h-sub" id="heroSub">Loading episode profile...</p>
+          <div class="pills" id="metaPills"></div>
+          <section class="startCard" aria-label="Start here">
+            <div class="startCard__eyebrow">Start Here</div>
+            <h2 class="startCard__title">Listen first, then move across the tabs in order.</h2>
+            <p class="startCard__copy" id="startCopy">One clean pass through Listen will make the slides and exercise feel easier to route.</p>
+            <div class="startCard__actions">
+              <button class="btn btn--primary" type="button" id="jumpListen">1 Listen</button>
+              <button class="btn btn--quiet" type="button" id="jumpSlides">2 Slides</button>
+              <button class="btn btn--quiet" type="button" id="jumpRef">3 Reference</button>
+              <button class="btn btn--quiet" type="button" id="jumpEngage">4 Engage</button>
+            </div>
+            <div class="startCard__steps"><span class="startCard__step is-active"><strong>1</strong> Listen</span><span class="startCard__step"><strong>2</strong> Slides</span><span class="startCard__step"><strong>3</strong> Reference</span><span class="startCard__step"><strong>4</strong> Engage</span></div>
+            <div id="heroListenAttach" class="bytecast-listen-dim-exempt"></div>
+            <p class="muted startCard__note" id="heroNote"></p>
+          </section>
+        </div>
+        <aside class="card"><div class="callout" style="padding:16px;border-radius:18px;"><div class="k" id="heroKicker">Lumina Revenue Lane</div><p id="keyLine" style="margin:10px 0 0;line-height:1.55;">Commercial clarity before delivery promises.</p><div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;"><span class="chip"><span class="tagdot"></span> <b id="heroNextTag" style="font-family:var(--mono);">THEN</b> <span id="heroNextLabel">Keep going</span></span></div></div></aside>
+      </div>
+    </section>
+    <section class="panel sectionGuide" aria-label="Episode navigation guide">
+      <div class="panel__body">
+        <div class="sectionGuide__top">
+          <div>
+            <div class="sectionGuide__eyebrow">Episode Guide</div>
+            <h2 class="sectionGuide__title" id="guideTitle">Start with Listen</h2>
+            <p class="muted sectionGuide__copy" id="guideCopy">Use one clean pass through the lesson from left to right. The next click is always called out here.</p>
+          </div>
+          <div class="sectionGuide__actions">
+            <button class="btn btn--primary" type="button" id="guideBtn" data-guide-action="listen">1 Listen</button>
+            <span class="chip" id="guideStatus">Next click: 1 Listen</span>
+          </div>
+        </div>
+        <div class="sectionGuide__progress" id="guideProgress"></div>
+      </div>
+    </section>
+    <section class="panel tabsHost" id="lessonTabs" aria-label="Episode lesson">
+      <div class="tabs__bar" role="tablist" aria-label="Lesson sections">
+        <button type="button" class="tabs__btn is-active" role="tab" id="tab-listen" aria-selected="true" aria-controls="listen-panel">1 Listen</button>
+        <button type="button" class="tabs__btn" role="tab" id="tab-lesson-slides" aria-selected="false" aria-controls="lesson-slides">2 Slides</button>
+        <button type="button" class="tabs__btn" role="tab" id="tab-refstrip" aria-selected="false" aria-controls="refstrip">3 Reference</button>
+        <button type="button" class="tabs__btn" role="tab" id="tab-engage" aria-selected="false" aria-controls="engage">4 Engage</button>
+      </div>
+      <div id="listen-panel" class="tabs__panel" role="tabpanel" aria-labelledby="tab-listen">
+        <div class="panel__top"><div class="panel__meta"><h2>Listen</h2><p id="audioLine">Read the episode overview or play optional narration. Completing a listen pass clears the listen gate.</p></div><div class="chip"><span class="tagdot"></span> <b id="listenGateLabel" style="font-family:var(--mono);">GATE</b></div></div>
+        <div class="panel__body"><div id="listenModeMount" class="bytecast-listen-dim-exempt"></div><div class="sectionHint" id="listenHint" aria-live="polite"></div><audio id="audio" preload="metadata" aria-hidden="true" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;left:-9999px;"></audio></div>
+      </div>
+      <div id="lesson-slides" class="tabs__panel" role="tabpanel" aria-labelledby="tab-lesson-slides" hidden>
+        <div class="deck__bar"><div class="deckTitleRow"><h3 id="deckTitle">Slides</h3><span class="slideProg" id="slideProg" aria-live="polite">-</span></div><span class="deckHint" aria-hidden="true">Use buttons or left/right keys</span><div class="dots" id="dots"></div></div>
+        <div class="slides" id="slides"></div>
+        <div class="panel__body"><div class="sectionHint" id="slidesHint" aria-live="polite"></div></div>
+      </div>
+      <div id="refstrip" class="tabs__panel" role="tabpanel" aria-labelledby="tab-refstrip" hidden>
+        <div class="panel__top"><div class="panel__meta"><h2>Reference</h2><p id="refBlurb">Use the lane plan and governed docs to reinforce the lesson before you submit the quiz.</p></div></div>
+        <div class="panel__body"><div class="refRow" id="refLinks"></div><div class="sectionHint" id="refHint" aria-live="polite"></div></div>
+      </div>
+      <div id="engage" class="tabs__panel" role="tabpanel" aria-labelledby="tab-engage" hidden>
+        <div class="deck__bar"><h3>Engage</h3><span class="chip"><span class="tagdot"></span> Quiz >= 80%</span></div>
+        <div class="panel__body">
+          <div class="grid2"><div class="card"><h4 id="questTitle">Quest</h4><p class="muted" id="questBlurb">Use the checklist to reinforce the behavior, not just the wording.</p><div id="questList"></div></div><div class="card"><h4>Quiz</h4><p class="muted" id="quizBlurb">Pass the knowledge check to clear the engage gate.</p><div id="quiz"></div></div></div>
+          <div class="sectionHint" id="engageHint" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+    <section class="panel"><div class="panel__top"><div class="panel__meta"><h2>Next</h2><p id="nextDesc">Complete the episode gates, then continue to the next step in the lane.</p></div></div><div class="panel__body"><div class="gateRow" id="gateRow"></div><a class="btn" id="nextEp" href="../../seed_bytecast.html">Continue</a><span class="chip" id="gateNote" style="margin-left:10px;">Gates loading...</span></div></section>
+    <footer><span id="footerLeft">ByteCast - Lumina Revenue Lane</span><span>Tabs: Listen / Slides / Reference / Engage</span></footer>
+  </main>
+  <script src="../../assets/shared/bytecast_loop.js"></script>
+  <script src="../../assets/shared/listen_mode.js"></script>
+  <script src="../../assets/shared/lumina_episode_runtime.js"></script>
+</body>
+</html>

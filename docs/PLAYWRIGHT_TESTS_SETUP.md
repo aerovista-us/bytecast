@@ -9,6 +9,8 @@
 
 Comprehensive Playwright test suite created to automate user journey testing across multiple paths in the ByteCast workspace.
 
+To serve the same static tree with **Docker** (port 8080) and run tests against it, use `docker compose up` and set `BYTECAST_USE_EXTERNAL_SERVER=1` before `npm test`. See [DOCKER_COMPOSE.md](./DOCKER_COMPOSE.md).
+
 ---
 
 ## Files Created
@@ -42,8 +44,8 @@ Comprehensive Playwright test suite created to automate user journey testing acr
 - Navigation between pages works
 
 ### 2. Golden Path Journey (`golden-path.spec.js`)
-- EP-001 gates completion (listen, slide, engage)
-- TR-001 training completion
+- Day 1 spine: EP-001 → EP-002 → EP-003 → EP-004 gates (listen, slide, engage each)
+- TR-001A training completion (replaces TR-001 on `p1_golden_path`)
 - Seed export completion
 - Publish step completion
 - Full journey → Badge minted

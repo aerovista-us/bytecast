@@ -1,0 +1,28 @@
+{
+  "schema": "art-localized-phase-pack-v1",
+  "phase": 4,
+  "title": "Ep 3 — Amplification (Phase 4)",
+  "audio": {
+    "primary": "assets/narration.mp3",
+    "fallback": null
+  },
+  "slides": [
+    {
+      "id": "s1",
+      "title": "Signal vs noise",
+      "html": "<p><strong>Definition.</strong> Amplification is widening the right story with evidence — not spamming channels.</p>"
+    },
+    {
+      "id": "s2",
+      "title": "Cadence",
+      "html": "<p><strong>Practice.</strong> Use a steady cadence tied to releases, wins, and customer proof.</p>"
+    }
+  ],
+  "engage": {
+    "prompt": "Pick the best answer.",
+    "options": [
+      { "value": "1", "label": "Good amplification ties messages to proof and next steps.", "correct": true },
+      { "value": "0", "label": "Amplification means posting more often without changing the story.", "correct": false }
+    ]
+  }
+}

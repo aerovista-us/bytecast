@@ -1,0 +1,112 @@
+﻿
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TR-LUM-001 - Revenue Routing Mission</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml" />
+  <style>
+    :root{--bg0:#050607;--bg1:#0b0f14;--line:rgba(255,255,255,0.14);--ink:rgba(255,255,255,0.93);--muted:rgba(255,255,255,0.66);--gold:#ffc45a;--neon:#22a7ff;--max:980px;}
+    *{box-sizing:border-box;} body{margin:0;padding:18px;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,sans-serif;color:var(--ink);background:radial-gradient(1000px 500px at 10% 0%,rgba(34,167,255,0.12),transparent),linear-gradient(180deg,var(--bg0),var(--bg1));}
+    .shell{max-width:var(--max);margin:0 auto;} .card{border-radius:18px;border:1px solid var(--line);padding:16px;background:rgba(255,255,255,0.04);margin-bottom:14px;} h1,h2{margin:0 0 10px;} p,label,.muted{line-height:1.55;color:var(--muted);} .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,0.05);color:var(--ink);text-decoration:none;cursor:pointer;} .btn.primary{border-color:rgba(34,167,255,0.45);background:rgba(34,167,255,0.12);} .grid{display:grid;gap:12px;} .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;} @media(max-width:720px){.grid2{grid-template-columns:1fr;}} input,select,textarea{width:100%;border-radius:12px;border:1px solid var(--line);background:rgba(0,0,0,0.28);color:var(--ink);padding:12px;font:inherit;} textarea{min-height:98px;} .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;} .chip{padding:6px 10px;border-radius:999px;border:1px solid var(--line);font-size:12px;} .status{margin-top:12px;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,196,90,0.35);background:rgba(255,196,90,0.10);}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="card"><h1>TR-LUM-001 - Revenue Routing Mission</h1><p>Use one realistic lead scenario and show that you can qualify the need, recommend the right division or bundle, explain Lumina's role, and leave delivery with a clean next step.</p><div class="chips"><span class="chip">Pass target: 9 / 12</span><span class="chip">Requires reviewer sign-off</span><span class="chip">Next: SEED-LUM-001</span><span class="chip">Includes worked example</span></div><div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;"><a class="btn" href="../../../seed_bytecast.html">Playlist</a><a class="btn" href="../../lumina_rev_106/index.html">Back to EP-LUM-106</a></div></section>
+    <section class="card"><h2>Worked Example</h2><p class="muted">Use this as a quality bar, not as something to copy blindly. It shows the level of clarity the mission is looking for.</p><div style="display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 14px;"><button class="btn" id="loadExample" type="button">Load Worked Example</button></div><details><summary style="cursor:pointer;">View strong sample answer</summary><div class="grid2" style="margin-top:12px;"><div><p><strong>Scenario:</strong> small business needs rebrand, website refresh, and lead flow automation.</p><p><strong>Prospect summary:</strong> Family-owned field service company with strong referrals, weak online clarity, and no dependable intake workflow.</p><p><strong>Primary path:</strong> Lumina + Nexus.</p><p><strong>Why:</strong> the real issue is not only appearance. It is unclear offer packaging plus manual follow-up and intake loss.</p></div><div><p><strong>Good next step:</strong> scoped working session to clarify offer language, lead capture flow, and owner handoff.</p><p><strong>Strong handoff note:</strong> message angle should emphasize trust and response speed; do not promise full site rebuild before intake workflow is mapped.</p><p><strong>Why it passes:</strong> it names the real pain, picks a plausible path, keeps Lumina's role honest, and gives delivery usable context.</p></div></div></details></section>
+    <section class="card grid">
+      <div><label for="scenario">Scenario</label><select id="scenario"><option value="small_business_rebrand">Small business needs rebrand, website refresh, and lead flow automation</option><option value="artist_release_rollout">Artist project needs release rollout, visuals, and audience growth plan</option><option value="training_org_platform">Training org needs course platform, learner journey, and stronger market positioning</option><option value="field_service_campaign">Field-service client needs drone visuals plus campaign packaging</option></select></div>
+      <div class="grid2">
+        <div><label for="prospectSummary">Prospect summary</label><textarea id="prospectSummary" placeholder="Who they are, what stage they are in, and why they are talking to Lumina."></textarea></div>
+        <div><label for="painPoint">Key pain point</label><textarea id="painPoint" placeholder="What is actually hurting or blocked right now?"></textarea></div>
+      </div>
+      <div class="grid2">
+        <div><label for="desiredOutcome">Desired outcome</label><textarea id="desiredOutcome" placeholder="What changes after success?"></textarea></div>
+        <div><label for="primaryDivision">Likely primary division</label><input id="primaryDivision" placeholder="Examples: Lumina + Nexus, EchoVerse, Horizon..." /></div>
+      </div>
+      <div class="grid2">
+        <div><label for="supportDivisions">Support divisions</label><input id="supportDivisions" placeholder="Optional support lanes or bundle notes." /></div>
+        <div><label for="luminaRole">Lumina's role</label><textarea id="luminaRole" placeholder="How does Lumina lead commercial clarity without pretending to own delivery?"></textarea></div>
+      </div>
+      <div><label for="recommendationSummary">Recommendation summary</label><textarea id="recommendationSummary" placeholder="Problem -> recommended lane(s) -> reason -> next step."></textarea></div>
+      <div class="grid2">
+        <div><label for="nextStep">Next step</label><textarea id="nextStep" placeholder="What should happen next, and who should own it?"></textarea></div>
+        <div><label for="handoffNote">Delivery handoff note</label><textarea id="handoffNote" placeholder="What does delivery need to know to start cleanly?"></textarea></div>
+      </div>
+      <div class="grid2">
+        <div><label for="score">Reviewer score (0-12)</label><input id="score" type="number" min="0" max="12" step="1" value="9" /></div>
+        <div><label for="reviewerName">Reviewer name</label><input id="reviewerName" placeholder="Required for sign-off" /></div>
+      </div>
+      <label><input id="reviewerApproved" type="checkbox" style="width:auto;margin-right:8px;" /> Reviewer approves this mission as pass-ready.</label>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;"><button class="btn primary" id="submitMission" type="button">Save Mission Result</button><a class="btn" href="../../seed_builder_studio/lumina_sales_brief/index.html">Open SEED-LUM-001</a></div>
+      <div class="status" id="status">Mission not saved yet.</div>
+    </section>
+  </main>
+  <script src="../../../assets/shared/bytecast_loop.js"></script>
+  <script>
+    const Loop = window.ByteCastLoop || null;
+    const STORE = "bytecast.tr_lum_001.v1";
+    const EXAMPLE_STATE = {
+      scenario: "small_business_rebrand",
+      prospectSummary: "Family-owned field service company with strong referrals, uneven digital clarity, and no dependable inbound intake flow.",
+      painPoint: "Leads arrive from multiple places, follow-up is manual, and the offer is not explained clearly enough for buyers who do not already know the company.",
+      desiredOutcome: "Clarify the offer, improve trust online, and create a clean intake path that speeds response time without forcing a full rebuild on day one.",
+      primaryDivision: "Lumina + Nexus",
+      supportDivisions: "Optional Horizon later if field-proof visuals strengthen the trust story.",
+      luminaRole: "Lumina leads commercial clarity: offer framing, message cleanup, and recommendation logic. Nexus owns the intake workflow and systems layer that supports response speed.",
+      recommendationSummary: "The problem is weak offer clarity plus manual intake loss. Recommend Lumina + Nexus so the message becomes clear and the response path becomes dependable. Next step is a scoped working session to map the offer, intake points, and owner handoff.",
+      nextStep: "Run a scoped working session this week to define offer language, lead capture points, and the first intake-flow improvement.",
+      handoffNote: "Do not promise a full website rebuild yet. Delivery should start by mapping the current lead path, message gaps, and fastest high-trust workflow fix.",
+      score: "9",
+      reviewerName: "",
+      reviewerApproved: false
+    };
+    const ids = ["scenario","prospectSummary","painPoint","desiredOutcome","primaryDivision","supportDivisions","luminaRole","recommendationSummary","nextStep","handoffNote","score","reviewerName","reviewerApproved"];
+    function loadState(){ try { return JSON.parse(localStorage.getItem(STORE) || "{}"); } catch { return {}; } }
+    function saveState(state){ localStorage.setItem(STORE, JSON.stringify(state)); }
+    function hydrate(){ const state = loadState(); ids.forEach((id) => { const el = document.getElementById(id); if (!el) return; if (el.type === "checkbox") el.checked = Boolean(state[id]); else if (state[id] != null) el.value = state[id]; }); }
+    function collect(){ const state = {}; ids.forEach((id) => { const el = document.getElementById(id); if (!el) return; state[id] = el.type === "checkbox" ? Boolean(el.checked) : String(el.value || "").trim(); }); saveState(state); return state; }
+    ids.forEach((id) => document.getElementById(id).addEventListener("input", collect));
+    hydrate();
+    document.getElementById("loadExample").addEventListener("click", () => {
+      saveState({ ...loadState(), ...EXAMPLE_STATE });
+      hydrate();
+      document.getElementById("status").textContent = "Worked example loaded. Use it as a model, then adapt it to your own scenario.";
+    });
+    document.getElementById("submitMission").addEventListener("click", () => {
+      const state = collect();
+      const score = Number(state.score || 0);
+      const textOk = ["prospectSummary","painPoint","desiredOutcome","primaryDivision","luminaRole","recommendationSummary","nextStep","handoffNote","reviewerName"].every((key) => String(state[key] || "").length >= 8);
+      if (!textOk || score < 9 || !state.reviewerApproved) { document.getElementById("status").textContent = "Need complete notes, score >= 9, and reviewer approval before this mission can be saved."; return; }
+      try { Loop?.setActiveJourneyId?.("lumina_revenue_v1"); } catch {}
+      try {
+        Loop?.markStepDone?.("tr_lum_001_revenue_routing", {
+          journeyId: "lumina_revenue_v1",
+          mission: "tr_lum_001_revenue_routing",
+          moduleId: "tr_lum_001_revenue_routing",
+          understandingCheckPassed: true,
+          lumMissionScore: score,
+          lumScenarioId: state.scenario,
+          lumProspectSummary: state.prospectSummary,
+          lumDesiredOutcome: state.desiredOutcome,
+          lumPrimaryDivision: state.primaryDivision,
+          lumSupportDivisions: state.supportDivisions,
+          lumRecommendationSummary: state.recommendationSummary,
+          lumNextStep: state.nextStep,
+          lumHandoffNote: state.handoffNote,
+          lumReviewerApproved: true,
+          lumReviewerName: state.reviewerName,
+          lumMissionCompletedAt: new Date().toISOString(),
+          version: "2026-03-26-lum-v1"
+        });
+        document.getElementById("status").textContent = "TR-LUM-001 saved. SEED-LUM-001 is ready.";
+      } catch (error) {
+        document.getElementById("status").textContent = "Could not save your mission result: " + error;
+      }
+    });
+  </script>
+</body>
+</html>
+

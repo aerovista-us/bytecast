@@ -1,0 +1,10 @@
+{
+  "schema": "bytecast-episode-sot-v1",
+  "slug": "contributor_onboarding_ep2",
+  "episode_code": "CO-EP-2",
+  "title": "Contributor Onboarding - Ep 2 - Lanes and the Honest Helper",
+  "series_id": "contributor_onboarding",
+  "sequence": 3,
+  "status": "active",
+  "entry": "index.html"
+}

@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bytecast.local/schemas/proof_bundle_v1.json",
+  "title": "ByteCast proof bundle v1",
+  "type": "object",
+  "required": ["schema", "exportedAt", "journeyId", "workflow", "badges"],
+  "properties": {
+    "schema": { "const": "bytecast-proof-bundle-v1" },
+    "exportedAt": { "type": "string", "format": "date-time" },
+    "journeyId": { "type": "string", "minLength": 1 },
+    "workflow": {
+      "type": "object",
+      "description": "bytecast-workflow-v2 shape: steps map with done/meta"
+    },
+    "badges": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "projects": {
+      "type": "array",
+      "description": "Dated workstreams (onboarding, collaboration, maintenance) for planning and audit context alongside workflow proof.",
+      "items": {
+        "type": "object",
+        "required": ["id", "title"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Stable slug, e.g. bytecast-onboarding-v1"
+          },
+          "title": { "type": "string", "minLength": 1 },
+          "kind": {
+            "type": "string",
+            "description": "Loose category: onboarding, collaboration, maintenance, content, ops"
+          },
+          "summary": { "type": "string" },
+          "startDate": { "type": "string", "format": "date" },
+          "targetDate": { "type": "string", "format": "date" },
+          "milestones": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["label"],
+              "properties": {
+                "label": { "type": "string", "minLength": 1 },
+                "due": { "type": "string", "format": "date" },
+                "done": { "type": "boolean" }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": true
+}

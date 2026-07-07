@@ -1,0 +1,28 @@
+{
+  "schema": "art-localized-phase-pack-v1",
+  "phase": 1,
+  "title": "The Art Localized — Phase 1 (Collaboration 0)",
+  "audio": {
+    "primary": "assets/narration.mp3",
+    "fallback": null
+  },
+  "slides": [
+    {
+      "id": "s1",
+      "title": "Why collaboration is localized",
+      "html": "<p><strong>Framing.</strong> “Localized” means tuned to this team, this offer rhythm, and these proof gates — not generic training theater.</p>"
+    },
+    {
+      "id": "s2",
+      "title": "What you will do here",
+      "html": "<p><strong>Flow.</strong> Each episode follows Listen → Slide → Engage so progress stays honest and portable across surfaces.</p>"
+    }
+  ],
+  "engage": {
+    "prompt": "Pick the best answer.",
+    "options": [
+      { "value": "0", "label": "Collaboration in this journey is mainly about adding more meetings.", "correct": false },
+      { "value": "1", "label": "Collaboration here means shared context, clear handoffs, and proof — not noise.", "correct": true }
+    ]
+  }
+}

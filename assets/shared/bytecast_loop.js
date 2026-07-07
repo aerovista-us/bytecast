@@ -8,6 +8,36 @@
   const MIGRATED_GLOBAL_V2_KEY = "bytecast.workflow.v2.migrated_to_per_journey.v1";
   const LOOP_ENGINE_VERSION = "bytecast_loop_v2";
 
+  /** Dated workstreams appended to proof exports; schema: docs/proof_bundle_v1.schema.json */
+  const DEFAULT_PROOF_BUNDLE_PROJECTS = [
+    {
+      id: "bytecast-onboarding-v1",
+      title: "Bytecast onboarding",
+      kind: "onboarding",
+      summary: "TR-001A foundations through proof bundle export and day-1 spine",
+      startDate: "2026-03-20",
+      targetDate: "2026-04-15",
+      milestones: [
+        { label: "Day 1 foundations step complete", due: "2026-03-25", done: false },
+        { label: "First proof bundle export reviewed", due: "2026-03-28", done: false },
+        { label: "Golden path day 2 track started", due: "2026-04-05", done: false },
+      ],
+    },
+    {
+      id: "collab-known-issues-q1",
+      title: "Collaborating on fixing known issues",
+      kind: "collaboration",
+      summary: "Shared triage + patches for audit findings (e.g. glitch_bitch, proof schema)",
+      startDate: "2026-03-24",
+      targetDate: "2026-04-30",
+      milestones: [
+        { label: "Issue list agreed and prioritized", due: "2026-03-26", done: false },
+        { label: "Import/export fixtures documented", due: "2026-03-27", done: true },
+        { label: "Hardening pass scheduled", due: "2026-04-10", done: false },
+      ],
+    },
+  ];
+
   function surfaceName() {
     try {
       const mode = document?.body?.dataset?.appMode;
@@ -197,6 +227,43 @@
     return Boolean(s && typeof s === "object" && s.done);
   }
 
+  function readStepMeta(wf2, stepId) {
+    const steps = wf2?.steps && typeof wf2.steps === "object" ? wf2.steps : null;
+    const s = steps ? steps[stepId] : null;
+    const meta = s && typeof s.meta === "object" ? s.meta : {};
+    return meta;
+  }
+
+  function metaFieldMissing(meta, fieldName) {
+    const v = meta?.[fieldName];
+    if (v == null) return true;
+    if (typeof v === "string") return v.trim().length === 0;
+    if (typeof v === "boolean") return v !== true;
+    if (typeof v === "number") return !Number.isFinite(v);
+    return false;
+  }
+
+  function proofMetaOk(wf2, stepId, fields) {
+    const fieldList = Array.isArray(fields) ? fields : [];
+    if (!fieldList.length) return { ok: true, missing: [] };
+    const meta = readStepMeta(wf2, stepId);
+    const missing = fieldList.filter((f) => metaFieldMissing(meta, f));
+    return { ok: missing.length === 0, missing };
+  }
+
+  function buildProofBundle(journeyId) {
+    const id = String(journeyId || "").trim() || getActiveJourneyId() || "p1_golden_path";
+    const wf2 = loadWorkflowV2(id);
+    return {
+      schema: "bytecast-proof-bundle-v1",
+      exportedAt: new Date().toISOString(),
+      journeyId: id,
+      workflow: wf2,
+      badges: loadBadges(),
+      projects: DEFAULT_PROOF_BUNDLE_PROJECTS,
+    };
+  }
+
   function migrateV1ToV2(v1) {
     const wf2 = defaultV2();
     wf2.cycle = v1.cycle;
@@ -209,7 +276,7 @@
     if (bc.slide) setStepDoneV2(wf2, "ep001_slide");
     if (bc.interact) setStepDoneV2(wf2, "ep001_engage");
     if (bc.listen && bc.slide && bc.interact) setStepDoneV2(wf2, "ep001_gates");
-    if (v1.trainingDone) setStepDoneV2(wf2, "tr001_golden_path");
+    if (v1.trainingDone) setStepDoneV2(wf2, "tr001a_day1_foundations");
     if (v1.seedDone) setStepDoneV2(wf2, "seed_export_v1");
     if (badgeHas("p1_golden_path_v1")) setStepDoneV2(wf2, "badge_p1_golden_path_v1");
 
@@ -307,7 +374,8 @@
         if (bc.slide && !isStepDone(wf2, "ep001_slide")) { setStepDoneV2(wf2, "ep001_slide"); changed = true; }
         if (bc.interact && !isStepDone(wf2, "ep001_engage")) { setStepDoneV2(wf2, "ep001_engage"); changed = true; }
         if (bc.listen && bc.slide && bc.interact && !isStepDone(wf2, "ep001_gates")) { setStepDoneV2(wf2, "ep001_gates"); changed = true; }
-        if (v1.trainingDone && !isStepDone(wf2, "tr001_golden_path")) { setStepDoneV2(wf2, "tr001_golden_path"); changed = true; }
+        if (v1.trainingDone && !isStepDone(wf2, "tr001a_day1_foundations")) { setStepDoneV2(wf2, "tr001a_day1_foundations"); changed = true; }
+        if (isStepDone(wf2, "tr001_golden_path") && !isStepDone(wf2, "tr001a_day1_foundations")) { setStepDoneV2(wf2, "tr001a_day1_foundations"); changed = true; }
         if (v1.seedDone && !isStepDone(wf2, "seed_export_v1")) { setStepDoneV2(wf2, "seed_export_v1"); changed = true; }
         if (badgeHas("p1_golden_path_v1") && !isStepDone(wf2, "badge_p1_golden_path_v1")) { setStepDoneV2(wf2, "badge_p1_golden_path_v1"); changed = true; }
       }
@@ -355,7 +423,7 @@
     if (stepId === "ep001_slide") out.bytecast.slide = true;
     if (stepId === "ep001_engage") out.bytecast.interact = true;
     if (stepId === "ep001_gates") out.bytecast = { listen: true, slide: true, interact: true };
-    if (stepId === "tr001_golden_path") out.trainingDone = true;
+    if (stepId === "tr001a_day1_foundations" || stepId === "tr001_golden_path") out.trainingDone = true;
     if (stepId === "seed_export_v1") out.seedDone = true;
     if (stepId === "badge_p1_golden_path_v1") {
       // no v1 field for badge; keep in badges store
@@ -375,6 +443,18 @@
     if (stepId === "ep001_listen" || stepId === "ep001_slide" || stepId === "ep001_engage") {
       const ok = isStepDone(wf2, "ep001_listen") && isStepDone(wf2, "ep001_slide") && isStepDone(wf2, "ep001_engage");
       if (ok) setStepDoneV2(wf2, "ep001_gates");
+    }
+    if (stepId === "ep002_listen" || stepId === "ep002_slide" || stepId === "ep002_engage") {
+      const ok2 = isStepDone(wf2, "ep002_listen") && isStepDone(wf2, "ep002_slide") && isStepDone(wf2, "ep002_engage");
+      if (ok2) setStepDoneV2(wf2, "ep002_gates");
+    }
+    if (stepId === "ep003_listen" || stepId === "ep003_slide" || stepId === "ep003_engage") {
+      const ok3 = isStepDone(wf2, "ep003_listen") && isStepDone(wf2, "ep003_slide") && isStepDone(wf2, "ep003_engage");
+      if (ok3) setStepDoneV2(wf2, "ep003_gates");
+    }
+    if (stepId === "ep004_listen" || stepId === "ep004_slide" || stepId === "ep004_engage") {
+      const ok4 = isStepDone(wf2, "ep004_listen") && isStepDone(wf2, "ep004_slide") && isStepDone(wf2, "ep004_engage");
+      if (ok4) setStepDoneV2(wf2, "ep004_gates");
     }
     saveWorkflowV2(wf2, journeyId);
 
@@ -512,11 +592,25 @@
 
   function isStepUnlocked(journey, step, wf2) {
     const deps = Array.isArray(step?.depends_on) ? step.depends_on : [];
-    if (!deps.length) return true;
-    return deps.every((depId) => {
-      const dep = getStepById(journey, depId);
-      return dep ? isStepComplete(journey, dep, wf2) : isStepDone(wf2, depId);
-    });
+    if (deps.length) {
+      const depsOk = deps.every((depId) => {
+        const dep = getStepById(journey, depId);
+        return dep ? isStepComplete(journey, dep, wf2) : isStepDone(wf2, depId);
+      });
+      if (!depsOk) return false;
+    }
+    const ur = Array.isArray(step?.unlock_requires) ? step.unlock_requires : [];
+    for (let i = 0; i < ur.length; i += 1) {
+      const req = ur[i];
+      if (!req || typeof req !== "object") continue;
+      const sid = String(req.stepId || "").trim();
+      if (!sid) continue;
+      const mf = Array.isArray(req.meta_fields) ? req.meta_fields : [];
+      if (!mf.length) continue;
+      const pr = proofMetaOk(wf2, sid, mf);
+      if (!pr.ok) return false;
+    }
+    return true;
   }
 
   function sortSteps(steps) {
@@ -560,22 +654,8 @@
       }
     }
 
-    function stepMeta(stepId) {
-      const s = wf2?.steps && typeof wf2.steps === "object" ? wf2.steps[stepId] : null;
-      const meta = s && typeof s === "object" ? s.meta : null;
-      return meta && typeof meta === "object" ? meta : {};
-    }
-
     function proofOk(stepId, requiredFields) {
-      const fields = Array.isArray(requiredFields) ? requiredFields : [];
-      if (!fields.length) return { ok: true, missing: [] };
-      const meta = stepMeta(stepId);
-      const missing = fields.filter((f) => {
-        const v = meta?.[f];
-        if (typeof v === "string") return v.trim().length === 0;
-        return v == null;
-      });
-      return { ok: missing.length === 0, missing };
+      return proofMetaOk(wf2, stepId, requiredFields);
     }
 
     for (const b of badges) {
@@ -642,6 +722,18 @@
       }
 
       const stepIdSet = new Set(ids);
+      for (const s of steps) {
+        if (!s || typeof s !== "object") continue;
+        const ur = Array.isArray(s.unlock_requires) ? s.unlock_requires : [];
+        for (const r of ur) {
+          const sid = String(r?.stepId || "").trim();
+          if (!sid || stepIdSet.has(sid)) continue;
+          console.warn(
+            `[ByteCastLoop] Step "${s.id || "unknown"}" unlock_requires unknown step id "${sid}" in journey "${j.id || "unknown"}". ` +
+              "Hidden substeps are allowed—verify the id."
+          );
+        }
+      }
       const badges = Array.isArray(j.badges) ? j.badges : [];
       for (const b of badges) {
         if (!b || typeof b !== "object") continue;
@@ -687,6 +779,8 @@
     getNextStep,
     isStepComplete,
     isStepUnlocked,
+    proofMetaOk,
+    buildProofBundle,
     ensureJourneyBadges,
     resolveRootUrl: findRootUrl,
     analytics: { track, trackOnce },

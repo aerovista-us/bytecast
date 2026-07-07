@@ -1,0 +1,287 @@
+/* Day 1 listen mode — teleprompter + TTS (shared across episodes) */
+.bytecast-listen {
+  --listen-pane-h: clamp(240px, 42vh, 390px);
+  position: relative;
+  display: grid;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.bytecast-listen__top {
+  display: grid;
+  gap: 10px;
+}
+
+.bytecast-listen__strip {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.62;
+  color: rgba(255, 255, 255, 0.72);
+  max-width: 64ch;
+}
+
+.bytecast-listen__strip strong {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.bytecast-listen__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bytecast-listen__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.bytecast-listen__btn {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  color: inherit;
+  border-radius: 999px;
+  padding: 11px 18px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.12s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bytecast-listen__btn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(100, 180, 255, 0.35);
+}
+
+.bytecast-listen__btn--primary {
+  border-color: rgba(34, 167, 255, 0.4);
+  box-shadow: 0 0 18px rgba(34, 167, 255, 0.2);
+}
+
+.bytecast-listen__btn:disabled {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.bytecast-listen__status {
+  display: inline-flex;
+  align-items: center;
+  min-height: auto;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 12px;
+  line-height: 1.2;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.bytecast-listen__status:empty {
+  display: none;
+}
+
+.bytecast-listen__live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.bytecast-listen-pane {
+  position: relative;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background:
+    linear-gradient(180deg, rgba(6, 8, 11, 0.96), rgba(10, 12, 16, 0.92)),
+    radial-gradient(900px 320px at 50% 0%, rgba(34, 167, 255, 0.06), transparent 58%);
+  min-height: var(--listen-pane-h);
+  max-height: var(--listen-pane-h);
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+}
+
+.bytecast-listen-pane::before,
+.bytecast-listen-pane::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 24px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.bytecast-listen-pane::before {
+  top: 0;
+  background: linear-gradient(180deg, rgba(6, 8, 11, 0.94), rgba(6, 8, 11, 0));
+}
+
+.bytecast-listen-pane::after {
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(6, 8, 11, 0), rgba(6, 8, 11, 0.96));
+}
+
+.bytecast-listen-pane__track {
+  max-height: var(--listen-pane-h);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 18px clamp(18px, 3vw, 34px) 24px;
+  scroll-behavior: smooth;
+  display: grid;
+  align-content: start;
+  gap: 4px;
+}
+
+.bytecast-listen-pane__chunk {
+  display: block;
+  width: min(100%, 70ch);
+  margin: 0 auto;
+  font-size: clamp(16px, 1.25vw, 18px);
+  line-height: 1.72;
+  letter-spacing: 0.002em;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 8px 12px;
+  border-radius: 12px;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bytecast-listen.is-speaking .bytecast-listen-pane__chunk {
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.bytecast-listen-pane__chunk.is-active {
+  background: rgba(34, 167, 255, 0.14);
+  color: rgba(255, 255, 255, 0.97);
+  outline: 1px solid rgba(34, 167, 255, 0.32);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.24);
+}
+
+.bytecast-listen.is-paused .bytecast-listen-pane__chunk.is-active {
+  background: rgba(255, 196, 90, 0.14);
+  outline-color: rgba(255, 196, 90, 0.32);
+}
+
+.bytecast-listen:not(.is-speaking) .bytecast-listen-pane__chunk:hover {
+  background: rgba(255, 255, 255, 0.035);
+}
+
+body.bytecast-listen-dim .wrap > *:not(.topbar):not(.bytecast-listen-dim-exempt) {
+  opacity: 0.55;
+  transition: opacity 0.25s ease;
+}
+
+/* TR-001A and similar: main.shell + sticky nav */
+body.bytecast-listen-dim .shell > *:not(.navtop):not(.bytecast-listen-dim-exempt) {
+  opacity: 0.55;
+  transition: opacity 0.25s ease;
+}
+
+body.bytecast-listen-dim .bytecast-listen-dim-exempt,
+body.bytecast-listen-dim .topbar,
+body.bytecast-listen-dim .navtop {
+  opacity: 1;
+}
+
+.bytecast-listen-section {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.bytecast-listen-section__hint {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0 0 8px;
+  max-width: 62ch;
+}
+
+.bytecast-listen-section__btn {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.25);
+  color: inherit;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.bytecast-listen-section__btn:hover {
+  border-color: rgba(100, 180, 255, 0.35);
+}
+
+.bytecast-guidance-card {
+  display: grid;
+  gap: 12px;
+  margin-top: 14px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(34, 167, 255, 0.18);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)),
+    rgba(0, 0, 0, 0.16);
+}
+
+.bytecast-guidance-card__eyebrow {
+  margin: 0 0 6px;
+  font-size: 11px;
+  line-height: 1.2;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.48);
+}
+
+.bytecast-guidance-card__title {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.24;
+  color: rgba(255, 255, 255, 0.94);
+}
+
+.bytecast-guidance-card__copy {
+  margin: 8px 0 0;
+  max-width: 64ch;
+  font-size: 14px;
+  line-height: 1.58;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.bytecast-guidance-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.btn.is-disabled,
+.btn[aria-disabled="true"] {
+  opacity: 0.46;
+  pointer-events: none;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.tabsHost {
+  scroll-margin-top: 88px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bytecast-listen-pane__track {
+    scroll-behavior: auto;
+  }
+}
+
+/* Edge Read aloud: SVG diagrams use non-HTML text; line highlighting can throw (getLineRange → null).
+   Copy to read is in .slideGrid .card / .callout — keep diagrams non-selectable and out of the a11y tree. */
+.slide-visual,
+.slide-visual svg {
+  user-select: none;
+  -webkit-user-select: none;
+}

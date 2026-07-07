@@ -1,0 +1,97 @@
+{
+  "schema": "bytecast-voiceover-sections-v1",
+  "slug": "lumina_rev_103",
+  "code": "EP-LUM-103",
+  "sections": [
+    {
+      "id": "cold-open",
+      "title": "Cold open",
+      "displayText": "Welcome to EP-LUM-103. Brand is not just a look layer. In sales it shapes trust. If every division sounds the same, buyers lose confidence because the message stops fitting the real work. This episode teaches the brand feel of each lane so your language supports routing instead of weakening it.",
+      "speakText": "Welcome to EP-LUM-103. Brand is not just a look layer. In sales it shapes trust. If every division sounds the same, buyers lose confidence because the message stops fitting the real work. This episode teaches the brand feel of each lane so your language supports routing instead of weakening it."
+    },
+    {
+      "id": "slide-brand_more",
+      "title": "Brand is more than a logo",
+      "displayText": "Brand is more than a logo. Broaden the learner's definition. Brand includes language, confidence level, promise shape, trust style, and presentation energy. Sales messaging should match the lane it is pointing toward. A technically serious lane and an expressive creative lane should not sound identical.",
+      "speakText": "Brand is more than a logo. Broaden the learner's definition. Brand includes language, confidence level, promise shape, trust style, and presentation energy. Sales messaging should match the lane it is pointing toward. A technically serious lane and an expressive creative lane should not sound identical."
+    },
+    {
+      "id": "slide-why_diff",
+      "title": "Why brand differences matter",
+      "displayText": "Why brand differences matter. Tie tone to commercial trust. Flattened language makes offers blur together. Division-specific tone helps the buyer feel that AeroVista understands the category of work being discussed. That is not fragmentation. That is precision.",
+      "speakText": "Why brand differences matter. Tie tone to commercial trust. Flattened language makes offers blur together. Division-specific tone helps the buyer feel that AeroVista understands the category of work being discussed. That is not fragmentation. That is precision."
+    },
+    {
+      "id": "slide-nexus_summit",
+      "title": "Nexus and Summit",
+      "displayText": "Nexus and Summit. Set technical and educational tones clearly. Nexus should feel capable, technical, reliable, and systems-minded. A Nexus-flavored line sounds like: We help operations teams replace manual workflow with dependable systems and automation. Summit should feel clear, educational, structured, and growth-focused, like: We help teams turn expertise into guided learner journeys people can actually complete.",
+      "speakText": "Nexus and Summit. Set technical and educational tones clearly. Nexus should feel capable, technical, reliable, and systems-minded. A Nexus-flavored line sounds like: We help operations teams replace manual workflow with dependable systems and automation. Summit should feel clear, educational, structured, and growth-focused, like: We help teams turn expertise into guided learner journeys people can actually complete."
+    },
+    {
+      "id": "slide-echo_sky",
+      "title": "EchoVerse and SkyForge",
+      "displayText": "EchoVerse and SkyForge. Separate expressive from immersive. EchoVerse should feel emotional, sonic, expressive, and artist-aware. A strong EchoVerse line might say: We help artists shape a release experience people can hear, feel, and remember. SkyForge should feel imaginative, interactive, exploratory, and experience-driven, more like: We build interactive worlds people can step into, not just watch.",
+      "speakText": "EchoVerse and SkyForge. Separate expressive from immersive. EchoVerse should feel emotional, sonic, expressive, and artist-aware. A strong EchoVerse line might say: We help artists shape a release experience people can hear, feel, and remember. SkyForge should feel imaginative, interactive, exploratory, and experience-driven, more like: We build interactive worlds people can step into, not just watch."
+    },
+    {
+      "id": "slide-lumina_vespera",
+      "title": "Lumina and Vespera",
+      "displayText": "Lumina and Vespera. Place market-facing persuasion beside authored clarity. Lumina should feel polished, strategic, persuasive, and market-facing. A Lumina-flavored line sounds like: We help you clarify the offer, sharpen the message, and move the right buyers forward. Vespera should feel thoughtful, authored, editorial, and narrative-driven, like: We turn your expertise into a crafted, readable body of published work.",
+      "speakText": "Lumina and Vespera. Place market-facing persuasion beside authored clarity. Lumina should feel polished, strategic, persuasive, and market-facing. A Lumina-flavored line sounds like: We help you clarify the offer, sharpen the message, and move the right buyers forward. Vespera should feel thoughtful, authored, editorial, and narrative-driven, like: We turn your expertise into a crafted, readable body of published work."
+    },
+    {
+      "id": "slide-horizon_umbrella",
+      "title": "Horizon and the umbrella brand",
+      "displayText": "Horizon and the umbrella brand. Keep field proof distinct while preserving ecosystem cohesion. Horizon should feel field-ready, visual, precise, and proof-driven. A Horizon line should sound grounded, like: We capture clean aerial proof that helps the audience trust what is actually there. The AeroVista umbrella should still feel cohesive, credible, and cross-division capable without forcing every division into the same voice.",
+      "speakText": "Horizon and the umbrella brand. Keep field proof distinct while preserving ecosystem cohesion. Horizon should feel field-ready, visual, precise, and proof-driven. A Horizon line should sound grounded, like: We capture clean aerial proof that helps the audience trust what is actually there. The AeroVista umbrella should still feel cohesive, credible, and cross-division capable without forcing every division into the same voice."
+    },
+    {
+      "id": "slide-wrong_sound",
+      "title": "What sounds wrong",
+      "displayText": "What sounds wrong. Train mismatch detection. Overly poetic language can weaken a technical lane. Cold feature-heavy language can weaken a narrative or expressive lane. Wrong tone is a routing clue as much as a copy problem.",
+      "speakText": "What sounds wrong. Train mismatch detection. Overly poetic language can weaken a technical lane. Cold feature-heavy language can weaken a narrative or expressive lane. Wrong tone is a routing clue as much as a copy problem."
+    },
+    {
+      "id": "slide-rewrite_examples",
+      "title": "Worked rewrite examples",
+      "displayText": "Worked rewrite examples. Show what better fit actually sounds like. Weak generic line: We build bold digital experiences for any organization. Why it fails: it hides the lane and sounds interchangeable. Better Nexus line: We help teams replace spreadsheet chaos with dependable systems, automation, and reporting clarity. Better Vespera line: We help authors and brands turn rough expertise into clear, publishable content people can follow and trust.",
+      "speakText": "Worked rewrite examples. Show what better fit actually sounds like. Weak generic line: We build bold digital experiences for any organization. Why it fails: it hides the lane and sounds interchangeable. Better Nexus line: We help teams replace spreadsheet chaos with dependable systems, automation, and reporting clarity. Better Vespera line: We help authors and brands turn rough expertise into clear, publishable content people can follow and trust."
+    },
+    {
+      "id": "slide-brand_route",
+      "title": "Use brand fit to improve routing",
+      "displayText": "Use brand fit to improve routing. Connect tone back to sales judgment. If the message sounds off, the path may also be off. Brand fit helps you catch weak proposals before they go out. Good sales language reinforces the right lane instead of hiding it.",
+      "speakText": "Use brand fit to improve routing. Connect tone back to sales judgment. If the message sounds off, the path may also be off. Brand fit helps you catch weak proposals before they go out. Good sales language reinforces the right lane instead of hiding it."
+    },
+    {
+      "id": "end",
+      "title": "End",
+      "displayText": "End.",
+      "speakText": "End."
+    }
+  ],
+  "overviewOrder": [
+    "cold-open",
+    "slide-brand_more",
+    "slide-why_diff",
+    "slide-nexus_summit",
+    "slide-echo_sky",
+    "slide-lumina_vespera",
+    "slide-horizon_umbrella",
+    "slide-wrong_sound",
+    "slide-rewrite_examples",
+    "slide-brand_route"
+  ],
+  "heroSectionId": "cold-open",
+  "slideSectionMap": {
+    "brand_more": "slide-brand_more",
+    "why_diff": "slide-why_diff",
+    "nexus_summit": "slide-nexus_summit",
+    "echo_sky": "slide-echo_sky",
+    "lumina_vespera": "slide-lumina_vespera",
+    "horizon_umbrella": "slide-horizon_umbrella",
+    "wrong_sound": "slide-wrong_sound",
+    "rewrite_examples": "slide-rewrite_examples",
+    "brand_route": "slide-brand_route"
+  }
+}

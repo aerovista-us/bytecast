@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ByteCast Glossary</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <style>
+    :root {
+      --bg0: #050607;
+      --bg1: #0b0f14;
+      --panel: rgba(255, 255, 255, 0.05);
+      --line: rgba(255, 255, 255, 0.14);
+      --ink: rgba(255, 255, 255, 0.93);
+      --muted: rgba(255, 255, 255, 0.66);
+      --faint: rgba(255, 255, 255, 0.48);
+      --neon: #22a7ff;
+      --gold: #ffc45a;
+      --ghost: #a66bff;
+      --radius: 18px;
+      --radius-sm: 12px;
+      --shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+      --sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+      --display: "Sora", "Segoe UI", system-ui, sans-serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--sans);
+      color: var(--ink);
+      background:
+        radial-gradient(800px 420px at 10% 0%, rgba(34, 167, 255, 0.12), transparent 60%),
+        radial-gradient(700px 480px at 100% 10%, rgba(166, 107, 255, 0.10), transparent 58%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      padding: 1rem;
+    }
+
+    .shell {
+      max-width: 760px;
+      margin: 0 auto;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+        var(--panel);
+      padding: 1rem;
+      box-shadow: var(--shadow);
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: #ffe0a2;
+      font: 700 0.76rem/1 var(--mono);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0.3rem 0 0;
+      font-family: var(--display);
+      font-size: clamp(1.5rem, 4vw, 2rem);
+    }
+
+    .lead,
+    .muted {
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .lead {
+      margin: 0.45rem 0 0;
+      max-width: 58ch;
+    }
+
+    .actions {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-top: 0.9rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.55rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--ink);
+      font: inherit;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.12s ease;
+    }
+
+    .btn:hover {
+      border-color: rgba(34, 167, 255, 0.45);
+      box-shadow: 0 0 18px rgba(34, 167, 255, 0.2);
+      transform: translateY(-1px);
+    }
+
+    .btn--primary {
+      border-color: rgba(34, 167, 255, 0.45);
+      background: rgba(34, 167, 255, 0.13);
+      box-shadow: 0 0 18px rgba(34, 167, 255, 0.18);
+    }
+
+    label {
+      display: grid;
+      gap: 0.35rem;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    input[type="search"] {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 0.7rem 0.8rem;
+      background: rgba(0, 0, 0, 0.26);
+      color: var(--ink);
+      font: inherit;
+    }
+
+    input[type="search"]::placeholder {
+      color: rgba(255, 255, 255, 0.42);
+    }
+
+    input[type="search"]:focus-visible,
+    .btn:focus-visible {
+      outline: 3px solid rgba(34, 167, 255, 0.3);
+      outline-offset: 2px;
+    }
+
+    .toolbar {
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .toolbar__meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .count {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 196, 90, 0.22);
+      background: rgba(255, 196, 90, 0.08);
+      color: rgba(255, 240, 210, 0.92);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .terms {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .term-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 0.85rem 0.9rem;
+      background:
+        linear-gradient(145deg, rgba(34, 167, 255, 0.06), rgba(166, 107, 255, 0.03) 60%, rgba(255, 255, 255, 0.02)),
+        rgba(255, 255, 255, 0.02);
+    }
+
+    .term-card h2 {
+      margin: 0;
+      font-size: 1rem;
+      font-family: var(--display);
+    }
+
+    .term-card p {
+      margin: 0.45rem 0 0;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .term-card__tag {
+      display: inline-flex;
+      margin-top: 0.55rem;
+      padding: 0.22rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(166, 107, 255, 0.24);
+      background: rgba(166, 107, 255, 0.1);
+      color: rgba(234, 220, 255, 0.92);
+      font: 700 0.72rem/1 var(--mono);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .empty {
+      border: 1px dashed rgba(255, 255, 255, 0.18);
+      border-radius: 14px;
+      padding: 1rem;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    @media (max-width: 560px) {
+      body {
+        padding: 0.75rem;
+      }
+
+      .actions,
+      .toolbar__meta {
+        grid-template-columns: 1fr;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="panel">
+      <p class="eyebrow">Quick Reference</p>
+      <h1>Glossary</h1>
+      <p class="lead">A compact lookup for core ByteCast and AeroVista training terms. Keep this open while you move through Training Hub, episodes, and missions.</p>
+      <div class="actions">
+        <a class="btn btn--primary" href="../index.html">Back to Training Hub</a>
+        <button class="btn" type="button" id="closeWindowBtn">Close Window</button>
+      </div>
+    </section>
+
+    <section class="panel toolbar" aria-label="Glossary controls">
+      <label for="termFilter">Filter terms...
+        <input id="termFilter" type="search" placeholder="Filter terms..." autocomplete="off">
+      </label>
+      <div class="toolbar__meta">
+        <div class="count" id="termCount">0 terms</div>
+        <p class="muted" style="margin:0;">Search by term name or definition text.</p>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Glossary terms">
+      <div class="terms" id="termList"></div>
+      <div class="empty" id="emptyState" hidden>No glossary terms match this filter yet.</div>
+    </section>
+  </main>
+
+  <script>
+    const TERMS = [
+      {
+        term: "ACOS",
+        tag: "system",
+        definition: "The visual awareness and cockpit layer that shows cross-system status, changes, and drill-ins."
+      },
+      {
+        term: "SOT",
+        tag: "truth",
+        definition: "Source of Truth. The declared canonical artifact or system for a concern."
+      },
+      {
+        term: "Canonical",
+        tag: "truth",
+        definition: "Officially trusted as current truth."
+      },
+      {
+        term: "Domain system",
+        tag: "ownership",
+        definition: "A system that owns one area of truth, such as work orders, reporting, or timeline state."
+      },
+      {
+        term: "Integration contract",
+        tag: "integration",
+        definition: "The defined format and rules for what one system publishes to another."
+      },
+      {
+        term: "Founder intent",
+        tag: "architecture",
+        definition: "A service or surface that still belongs in the architecture, even if it is currently offline."
+      },
+      {
+        term: "Runtime truth",
+        tag: "runtime",
+        definition: "What is actually running right now in the live environment."
+      },
+      {
+        term: "NXCal",
+        tag: "ledger",
+        definition: "The canonical event and timeline ledger in the ecosystem."
+      },
+      {
+        term: "Golden path",
+        tag: "journey",
+        definition: "The core flow that should work cleanly before more scope is added."
+      },
+      {
+        term: "Punch list",
+        tag: "operations",
+        definition: "A focused list of remaining items needed to make a lane cleaner or more operational."
+      },
+      {
+        term: "Current truth",
+        tag: "truth",
+        definition: "The declared answer the learner should trust now, instead of guessing from the newest-looking file."
+      },
+      {
+        term: "Reporting system",
+        tag: "ownership",
+        definition: "The memory and meaning layer that explains what happened, why it matters, and what status should be trusted."
+      },
+      {
+        term: "Work order ledger",
+        tag: "operations",
+        definition: "The execution record that tracks what work was requested, routed, and completed."
+      }
+    ];
+
+    const refs = {
+      termFilter: document.getElementById("termFilter"),
+      termCount: document.getElementById("termCount"),
+      termList: document.getElementById("termList"),
+      emptyState: document.getElementById("emptyState"),
+      closeWindowBtn: document.getElementById("closeWindowBtn")
+    };
+
+    function renderTerms(query) {
+      const normalized = String(query || "").trim().toLowerCase();
+      const visible = TERMS.filter((item) => {
+        if (!normalized) return true;
+        return item.term.toLowerCase().includes(normalized) || item.definition.toLowerCase().includes(normalized) || item.tag.toLowerCase().includes(normalized);
+      });
+
+      refs.termCount.textContent = `${visible.length} term${visible.length === 1 ? "" : "s"}`;
+      refs.emptyState.hidden = visible.length !== 0;
+      refs.termList.innerHTML = visible.map((item) => `
+        <article class="term-card">
+          <h2>${escapeHtml(item.term)}</h2>
+          <p>${escapeHtml(item.definition)}</p>
+          <span class="term-card__tag">${escapeHtml(item.tag)}</span>
+        </article>
+      `).join("");
+    }
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    refs.termFilter.addEventListener("input", (event) => {
+      renderTerms(event.target.value);
+    });
+
+    refs.closeWindowBtn.addEventListener("click", () => {
+      window.close();
+    });
+
+    renderTerms("");
+  </script>
+</body>
+</html>

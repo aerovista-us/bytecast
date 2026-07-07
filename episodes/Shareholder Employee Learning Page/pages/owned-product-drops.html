@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2. Owned Product Drops | AeroVista Ecosystem</title>
+  <meta name="description" content="AeroVista ecosystem play page for Owned Product Drops." />
+  <style>
+    :root {
+      --bg: #060817;
+      --bg2: #0b1026;
+      --panel: rgba(255,255,255,0.07);
+      --panel2: rgba(255,255,255,0.105);
+      --line: rgba(255,255,255,0.16);
+      --text: #eef6ff;
+      --muted: #a9b8d4;
+      --cyan: #00aeef;
+      --gold: #ffd166;
+      --pink: #ff4ecd;
+      --green: #44f2a1;
+      --purple: #9b6cff;
+      --orange: #ff9b54;
+      --danger: #ff667a;
+      --shadow: 0 24px 90px rgba(0,0,0,0.42);
+      --radius: 24px;
+      --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 10%, rgba(0,174,239,0.25), transparent 28rem),
+        radial-gradient(circle at 84% 16%, rgba(255,78,205,0.20), transparent 32rem),
+        radial-gradient(circle at 60% 88%, rgba(68,242,161,0.13), transparent 28rem),
+        linear-gradient(135deg, var(--bg), var(--bg2) 55%, #080515);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 46px 46px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.65), transparent 85%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .wrap { width: min(1180px, calc(100% - 36px)); margin: 0 auto; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: rgba(6,8,23,0.72);
+      border-bottom: 1px solid var(--line);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      padding: 14px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: conic-gradient(from 180deg, var(--cyan), var(--purple), var(--pink), var(--gold), var(--green), var(--cyan));
+      box-shadow: 0 0 36px rgba(0,174,239,0.45);
+      position: relative;
+    }
+
+    .mark::after {
+      content: "AV";
+      position: absolute;
+      inset: 3px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: #07091a;
+      font-size: 0.72rem;
+      font-weight: 950;
+      letter-spacing: 0.04em;
+    }
+
+    .navlinks { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+    .navlinks a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+    }
+    .navlinks a:hover { color: white; border-color: var(--line); background: rgba(255,255,255,0.06); }
+
+    .hero { padding: 80px 0 34px; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--cyan);
+      border: 1px solid rgba(0,174,239,0.35);
+      background: rgba(0,174,239,0.08);
+      border-radius: 999px;
+      padding: 9px 13px;
+      font-size: 0.86rem;
+      font-weight: 750;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 8vw, 6.9rem);
+      line-height: 0.92;
+      letter-spacing: -0.07em;
+      margin: 22px 0 18px;
+      max-width: 1030px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #fff, var(--cyan), var(--pink), var(--gold));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 780px;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      line-height: 1.6;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 22px;
+      align-items: stretch;
+      margin-top: 34px;
+    }
+
+    .glass {
+      background: linear-gradient(145deg, rgba(255,255,255,0.10), rgba(255,255,255,0.045));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .panel { padding: 24px; }
+
+    .audio-card { position: relative; min-height: 100%; }
+    .audio-bars {
+      display: grid;
+      grid-template-columns: repeat(22, 1fr);
+      align-items: end;
+      gap: 6px;
+      height: 150px;
+      padding: 16px 0 0;
+    }
+    .bar {
+      border-radius: 999px;
+      background: linear-gradient(to top, rgba(0,174,239,0.25), var(--cyan), var(--pink));
+      min-height: 18px;
+      opacity: 0.75;
+      transform-origin: bottom;
+      animation: bounce 1.6s ease-in-out infinite;
+      animation-play-state: paused;
+    }
+    .playing .bar { animation-play-state: running; }
+    .bar:nth-child(2n) { animation-duration: 1.2s; background: linear-gradient(to top, rgba(155,108,255,0.2), var(--purple), var(--cyan)); }
+    .bar:nth-child(3n) { animation-duration: 1.85s; background: linear-gradient(to top, rgba(255,209,102,0.2), var(--gold), var(--pink)); }
+    .bar:nth-child(5n) { animation-duration: 1.05s; }
+    @keyframes bounce { 0%,100%{ transform: scaleY(0.42);} 50%{ transform: scaleY(1.05);} }
+
+    button, .button {
+      cursor: pointer;
+      border: 0;
+      border-radius: 999px;
+      color: #06101c;
+      font-weight: 900;
+      padding: 12px 16px;
+      background: linear-gradient(90deg, var(--cyan), var(--green));
+      box-shadow: 0 10px 30px rgba(0,174,239,0.22);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+    }
+    button.secondary, .button.secondary { background: rgba(255,255,255,0.1); color: white; border: 1px solid var(--line); box-shadow: none; }
+    .button-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.055);
+      border-radius: 18px;
+      padding: 16px;
+    }
+    .stat b { display: block; font-size: 1.6rem; color: white; }
+    .stat span { color: var(--muted); font-size: 0.88rem; }
+
+    section { padding: 56px 0; }
+    .section-title { display: flex; justify-content: space-between; gap: 20px; align-items: end; margin-bottom: 20px; }
+    h2 { font-size: clamp(2rem, 5vw, 3.6rem); letter-spacing: -0.05em; line-height: 1; margin: 0; }
+    .section-title p { margin: 0; color: var(--muted); max-width: 520px; line-height: 1.55; }
+
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .card {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.065);
+      border-radius: 22px;
+      padding: 20px;
+      min-height: 220px;
+      transition: transform 0.2s ease, background 0.2s ease, border 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .card:hover { transform: translateY(-4px); background: rgba(255,255,255,0.095); border-color: rgba(0,174,239,0.4); }
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -120px auto auto -100px;
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(0,174,239,0.26), transparent 70%);
+    }
+    .card h3 { margin: 0 0 8px; font-size: 1.25rem; }
+    .card p { color: var(--muted); line-height: 1.55; margin: 0 0 14px; }
+    .tag { display: inline-flex; padding: 6px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--text); font-size: 0.78rem; background: rgba(255,255,255,0.08); }
+    .tag.high { border-color: rgba(68,242,161,0.38); color: var(--green); }
+    .tag.med { border-color: rgba(255,209,102,0.38); color: var(--gold); }
+    .tag.future { border-color: rgba(155,108,255,0.38); color: #cbb9ff; }
+
+    .flywheel {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+    .wheel {
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at center, rgba(255,255,255,0.12), transparent 32%),
+        conic-gradient(from 0deg, rgba(0,174,239,0.2), rgba(255,78,205,0.2), rgba(255,209,102,0.2), rgba(68,242,161,0.2), rgba(0,174,239,0.2));
+    }
+    .wheel-inner {
+      width: 42%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: #07091a;
+      border: 1px solid rgba(255,255,255,0.20);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font-weight: 950;
+      letter-spacing: 0.04em;
+      box-shadow: 0 0 40px rgba(0,0,0,0.38);
+    }
+    .orbit { position: absolute; width: 100%; height: 100%; animation: spin 26s linear infinite; }
+    .node {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(6,8,23,0.86);
+      border: 1px solid var(--line);
+      color: white;
+      font-size: 0.78rem;
+      white-space: nowrap;
+    }
+    .n1 { left: 50%; top: 6%; }
+    .n2 { left: 90%; top: 30%; }
+    .n3 { left: 84%; top: 72%; }
+    .n4 { left: 50%; top: 94%; }
+    .n5 { left: 16%; top: 72%; }
+    .n6 { left: 10%; top: 30%; }
+    @keyframes spin { from{ transform: rotate(0deg);} to{ transform: rotate(360deg);} }
+    .orbit .node { animation: unspin 26s linear infinite; }
+    @keyframes unspin { from{ transform: translate(-50%,-50%) rotate(0deg);} to{ transform: translate(-50%,-50%) rotate(-360deg);} }
+
+    .steps { display: grid; gap: 12px; }
+    .step { display: grid; grid-template-columns: 58px 1fr; gap: 14px; align-items: start; padding: 16px; border: 1px solid var(--line); background: rgba(255,255,255,0.055); border-radius: 18px; }
+    .num { width: 42px; height: 42px; border-radius: 14px; display: grid; place-items: center; font-weight: 950; background: linear-gradient(135deg, var(--cyan), var(--purple)); color: white; }
+    .step h3 { margin: 0 0 4px; }
+    .step p { margin: 0; color: var(--muted); line-height: 1.5; }
+
+    .tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+    .tab {
+      padding: 10px 13px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      cursor: pointer;
+      font-weight: 800;
+    }
+    .tab.active { background: linear-gradient(90deg, rgba(0,174,239,0.35), rgba(255,78,205,0.25)); border-color: rgba(0,174,239,0.4); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    .compare { overflow: hidden; border-radius: 22px; border: 1px solid var(--line); }
+    table { border-collapse: collapse; width: 100%; background: rgba(255,255,255,0.055); }
+    th, td { text-align: left; padding: 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { color: white; background: rgba(255,255,255,0.06); }
+    td { color: var(--muted); line-height: 1.5; }
+    td strong { color: white; }
+
+    .track { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .lyrics {
+      white-space: pre-wrap;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      line-height: 1.55;
+      color: #dce8ff;
+      background: rgba(0,0,0,0.25);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      overflow: auto;
+      max-height: 560px;
+    }
+    .copybox { position: relative; }
+    .copy-btn { position: absolute; right: 12px; top: 12px; padding: 8px 10px; font-size: 0.78rem; }
+
+    .notice { border-left: 4px solid var(--gold); padding: 15px 16px; background: rgba(255,209,102,0.08); color: #ffe6a7; border-radius: 14px; line-height: 1.55; }
+    footer { padding: 40px 0 64px; color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+
+    .mini-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .mini { padding: 18px; border: 1px solid var(--line); border-radius: 18px; background: rgba(255,255,255,0.055); }
+    .mini h3 { margin: 0 0 8px; }
+    .mini p { color: var(--muted); line-height: 1.55; margin: 0; }
+
+    @media (max-width: 900px) {
+      .hero-grid, .flywheel, .track { grid-template-columns: 1fr; }
+      .cards { grid-template-columns: 1fr 1fr; }
+      .section-title { align-items: start; flex-direction: column; }
+      .stats { grid-template-columns: 1fr; }
+      .mini-grid { grid-template-columns: 1fr; }
+      nav { align-items: start; flex-direction: column; }
+      .navlinks { justify-content: start; }
+    }
+    @media (max-width: 620px) {
+      .cards { grid-template-columns: 1fr; }
+      th, td { display: block; width: 100%; }
+      th { border-bottom: 0; }
+      tr { display: block; border-bottom: 1px solid var(--line); }
+      .hero { padding-top: 48px; }
+    }
+  
+
+    a.card, .link-card { color: inherit; text-decoration: none; display: block; }
+    .card .learn-more { margin-top: 16px; color: var(--cyan); font-weight: 900; display: inline-flex; align-items: center; gap: 8px; }
+    .card .learn-more::after { content: "→"; transition: transform .2s ease; }
+    .card:hover .learn-more::after { transform: translateX(4px); }
+    .page-hero { padding: 70px 0 24px; }
+    .page-hero h1 { max-width: 1000px; }
+    .breadcrumb { color: var(--muted); display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 18px; }
+    .breadcrumb a { color: var(--cyan); text-decoration: none; font-weight: 800; }
+    .detail-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 18px; align-items: start; }
+    .detail-card { border: 1px solid var(--line); background: rgba(255,255,255,.065); border-radius: 22px; padding: 22px; }
+    .detail-card h2, .detail-card h3 { margin-top: 0; }
+    .detail-card p, .detail-card li { color: var(--muted); line-height: 1.65; }
+    .detail-card ul, .detail-card ol { padding-left: 1.2rem; }
+    .metric-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
+    .metric { border: 1px solid var(--line); border-radius: 18px; padding: 15px; background: rgba(255,255,255,.055); }
+    .metric b { display: block; font-size: 1.25rem; color: white; }
+    .metric span { color: var(--muted); font-size: .88rem; }
+    .timeline { counter-reset: step; display: grid; gap: 12px; }
+    .timeline li { list-style: none; border: 1px solid var(--line); background: rgba(255,255,255,.05); border-radius: 16px; padding: 14px 14px 14px 52px; position: relative; }
+    .timeline li::before { counter-increment: step; content: counter(step); position: absolute; left: 14px; top: 14px; width: 25px; height: 25px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(90deg, var(--cyan), var(--green)); color: #06101c; font-weight: 950; }
+    .mini-nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; }
+    .mini-nav a { color: var(--muted); text-decoration: none; border: 1px solid var(--line); padding: 8px 10px; border-radius: 999px; background: rgba(255,255,255,.045); }
+    .mini-nav a:hover { color: white; border-color: rgba(0,174,239,.4); }
+    .callout { border: 1px solid rgba(255,209,102,.35); background: rgba(255,209,102,.08); border-radius: 22px; padding: 20px; }
+    .callout strong { color: var(--gold); }
+    .nextprev { display: flex; justify-content: space-between; gap: 12px; margin-top: 22px; }
+    @media (max-width: 880px) { .detail-grid, .metric-row { grid-template-columns: 1fr; } .nextprev { flex-direction: column; } }
+</style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <nav>
+        <div class="brand"><span class="mark"></span><span>AeroVista</span></div>
+        <div class="navlinks">
+          <a href="../index.html#roi">ROI Hub</a>
+          <a href="../index.html#flywheel">Flywheel</a>
+          <a href="../index.html#audio">Audio</a>
+          <a href="../index.html#next">Next Steps</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="wrap">
+        <div class="breadcrumb"><a href="../index.html">← Back to learning hub</a><span>/</span><span>Play 2</span></div>
+        <span class="tag high">ROI: Very High</span>
+        <h1><span class="gradient-text">2. Owned Product Drops</span></h1>
+        <p>AV proves its system by launching its own products first.</p>
+        <div class="button-row">
+          <a class="button" href="#blueprint">Explore the blueprint</a>
+          <a class="button secondary" href="../index.html#roi">View all plays</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="blueprint">
+      <div class="wrap detail-grid">
+        <aside class="glass panel audio-card" id="audioCard">
+          <h2 style="font-size:2rem; margin-bottom:8px;">Page sound cue</h2>
+          <p style="color:var(--muted); line-height:1.55; margin-top:0;">Cinematic beat with product-reveal hits, warm bass, and confident retail-drop momentum.</p>
+          <div class="audio-bars" aria-hidden="true"><span class="bar" style="height:48px"></span><span class="bar" style="height:112px"></span><span class="bar" style="height:72px"></span><span class="bar" style="height:132px"></span><span class="bar" style="height:54px"></span><span class="bar" style="height:102px"></span><span class="bar" style="height:86px"></span><span class="bar" style="height:144px"></span><span class="bar" style="height:68px"></span><span class="bar" style="height:126px"></span><span class="bar" style="height:44px"></span><span class="bar" style="height:108px"></span><span class="bar" style="height:76px"></span><span class="bar" style="height:138px"></span><span class="bar" style="height:58px"></span><span class="bar" style="height:118px"></span><span class="bar" style="height:88px"></span><span class="bar" style="height:150px"></span><span class="bar" style="height:64px"></span><span class="bar" style="height:112px"></span><span class="bar" style="height:82px"></span><span class="bar" style="height:132px"></span></div>
+          <div class="button-row">
+            <button id="playBtn">▶ Play Page Pulse</button>
+            <button class="secondary" id="stopBtn">Stop</button>
+          </div>
+          <div class="metric-row"><div class="metric"><b>Speed</b><span>Fast</span></div><div class="metric"><b>Complexity</b><span>Medium</span></div><div class="metric"><b>Brand Equity</b><span>Very High</span></div></div>
+        </aside>
+
+        <div class="detail-card">
+          <h2>What this play is</h2>
+          <p>A repeatable drop engine for AV-owned products: journals, apparel, music releases, field guides, digital packs, booth demos, and limited campaigns.</p>
+          <div class="callout"><strong>Simple read:</strong> Things Worth Remembering, EchoVerse, Horizon, Vespera, and AV Apparel become proof, content, and revenue.</div>
+          <h3>Why it matters</h3>
+          <ul><li>Every drop can earn revenue.</li><li>Every drop becomes marketing content.</li><li>Every drop proves the launch-kit system.</li><li>Every drop creates reusable templates, assets, and operational habits.</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap detail-grid">
+        <div class="detail-card">
+          <h2>Build sequence</h2>
+          <ol class="timeline"><li>Pick one first drop with the strongest identity.</li><li>Build the product page, mockups, copy, social pack, and checkout path.</li><li>Create a launch calendar with teaser, release, and follow-up posts.</li><li>Capture the process as a case study.</li><li>Turn the drop assets into templates for future clients.</li></ol>
+        </div>
+        <div class="detail-card">
+          <h2>How to explain it</h2>
+          <h3>To a potential shareholder</h3>
+          <p>Owned drops convert AV from a pure service model into a portfolio of revenue-producing assets.</p>
+          <h3>To a future employee</h3>
+          <p>This is where builders get to make real things: not imaginary decks, but sellable artifacts that teach the system by existing.</p>
+          <h3>How this feeds the AV ecosystem</h3>
+          <p>This play should not live alone. It should create reusable assets, stronger demos, cleaner process notes, and a clearer sales path for the rest of AeroVista.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="glass panel">
+          <h2>Play map</h2>
+          <p style="color:var(--muted); line-height:1.6;">Jump between the ROI plays without losing the thread.</p>
+          <div class="mini-nav"><a href="productized-launch-kits.html">1. Productized Launch Kits</a>
+<a href="owned-product-drops.html">2. Owned Product Drops</a>
+<a href="creator-booth-packages.html">3. Creator Booth Packages</a>
+<a href="ops-compliance-microtools.html">4. Ops / Compliance Microtools</a>
+<a href="template-asset-store.html">5. Template + Asset Store</a>
+<a href="horizon-place-media.html">6. Horizon Place Media</a>
+<a href="art-localized-platform.html">7. Art Localized Platform</a>
+<a href="echoverse-vespera-ip.html">8. EchoVerse / Vespera IP</a>
+<a href="av-venture-studio.html">9. AV Venture Studio</a></div>
+          <div class="nextprev">
+            <a class="button secondary" href="productized-launch-kits.html">← Productized Launch Kits</a>
+            <a class="button" href="creator-booth-packages.html">Creator Booth Packages →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>© AeroVista LLC concept training page. For education, onboarding, and internal strategy discussion. Not an investment offer or employment offer.</p>
+    </div>
+  </footer>
+  <script src="../assets/pulse.js"></script>
+</body>
+</html>

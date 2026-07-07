@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ByteCast | AV Ecosystem Map Pilot</title>
+  <meta
+    name="description"
+    content="Infographic-first ByteCast pilot built on AV_AppEchosystemMap.png with guided overlays, training context, and hotspot-driven learning."
+  />
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../assets/shared/infographic_episode.css" />
+</head>
+<body class="ig-body">
+  <a class="ig-skip" href="#appMount">Skip to content</a>
+
+  <header class="ig-topbar">
+    <div class="ig-topbar__inner">
+      <div class="ig-badge">
+        <span class="ig-badge__dot" aria-hidden="true"></span>
+        <div>
+          <div style="font-weight:800; letter-spacing:0.02em;">ByteCast Infographic Pilot</div>
+          <div class="ig-k">image-first learning episode</div>
+        </div>
+      </div>
+      <div class="ig-controls">
+        <a class="ig-btn ig-btn--quiet" href="../../seed_bytecast.html">Playlist</a>
+        <a class="ig-btn ig-btn--quiet" href="../training_hub/index.html">Training Hub</a>
+        <a class="ig-btn ig-btn--quiet" href="../aerovista_7_division_overview/index.html">EP-002</a>
+        <a class="ig-btn ig-btn--primary" href="../../index.html">Workspace</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="ig-wrap" id="appMount">
+    <section class="ig-hero">
+      <div class="ig-hero__grid">
+        <div>
+          <p class="ig-eyebrow" id="heroEyebrow">Loading pilot metadata...</p>
+          <h1 id="heroTitle">Loading...</h1>
+          <p class="ig-lead" id="heroLead">Preparing infographic training pilot.</p>
+          <div class="ig-pill-row" id="heroPills"></div>
+          <div class="ig-actions">
+            <button type="button" class="ig-btn ig-btn--primary" id="jumpListen">Start With Listen</button>
+            <button type="button" class="ig-btn ig-btn--gold" id="jumpExplore">Open Explore Layer</button>
+            <a class="ig-btn ig-btn--quiet" href="../infografic/AV_AppEchosystemMap.png" target="_blank" rel="noreferrer">Open Raw PNG</a>
+          </div>
+        </div>
+        <aside class="ig-next-card">
+          <div class="ig-callout">
+            <div class="ig-k">Pilot Goal</div>
+            <p id="heroKeyLine">Loading key line...</p>
+          </div>
+          <div class="ig-callout ig-callout--gold">
+            <div class="ig-k">How To Use This</div>
+            <p id="startCopy">Loading start instructions...</p>
+          </div>
+          <div class="ig-callout">
+            <div class="ig-k">Progress</div>
+            <div class="ig-progress" id="progressPills" style="margin-top:10px;"></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="ig-panel" aria-label="Episode tabs">
+      <div class="ig-panel__top">
+        <div class="ig-tablist" role="tablist" aria-label="Episode sections">
+          <button type="button" class="ig-tab is-active" role="tab" id="tab-listen" aria-controls="listen-panel" aria-selected="true">1 Listen</button>
+          <button type="button" class="ig-tab" role="tab" id="tab-explore" aria-controls="explore-panel" aria-selected="false">2 Explore</button>
+          <button type="button" class="ig-tab" role="tab" id="tab-reference" aria-controls="reference-panel" aria-selected="false">3 Reference</button>
+          <button type="button" class="ig-tab" role="tab" id="tab-engage" aria-controls="engage-panel" aria-selected="false">4 Engage</button>
+        </div>
+      </div>
+
+      <div id="listen-panel" class="ig-tabs__panel" role="tabpanel" aria-labelledby="tab-listen">
+        <div class="ig-panel__body ig-listen-layout">
+          <div class="ig-listen-cards">
+            <article class="ig-card">
+              <h3>Guided Audio</h3>
+              <p class="ig-muted">
+                This pilot uses browser voiceover so we can test the training pattern before committing studio audio.
+                Each section is mapped to a hotspot, so the narration can move attention around the poster instead of merely reading it back.
+              </p>
+              <div class="ig-actions" style="margin-top:14px;">
+                <button type="button" class="ig-btn ig-btn--primary" id="playAll">Play Guided Audio</button>
+                <button type="button" class="ig-btn ig-btn--quiet" id="stopVoice">Stop</button>
+                <button type="button" class="ig-btn ig-btn--gold" id="markListenDone">Mark Listen Complete</button>
+              </div>
+              <p class="ig-muted" id="listenStatus" style="margin-top:12px;">Ready to play the guided overview.</p>
+            </article>
+            <div id="voiceoverCards"></div>
+          </div>
+
+          <aside class="ig-card">
+            <h3>What This Pilot Is Proving</h3>
+            <ul class="ig-bullet-list">
+              <li>The image can become a teaching surface instead of a decorative poster.</li>
+              <li>The overlay layer can guide attention without rewriting the artwork.</li>
+              <li>Training value comes from operator judgment, routing cues, and anti-patterns, not from repeating labels already on the graphic.</li>
+            </ul>
+            <div class="ig-callout" style="margin-top:14px;">
+              <div class="ig-k">Checkpoint Logic</div>
+              <p style="margin-top:8px;">Listen clears when you finish the guided run or manually confirm it. Explore clears when every hotspot has been opened. Engage clears when the quiz passes.</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <div id="explore-panel" class="ig-tabs__panel" role="tabpanel" aria-labelledby="tab-explore" hidden>
+        <div class="ig-panel__body ig-explore-layout">
+          <div class="ig-stage-panel">
+            <div class="ig-row" style="justify-content:space-between; align-items:center;">
+              <div>
+                <h3 class="ig-section-title">Interactive Overlay Stage</h3>
+                <p class="ig-muted" id="exploreMeta">0 hotspot regions explored</p>
+              </div>
+              <div class="ig-zoom">
+                <button type="button" class="ig-btn ig-btn--quiet" id="zoomOut">Zoom out</button>
+                <span class="ig-chip"><strong>zoom</strong> <span id="zoomValue">100%</span></span>
+                <button type="button" class="ig-btn ig-btn--quiet" id="zoomIn">Zoom in</button>
+              </div>
+            </div>
+            <div id="stageMount"></div>
+            <div class="ig-handoff">
+              <button type="button" class="ig-btn ig-btn--quiet" id="prevHotspot">Previous hotspot</button>
+              <button type="button" class="ig-btn ig-btn--primary" id="nextHotspot">Next hotspot</button>
+            </div>
+          </div>
+
+          <aside class="ig-sidebar">
+            <div class="ig-card">
+              <h3>Hotspots</h3>
+              <p class="ig-muted">Each hotspot adds the training layer the poster itself cannot carry: ownership, decision cues, and what to do when reality gets messy.</p>
+              <div class="ig-hotspot-list" id="hotspotList" style="margin-top:12px;"></div>
+            </div>
+            <div id="hotspotDetail"></div>
+          </aside>
+        </div>
+      </div>
+
+      <div id="reference-panel" class="ig-tabs__panel" role="tabpanel" aria-labelledby="tab-reference" hidden>
+        <div class="ig-panel__body ig-reference-layout">
+          <div>
+            <h3 class="ig-section-title">Reference Layer</h3>
+            <p class="ig-muted" id="referenceBlurb">Loading reference cards...</p>
+            <div class="ig-reference-cards" id="referenceCards" style="display:grid; gap:12px; margin-top:14px;"></div>
+          </div>
+          <aside class="ig-card">
+            <h3>Continue The Thread</h3>
+            <p class="ig-muted">These links keep the pilot grounded in the rest of the workspace instead of turning it into a disconnected visual experiment.</p>
+            <div class="ig-card-list" id="referenceLinks" style="flex-direction:column; margin-top:12px;"></div>
+          </aside>
+        </div>
+      </div>
+
+      <div id="engage-panel" class="ig-tabs__panel" role="tabpanel" aria-labelledby="tab-engage" hidden>
+        <div class="ig-panel__body ig-engage-layout">
+          <div class="ig-card">
+            <h3 id="questTitle">Quest</h3>
+            <p class="ig-muted" id="questPrompt">Loading quest...</p>
+            <div class="ig-quest-list" id="questList" style="flex-direction:column; margin-top:12px;"></div>
+          </div>
+          <div class="ig-card">
+            <h3>Quiz</h3>
+            <p class="ig-muted">The quiz checks whether the overlay helped you reason better about the platform, not whether you can recite the map from memory.</p>
+            <div id="quizMount" style="margin-top:12px;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ig-panel">
+      <div class="ig-panel__body">
+        <h3 class="ig-section-title">After This Pilot</h3>
+        <div class="ig-callout ig-callout--gold">
+          <div class="ig-k" id="afterStatus">Start with Listen</div>
+          <p id="afterDetail" style="margin-top:8px;">The voiceover gives the map a job: it teaches how to route thinking, not just what the poster says.</p>
+        </div>
+        <div class="ig-actions" style="margin-top:14px;">
+          <a class="ig-btn ig-btn--primary" href="../aerovista_7_division_overview/index.html">Compare With EP-002</a>
+          <a class="ig-btn ig-btn--quiet" href="../training_hub/index.html">Open Training Hub</a>
+          <a class="ig-btn ig-btn--quiet" href="../../seed_bytecast.html">Return To Playlist</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="ig-footer">
+      <span>Infographic pilot built from <code>episodes/infografic/AV_AppEchosystemMap.png</code></span>
+      <span>ByteCast • AeroVista • image-first training prototype</span>
+    </footer>
+  </main>
+
+  <script src="../../assets/shared/infographic_episode_runtime.js"></script>
+</body>
+</html>

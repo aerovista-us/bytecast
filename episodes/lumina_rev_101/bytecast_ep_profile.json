@@ -1,0 +1,259 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "episode": {
+    "code": "EP-LUM-101",
+    "title": "Lumina Owns Revenue Messaging",
+    "type": "episode pack",
+    "date": "2026-03-29",
+    "runtime_target_minutes": 10,
+    "status": "active"
+  },
+  "content": {
+    "tags": [
+      "lumina",
+      "revenue",
+      "messaging",
+      "routing",
+      "delivery-truth",
+      "client-safe-claims"
+    ],
+    "summary_short": "Reset the mental model: Lumina is the commercial growth lane for the whole AeroVista board, not just the branding corner, and not a license to overpromise.",
+    "summary_long": "This episode reframes Lumina as the lane that helps AeroVista present, position, and move work forward commercially. It separates sales and messaging ownership from delivery ownership so learners can communicate clearly without turning discovery, partner lanes, or future ideas into client commitments.",
+    "start_here": "Use Listen once, then check the slides for the clean rule: Lumina owns commercial clarity while the right division owns delivery truth.",
+    "hero_kicker": "Lumina Revenue Foundations",
+    "key_line": "Commercial clarity is a real lane. It is not a cosmetic afterthought."
+  },
+  "media": {
+    "audio_files": []
+  },
+  "slides": [
+    {
+      "id": "reset",
+      "title": "More than branding",
+      "goal": "Break the old assumption fast.",
+      "bullets": [
+        "Lumina is not just the team that makes things look polished.",
+        "Lumina owns positioning, messaging, market-facing clarity, and commercial movement across the AeroVista ecosystem.",
+        "That means Lumina must understand offers well enough to sell and route them without pretending to deliver all of them."
+      ]
+    },
+    {
+      "id": "core_job",
+      "title": "Lumina's core job",
+      "goal": "Name the lane in plain language.",
+      "bullets": [
+        "Lumina helps prospects understand what AeroVista can do and which lane actually fits the need.",
+        "It shapes messaging, campaign framing, sales conversations, and bundle logic so the commercial story stays coherent.",
+        "The best shorthand is simple: Lumina helps move good-fit work forward."
+      ],
+      "takeaway": "Lumina owns commercial clarity."
+    },
+    {
+      "id": "not_job",
+      "title": "What Lumina does not own",
+      "goal": "Protect trust by drawing the line clearly.",
+      "bullets": [
+        "Lumina does not automatically own engineering, audio production, drone operations, publishing execution, or learning platform delivery.",
+        "Those lanes can absolutely partner with Lumina, but delivery truth stays with the division doing the work.",
+        "That distinction matters because overpromising early creates confusion later."
+      ]
+    },
+    {
+      "id": "board",
+      "title": "Why Lumina needs the whole board",
+      "goal": "Show why cross-division awareness is a sales requirement.",
+      "bullets": [
+        "Lumina cannot route cleanly if it only understands one division.",
+        "Prospects often describe a surface request that actually spans multiple lanes.",
+        "Strong commercial judgment starts with enough board awareness to see the real fit."
+      ]
+    },
+    {
+      "id": "examples",
+      "title": "What Lumina-led can look like",
+      "goal": "Make collaboration concrete.",
+      "bullets": [
+        "Lumina + Nexus: messaging and offer framing lead into a system or automation build.",
+        "Lumina + EchoVerse: campaign positioning supports a sound, music, or release experience.",
+        "Lumina + Horizon: a field proof asset becomes part of a larger market-facing story."
+      ]
+    },
+    {
+      "id": "rule",
+      "title": "The clean rule",
+      "goal": "Give learners a sentence they can reuse.",
+      "bullets": [
+        "Lumina owns how the opportunity is framed, positioned, and moved forward commercially.",
+        "Delivery lanes own the execution details, constraints, timelines, and records of actual delivery.",
+        "When in doubt, protect delivery truth instead of smoothing it over."
+      ]
+    },
+    {
+      "id": "claim_boundary",
+      "title": "Claim boundary",
+      "goal": "Keep Lumina recommendations client-safe.",
+      "bullets": [
+        "Lumina can describe likely fit, but delivery lanes confirm scope, timeline, dependencies, and constraints.",
+        "Use phrases like 'based on current discovery' when the recommendation is still provisional.",
+        "Do not turn a partner lane, future idea, or support path into a promised deliverable."
+      ],
+      "takeaway": "Client confidence grows when commercial language stays honest."
+    },
+    {
+      "id": "your_role",
+      "title": "Your role in revenue",
+      "goal": "Set the expectation for the learner.",
+      "bullets": [
+        "Your job is to qualify, position, recommend, and hand off cleanly.",
+        "You do not need fake expert knowledge in every delivery lane to be useful.",
+        "You do need enough understanding to keep the prospect pointed in the right direction."
+      ]
+    }
+  ],
+  "references": {
+    "blurb": "Use the original lane docs plus ByteCast standards to reinforce this episode.",
+    "links": [
+      {
+        "label": "Lane Overview",
+        "href": "../../building blocks/LUM_BUILD_PACKS/LUM-REV-001/00_lane_overview.md",
+        "primary": true
+      },
+      {
+        "label": "Training Standard",
+        "href": "../../docs/BYTECAST_TRAINING_STANDARD.md"
+      },
+      {
+        "label": "Proof Schema",
+        "href": "../../docs/BYTECAST_PROOF_SCHEMA.md"
+      },
+      {
+        "label": "Playlist",
+        "href": "../../seed_bytecast.html"
+      },
+      {
+        "label": "EP-LUM-101 plan",
+        "href": "../../building blocks/LUM_BUILD_PACKS/LUM-REV-001/episodes/EP-LUM-101.md"
+      }
+    ]
+  },
+  "navigation": {
+    "previous_href": "../current_truth_basics/index.html",
+    "previous_label": "Back: EP-004"
+  },
+  "advance": {
+    "href": "../lumina_rev_102/index.html",
+    "label": "EP-LUM-102",
+    "cta": "Open EP-LUM-102",
+    "tag": "THEN",
+    "description": "Complete EP-LUM-101 gates, then continue into Know the Board."
+  },
+  "routing": {
+    "slug": "lumina_rev_101",
+    "journey_id": "lumina_revenue_v1",
+    "listen_step": "lum101_listen",
+    "slide_step": "lum101_slide",
+    "engage_step": "lum101_engage",
+    "storage_prefix": "lumina_rev_101"
+  },
+  "engagement": {
+    "quest": {
+      "title": "EP-LUM-101 practice checklist",
+      "prompt": "Use the checklist to reinforce the ownership line between commercial clarity and delivery truth.",
+      "items": [
+        {
+          "id": "q1",
+          "text": "Say the clean rule aloud once: Lumina owns commercial clarity; delivery lanes own delivery truth."
+        },
+        {
+          "id": "q2",
+          "text": "Name one example of Lumina leading messaging while another division delivers."
+        },
+        {
+          "id": "q3",
+          "text": "Open the lane overview and confirm that this pack sits after the Golden Path."
+        },
+        {
+          "id": "q4",
+          "text": "Explain why confusing sales ownership with delivery ownership breaks trust."
+        },
+        {
+          "id": "q5",
+          "text": "Rewrite one enthusiastic recommendation into client-safe language that preserves the delivery-owner boundary."
+        }
+      ]
+    },
+    "quiz": {
+      "enabled": true,
+      "pass_threshold": 0.8,
+      "prompt": "Clear the reset before moving into the rest of the revenue lane.",
+      "questions": [
+        {
+          "id": "lum101_q1",
+          "q": "What is Lumina's best primary description?",
+          "choices": [
+            "A cosmetic design-only team",
+            "A commercial growth and messaging lane",
+            "The company-wide delivery owner"
+          ],
+          "answer_index": 1,
+          "explain": "Lumina owns commercial positioning and movement, not every delivery function."
+        },
+        {
+          "id": "lum101_q2",
+          "q": "If a lead needs a custom system plus better positioning, what is the cleanest model?",
+          "choices": [
+            "Lumina leads messaging while Nexus owns technical delivery",
+            "Lumina should pretend to deliver the build too",
+            "The lead does not fit AeroVista"
+          ],
+          "answer_index": 0,
+          "explain": "Commercial leadership and delivery ownership can be separate and still coordinated."
+        },
+        {
+          "id": "lum101_q3",
+          "q": "Why does Lumina need awareness of all seven divisions?",
+          "choices": [
+            "To replace them",
+            "To qualify and route correctly",
+            "To avoid talking with prospects"
+          ],
+          "answer_index": 1,
+          "explain": "Board awareness supports routing quality."
+        },
+        {
+          "id": "lum101_q4",
+          "q": "Which statement protects trust best?",
+          "choices": [
+            "Lumina owns commercial clarity; delivery lanes own delivery truth",
+            "Lumina should promise whatever closes fastest",
+            "Every lane sounds the same anyway"
+          ],
+          "answer_index": 0,
+          "explain": "That rule keeps scope honest and handoffs clean."
+        },
+        {
+          "id": "lum101_q5",
+          "q": "Which task is most clearly Lumina-owned?",
+          "choices": [
+            "Campaign framing and message positioning",
+            "Drone flight execution",
+            "Audio mastering"
+          ],
+          "answer_index": 0,
+          "explain": "Lumina leads the commercial story, not specialized execution."
+        },
+        {
+          "id": "lum101_q6",
+          "q": "Which wording protects delivery truth?",
+          "choices": [
+            "Lumina can promise the full delivery now",
+            "Based on current discovery, Lumina can frame the path while the delivery lane confirms scope and timeline",
+            "Delivery ownership does not matter if the message is clear"
+          ],
+          "answer_index": 1,
+          "explain": "Lumina owns commercial framing; delivery lanes confirm execution constraints."
+        }
+      ]
+    }
+  }
+}

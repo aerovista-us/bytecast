@@ -1,0 +1,10 @@
+{
+  "schema": "bytecast-episode-sot-v1",
+  "slug": "art_localized_ep2",
+  "episode_code": "ART-EP-2",
+  "title": "The Art Localized - Ep 2 - Partnership Tiers",
+  "series_id": "art_localized_training",
+  "sequence": 2,
+  "status": "active",
+  "entry": "index.html"
+}

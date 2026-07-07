@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en" data-theme="art-localized">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ByteCast — The Art Localized • Ep 4 — Your role and final assessment</title>
+  <meta
+    name="description"
+    content="The Art Localized Training — Ep 4. Pathways, rights, ecosystem roles, and final assessment from the Phase 4 source pack."
+  />
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml" />
+  <style>
+    :root {
+      --bg0: #121009;
+      --bg1: #221b10;
+      --panel: rgba(18, 16, 9, 0.84);
+      --ink: rgba(252, 244, 225, 0.96);
+      --muted: rgba(252, 244, 225, 0.72);
+      --line: rgba(242, 195, 96, 0.24);
+      --accent: #f2c360;
+      --accent-2: #ffdca0;
+      --accent-3: #99efb0;
+      --max: 980px;
+      --pad: clamp(16px, 2.5vw, 26px);
+      --display: "Aptos Display", "Segoe UI Variable Display", "Trebuchet MS", sans-serif;
+      --sans: "Aptos", "Segoe UI Variable Text", "Segoe UI", sans-serif;
+      --mono: ui-monospace, "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      color: var(--ink);
+      background:
+        radial-gradient(860px 500px at 50% 0%, rgba(242, 195, 96, 0.15), transparent 58%),
+        radial-gradient(760px 420px at 100% 12%, rgba(255, 220, 160, 0.08), transparent 50%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      min-height: 100vh;
+    }
+    a { color: inherit; }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(18, 16, 9, 0.84);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar__inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 12px var(--pad);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .k, .eyebrow {
+      font-family: var(--mono);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .k {
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .eyebrow {
+      margin: 0 0 10px;
+      font-size: 12px;
+      color: var(--accent-2);
+    }
+    .btn {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font: inherit;
+      font-size: 13px;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn--primary {
+      border-color: rgba(242, 195, 96, 0.58);
+      box-shadow: 0 0 22px rgba(242, 195, 96, 0.18);
+    }
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 24px var(--pad) 72px;
+    }
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: var(--panel);
+      padding: 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 18px 46px rgba(0, 0, 0, 0.22);
+    }
+    .hero {
+      padding: 24px;
+      background:
+        linear-gradient(135deg, rgba(242, 195, 96, 0.18), rgba(255, 220, 160, 0.1)),
+        rgba(18, 16, 9, 0.84);
+    }
+    h1, h2, h3 {
+      margin: 0 0 10px;
+      font-family: var(--display);
+      letter-spacing: -0.02em;
+    }
+    h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); }
+    h2 { font-size: 1.05rem; }
+    h3 { font-size: 0.96rem; }
+    .sub {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 74ch;
+    }
+    .row, .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+    .chips { margin-top: 16px; }
+    .chip {
+      border: 1px solid rgba(242, 195, 96, 0.28);
+      background: rgba(242, 195, 96, 0.08);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+    }
+    .status {
+      margin: 12px 0 0;
+      font-size: 13px;
+      color: var(--accent-2);
+    }
+    .script {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .script p, .mini, .choice, .source-list li {
+      line-height: 1.6;
+    }
+    .script p, .mini, .choice {
+      margin: 0;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .slide-visual {
+      margin-bottom: 14px;
+      padding: 12px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+    }
+    .slide-visual svg { max-width: 100%; height: auto; display: block; }
+    .slides { min-height: 250px; }
+    .slide { display: none; }
+    .slide.is-active { display: block; }
+    .slide:not(.is-active) .bc-art :is(animate, animateTransform) { visibility: hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      .slide-visual .bc-art :is(animate, animateTransform) { display: none !important; }
+    }
+    .note-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .mini { color: var(--muted); }
+    .source-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+    .choice {
+      display: block;
+      margin: 10px 0;
+      cursor: pointer;
+    }
+    .choice input { margin-right: 10px; }
+    .final-q {
+      margin: 16px 0 8px;
+      font-size: 0.98rem;
+      font-family: var(--display);
+    }
+    .mission-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .mission-field {
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .mission-field input,
+    .mission-field textarea {
+      width: 100%;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
+      padding: 12px 14px;
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.04);
+      font: inherit;
+    }
+    .mission-field textarea {
+      min-height: 104px;
+      resize: vertical;
+    }
+    .field-guide {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .guide-card {
+      padding: 14px;
+      border-radius: 16px;
+      background: rgba(153, 239, 176, 0.07);
+      border: 1px solid rgba(153, 239, 176, 0.16);
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .guide-card strong { color: var(--ink); }
+    #engageHint, #missionHint, #finalHint {
+      margin-top: 12px;
+      color: var(--accent-3);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body data-bc-ep="4" data-bc-slug="art_localized_ep4">
+  <header class="topbar">
+    <div class="topbar__inner">
+      <span class="k">The Art Localized — Training</span>
+      <div class="row">
+        <a class="btn" href="../../../seed_bytecast.html">Playlist</a>
+        <a class="btn" href="../../../episodes/training_hub/index.html">Training Hub</a>
+        <a class="btn btn--primary" href="../../../index.html">Workspace</a>
+      </div>
+    </div>
+  </header>
+  <main class="wrap">
+    <section class="panel hero">
+      <p class="eyebrow">ART-EP-4 • Phase 4 Pathways</p>
+      <h1>Ep 4 — Your role</h1>
+      <p class="sub">
+        Phase 4 turns interest into careful next steps. Your role is to route creators and collaborators into the
+        right pathway, keep proof clean, and preserve creator equity while the system learns.
+      </p>
+      <div class="chips">
+        <span class="chip">Future Pathways</span>
+        <span class="chip">Rights Review</span>
+        <span class="chip">Ecosystem Integration</span>
+        <span class="chip">Final Assessment</span>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Listen">
+      <h2>Listen</h2>
+      <p class="sub">
+        Read-aloud uses the browser voice on this device. The script below is built from the pathway plan,
+        rights framework, and ecosystem integration docs.
+      </p>
+      <div class="row" style="margin-top:14px;">
+        <button type="button" class="btn btn--primary" id="btnReadAloud">Read Aloud</button>
+        <button type="button" class="btn" id="btnPauseReadAloud">Pause</button>
+        <button type="button" class="btn" id="btnStopReadAloud">Stop</button>
+        <button type="button" class="btn" id="btnListenDone">Mark listen complete</button>
+      </div>
+      <p class="status" id="readStatus" aria-live="polite">Ready to read the Phase 4 script aloud.</p>
+      <div id="readScript" class="script">
+        <p>
+          Phase 4 is where participation becomes a responsible next step. The pathway plan names the goal directly:
+          creators should understand what is being proposed, what is still experimental, and what review is required before anything becomes public.
+        </p>
+        <p>
+          The rights framework defines the public surface. Creator profiles, intake records, usage notes,
+          reviewer comments, and embeddable galleries turn the campaign into a careful pilot instead of a symbolic one.
+        </p>
+        <p>
+          Ecosystem integration makes every division accountable for a clear support role. Lumina can shape branded
+          collaboration notes, EchoVerse can explore audio fit, Nexus can power dashboards and consent records, Summit can support
+          education, Vespera can handle publication review, and Horizon can support visual capture when rights are clear.
+        </p>
+        <p>
+          Your role is to keep those mechanisms legible. Route the creator to the right lane, match the artifact to
+          the reviewer path, and keep the metrics honest. If the work scales but creator equity disappears, the system failed.
+        </p>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Slides">
+      <h2>Slides</h2>
+      <p class="eyebrow" id="slideTitle">From interest to next step</p>
+      <div id="slides" class="slides">
+        <div class="slide is-active" data-title="From interest to next step">
+          <div class="slide-visual" data-slide-art="s1" aria-hidden="true"></div>
+          <p class="sub">
+            A pilot pathway means the movement can support creators responsibly, not just inspire them narratively.
+          </p>
+          <div class="note-grid">
+            <article class="mini"><strong>Possible future paths.</strong> Profiles, workshops, remixes, learning sessions, publication drafts.</article>
+            <article class="mini"><strong>Pilot signals.</strong> Consent, follow-up interest, partner fit, readiness, satisfaction.</article>
+            <article class="mini"><strong>Rule.</strong> Every next step has to stay aligned with creative equity.</article>
+          </div>
+        </div>
+        <div class="slide" data-title="Pathway mechanics">
+          <div class="slide-visual" data-slide-art="s2" aria-hidden="true"></div>
+          <p class="sub">
+            The pathway model is the operating center of gravity for Phase 4.
+          </p>
+          <div class="note-grid">
+            <article class="mini"><strong>Profiles.</strong> Creator story, consent status, support needs, and public-ready assets.</article>
+            <article class="mini"><strong>Infrastructure.</strong> Intake, review, attribution, comments, and embeddable galleries.</article>
+            <article class="mini"><strong>Auditability.</strong> Decision trails and rights clarity reduce drift.</article>
+          </div>
+        </div>
+        <div class="slide" data-title="Division pathway map">
+          <div class="slide-visual" data-slide-art="s3" aria-hidden="true"></div>
+          <p class="sub">
+            Every division should produce a clear support or learning outcome, not a vague contribution.
+          </p>
+          <div class="note-grid">
+            <article class="mini"><strong>Lumina / EchoVerse.</strong> Spotlight ideas and audio collaboration review.</article>
+            <article class="mini"><strong>Nexus / Summit.</strong> Platform analytics, learning sessions, and readiness checks.</article>
+            <article class="mini"><strong>Vespera / Horizon.</strong> Publication options, artist stories, shoots, and gallery conversations.</article>
+          </div>
+        </div>
+        <div class="slide" data-title="Operator role">
+          <div class="slide-visual" data-slide-art="s4" aria-hidden="true"></div>
+          <p class="sub">
+            The operator’s job is to maintain fit between lane, artifact, reviewer, and proof.
+          </p>
+          <div class="note-grid">
+            <article class="mini"><strong>Route correctly.</strong> Put work into the right next-step path.</article>
+            <article class="mini"><strong>Prove clearly.</strong> Artifacts must match the stated next step.</article>
+            <article class="mini"><strong>Protect equity.</strong> Growth is valid only if creators understand and benefit from it.</article>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="margin-top:14px;">
+        <button type="button" class="btn" id="btnSlidePrev">Previous</button>
+        <button type="button" class="btn btn--primary" id="btnSlideNext">Next</button>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Built from">
+      <h2>Built From</h2>
+      <ul class="source-list">
+        <li><code>The_Art_Localized_Phase4_Pack_AVHQ/conversion-plan.md</code> as source material for future pathway questions and pilot-safe signals.</li>
+        <li><code>The_Art_Localized_Phase4_Pack_AVHQ/marketplace-framework.md</code> as source material for rights, profiles, and review mechanics.</li>
+        <li><code>The_Art_Localized_Phase4_Pack_AVHQ/ecosystem-integration.md</code> for division-by-division support roles.</li>
+      </ul>
+    </section>
+
+    <section class="panel" aria-label="Field guide">
+      <h2>Field guide</h2>
+      <p class="sub">
+        Use this when turning attention into a profile, workshop, partner conversation, publication draft, or future pathway.
+        A next step is only good if the creator understands the terms and benefits from the outcome.
+      </p>
+      <div class="field-guide">
+        <article class="guide-card"><strong>Pick the smallest honest next step.</strong> Do not force every artist into a public launch. Some launches should route to a workshop, partner conversation, publication review, showcase note, or profile page first.</article>
+        <article class="guide-card"><strong>Name the rights boundary.</strong> Before public use enters the system, clarify ownership, usage rights, revocation path, attribution, and what AI-assisted assets can or cannot be reused for.</article>
+        <article class="guide-card"><strong>Review the equity outcome.</strong> Ask: who benefits, who gets credit, who gains audience, who carries risk, and what would make this launch feel extractive?</article>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Engage">
+      <h2>Engage</h2>
+      <form id="engageForm">
+        <p class="sub">Pick the answer that matches the Phase 4 operating model.</p>
+        <label class="choice"><input type="radio" name="engage" value="memory" /> Your role is mostly to keep the idea alive in chat and avoid slowing things down with clear artifacts or routing.</label>
+        <label class="choice"><input type="radio" name="engage" value="routing" data-correct="true" /> Your role is to route creators into the right next-step lane, keep artifacts clear, and preserve equity as the system learns.</label>
+        <div class="row" style="margin-top:14px;">
+          <button type="submit" class="btn btn--primary" id="engageSubmit">Submit Engage</button>
+        </div>
+        <p id="engageHint"></p>
+      </form>
+    </section>
+
+    <section class="panel" aria-label="Proof mission">
+      <h2>Launch readiness mission</h2>
+      <p class="sub">
+        Complete the operator capstone. Choose a creator route, a next-step path, and the equity safeguard that
+        keeps the launch from turning into generic scale.
+      </p>
+      <form id="missionForm">
+        <div class="mission-grid">
+          <label class="mission-field">
+            <span>Creator route</span>
+            <textarea data-proof-field="creatorRoute" placeholder="Who is the creator, what region or community do they represent, and which division owns the next move?"></textarea>
+          </label>
+          <label class="mission-field">
+            <span>Next-step path</span>
+            <textarea data-proof-field="nextStepPath" placeholder="Profile page, workshop, rights review, showcase, publication draft, or partner conversation..."></textarea>
+          </label>
+          <label class="mission-field">
+            <span>Creator-equity safeguard</span>
+            <textarea data-proof-field="creatorEquitySafeguard" placeholder="What protects authorship, consent, compensation, local identity, or review rights?"></textarea>
+          </label>
+        </div>
+        <div class="row" style="margin-top:14px;">
+          <button type="submit" class="btn btn--primary">Record launch readiness proof</button>
+        </div>
+        <p id="missionHint"></p>
+      </form>
+    </section>
+
+    <section class="panel" aria-label="Final assessment">
+      <h2>Final assessment</h2>
+      <p class="sub">
+        Both checks must be correct. The goal is to confirm that you can connect proof, routing, and creator benefit.
+      </p>
+      <form id="finalForm">
+        <p class="final-q">1) Proof beats posture when:</p>
+        <label class="choice"><input type="radio" name="finalA" value="artifact" data-correct="true" /> The artifact, reviewer path, and stated next step all line up with the actual pathway.</label>
+        <label class="choice"><input type="radio" name="finalA" value="appearance" /> The newest-looking deck feels polished enough to stand in for real proof.</label>
+
+        <p class="final-q">2) “Localized” in this journey means:</p>
+        <label class="choice"><input type="radio" name="finalB" value="equity" data-correct="true" /> The system stays tuned to real communities, creators, and review outcomes instead of flattening them into generic scale.</label>
+        <label class="choice"><input type="radio" name="finalB" value="language" /> The project only needs to be translated into another spoken language to count as localized.</label>
+
+        <div class="row" style="margin-top:14px;">
+          <button type="submit" class="btn btn--primary">Submit final assessment</button>
+        </div>
+        <p id="finalHint"></p>
+      </form>
+    </section>
+  </main>
+  <script src="../../../assets/shared/bytecast_loop.js"></script>
+  <script src="../../../assets/shared/art_localized_episode.js"></script>
+</body>
+</html>

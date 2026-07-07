@@ -2,23 +2,23 @@
   "schema": "bytecast-ep-profile-v1",
   "episode": {
     "code": "EP-002",
-    "title": "AeroVista Overview: 7 Divisions + How They Interlock",
+    "title": "AeroVista 7-Division Overview - One ecosystem, shared direction",
     "type": "internal",
-    "date": "2026-02-07",
-    "runtime_target_minutes": 8,
+    "date": "2026-03-25",
+    "runtime_target_minutes": 19,
     "status": "draft"
   },
   "content": {
     "tags": [
       "aerovista",
-      "overview",
       "divisions",
-      "handoffs",
-      "workflow",
-      "recruitment"
+      "hq",
+      "onboarding",
+      "bytecast",
+      "golden-path"
     ],
-    "summary_short": "A high-signal overview of AeroVista’s 7 divisions, what each ships, and how projects flow across the ecosystem.",
-    "summary_long": "Episode 2 makes the AeroVista operating model obvious: each division has clear outputs, and projects move through predictable handoffs. You’ll learn what each division ships (bread & butter), how a Seed becomes a Drop, and where contributors can plug in immediately. Ends with a simple lane-pick quest + an alignment quiz."
+    "summary_short": "What AeroVista is, why the seven divisions are peers, how HQ fits, and how real cross-division work combines learning, engineering, media, publishing, and brand execution.",
+    "summary_long": "EP-002 gives the learner a practical company map. Instead of treating AeroVista as one product, it frames the organization as one platform with seven peer divisions plus HQ for strategy and cross-division alignment. The episode also grounds the model in real combinations a learner can understand quickly: ByteCast and training align naturally with Summit, repeatable tooling aligns with Nexus, publishing and research work align with Vespera, and shared presentation quality depends on Lumina and the rest of the ecosystem working together. Full scene-by-scene copy lives in docs/day1/EP-002_VOICEOVER.md."
   },
   "media": {
     "audio_files": [
@@ -27,116 +27,204 @@
         "label": "Episode audio (main)",
         "required": true
       }
-    ]
+    ],
+    "audio_aac": "aerovista_7_division_overview.aac"
   },
   "slides": [
     {
-      "id": "s1",
-      "title": "The Point",
-      "goal": "Why divisions exist and how to think about them.",
+      "id": "s_open",
+      "title": "EP-002 - AeroVista 7-Division Overview",
+      "goal": "Set the scope: learn the ecosystem shape, not every file and product.",
       "bullets": [
-        "AeroVista is one ecosystem with multiple ship-lanes.",
-        "Divisions protect focus and raise quality.",
-        "Everything ends as a deliverable someone can use."
+        "One ecosystem. Seven divisions. Shared direction.",
+        "The learner goal is orientation: what AeroVista is, why it exists, and how the major lanes fit together.",
+        "This episode turns the company from a vague brand umbrella into a usable mental map."
+      ]
+    },
+    {
+      "id": "s1",
+      "title": "What AeroVista is",
+      "goal": "See the company as one platform with multiple kinds of work.",
+      "bullets": [
+        "AeroVista is not one app or one service. It is a multimedia and technology platform built around creative, technical, and operational lanes.",
+        "The business spans learning, tools, publishing, brand work, audio, interactive media, and real-world capture.",
+        "The useful Day 1 takeaway is simple: one business, many specialized lanes, shared direction."
       ]
     },
     {
       "id": "s2",
-      "title": "7 Divisions — One Breath Each",
-      "goal": "Fast mental map.",
+      "title": "Mission, vision, and philosophy",
+      "goal": "Understand why the ecosystem feels broad by design.",
       "bullets": [
-        "NeXuS TechWorks: build the systems and glue.",
-        "SkyForge: interactive experiences and quests.",
-        "EchoVerse: music, sound design, audio tooling.",
-        "Summit: teaching packs and training systems.",
-        "Lumina: branding, visuals, launch kits.",
-        "Vespera: docs, books/courses, packaged knowledge.",
-        "Horizon: drone/capture, mapping, visual products."
+        "Mission: build emotionally resonant, AI-enhanced entertainment, education, and immersive experiences.",
+        "Vision: become a connected creative ecosystem where gaming, publishing, music, digital media, and learning reinforce each other.",
+        "Philosophy: story first, humans plus AI, and integration instead of isolated silos."
       ]
     },
     {
       "id": "s3",
-      "title": "Bread & Butter Outputs",
-      "goal": "Make outputs concrete.",
+      "title": "The seven divisions (peers + HQ)",
+      "goal": "Learn the structure rule that keeps the map honest.",
       "bullets": [
-        "NeXuS ships apps, APIs, automation, infra hardening.",
-        "SkyForge ships playable pages, minigames, engagement modules.",
-        "EchoVerse ships tracks, stems, cover prompts, visualizers.",
-        "Summit ships curricula, SOPs, onboarding flows.",
-        "Lumina ships brand kits, templates, launch assets.",
-        "Vespera ships structured docs/products people can buy or reuse.",
-        "Horizon ships capture packages (video, maps, 3D, reports)."
+        "Nexus, EchoVerse, SkyForge, Summit, Lumina, Vespera, and Horizon are peer divisions, not subfolders under one master lane.",
+        "AeroVista HQ sits at the center for strategy, brand oversight, and cross-division operations.",
+        "That parity matters because learners need to expect collaboration across peers, not a fake hierarchy."
       ]
     },
     {
       "id": "s4",
-      "title": "How They Interlock",
-      "goal": "Show the handoff model.",
+      "title": "Nexus TechWorks",
+      "goal": "Recognize the engineering and systems lane.",
       "bullets": [
-        "NeXuS provides the platform + deployment lane.",
-        "SkyForge turns ideas into interactive experiences.",
-        "EchoVerse gives it a soundtrack + vibe memory.",
-        "Lumina makes it look like a real product.",
-        "Summit documents + teaches it once for reuse.",
-        "Vespera packages the knowledge for distribution.",
-        "Horizon adds real-world capture when needed."
+        "Nexus covers apps, SaaS, automation, AI systems, architecture, and operational tooling.",
+        "If a workflow needs a repeatable system, platform shell, or technical backbone, Nexus is a natural builder home.",
+        "In the learner's world, Seed Builder and other repeatable tooling patterns make the Nexus lane easier to recognize."
       ]
     },
     {
       "id": "s5",
-      "title": "Example Flow: Seed → Drop",
-      "goal": "One canonical pipeline.",
+      "title": "EchoVerse Audio",
+      "goal": "Understand the audio lane as both product and platform capability.",
       "bullets": [
-        "Seed: single-file demo + clear intent + fast ship.",
-        "Signal: feedback (people finish it, share it, remember it).",
-        "Scale: graduate into a Drop (multi-file bundle, docs, polish).",
-        "Repeat: winners become products; everything else becomes lessons."
+        "EchoVerse covers music, sound design, licensing, listening experiences, and collaborative audio workflows.",
+        "This lane is not just songs; it is audio as an experience layer and product surface.",
+        "When AeroVista turns sound into a reusable audience or platform experience, EchoVerse is part of that story."
       ]
     },
     {
       "id": "s6",
-      "title": "Recruitment: Where You Plug In",
-      "goal": "Make joining obvious.",
+      "title": "SkyForge Creative Studios",
+      "goal": "See the immersive and interactive lane clearly.",
       "bullets": [
-        "Pick a lane: build / design / audio / docs / interactive.",
-        "Ship one improvement: problem → impact → fix.",
-        "Earn trust through proof-of-work, not permission."
+        "SkyForge is the home for games, interactive storytelling, AR, VR, and immersive worlds.",
+        "It represents the platform's move from content into playable or experiential spaces.",
+        "When AeroVista needs worldbuilding, play, and interactive narrative, SkyForge is a key engine."
       ]
     },
     {
       "id": "s7",
-      "title": "What’s Next",
-      "goal": "Tease division deep dives.",
+      "title": "Summit Learning",
+      "goal": "Anchor the education lane and connect ByteCast back to the bigger company map.",
       "bullets": [
-        "Next: division ByteCasts — deeper workflows + starter tasks.",
-        "Each division gets quests + badges + repeatable templates.",
-        "You won’t be confused — you’ll have a lane."
+        "Summit covers courses, learning systems, AI training, knowledge management, and structured education experiences.",
+        "ByteCast sits naturally in this learning lane because it teaches, checks understanding, and routes people into stronger proof.",
+        "This matters because the training system is not a side project; it belongs inside a company that treats learning as a first-class product."
+      ]
+    },
+    {
+      "id": "s8",
+      "title": "Lumina Creative Media",
+      "goal": "Understand the brand and presentation layer.",
+      "bullets": [
+        "Lumina handles branding, presentation systems, marketing materials, launch polish, and audience-facing coherence.",
+        "It helps the ecosystem feel trustworthy and recognizable across many surfaces.",
+        "When work from multiple divisions has to read like one company, Lumina helps hold the line."
+      ]
+    },
+    {
+      "id": "s9",
+      "title": "Vespera Publishing",
+      "goal": "Recognize the structured writing and publishing lane.",
+      "bullets": [
+        "Vespera covers books, formatted content, editorial flow, research packaging, and publishable written output.",
+        "It gives shape, order, and delivery to ideas that start as drafts or knowledge assets.",
+        "When a learning or story project needs durable written form, Vespera often joins the stack."
+      ]
+    },
+    {
+      "id": "s10",
+      "title": "Horizon Aerial & Visual",
+      "goal": "Remember that AeroVista reaches into real-world capture too.",
+      "bullets": [
+        "Horizon covers drone work, aerial products, mapping, cinematography, and visual capture.",
+        "It gives the ecosystem a physical-world media arm instead of limiting everything to digital-only output.",
+        "That broadened capability helps explain why the overall platform feels larger than a software shop."
+      ]
+    },
+    {
+      "id": "s11",
+      "title": "Why HQ matters",
+      "goal": "See HQ as the strategic center, not a vague label.",
+      "bullets": [
+        "HQ aligns strategy, brand, and cross-division operations so the platform moves as one business.",
+        "Its job is not to erase division identity; it is to keep shared direction from dissolving into drift.",
+        "The fast summary is: seven lanes, one platform, one strategic center."
+      ]
+    },
+    {
+      "id": "s12",
+      "title": "Cross-division collaboration",
+      "goal": "Treat collaboration as normal, not special-case.",
+      "bullets": [
+        "Shared technology, shared components, billing, brand systems, and coordinated execution are part of the platform model.",
+        "A learning product can involve Summit for curriculum, Nexus for systems, and Vespera for structured written output.",
+        "A launch can combine Lumina for presentation, EchoVerse for audio, and Nexus or SkyForge for the technical surface."
+      ]
+    },
+    {
+      "id": "s13",
+      "title": "The visual mental map",
+      "goal": "Keep the map stable even when the project list changes.",
+      "bullets": [
+        "Think AeroVista home first, then peer divisions, then apps, projects, and offers beneath each lane.",
+        "The learner does not need every filename; the learner needs the shape of the ecosystem and how the lanes relate.",
+        "Once that frame is stable, later tool- or project-level details stop feeling random."
+      ]
+    },
+    {
+      "id": "s14",
+      "title": "Why this matters to a learner",
+      "goal": "Connect company context to lower confusion later.",
+      "bullets": [
+        "People get lost when they meet tools before they understand the organization behind them.",
+        "This map reduces that drift by showing which lane owns what kind of outcome.",
+        "It also prepares the learner to understand why later episodes care about doors, truth boundaries, and ownership."
+      ]
+    },
+    {
+      "id": "s15",
+      "title": "Quick recap",
+      "goal": "Lock the company map before Engage.",
+      "bullets": [
+        "AeroVista is a unified platform, not one isolated product.",
+        "The seven divisions are peers, HQ aligns the system, and value comes from integration as much as specialization.",
+        "ByteCast lives inside a broader organization that combines learning, engineering, brand, publishing, audio, interactive work, and capture."
+      ]
+    },
+    {
+      "id": "s16",
+      "title": "Before you continue",
+      "goal": "Self-check before the doors episode.",
+      "bullets": [
+        "Explain AeroVista in one sentence and name all seven divisions.",
+        "Name one division that naturally fits learning, one that fits tooling, and one that fits durable publishing output.",
+        "Next: EP-003 teaches where to go for which job once you know the company map."
       ]
     }
   ],
   "engagement": {
     "quest": {
-      "title": "Pick Your Lane (Starter Quest)",
+      "title": "EP-002 ecosystem checklist",
       "items": [
         {
           "id": "q1",
-          "text": "Finish the slides (reach ‘What’s Next’)."
+          "text": "Use Listen and move through the slide deck through Quick recap."
         },
         {
           "id": "q2",
-          "text": "Pick a division lane you want to contribute to."
+          "text": "Pick three divisions and state one type of outcome each division is built to own."
         },
         {
           "id": "q3",
-          "text": "Choose 1 starter output you can ship in 30–90 minutes."
+          "text": "Describe one realistic cross-division combination, such as learning plus tooling plus publishing."
         },
         {
           "id": "q4",
-          "text": "Write it clean: problem → impact → fix (or build → test → deliver)."
+          "text": "Say aloud why division parity matters more than memorizing every current project."
         }
       ],
       "reward_badge": {
-        "label": "LANE LOCKED",
+        "label": "ECOSYSTEM MAP",
         "style": "neon"
       }
     },
@@ -145,98 +233,93 @@
       "pass_threshold": 0.8,
       "questions": [
         {
-          "id": "k1",
-          "q": "The core purpose of divisions is to:",
+          "id": "ep2_q1_aerovista_is",
+          "q": "AeroVista is:",
           "choices": [
-            "Create silos",
-            "Protect focus and ship clearer outputs",
-            "Make org charts",
-            "Avoid collaboration"
+            "one single product",
+            "a unified creative and technology ecosystem",
+            "a docs archive"
           ],
           "answer_index": 1,
-          "explain": "Divisions protect focus while still supporting clean handoffs."
+          "explain": "The company is framed as one connected platform with multiple specialized lanes."
         },
         {
-          "id": "k2",
-          "q": "A Seed is best described as:",
+          "id": "ep2_q2_divisions_structure",
+          "q": "The core divisions are:",
           "choices": [
-            "A full product",
-            "A fast, portable demo with clear intent",
-            "A marketing campaign",
-            "A private server-only app"
+            "stacked under one master division",
+            "peers at the top level",
+            "temporary project groups"
           ],
           "answer_index": 1,
-          "explain": "Seeds ship quickly and stay portable (often single-file)."
+          "explain": "Division parity is part of the organizational model."
         },
         {
-          "id": "k3",
-          "q": "Which division is most responsible for playable web experiences?",
+          "id": "ep2_q3_hq_role",
+          "q": "AeroVista HQ is responsible for:",
           "choices": [
-            "Vespera",
-            "SkyForge",
-            "Horizon",
-            "Summit"
-          ],
-          "answer_index": 1,
-          "explain": "SkyForge builds interactive experiences, quests, and mini-games."
-        },
-        {
-          "id": "k4",
-          "q": "The best recruitment signal inside AeroVista is:",
-          "choices": [
-            "A promise",
-            "A big resume",
-            "Proof-of-work",
-            "A perfect plan"
+            "only audio production",
+            "only engineering",
+            "strategy, brand oversight, and cross-division operations"
           ],
           "answer_index": 2,
-          "explain": "Small shipped wins get noticed and trusted."
+          "explain": "HQ aligns the business while divisions own their lanes."
         },
         {
-          "id": "k5",
-          "q": "The Seed → Drop flow includes:",
+          "id": "ep2_q4_collaboration",
+          "q": "Cross-division collaboration is:",
           "choices": [
-            "Seed → Ignore",
-            "Seed → Signal → Scale",
-            "Seed → NDA → Launch",
-            "Seed → Rewrite forever"
+            "accidental",
+            "part of the platform model",
+            "not important early on"
           ],
           "answer_index": 1,
-          "explain": "We ship, measure signal, and scale winners."
+          "explain": "Shared systems and coordinated work are structural, not incidental."
+        },
+        {
+          "id": "ep2_q5_combo",
+          "q": "Which combination best fits a ByteCast-like learning product with durable written output?",
+          "choices": [
+            "Summit, Nexus, and Vespera",
+            "Horizon only",
+            "EchoVerse only"
+          ],
+          "answer_index": 0,
+          "explain": "Learning, systems, and publishable structured content often combine across those lanes."
         }
       ]
     }
   },
   "aerovista_about": {
-    "summary": "AeroVista is a multi-division creative + engineering ecosystem shipping reusable experiences that blend software, storytelling, automation, music, and design.",
+    "summary": "AeroVista is a unified multimedia and technology platform: seven peer divisions with AeroVista HQ for strategy, brand, and cross-division operations.",
     "divisions": [
       {
-        "name": "NeXuS TechWorks",
-        "bread_and_butter": "Full-stack engineering, offline-first apps, automation pipelines, DevOps, security hardening."
-      },
-      {
-        "name": "SkyForge Creative Studios",
-        "bread_and_butter": "Interactive builds: playable sites, quests, AR/VR concepts, narrative experiences."
+        "name": "Nexus TechWorks",
+        "bread_and_butter": "AI and technology: apps, SaaS, automation, architecture, cloud-backed systems."
       },
       {
         "name": "EchoVerse Audio",
-        "bread_and_butter": "Music production, sound design, album worlds, audio tooling, interactive player drops."
+        "bread_and_butter": "Music, sound design, licensing, collaborative audio, and listening experiences."
+      },
+      {
+        "name": "SkyForge Creative Studios",
+        "bread_and_butter": "Games, interactive storytelling, AR/VR, and immersive worlds."
       },
       {
         "name": "Summit Learning",
-        "bread_and_butter": "Teaching systems, tutorials, internal training, playbooks, skill paths."
+        "bread_and_butter": "Courses, learning systems, AI training, and knowledge management."
       },
       {
-        "name": "Lumina Creative",
-        "bread_and_butter": "Branding, visuals, marketing assets, launch kits, content strategy."
+        "name": "Lumina Creative Media",
+        "bread_and_butter": "Branding, design systems, social, marketing, and visual presentation."
       },
       {
         "name": "Vespera Publishing",
-        "bread_and_butter": "Digital content, books/courses, structured knowledge products."
+        "bread_and_butter": "Books, formatting, research content, and publishing workflows."
       },
       {
         "name": "Horizon Aerial & Visual",
-        "bread_and_butter": "Drone cinematography, mapping, 3D capture, real estate/ag/visual products."
+        "bread_and_butter": "Drone photography, aerial products, cinematography, mapping, and capture."
       }
     ]
   }

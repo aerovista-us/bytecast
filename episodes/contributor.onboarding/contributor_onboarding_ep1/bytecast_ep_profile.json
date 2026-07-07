@@ -1,0 +1,100 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "episode": {
+    "code": "CO-EP-1",
+    "title": "Contributor Onboarding — Ep 1 — Fit and Mutual Expectations",
+    "type": "training",
+    "date": "2026-03-30",
+    "runtime_target_minutes": 5,
+    "status": "active"
+  },
+  "content": {
+    "tags": ["contributor-onboarding", "fit", "expectations", "question-quality"],
+    "summary_short": "The fit pass is about working style: small changes, self-guidance, clean questions, and respect for boundaries.",
+    "summary_long": "AeroVista is explicit about fit so nobody wastes time. The right match is someone who can ship small, stay inside scope, ask clear questions, and treat boundaries seriously."
+  },
+  "training": {
+    "eyebrow": "Fit Check",
+    "chips": ["Mutual fit", "Self-guidance", "Preview baseline", "Question quality", "Signal, not access"],
+    "sources": [
+      "episodes/contributor.onboarding/fit.html",
+      "episodes/contributor.onboarding/founder_welcome.html",
+      "episodes/contributor.onboarding/docs/CONTRIBUTING.md"
+    ],
+    "transcript": [
+      "The fit process is not meant to be weird gatekeeping. It is there to surface working style early, before anyone commits time under the wrong assumptions.",
+      "AeroVista tends to work well for people who like small, reviewable changes, who can explain what changed and how to test it, and who ask where the source of truth is before building on vibes.",
+      "A strong contributor does not just ask more questions; they ask sharper questions. Useful questions name the source of truth, the example to mirror, the out-of-scope line, and what done should look like.",
+      "It is a bad fit for people who need constant direction, who prefer giant surprise refactors, or who treat security boundaries like optional suggestions.",
+      "The Crew Check reflects that. It is not measuring IQ. It is measuring whether you can self-guide, follow clear rules, and move responsibly in a real repository.",
+      "Passing the check creates a signal packet. It does not create automatic access. The follow-up still depends on current needs, scope alignment, and founder review."
+    ],
+    "slides": [
+      {
+        "id": "s1",
+        "title": "Mutual fit, not gatekeeping",
+        "body": "The point of the fit pass is to make expectations explicit before work starts.",
+        "notes": [
+          "Good fit saves time for both sides.",
+          "The process exists to reduce ambiguity, not to add ceremony.",
+          "Clarity early prevents friction later."
+        ]
+      },
+      {
+        "id": "s2",
+        "title": "What tends to work here",
+        "body": "AeroVista favors contributors who can self-guide, ship small, and document just enough.",
+        "notes": [
+          "One task to one PR is normal here.",
+          "Clean questions beat silent guessing.",
+          "Preview validation is part of the standard."
+        ]
+      },
+      {
+        "id": "s3",
+        "title": "What usually fails the fit",
+        "body": "Surprise scope changes, handholding dependence, and casual boundary handling create drag fast.",
+        "notes": [
+          "No stealth refactors.",
+          "No vibes-only work.",
+          "No casual handling of secrets or restricted systems."
+        ]
+      },
+      {
+        "id": "s4",
+        "title": "Crew Check is signal",
+        "body": "Passing proves self-guidance and effort. It does not grant automatic membership or access.",
+        "notes": [
+          "Badge plus packet create a clean founder review input.",
+          "The next step is follow-up, not instant permissions.",
+          "Signal matters because it is grounded in behavior."
+        ]
+      },
+      {
+        "id": "s5",
+        "title": "Question quality is work quality",
+        "body": "A good question narrows risk: source of truth, example to mirror, out-of-scope line, and done-state.",
+        "notes": [
+          "Do not ask the founder to re-explain what a file or template already answers.",
+          "Do ask when source of truth, acceptance criteria, or access boundaries are unclear.",
+          "Bring a proposed safe next step with the question."
+        ]
+      }
+    ],
+    "engage": {
+      "prompt": "Which contributor behavior best matches the AeroVista fit standard?",
+      "options": [
+        {
+          "label": "Ship small, stay inside scope, ask clear source-of-truth questions, and respect review and boundaries.",
+          "correct": true
+        },
+        {
+          "label": "Start with a large rewrite to show initiative, then explain the details after merge."
+        },
+        {
+          "label": "Wait for constant live direction instead of making progress with clear prompts and examples."
+        }
+      ]
+    }
+  }
+}

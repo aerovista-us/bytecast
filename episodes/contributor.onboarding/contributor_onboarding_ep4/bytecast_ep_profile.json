@@ -1,0 +1,186 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "episode": {
+    "code": "CO-EP-4",
+    "title": "Contributor Onboarding — Ep 4 — Crew Check and Final Readiness",
+    "type": "training",
+    "date": "2026-03-30",
+    "runtime_target_minutes": 7,
+    "status": "active"
+  },
+  "content": {
+    "tags": ["contributor-onboarding", "crew-check", "final"],
+    "summary_short": "The Crew Check, badge, and follow-up packet turn readiness into proof, but they do not replace scope review, access control, or human trust-building.",
+    "summary_long": "The final step is to prove readiness in the same way the project expects real work to be proven: with explicit answers, clean proof, founder review, and a realistic first-scope request."
+  },
+  "training": {
+    "eyebrow": "Crew Check + Final Readiness",
+    "chips": ["80% to pass", "Badge + packet", "Founder review", "First-scope request", "Proof before access"],
+    "sources": [
+      "episodes/contributor.onboarding/quiz.html",
+      "episodes/contributor.onboarding/badge.html",
+      "episodes/contributor.onboarding/founder_welcome.html",
+      "episodes/contributor.onboarding/fit.html"
+    ],
+    "transcript": [
+      "The Crew Check is the readiness gate for this onboarding flow. It tests whether a contributor can read the operating rules, understand the lanes, and choose the safe move when scope or risk changes.",
+      "The pass mark is eighty percent. Passing unlocks a badge and a follow-up packet that can be pasted into a discussion or issue for founder review.",
+      "That badge is not access control. It is a signal. The packet still needs practical details such as lane interest, availability, examples of work, and anything the founder should know before assigning real scope.",
+      "The safest first ask is small and reviewable. A contributor who asks for a narrow docs update, copy pass, JSON cleanup, or UI polish task is easier to trust than one asking to touch auth, deployment, secrets, or production data on day one.",
+      "This matters because proof is the pattern everywhere in AeroVista. The same mindset used for quizzes, work orders, and Definition of Done also applies to onboarding itself.",
+      "Final readiness means you understand the ecosystem, respect the boundaries, communicate honestly, and know that trust is built through clean proof instead of assumptions."
+    ],
+    "slides": [
+      {
+        "id": "s1",
+        "title": "Crew Check proves self-guidance",
+        "body": "The quiz measures rule-following, lane awareness, and self-guided judgment in realistic repo scenarios.",
+        "notes": [
+          "Pass threshold is 80 percent.",
+          "The point is behavior, not trivia.",
+          "It checks whether the contributor can choose the safe move."
+        ]
+      },
+      {
+        "id": "s2",
+        "title": "Badge is signal, not access",
+        "body": "A pass creates a badge and proof packet, but permissions and real scope still come through review.",
+        "notes": [
+          "Passing does not auto-grant repo or production access.",
+          "The badge helps the founder scan readiness quickly.",
+          "Signal is useful because it is grounded in explicit proof."
+        ]
+      },
+      {
+        "id": "s3",
+        "title": "Follow-up packet needs specifics",
+        "body": "The request packet should show lane interest, availability, links, and any relevant context for scope matching.",
+        "notes": [
+          "Concrete packet details reduce back-and-forth.",
+          "Good follow-up still respects current needs and timing.",
+          "This is where alignment replaces assumption."
+        ]
+      },
+      {
+        "id": "s4",
+        "title": "Ready means safe and reviewable",
+        "body": "Contributor readiness is demonstrated the same way work quality is: with proof, boundaries, and repeatable behavior.",
+        "notes": [
+          "Know the lanes.",
+          "Use work orders and DoD.",
+          "Communicate honestly and leave reviewable proof behind."
+        ]
+      },
+      {
+        "id": "s5",
+        "title": "Ask for first scope wisely",
+        "body": "The best first task is narrow, low-risk, and easy to review. It proves judgment before permissions expand.",
+        "notes": [
+          "Good first scope: docs, copy, styling polish, non-prod JSON, or clear QA notes.",
+          "Bad first scope: secrets, deployment, auth, billing, or production data.",
+          "Trust grows when the first request is modest and specific."
+        ]
+      }
+    ],
+    "engage": {
+      "prompt": "What happens after a contributor passes Crew Check?",
+      "options": [
+        {
+          "label": "They unlock a badge and follow-up packet for founder review, but not automatic access.",
+          "correct": true
+        },
+        {
+          "label": "They automatically gain access to restricted systems because the quiz replaces review."
+        },
+        {
+          "label": "They can skip work orders because the onboarding itself proves future scope."
+        }
+      ]
+    },
+    "final_assessment": {
+      "intro": "Pass every final check to record contributor onboarding readiness for this browser.",
+      "questions": [
+        {
+          "name": "co_final_q1",
+          "prompt": "A task touches auth or deployment pipelines. What is the correct handling?",
+          "options": [
+            {
+              "label": "Prepare the plan or safe patch, then escalate because founder executes the final Lane C change.",
+              "correct": true
+            },
+            {
+              "label": "Ship it directly if the diff looks small."
+            },
+            {
+              "label": "Treat it as Lane A if the deadline is tight."
+            }
+          ]
+        },
+        {
+          "name": "co_final_q2",
+          "prompt": "What is the baseline for calling work done?",
+          "options": [
+            {
+              "label": "It works in preview, matches acceptance criteria, includes test notes, and includes a short docs note.",
+              "correct": true
+            },
+            {
+              "label": "It runs locally on one machine."
+            },
+            {
+              "label": "It merged, so review details are optional."
+            }
+          ]
+        },
+        {
+          "name": "co_final_q3",
+          "prompt": "What should an Honest Helper ask for when the start point is unclear?",
+          "options": [
+            {
+              "label": "Source of truth, an example, and what done looks like.",
+              "correct": true
+            },
+            {
+              "label": "Only a deadline, because speed matters most."
+            },
+            {
+              "label": "Permission to refactor broadly so the system makes sense."
+            }
+          ]
+        },
+        {
+          "name": "co_final_q4",
+          "prompt": "What does passing Crew Check grant?",
+          "options": [
+            {
+              "label": "A strong signal and a follow-up packet for review, not automatic access.",
+              "correct": true
+            },
+            {
+              "label": "Immediate access to restricted systems."
+            },
+            {
+              "label": "An exemption from work orders and review."
+            }
+          ]
+        },
+        {
+          "name": "co_final_q5",
+          "prompt": "What is the best first real task request after onboarding?",
+          "options": [
+            {
+              "label": "A narrow, low-risk task with clear files, acceptance criteria, and review path.",
+              "correct": true
+            },
+            {
+              "label": "A broad refactor so the contributor can prove speed immediately."
+            },
+            {
+              "label": "A production credential or deployment change because the badge proves access."
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

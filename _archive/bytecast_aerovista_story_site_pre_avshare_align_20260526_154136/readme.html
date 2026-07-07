@@ -1,0 +1,143 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ByteCast AeroVista Story Build | ByteCast</title><meta name="description" content="This project now builds the local markdown library into themed HTML pages."><link rel="stylesheet" href="assets/styles.css"></head><body class="grid-bg" style="--bg:#061118;--bg-soft:#0d1d29;--panel:rgba(7, 20, 30, 0.76);--panel-soft:rgba(11, 31, 46, 0.72);--text:#f6fbff;--muted:#b7c9d6;--accent:#6fe3ff;--accent-alt:#ff8d6f;--line:rgba(111, 227, 255, 0.28);--glow:rgba(111, 227, 255, 0.28)"><div class="orb one"></div><div class="orb two"></div><div class="orb three"></div><div class="scroll-progress" aria-hidden="true"><span data-scroll-progress></span></div>
+<nav class="nav"><div class="nav-inner"><a class="brand" href="index.html"><span class="apex">Λ</span><span>ByteCast · AeroVista</span></a><div class="nav-links"><a href="index.html">Home</a><a href="site-map.html">Map</a><a href="updated-master-blueprint-v2.html">Prev</a></div></div></nav>
+<main>
+<section class="hero wrap hero-cinematic" id="top"><div class="hero-visual hero-visual-soft" aria-hidden="true"><svg viewBox="0 0 520 420" class="hero-svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="grid-readme" x1="0%" x2="100%">
+          <stop offset="0%" stop-color="var(--accent)" />
+          <stop offset="100%" stop-color="var(--accent-alt)" />
+        </linearGradient>
+      </defs>
+      <g class="motion-grid">
+        <path d="M40 70 H480 M40 140 H480 M40 210 H480 M40 280 H480 M40 350 H480" />
+        <path d="M100 30 V390 M180 30 V390 M260 30 V390 M340 30 V390 M420 30 V390" />
+      </g>
+      <path class="motion-rift" d="M120 55 L205 130 L160 210 L280 280 L235 370" />
+      <circle class="motion-node" cx="205" cy="130" r="9" />
+      <circle class="motion-node" cx="280" cy="280" r="11" />
+    </svg></div><div><div class="eyebrow">Project notes</div><h1 class="title">ByteCast AeroVista Story Build</h1><p class="subtitle">This project now builds the local markdown library into themed HTML pages.</p><div class="quote" id="hero-read">```powershell node scripts/build-site. mjs ``` Optional link check (especially useful while refining Acts 1-3): ```powershell node -e &quot;const fs=require('fs'),p=require('path');const root=process. cwd();const files=fs. readdirSync(root).</div><div class="actions"><button class="btn primary" data-play-narration data-title="ByteCast AeroVista Story Build" data-audio-sources="" data-narration-source="#narration-readme">▶ Play narration</button><a class="btn ghost" href="#story">Jump to content</a></div></div></section>
+<section class="wrap section" id="story"><div class="panel" style="margin-top:18px"><h2>Opening Sequence</h2><div class="scene"><p>This project now builds the local markdown library into themed HTML pages.</p></div></div>
+<div class="panel" style="margin-top:18px"><h2>What changed</h2><div class="scene"><ul><li>Every root-level .md file is converted into its own .html page.</li><li>The generated pages use animated SVG hero visuals chosen from the content theme.</li><li>Narration quality is improved with a premium TTS build path plus a browser fallback.</li><li>Generated pages now include a top reading-progress indicator and a floating back-to-top control for long-form readability.</li><li>index.html becomes a generated library landing page instead of a hand-maintained page.</li><li>Starter-site UI patterns are supported alongside the generated layout so older pages can keep working (navigation/button/audio markup compatibility).</li><li>The generated site theme now defaults to the starter-set cinematic palette + typography, while keeping the existing SVG motion system and chapter layout.</li><li>Document-page nav now includes direct links back to the act hub (act-N.html) and the global site map.</li></ul></div></div>
+<div class="panel" style="margin-top:18px"><h2>Build</h2><div class="scene"><p>Run:</p>
+<p>```powershell node scripts/build-site.mjs ```</p>
+<p>Optional link check (especially useful while refining Acts 1-3):</p>
+<p>```powershell node -e &quot;const fs=require('fs'),p=require('path');const root=process.cwd();const files=fs.readdirSync(root).filter(f=&gt;f.endsWith('.html'));const set=new Set(files);const scope=files.filter(f=&gt;/^act-(1|2|3)\.html$/.test(f)||/^act-(i|ii|iii)-/.test(f)||/^bytecast-act-[123]-/.test(f));let bad=[];for(const f of scope){const txt=fs.readFileSync(p.join(root,f),'utf8');for(const m of txt.matchAll(/(?:href|src)=\&quot;([^\&quot;]+)\&quot;/g)){const u=m[1];if(/^(https?:|mailto:|#|data:)/i.test(u))continue;const base=u.split('#')[0].split('?')[0];if(!base)continue;if(!set.has(base))bad.push(${f} -&gt; ${u});}}if(bad.length){console.log('Broken refs:\\n'+bad.join('\\n'));process.exitCode=1;}else{console.log('No broken local refs in Acts 1-3 scope.');}&quot; ```</p>
+<p>This writes:</p>
+<ul><li>index.html — regenerated each run; nav includes Map → site-map.html</li><li>site-map.html — full route index (landing, hubs, Markdown outputs, stray HTML files on disk); regenerated each run</li><li>one .html page per root .md file (output name = that file’s slug)</li><li>optional generated audio under audio/</li></ul>
+<p>act-1.html … act-8.html are hand-maintained act overviews and are not emitted by the build (they appear on the site map under Act overview hubs).</p></div></div>
+<div class="panel" style="margin-top:18px"><h2>TTS</h2><div class="scene"><p>If OPENAI\_API\_KEY is available, the build script generates narration audio with:</p>
+<ul><li>model: tts-1-hd</li><li>voice: onyx</li><li>slower pacing for a calmer documentary tone</li></ul>
+<p>Optional overrides:</p>
+<ul><li>BYTECAST\_TTS\_MODEL</li><li>BYTECAST\_TTS\_VOICE</li><li>BYTECAST\_TTS\_SPEED</li><li>BYTECAST\_TTS\_FORMAT</li><li>BYTECAST\_TTS\_INSTRUCTIONS</li></ul>
+<p>If no API key is available, the site falls back to browser speech synthesis.</p></div></div>
+<div class="panel" style="margin-top:18px"><h2>Structured episode scripts (Markdown → HTML)</h2><div class="scene"><p>Canonical template (copy for new episodes): docs/episode-format-template.md — includes required ACT/title/subtitle lines plus the full [STYLE] → [INTRO] → sections → [CLOSING] pattern.</p>
+<p>Voice-script Markdown can use segment markers so pages render as stacked cards instead of one wall of text. When the body contains markers such as [INTRO], [SECTION: Title], [CLOSING], [STYLE], or [CORE REALIZATION], the build uses the structured parser:</p>
+<ul><li>--- → subtle divider inside the segment</li><li>[pause], [long pause], [slow], [whisper], [emphasis] → not shown on the page; not spoken by narration (timing hints for recording / Suno only; stripped from generated narration text if they appear inline)</li><li>Three or more short consecutive lines (≤3 words each, no terminal punctuation) → rhythm list styling</li><li>[STYLE] blocks → kept in the .md file for Suno/production notes; omitted from narration output and hidden in generated HTML pages</li></ul>
+<p>Legacy voice scripts without those markers keep the previous panel + paragraph layout.</p></div></div>
+<div class="panel" style="margin-top:18px"><h2>Act overview alignment</h2><div class="scene"><p>Manual act-1.html … act-8.html pages (plus index.html act cards and getActInfo() in scripts/build-site.mjs) follow Updated Master Blueprint v2 (Updated Master Blueprint v2.md) for titles, themes, purposes, and episode lists. Episode pages themselves are unchanged until content passes editorial; mismatches between a filename and blueprint episode title are called out when shipping those episodes.</p></div></div>
+<div class="panel" style="margin-top:18px"><h2>Notes</h2><div class="scene"><ul><li>Generated audio is labeled in-page as AI-generated.</li><li>The build script caches audio per page using a content signature in audio/&lt;slug&gt;/meta.json.</li><li>Narration triggers supported:</li></ul>
+<ul><li>data-play-narration (generated pages)</li><li>data-read / data-read-target (legacy starter pages)</li></ul></div></div></section>
+</main>
+<template id="narration-readme">Project notes
+
+ByteCast AeroVista Story Build
+
+This project now builds the local markdown library into themed HTML pages.
+
+What changed
+
+Every root. level.md file is converted into its own.html page.
+
+The generated pages use animated SVG hero visuals chosen from the content theme.
+
+Narration quality is improved with a premium TTS build path plus a browser fallback.
+
+Generated pages now include a top reading. progress indicator and a floating back. to. top control for long. form readability.
+
+index.html becomes a generated library landing page instead of a hand. maintained page.
+
+Starter. site UI patterns are supported alongside the generated layout so older pages can keep working (navigation/button/audio markup compatibility).
+
+The generated site theme now defaults to the starter. set cinematic palette + typography, while keeping the existing SVG motion system and chapter layout.
+
+Document. page nav now includes direct links back to the act hub (act. N.html) and the global site map.
+
+Build
+
+Run:
+
+```powershell node scripts/build. site.mjs ```
+
+Optional link check (especially useful while refining Acts 1. 3):
+
+```powershell node. e &quot;const fs=require('fs'),p=require('path');const root=process.cwd();const files=fs.readdirSync(root).filter(f=&gt;f.endsWith('.html'));const set=new Set(files);const scope=files.filter(f=&gt;/^act. (1|2|3)\.html$/.test(f)||/^act. (i|ii|iii). /.test(f)||/^bytecast. act. [123]. /.test(f));let bad=[];for(const f of scope){const txt=fs.readFileSync(p.join(root,f),'utf8');for(const m of txt.matchAll(/(?: href|src)=\&quot;([^\&quot;]+)\&quot;/g)){const u=m[1];if(/^(https?: |mailto: |#|data: )/i.test(u))continue;const base=u.split('#')[0].split('?')[0];if(!base)continue;if(!set.has(base))bad.push(${f}. &gt; ${u});}}if(bad.length){console.log('Broken refs: \\n'+bad.join('\\n'));process.exitCode=1;}else{console.log('No broken local refs in Acts 1. 3 scope.');}&quot; ```
+
+This writes:
+
+index.html — regenerated each run; nav includes Map → site. map.html
+
+site. map.html — full route index (landing, hubs, Markdown outputs, stray HTML files on disk); regenerated each run
+
+one.html page per root.md file (output name = that file's slug)
+
+optional generated audio under audio/
+
+act. 1.html...  act. 8.html are hand. maintained act overviews and are not emitted by the build (they appear on the site map under Act overview hubs).
+
+TTS
+
+If OPENAI\_API\_KEY is available, the build script generates narration audio with:
+
+model: tts. 1. hd
+
+voice: onyx
+
+slower pacing for a calmer documentary tone
+
+Optional overrides:
+
+BYTECAST\_TTS\_MODEL
+
+BYTECAST\_TTS\_VOICE
+
+BYTECAST\_TTS\_SPEED
+
+BYTECAST\_TTS\_FORMAT
+
+BYTECAST\_TTS\_INSTRUCTIONS
+
+If no API key is available, the site falls back to browser speech synthesis.
+
+Structured episode scripts (Markdown → HTML)
+
+Canonical template (copy for new episodes): docs/episode. format. template.md — includes required ACT/title/subtitle lines plus the full [STYLE] → [INTRO] → sections → [CLOSING] pattern.
+
+Voice. script Markdown can use segment markers so pages render as stacked cards instead of one wall of text. When the body contains markers such as [INTRO], [SECTION: Title], [CLOSING], [STYLE], or [CORE REALIZATION], the build uses the structured parser:
+
+... → subtle divider inside the segment
+
+,,,, → not shown on the page; not spoken by narration (timing hints for recording / Suno only; stripped from generated narration text if they appear inline)
+
+Three or more short consecutive lines (≤3 words each, no terminal punctuation) → rhythm list styling
+
+[STYLE] blocks → kept in the.md file for Suno/production notes; omitted from narration output and hidden in generated HTML pages
+
+Legacy voice scripts without those markers keep the previous panel + paragraph layout.
+
+Act overview alignment
+
+Manual act. 1.html...  act. 8.html pages (plus index.html act cards and getActInfo() in scripts/build. site.mjs) follow Updated Master Blueprint v2 (Updated Master Blueprint v2.md) for titles, themes, purposes, and episode lists. Episode pages themselves are unchanged until content passes editorial; mismatches between a filename and blueprint episode title are called out when shipping those episodes.
+
+Notes
+
+Generated audio is labeled in. page as AI. generated.
+
+The build script caches audio per page using a content signature in audio/&lt;slug&gt;/meta.json.
+
+Narration triggers supported:
+
+data. play. narration (generated pages)
+
+data. read / data. read. target (legacy starter pages)</template>
+<div class="audio-bar" data-audio-bar hidden><button class="btn" data-stop>Stop</button><div class="audio-title" data-audio-title>ByteCast narration</div><div class="progress"><span data-progress-fill></span></div></div>
+<footer class="footer">Source: README.md</footer><button class="to-top" type="button" data-to-top aria-label="Back to top">Top</button><script src="assets/app.js"></script></body></html>

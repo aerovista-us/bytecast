@@ -1,0 +1,9 @@
+{
+  "schema": "bytecast-episode-sot-v1",
+  "slug": "training_missions",
+  "title": "Training Missions",
+  "type": "mission-hub",
+  "status": "active",
+  "entry": "index.html",
+  "owner": "Training and Community"
+}

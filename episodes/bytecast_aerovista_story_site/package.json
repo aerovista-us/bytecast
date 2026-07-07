@@ -1,0 +1,13 @@
+{
+  "name": "bytecast-aerovista-story-site",
+  "private": true,
+  "description": "Build episode HTML from the episodes Markdown library",
+  "scripts": {
+    "build": "node scripts/build-site.mjs",
+    "check-links": "node scripts/check-links.mjs",
+    "check-tts-audio": "node scripts/check-tts-audio.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

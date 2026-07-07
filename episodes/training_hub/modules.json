@@ -1,0 +1,303 @@
+{
+  "schema": "bytecast-module-manifest-v1",
+  "app_id": "training_hub",
+  "app_name": "Training Hub",
+  "updated_on": "2026-05-11",
+  "series": [
+    {
+      "id": "golden_path_day1",
+      "name": "Golden Path Day 1",
+      "description": "Default onboarding route: the core ByteCast episodes, the Day 1 training gate, and the practice handoff.",
+      "sort_order": 10
+    },
+    {
+      "id": "sales_enablement",
+      "name": "Sales Enablement",
+      "description": "Offer framing, routing judgment, and the current sales practice surfaces.",
+      "sort_order": 20
+    },
+    {
+      "id": "lumina_revenue_lane",
+      "name": "Lumina Revenue Lane",
+      "description": "Six Lumina revenue episodes followed by the routing capstone and seed brief handoff.",
+      "sort_order": 30
+    },
+    {
+      "id": "apparel_onboarding",
+      "name": "AV Apparel Onboarding",
+      "description": "Three episodes for apparel culture, catalog work, and operating standards.",
+      "sort_order": 40
+    },
+    {
+      "id": "art_localized_training",
+      "name": "The Art Localized",
+      "description": "Five-part collaboration and partnership training series.",
+      "sort_order": 50
+    },
+    {
+      "id": "contributor_onboarding",
+      "name": "Contributor Onboarding",
+      "description": "Hub plus guided onboarding episodes for contributor expectations and readiness.",
+      "sort_order": 60
+    },
+    {
+      "id": "infographic_training",
+      "name": "Infographic Training",
+      "description": "Image-first overlay lesson pilots built from the infographic pack.",
+      "sort_order": 70
+    },
+    {
+      "id": "story_context",
+      "name": "Story + Context",
+      "description": "Long-form origin and making-of surfaces that give the training lanes more context.",
+      "sort_order": 80
+    },
+    {
+      "id": "reference_tools",
+      "name": "Reference + Tools",
+      "description": "Supporting shells, docs, and reference training surfaces.",
+      "sort_order": 90
+    }
+  ],
+  "modules": [
+    {
+      "id": "golden_path_start",
+      "name": "Golden Path Playlist Start",
+      "description": "Start the default learner route at EP-001 and move through the core ByteCast spine.",
+      "owner": "Training and Community",
+      "category": "series",
+      "series_id": "golden_path_day1",
+      "sequence": 1,
+      "step_count": 4,
+      "part_label": "EP-001 to EP-004",
+      "path": "../../seed_bytecast.html",
+      "canon_path": "seed_bytecast.html",
+      "launch_label": "Open playlist"
+    },
+    {
+      "id": "tr_001a_day1_foundations",
+      "name": "TR-001A - Day 1 Foundations Check",
+      "description": "Day 1 check after EP-001 to EP-004: quiz, short written responses, and one routing scenario.",
+      "owner": "Training and Community",
+      "category": "mission",
+      "series_id": "golden_path_day1",
+      "sequence": 2,
+      "part_label": "Mission gate",
+      "path": "../training_missions/tr_001a_day1_foundations/index.html",
+      "canon_path": "episodes/training_missions/tr_001a_day1_foundations",
+      "launch_label": "Open mission"
+    },
+    {
+      "id": "tr_001_golden_path",
+      "name": "TR-001 - Golden Path Missions (legacy)",
+      "description": "Earlier Golden Path mission set kept for reference.",
+      "owner": "Training and Community",
+      "category": "mission",
+      "series_id": "golden_path_day1",
+      "sequence": 3,
+      "part_label": "Legacy reference",
+      "path": "../training_missions/tr_001_golden_path/index.html",
+      "canon_path": "episodes/training_missions/tr_001_golden_path",
+      "launch_label": "Open legacy mission"
+    },
+    {
+      "id": "aerovista_offer_pack",
+      "name": "AeroVista Offer Pack App",
+      "description": "Division map, offers, and playbooks that help explain how AeroVista work is packaged.",
+      "owner": "Offers and Sales Ops",
+      "category": "app",
+      "series_id": "sales_enablement",
+      "sequence": 1,
+      "part_label": "Offer map",
+      "path": "../aerovista_offer_pack/app/index.html",
+      "canon_path": "episodes/aerovista_offer_pack",
+      "launch_label": "Open app"
+    },
+    {
+      "id": "dispatchflow_revenue_routing_lab",
+      "name": "DispatchFlow Revenue Routing Lab",
+      "description": "Gameified sales mission for routing the right offer ladder: Training Hub entry, DispatchFlow primary, Visibility Layer upsell, or clean reroute.",
+      "owner": "Offers and Sales Ops",
+      "category": "mission",
+      "series_id": "sales_enablement",
+      "sequence": 2,
+      "part_label": "Current lab",
+      "path": "../training_missions/dispatchflow_sales_workbook.html",
+      "canon_path": "episodes/training_missions/dispatchflow_sales_workbook.html",
+      "launch_label": "Open lab"
+    },
+    {
+      "id": "revenue_engine_training",
+      "name": "Revenue Engine Training",
+      "description": "Standalone visual sales training surface for the offer ladder, objections, and talking cards.",
+      "owner": "Offers and Sales Ops",
+      "category": "series",
+      "series_id": "sales_enablement",
+      "sequence": 3,
+      "part_label": "Reference lane",
+      "path": "../revenue_engine_training/index.html",
+      "canon_path": "episodes/revenue_engine_training",
+      "launch_label": "Open training"
+    },
+    {
+      "id": "lumina_revenue_series_start",
+      "name": "Lumina Revenue Lane Start",
+      "description": "Start the Lumina revenue training sequence at EP-LUM-101 and run through EP-LUM-106.",
+      "owner": "Training and Community",
+      "category": "series",
+      "series_id": "lumina_revenue_lane",
+      "sequence": 1,
+      "step_count": 6,
+      "part_label": "EP-LUM-101 to EP-LUM-106",
+      "path": "../lumina_rev_101/index.html",
+      "canon_path": "episodes/lumina_rev_101",
+      "launch_label": "Start series"
+    },
+    {
+      "id": "tr_lum_001_revenue_routing",
+      "name": "TR-LUM-001 - Revenue Routing Mission",
+      "description": "Lumina capstone mission: qualify the lead, recommend the right lane, and save a reviewer-approved result.",
+      "owner": "Training and Community",
+      "category": "mission",
+      "series_id": "lumina_revenue_lane",
+      "sequence": 2,
+      "part_label": "Capstone mission",
+      "path": "../training_missions/tr_lum_001_revenue_routing/index.html",
+      "canon_path": "episodes/training_missions/tr_lum_001_revenue_routing",
+      "launch_label": "Open mission"
+    },
+    {
+      "id": "seed_lum_001_sales_brief",
+      "name": "SEED-LUM-001 - Lumina Sales Brief",
+      "description": "Seed page for packaging the Lumina sales brief and saving completion for the lane.",
+      "owner": "Training and Community",
+      "category": "seed",
+      "series_id": "lumina_revenue_lane",
+      "sequence": 3,
+      "part_label": "Seed handoff",
+      "path": "../seed_builder_studio/lumina_sales_brief/index.html",
+      "canon_path": "episodes/seed_builder_studio/lumina_sales_brief",
+      "launch_label": "Open seed brief"
+    },
+    {
+      "id": "av_apparel_series_start",
+      "name": "AV Apparel Onboarding Start",
+      "description": "Start the apparel onboarding run covering culture, catalog contribution, and operations standards.",
+      "owner": "Training and Community",
+      "category": "series",
+      "series_id": "apparel_onboarding",
+      "sequence": 1,
+      "step_count": 3,
+      "part_label": "EP-APP-001 to EP-APP-003",
+      "path": "../av_apparel_ep1_welcome/index.html",
+      "canon_path": "episodes/av_apparel_ep1_welcome",
+      "launch_label": "Start series"
+    },
+    {
+      "id": "art_localized_series_start",
+      "name": "The Art Localized Start",
+      "description": "Open the creative collaboration training lane at ART-EP-0 and continue through ART-EP-4.",
+      "owner": "Training and Community",
+      "category": "series",
+      "series_id": "art_localized_training",
+      "sequence": 1,
+      "step_count": 5,
+      "part_label": "ART-EP-0 to ART-EP-4",
+      "path": "../art_localized_ep0/index.html",
+      "canon_path": "episodes/art_localized_ep0",
+      "launch_label": "Start series"
+    },
+    {
+      "id": "contributor_onboarding_hub",
+      "name": "Contributor Onboarding Hub",
+      "description": "Hub page for the contributor lane with links, context, and supporting docs.",
+      "owner": "Training and Community",
+      "category": "hub",
+      "series_id": "contributor_onboarding",
+      "sequence": 1,
+      "part_label": "Hub",
+      "path": "../contributor.onboarding/index.html",
+      "canon_path": "episodes/contributor.onboarding",
+      "launch_label": "Open hub"
+    },
+    {
+      "id": "contributor_onboarding_series_start",
+      "name": "Contributor Onboarding Episodes",
+      "description": "Start the contributor training episodes at CO-EP-0 and move through the full readiness sequence.",
+      "owner": "Training and Community",
+      "category": "series",
+      "series_id": "contributor_onboarding",
+      "sequence": 2,
+      "step_count": 5,
+      "part_label": "CO-EP-0 to CO-EP-4",
+      "path": "../contributor_onboarding_ep0/index.html",
+      "canon_path": "episodes/contributor_onboarding_ep0",
+      "launch_label": "Start series"
+    },
+    {
+      "id": "av_ecosystem_map_pilot",
+      "name": "AV Ecosystem Map Pilot",
+      "description": "Infographic-first pilot episode built from AV_AppEchosystemMap.png with overlay guidance and checkpoints.",
+      "owner": "Training and Community",
+      "category": "episode",
+      "series_id": "infographic_training",
+      "sequence": 1,
+      "part_label": "Pilot episode",
+      "path": "../av_ecosystem_map_pilot/index.html",
+      "canon_path": "episodes/av_ecosystem_map_pilot",
+      "launch_label": "Open pilot"
+    },
+    {
+      "id": "bytecasts_making_of_av",
+      "name": "ByteCasts Making of AV",
+      "description": "Season-style context surface showing the making-of narrative behind the wider AeroVista training world.",
+      "owner": "Content Ops",
+      "category": "series",
+      "series_id": "story_context",
+      "sequence": 1,
+      "part_label": "Season landing page",
+      "path": "../bytecasts_making_of_av/index.html",
+      "canon_path": "episodes/bytecasts_making_of_av",
+      "launch_label": "Open series"
+    },
+    {
+      "id": "bytecast_aerovista_story_site",
+      "name": "ByteCast AeroVista Story Site",
+      "description": "Long-form AeroVista story build for deeper platform narrative and chapter browsing.",
+      "owner": "Content Ops",
+      "category": "series",
+      "series_id": "story_context",
+      "sequence": 2,
+      "part_label": "Story archive",
+      "path": "../bytecast_aerovista_story_site/index.html",
+      "canon_path": "episodes/bytecast_aerovista_story_site",
+      "launch_label": "Open story site"
+    },
+    {
+      "id": "lift_lab_training_site",
+      "name": "Lift Lab Training Site",
+      "description": "Guided training site with missions and step-by-step learning lanes.",
+      "owner": "Training and Community",
+      "category": "app",
+      "series_id": "reference_tools",
+      "sequence": 1,
+      "part_label": "Reference app",
+      "path": "../../lift_lab_bytecast_bundle/site/index.html",
+      "canon_path": "lift_lab_bytecast_bundle",
+      "launch_label": "Open site"
+    },
+    {
+      "id": "workspace_docs_index",
+      "name": "Docs Portal",
+      "description": "Reference library for standards, troubleshooting, and governed answers.",
+      "owner": "Platform Ops",
+      "category": "docs",
+      "series_id": "reference_tools",
+      "sequence": 2,
+      "part_label": "Governance",
+      "path": "../../docs/index.html",
+      "canon_path": "docs",
+      "launch_label": "Open docs"
+    }
+  ]
+}

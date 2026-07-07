@@ -1,0 +1,28 @@
+{
+  "schema": "art-localized-phase-pack-v1",
+  "phase": 3,
+  "title": "Ep 2 — Partnership tiers (Phase 3)",
+  "audio": {
+    "primary": "assets/narration.mp3",
+    "fallback": null
+  },
+  "slides": [
+    {
+      "id": "s1",
+      "title": "Tier = contract",
+      "html": "<p><strong>Reality.</strong> A tier is a commitment shape: speed, depth, co-selling, and risk boundaries.</p>"
+    },
+    {
+      "id": "s2",
+      "title": "Proof follows tier",
+      "html": "<p><strong>Rule.</strong> Higher touch requires clearer artifacts — not more chat threads.</p>"
+    }
+  ],
+  "engage": {
+    "prompt": "Pick the best answer.",
+    "options": [
+      { "value": "0", "label": "Tiers are only cosmetic labels for proposals.", "correct": false },
+      { "value": "1", "label": "Tiers should change expectations, artifacts, and review paths.", "correct": true }
+    ]
+  }
+}

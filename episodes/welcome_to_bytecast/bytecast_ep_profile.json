@@ -2,10 +2,10 @@
   "schema": "bytecast-ep-profile-v1",
   "episode": {
     "code": "EP-001",
-    "title": "Welcome to ByteCast: How to Use This + Why It Matters",
+    "title": "Welcome to ByteCast - Day 1 foundations",
     "type": "internal",
-    "date": "2026-02-07",
-    "runtime_target_minutes": 6,
+    "date": "2026-03-25",
+    "runtime_target_minutes": 11,
     "status": "draft"
   },
   "content": {
@@ -13,12 +13,12 @@
       "bytecast",
       "welcome",
       "tutorial",
-      "recruitment",
       "onboarding",
-      "aerovista"
+      "aerovista",
+      "golden-path"
     ],
-    "summary_short": "A fast, hype-driven welcome: what ByteCast is, how to use the player + slides + quests, and how to join the mission without drama.",
-    "summary_long": "Episode 1 is a lightweight onboarding primer. It teaches the ByteCast flow (listen \u2192 slide \u2192 engage), sets expectations for contributors, and builds anticipation for upcoming drops. It includes a simple quest checklist and a mini-quiz checkpoint designed to reinforce the core idea: we ship reusable experiences fast, measure what works, and scale the winners."
+    "summary_short": "What ByteCast is, how the Golden Path actually runs today, what each main door is for, and why proof-based progression beats random wandering.",
+    "summary_long": "EP-001 anchors the current Day 1 journey with concrete surfaces and sequence: Workspace Entry for orientation, Playlist for resume and next step, Training Hub for routes, Seed Builder for repeatable output, and Docs for governed answers. The learner leaves knowing the real Golden Path order from EP-001 through TR-001A, Seed export, publish, and badge, plus why the system records proof instead of assuming understanding from clicks alone. Voiceover: docs/day1/EP-001_VOICEOVER.md. On-screen spec: docs/day1/EP-001_ON_SCREEN.md."
   },
   "media": {
     "audio_files": [
@@ -49,88 +49,128 @@
   "slides": [
     {
       "id": "s1",
-      "title": "Welcome",
-      "goal": "Set tone + hype. What ByteCast is in one breath.",
+      "title": "What ByteCast is",
+      "goal": "Understand the layer you are standing in before you touch deeper systems.",
       "bullets": [
-        "ByteCast = audio + slides + micro-engagement that actually sticks.",
-        "Built for captivation: finish the episode, keep the momentum.",
-        "If you\u2019re here, you\u2019re already closer than most."
+        "ByteCast is a connected training layer built from focused packs and thin routing shells, not one giant app.",
+        "The system already has a real Day 1 path: EP-001, EP-002, EP-003, EP-004, then TR-001A before seed work opens.",
+        "That shape matters because the learner is being guided toward understanding, proof, and repeatable work, not just exposure."
       ]
     },
     {
       "id": "s2",
-      "title": "How to Use This Page",
-      "goal": "Teach the controls and the flow.",
+      "title": "The journey loop",
+      "goal": "See the actual learning contract, not just the slogan.",
       "bullets": [
-        "Press Space to play/pause; J/L to jump; M to mark key moments.",
-        "Use \u2190 / \u2192 to move slides (additive learning).",
-        "Engagement blocks are optional: quests, quiz, mini-games."
+        "Listen -> Slides -> Engage builds orientation first; Training and Seed come after the early proof gates.",
+        "On the current Golden Path, the loop continues into TR-001A, Seed export, publish link capture, and badge eligibility.",
+        "The system stores step proof so returning after a break does not depend on memory or sticky notes."
       ]
     },
     {
       "id": "s3",
-      "title": "The AeroVista Loop",
-      "goal": "Explain the production philosophy.",
+      "title": "Path, not a pile",
+      "goal": "Build the reflex to return to the path when the map feels noisy.",
       "bullets": [
-        "Ship small experiences fast (Seeds).",
-        "Measure what hits (optional analytics).",
-        "Scale the winners into bigger builds."
+        "A pile says open more tabs; a path says check the Playlist, confirm your step, and move one honest action forward.",
+        "Beginner progress is not measured by how many internal tools you saw. It is measured by whether you can stay correctly routed.",
+        "ByteCast is training judgment as much as content: know what comes next, and know what can wait."
       ]
     },
     {
       "id": "s4",
-      "title": "Recruitment & Fit",
-      "goal": "Set contributor vibe and expectations.",
+      "title": "The five main doors",
+      "goal": "Match real surfaces to real jobs.",
       "bullets": [
-        "We value self-guidance, clarity, and clean execution.",
-        "We don\u2019t gate people with ego \u2014 we gate with follow-through.",
-        "Bring your craft. Respect the system. Ship."
+        "Workspace Entry is the front door for orientation; ByteCast Playlist is the learner surface for discovery, resume, and next action.",
+        "Training Hub maps routes and missions; Seed Builder Studio handles templates, generators, and repeatable artifact work.",
+        "Docs Portal is where governed references live, including standards, proof rules, troubleshooting, and site structure."
       ]
     },
     {
       "id": "s5",
-      "title": "Quest: First Win",
-      "goal": "A simple checklist to solidify commitment.",
+      "title": "Learner-facing vs internal",
+      "goal": "Understand why some surfaces are visible but still not your Day 1 starting point.",
       "bullets": [
-        "Open one seed drop and explore it end-to-end.",
-        "Find one improvement (UX, copy, accessibility, performance).",
-        "Submit it as a clean suggestion: problem \u2192 impact \u2192 fix."
+        "Public learning doors exist so new learners do not have to infer workflow from raw registries or maintainer screens.",
+        "Files like journey config, workflow data, or tooling internals are real; they are just not the first lens for a new operator.",
+        "The discipline is simple: use learner-safe surfaces until the map and truth rules are stable in your head."
       ]
     },
     {
       "id": "s6",
-      "title": "What\u2019s Next",
-      "goal": "Anticipation + tease upcoming episodes.",
+      "title": "Canonical starts",
+      "goal": "Know why the episode order exists.",
       "bullets": [
-        "EP-002: Seed Playbook (design rules + modules).",
-        "EP-003: Contributor Path (quests, badges, \u2018proof of work\u2019).",
-        "EP-004: Command Center pulse + dashboards."
+        "EP-001 teaches the learning system itself so later episodes land in the right context.",
+        "EP-002 explains the AeroVista ecosystem, EP-003 teaches which door handles which job, and EP-004 teaches where truth lives.",
+        "The sequence is intentional: system first, company second, navigation third, truth fourth."
+      ]
+    },
+    {
+      "id": "s7",
+      "title": "What progress means",
+      "goal": "Treat the locks as learning support, not friction.",
+      "bullets": [
+        "Listen, slides, and Engage record whether the learner actually completed the early surface and passed the check.",
+        "TR-001A asks for stronger proof, including quiz performance and short written responses that a reviewer can audit later.",
+        "That is why the Golden Path feels sequential: it is designed to preserve meaning, not just movement."
+      ]
+    },
+    {
+      "id": "s8",
+      "title": "Success in EP-001",
+      "goal": "Know the operational bar for this episode.",
+      "bullets": [
+        "You can explain ByteCast in plain language and name the full Golden Path from episode work into proof and seed output.",
+        "You can route three common needs: orientation to Entry, resume to Playlist, governed answer to Docs.",
+        "You know Training Hub is the map and Seed Builder is the repeatable-build door, not the default Day 1 landing spot."
+      ]
+    },
+    {
+      "id": "s9",
+      "title": "Beginner promise",
+      "goal": "Reduce anxiety without lowering standards.",
+      "bullets": [
+        "You do not need every tool, every division, or every internal file on day one.",
+        "You do need a stable starting point, a clear route, and confidence that the system will tell you what comes next.",
+        "Good onboarding makes the environment feel navigable before it asks the learner to produce anything durable."
+      ]
+    },
+    {
+      "id": "s10",
+      "title": "Recap",
+      "goal": "Lock the model before Engage.",
+      "bullets": [
+        "ByteCast is the guided learning layer. The Golden Path is sequential and proof-based.",
+        "The five main doors each have a distinct job, and the Playlist is the safest default return surface.",
+        "Next up is EP-002, where the learner zooms out from the training shell into the AeroVista ecosystem itself."
       ]
     }
   ],
   "engagement": {
     "quest": {
-      "title": "First Win Checklist",
+      "title": "EP-001 first-route checklist",
       "items": [
         {
           "id": "q1",
-          "text": "Play the episode audio and mark 2 key moments (M)."
+          "text": "Use Listen once, then finish the slide deck through Recap."
         },
         {
           "id": "q2",
-          "text": "Complete the slide deck (reach \u2018What\u2019s Next\u2019)."
+          "text": "Open the Playlist and identify what it tells a learner about progress or next action."
         },
         {
           "id": "q3",
-          "text": "Open one AeroVista drop and write 1 improvement idea."
+          "text": "Open Docs and name one kind of governed answer that belongs there."
         },
         {
           "id": "q4",
-          "text": "Pick a lane: build, design, audio, docs \u2014 choose one."
+          "text": "Say aloud the current Golden Path order through TR-001A."
         }
       ],
       "reward_badge": {
-        "label": "FIRST WIN",
+        "label": "FIRST ROUTE",
         "style": "neon"
       }
     },
@@ -139,70 +179,65 @@
       "pass_threshold": 0.8,
       "questions": [
         {
-          "id": "k1",
-          "q": "ByteCast is primarily designed for:",
+          "id": "q_bytecast_shape",
+          "q": "ByteCast is:",
           "choices": [
-            "Long lectures",
-            "Captivation + additive learning",
-            "Hidden access control",
-            "Marketing only"
+            "A single giant app",
+            "A modular learning system",
+            "A file archive"
           ],
           "answer_index": 1,
-          "explain": "Audio anchors the intent, slides lock the memory, engagement confirms retention."
+          "explain": "Focused packs and thin shells make the journey easier to route and maintain."
         },
         {
-          "id": "k2",
-          "q": "What\u2019s the correct usage flow?",
+          "id": "q_playlist",
+          "q": "If you return after a break and need the honest next step, the best first door is:",
           "choices": [
-            "Scroll randomly",
-            "Listen \u2192 Slide \u2192 Engage",
-            "Engage \u2192 Listen \u2192 Slide",
-            "Slide only"
+            "ByteCast Playlist",
+            "Raw workflow JSON",
+            "Seed Builder Studio"
           ],
-          "answer_index": 1,
-          "explain": "We want forward motion without overload."
+          "answer_index": 0,
+          "explain": "Playlist is built for discovery, resume, gates, and next recommended action."
         },
         {
-          "id": "k3",
-          "q": "Seeds should still work when opened as file:// because:",
+          "id": "q_training_hub",
+          "q": "The Training Hub is primarily:",
           "choices": [
-            "It looks cool",
-            "We avoid build steps and keep static-first portability",
-            "We dislike servers",
-            "It improves SEO"
+            "The module router and map",
+            "The only place lesson content exists",
+            "A maintainer-only control plane"
           ],
-          "answer_index": 1,
-          "explain": "Static-first = fast distribution + easy testing."
+          "answer_index": 0,
+          "explain": "Hub organizes routes and modules; the actual learning packs live in their own surfaces."
         },
         {
-          "id": "k4",
-          "q": "Our contributor gate is mostly about:",
+          "id": "q_docs_role",
+          "q": "Docs Portal is the right first stop when you need:",
           "choices": [
-            "Status",
-            "Follow-through and clean execution",
-            "Being loud",
-            "Knowing every tool"
+            "A governed standard or proof rule",
+            "To resume the next episode gate",
+            "To generate a seed artifact"
           ],
-          "answer_index": 1,
-          "explain": "We care about proof-of-work and self-guidance."
+          "answer_index": 0,
+          "explain": "Docs is the home for standards, governance, troubleshooting, and canon references."
         },
         {
-          "id": "k5",
-          "q": "Optional analytics exists to:",
+          "id": "q_path_rule",
+          "q": "The safest beginner rule is:",
           "choices": [
-            "Spy on users",
-            "Prove what resonates so we can scale winners",
-            "Replace creativity",
-            "Prevent file:// usage"
+            "Open everything to learn faster",
+            "Stay on the path and let proof unlock the next layer",
+            "Skip the early checks"
           ],
           "answer_index": 1,
-          "explain": "Feedback loops help decision-making without breaking offline mode."
+          "explain": "The sequence protects comprehension and makes later work easier, not harder."
         }
       ]
     }
   },
   "aerovista_about": {
-    "summary": "AeroVista is a multi-division creative + engineering ecosystem shipping reusable experiences that blend software, storytelling, automation, music, and design.",
+    "summary": "AeroVista is a multi-division creative and engineering ecosystem shipping reusable experiences that blend software, storytelling, automation, music, and design.",
     "divisions": [
       {
         "name": "NeXuS TechWorks",
@@ -236,15 +271,15 @@
   },
   "cta": {
     "primary": {
-      "label": "Join AeroVista (Instructions)",
+      "label": "Open About AV",
       "href": "#about",
       "note": "Replace with your onboarding gate link when ready."
     },
     "secondary": {
-      "label": "Explore Drops",
+      "label": "View Public Example",
       "href": "https://aerovista-us.github.io/about/",
       "note": "Public about page / hub."
     },
-    "recruitment_copy": "If you want in, don\u2019t ask for permission \u2014 ship a small win. Proof-of-work gets noticed."
+    "recruitment_copy": "Finish one clean pass through Listen, Slides, and Engage before exploring further. Clarity comes first."
   }
 }

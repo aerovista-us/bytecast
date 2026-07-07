@@ -1,0 +1,101 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "episode": {
+    "code": "CO-EP-3",
+    "title": "Contributor Onboarding — Ep 3 — Work Orders and Definition of Done",
+    "type": "training",
+    "date": "2026-03-30",
+    "runtime_target_minutes": 6,
+    "status": "active"
+  },
+  "content": {
+    "tags": ["contributor-onboarding", "work-orders", "definition-of-done"],
+    "summary_short": "Work starts with goal, scope, acceptance, and DoD; work finishes with preview proof, test notes, rollback notes, and a short docs note.",
+    "summary_long": "AeroVista replaces vague tasks with work orders and a Definition of Done checklist. That turns review from opinion into proof, and keeps rushed changes from becoming hidden maintenance debt."
+  },
+  "training": {
+    "eyebrow": "Work Orders + DoD",
+    "chips": ["Goal and scope", "Acceptance criteria", "Preview validation", "Rollback notes", "Docs note"],
+    "sources": [
+      "episodes/contributor.onboarding/docs/WORK_ORDERS_TEMPLATE.md",
+      "episodes/contributor.onboarding/docs/CONTRIBUTING.md",
+      "episodes/contributor.onboarding/docs/DECISIONS_LOG.md"
+    ],
+    "transcript": [
+      "In AeroVista, work starts with a work order, not with vibes. If a task does not define the goal, scope, out of scope, acceptance criteria, and Definition of Done, it is still discussion.",
+      "The work order template forces that clarity up front. It also points contributors at the source of truth, references, and the expected test plan before implementation begins.",
+      "Definition of Done is equally concrete. The change must match acceptance criteria, avoid breaking the build, include test notes, avoid security regressions, include a short docs note, and use the correct paths and naming.",
+      "For review quality, add the boring but important line: what would you check or revert if this behaves badly? A rollback note does not have to be dramatic. It can be as simple as the file changed, the setting touched, or the old copy to restore.",
+      "The baseline is works in preview, not just works on my machine. Review should be able to reproduce the result quickly and see why the change is complete.",
+      "Short supporting docs matter too: what changed, why, how to run or test, and any gotchas. If a task changes direction, the decision should be captured in the decisions log instead of living in memory."
+    ],
+    "slides": [
+      {
+        "id": "s1",
+        "title": "No vibes-only work",
+        "body": "If the task lacks goal, scope, out of scope, acceptance criteria, or DoD, it is not implementation-ready yet.",
+        "notes": [
+          "Missing one field is enough to pause.",
+          "Discussion is not the same as a work order.",
+          "Clarity prevents accidental scope growth."
+        ]
+      },
+      {
+        "id": "s2",
+        "title": "Work order anatomy",
+        "body": "A complete work order points to the starting files, examples, acceptance criteria, and the test plan.",
+        "notes": [
+          "Start here defines source of truth.",
+          "Examples reduce interpretation drift.",
+          "Test plan defines how completion is verified."
+        ]
+      },
+      {
+        "id": "s3",
+        "title": "Definition of Done",
+        "body": "Done means acceptance met, build okay, test notes written, docs updated, rollback path named, and no security regressions.",
+        "notes": [
+          "Preview proof is the baseline.",
+          "Correct naming and paths are part of quality.",
+          "Optional screenshots or metrics help review move faster.",
+          "Rollback notes help reviewers understand blast radius."
+        ]
+      },
+      {
+        "id": "s4",
+        "title": "Validation and documentation",
+        "body": "Short notes and searchable decisions keep momentum from turning into ambiguity later.",
+        "notes": [
+          "Document what changed, why, and how to verify it.",
+          "Use the decisions log for durable changes in direction.",
+          "Clean validation beats post-merge guesswork."
+        ]
+      },
+      {
+        "id": "s5",
+        "title": "Review-ready handoff",
+        "body": "A good handoff lets the reviewer answer four questions fast: what changed, why, how was it checked, and what should be watched after merge.",
+        "notes": [
+          "Name the exact preview URL or local path used.",
+          "Call out untested areas instead of hiding them.",
+          "If the work touches shared behavior, ask for a narrower review owner."
+        ]
+      }
+    ],
+    "engage": {
+      "prompt": "A task is missing acceptance criteria. How should it be treated?",
+      "options": [
+        {
+          "label": "As discussion that needs clarification before implementation starts.",
+          "correct": true
+        },
+        {
+          "label": "As implementation-ready because the contributor can infer the missing details."
+        },
+        {
+          "label": "As done once the contributor gets it working locally."
+        }
+      ]
+    }
+  }
+}

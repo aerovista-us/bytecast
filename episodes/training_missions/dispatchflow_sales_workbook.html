@@ -1,0 +1,2082 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DispatchFlow Sales Quest</title>
+  <style>
+    :root {
+      --bg: #07101c;
+      --bg2: #0b1424;
+      --panel: #101b2e;
+      --panel2: #15233a;
+      --line: #243b61;
+      --text: #ebf3ff;
+      --muted: #97abc8;
+      --cyan: #6fdbff;
+      --green: #8ef1c5;
+      --amber: #ffd182;
+      --red: #ff9d9d;
+      --purple: #c1a5ff;
+      --shadow: 0 18px 40px rgba(0,0,0,.28);
+      --radius: 18px;
+      --display: "Aptos Display", "Segoe UI Variable Display", "Trebuchet MS", sans-serif;
+      --sans: "Aptos", "Segoe UI Variable Text", "Segoe UI", Helvetica, Arial, sans-serif;
+      --mono: ui-monospace, "Cascadia Code", Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--sans);
+      background:
+        radial-gradient(circle at top right, rgba(111,219,255,.12), transparent 25%),
+        radial-gradient(circle at bottom left, rgba(193,165,255,.10), transparent 22%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+      color: var(--text);
+    }
+    body { min-height: 100vh; }
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 18px; }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: linear-gradient(135deg, rgba(111,219,255,.10), rgba(193,165,255,.08));
+      padding: 26px;
+      box-shadow: var(--shadow);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -80px;
+      top: -80px;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(111,219,255,.16), rgba(111,219,255,0));
+      pointer-events: none;
+    }
+    .eyebrow {
+      display: inline-block;
+      border: 1px solid rgba(111,219,255,.25);
+      color: var(--cyan);
+      background: rgba(111,219,255,.08);
+      border-radius: 999px;
+      padding: 6px 10px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-size: 12px;
+      font-weight: 700;
+      font-family: var(--mono);
+    }
+    h1, h2, h3 { font-family: var(--display); letter-spacing: -.02em; }
+    h1 { margin: 14px 0 10px; font-size: 38px; line-height: 1.05; }
+    h2 { margin: 0 0 10px; font-size: 24px; }
+    h3 { margin: 0 0 8px; font-size: 18px; }
+    p { margin: 0 0 10px; }
+    .muted { color: var(--muted); }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 18px;
+      margin-top: 16px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+      margin-top: 18px;
+    }
+    .span-12 { grid-column: span 12; }
+    .span-8 { grid-column: span 8; }
+    .span-7 { grid-column: span 7; }
+    .span-6 { grid-column: span 6; }
+    .span-5 { grid-column: span 5; }
+    .span-4 { grid-column: span 4; }
+    .span-3 { grid-column: span 3; }
+    .card {
+      background: linear-gradient(180deg, rgba(16,27,46,.95), rgba(12,21,37,.95));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+    .card.soft { background: linear-gradient(180deg, rgba(21,35,58,.95), rgba(14,23,39,.95)); }
+    .mini {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-weight: 700;
+      margin-bottom: 8px;
+      font-family: var(--mono);
+    }
+    .pill, .tag {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      border: 1px solid rgba(111,219,255,.25);
+      color: var(--cyan);
+      background: rgba(111,219,255,.08);
+      margin-right: 6px;
+      margin-bottom: 6px;
+    }
+    .tag.green { color: var(--green); border-color: rgba(142,241,197,.26); background: rgba(142,241,197,.08); }
+    .tag.amber { color: var(--amber); border-color: rgba(255,209,130,.26); background: rgba(255,209,130,.08); }
+    .tag.red { color: var(--red); border-color: rgba(255,157,157,.24); background: rgba(255,157,157,.08); }
+    .kpis { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+    .metric {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, var(--panel2), #0d1728);
+      border-radius: 14px;
+      padding: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+    .metric::after {
+      content: "";
+      position: absolute;
+      inset: auto -30px -28px auto;
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(111,219,255,.16), transparent 68%);
+      pointer-events: none;
+    }
+    .metric strong { display: block; font-size: 26px; margin-top: 4px; }
+    .metric small { color: var(--muted); }
+    .metric small, .metric strong { position: relative; z-index: 1; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .four-col { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    label {
+      display: block;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+    input, select, textarea {
+      width: 100%;
+      background: #0a1322;
+      color: var(--text);
+      border: 1px solid #2b446e;
+      border-radius: 12px;
+      padding: 12px;
+      font: inherit;
+    }
+    textarea { min-height: 92px; resize: vertical; }
+    button {
+      border: 0;
+      border-radius: 12px;
+      padding: 12px 16px;
+      cursor: pointer;
+      font-weight: 700;
+      color: #031018;
+      background: linear-gradient(135deg, var(--cyan), #8de8ff);
+      box-shadow: var(--shadow);
+    }
+    button.secondary {
+      color: var(--text);
+      background: #14233b;
+      border: 1px solid var(--line);
+      box-shadow: none;
+    }
+    button.ghost {
+      color: var(--muted);
+      background: transparent;
+      border: 1px dashed #365179;
+      box-shadow: none;
+    }
+    .btn-row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .progress {
+      height: 14px;
+      width: 100%;
+      background: #09121f;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid #213657;
+      margin-top: 8px;
+    }
+    .bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--cyan), var(--green));
+      transition: width .25s ease;
+    }
+    .tabs { display: flex; gap: 10px; flex-wrap: wrap; }
+    .tab-btn {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.02);
+      color: var(--text);
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .tab-btn.active { background: rgba(111,219,255,.10); color: var(--cyan); border-color: rgba(111,219,255,.24); }
+    .panel { display: none; }
+    .panel.active { display: block; }
+    .prospects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .offer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .prospect-card {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: linear-gradient(180deg, #122038, #0d1729);
+      cursor: pointer;
+      transition: transform .12s ease, border-color .12s ease, box-shadow .12s ease;
+    }
+    .prospect-card:hover { transform: translateY(-2px); border-color: #3e628f; box-shadow: 0 10px 24px rgba(0,0,0,.24); }
+    .prospect-card.selected { border-color: var(--cyan); box-shadow: 0 0 0 1px rgba(111,219,255,.18) inset; }
+    .prospect-card.good-pick { border-color: rgba(142,241,197,.42); }
+    .prospect-card.risky-pick { border-color: rgba(255,209,130,.42); }
+    .offer-card {
+      width: 100%;
+      text-align: left;
+      color: var(--text);
+      background: linear-gradient(180deg, #122038, #0d1729);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: none;
+    }
+    .offer-card:hover {
+      transform: translateY(-2px);
+      border-color: #3e628f;
+      box-shadow: 0 10px 24px rgba(0,0,0,.24);
+    }
+    .offer-card.selected {
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 1px rgba(111,219,255,.18) inset;
+      background: linear-gradient(180deg, rgba(111,219,255,.10), rgba(13,23,41,.95));
+    }
+    .route-role {
+      display: inline-block;
+      margin-bottom: 8px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(111,219,255,.22);
+      background: rgba(111,219,255,.08);
+      color: var(--cyan);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-family: var(--mono);
+    }
+    .ladder-grid { display: grid; gap: 10px; }
+    .ladder-card {
+      border: 1px solid #294263;
+      background: #0d1626;
+      border-radius: 14px;
+      padding: 12px;
+    }
+    .ladder-card.active {
+      border-color: rgba(111,219,255,.36);
+      background: rgba(111,219,255,.08);
+    }
+    .checklist { display: grid; gap: 10px; }
+    .check {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      border: 1px solid #294263;
+      background: #0d1626;
+      border-radius: 14px;
+      padding: 12px;
+    }
+    .check input { width: 18px; height: 18px; margin-top: 2px; }
+    .question-card, .objection-card {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      border: 1px solid #294263;
+      background: #0d1626;
+      border-radius: 14px;
+      padding: 12px;
+    }
+    .question-card.locked, .objection-card.locked { opacity: .55; }
+    .log {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, #0d1525, #09111c);
+      border-radius: 14px;
+      padding: 14px;
+      min-height: 110px;
+      white-space: pre-wrap;
+    }
+    .score-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+    .score-card {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, var(--panel2), #0d1728);
+      border-radius: 14px;
+      padding: 14px;
+    }
+    .score-card strong { display: block; font-size: 28px; margin-top: 4px; }
+    .rank {
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--green);
+    }
+    .scenario-results p, .coach-note p { margin-bottom: 10px; }
+    .call-script {
+      border-left: 4px solid var(--cyan);
+      background: #0c1627;
+      border-radius: 10px;
+      padding: 14px 16px;
+      white-space: pre-wrap;
+    }
+    .footer { text-align: center; color: var(--muted); font-size: 13px; padding: 24px 0 40px; }
+    .hidden-box {
+      border: 1px dashed #3a567f;
+      border-radius: 14px;
+      padding: 12px;
+      background: rgba(255,255,255,.02);
+    }
+    .mission-strip {
+      display: grid;
+      grid-template-columns: 1.15fr .95fr .9fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+    .mission-stack { display: grid; gap: 12px; }
+    .objective-list, .feed-list, .achievement-grid { display: grid; gap: 10px; }
+    .objective-item, .feed-item, .achievement {
+      border: 1px solid #294263;
+      background: #0d1626;
+      border-radius: 14px;
+      padding: 12px;
+    }
+    .objective-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .objective-item.done { border-color: rgba(142,241,197,.36); background: rgba(142,241,197,.08); }
+    .objective-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid #3d5f88;
+      margin-top: 2px;
+      flex: 0 0 auto;
+    }
+    .objective-item.done .objective-dot {
+      background: linear-gradient(135deg, var(--green), #c7ffe7);
+      border-color: rgba(142,241,197,.4);
+      box-shadow: 0 0 0 4px rgba(142,241,197,.10);
+    }
+    .feed-item { border-left: 4px solid #2b466e; }
+    .feed-item.good { border-left-color: var(--green); }
+    .feed-item.warn { border-left-color: var(--amber); }
+    .feed-item.info { border-left-color: var(--cyan); }
+    .feed-time {
+      color: var(--muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-family: var(--mono);
+      margin-bottom: 6px;
+    }
+    .achievement-grid { grid-template-columns: 1fr 1fr; }
+    .achievement {
+      position: relative;
+      min-height: 92px;
+      opacity: .54;
+      transition: transform .16s ease, opacity .16s ease, border-color .16s ease;
+    }
+    .achievement.unlocked {
+      opacity: 1;
+      border-color: rgba(111,219,255,.34);
+      background: linear-gradient(180deg, rgba(111,219,255,.09), rgba(14,23,39,.96));
+      transform: translateY(-2px);
+    }
+    .achievement .badge-line {
+      display: inline-block;
+      margin-bottom: 8px;
+      font-size: 11px;
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-family: var(--mono);
+    }
+    .mission-alert {
+      border-radius: 14px;
+      border: 1px solid rgba(255,209,130,.22);
+      background: rgba(255,209,130,.07);
+      padding: 12px;
+    }
+    .mission-alert strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--amber);
+      font-family: var(--display);
+    }
+    .micro-meter {
+      height: 10px;
+      background: #0a1322;
+      border: 1px solid #294263;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .micro-meter > div {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--amber), var(--red));
+      transition: width .25s ease;
+    }
+    .toast {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 40;
+      max-width: 360px;
+      border-radius: 16px;
+      border: 1px solid rgba(111,219,255,.22);
+      background: rgba(9,17,30,.94);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      padding: 14px 16px;
+      display: none;
+    }
+    .toast.show { display: block; animation: toastIn .18s ease; }
+    .toast.good { border-color: rgba(142,241,197,.28); }
+    .toast.warn { border-color: rgba(255,209,130,.3); }
+    .toast-title {
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      font-family: var(--mono);
+      margin-bottom: 6px;
+    }
+    @keyframes toastIn {
+      from { transform: translateY(8px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .success { color: var(--green); }
+    .warn { color: var(--amber); }
+    .danger { color: var(--red); }
+    @media (max-width: 1000px) {
+      .hero-grid, .two-col, .three-col, .four-col, .prospects, .offer-grid, .kpis, .score-grid, .mission-strip, .achievement-grid { grid-template-columns: 1fr 1fr; }
+      .span-8, .span-7, .span-6, .span-5, .span-4, .span-3 { grid-column: span 12; }
+    }
+    @media (max-width: 720px) {
+      .hero-grid, .two-col, .three-col, .four-col, .prospects, .offer-grid, .kpis, .score-grid, .mission-strip, .achievement-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 30px; }
+      .wrap { padding: 12px; }
+    }
+    @media print {
+      body { background: #fff; color: #000; }
+      button, .tabs { display: none !important; }
+      .panel { display: block !important; }
+      .card, .hero, .metric, .score-card { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <span class="eyebrow">AeroVista Sales Training Quest</span>
+      <h1>DispatchFlow Revenue Routing Lab</h1>
+      <p class="muted">A gameified sales lab for learning the three core offer moves around DispatchFlow: Training Hub as the entry step, DispatchFlow as the primary system, and Visibility Layer as the natural upsell once the workflow is live.</p>
+      <div class="hero-grid">
+        <div class="card soft">
+          <div class="mini">Mission</div>
+          <h3>Route the right offer before you pitch the wrong one</h3>
+          <p class="muted">The job is to identify the right prospect, choose the correct lead offer, reveal the real pain, prepare for likely pushback, and leave with a clean contact plan plus a believable expansion path.</p>
+          <div class="btn-row" style="margin-top:14px;">
+            <button type="button" onclick="startQuest()">Start New Quest</button>
+            <button type="button" class="secondary" onclick="loadDemoState()">Load Demo State</button>
+            <button type="button" class="ghost" onclick="window.print()">Print / Save PDF</button>
+          </div>
+        </div>
+        <div class="card soft">
+          <div class="mini">Operator status</div>
+          <div class="kpis">
+            <div class="metric"><small>XP</small><strong id="xpValue">0</strong></div>
+            <div class="metric"><small>Clues</small><strong id="clueValue">0</strong></div>
+            <div class="metric"><small>Prepared Objections</small><strong id="objValue">0</strong></div>
+            <div class="metric"><small>Combo</small><strong id="comboValue">0</strong></div>
+            <div class="metric"><small>Streak</small><strong id="streakValue">0</strong></div>
+            <div class="metric"><small>Quest Rank</small><strong id="rankValue">D</strong></div>
+          </div>
+          <div class="mini" style="margin-top:14px;">Quest progress</div>
+          <div class="progress"><div class="bar" id="mainBar"></div></div>
+          <p class="muted" id="missionState" style="margin-top:10px;">Progress is based on locking a prospect, routing the right offer, qualifying fit, uncovering hidden info, preparing rebuttals, and finishing the contact plan.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="span-12 card soft">
+        <div class="mission-strip">
+          <div class="mission-stack">
+            <div>
+              <div class="mini">Mission chain</div>
+              <h3>Win the room before first contact</h3>
+              <p class="muted">Stack clean decisions in sequence. Perfect stages raise your streak and unlock operator badges.</p>
+            </div>
+            <div class="objective-list" id="objectiveList"></div>
+          </div>
+          <div class="mission-stack">
+            <div>
+              <div class="mini">Revenue feed</div>
+              <h3>Live coach telemetry</h3>
+            </div>
+            <div class="feed-list" id="eventFeed"></div>
+          </div>
+          <div class="mission-stack">
+            <div>
+              <div class="mini">Unlocks</div>
+              <h3>Operator badges</h3>
+            </div>
+            <div class="achievement-grid" id="achievementGrid"></div>
+            <div class="mission-alert">
+              <strong>Pressure meter</strong>
+              <span class="muted" id="pressureText">Pick a prospect to see how much selling tension the scenario creates.</span>
+              <div class="micro-meter"><div id="pressureBar"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="span-12 card">
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="choose">1. Choose Prospect</button>
+          <button class="tab-btn" data-tab="route">2. Route Offer</button>
+          <button class="tab-btn" data-tab="qualify">3. Qualify Fit</button>
+          <button class="tab-btn" data-tab="discover">4. Ask Questions</button>
+          <button class="tab-btn" data-tab="objections">5. Rebuttal Prep</button>
+          <button class="tab-btn" data-tab="plan">6. Contact Plan</button>
+          <button class="tab-btn" data-tab="score">7. Scoreboard</button>
+        </div>
+      </div>
+
+      <div class="span-12 panel active" id="panel-choose">
+        <div class="card">
+          <div class="mini">Stage 1</div>
+          <h2>Choose your practice prospect</h2>
+          <p class="muted">Pick the prospect you want to train on. Some want the primary offer, some need a lighter entry, some are really upsell visibility cases, and some should be rerouted entirely.</p>
+          <div class="prospects" id="prospectGrid"></div>
+        </div>
+      </div>
+
+      <div class="span-12 panel" id="panel-route">
+        <div class="two-col">
+          <div class="card">
+            <div class="mini">Stage 2</div>
+            <h2>Route the lead offer</h2>
+            <p class="muted">The broader sales training points to a simple ladder: <strong>Training Hub</strong> is the entry move, <strong>DispatchFlow</strong> is the primary system, and <strong>Visibility Layer</strong> is the upsell once workflow data exists. Use <strong>No Fit / Reroute</strong> when the prospect belongs on another board entirely.</p>
+            <div class="offer-grid" id="offerDeck" style="margin-top:12px;"></div>
+            <div class="hidden-box" style="margin-top:14px;">
+              <div class="mini">Your route logic</div>
+              <label for="routeReason">Why should this offer lead?</label>
+              <textarea id="routeReason" placeholder="Write the plain-language reason this offer should open the conversation."></textarea>
+            </div>
+            <div class="btn-row" style="margin-top:14px;">
+              <button type="button" onclick="scoreRoute()">Lock route</button>
+              <button type="button" class="secondary" onclick="resetRoute()">Reset route</button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="mini">Offer board</div>
+            <h2>Entry / primary / upsell map</h2>
+            <div id="ladderBoard" class="ladder-grid"></div>
+            <div class="hidden-box" style="margin-top:14px;">
+              <div class="mini">Route feedback</div>
+              <div id="routeFeedback" class="log">Pick a prospect and choose the offer that should lead the conversation. The exact ladder path reveals after you lock the route.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="span-12 panel" id="panel-qualify">
+        <div class="two-col">
+          <div class="card">
+            <div class="mini">Stage 3</div>
+            <h2>Prospect fit challenge</h2>
+            <p class="muted" id="fitIntro">Lock a lead offer first. The fit indicators change depending on whether you are selling the entry offer, the primary system, the upsell dashboard, or a reroute.</p>
+            <div class="checklist" id="fitChecklist"></div>
+            <div class="score-card" style="margin-top:14px;">
+              <div class="mini">Fit score</div>
+              <strong id="fitScore">0 / 6</strong>
+              <div id="fitVerdict" class="danger">No prospect selected</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="mini">Prospect briefing</div>
+            <h2 id="briefName">Select a prospect</h2>
+            <p id="briefSummary" class="muted">Once you select a prospect, the mission briefing will appear here.</p>
+            <div id="briefTags"></div>
+            <div id="briefRoute" style="margin-top:10px;"></div>
+            <div class="hidden-box" style="margin-top:14px;">
+              <div class="mini">Your take</div>
+              <label for="fitReason">Why is this a fit or not a fit?</label>
+              <textarea id="fitReason" placeholder="Write your own plain-language reasoning."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="span-12 panel" id="panel-discover">
+        <div class="two-col">
+          <div class="card">
+            <div class="mini">Stage 4</div>
+            <h2>Question pick challenge</h2>
+            <p class="muted">You can only choose <strong>3 questions</strong>. Choose the ones most likely to uncover workflow pain, route signal, urgency, and buyer resistance.</p>
+            <div class="pill" id="questionCount">0 / 3 selected</div>
+            <div class="checklist" id="questionList" style="margin-top:12px;"></div>
+            <div class="btn-row" style="margin-top:14px;">
+              <button type="button" onclick="revealClues()">Reveal hidden info</button>
+              <button type="button" class="secondary" onclick="resetQuestions()">Reset questions</button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="mini">Intel feed</div>
+            <h2>What you uncover</h2>
+            <div id="clueResults" class="scenario-results muted">Select a prospect and ask up to 3 questions to reveal hidden details.</div>
+            <div class="hidden-box" style="margin-top:14px;">
+              <div class="mini">Coach log</div>
+              <div id="coachLog" class="log">No questions asked yet.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="span-12 panel" id="panel-objections">
+        <div class="two-col">
+          <div class="card">
+            <div class="mini">Stage 5</div>
+            <h2>Objection prep challenge</h2>
+            <p class="muted">You can only prepare for <strong>3 objections</strong>. Choose the ones most likely for this prospect and the route you are trying to open.</p>
+            <div class="pill" id="objectionCount">0 / 3 selected</div>
+            <div class="checklist" id="objectionList" style="margin-top:12px;"></div>
+            <div class="btn-row" style="margin-top:14px;">
+              <button type="button" onclick="revealRebuttals()">Show rebuttals</button>
+              <button type="button" class="secondary" onclick="resetObjections()">Reset objections</button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="mini">Rebuttal output</div>
+            <h2>Prepared responses</h2>
+            <div id="rebuttalResults" class="scenario-results muted">Pick objections to build your rebuttal pack.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="span-12 panel" id="panel-plan">
+        <div class="card">
+          <div class="mini">Stage 6</div>
+          <h2>Build your first-contact plan</h2>
+          <div class="two-col" style="margin-bottom:16px;">
+            <div class="hidden-box">
+              <div class="mini">Lead offer</div>
+              <div id="planLeadOffer" class="log">Pick a prospect and lock a lead offer first.</div>
+            </div>
+            <div class="hidden-box">
+              <div class="mini">Ladder path</div>
+              <div id="planLadder" class="log">The recommended entry / primary / upsell path will appear here after you lock the route.</div>
+            </div>
+          </div>
+          <div class="three-col">
+            <div>
+              <label for="oneLine">1-line explanation</label>
+              <textarea id="oneLine" placeholder="Use the lead offer you routed, not a generic pitch."></textarea>
+            </div>
+            <div>
+              <label for="leadPain">Main pain to lead with</label>
+              <textarea id="leadPain" placeholder="Name the exact coordination, adoption, or visibility pain this prospect feels first."></textarea>
+            </div>
+            <div>
+              <label for="leadValue">Main value to lead with</label>
+              <textarea id="leadValue" placeholder="State the main value of the chosen offer in plain language."></textarea>
+            </div>
+          </div>
+          <div class="two-col" style="margin-top:16px;">
+            <div>
+              <label for="openingAngle">Opening angle</label>
+              <textarea id="openingAngle" placeholder="Why this prospect, and why this offer first?"></textarea>
+            </div>
+            <div>
+              <label for="ctaText">Follow-up CTA</label>
+              <textarea id="ctaText" placeholder="Example: If helpful, I can show you a short example and see whether this first step maps to your team."></textarea>
+            </div>
+          </div>
+          <div class="two-col" style="margin-top:16px;">
+            <div>
+              <label for="outreachName">Prospect name / company</label>
+              <input id="outreachName" placeholder="Example: North Pine Heating & Air / Sarah" />
+            </div>
+            <div>
+              <label for="buyerRole">Buyer role</label>
+              <input id="buyerRole" placeholder="Owner / Office Manager / Dispatcher" />
+            </div>
+          </div>
+          <div class="btn-row" style="margin-top:14px;">
+            <button type="button" onclick="generateOutreach()">Generate outreach draft</button>
+            <button type="button" class="secondary" onclick="generateCallScript()">Generate 60-sec call path</button>
+          </div>
+          <div class="two-col" style="margin-top:16px;">
+            <div>
+              <div class="mini">Outreach draft</div>
+              <div id="outreachDraft" class="call-script muted">Generate a draft after filling in the plan.</div>
+            </div>
+            <div>
+              <div class="mini">Call path</div>
+              <div id="callPath" class="call-script muted">Generate a call path when ready.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="span-12 panel" id="panel-score">
+        <div class="card">
+          <div class="mini">Stage 7</div>
+          <h2>Quest scoreboard</h2>
+          <div class="score-grid">
+            <div class="score-card"><div class="mini">Prospect choice</div><strong id="scoreProspect">0</strong><div class="muted">Selected and reviewed</div></div>
+            <div class="score-card"><div class="mini">Offer route</div><strong id="scoreRoute">0</strong><div class="muted">Lead-offer accuracy</div></div>
+            <div class="score-card"><div class="mini">Fit score</div><strong id="scoreFit">0</strong><div class="muted">Qualification quality</div></div>
+            <div class="score-card"><div class="mini">Clue score</div><strong id="scoreClues">0</strong><div class="muted">Useful hidden info revealed</div></div>
+            <div class="score-card"><div class="mini">Prep score</div><strong id="scorePrep">0</strong><div class="muted">Rebuttal and contact readiness</div></div>
+          </div>
+          <div class="two-col" style="margin-top:16px;">
+            <div class="card soft">
+              <div class="mini">Final rank</div>
+              <div class="rank" id="finalRank">D</div>
+              <p id="finalRankText" class="muted" style="margin-top:10px;">Complete the quest to improve your operator rank.</p>
+              <div class="progress"><div class="bar" id="scoreBar"></div></div>
+            </div>
+            <div class="card soft coach-note">
+              <div class="mini">Coach summary</div>
+              <div id="coachSummary" class="muted">Choose a prospect, route the correct offer, qualify fit, reveal clues, prepare rebuttals, and build a contact plan to get a full coaching summary.</div>
+            </div>
+          </div>
+          <div class="btn-row" style="margin-top:16px;">
+            <button type="button" onclick="downloadSession()">Download session (.txt)</button>
+            <button type="button" class="secondary" onclick="saveSession()">Save progress</button>
+            <button type="button" class="secondary" onclick="restoreSession()">Restore progress</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">AeroVista • DispatchFlow Revenue Routing Lab • Gameified workbook for entry, primary, and upsell offer discipline</div>
+  </div>
+
+  <div class="toast" id="questToast" role="status" aria-live="polite">
+    <div class="toast-title" id="toastTitle">Quest update</div>
+    <div id="toastBody">Mission started.</div>
+  </div>
+
+  <script>
+    const game = {
+      selectedProspect: '',
+      selectedOffer: '',
+      fitChecks: new Set(),
+      chosenQuestions: new Set(),
+      foundClues: [],
+      chosenObjections: new Set(),
+      revealedRebuttals: [],
+      xp: 0,
+      combo: 0,
+      streak: 0,
+      bestCombo: 0,
+      achievements: new Set(),
+      perfectStages: {
+        route: false,
+        fit: false,
+        clues: false,
+        objections: false,
+        plan: false
+      },
+      generatedAssets: {
+        outreach: false,
+        call: false
+      },
+      eventFeed: [],
+      stageFlags: {
+        prospect: false,
+        route: false,
+        fit: false,
+        clues: false,
+        objections: false,
+        plan: false
+      }
+    };
+
+    const offerCatalog = {
+      training: {
+        name: 'Training Hub',
+        role: 'Entry',
+        lane: 'Onboarding / Enablement',
+        tagline: 'Turn tribal knowledge into a repeatable onboarding and SOP flow.',
+        cue: 'Use when adoption, consistency, or a lower-friction first step matters most.'
+      },
+      dispatchflow: {
+        name: 'DispatchFlow',
+        role: 'Primary',
+        lane: 'Field Service / Mobile Ops',
+        tagline: 'Intake, assign, track, and close field work in one cleaner flow.',
+        cue: 'Use when live office-to-field coordination is the actual pain.'
+      },
+      visibility: {
+        name: 'Visibility Layer',
+        role: 'Upsell',
+        lane: 'Ops / Leadership Reporting',
+        tagline: 'Give managers one cleaner view of work, bottlenecks, and trends.',
+        cue: 'Use when the work exists already, but leadership still cannot see it clearly.'
+      },
+      reroute: {
+        name: 'No Fit / Reroute',
+        role: 'Guardrail',
+        lane: 'Hand-off / Disqualify',
+        tagline: 'Do not force this ladder when the need belongs on another board.',
+        cue: 'Use when the problem is really web, brand, or another lane outside this pack.'
+      }
+    };
+
+    const fitStatementsByOffer = {
+      training: [
+        'They repeat the same process across people, shifts, or roles.',
+        'Onboarding, SOP consistency, or handoff quality is visibly weak.',
+        'The buyer is worried about rollout complexity or adoption.',
+        'A lighter first step would build trust faster than a full system first.',
+        'The pain includes admin, front desk, dispatcher, or coordination habits.',
+        'Better training or playbooks would improve performance quickly.'
+      ],
+      dispatchflow: [
+        'They dispatch real field work.',
+        'They still rely on calls, texts, email, or paper for live status.',
+        'Someone in the office or leadership is coordinating moving jobs.',
+        'Speed, missed updates, or follow-through affect revenue or customer trust.',
+        'A mobile-friendly workflow would improve office-to-field clarity.',
+        'The team is small enough that a practical system beats enterprise sprawl.'
+      ],
+      visibility: [
+        'Leadership lacks one clean view of work, bottlenecks, or throughput.',
+        'The team already has activity data, but it is scattered across tools or memory.',
+        'Managers ask for updates, ETAs, KPIs, or status summaries repeatedly.',
+        'The pain is not only execution; it is weak reporting and weak visibility.',
+        'A dashboard or reporting layer would help without forcing a full rebuild first.',
+        'There is enough recurring volume that trends and bottlenecks matter.'
+      ],
+      reroute: [
+        'The business has no field workflow or repeatable ops pain for this ladder.',
+        'The stated need is mostly brand, web presence, or marketing clarity.',
+        'None of the core offers would solve the first problem cleanly.',
+        'The honest move is to redirect instead of forcing a weak fit.',
+        'There may still be opportunity, but it belongs in another lane.',
+        'Good sales process sometimes means \"not this board.\"'
+      ]
+    };
+
+    const questionBank = [
+      'How are you currently tracking jobs once they come in?',
+      'Where does job status usually live today — software, text threads, whiteboards, or a mix?',
+      'What tends to fall through the cracks most often: scheduling, updates, notes, or follow-through?',
+      'If you could clean up one part of the dispatch process first, what would it be?',
+      'Do your techs update job status from the field in a consistent way today?',
+      'How often does the office have to call or text techs just to get a status update?',
+      'What happens when updates are late or missing?',
+      'How much does dispatch confusion affect customers or repeat business?',
+      'When you look at software, what usually worries you most: cost, rollout effort, training, or complexity?',
+      'Who usually assigns work each morning?',
+      'Do you have after-hours or emergency calls that are harder to track?',
+      'How do notes and photos make their way back to the office today?'
+    ];
+
+    const planFields = ['oneLine','leadPain','leadValue','openingAngle','ctaText'];
+
+    const prospectTuning = {
+      'North Pine Heating & Air': {
+        leadOffer: 'dispatchflow',
+        entryOffer: 'training',
+        primaryOffer: 'dispatchflow',
+        upsellOffer: 'visibility',
+        routeWhy: 'True field-service coordination pain. Lead with the workflow sale, not the reporting layer.',
+        routePath: 'Lead with DispatchFlow. Use Training Hub if rollout anxiety slows the deal. Add Visibility Layer once the workflow data is stable.',
+        fitTruthByOffer: {
+          training: [true, false, true, true, true, false],
+          dispatchflow: [true, true, true, true, true, true],
+          visibility: [true, true, true, true, true, true],
+          reroute: [false, false, false, false, false, false]
+        },
+        priorityQuestions: [1, 3, 5, 6, 8],
+        priorityObjections: [0, 1, 2],
+        pressure: 78
+      },
+      'Lake City Electric': {
+        leadOffer: 'dispatchflow',
+        entryOffer: 'training',
+        primaryOffer: 'dispatchflow',
+        upsellOffer: 'visibility',
+        routeWhy: 'Live assignment pain and messy field updates make DispatchFlow the best first move.',
+        routePath: 'Lead with DispatchFlow. Use Training Hub if the owner needs a narrower first step. Add Visibility Layer when leadership wants cleaner reporting.',
+        fitTruthByOffer: {
+          training: [true, false, true, true, true, false],
+          dispatchflow: [true, true, true, true, true, true],
+          visibility: [true, true, true, true, true, true],
+          reroute: [false, false, false, false, false, false]
+        },
+        priorityQuestions: [0, 3, 6, 8, 11],
+        priorityObjections: [0, 1, 2],
+        pressure: 72
+      },
+      'Timberline Plumbing': {
+        leadOffer: 'dispatchflow',
+        entryOffer: 'training',
+        primaryOffer: 'dispatchflow',
+        upsellOffer: 'visibility',
+        routeWhy: 'Mixed service calls and after-hours work make live workflow clarity the first sale.',
+        routePath: 'Lead with DispatchFlow. Use Training Hub if adoption feels heavy. Add Visibility Layer once managers want cleaner after-hours reporting.',
+        fitTruthByOffer: {
+          training: [true, false, true, true, true, false],
+          dispatchflow: [true, true, true, true, true, true],
+          visibility: [true, true, true, true, true, true],
+          reroute: [false, false, false, false, false, false]
+        },
+        priorityQuestions: [1, 5, 7, 8, 10],
+        priorityObjections: [0, 2, 3],
+        pressure: 82
+      },
+      'CDA Custom Cabinets': {
+        leadOffer: 'visibility',
+        entryOffer: 'training',
+        primaryOffer: 'visibility',
+        upsellOffer: '',
+        routeWhy: 'This is milestone visibility more than live dispatch, so Visibility Layer should lead.',
+        routePath: 'Lead with Visibility Layer. Training Hub can standardize handoffs first. DispatchFlow is not the right first promise here.',
+        fitTruthByOffer: {
+          training: [true, true, true, true, true, false],
+          dispatchflow: [false, true, true, false, false, true],
+          visibility: [true, true, true, true, true, true],
+          reroute: [false, false, false, false, false, false]
+        },
+        priorityQuestions: [0, 2, 3],
+        priorityObjections: [0, 2],
+        pressure: 44
+      },
+      'Evergreen Dental Group': {
+        leadOffer: 'training',
+        entryOffer: 'training',
+        primaryOffer: 'visibility',
+        upsellOffer: '',
+        routeWhy: 'This is process consistency pain, not dispatch pain. Training Hub should lead.',
+        routePath: 'Lead with Training Hub. Visibility Layer can follow later if managers want reporting. DispatchFlow is the wrong shape.',
+        fitTruthByOffer: {
+          training: [true, true, true, true, true, true],
+          dispatchflow: [false, false, true, true, false, true],
+          visibility: [true, true, true, true, true, false],
+          reroute: [false, false, false, false, false, false]
+        },
+        priorityQuestions: [0, 3, 8],
+        priorityObjections: [0, 1],
+        pressure: 28
+      },
+      'North Ridge Boutique': {
+        leadOffer: 'reroute',
+        entryOffer: '',
+        primaryOffer: '',
+        upsellOffer: '',
+        routeWhy: 'This does not belong in the ladder at all. Route it elsewhere.',
+        routePath: 'Do not force the offer ladder. This scenario should be handed to a better-fit board such as brand or web.',
+        fitTruthByOffer: {
+          training: [false, false, false, false, false, false],
+          dispatchflow: [false, false, false, false, false, true],
+          visibility: [false, false, false, false, false, false],
+          reroute: [true, true, true, true, true, true]
+        },
+        priorityQuestions: [0, 2],
+        priorityObjections: [0, 1],
+        pressure: 12
+      }
+    };
+
+    const achievementCatalog = {
+      strong_pick: {
+        label: 'Signal Reader',
+        desc: 'Qualified the chosen offer with a clean fit read.',
+        icon: 'Fit read'
+      },
+      pivot_eye: {
+        label: 'Pivot Vision',
+        desc: 'Detected that DispatchFlow should not lead every scenario.',
+        icon: 'Offer pivot'
+      },
+      intel_surgeon: {
+        label: 'Pain Hunter',
+        desc: 'Used high-signal questions to expose the real workflow pain.',
+        icon: '3-clue burst'
+      },
+      objection_sniper: {
+        label: 'Shield Stack',
+        desc: 'Prepared the most likely objections before outreach.',
+        icon: 'Rebuttal ready'
+      },
+      closer_mode: {
+        label: 'Closer Mode',
+        desc: 'Built both the outreach draft and the live call path.',
+        icon: 'Contact plan'
+      },
+      combo_runner: {
+        label: 'Momentum Loop',
+        desc: 'Built a combo streak across multiple clean stage wins.',
+        icon: '3x combo'
+      },
+      dispatch_ace: {
+        label: 'Revenue Ace',
+        desc: 'Finished with an S-rank operator score.',
+        icon: 'S-rank finish'
+      }
+    };
+
+    const prospects = {
+      'North Pine Heating & Air': {
+        fit: 'strong',
+        summary: 'Local HVAC company with 8 field techs, 2 office staff, emergency calls, maintenance visits, and install follow-ups.',
+        tags: ['Strong fit', 'HVAC', '8 techs', 'Office + field'],
+        hidden: [
+          { topic: 'Current workflow', trigger: ['How are you currently tracking jobs once they come in?','Where does job status usually live today — software, text threads, whiteboards, or a mix?'], text: 'They use a basic invoicing tool, but real status updates still happen through calls, memory, and text threads.' },
+          { topic: 'Biggest pain', trigger: ['What tends to fall through the cracks most often: scheduling, updates, notes, or follow-through?','If you could clean up one part of the dispatch process first, what would it be?'], text: 'The office often knows a tech was assigned, but not whether the job is actually on site, delayed, waiting on parts, or done.' },
+          { topic: 'Mobile need', trigger: ['Do your techs update job status from the field in a consistent way today?','How often does the office have to call or text techs just to get a status update?'], text: 'Techs do not have a standard mobile update flow. The office spends a lot of time chasing simple status confirmations.' },
+          { topic: 'Buyer concern', trigger: ['When you look at software, what usually worries you most: cost, rollout effort, training, or complexity?'], text: 'The owner is worried about adding something too complicated for a small team.' },
+          { topic: 'Urgency', trigger: ['What happens when updates are late or missing?','How much does dispatch confusion affect customers or repeat business?'], text: 'Missed or delayed updates make the company look disorganized and create avoidable customer frustration.' }
+        ],
+        objections: [
+          { objection: 'We already have a system.', good: 'Totally fair. A lot of teams have a core system, but still end up managing live job status through calls and texts. The question is whether your current setup gives you a clean real-time workflow view for office and field together.' },
+          { objection: 'We’re too small for something complicated.', good: 'That makes sense, and small teams are exactly why this should stay simple. The goal is not heavy software. It is one cleaner operating flow for intake, assignment, and status updates.' },
+          { objection: 'My techs won’t use it.', good: 'That is a valid concern. The field side has to be simple enough that a tech can update status in seconds, not stop and type a report every time.' },
+          { objection: 'We do fine with text messages.', good: 'Texting works until the office needs one shared view. The issue is not whether texting works at all. It is whether it gives leadership clean visibility without constant chasing.' }
+        ]
+      },
+      'Lake City Electric': {
+        fit: 'strong',
+        summary: 'Small electrical contractor with service calls, estimate visits, install jobs, and a supervisor assigning work each morning.',
+        tags: ['Strong fit', 'Electrical', 'Service calls', 'Manual assign'],
+        hidden: [
+          { topic: 'Current workflow', trigger: ['How are you currently tracking jobs once they come in?','Who usually assigns work each morning?'], text: 'The supervisor assigns work manually every morning, and the day gets messy once changes start happening in real time.' },
+          { topic: 'Biggest pain', trigger: ['What tends to fall through the cracks most often: scheduling, updates, notes, or follow-through?','How do notes and photos make their way back to the office today?'], text: 'Notes from the field often come back late, which affects invoicing and follow-up scheduling.' },
+          { topic: 'Mobile need', trigger: ['Do your techs update job status from the field in a consistent way today?'], text: 'Some techs text updates, some call, and some wait until the end of the day.' },
+          { topic: 'Buyer concern', trigger: ['When you look at software, what usually worries you most: cost, rollout effort, training, or complexity?'], text: 'The owner does not want a long rollout or anything that feels like enterprise software.' },
+          { topic: 'Urgency', trigger: ['What happens when updates are late or missing?'], text: 'The office sometimes cannot tell if a job is running long until the customer calls asking for an ETA.' }
+        ],
+        objections: [
+          { objection: 'We already have a system.', good: 'Understood. The real question is whether it covers the live handoff between office and field cleanly, or whether updates still depend on texting and memory.' },
+          { objection: 'We’re too busy to change anything.', good: 'That is exactly why I would keep the first phase narrow. The idea is to solve one part of the workflow, not force a big process change all at once.' },
+          { objection: 'We can just text each other.', good: 'You can, and a lot of teams do. The issue is that text threads are hard to search, hard to standardize, and hard for the office to turn into a clear operating view.' },
+          { objection: 'We don’t need another tool.', good: 'Fair point. The test is whether another tool reduces enough friction to justify itself. If leadership still has weak visibility today, there may be a gap worth solving.' }
+        ]
+      },
+      'Timberline Plumbing': {
+        fit: 'strong',
+        summary: 'Regional plumbing business with mixed residential and commercial calls, 5 vans, after-hours service, and scattered text updates.',
+        tags: ['Strong fit', 'Plumbing', '5 vans', 'After-hours'],
+        hidden: [
+          { topic: 'Current workflow', trigger: ['Where does job status usually live today — software, text threads, whiteboards, or a mix?','Do you have after-hours or emergency calls that are harder to track?'], text: 'They use a mix of whiteboard planning, phone calls, and texts, especially after-hours.' },
+          { topic: 'Biggest pain', trigger: ['What tends to fall through the cracks most often: scheduling, updates, notes, or follow-through?'], text: 'After-hours and follow-up jobs are the easiest to lose track of.' },
+          { topic: 'Mobile need', trigger: ['How often does the office have to call or text techs just to get a status update?'], text: 'The office spends too much time checking whether a van is still on a job or heading to the next one.' },
+          { topic: 'Buyer concern', trigger: ['When you look at software, what usually worries you most: cost, rollout effort, training, or complexity?'], text: 'They are interested in better visibility but skeptical of paying for features they will never use.' },
+          { topic: 'Urgency', trigger: ['How much does dispatch confusion affect customers or repeat business?'], text: 'They have had a few customer complaints tied directly to unclear arrival windows and weak follow-up communication.' }
+        ],
+        objections: [
+          { objection: 'It sounds expensive.', good: 'That is fair. The first pass should solve a visible pain without forcing you into a huge system. The value comes from reducing missed updates and wasted coordination time.' },
+          { objection: 'We’ve made it this far without it.', good: 'Absolutely, and the team has probably built good habits to keep things moving. The question is whether a cleaner workflow would save enough time and frustration to be worth it.' },
+          { objection: 'My guys are not going to type a bunch of notes.', good: 'They should not have to. A good field flow keeps updates simple: status change, short note if needed, and done.' },
+          { objection: 'We only need this for emergencies.', good: 'Emergency visibility is a valid starting point. Once a team sees the benefit there, it often makes sense to extend the same clarity to standard service work too.' }
+        ]
+      },
+      'CDA Custom Cabinets': {
+        fit: 'maybe',
+        summary: 'Small shop doing design, fabrication, and scheduled installs. Some field activity, but most work happens in-shop and project timelines are longer.',
+        tags: ['Maybe fit', 'Custom work', 'Project-based', 'Install coordination'],
+        hidden: [
+          { topic: 'Current workflow', trigger: ['How are you currently tracking jobs once they come in?'], text: 'Their process is more project-based than service-call based, with long lead times and fewer same-day dispatch decisions.' },
+          { topic: 'Biggest pain', trigger: ['What tends to fall through the cracks most often: scheduling, updates, notes, or follow-through?'], text: 'Install coordination can get messy, but the bigger pain is often project visibility and milestone tracking rather than live dispatch.' },
+          { topic: 'Offer fit', trigger: ['If you could clean up one part of the dispatch process first, what would it be?'], text: 'They may not even describe their work as dispatch, which is a clue this is not the perfect first offer.' }
+        ],
+        objections: [
+          { objection: 'This doesn’t really sound like us.', good: 'That makes sense. If your work is more project-based than field-dispatch based, a visibility or project flow might be a better fit than DispatchFlow specifically.' },
+          { objection: 'Our jobs run for weeks, not hours.', good: 'That is useful context. In that case, I would not force a service-call workflow onto your team. We would look at milestone visibility instead.' },
+          { objection: 'We don’t need dispatch software.', good: 'Then DispatchFlow may not be the right lead offer here, and that is okay. The better conversation may be around project visibility or install coordination.' }
+        ]
+      },
+      'Evergreen Dental Group': {
+        fit: 'weak',
+        summary: 'Dental office with scheduling, front desk, and patient coordination pain, but no field technicians or dispatch-style mobile workflow.',
+        tags: ['Weak fit', 'Office workflow', 'No field techs', 'Wrong lead offer'],
+        hidden: [
+          { topic: 'Current workflow', trigger: ['How are you currently tracking jobs once they come in?'], text: 'They have coordination pain, but it is front-desk and patient-flow related, not field dispatch.' },
+          { topic: 'Better offer', trigger: ['If you could clean up one part of the dispatch process first, what would it be?'], text: 'A support-ops dashboard or training workflow would fit much better than DispatchFlow.' }
+        ],
+        objections: [
+          { objection: 'We don’t dispatch field work.', good: 'Right, and that tells me DispatchFlow is not the right lead offer here. A workflow or visibility tool for patient coordination would make more sense.' },
+          { objection: 'This sounds built for service trucks, not us.', good: 'Exactly. I would not force the wrong workflow. Your needs sound closer to scheduling, front-desk process, or training consistency.' }
+        ]
+      },
+      'North Ridge Boutique': {
+        fit: 'poor',
+        summary: 'Retail clothing shop with 4 employees, no field crews, no dispatch, and no mobile service workflow.',
+        tags: ['Poor fit', 'Retail', 'No field crew', 'Skip for this offer'],
+        hidden: [
+          { topic: 'Current workflow', trigger: ['How are you currently tracking jobs once they come in?'], text: 'There is no real dispatch-like process here. This is the wrong offer for this type of business.' }
+        ],
+        objections: [
+          { objection: 'I don’t think this applies to us.', good: 'I agree. DispatchFlow would not be the right starting point for your business model.' },
+          { objection: 'We don’t have field technicians.', good: 'Right, which means we should not pitch a field-service workflow here at all.' }
+        ]
+      }
+    };
+
+    function selectedTuning() {
+      return prospectTuning[game.selectedProspect] || null;
+    }
+
+    function selectedOfferData() {
+      return offerCatalog[game.selectedOffer] || null;
+    }
+
+    function routeSlots(tuning) {
+      return [
+        { label: 'Entry', key: tuning?.entryOffer || '' },
+        { label: 'Primary', key: tuning?.primaryOffer || '' },
+        { label: 'Upsell', key: tuning?.upsellOffer || '' }
+      ];
+    }
+
+    function routeOutcome() {
+      const tuning = selectedTuning();
+      if (!tuning || !game.selectedOffer) return '';
+      if (game.selectedOffer === tuning.leadOffer) return 'exact';
+      if ([tuning.entryOffer, tuning.primaryOffer, tuning.upsellOffer].filter(Boolean).includes(game.selectedOffer)) return 'ladder';
+      return 'miss';
+    }
+
+    function pushFeed(text, tone = 'info') {
+      const stamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      game.eventFeed.unshift({ text, tone, stamp });
+      game.eventFeed = game.eventFeed.slice(0, 6);
+      renderEventFeed();
+    }
+
+    let toastTimer = 0;
+    function showToast(title, body, tone = 'info') {
+      const toast = document.getElementById('questToast');
+      toast.className = `toast show ${tone}`;
+      document.getElementById('toastTitle').textContent = title;
+      document.getElementById('toastBody').textContent = body;
+      window.clearTimeout(toastTimer);
+      toastTimer = window.setTimeout(() => toast.className = 'toast', 2400);
+    }
+
+    function sustainCombo(reason) {
+      game.combo += 1;
+      game.bestCombo = Math.max(game.bestCombo, game.combo);
+      if (game.combo >= 3) awardAchievement('combo_runner');
+      if (reason) pushFeed(`Combo x${game.combo}: ${reason}`, 'good');
+    }
+
+    function breakCombo(reason) {
+      if (reason && game.combo >= 2) pushFeed(reason, 'warn');
+      game.combo = 0;
+    }
+
+    function markPerfectStage(stage, message) {
+      if (!game.perfectStages[stage]) {
+        game.perfectStages[stage] = true;
+        game.streak += 1;
+        sustainCombo(message);
+      }
+    }
+
+    function clearPerfectStage(stage, reason) {
+      if (game.perfectStages[stage]) game.perfectStages[stage] = false;
+      game.streak = Math.max(0, Object.values(game.perfectStages).filter(Boolean).length);
+      if (reason) breakCombo(reason);
+    }
+
+    function awardAchievement(id) {
+      if (game.achievements.has(id) || !achievementCatalog[id]) return;
+      game.achievements.add(id);
+      xp(6);
+      pushFeed(`Badge unlocked: ${achievementCatalog[id].label}`, 'good');
+      showToast('Badge unlocked', achievementCatalog[id].label, 'good');
+      renderAchievements();
+    }
+
+    function questionQualityCount() {
+      const tuning = selectedTuning();
+      if (!tuning) return 0;
+      return [...game.chosenQuestions]
+        .map(q => questionBank.indexOf(q))
+        .filter(idx => tuning.priorityQuestions.includes(idx)).length;
+    }
+
+    function objectionQualityCount() {
+      const tuning = selectedTuning();
+      if (!tuning) return 0;
+      return [...game.chosenObjections].filter(idx => tuning.priorityObjections.includes(idx)).length;
+    }
+
+    function fitAnalysis() {
+      const tuning = selectedTuning();
+      if (!tuning) return { truthCount: 0, strongHits: 0, falseHits: 0, accuracy: 0 };
+      const truth = (tuning.fitTruthByOffer && tuning.fitTruthByOffer[game.selectedOffer]) || [];
+      const strongHits = truth.filter((isTrue, idx) => isTrue && game.fitChecks.has(idx)).length;
+      const falseHits = truth.filter((isTrue, idx) => !isTrue && game.fitChecks.has(idx)).length;
+      const accuracy = truth.filter((isTrue, idx) => game.fitChecks.has(idx) === isTrue).length;
+      return {
+        truthCount: truth.filter(Boolean).length,
+        strongHits,
+        falseHits,
+        accuracy
+      };
+    }
+
+    function planFieldCount() {
+      return planFields.filter(id => document.getElementById(id).value.trim()).length;
+    }
+
+    function evaluatePlanStage() {
+      const filled = planFieldCount();
+      const perfect = filled >= 5 && game.generatedAssets.outreach && game.generatedAssets.call;
+      game.stageFlags.plan = game.generatedAssets.outreach || game.generatedAssets.call;
+      if (perfect) {
+        markPerfectStage('plan', 'Contact plan locked in');
+        awardAchievement('closer_mode');
+      } else {
+        clearPerfectStage('plan');
+      }
+    }
+
+    function pressureValue() {
+      const tuning = selectedTuning();
+      if (!tuning) return 0;
+      let pressure = tuning.pressure;
+      pressure -= routeOutcome() === 'exact' ? 8 : routeOutcome() === 'ladder' ? 3 : 0;
+      pressure -= game.stageFlags.fit ? 8 : 0;
+      pressure -= Math.min(18, game.foundClues.length * 4);
+      pressure -= Math.min(12, objectionQualityCount() * 4);
+      pressure -= game.generatedAssets.outreach ? 6 : 0;
+      return Math.max(8, Math.min(98, pressure));
+    }
+
+    function renderObjectives() {
+      const objectives = [
+        { done: !!game.selectedProspect, text: 'Lock a practice prospect and commit to the scenario.' },
+        { done: game.stageFlags.route, text: 'Choose the right lead offer across entry, primary, upsell, or reroute.' },
+        { done: game.stageFlags.fit, text: 'Read fit correctly for the offer you actually chose.' },
+        { done: game.foundClues.length >= 3 || game.foundClues.some(c => c.topic === 'Better offer' || c.topic === 'Offer fit'), text: 'Expose the real pain or catch the route signal.' },
+        { done: game.revealedRebuttals.length >= 2, text: 'Prepare the most likely objections before outreach.' },
+        { done: game.generatedAssets.outreach && game.generatedAssets.call, text: 'Ship both the outreach draft and the 60-second call path.' }
+      ];
+      document.getElementById('objectiveList').innerHTML = objectives.map(item => `
+        <div class="objective-item ${item.done ? 'done' : ''}">
+          <div class="objective-dot"></div>
+          <div>${item.text}</div>
+        </div>
+      `).join('');
+      const next = objectives.find(item => !item.done);
+      document.getElementById('missionState').textContent = next ? `Next move: ${next.text}` : 'Mission complete. Hunt for an S-rank finish and badge unlocks.';
+    }
+
+    function renderEventFeed() {
+      const feed = game.eventFeed.length ? game.eventFeed : [
+        { stamp: 'INIT', tone: 'info', text: 'Mission feed online. Pick a prospect to begin.' }
+      ];
+      document.getElementById('eventFeed').innerHTML = feed.map(item => `
+        <div class="feed-item ${item.tone}">
+          <div class="feed-time">${item.stamp}</div>
+          <div>${item.text}</div>
+        </div>
+      `).join('');
+    }
+
+    function renderAchievements() {
+      document.getElementById('achievementGrid').innerHTML = Object.entries(achievementCatalog).map(([id, item]) => `
+        <div class="achievement ${game.achievements.has(id) ? 'unlocked' : ''}">
+          <div class="badge-line">${item.icon}</div>
+          <strong>${item.label}</strong>
+          <div class="muted" style="margin-top:6px;">${item.desc}</div>
+        </div>
+      `).join('');
+    }
+
+    function xp(delta) {
+      game.xp = Math.max(0, game.xp + delta);
+      renderHUD();
+    }
+
+    function rankFromScore(score) {
+      if (score >= 90) return 'S';
+      if (score >= 80) return 'A';
+      if (score >= 70) return 'B';
+      if (score >= 60) return 'C';
+      return 'D';
+    }
+
+    function renderHUD() {
+      const clueCount = game.foundClues.length;
+      const objCount = game.revealedRebuttals.length;
+      const finalScore = totalScore();
+      document.getElementById('xpValue').textContent = game.xp;
+      document.getElementById('clueValue').textContent = clueCount;
+      document.getElementById('objValue').textContent = objCount;
+      document.getElementById('comboValue').textContent = game.combo;
+      document.getElementById('streakValue').textContent = game.streak;
+      document.getElementById('rankValue').textContent = rankFromScore(finalScore);
+      document.getElementById('mainBar').style.width = finalScore + '%';
+      document.getElementById('scoreBar').style.width = finalScore + '%';
+      const pressure = pressureValue();
+      document.getElementById('pressureBar').style.width = pressure + '%';
+      document.getElementById('pressureText').textContent = !game.selectedProspect
+        ? 'Pick a prospect to see how much selling tension the scenario creates.'
+        : pressure >= 70
+          ? 'High pressure. There is real need here, but sloppy routing or prep will get exposed fast.'
+          : pressure >= 45
+            ? 'Moderate pressure. There is a case here, but the angle needs discipline.'
+            : 'Low pressure. This is a softer fit or reroute scenario, so qualify carefully.';
+      renderObjectives();
+      renderEventFeed();
+      renderAchievements();
+      renderScoreboard();
+    }
+
+    function renderTabs() {
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => openTab(btn.dataset.tab));
+      });
+    }
+
+    function openTab(name) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.tab === name));
+      document.querySelectorAll('.panel').forEach(panel => panel.classList.toggle('active', panel.id === 'panel-' + name));
+    }
+
+    function renderProspects() {
+      const grid = document.getElementById('prospectGrid');
+      grid.innerHTML = Object.entries(prospects).map(([name, p]) => {
+        const fitClass = p.fit === 'strong' ? 'green' : p.fit === 'maybe' ? 'amber' : 'red';
+        const label = p.fit === 'strong' ? 'Strong fit' : p.fit === 'maybe' ? 'Maybe fit' : p.fit === 'weak' ? 'Weak fit' : 'Poor fit';
+        const moodClass = p.fit === 'strong' ? 'good-pick' : p.fit === 'maybe' ? 'risky-pick' : '';
+        return `<div class="prospect-card ${moodClass} ${game.selectedProspect === name ? 'selected' : ''}" onclick="selectProspect('${name.replace(/'/g, "\\'")}')">
+          <div class="mini">Practice prospect</div>
+          <h3>${name}</h3>
+          <p class="muted">${p.summary}</p>
+          <span class="tag ${fitClass}">${label}</span>
+        </div>`;
+      }).join('');
+    }
+
+    function selectProspect(name) {
+      const wasDifferent = game.selectedProspect !== name;
+      game.selectedProspect = name;
+      game.selectedOffer = '';
+      game.fitChecks.clear();
+      game.chosenQuestions.clear();
+      game.foundClues = [];
+      game.chosenObjections.clear();
+      game.revealedRebuttals = [];
+      game.generatedAssets.outreach = false;
+      game.generatedAssets.call = false;
+      game.perfectStages.route = false;
+      game.perfectStages.fit = false;
+      game.perfectStages.clues = false;
+      game.perfectStages.objections = false;
+      game.perfectStages.plan = false;
+      game.stageFlags.route = false;
+      game.stageFlags.fit = false;
+      game.streak = 0;
+      game.combo = 0;
+      document.getElementById('fitReason').value = '';
+      document.getElementById('routeReason').value = '';
+      document.getElementById('outreachName').value = name;
+      renderProspects();
+      renderBrief();
+      renderOfferDeck();
+      renderFitChecks();
+      renderQuestions();
+      renderObjections();
+      resetDiscoveryOutputs();
+      resetRebuttalOutputs();
+      if (wasDifferent) {
+        xp(8);
+        const p = prospects[name];
+        const tone = p.fit === 'strong' ? 'good' : p.fit === 'maybe' ? 'warn' : 'info';
+        pushFeed(`Prospect locked: ${name}. ${p.fit === 'strong' ? 'Strong fit scenario.' : 'This one may require a pivot read.'}`, tone);
+        showToast('Prospect locked', name, tone);
+      }
+      game.stageFlags.prospect = true;
+      renderHUD();
+    }
+
+    function renderBrief() {
+      const name = game.selectedProspect;
+      if (!name) {
+        document.getElementById('briefRoute').innerHTML = '';
+        return;
+      }
+      const p = prospects[name];
+      const tuning = selectedTuning();
+      document.getElementById('briefName').textContent = name;
+      document.getElementById('briefSummary').textContent = p.summary;
+      document.getElementById('briefTags').innerHTML = p.tags.map((t,i) => {
+        let cls = 'green';
+        if (i === 0 && p.fit === 'maybe') cls = 'amber';
+        if (i === 0 && (p.fit === 'weak' || p.fit === 'poor')) cls = 'red';
+        return `<span class="tag ${cls}">${t}</span>`;
+      }).join('');
+      document.getElementById('briefRoute').innerHTML = [
+        `<span class="pill">Entry: ${offerCatalog.training.name}</span>`,
+        `<span class="pill">Primary: ${offerCatalog.dispatchflow.name}</span>`,
+        `<span class="pill">Upsell: ${offerCatalog.visibility.name}</span>`,
+        tuning?.leadOffer === 'reroute' ? `<span class="tag amber">Guardrail: ${offerCatalog.reroute.name}</span>` : ''
+      ].join('');
+    }
+
+    function renderOfferDeck() {
+      const deck = document.getElementById('offerDeck');
+      const tuning = selectedTuning();
+      if (!deck) return;
+      deck.innerHTML = Object.entries(offerCatalog).map(([key, offer]) => `
+        <button type="button" class="offer-card ${game.selectedOffer === key ? 'selected' : ''}" onclick="selectOffer('${key}')">
+          <span class="route-role">${offer.role}</span>
+          <div class="mini">${offer.lane}</div>
+          <h3>${offer.name}</h3>
+          <p class="muted">${offer.tagline}</p>
+          <div class="muted">${offer.cue}</div>
+        </button>
+      `).join('');
+      renderLadderBoard(tuning);
+    }
+
+    function renderLadderBoard(tuning = selectedTuning()) {
+      const board = document.getElementById('ladderBoard');
+      const feedback = document.getElementById('routeFeedback');
+      if (!board || !feedback) return;
+      if (!tuning) {
+        board.innerHTML = '<div class="ladder-card"><strong>No prospect locked.</strong><div class="muted" style="margin-top:6px;">Choose a prospect to start the routing challenge.</div></div>';
+        feedback.textContent = 'Pick a prospect and choose the offer that should lead the conversation. The exact ladder path reveals after you lock the route.';
+        renderPlanBoards();
+        return;
+      }
+      if (!game.stageFlags.route) {
+        board.innerHTML = Object.entries(offerCatalog).map(([key, offer]) => `
+          <div class="ladder-card ${game.selectedOffer === key ? 'active' : ''}">
+            <div class="route-role">${offer.role}</div>
+            <strong>${offer.name}</strong>
+            <div class="muted" style="margin-top:6px;">${offer.cue}</div>
+          </div>
+        `).join('');
+        feedback.innerHTML = game.selectedOffer
+          ? `<span class="warn">Current choice: ${offerCatalog[game.selectedOffer].name}.</span><p class="muted">Click <strong>Lock route</strong> to score it.</p>`
+          : 'Choose one lead offer. The challenge is to decide whether this is an entry move, a primary system sale, an upsell visibility play, or a clean reroute.';
+        renderPlanBoards();
+        return;
+      }
+      board.innerHTML = [
+        { label: 'Lead now', key: tuning.leadOffer, note: tuning.routeWhy },
+        ...routeSlots(tuning).map(item => ({ label: item.label, key: item.key, note: item.key ? offerCatalog[item.key].cue : 'Not part of this path.' }))
+      ].map(item => `
+        <div class="ladder-card ${item.key && item.key === game.selectedOffer ? 'active' : ''}">
+          <div class="route-role">${item.label}</div>
+          <strong>${item.key ? offerCatalog[item.key].name : 'Not in path'}</strong>
+          <div class="muted" style="margin-top:6px;">${item.note}</div>
+        </div>
+      `).join('');
+      feedback.innerHTML = routeOutcome() === 'exact'
+        ? `<span class="success">Correct lead offer: ${offerCatalog[tuning.leadOffer].name}.</span><p class="muted">${tuning.routePath}</p>`
+        : routeOutcome() === 'ladder'
+          ? `<span class="warn">${offerCatalog[game.selectedOffer].name} is in the ladder, but not the best opening move.</span><p class="muted">${tuning.routePath}</p>`
+          : `<span class="danger">Wrong first board for this prospect.</span><p class="muted">${tuning.routePath}</p>`;
+      renderPlanBoards();
+    }
+
+    function renderPlanBoards() {
+      const leadBox = document.getElementById('planLeadOffer');
+      const ladderBox = document.getElementById('planLadder');
+      const tuning = selectedTuning();
+      if (!leadBox || !ladderBox) return;
+      if (!tuning) {
+        leadBox.textContent = 'Pick a prospect and lock a lead offer first.';
+        ladderBox.textContent = 'The recommended entry / primary / upsell path will appear here after you lock the route.';
+        return;
+      }
+      leadBox.textContent = game.selectedOffer ? `${offerCatalog[game.selectedOffer].name} (${offerCatalog[game.selectedOffer].role})` : 'No lead offer selected yet.';
+      ladderBox.textContent = game.stageFlags.route ? tuning.routePath : 'Lock the route to reveal the recommended ladder path for this prospect.';
+    }
+
+    function selectOffer(key) {
+      game.selectedOffer = key;
+      game.stageFlags.route = false;
+      game.stageFlags.fit = false;
+      game.fitChecks.clear();
+      renderOfferDeck();
+      renderFitChecks();
+      renderHUD();
+    }
+
+    function scoreRoute() {
+      const tuning = selectedTuning();
+      if (!tuning || !game.selectedOffer) return;
+      game.stageFlags.route = true;
+      renderLadderBoard(tuning);
+      renderFitChecks();
+      renderHUD();
+    }
+
+    function resetRoute() {
+      game.selectedOffer = '';
+      game.stageFlags.route = false;
+      game.stageFlags.fit = false;
+      game.fitChecks.clear();
+      document.getElementById('routeReason').value = '';
+      renderOfferDeck();
+      renderFitChecks();
+      renderHUD();
+    }
+
+    function renderFitChecks() {
+      const box = document.getElementById('fitChecklist');
+      const intro = document.getElementById('fitIntro');
+      if (!game.selectedProspect) {
+        intro.textContent = 'Lock a lead offer first. The fit indicators change depending on whether you are selling the entry offer, the primary system, the upsell dashboard, or a reroute.';
+        box.innerHTML = '<p class="muted">Pick a prospect first.</p>';
+        document.getElementById('fitScore').textContent = '0 / 6';
+        document.getElementById('fitVerdict').textContent = 'No prospect selected';
+        document.getElementById('fitVerdict').className = 'danger';
+        return;
+      }
+      if (!game.stageFlags.route || !game.selectedOffer) {
+        intro.textContent = 'Lock the lead offer first. Fit only makes sense after you decide which rung of the ladder should open the conversation.';
+        box.innerHTML = '<p class="muted">Route the offer in Stage 2 to unlock fit scoring.</p>';
+        document.getElementById('fitScore').textContent = '0 / 6';
+        document.getElementById('fitVerdict').textContent = 'Lead offer not locked';
+        document.getElementById('fitVerdict').className = 'warn';
+        return;
+      }
+      intro.textContent = `Check what is true for ${offerCatalog[game.selectedOffer].name}.`;
+      box.innerHTML = fitStatementsByOffer[game.selectedOffer].map((text, idx) => `
+        <label class="check"><input type="checkbox" onchange="toggleFit(${idx}, this.checked)" ${game.fitChecks.has(idx) ? 'checked' : ''}/> <div>${text}</div></label>
+      `).join('');
+      updateFitScore();
+    }
+
+    function toggleFit(idx, checked) {
+      if (checked) {
+        game.fitChecks.add(idx);
+        xp(2);
+      } else {
+        game.fitChecks.delete(idx);
+      }
+      updateFitScore();
+    }
+
+    function updateFitScore() {
+      if (!game.stageFlags.route || !game.selectedOffer) return;
+      const tuning = selectedTuning();
+      const analysis = fitAnalysis();
+      document.getElementById('fitScore').textContent = `${analysis.accuracy} / 6`;
+      const verdict = document.getElementById('fitVerdict');
+      if (analysis.accuracy >= 5 && analysis.falseHits === 0) {
+        verdict.textContent = game.selectedOffer === tuning.leadOffer ? 'Clean fit read for the correct lead offer.' : 'Good qualification for this ladder rung.';
+        verdict.className = 'success';
+        game.stageFlags.fit = true;
+      } else if (analysis.strongHits >= Math.max(3, analysis.truthCount - 1)) {
+        verdict.textContent = 'Usable read, but still noisy.';
+        verdict.className = 'warn';
+        game.stageFlags.fit = true;
+      } else {
+        verdict.textContent = `Weak read for ${offerCatalog[game.selectedOffer].name}`;
+        verdict.className = 'danger';
+        game.stageFlags.fit = false;
+      }
+      renderHUD();
+    }
+
+    function renderQuestions() {
+      const list = document.getElementById('questionList');
+      list.innerHTML = questionBank.map(q => {
+        const checked = game.chosenQuestions.has(q);
+        const locked = !checked && game.chosenQuestions.size >= 3;
+        return `<label class="question-card ${locked ? 'locked' : ''}">
+          <input type="checkbox" ${checked ? 'checked' : ''} ${locked ? 'disabled' : ''} onchange="toggleQuestion('${q.replace(/'/g, "\\'")}', this.checked)" />
+          <div>${q}</div>
+        </label>`;
+      }).join('');
+      document.getElementById('questionCount').textContent = `${game.chosenQuestions.size} / 3 selected`;
+    }
+
+    function toggleQuestion(q, checked) {
+      if (checked) {
+        if (game.chosenQuestions.size >= 3) return;
+        game.chosenQuestions.add(q);
+      } else {
+        game.chosenQuestions.delete(q);
+      }
+      renderQuestions();
+    }
+
+    function resetQuestions() {
+      game.chosenQuestions.clear();
+      game.foundClues = [];
+      clearPerfectStage('clues', 'Combo dropped. Intel chain reset.');
+      renderQuestions();
+      resetDiscoveryOutputs();
+      renderHUD();
+    }
+
+    function resetDiscoveryOutputs() {
+      document.getElementById('clueResults').innerHTML = '<span class="muted">Select a prospect and ask up to 3 questions to reveal hidden details.</span>';
+      document.getElementById('coachLog').textContent = 'No questions asked yet.';
+    }
+
+    function revealClues() {
+      if (!game.selectedProspect) {
+        document.getElementById('clueResults').innerHTML = '<p class="danger">Pick a prospect first.</p>';
+        return;
+      }
+      const p = prospects[game.selectedProspect];
+      const chosen = [...game.chosenQuestions];
+      if (!chosen.length) {
+        document.getElementById('clueResults').innerHTML = '<p class="danger">Choose at least 1 question first.</p>';
+        return;
+      }
+      const found = [];
+      p.hidden.forEach(item => {
+        if (item.trigger.some(t => chosen.includes(t))) found.push(item);
+      });
+      const qualityHits = questionQualityCount();
+      game.foundClues = found;
+      let html = `<div class="call-script"><strong>Questions asked:</strong>\n- ${chosen.join('\n- ')}</div>`;
+      if (found.length) {
+        html += `<div class="card soft" style="margin-top:12px;">`;
+        html += `<div class="mini">Hidden info uncovered</div>`;
+        found.forEach(f => {
+          html += `<p><strong>${f.topic}:</strong> ${f.text}</p>`;
+        });
+        html += `</div>`;
+        html += `<p class="muted" style="margin-top:10px;">High-signal picks: ${qualityHits} / ${chosen.length}</p>`;
+        xp(found.length * 8 + qualityHits * 3);
+        game.stageFlags.clues = true;
+        if (found.length >= Math.min(3, p.hidden.length) && qualityHits >= 2) {
+          markPerfectStage('clues', 'Intel burst landed');
+          awardAchievement('intel_surgeon');
+        } else {
+          clearPerfectStage('clues');
+        }
+      } else {
+        html += `<div class="card soft" style="margin-top:12px;"><div class="mini">Result</div><p class="danger">No high-value clues uncovered. Try questions aimed at live workflow, status visibility, urgency, or buyer concern.</p></div>`;
+        clearPerfectStage('clues', 'Combo dropped. The questions missed the pain lane.');
+      }
+      const missed = p.hidden.filter(item => !item.trigger.some(t => chosen.includes(t)));
+      let coach = `You asked ${chosen.length} question(s).`;
+      if (found.length) coach += `\nYou uncovered ${found.length} useful clue(s).`;
+      if (missed.length) coach += `\nYou missed ${missed.length} clue(s).`;
+      coach += `\nHigh-signal picks: ${qualityHits}/${chosen.length}.`;
+      if (p.fit === 'strong' && found.length >= 3) coach += `\nGood call discipline. You focused on the right pain lanes.`;
+      if (p.fit !== 'strong' && found.some(f => f.topic === 'Better offer' || f.topic === 'Offer fit')) coach += `\nNice catch: this prospect may need a different offer.`;
+      if (found.some(f => f.topic === 'Better offer' || f.topic === 'Offer fit')) awardAchievement('pivot_eye');
+      document.getElementById('clueResults').innerHTML = html;
+      document.getElementById('coachLog').textContent = coach;
+      renderHUD();
+    }
+
+    function renderObjections() {
+      const list = document.getElementById('objectionList');
+      if (!game.selectedProspect) {
+        list.innerHTML = '<p class="muted">Pick a prospect first.</p>';
+        document.getElementById('objectionCount').textContent = '0 / 3 selected';
+        return;
+      }
+      const p = prospects[game.selectedProspect];
+      list.innerHTML = p.objections.map((o, idx) => {
+        const checked = game.chosenObjections.has(idx);
+        const locked = !checked && game.chosenObjections.size >= 3;
+        return `<label class="objection-card ${locked ? 'locked' : ''}">
+          <input type="checkbox" ${checked ? 'checked' : ''} ${locked ? 'disabled' : ''} onchange="toggleObjection(${idx}, this.checked)" />
+          <div>${o.objection}</div>
+        </label>`;
+      }).join('');
+      document.getElementById('objectionCount').textContent = `${game.chosenObjections.size} / 3 selected`;
+    }
+
+    function toggleObjection(idx, checked) {
+      if (checked) {
+        if (game.chosenObjections.size >= 3) return;
+        game.chosenObjections.add(idx);
+      } else {
+        game.chosenObjections.delete(idx);
+      }
+      renderObjections();
+    }
+
+    function resetObjections() {
+      game.chosenObjections.clear();
+      game.revealedRebuttals = [];
+      clearPerfectStage('objections', 'Combo dropped. Rebuttal chain reset.');
+      renderObjections();
+      resetRebuttalOutputs();
+      renderHUD();
+    }
+
+    function resetRebuttalOutputs() {
+      document.getElementById('rebuttalResults').innerHTML = '<span class="muted">Pick objections to build your rebuttal pack.</span>';
+    }
+
+    function revealRebuttals() {
+      if (!game.selectedProspect) {
+        document.getElementById('rebuttalResults').innerHTML = '<p class="danger">Pick a prospect first.</p>';
+        return;
+      }
+      const p = prospects[game.selectedProspect];
+      const chosen = [...game.chosenObjections];
+      const qualityHits = objectionQualityCount();
+      if (!chosen.length) {
+        document.getElementById('rebuttalResults').innerHTML = '<p class="danger">Choose at least 1 objection first.</p>';
+        return;
+      }
+      game.revealedRebuttals = chosen.map(i => p.objections[i]);
+      let html = '<div class="card soft">';
+      html += '<div class="mini">Prepared rebuttal pack</div>';
+      game.revealedRebuttals.forEach(item => {
+        html += `<p><strong>Objection:</strong> ${item.objection}<br><strong>Good response:</strong> ${item.good}</p>`;
+      });
+      html += `<p class="muted" style="margin-top:10px;">Likely objections covered: ${qualityHits} / ${chosen.length}</p>`;
+      html += '</div>';
+      document.getElementById('rebuttalResults').innerHTML = html;
+      xp(game.revealedRebuttals.length * 6 + qualityHits * 3);
+      game.stageFlags.objections = true;
+      if (qualityHits >= Math.min(2, chosen.length)) {
+        markPerfectStage('objections', 'Objection shield stacked');
+        awardAchievement('objection_sniper');
+      } else {
+        clearPerfectStage('objections');
+      }
+      renderHUD();
+    }
+
+    function generateOutreach() {
+      const tuning = selectedTuning();
+      const offer = selectedOfferData() || offerCatalog.dispatchflow;
+      const prospect = document.getElementById('outreachName').value || game.selectedProspect || 'your team';
+      const oneLine = document.getElementById('oneLine').value || offer.tagline;
+      const pain = document.getElementById('leadPain').value || (tuning ? tuning.routeWhy : 'live workflow pain is getting ignored');
+      const angle = document.getElementById('openingAngle').value || 'how your team handles coordination today';
+      const cta = document.getElementById('ctaText').value || 'If helpful, I can show you a short example and see whether this first step maps to your team.';
+      const draft = game.selectedOffer === 'reroute'
+        ? `Internal routing note for ${prospect}:\n\nDo not force the current ladder here.\n\nWhy:\n${pain}\n\nRecommended move:\n${cta}`
+        : `Hi ${prospect},\n\nI’m reaching out because I’ve been thinking about ${angle}. For teams in your position, ${pain}.\n\nThe first step I would look at is ${offer.name}. ${oneLine}${tuning && game.stageFlags.route ? `\n\nIf that maps, the longer path is ${tuning.routePath}` : ''}\n\n${cta}\n\nBest,`;
+      document.getElementById('outreachDraft').textContent = draft;
+      game.generatedAssets.outreach = true;
+      game.stageFlags.plan = true;
+      xp(10);
+      pushFeed('Outreach draft generated.', 'good');
+      evaluatePlanStage();
+      renderHUD();
+    }
+
+    function generateCallScript() {
+      const offer = selectedOfferData() || offerCatalog.dispatchflow;
+      const buyerRole = document.getElementById('buyerRole').value || 'owner or office manager';
+      const pain = document.getElementById('leadPain').value || 'status updates get scattered';
+      const value = document.getElementById('leadValue').value || offer.tagline.toLowerCase();
+      const script = game.selectedOffer === 'reroute'
+        ? `1. Confirm the problem.\n"It sounds like the real issue is ${pain}."\n\n2. Disqualify honestly.\n"I do not want to force the wrong workflow offer on you."\n\n3. Hand off cleanly.\n"The right move is to route this to the lane that fits."`
+        : `1. Open with the problem.\n"I work with teams where ${pain}."\n\n2. Anchor to their world.\n"Usually that hits the ${buyerRole} first because they lose clarity."\n\n3. State the lead offer simply.\n"The first step I would look at is ${offer.name}, because the goal is ${value}."\n\n4. Ask one discovery question.\n"Where does that break down most often today?"`;
+      document.getElementById('callPath').textContent = script;
+      game.generatedAssets.call = true;
+      game.stageFlags.plan = true;
+      xp(10);
+      pushFeed('Call path generated.', 'good');
+      evaluatePlanStage();
+      renderHUD();
+    }
+
+    function fitScoreValue() {
+      const analysis = fitAnalysis();
+      if (!game.selectedProspect || !game.stageFlags.fit) return 0;
+      return Math.max(0, Math.min(20, analysis.accuracy * 3 + (analysis.falseHits === 0 ? 2 : 0)));
+    }
+
+    function clueScoreValue() {
+      return Math.min(30, game.foundClues.length * 6 + questionQualityCount() * 4);
+    }
+
+    function prepScoreValue() {
+      let score = 0;
+      if (game.revealedRebuttals.length) score += Math.min(15, objectionQualityCount() * 5 + (game.revealedRebuttals.length * 2));
+      const filled = planFieldCount();
+      score += Math.min(15, filled * 2 + (game.generatedAssets.outreach ? 3 : 0) + (game.generatedAssets.call ? 2 : 0));
+      return Math.min(30, score);
+    }
+
+    function prospectScoreValue() {
+      return game.selectedProspect ? 10 : 0;
+    }
+
+    function routeScoreValue() {
+      const tuning = selectedTuning();
+      if (!tuning || !game.selectedOffer || !game.stageFlags.route) return 0;
+      if (game.selectedOffer === tuning.leadOffer) return 20;
+      if ([tuning.entryOffer, tuning.primaryOffer, tuning.upsellOffer].filter(Boolean).includes(game.selectedOffer)) return 10;
+      return 4;
+    }
+
+    function totalScore() {
+      return Math.min(100, prospectScoreValue() + routeScoreValue() + fitScoreValue() + clueScoreValue() + prepScoreValue());
+    }
+
+    function renderScoreboard() {
+      const pScore = prospectScoreValue();
+      const routeScore = routeScoreValue();
+      const f = fitScoreValue();
+      const c = clueScoreValue();
+      const r = prepScoreValue();
+      const t = totalScore();
+      document.getElementById('scoreProspect').textContent = pScore;
+      document.getElementById('scoreRoute').textContent = routeScore;
+      document.getElementById('scoreFit').textContent = f;
+      document.getElementById('scoreClues').textContent = c;
+      document.getElementById('scorePrep').textContent = r;
+      const rank = rankFromScore(t);
+      document.getElementById('finalRank').textContent = rank;
+      const rankMap = {
+        S: 'Elite contact readiness. You qualified well, uncovered the right clues, and built a tight contact plan.',
+        A: 'Strong contact readiness. You are asking the right questions and selling with discipline.',
+        B: 'Solid start. You have a workable path, but there is room to sharpen fit or rebuttals.',
+        C: 'Usable, but not sharp yet. Tighten your question choices and contact plan.',
+        D: 'Early stage. Pick a better-fit prospect or improve your preparation before outreach.'
+      };
+      document.getElementById('finalRankText').textContent = rankMap[rank];
+      if (rank === 'S') awardAchievement('dispatch_ace');
+      const name = game.selectedProspect || 'No prospect selected yet';
+      let summary = `Prospect: ${name}.\n`;
+      if (!game.selectedProspect) {
+        summary += 'Start by choosing a prospect.';
+      } else {
+        const tuning = selectedTuning();
+        if (tuning) {
+          summary += `Recommended lead: ${offerCatalog[tuning.leadOffer].name}.\n`;
+          summary += `Chosen lead: ${game.selectedOffer ? offerCatalog[game.selectedOffer].name : 'None locked'}.\n`;
+          summary += `Ladder path: ${tuning.routePath}\n`;
+        }
+        summary += `Fit checks marked: ${game.fitChecks.size}/6.\n`;
+        summary += `Useful clues uncovered: ${game.foundClues.length}.\n`;
+        summary += `Objections prepared: ${game.revealedRebuttals.length}.\n`;
+        summary += `Combo peak: ${game.bestCombo}. Perfect stages: ${Object.values(game.perfectStages).filter(Boolean).length}/5.\n`;
+        if (tuning && tuning.leadOffer !== 'dispatchflow') summary += 'Coach note: this scenario should not auto-default to DispatchFlow.\n';
+        if (game.foundClues.some(c => c.topic === 'Better offer' || c.topic === 'Offer fit')) summary += 'You successfully detected a pivot signal to a different offer.\n';
+        if (game.revealedRebuttals.length === 0) summary += 'Prepare at least one rebuttal pack before outreach.\n';
+      }
+      document.getElementById('coachSummary').textContent = summary;
+    }
+
+    function startQuest() {
+      game.selectedProspect = '';
+      game.selectedOffer = '';
+      game.fitChecks.clear();
+      game.chosenQuestions.clear();
+      game.foundClues = [];
+      game.chosenObjections.clear();
+      game.revealedRebuttals = [];
+      game.xp = 0;
+      game.combo = 0;
+      game.streak = 0;
+      game.bestCombo = 0;
+      game.achievements = new Set();
+      game.perfectStages = { route:false, fit:false, clues:false, objections:false, plan:false };
+      game.generatedAssets = { outreach:false, call:false };
+      game.eventFeed = [];
+      game.stageFlags = { prospect:false, route:false, fit:false, clues:false, objections:false, plan:false };
+      document.querySelectorAll('textarea, input').forEach(el => el.value = '');
+      renderProspects();
+      document.getElementById('briefName').textContent = 'Select a prospect';
+      document.getElementById('briefSummary').textContent = 'Once you select a prospect, the mission briefing will appear here.';
+      document.getElementById('briefTags').innerHTML = '';
+      document.getElementById('briefRoute').innerHTML = '';
+      renderOfferDeck();
+      renderFitChecks();
+      renderQuestions();
+      renderObjections();
+      resetDiscoveryOutputs();
+      resetRebuttalOutputs();
+      document.getElementById('outreachDraft').textContent = 'Generate a draft after filling in the plan.';
+      document.getElementById('callPath').textContent = 'Generate a call path when ready.';
+      openTab('choose');
+      pushFeed('Mission reset. Find the strongest first-contact scenario.', 'info');
+      showToast('New quest', 'DispatchFlow mission ready', 'info');
+      renderHUD();
+    }
+
+    function loadDemoState() {
+      startQuest();
+      selectProspect('North Pine Heating & Air');
+      selectOffer('dispatchflow');
+      scoreRoute();
+      [0,1,2,3,4].forEach(i => game.fitChecks.add(i));
+      document.getElementById('fitReason').value = 'Strong fit because this is real field dispatch work with office-to-tech coordination pain and clear mobile workflow value.';
+      renderFitChecks();
+      ['Where does job status usually live today — software, text threads, whiteboards, or a mix?','How often does the office have to call or text techs just to get a status update?','When you look at software, what usually worries you most: cost, rollout effort, training, or complexity?'].forEach(q => game.chosenQuestions.add(q));
+      renderQuestions();
+      revealClues();
+      [0,1,2].forEach(i => game.chosenObjections.add(i));
+      renderObjections();
+      revealRebuttals();
+      document.getElementById('oneLine').value = 'DispatchFlow gives small HVAC teams one clean place to intake jobs, assign techs, track status, and close work without spreadsheet chaos.';
+      document.getElementById('leadPain').value = 'the office often cannot see whether a job is truly on site, delayed, waiting, or done without chasing techs';
+      document.getElementById('leadValue').value = 'one shared office-to-field view of jobs in motion';
+      document.getElementById('openingAngle').value = 'how your team handles live field status and office visibility';
+      document.getElementById('ctaText').value = 'If helpful, I can show you a 2-minute example and see whether it maps to your workflow.';
+      document.getElementById('outreachName').value = 'North Pine Heating & Air';
+      document.getElementById('buyerRole').value = 'owner or office manager';
+      generateOutreach();
+      generateCallScript();
+      openTab('score');
+      renderHUD();
+    }
+
+    function saveSession() {
+      const session = {
+        game: {
+          selectedProspect: game.selectedProspect,
+          selectedOffer: game.selectedOffer,
+          fitChecks: [...game.fitChecks],
+          chosenQuestions: [...game.chosenQuestions],
+          foundClues: game.foundClues,
+          chosenObjections: [...game.chosenObjections],
+          revealedRebuttals: game.revealedRebuttals,
+          xp: game.xp,
+          combo: game.combo,
+          streak: game.streak,
+          bestCombo: game.bestCombo,
+          achievements: [...game.achievements],
+          perfectStages: game.perfectStages,
+          generatedAssets: game.generatedAssets,
+          eventFeed: game.eventFeed,
+          stageFlags: game.stageFlags
+        },
+        fields: {
+          fitReason: document.getElementById('fitReason').value,
+          oneLine: document.getElementById('oneLine').value,
+          leadPain: document.getElementById('leadPain').value,
+          leadValue: document.getElementById('leadValue').value,
+          openingAngle: document.getElementById('openingAngle').value,
+          ctaText: document.getElementById('ctaText').value,
+          outreachName: document.getElementById('outreachName').value,
+          buyerRole: document.getElementById('buyerRole').value,
+          outreachDraft: document.getElementById('outreachDraft').textContent,
+          callPath: document.getElementById('callPath').textContent
+        }
+      };
+      localStorage.setItem('dispatchflow_sales_quest_v2', JSON.stringify(session));
+      alert('Progress saved on this device.');
+    }
+
+    function restoreSession() {
+      const raw = localStorage.getItem('dispatchflow_sales_quest_v2');
+      if (!raw) { alert('No saved session found.'); return; }
+      const session = JSON.parse(raw);
+      startQuest();
+      Object.assign(game.stageFlags, session.game.stageFlags || {});
+      Object.assign(game.perfectStages, session.game.perfectStages || {});
+      Object.assign(game.generatedAssets, session.game.generatedAssets || {});
+      game.selectedProspect = session.game.selectedProspect || '';
+      game.selectedOffer = session.game.selectedOffer || '';
+      game.fitChecks = new Set(session.game.fitChecks || []);
+      game.chosenQuestions = new Set(session.game.chosenQuestions || []);
+      game.foundClues = session.game.foundClues || [];
+      game.chosenObjections = new Set(session.game.chosenObjections || []);
+      game.revealedRebuttals = session.game.revealedRebuttals || [];
+      game.xp = session.game.xp || 0;
+      game.combo = session.game.combo || 0;
+      game.streak = session.game.streak || 0;
+      game.bestCombo = session.game.bestCombo || 0;
+      game.achievements = new Set(session.game.achievements || []);
+      game.eventFeed = session.game.eventFeed || [];
+      renderProspects();
+      if (game.selectedProspect) renderBrief();
+      renderOfferDeck();
+      renderFitChecks();
+      renderQuestions();
+      renderObjections();
+      document.getElementById('fitReason').value = session.fields.fitReason || '';
+      document.getElementById('oneLine').value = session.fields.oneLine || '';
+      document.getElementById('leadPain').value = session.fields.leadPain || '';
+      document.getElementById('leadValue').value = session.fields.leadValue || '';
+      document.getElementById('openingAngle').value = session.fields.openingAngle || '';
+      document.getElementById('ctaText').value = session.fields.ctaText || '';
+      document.getElementById('outreachName').value = session.fields.outreachName || '';
+      document.getElementById('buyerRole').value = session.fields.buyerRole || '';
+      document.getElementById('outreachDraft').textContent = session.fields.outreachDraft || 'Generate a draft after filling in the plan.';
+      document.getElementById('callPath').textContent = session.fields.callPath || 'Generate a call path when ready.';
+      if (game.foundClues.length) {
+        const html = `<div class="card soft"><div class="mini">Restored clue set</div>${game.foundClues.map(f => `<p><strong>${f.topic}:</strong> ${f.text}</p>`).join('')}</div>`;
+        document.getElementById('clueResults').innerHTML = html;
+      }
+      if (game.revealedRebuttals.length) {
+        const html = `<div class="card soft"><div class="mini">Restored rebuttal pack</div>${game.revealedRebuttals.map(item => `<p><strong>Objection:</strong> ${item.objection}<br><strong>Good response:</strong> ${item.good}</p>`).join('')}</div>`;
+        document.getElementById('rebuttalResults').innerHTML = html;
+      }
+      renderHUD();
+      alert('Progress restored.');
+    }
+
+    function downloadSession() {
+      const lines = [];
+      lines.push('DispatchFlow Sales Quest Session');
+      lines.push('');
+      lines.push('Prospect: ' + (game.selectedProspect || '')); 
+      lines.push('Fit checks: ' + game.fitChecks.size + '/6');
+      lines.push('Useful clues: ' + game.foundClues.length);
+      lines.push('Prepared objections: ' + game.revealedRebuttals.length);
+      lines.push('XP: ' + game.xp);
+      lines.push('Combo peak: ' + game.bestCombo);
+      lines.push('Rank: ' + rankFromScore(totalScore()));
+      lines.push('');
+      lines.push('Why fit or not:');
+      lines.push(document.getElementById('fitReason').value || '');
+      lines.push('');
+      lines.push('1-line explanation:');
+      lines.push(document.getElementById('oneLine').value || '');
+      lines.push('');
+      lines.push('Lead pain:');
+      lines.push(document.getElementById('leadPain').value || '');
+      lines.push('');
+      lines.push('Lead value:');
+      lines.push(document.getElementById('leadValue').value || '');
+      lines.push('');
+      lines.push('Opening angle:');
+      lines.push(document.getElementById('openingAngle').value || '');
+      lines.push('');
+      lines.push('CTA:');
+      lines.push(document.getElementById('ctaText').value || '');
+      lines.push('');
+      lines.push('Clues uncovered:');
+      game.foundClues.forEach(f => lines.push(`- ${f.topic}: ${f.text}`));
+      lines.push('');
+      lines.push('Prepared rebuttals:');
+      game.revealedRebuttals.forEach(item => lines.push(`- ${item.objection} => ${item.good}`));
+      lines.push('');
+      lines.push('Outreach draft:');
+      lines.push(document.getElementById('outreachDraft').textContent || '');
+      lines.push('');
+      lines.push('Call path:');
+      lines.push(document.getElementById('callPath').textContent || '');
+      const blob = new Blob([lines.join('\n')], { type: 'text/plain' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'dispatchflow_sales_quest_session.txt';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+
+    renderTabs();
+    startQuest();
+  </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+{
+  "schema": "art-localized-phase-pack-v1",
+  "phase": "marketing",
+  "title": "Ep 4 — Your role + final assessment",
+  "audio": {
+    "primary": "assets/narration.mp3",
+    "fallback": null
+  },
+  "slides": [
+    {
+      "id": "s1",
+      "title": "Your job",
+      "html": "<p><strong>Role.</strong> You translate strategy into routed action — using the right door, artifact, and reviewer.</p>"
+    },
+    {
+      "id": "s2",
+      "title": "Pledge",
+      "html": "<p><strong>Commit.</strong> When uncertain, verify against canon and SOT — do not guess from the newest file.</p>"
+    }
+  ],
+  "engage": {
+    "prompt": "Pick the best answer.",
+    "options": [
+      { "value": "0", "label": "Your role is to avoid documentation and rely on chat memory.", "correct": false },
+      { "value": "1", "label": "Your role is to produce clear artifacts and correct routing under the operating model.", "correct": true }
+    ]
+  },
+  "final_assessment": {
+    "intro": "Both questions must be correct to meet the bar for this two-item check.",
+    "failHint": "Passing requires both answers correct.",
+    "passHint": "Final assessment recorded. Progress saved for this browser.",
+    "questions": [
+      {
+        "name": "finalA",
+        "prompt": "1) Proof beats posture when:",
+        "options": [
+          { "value": "1", "label": "The artifact matches the reviewer path and canon source.", "correct": true },
+          { "value": "0", "label": "The slide deck looks newest.", "correct": false }
+        ]
+      },
+      {
+        "name": "finalB",
+        "prompt": "2) “Localized” in this journey means:",
+        "options": [
+          { "value": "1", "label": "Tuned to real lanes, customers, and proof — not generic slogans.", "correct": true },
+          { "value": "0", "label": "Only translated into another spoken language.", "correct": false }
+        ]
+      }
+    ]
+  }
+}

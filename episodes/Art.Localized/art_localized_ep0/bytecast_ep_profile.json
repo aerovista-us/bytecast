@@ -1,0 +1,30 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "episode": {
+    "code": "ART-EP-0",
+    "title": "The Art Localized — Ep 0 — Collaboration",
+    "type": "training",
+    "date": "2026-03-30",
+    "runtime_target_minutes": 6,
+    "status": "active"
+  },
+  "content": {
+    "tags": ["art-localized", "training", "collaboration"],
+    "summary_short": "Phase 1 manifesto, cue notes, and handoff system for Art Localized collaboration foundations."
+  },
+  "engagement": {
+    "quest": { "title": "Ep 0", "items": [] },
+    "quiz": {
+      "enabled": true,
+      "pass_threshold": 0.8,
+      "questions": [
+        {
+          "id": "art_ep0_q1",
+          "q": "Collaboration in this journey means:",
+          "choices": ["More meetings", "Shared context and proof"],
+          "answer_index": 1
+        }
+      ]
+    }
+  }
+}

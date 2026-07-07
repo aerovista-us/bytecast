@@ -1,0 +1,432 @@
+{
+  "episodeId": "bytecast-aerovista-over-time",
+  "series": "ByteCast",
+  "title": "AeroVista — The Story Over Time",
+  "subtitle": "From scattered tools and tactical fixes to a connected operating environment with clearer truth, identity, and governance",
+  "version": 1,
+  "status": "draft",
+  "sourceFragments": [
+    "aerovista_overtime_story_fragment(1).json",
+    "mmv2_merge_friendly_fragment(1).json",
+    "mmv2_value_example_fragment(1).json"
+  ],
+  "mergeIntent": {
+    "target": "story_bundle_and_episode_page",
+    "mode": "merged",
+    "notes": [
+      "Over-time story fragment is the narrative spine.",
+      "MMV2 fragment is appended as operational proof near the end of the episode.",
+      "Built to drive browser TTS and keep future edits centralized in JSON."
+    ]
+  },
+  "summary": "AeroVista did not become more serious all at once. It grew from isolated builds, experiments, and tactical fixes into a more governed ecosystem. Over time, the center of gravity shifted toward shared identity, source-of-truth decisions, business-suite extraction, cleaner ownership boundaries, and status checkpoints that made the system easier to trust. The story is not just about adding features. It is about moving from activity to architecture.",
+  "tts": {
+    "lang": "en-US",
+    "rate": 0.96,
+    "pitch": 1.0,
+    "volume": 1.0,
+    "preferredVoiceHints": [
+      "Samantha",
+      "Google US English",
+      "Microsoft Aria",
+      "Microsoft Jenny"
+    ],
+    "deliveryStyle": "reflective, steady, grounded",
+    "pace": "medium",
+    "emphasis": [
+      "action plus evidence",
+      "one pass",
+      "grounded context",
+      "less guesswork"
+    ],
+    "pauseSuggestions": {
+      "betweenSectionsMs": 550,
+      "afterTurningPointsMs": 800,
+      "afterOperationalSceneMs": 450
+    }
+  },
+  "chapters": [
+    {
+      "id": "opening_summary",
+      "label": "Opening",
+      "title": "The story over time",
+      "text": "AeroVista did not become more serious all at once. It grew from isolated builds, experiments, and tactical fixes into a more governed ecosystem. Over time, the center of gravity shifted toward shared identity, source-of-truth decisions, business-suite extraction, cleaner ownership boundaries, and status checkpoints that made the system easier to trust. The story is not just about adding features. It is about moving from activity to architecture."
+    },
+    {
+      "id": "vision",
+      "label": "Beginning",
+      "title": "The original impulse",
+      "text": "The early impulse was to build useful things fast: apps, tools, dashboards, sites, music systems, reporting surfaces, and experiments that solved real problems in the moment. The energy was practical and inventive, but much of it lived as individual builds rather than a single governed platform."
+    },
+    {
+      "id": "fragmentation",
+      "label": "Pressure",
+      "title": "When useful things start piling up",
+      "text": "As more systems came online, the work began to feel less like one product and more like a growing estate. Different apps carried their own assumptions. Data handling could be local and app-specific. Paths were not always consistent. Some surfaces were strong on output but weaker on shared structure."
+    },
+    {
+      "id": "dependencies",
+      "label": "Complication",
+      "title": "The hidden cost of dependency and drift",
+      "text": "The strain did not come only from scale. It came from path inconsistency, repo drift, service boundaries, sync gaps, infrastructure recovery work, and questions about where the real source of truth should live. This is where the story shifts from pure building into architecture and governance."
+    },
+    {
+      "id": "convergence",
+      "label": "Turning Point",
+      "title": "From separate apps toward a platform",
+      "text": "AeroCoreOS, AVCC, NXCal, and related systems began to read less like disconnected efforts and more like parts of a converging operating environment. The goal became clearer: shared contracts, shared routing, shared reporting, clearer service boundaries, and a business layer that could support many surfaces instead of forcing every app to invent its own rules."
+    },
+    {
+      "id": "source_of_truth",
+      "label": "Turning Point",
+      "title": "The source-of-truth shift",
+      "text": "One of the biggest changes over time was the move away from each app reading and writing files directly as its own little island. The new direction was toward centralized business logic, explicit ownership of data and services, and more deliberate separation between shell, business suite, timeline truth, and app-specific views."
+    },
+    {
+      "id": "identity",
+      "label": "Turning Point",
+      "title": "Identity becomes a shared plane",
+      "text": "Another major step was the emergence of AVCC as a cross-app identity and business plane. Shared login, profile, and badge direction started getting anchored there, which signaled that the ecosystem was maturing beyond standalone tools and into a system where presence, identity, and access could be understood across surfaces."
+    },
+    {
+      "id": "governance",
+      "label": "Maturity",
+      "title": "When status starts meaning something",
+      "text": "Milestones, cutovers, extraction plans, status checkpoints, work orders, and current-state reports became part of the normal rhythm. That matters because it marks the shift from building things because they can be built to governing them because they now matter together."
+    },
+    {
+      "id": "founder_shift",
+      "label": "Maturity",
+      "title": "The founder changes too",
+      "text": "The human story changed alongside the technical one. The posture evolved from rapid maker energy into operator-storyteller-architect energy. Speed stayed important, but continuity, handoff, structure, coherence, and narrative legibility became much more central."
+    },
+    {
+      "id": "current_state",
+      "label": "Now",
+      "title": "What the system feels like now",
+      "text": "Today the strongest pattern is platform convergence. The system increasingly behaves like a portfolio with divisions, shared identity, shared business logic, shared reporting surfaces, and more explicit boundaries between responsibilities. It still carries friction and cleanup work, but it is much easier to see the intended shape."
+    },
+    {
+      "id": "next_chapter",
+      "label": "Next",
+      "title": "What comes after convergence",
+      "text": "The next chapter is not just more features. It is higher-fidelity truth: better retrieval precision, cleaner service ownership, stronger reporting products, and a more human-readable operating narrative that can explain to others what the system has become and why it matters."
+    },
+    {
+      "id": "mmv2_bridge",
+      "label": "Operational Proof",
+      "title": "What this new operating model changes in practice",
+      "text": "This fragment explains MMV2 in plain language through three before-and-after operational scenes. The thread running through all three is simple: once context is attached, reviewers stop guessing, stop opening a dozen side files, and start making grounded decisions faster."
+    },
+    {
+      "id": "lane_review_triage",
+      "label": "Operational Scene",
+      "title": "Lane review triage",
+      "text": "Before: A mismatch is visible, but the reason is not. The item in view is AeroVista Pitch Studio. It shows assigned lane fund and suggested lane lumina. The reviewer only sees the action. The reviewer has to manually search docs, repos, and history for context. Decision speed drops because the evidence lives somewhere else. After: The reviewer sees both the action and the nearby memory that explains it. Nearby context now includes Prior decision notes about internal enablement usage; Related stack or service references such as av-share context; Recent architectural notes linked to that project root. That makes the real choices visible: Keep fund, Move to lumina, Defer with explicit reason. The operational effect is Reviewer can decide in one pass., Less open-12-files work., Faster lane resolution.."
+    },
+    {
+      "id": "missing_portfolio_block_completion",
+      "label": "Operational Scene",
+      "title": "Missing portfolio block completion",
+      "text": "Before: Fields often get filled from memory instead of evidence. The queue item is simple: Project has missing portfolio block. system_role, commercial_status, and decision_notes can drift in quality. Follow-up edits become more likely because the first pass was not grounded. After: The reviewer fills the block with context instead of approximation. MMV2 returns Project purpose text; Known owner or team clues; Previous similar project metadata. Metadata gets completed from nearby evidence rather than personal recall. The operational effect is Better metadata quality., Fewer follow-up edits., Faster reduction of missing_portfolio_block.."
+    },
+    {
+      "id": "host_bound_service_remediation",
+      "label": "Operational Scene",
+      "title": "Host-bound service remediation",
+      "text": "Before: A host-bound service list shows ports, but not enough story to fix routing cleanly. Routing remediation depends on tribal knowledge. The next step is unclear when all you can see is the container and the port. After: The reviewer can move from host-bound service to front-door route with less guesswork. Context search now returns Known route conventions; Prior infrastructure notes; Linked app and domain references. Fixes become more repeatable because context arrives with the queue item. The operational effect is Faster remediation path., More consistent routing decisions across teams.."
+    },
+    {
+      "id": "repo_usage",
+      "label": "Implementation",
+      "title": "How it is used in this repo",
+      "text": "build_action_queue.py can enrich lane_review_queue with MMV2 context when the memory paper settings are enabled. The relevant settings are SOT_MEMORY_PAPER_ENABLED set to true, SOT_MEMORY_PAPER_API_URL set to http://100.115.9.61:8001, and SOT_MEMORY_PAPER_MODE set to search_simple. In reports/action_queue.json, this adds a memory_paper_context summary and a per-item memory_context payload. The queue becomes action plus evidence, not just action."
+    },
+    {
+      "id": "closing_summary",
+      "label": "Closing",
+      "title": "From useful activity to legible architecture",
+      "text": "Over time, AeroVista changed from a collection of useful builds into a more connected operating environment. The biggest change was not just adding more apps. It was the move toward shared identity, source-of-truth architecture, business-suite extraction, status discipline, and platform thinking that made the whole system easier to understand and trust. The queue becomes action plus evidence, not just action."
+    }
+  ],
+  "storyArc": [
+    {
+      "id": "vision",
+      "label": "Beginning",
+      "title": "The original impulse",
+      "text": "The early impulse was to build useful things fast: apps, tools, dashboards, sites, music systems, reporting surfaces, and experiments that solved real problems in the moment. The energy was practical and inventive, but much of it lived as individual builds rather than a single governed platform."
+    },
+    {
+      "id": "fragmentation",
+      "label": "Pressure",
+      "title": "When useful things start piling up",
+      "text": "As more systems came online, the work began to feel less like one product and more like a growing estate. Different apps carried their own assumptions. Data handling could be local and app-specific. Paths were not always consistent. Some surfaces were strong on output but weaker on shared structure."
+    },
+    {
+      "id": "dependencies",
+      "label": "Complication",
+      "title": "The hidden cost of dependency and drift",
+      "text": "The strain did not come only from scale. It came from path inconsistency, repo drift, service boundaries, sync gaps, infrastructure recovery work, and questions about where the real source of truth should live. This is where the story shifts from pure building into architecture and governance."
+    },
+    {
+      "id": "convergence",
+      "label": "Turning Point",
+      "title": "From separate apps toward a platform",
+      "text": "AeroCoreOS, AVCC, NXCal, and related systems began to read less like disconnected efforts and more like parts of a converging operating environment. The goal became clearer: shared contracts, shared routing, shared reporting, clearer service boundaries, and a business layer that could support many surfaces instead of forcing every app to invent its own rules."
+    },
+    {
+      "id": "source_of_truth",
+      "label": "Turning Point",
+      "title": "The source-of-truth shift",
+      "text": "One of the biggest changes over time was the move away from each app reading and writing files directly as its own little island. The new direction was toward centralized business logic, explicit ownership of data and services, and more deliberate separation between shell, business suite, timeline truth, and app-specific views."
+    },
+    {
+      "id": "identity",
+      "label": "Turning Point",
+      "title": "Identity becomes a shared plane",
+      "text": "Another major step was the emergence of AVCC as a cross-app identity and business plane. Shared login, profile, and badge direction started getting anchored there, which signaled that the ecosystem was maturing beyond standalone tools and into a system where presence, identity, and access could be understood across surfaces."
+    },
+    {
+      "id": "governance",
+      "label": "Maturity",
+      "title": "When status starts meaning something",
+      "text": "Milestones, cutovers, extraction plans, status checkpoints, work orders, and current-state reports became part of the normal rhythm. That matters because it marks the shift from building things because they can be built to governing them because they now matter together."
+    },
+    {
+      "id": "founder_shift",
+      "label": "Maturity",
+      "title": "The founder changes too",
+      "text": "The human story changed alongside the technical one. The posture evolved from rapid maker energy into operator-storyteller-architect energy. Speed stayed important, but continuity, handoff, structure, coherence, and narrative legibility became much more central."
+    },
+    {
+      "id": "current_state",
+      "label": "Now",
+      "title": "What the system feels like now",
+      "text": "Today the strongest pattern is platform convergence. The system increasingly behaves like a portfolio with divisions, shared identity, shared business logic, shared reporting surfaces, and more explicit boundaries between responsibilities. It still carries friction and cleanup work, but it is much easier to see the intended shape."
+    },
+    {
+      "id": "next_chapter",
+      "label": "Next",
+      "title": "What comes after convergence",
+      "text": "The next chapter is not just more features. It is higher-fidelity truth: better retrieval precision, cleaner service ownership, stronger reporting products, and a more human-readable operating narrative that can explain to others what the system has become and why it matters."
+    }
+  ],
+  "observedThemes": [
+    {
+      "id": "ecosystem-thinking",
+      "theme": "Ecosystem thinking",
+      "before": "Individual apps, tools, experiments, and tactical fixes.",
+      "after": "A portfolio with divisions, shared lanes, shared identity, and cross-app governance."
+    },
+    {
+      "id": "source-of-truth",
+      "theme": "Source-of-truth thinking",
+      "before": "App-level file handling and local assumptions.",
+      "after": "Centralized business logic, explicit ownership, and cleaner boundaries."
+    },
+    {
+      "id": "operational-discipline",
+      "theme": "Operational discipline",
+      "before": "Manual progress tracking and loosely connected improvements.",
+      "after": "Cutovers, checkpoints, extraction plans, status reports, and work-order visibility."
+    },
+    {
+      "id": "brand-clarity",
+      "theme": "Brand and division clarity",
+      "before": "A broad umbrella of ambitious activity.",
+      "after": "Stronger distinctions between parent brand, divisions, public surfaces, and internal systems."
+    },
+    {
+      "id": "narrative-maturity",
+      "theme": "Narrative maturity",
+      "before": "A record of what was built.",
+      "after": "A story about what the system means, how it changed, and who it now serves."
+    }
+  ],
+  "evidenceSignals": {
+    "strongestSignals": [
+      "AeroCoreOS evolving toward a unified modular platform",
+      "AVCC emerging as a cross-app identity and business plane",
+      "business-suite extraction and current-state checkpoints",
+      "movement away from direct per-app file reads and writes",
+      "status, work-order, and reporting surfaces becoming part of normal operations"
+    ],
+    "knownFriction": [
+      "inconsistent paths",
+      "repo or sync drift between sources of truth",
+      "noisy retrieval outputs from keyword-only search posture",
+      "mixed-quality report products where some formats are better than others",
+      "operational cleanup still required around ownership boundaries and precision"
+    ]
+  },
+  "reportRead": {
+    "bestSupportingFormats": [
+      "App Inventory",
+      "Project Pulse",
+      "Daily Brief"
+    ],
+    "formatsToTreatCarefully": [
+      "Answer Card",
+      "What Changed"
+    ],
+    "why": "The best report products surface platform, status, identity, and service-boundary signals with less story drift. The weaker products still mix in adjacent conversational noise because retrieval remains too keyword-driven."
+  },
+  "mmv2": {
+    "title": "MMV2 Value Example",
+    "subtitle": "How context turns an action queue into action plus evidence",
+    "summary": "This fragment explains MMV2 in plain language through three before-and-after operational scenes. The thread running through all three is simple: once context is attached, reviewers stop guessing, stop opening a dozen side files, and start making grounded decisions faster.",
+    "section_blocks": [
+      {
+        "id": "lane_review_triage",
+        "kind": "before_after_example",
+        "title": "Lane review triage",
+        "use_case": "Real queue review for a lane mismatch",
+        "before": {
+          "item": "AeroVista Pitch Studio",
+          "queue_state": {
+            "assigned_lane": "fund",
+            "suggested_lane": "lumina"
+          },
+          "reader_experience": "A mismatch is visible, but the reason is not.",
+          "friction": [
+            "The reviewer only sees the action.",
+            "The reviewer has to manually search docs, repos, and history for context.",
+            "Decision speed drops because the evidence lives somewhere else."
+          ]
+        },
+        "after": {
+          "enrichment_source": "/api/search/simple",
+          "memory_context_top_matches": [
+            "Prior decision notes about internal enablement usage",
+            "Related stack or service references such as av-share context",
+            "Recent architectural notes linked to that project root"
+          ],
+          "decision_paths": [
+            "Keep fund",
+            "Move to lumina",
+            "Defer with explicit reason"
+          ],
+          "reader_experience": "The reviewer sees both the action and the nearby memory that explains it."
+        },
+        "operational_effects": [
+          "Reviewer can decide in one pass.",
+          "Less open-12-files work.",
+          "Faster lane resolution."
+        ]
+      },
+      {
+        "id": "missing_portfolio_block_completion",
+        "kind": "before_after_example",
+        "title": "Missing portfolio block completion",
+        "use_case": "Filling metadata without guesswork",
+        "before": {
+          "queue_item": "Project has missing portfolio block",
+          "reader_experience": "Fields often get filled from memory instead of evidence.",
+          "friction": [
+            "system_role, commercial_status, and decision_notes can drift in quality.",
+            "Follow-up edits become more likely because the first pass was not grounded."
+          ]
+        },
+        "after": {
+          "mmv2_returns": [
+            "Project purpose text",
+            "Known owner or team clues",
+            "Previous similar project metadata"
+          ],
+          "reader_experience": "The reviewer fills the block with context instead of approximation.",
+          "benefit": "Metadata gets completed from nearby evidence rather than personal recall."
+        },
+        "operational_effects": [
+          "Better metadata quality.",
+          "Fewer follow-up edits.",
+          "Faster reduction of missing_portfolio_block."
+        ]
+      },
+      {
+        "id": "host_bound_service_remediation",
+        "kind": "before_after_example",
+        "title": "Host-bound service remediation",
+        "use_case": "Routing cleanup with context",
+        "before": {
+          "reader_experience": "A host-bound service list shows ports, but not enough story to fix routing cleanly.",
+          "friction": [
+            "Routing remediation depends on tribal knowledge.",
+            "The next step is unclear when all you can see is the container and the port."
+          ]
+        },
+        "after": {
+          "context_search_returns": [
+            "Known route conventions",
+            "Prior infrastructure notes",
+            "Linked app and domain references"
+          ],
+          "reader_experience": "The reviewer can move from host-bound service to front-door route with less guesswork.",
+          "benefit": "Fixes become more repeatable because context arrives with the queue item."
+        },
+        "operational_effects": [
+          "Faster remediation path.",
+          "More consistent routing decisions across teams."
+        ]
+      }
+    ],
+    "operational_effects": {
+      "cross_cutting": [
+        "Action items become action plus evidence.",
+        "Reviewers spend less time gathering context and more time deciding.",
+        "Queue work becomes easier to explain, audit, and revisit later."
+      ],
+      "human_value": [
+        "Less context switching.",
+        "Less guesswork.",
+        "Higher trust in the next action taken."
+      ]
+    },
+    "repo_config_block": {
+      "title": "How it is used in this repo",
+      "description": "build_action_queue.py can enrich lane_review_queue with MMV2 context when the memory paper settings are enabled.",
+      "env": {
+        "SOT_MEMORY_PAPER_ENABLED": "true",
+        "SOT_MEMORY_PAPER_API_URL": "http://100.115.9.61:8001",
+        "SOT_MEMORY_PAPER_MODE": "search_simple"
+      },
+      "report_output": {
+        "file": "reports/action_queue.json",
+        "adds": [
+          "memory_paper_context summary",
+          "per-item memory_context payload"
+        ]
+      },
+      "closing_line": "The queue becomes action plus evidence, not just action."
+    },
+    "tags": [
+      "MMV2",
+      "SOT",
+      "ByteCast",
+      "lane_review",
+      "metadata",
+      "routing",
+      "memory_context",
+      "action_queue"
+    ]
+  },
+  "bestPlainEnglishSummary": "Over time, AeroVista changed from a collection of useful builds into a more connected operating environment. The biggest change was not just adding more apps. It was the move toward shared identity, source-of-truth architecture, business-suite extraction, status discipline, and platform thinking that made the whole system easier to understand and trust.",
+  "narrationOrder": [
+    "opening_summary",
+    "vision",
+    "fragmentation",
+    "dependencies",
+    "convergence",
+    "source_of_truth",
+    "identity",
+    "governance",
+    "founder_shift",
+    "current_state",
+    "next_chapter",
+    "mmv2_bridge",
+    "lane_review_triage",
+    "missing_portfolio_block_completion",
+    "host_bound_service_remediation",
+    "repo_usage",
+    "closing_summary"
+  ]
+}

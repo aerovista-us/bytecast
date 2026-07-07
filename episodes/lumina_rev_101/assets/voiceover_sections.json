@@ -1,0 +1,89 @@
+{
+  "schema": "bytecast-voiceover-sections-v1",
+  "slug": "lumina_rev_101",
+  "code": "EP-LUM-101",
+  "sections": [
+    {
+      "id": "cold-open",
+      "title": "Cold open",
+      "displayText": "Welcome to EP-LUM-101. This is the reset episode for the whole lane. If someone thinks Lumina is only the branding team, the rest of the pack will feel blurry. Lumina is the commercial growth lane. It helps AeroVista present the right offer, qualify the need, and move the right work toward the right delivery owner.",
+      "speakText": "Welcome to EP-LUM-101. This is the reset episode for the whole lane. If someone thinks Lumina is only the branding team, the rest of the pack will feel blurry. Lumina is the commercial growth lane. It helps AeroVista present the right offer, qualify the need, and move the right work toward the right delivery owner."
+    },
+    {
+      "id": "slide-reset",
+      "title": "More than branding",
+      "displayText": "More than branding. Break the old assumption fast. Lumina is not just the team that makes things look polished. Lumina owns positioning, messaging, market-facing clarity, and commercial movement across the AeroVista ecosystem. That means Lumina must understand offers well enough to sell and route them without pretending to deliver all of them.",
+      "speakText": "More than branding. Break the old assumption fast. Lumina is not just the team that makes things look polished. Lumina owns positioning, messaging, market-facing clarity, and commercial movement across the AeroVista ecosystem. That means Lumina must understand offers well enough to sell and route them without pretending to deliver all of them."
+    },
+    {
+      "id": "slide-core_job",
+      "title": "Lumina's core job",
+      "displayText": "Lumina's core job. Name the lane in plain language. Lumina helps prospects understand what AeroVista can do and which lane actually fits the need. It shapes messaging, campaign framing, sales conversations, and bundle logic so the commercial story stays coherent. The best shorthand is simple: Lumina helps move good-fit work forward.",
+      "speakText": "Lumina's core job. Name the lane in plain language. Lumina helps prospects understand what AeroVista can do and which lane actually fits the need. It shapes messaging, campaign framing, sales conversations, and bundle logic so the commercial story stays coherent. The best shorthand is simple: Lumina helps move good-fit work forward."
+    },
+    {
+      "id": "slide-not_job",
+      "title": "What Lumina does not own",
+      "displayText": "What Lumina does not own. Protect trust by drawing the line clearly. Lumina does not automatically own engineering, audio production, drone operations, publishing execution, or learning platform delivery. Those lanes can absolutely partner with Lumina, but delivery truth stays with the division doing the work. That distinction matters because overpromising early creates confusion later.",
+      "speakText": "What Lumina does not own. Protect trust by drawing the line clearly. Lumina does not automatically own engineering, audio production, drone operations, publishing execution, or learning platform delivery. Those lanes can absolutely partner with Lumina, but delivery truth stays with the division doing the work. That distinction matters because overpromising early creates confusion later."
+    },
+    {
+      "id": "slide-board",
+      "title": "Why Lumina needs the whole board",
+      "displayText": "Why Lumina needs the whole board. Show why cross-division awareness is a sales requirement. Lumina cannot route cleanly if it only understands one division. Prospects often describe a surface request that actually spans multiple lanes. Strong commercial judgment starts with enough board awareness to see the real fit.",
+      "speakText": "Why Lumina needs the whole board. Show why cross-division awareness is a sales requirement. Lumina cannot route cleanly if it only understands one division. Prospects often describe a surface request that actually spans multiple lanes. Strong commercial judgment starts with enough board awareness to see the real fit."
+    },
+    {
+      "id": "slide-examples",
+      "title": "What Lumina-led can look like",
+      "displayText": "What Lumina-led can look like. Make collaboration concrete. Lumina + Nexus: messaging and offer framing lead into a system or automation build. Lumina + EchoVerse: campaign positioning supports a sound, music, or release experience. Lumina + Horizon: a field proof asset becomes part of a larger market-facing story.",
+      "speakText": "What Lumina-led can look like. Make collaboration concrete. Lumina + Nexus: messaging and offer framing lead into a system or automation build. Lumina + EchoVerse: campaign positioning supports a sound, music, or release experience. Lumina + Horizon: a field proof asset becomes part of a larger market-facing story."
+    },
+    {
+      "id": "slide-rule",
+      "title": "The clean rule",
+      "displayText": "The clean rule. Give learners a sentence they can reuse. Lumina owns how the opportunity is framed, positioned, and moved forward commercially. Delivery lanes own the execution details, constraints, timelines, and records of actual delivery. When in doubt, protect delivery truth instead of smoothing it over.",
+      "speakText": "The clean rule. Give learners a sentence they can reuse. Lumina owns how the opportunity is framed, positioned, and moved forward commercially. Delivery lanes own the execution details, constraints, timelines, and records of actual delivery. When in doubt, protect delivery truth instead of smoothing it over."
+    },
+    {
+      "id": "slide-claim_boundary",
+      "title": "Claim boundary",
+      "displayText": "Claim boundary. Keep Lumina recommendations client-safe. Lumina can describe likely fit, but delivery lanes confirm scope, timeline, dependencies, and constraints. Use phrases like based on current discovery when the recommendation is still provisional. Do not turn a partner lane, future idea, or support path into a promised deliverable.",
+      "speakText": "Claim boundary. Keep Lumina recommendations client-safe. Lumina can describe likely fit, but delivery lanes confirm scope, timeline, dependencies, and constraints. Use phrases like based on current discovery when the recommendation is still provisional. Do not turn a partner lane, future idea, or support path into a promised deliverable."
+    },
+    {
+      "id": "slide-your_role",
+      "title": "Your role in revenue",
+      "displayText": "Your role in revenue. Set the expectation for the learner. Your job is to qualify, position, recommend, and hand off cleanly. You do not need fake expert knowledge in every delivery lane to be useful. You do need enough understanding to keep the prospect pointed in the right direction.",
+      "speakText": "Your role in revenue. Set the expectation for the learner. Your job is to qualify, position, recommend, and hand off cleanly. You do not need fake expert knowledge in every delivery lane to be useful. You do need enough understanding to keep the prospect pointed in the right direction."
+    },
+    {
+      "id": "end",
+      "title": "End",
+      "displayText": "End.",
+      "speakText": "End."
+    }
+  ],
+  "overviewOrder": [
+    "cold-open",
+    "slide-reset",
+    "slide-core_job",
+    "slide-not_job",
+    "slide-board",
+    "slide-examples",
+    "slide-rule",
+    "slide-claim_boundary",
+    "slide-your_role"
+  ],
+  "heroSectionId": "cold-open",
+  "slideSectionMap": {
+    "reset": "slide-reset",
+    "core_job": "slide-core_job",
+    "not_job": "slide-not_job",
+    "board": "slide-board",
+    "examples": "slide-examples",
+    "rule": "slide-rule",
+    "claim_boundary": "slide-claim_boundary",
+    "your_role": "slide-your_role"
+  }
+}

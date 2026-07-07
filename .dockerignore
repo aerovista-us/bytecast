@@ -1,0 +1,9 @@
+# Keep image build context small if you later add a Dockerfile; also documents noise.
+node_modules
+test-results
+playwright-report
+**/test-results
+**/.cache
+.git
+*.log
+.DS_Store

@@ -1,0 +1,395 @@
+{
+  "schema": "bytecast-infographic-profile-v1",
+  "episode": {
+    "code": "EP-IG-001",
+    "title": "AeroVista App Ecosystem Map - Reading the Platform, Not Just the Poster",
+    "type": "infographic-pilot",
+    "date": "2026-05-11",
+    "runtime_target_minutes": 11,
+    "status": "pilot"
+  },
+  "routing": {
+    "slug": "av_ecosystem_map_pilot",
+    "storage_prefix": "av_ecosystem_map_pilot"
+  },
+  "content": {
+    "tags": [
+      "infographic",
+      "ecosystem",
+      "routing",
+      "platform-mental-model",
+      "pilot"
+    ],
+    "hero_kicker": "Infographic training pilot",
+    "summary_short": "Turn the AeroVista app ecosystem map into a guided training surface with hotspot overlays, routing judgment, and a proof-of-pattern episode flow.",
+    "summary_long": "This pilot treats AV_AppEchosystemMap.png as a working training surface instead of a static poster. The point is not to repeat every label on the graphic. The point is to teach what the map helps an operator decide: when work belongs to platform instead of app teams, how peer divisions should be routed, where shared services create leverage, and how to read infrastructure claims without getting distracted by presentation polish.",
+    "key_line": "The map is valuable when it helps someone route decisions, not when it merely looks impressive.",
+    "start_here": "Listen first so the poster gains a job. Then open each hotspot and compare the overlay commentary to what the image says directly. Finish with the quiz to confirm that the training layer changed your judgment."
+  },
+  "infographic": {
+    "image": "../infografic/AV_AppEchosystemMap.png",
+    "width": 1536,
+    "height": 1024,
+    "alt": "AeroVista app ecosystem map poster showing command center, platform, divisions, shared services, and infrastructure",
+    "hotspots": [
+      {
+        "id": "left-column",
+        "nav_label": "Promises",
+        "title": "The promise column is your evaluation rubric, not just marketing copy",
+        "subtitle": "Use the left rail to judge whether a future build actually fits the ecosystem.",
+        "kicker": "operator lens",
+        "shape": {
+          "type": "rect",
+          "x": 16,
+          "y": 226,
+          "width": 256,
+          "height": 455,
+          "rx": 24,
+          "ry": 24
+        },
+        "anchor": {
+          "x": 272,
+          "y": 316,
+          "label_x": 306,
+          "label_y": 244
+        },
+        "summary": "The left-side claims about modularity, security, scale, ownership, and ship-readiness should function like acceptance criteria when people pitch new tools, not like decorative brand language.",
+        "insight": "A mature team can point at this column and ask, 'Which promise does this new idea strengthen, and which promise does it threaten?' That turns brand framing into review discipline.",
+        "details": [
+          "If a proposal increases app count but weakens shared identity or ownership, it is ecosystem debt even if the feature looks exciting.",
+          "If a tool depends on fragile admin knowledge or one person's memory, it does not satisfy the poster's automation and scale claims yet.",
+          "Security-by-design belongs here as a first-pass question, not as a cleanup task after launch."
+        ],
+        "coach": "Treat the promise column as a pre-flight checklist. Before adding a new lane, verify that the work preserves integration, ownership, and operational clarity.",
+        "pitfalls": [
+          "Using the map to justify new surfaces without testing whether the backend discipline exists.",
+          "Assuming 'data you own' is automatically true because a dashboard exists.",
+          "Confusing the visual story of scale with the operational reality of scale."
+        ]
+      },
+      {
+        "id": "core-platform",
+        "nav_label": "Core Platform",
+        "title": "Core platform work should remove repeated friction across many apps",
+        "subtitle": "NXCore and AeroCoreOS are leverage layers, not shiny badges.",
+        "kicker": "platform leverage",
+        "shape": {
+          "type": "rect",
+          "x": 424,
+          "y": 24,
+          "width": 706,
+          "height": 160,
+          "rx": 22,
+          "ry": 22
+        },
+        "anchor": {
+          "x": 778,
+          "y": 184,
+          "label_x": 862,
+          "label_y": 198
+        },
+        "summary": "The top band teaches a crucial distinction: platform investments should make multiple downstream apps safer, easier to run, and easier to recover, rather than becoming another isolated product surface.",
+        "insight": "If a change only helps one app, it may belong in that app. If it improves access control, recovery, launch discipline, or observability for several tools at once, it belongs in the platform conversation.",
+        "details": [
+          "Private OS and secure core language should map to repeatable controls like roles, backups, patching, and monitoring.",
+          "Platform decisions are justified by multiplied savings: less duplicated auth, fewer bespoke update flows, fewer one-off recovery plans.",
+          "Operators should ask whether the next improvement belongs in an app backlog or in the platform layer above it."
+        ],
+        "coach": "A good platform move reduces the number of future exceptions teams have to remember.",
+        "pitfalls": [
+          "Calling work 'platform' when it is really a one-team convenience feature.",
+          "Buying visual security language without confirming backup, recovery, and access-control mechanics.",
+          "Overbuilding platform abstractions before two or three real apps prove the repeated need."
+        ]
+      },
+      {
+        "id": "command-center",
+        "nav_label": "Command Center",
+        "title": "The command center is a coordination plane, not the place all work should live",
+        "subtitle": "Centralization should clarify ownership, not erase it.",
+        "kicker": "coordination layer",
+        "shape": {
+          "type": "rect",
+          "x": 575,
+          "y": 206,
+          "width": 384,
+          "height": 352,
+          "rx": 176,
+          "ry": 176
+        },
+        "anchor": {
+          "x": 768,
+          "y": 558,
+          "label_x": 640,
+          "label_y": 506
+        },
+        "summary": "The center teaches orchestration, not ownership. Cross-division work comes here to get routed, prioritized, and reconciled, then it should return to the teams and systems that actually carry the responsibility.",
+        "insight": "When people misuse command-center language, everything drifts toward one giant pseudo-app. The healthier pattern is central visibility, local execution, and explicit handoffs.",
+        "details": [
+          "Bring work here when it crosses multiple divisions, requires shared sequencing, or changes portfolio-level priorities.",
+          "Do not bring work here merely because the central node looks important on the poster.",
+          "The right output of command-center review is a clear owner, an agreed proof path, and a next operating step."
+        ],
+        "coach": "If a discussion ends in the center, it is unfinished. The center should dispatch and align, not hoard tasks.",
+        "pitfalls": [
+          "Treating central visibility as permission to override local expertise without evidence.",
+          "Replacing source systems with a narrative hub that feels cleaner but is less accountable.",
+          "Letting the command center become a branding phrase instead of a practical routing function."
+        ]
+      },
+      {
+        "id": "division-lanes",
+        "nav_label": "Division Lanes",
+        "title": "Division nodes are routing clues for work, audience, and proof",
+        "subtitle": "The map says these are peer lanes, so the training should teach how to pick the right one.",
+        "kicker": "lane routing",
+        "shape": {
+          "type": "rect",
+          "x": 294,
+          "y": 198,
+          "width": 918,
+          "height": 474,
+          "rx": 26,
+          "ry": 26
+        },
+        "anchor": {
+          "x": 1118,
+          "y": 348,
+          "label_x": 1194,
+          "label_y": 304
+        },
+        "summary": "Each division card tells you more than a brand name. It suggests what kind of artifact is being produced, what audience it serves, and what sort of proof should exist when the work is done.",
+        "insight": "A practical operator can usually route a request by asking three things: What is the deliverable? Who experiences it first? What durable proof should remain after it ships?",
+        "details": [
+          "Nexus-like requests imply systems, automation, or tooling proof.",
+          "EchoVerse- or Lumina-like requests imply story, creative assets, messaging, and audience-facing consistency.",
+          "Summit-like requests imply onboarding, learning outcomes, and adoption proof instead of just asset delivery."
+        ],
+        "coach": "Route by operating outcome, not by whichever division name sounds most impressive in the meeting.",
+        "pitfalls": [
+          "Stuffing unrelated work into one division because it happens to be active already.",
+          "Using the map as a hierarchy chart when it is actually a peer-lane model.",
+          "Routing by aesthetics instead of by delivery obligations and proof."
+        ]
+      },
+      {
+        "id": "shared-services",
+        "nav_label": "Shared Services",
+        "title": "Shared services are multipliers that keep the ecosystem from fragmenting",
+        "subtitle": "The right column is about cross-cutting capability, not optional polish.",
+        "kicker": "cross-cutting capability",
+        "shape": {
+          "type": "rect",
+          "x": 1221,
+          "y": 24,
+          "width": 280,
+          "height": 496,
+          "rx": 24,
+          "ry": 24
+        },
+        "anchor": {
+          "x": 1221,
+          "y": 210,
+          "label_x": 1008,
+          "label_y": 104
+        },
+        "summary": "Single sign-on, shared data, automation, notifications, file hubs, and local AI are not side quests. They are the glue that determines whether multiple apps feel like one platform or a set of unrelated portals.",
+        "insight": "When these services are missing, teams compensate with copy-paste workflows, manual reminders, duplicate data entry, and brittle user onboarding. The poster hints at the upside; the training should teach the failure mode.",
+        "details": [
+          "SSO and shared identity reduce account sprawl and role confusion.",
+          "Automation and notifications reduce the number of handoffs that depend on memory.",
+          "A local AI assistant only creates value when the surrounding files, roles, and sources are already structured enough to trust."
+        ],
+        "coach": "If a team keeps asking for status updates manually, the shared-service layer probably needs attention more than the front-end layer does.",
+        "pitfalls": [
+          "Adding apps faster than identity, notification, and data conventions can support them.",
+          "Treating AI assistant language as value before the underlying information architecture is coherent.",
+          "Assuming 'one login' is finished simply because authentication exists."
+        ]
+      },
+      {
+        "id": "foundation-stack",
+        "nav_label": "Foundation Stack",
+        "title": "The infrastructure strip is where operational claims become testable",
+        "subtitle": "If the stack underneath is weak, the map above it is only a pitch.",
+        "kicker": "ops reality",
+        "shape": {
+          "type": "rect",
+          "x": 291,
+          "y": 698,
+          "width": 916,
+          "height": 116,
+          "rx": 20,
+          "ry": 20
+        },
+        "anchor": {
+          "x": 752,
+          "y": 698,
+          "label_x": 836,
+          "label_y": 642
+        },
+        "summary": "The bottom-center infrastructure row tells you what has to work before any ecosystem promise is credible: containerization, routing, DNS/security, private networking, databases, caching, backups, monitoring, and version control.",
+        "insight": "This is the triage order operators eventually learn the hard way. When an app misbehaves, you do not jump straight to brand, UI, or content. You check edge, routing, runtime, data, recovery, and observability in order.",
+        "details": [
+          "Infrastructure rows are a teaching cue for incident order: edge first, then service routing, then app process, then data and recovery.",
+          "Backups and monitoring belong on the same line because recovery without visibility is guesswork, and visibility without recovery is panic with charts.",
+          "If multiple apps depend on the same foundation tools, changes here deserve stronger review than ordinary content edits."
+        ],
+        "coach": "Teach learners to read the foundation row as the platform's risk map.",
+        "pitfalls": [
+          "Treating infrastructure icons as decorative proof instead of asking what is actually deployed and verified.",
+          "Skipping backup and monitoring review because the front-end demo looks polished.",
+          "Confusing source control presence with deployment discipline."
+        ]
+      },
+      {
+        "id": "operating-story",
+        "nav_label": "Operating Story",
+        "title": "The bottom strip teaches the difference between portfolio story and operating system",
+        "subtitle": "This is where presentation and execution meet.",
+        "kicker": "story versus operations",
+        "shape": {
+          "type": "rect",
+          "x": 14,
+          "y": 838,
+          "width": 1508,
+          "height": 170,
+          "rx": 20,
+          "ry": 20
+        },
+        "anchor": {
+          "x": 1276,
+          "y": 922,
+          "label_x": 1112,
+          "label_y": 878
+        },
+        "summary": "The division strip and closing promise are doing two jobs at once: they help outsiders understand the portfolio, and they help insiders keep a shared language for what each lane is supposed to produce.",
+        "insight": "A strong poster can unify the story, but the training layer has to remind people that representation is not evidence. The map's job is to orient; the systems behind it still need explicit ownership and proof.",
+        "details": [
+          "Use the strip when orienting new contributors or external partners who need the big picture fast.",
+          "Do not use the strip as a substitute for project briefs, ownership docs, or work-order routing.",
+          "The right takeaway is confidence with boundaries: understand the system clearly, but keep decisions tied to accountable sources."
+        ],
+        "coach": "The poster succeeds when it reduces confusion without encouraging fake certainty.",
+        "pitfalls": [
+          "Assuming a neat taxonomy means the portfolio is already operating cleanly everywhere.",
+          "Using the poster to skip the harder questions about proof, ownership, and handoff.",
+          "Letting the visual language become the only language."
+        ]
+      }
+    ]
+  },
+  "references": {
+    "blurb": "Use the pilot reference layer to connect the map back to the governed learning surfaces already in the workspace.",
+    "cards": [
+      {
+        "title": "Use the map for routing, not for mythology",
+        "body": "When someone asks where work belongs, the map gives you candidate lanes. It does not prove staffing, deployment quality, or source-of-truth status on its own."
+      },
+      {
+        "title": "Separate visibility from ownership",
+        "body": "A portfolio map is a visibility tool. Source systems, handoff docs, and operating records still own the binding truth for work execution."
+      },
+      {
+        "title": "Escalate to platform only when the pattern repeats",
+        "body": "If a problem shows up across several apps, it deserves platform attention. If it stays local to one surface, solve it as close to that surface as possible."
+      },
+      {
+        "title": "Use the poster to teach vocabulary faster",
+        "body": "The quickest win for this episode type is shared language: command center, division lane, shared service, and infrastructure stack all become easier to discuss after one guided pass."
+      }
+    ],
+    "links": [
+      {
+        "label": "Open EP-002: AeroVista Overview",
+        "href": "../aerovista_7_division_overview/index.html",
+        "primary": true
+      },
+      {
+        "label": "Open Training Hub",
+        "href": "../training_hub/index.html",
+        "primary": false
+      },
+      {
+        "label": "Workspace Docs Portal",
+        "href": "../../docs/index.html",
+        "primary": false
+      },
+      {
+        "label": "Return to Playlist",
+        "href": "../../seed_bytecast.html",
+        "primary": false
+      }
+    ]
+  },
+  "engagement": {
+    "quest": {
+      "title": "Operator checklist",
+      "prompt": "Use the checklist as a quick self-review after you finish the hotspots.",
+      "items": [
+        {
+          "id": "q1",
+          "text": "Open every hotspot and identify one place where the training layer adds operator judgment that the poster alone does not provide."
+        },
+        {
+          "id": "q2",
+          "text": "Say out loud when a request should stay at the app level versus when it should be elevated to the shared platform layer."
+        },
+        {
+          "id": "q3",
+          "text": "Name one anti-pattern the command-center hotspot warns against."
+        }
+      ]
+    },
+    "quiz": {
+      "enabled": true,
+      "pass_threshold": 0.75,
+      "questions": [
+        {
+          "id": "ig1_q1",
+          "q": "The strongest reason to route work into the core platform layer is:",
+          "choices": [
+            "The platform section of the poster looks important",
+            "The same control or friction problem appears across multiple apps",
+            "A team wants to rename a single feature more elegantly"
+          ],
+          "answer_index": 1,
+          "explain": "Platform work is justified by repeated leverage, not by prestige or by one isolated cosmetic issue."
+        },
+        {
+          "id": "ig1_q2",
+          "q": "What is the command center supposed to produce?",
+          "choices": [
+            "A central place where all execution stays forever",
+            "A routed owner, a proof path, and a next operating step",
+            "A replacement for local team systems"
+          ],
+          "answer_index": 1,
+          "explain": "The command center coordinates and dispatches. It should not become a pseudo-system of record."
+        },
+        {
+          "id": "ig1_q3",
+          "q": "Which statement best captures the purpose of shared services like SSO, automation, and notifications?",
+          "choices": [
+            "They are optional polish once every app is already live",
+            "They reduce fragmentation and manual handoffs across the ecosystem",
+            "They matter only for executive dashboards"
+          ],
+          "answer_index": 1,
+          "explain": "Shared services create platform cohesion. Without them, teams end up rebuilding the same coordination moves by hand."
+        },
+        {
+          "id": "ig1_q4",
+          "q": "When an app is failing, what does the infrastructure hotspot teach first?",
+          "choices": [
+            "Start by changing the brand language on the poster",
+            "Jump directly to the newest visible front-end file",
+            "Check edge, routing, runtime, data, recovery, and observability in a disciplined order"
+          ],
+          "answer_index": 2,
+          "explain": "The infrastructure strip is the platform's risk map. It helps you triage systematically instead of guessing from presentation."
+        }
+      ]
+    }
+  }
+}

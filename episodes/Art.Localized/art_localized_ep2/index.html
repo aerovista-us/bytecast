@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en" data-theme="art-localized">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ByteCast — The Art Localized • Ep 2 — Partnership tiers</title>
+  <meta
+    name="description"
+    content="The Art Localized Training — Ep 2. Partnership tiers, division collaboration, and press-kit proof from the Phase 3 source pack."
+  />
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml" />
+  <style>
+    :root {
+      --bg0: #140d09;
+      --bg1: #24160d;
+      --panel: rgba(20, 13, 9, 0.84);
+      --ink: rgba(255, 244, 238, 0.96);
+      --muted: rgba(255, 244, 238, 0.72);
+      --line: rgba(255, 174, 118, 0.22);
+      --accent: #ff9d57;
+      --accent-2: #ffd29d;
+      --accent-3: #8ef0bf;
+      --max: 980px;
+      --pad: clamp(16px, 2.5vw, 26px);
+      --display: "Aptos Display", "Segoe UI Variable Display", "Trebuchet MS", sans-serif;
+      --sans: "Aptos", "Segoe UI Variable Text", "Segoe UI", sans-serif;
+      --mono: ui-monospace, "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      color: var(--ink);
+      background:
+        radial-gradient(880px 520px at 50% 0%, rgba(255, 157, 87, 0.16), transparent 55%),
+        radial-gradient(760px 420px at 100% 12%, rgba(255, 210, 157, 0.12), transparent 50%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      min-height: 100vh;
+    }
+    a { color: inherit; }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(20, 13, 9, 0.84);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar__inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 12px var(--pad);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .k, .eyebrow {
+      font-family: var(--mono);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .k {
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .eyebrow {
+      margin: 0 0 10px;
+      font-size: 12px;
+      color: var(--accent-2);
+    }
+    .btn {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font: inherit;
+      font-size: 13px;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn--primary {
+      border-color: rgba(255, 157, 87, 0.56);
+      box-shadow: 0 0 22px rgba(255, 157, 87, 0.18);
+    }
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 24px var(--pad) 72px;
+    }
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: var(--panel);
+      padding: 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 18px 46px rgba(0, 0, 0, 0.22);
+    }
+    .hero {
+      padding: 24px;
+      background:
+        linear-gradient(135deg, rgba(255, 157, 87, 0.16), rgba(255, 210, 157, 0.12)),
+        rgba(20, 13, 9, 0.84);
+    }
+    h1, h2 {
+      margin: 0 0 10px;
+      font-family: var(--display);
+      letter-spacing: -0.02em;
+    }
+    h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); }
+    h2 { font-size: 1.05rem; }
+    .sub {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 74ch;
+    }
+    .row, .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+    .chips { margin-top: 16px; }
+    .chip {
+      border: 1px solid rgba(255, 157, 87, 0.28);
+      background: rgba(255, 157, 87, 0.08);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+    }
+    .status {
+      margin: 12px 0 0;
+      font-size: 13px;
+      color: var(--accent-2);
+    }
+    .script {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .script p, .mini, .choice, .source-list li {
+      line-height: 1.6;
+    }
+    .script p, .mini, .choice {
+      margin: 0;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .slide-visual {
+      margin-bottom: 14px;
+      padding: 12px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+    }
+    .slide-visual svg { max-width: 100%; height: auto; display: block; }
+    .slides { min-height: 250px; }
+    .slide { display: none; }
+    .slide.is-active { display: block; }
+    .slide:not(.is-active) .bc-art :is(animate, animateTransform) { visibility: hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      .slide-visual .bc-art :is(animate, animateTransform) { display: none !important; }
+    }
+    .note-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .mini { color: var(--muted); }
+    .source-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+    .choice {
+      display: block;
+      margin: 10px 0;
+      cursor: pointer;
+    }
+    .choice input { margin-right: 10px; }
+    .mission-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .mission-field {
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .mission-field input,
+    .mission-field textarea {
+      width: 100%;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
+      padding: 12px 14px;
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.04);
+      font: inherit;
+    }
+    .mission-field textarea {
+      min-height: 104px;
+      resize: vertical;
+    }
+    .field-guide {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .guide-card {
+      padding: 14px;
+      border-radius: 16px;
+      background: rgba(255, 210, 157, 0.07);
+      border: 1px solid rgba(255, 210, 157, 0.16);
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .guide-card strong { color: var(--ink); }
+    #engageHint, #missionHint {
+      margin-top: 12px;
+      color: var(--accent-3);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body data-bc-ep="2" data-bc-slug="art_localized_ep2">
+  <header class="topbar">
+    <div class="topbar__inner">
+      <span class="k">The Art Localized — Training</span>
+      <div class="row">
+        <a class="btn" href="../../../seed_bytecast.html">Playlist</a>
+        <a class="btn" href="../../../episodes/training_hub/index.html">Training Hub</a>
+        <a class="btn btn--primary" href="../../../index.html">Workspace</a>
+      </div>
+    </div>
+  </header>
+  <main class="wrap">
+    <section class="panel hero">
+      <p class="eyebrow">ART-EP-2 • Phase 3 Partnerships</p>
+      <h1>Ep 2 — Partnership tiers</h1>
+      <p class="sub">
+        Phase 3 scales the program through partner structure. Tiers are not cosmetic labels. They change the
+        collaboration offer, the proof package, and the cross-division obligations that come with the deal.
+      </p>
+      <div class="chips">
+        <span class="chip">Community Partner</span>
+        <span class="chip">Cultural Partner</span>
+        <span class="chip">Corporate Ally</span>
+        <span class="chip">Press Kit Proof</span>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Listen">
+      <h2>Listen</h2>
+      <p class="sub">
+        Read-aloud uses the browser voice on this device. The script below is built from the Phase 3 partnership,
+        division-collaboration, and press-kit materials.
+      </p>
+      <div class="row" style="margin-top:14px;">
+        <button type="button" class="btn btn--primary" id="btnReadAloud">Read Aloud</button>
+        <button type="button" class="btn" id="btnPauseReadAloud">Pause</button>
+        <button type="button" class="btn" id="btnStopReadAloud">Stop</button>
+        <button type="button" class="btn" id="btnListenDone">Mark listen complete</button>
+      </div>
+      <p class="status" id="readStatus" aria-live="polite">Ready to read the Phase 3 script aloud.</p>
+      <div id="readScript" class="script">
+        <p>
+          Phase 3 scales Art Localized from a community initiative into a partnership-ready movement. The
+          partner deck is clear about the offer: sponsorship of local showcases, co-branded events, and artist-in-residence
+          programs become the vehicles for expansion.
+        </p>
+        <p>
+          Partnership tiers define how much commitment and infrastructure is involved. Community Partners include
+          schools and local studios. Cultural Partners include regional institutions. Corporate Allies include
+          media and tech collaborators. The tier determines how much coordination, proof, and shared output is required.
+        </p>
+        <p>
+          Division collaboration must stay explicit. Lumina handles campaign orchestration, EchoVerse owns sound
+          identity, SkyForge develops immersive art experiences, Vespera handles publication, Summit drives educational
+          impact, and Horizon captures regional showcases. Tier promises are only credible when those roles stay mapped.
+        </p>
+        <p>
+          Proof for partnership conversations lives in the press kit and metrics. The pack calls for logos, a fact
+          sheet, media contacts, creator profiles, quotes, soundtrack links, and milestone data. A real tier should
+          change both the artifact set and the reviewer path.
+        </p>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Slides">
+      <h2>Slides</h2>
+      <p class="eyebrow" id="slideTitle">Tier shapes the offer</p>
+      <div id="slides" class="slides">
+        <div class="slide is-active" data-title="Tier shapes the offer">
+          <div class="slide-visual" data-slide-art="s1" aria-hidden="true"></div>
+          <p class="sub">
+            The partner deck turns “support” into concrete lanes, and each lane carries a different collaboration burden.
+          </p>
+          <div class="note-grid">
+            <article class="mini"><strong>Community.</strong> Local schools, art studios, and grassroots activators.</article>
+            <article class="mini"><strong>Cultural.</strong> Institutions that expand legitimacy and regional reach.</article>
+            <article class="mini"><strong>Corporate Ally.</strong> Media or tech collaborators with larger amplification power.</article>
+          </div>
+        </div>
+        <div class="slide" data-title="Opportunities">
+          <div class="slide-visual" data-slide-art="s2" aria-hidden="true"></div>
+          <p class="sub">
+            Tiers are useful only if they drive different asks, different benefits, and different next steps.
+          </p>
+          <div class="note-grid">
+            <article class="mini"><strong>Sponsorship.</strong> Fund and stage local showcases.</article>
+            <article class="mini"><strong>Co-branded events.</strong> Share audience and proof in public.</article>
+            <article class="mini"><strong>Residencies.</strong> Create higher-touch programs with deeper support.</article>
+          </div>
+        </div>
+        <div class="slide" data-title="Division map">
+          <div class="slide-visual" data-slide-art="s3" aria-hidden="true"></div>
+          <p class="sub">
+            Every partner promise crosses divisions, so the operating model has to name who owns what.
+          </p>
+          <div class="note-grid">
+            <article class="mini"><strong>Lumina.</strong> Press kits, ads, social, and orchestration.</article>
+            <article class="mini"><strong>EchoVerse / SkyForge.</strong> Soundtrack plus immersive activations.</article>
+            <article class="mini"><strong>Vespera / Summit / Horizon.</strong> Publication, certification, and cinematic capture.</article>
+          </div>
+        </div>
+        <div class="slide" data-title="Proof follows the tier">
+          <div class="slide-visual" data-slide-art="s4" aria-hidden="true"></div>
+          <p class="sub">
+            Higher-touch tiers need stronger proof. That means better artifacts, clearer metrics, and tighter reviewer paths.
+          </p>
+          <div class="note-grid">
+            <article class="mini"><strong>Press kit.</strong> Logos, fact sheet, contacts, creator examples, and QR links.</article>
+            <article class="mini"><strong>Feedback data.</strong> Reach, partnerships, creator count, and follow-up activity.</article>
+            <article class="mini"><strong>Rule.</strong> If the tier rises, the artifact standard rises with it.</article>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="margin-top:14px;">
+        <button type="button" class="btn" id="btnSlidePrev">Previous</button>
+        <button type="button" class="btn btn--primary" id="btnSlideNext">Next</button>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Built from">
+      <h2>Built From</h2>
+      <ul class="source-list">
+        <li><code>The_Art_Localized_Phase3_Pack_AVHQ/partner-deck-outline.md</code> for tier structure and collaboration opportunities.</li>
+        <li><code>The_Art_Localized_Phase3_Pack_AVHQ/division-collab-framework.md</code> for cross-division roles.</li>
+        <li><code>The_Art_Localized_Phase3_Pack_AVHQ/press-kit-template.md</code> for artifact expectations and media proof.</li>
+        <li><code>The_Art_Localized_Phase3_Pack_AVHQ/amplification-plan.md</code> for the growth targets behind the partner program.</li>
+      </ul>
+    </section>
+
+    <section class="panel" aria-label="Field guide">
+      <h2>Field guide</h2>
+      <p class="sub">
+        Use this when deciding whether a partner helps the creator or simply borrows the campaign's credibility.
+        A good partner tier increases support and proof without quietly shifting risk onto the artist.
+      </p>
+      <div class="field-guide">
+        <article class="guide-card"><strong>Community Partner.</strong> Best for local workshops, venue access, small showcases, and trust-building. Proof can be simple: event plan, consented artist profile, and attendance or signup target.</article>
+        <article class="guide-card"><strong>Cultural Partner.</strong> Best for institutions, nonprofits, galleries, schools, or regional organizations. Proof needs stronger review: press kit, role map, public language, and a clear creator benefit.</article>
+        <article class="guide-card"><strong>Corporate Ally.</strong> Best only when larger reach adds real support. Require stricter proof: rights language, benefit terms, brand usage approval, measurable feedback, and an exit path if the fit turns extractive.</article>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Engage">
+      <h2>Engage</h2>
+      <form id="engageForm">
+        <p class="sub">Pick the answer that matches the partnership model.</p>
+        <label class="choice"><input type="radio" name="engage" value="cosmetic" /> Tiers are mostly cosmetic labels for proposals and should not change the artifact or review path.</label>
+        <label class="choice"><input type="radio" name="engage" value="operating" data-correct="true" /> Tiers should change expectations, artifacts, collaborators, and the reviewer path that proves the work.</label>
+        <div class="row" style="margin-top:14px;">
+          <button type="submit" class="btn btn--primary" id="engageSubmit">Submit Engage</button>
+        </div>
+        <p id="engageHint"></p>
+      </form>
+    </section>
+
+    <section class="panel" aria-label="Proof mission">
+      <h2>Proof mission</h2>
+      <p class="sub">
+        Choose the partner tier for a sample launch. Your proof should explain what changes when the tier changes,
+        including the artifact standard and reviewer path.
+      </p>
+      <form id="missionForm">
+        <div class="mission-grid">
+          <label class="mission-field">
+            <span>Partner tier</span>
+            <input data-proof-field="partnerTier" type="text" placeholder="Community Partner, Cultural Partner, Corporate Ally..." />
+          </label>
+          <label class="mission-field">
+            <span>Required proof artifact</span>
+            <textarea data-proof-field="requiredProofArtifact" placeholder="Press kit, creator profile, metric snapshot, event plan, rights note..."></textarea>
+          </label>
+          <label class="mission-field">
+            <span>Reviewer path</span>
+            <input data-proof-field="reviewerPath" type="text" placeholder="Who signs off before this goes public?" />
+          </label>
+        </div>
+        <div class="row" style="margin-top:14px;">
+          <button type="submit" class="btn btn--primary">Record proof mission</button>
+        </div>
+        <p id="missionHint"></p>
+      </form>
+    </section>
+  </main>
+  <script src="../../../assets/shared/bytecast_loop.js"></script>
+  <script src="../../../assets/shared/art_localized_episode.js"></script>
+</body>
+</html>

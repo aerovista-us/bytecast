@@ -1,0 +1,10 @@
+{
+  "schema": "bytecast-episode-sot-v1",
+  "slug": "contributor_onboarding_ep1",
+  "episode_code": "CO-EP-1",
+  "title": "Contributor Onboarding - Ep 1 - Fit and Mutual Expectations",
+  "series_id": "contributor_onboarding",
+  "sequence": 2,
+  "status": "active",
+  "entry": "index.html"
+}

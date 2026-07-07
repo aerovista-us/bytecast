@@ -1,0 +1,240 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "episode": {
+    "code": "EP-LUM-102",
+    "title": "Know the Board",
+    "type": "episode pack",
+    "date": "2026-03-29",
+    "runtime_target_minutes": 12,
+    "status": "active"
+  },
+  "content": {
+    "tags": [
+      "divisions",
+      "routing",
+      "board",
+      "bundles"
+    ],
+    "summary_short": "Build a usable map of all seven AeroVista divisions so leads get routed by need instead of buzzword.",
+    "summary_long": "This episode gives the learner a sales-level explanation of each division, the kind of problem it fits, and the early signs that a single request is actually a bundled opportunity.",
+    "start_here": "Listen once, then use the slides to practice one-sentence division shorthands and bundle thinking.",
+    "hero_kicker": "Board Awareness",
+    "key_line": "AeroVista is a board of lanes, not one giant bucket."
+  },
+  "media": {
+    "audio_files": []
+  },
+  "slides": [
+    {
+      "id": "board_model",
+      "title": "AeroVista is a board, not a bucket",
+      "goal": "Anchor the peer-division model.",
+      "bullets": [
+        "Each division has its own delivery strengths, trust style, and offer logic.",
+        "Lumina sits across the board commercially, but it still routes into specific lanes.",
+        "That means the board matters more than memorizing slogans."
+      ]
+    },
+    {
+      "id": "nexus",
+      "title": "Nexus = build, systems, AI",
+      "goal": "Give Nexus a clean sales shorthand.",
+      "bullets": [
+        "Think custom software, automation, integration, and AI-enabled systems.",
+        "The buyer usually has an operational or technical problem that needs structure.",
+        "Words like workflow, system, portal, automation, and integration are strong clues."
+      ]
+    },
+    {
+      "id": "echo_sky",
+      "title": "EchoVerse and SkyForge",
+      "goal": "Separate sonic work from interactive experiences.",
+      "bullets": [
+        "EchoVerse fits music, sound, audio identity, release support, and expressive sonic experiences.",
+        "SkyForge fits immersive, playful, interactive, or game-like work.",
+        "A lead may mention content generally, but the format tells you which lane is primary."
+      ]
+    },
+    {
+      "id": "summit_vespera",
+      "title": "Summit and Vespera",
+      "goal": "Distinguish learning systems from authored content.",
+      "bullets": [
+        "Summit is the learning and training systems lane: courses, learner journeys, education experiences.",
+        "Vespera is the publishing and authored-content lane: books, editorial packages, narrative content systems.",
+        "Both can package information, but they do not do it the same way."
+      ]
+    },
+    {
+      "id": "lumina_horizon",
+      "title": "Lumina and Horizon",
+      "goal": "Place the market-facing and field-proof lanes together.",
+      "bullets": [
+        "Lumina owns the commercial story, positioning, and growth motion.",
+        "Horizon brings field-ready aerial or visual proof when that proof is part of the opportunity.",
+        "Aerial capture alone is not the same as campaign strategy, and campaign strategy alone is not field proof."
+      ]
+    },
+    {
+      "id": "one_line",
+      "title": "The board in one line each",
+      "goal": "Make the map reusable in conversation.",
+      "bullets": [
+        "Nexus builds systems. EchoVerse shapes sound. SkyForge creates interactive experiences.",
+        "Summit builds learning journeys. Vespera packages authored content. Horizon captures field proof. Lumina leads commercial clarity.",
+        "If you can say that cleanly, you can start qualifying faster."
+      ]
+    },
+    {
+      "id": "bundle",
+      "title": "Single lane or bundle",
+      "goal": "Introduce bundle thinking.",
+      "bullets": [
+        "Some leads are clearly single-lane. Others point to one primary lane plus support.",
+        "A rebrand plus automation may be Lumina + Nexus. A release rollout may be Lumina + EchoVerse.",
+        "The job is not to over-bundle everything. The job is to hear when more than one lane is real."
+      ]
+    },
+    {
+      "id": "route_need",
+      "title": "Route by need, not by buzzword",
+      "goal": "Protect the learner from shallow routing.",
+      "bullets": [
+        "People say website when they actually need positioning, automation, proof assets, or a course flow.",
+        "Surface wording helps, but problem shape matters more.",
+        "Good routing listens for the underlying need first."
+      ]
+    }
+  ],
+  "references": {
+    "blurb": "Use the original lane docs plus ByteCast standards to reinforce this episode.",
+    "links": [
+      {
+        "label": "Lane Overview",
+        "href": "../../building blocks/LUM_BUILD_PACKS/LUM-REV-001/00_lane_overview.md",
+        "primary": true
+      },
+      {
+        "label": "Training Standard",
+        "href": "../../docs/BYTECAST_TRAINING_STANDARD.md"
+      },
+      {
+        "label": "Proof Schema",
+        "href": "../../docs/BYTECAST_PROOF_SCHEMA.md"
+      },
+      {
+        "label": "Playlist",
+        "href": "../../seed_bytecast.html"
+      },
+      {
+        "label": "EP-LUM-102 plan",
+        "href": "../../building blocks/LUM_BUILD_PACKS/LUM-REV-001/episodes/EP-LUM-102.md"
+      }
+    ]
+  },
+  "navigation": {
+    "previous_href": "../lumina_rev_101/index.html",
+    "previous_label": "Back: EP-LUM-101"
+  },
+  "advance": {
+    "href": "../lumina_rev_103/index.html",
+    "label": "EP-LUM-103",
+    "cta": "Open EP-LUM-103",
+    "tag": "THEN",
+    "description": "Complete EP-LUM-102 gates, then continue into Brand by Division."
+  },
+  "routing": {
+    "slug": "lumina_rev_102",
+    "journey_id": "lumina_revenue_v1",
+    "listen_step": "lum102_listen",
+    "slide_step": "lum102_slide",
+    "engage_step": "lum102_engage",
+    "storage_prefix": "lumina_rev_102"
+  },
+  "engagement": {
+    "quest": {
+      "title": "EP-LUM-102 practice checklist",
+      "prompt": "Match the plain-language division map before you move deeper into brand and qualification.",
+      "items": [
+        {
+          "id": "q1",
+          "text": "Name all seven divisions without opening another tab."
+        },
+        {
+          "id": "q2",
+          "text": "Pick one example lead and say whether it is single-lane or bundle."
+        },
+        {
+          "id": "q3",
+          "text": "Use the board shorthand slide to explain Lumina, Nexus, and Horizon in one sentence each."
+        },
+        {
+          "id": "q4",
+          "text": "Say why buzzwords alone are a weak routing method."
+        }
+      ]
+    },
+    "quiz": {
+      "enabled": true,
+      "pass_threshold": 0.8,
+      "prompt": "Pass the board check before moving into division brand fit.",
+      "questions": [
+        {
+          "id": "lum102_q1",
+          "q": "Which division is the engineering and systems lane?",
+          "choices": [
+            "Nexus",
+            "EchoVerse",
+            "Vespera"
+          ],
+          "answer_index": 0,
+          "explain": "Nexus is the build, systems, and AI lane."
+        },
+        {
+          "id": "lum102_q2",
+          "q": "Which pairing best fits music or sound-centered work?",
+          "choices": [
+            "EchoVerse",
+            "Horizon",
+            "Summit"
+          ],
+          "answer_index": 0,
+          "explain": "EchoVerse is the sound and audio lane."
+        },
+        {
+          "id": "lum102_q3",
+          "q": "Course delivery and learner journey work best fits:",
+          "choices": [
+            "Summit",
+            "SkyForge",
+            "Vespera"
+          ],
+          "answer_index": 0,
+          "explain": "Summit is the training and learning systems lane."
+        },
+        {
+          "id": "lum102_q4",
+          "q": "Drone visuals plus campaign packaging is most likely:",
+          "choices": [
+            "Horizon only",
+            "Lumina + Horizon",
+            "SkyForge + Vespera"
+          ],
+          "answer_index": 1,
+          "explain": "Field proof plus market packaging suggests a bundle."
+        },
+        {
+          "id": "lum102_q5",
+          "q": "Best routing rule?",
+          "choices": [
+            "Route by buzzword only",
+            "Route by underlying need",
+            "Route by whichever lane is easiest to explain"
+          ],
+          "answer_index": 1,
+          "explain": "Need shape beats surface wording."
+        }
+      ]
+    }
+  }
+}

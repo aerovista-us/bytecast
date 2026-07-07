@@ -25,6 +25,7 @@ Each journey has a `steps` array. Each step object supports:
 - `href` (string, required): root-relative path inside this repo (example: `episodes/welcome_to_bytecast/index.html`).
 - `cta` (string, optional): button label for the primary next action.
 - `depends_on` (string[], optional): step IDs that must be complete before this step unlocks.
+- `unlock_requires` (object[], optional): additional **proof gates** before the step is treated as unlocked (Training Hub map, Playlist next-step, `getNextStep`, etc.). Each entry: `{ "stepId": "<id>", "meta_fields": ["fieldA", "fieldB"] }`. The engine uses the same presence rules as badge `minProof` (non-empty strings, `true` for booleans, finite numbers).
 - `complete_when` (object, optional): completion rule override.
   - `{ "type": "step_done", "id": "<stepId>" }`
   - `{ "type": "steps_all", "ids": ["a","b"] }`
@@ -32,6 +33,15 @@ Each journey has a `steps` array. Each step object supports:
   - `{ "type": "badge_has", "badge_id": "p1_golden_path_v1" }`
 
 If `complete_when` is omitted, completion defaults to `workflow.v2.steps[step.id].done === true`.
+
+## Proof bundle export (teacher review)
+
+- `ByteCastLoop.buildProofBundle(journeyId?)` returns JSON: `{ schema, exportedAt, journeyId, workflow, badges, projects }` (`bytecast-proof-bundle-v1`). `projects` is an optional dated workstream list (onboarding, collaboration, etc.); see [`BYTECAST_PROOF_SCHEMA.md`](./BYTECAST_PROOF_SCHEMA.md) and [`proof_bundle_v1.schema.json`](./proof_bundle_v1.schema.json).
+- Teachers paste that JSON into [`proof_review.html`](./proof_review.html) (Docs Portal).
+
+## Meta validation helper
+
+- `ByteCastLoop.proofMetaOk(wf2, stepId, fields)` → `{ ok, missing }` for rubrics and custom UI.
 
 ## Badge Contract
 
@@ -41,10 +51,32 @@ Journeys can declare badges:
 {
   "id": "p1_golden_path_v1",
   "label": "P1: Golden Path",
-  "requires": ["ep001_gates", "tr001_golden_path", "seed_export_v1"],
+  "requires": [
+    "ep001_gates",
+    "ep002_gates",
+    "ep003_gates",
+    "ep004_gates",
+    "tr001a_day1_foundations",
+    "seed_export_v1",
+    "seed_publish_v1"
+  ],
   "minProof": {
-    "tr001_golden_path": ["mission"],
-    "seed_export_v1": ["artifactName", "artifactHash"]
+    "ep001_engage": ["engageQuizPassed", "engageQuizScore"],
+    "ep002_engage": ["engageQuizPassed", "engageQuizScore"],
+    "ep003_engage": ["engageQuizPassed", "engageQuizScore"],
+    "ep004_engage": ["engageQuizPassed", "engageQuizScore"],
+    "tr001a_day1_foundations": [
+      "mission",
+      "understandingCheckPassed",
+      "tr001aQuizPassed",
+      "tr001aQuizScore",
+      "tr001aWritten1",
+      "tr001aWritten2",
+      "tr001aScenarioRouting",
+      "tr001aCompletedAt"
+    ],
+    "seed_export_v1": ["artifactName", "artifactHash"],
+    "seed_publish_v1": ["publishedUrl"]
   }
 }
 ```

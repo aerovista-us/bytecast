@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en" data-theme="art-localized">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ByteCast — The Art Localized • Ep 3 — Amplification</title>
+  <meta
+    name="description"
+    content="The Art Localized Training — Ep 3. Public amplification, ambassador network, microsite, and education loop from the marketing campaign pack."
+  />
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml" />
+  <style>
+    :root {
+      --bg0: #09131b;
+      --bg1: #10202b;
+      --panel: rgba(9, 19, 27, 0.84);
+      --ink: rgba(240, 251, 255, 0.96);
+      --muted: rgba(240, 251, 255, 0.72);
+      --line: rgba(66, 191, 255, 0.22);
+      --accent: #42bfff;
+      --accent-2: #7ae8ff;
+      --accent-3: #9cf1a7;
+      --max: 980px;
+      --pad: clamp(16px, 2.5vw, 26px);
+      --display: "Aptos Display", "Segoe UI Variable Display", "Trebuchet MS", sans-serif;
+      --sans: "Aptos", "Segoe UI Variable Text", "Segoe UI", sans-serif;
+      --mono: ui-monospace, "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      color: var(--ink);
+      background:
+        radial-gradient(900px 520px at 20% 0%, rgba(66, 191, 255, 0.16), transparent 58%),
+        radial-gradient(860px 480px at 100% 10%, rgba(122, 232, 255, 0.1), transparent 50%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      min-height: 100vh;
+    }
+    a { color: inherit; }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(9, 19, 27, 0.84);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar__inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 12px var(--pad);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .k, .eyebrow {
+      font-family: var(--mono);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .k {
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .eyebrow {
+      margin: 0 0 10px;
+      font-size: 12px;
+      color: var(--accent-2);
+    }
+    .btn {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font: inherit;
+      font-size: 13px;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn--primary {
+      border-color: rgba(66, 191, 255, 0.58);
+      box-shadow: 0 0 22px rgba(66, 191, 255, 0.18);
+    }
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 24px var(--pad) 72px;
+    }
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: var(--panel);
+      padding: 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 18px 46px rgba(0, 0, 0, 0.22);
+    }
+    .hero {
+      padding: 24px;
+      background:
+        linear-gradient(135deg, rgba(66, 191, 255, 0.18), rgba(122, 232, 255, 0.1)),
+        rgba(9, 19, 27, 0.84);
+    }
+    h1, h2 {
+      margin: 0 0 10px;
+      font-family: var(--display);
+      letter-spacing: -0.02em;
+    }
+    h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); }
+    h2 { font-size: 1.05rem; }
+    .sub {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 74ch;
+    }
+    .row, .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+    .chips { margin-top: 16px; }
+    .chip {
+      border: 1px solid rgba(66, 191, 255, 0.28);
+      background: rgba(66, 191, 255, 0.08);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+    }
+    .status {
+      margin: 12px 0 0;
+      font-size: 13px;
+      color: var(--accent-2);
+    }
+    .script {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .script p, .mini, .choice, .source-list li {
+      line-height: 1.6;
+    }
+    .script p, .mini, .choice {
+      margin: 0;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .slide-visual {
+      margin-bottom: 14px;
+      padding: 12px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+    }
+    .slide-visual svg { max-width: 100%; height: auto; display: block; }
+    .slides { min-height: 250px; }
+    .slide { display: none; }
+    .slide.is-active { display: block; }
+    .slide:not(.is-active) .bc-art :is(animate, animateTransform) { visibility: hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      .slide-visual .bc-art :is(animate, animateTransform) { display: none !important; }
+    }
+    .note-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .mini { color: var(--muted); }
+    .source-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+    .choice {
+      display: block;
+      margin: 10px 0;
+      cursor: pointer;
+    }
+    .choice input { margin-right: 10px; }
+    .mission-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .mission-field {
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .mission-field input,
+    .mission-field textarea {
+      width: 100%;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
+      padding: 12px 14px;
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.04);
+      font: inherit;
+    }
+    .mission-field textarea {
+      min-height: 104px;
+      resize: vertical;
+    }
+    .field-guide {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .guide-card {
+      padding: 14px;
+      border-radius: 16px;
+      background: rgba(156, 241, 167, 0.07);
+      border: 1px solid rgba(156, 241, 167, 0.16);
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .guide-card strong { color: var(--ink); }
+    #engageHint, #missionHint {
+      margin-top: 12px;
+      color: var(--accent-3);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body data-bc-ep="3" data-bc-slug="art_localized_ep3">
+  <header class="topbar">
+    <div class="topbar__inner">
+      <span class="k">The Art Localized — Training</span>
+      <div class="row">
+        <a class="btn" href="../../../seed_bytecast.html">Playlist</a>
+        <a class="btn" href="../../../episodes/training_hub/index.html">Training Hub</a>
+        <a class="btn btn--primary" href="../../../index.html">Workspace</a>
+      </div>
+    </div>
+  </header>
+  <main class="wrap">
+    <section class="panel hero">
+      <p class="eyebrow">ART-EP-3 • Marketing Campaign Amplification</p>
+      <h1>Ep 3 — Amplification</h1>
+      <p class="sub">
+        The marketing campaign pack is the public amplification layer: launch video, ambassador network, microsite,
+        creator education, and the impact loop that keeps the movement legible outside the internal team.
+      </p>
+      <div class="chips">
+        <span class="chip">Launch Video</span>
+        <span class="chip">Ambassadors</span>
+        <span class="chip">Microsite</span>
+        <span class="chip">Education Loop</span>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Listen">
+      <h2>Listen</h2>
+      <p class="sub">
+        Read-aloud uses the browser voice on this device. The script is built from the campaign video, ambassador,
+        microsite, curriculum, and harvest materials.
+      </p>
+      <div class="row" style="margin-top:14px;">
+        <button type="button" class="btn btn--primary" id="btnReadAloud">Read Aloud</button>
+        <button type="button" class="btn" id="btnPauseReadAloud">Pause</button>
+        <button type="button" class="btn" id="btnStopReadAloud">Stop</button>
+        <button type="button" class="btn" id="btnListenDone">Mark listen complete</button>
+      </div>
+      <p class="status" id="readStatus" aria-live="polite">Ready to read the amplification script aloud.</p>
+      <div id="readScript" class="script">
+        <p>
+          Amplification starts with a human signal. The launch video frames the campaign around a simple claim:
+          AI did not take the art, it gave it back. The public story has to feel human before it feels impressive.
+        </p>
+        <p>
+          The regional ambassador program turns that story into local presence. Artists, educators, and community
+          leaders host events, share stories, and represent AeroVista in places like the Pacific Northwest, Metro Manila,
+          Ontario, and Barcelona. Amplification works when real people carry it.
+        </p>
+        <p>
+          The microsite gives the movement a stable public surface: hero message, mission, artist stories,
+          pilot preview, and join-the-movement funnel. That keeps the campaign from fragmenting into isolated posts.
+        </p>
+        <p>
+          Education and harvest close the loop. Summit Learning turns the message into accessible AI-for-local-creators
+          curriculum, while the harvest protocol measures creator participation, feedback, partnerships, and long-term hubs.
+          Good amplification widens the story and improves the system underneath it.
+        </p>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Slides">
+      <h2>Slides</h2>
+      <p class="eyebrow" id="slideTitle">Human signal</p>
+      <div id="slides" class="slides">
+        <div class="slide is-active" data-title="Human signal">
+          <div class="slide-visual" data-slide-art="s1" aria-hidden="true"></div>
+          <p class="sub">
+            The launch video defines amplification as a narrative move, not a volume move.
+          </p>
+          <div class="note-grid">
+            <article class="mini"><strong>Line.</strong> “AI didn’t take the art. It gave it back.”</article>
+            <article class="mini"><strong>Scenes.</strong> Silent studios, awakening, empowerment, and call to action.</article>
+            <article class="mini"><strong>Rule.</strong> The public message must stay rooted in creators, not platform bragging.</article>
+          </div>
+        </div>
+        <div class="slide" data-title="Ambassador network">
+          <div class="slide-visual" data-slide-art="s2" aria-hidden="true"></div>
+          <p class="sub">
+            Ambassadors are the movement’s local relay points. They make the campaign visible in communities, not just on screens.
+          </p>
+          <div class="note-grid">
+            <article class="mini"><strong>Who.</strong> Artists, educators, and community leaders.</article>
+            <article class="mini"><strong>What.</strong> Events, stories, local representation, and workshops.</article>
+            <article class="mini"><strong>Why.</strong> Public trust rises when the campaign has real regional faces.</article>
+          </div>
+        </div>
+        <div class="slide" data-title="Microsite system">
+          <div class="slide-visual" data-slide-art="s3" aria-hidden="true"></div>
+          <p class="sub">
+            The microsite organizes the message into a repeatable public funnel instead of dispersing it across ad hoc links.
+          </p>
+          <div class="note-grid">
+            <article class="mini"><strong>Hero.</strong> Mission and CTA anchor the message.</article>
+            <article class="mini"><strong>Stories.</strong> Testimonials, feature reels, and pilot preview deepen credibility.</article>
+            <article class="mini"><strong>Join.</strong> Signup and newsletter capture convert attention into participation.</article>
+          </div>
+        </div>
+        <div class="slide" data-title="Education and impact">
+          <div class="slide-visual" data-slide-art="s4" aria-hidden="true"></div>
+          <p class="sub">
+            Amplification is strongest when it also teaches and measures. Otherwise reach becomes noise.
+          </p>
+          <div class="note-grid">
+            <article class="mini"><strong>Curriculum.</strong> Creative foundations, tools, ethics, and responsible use.</article>
+            <article class="mini"><strong>Harvest.</strong> Creator participation, feedback, and partnership growth.</article>
+            <article class="mini"><strong>Outcome.</strong> Signal should widen reach and improve creator equity at the same time.</article>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="margin-top:14px;">
+        <button type="button" class="btn" id="btnSlidePrev">Previous</button>
+        <button type="button" class="btn btn--primary" id="btnSlideNext">Next</button>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Built from">
+      <h2>Built From</h2>
+      <ul class="source-list">
+        <li><code>The_Art_Localized_marketing.campaign/video-script.md</code> for the launch narrative and voice line.</li>
+        <li><code>The_Art_Localized_marketing.campaign/ambassador-program.md</code> for regional amplification roles.</li>
+        <li><code>The_Art_Localized_marketing.campaign/microsite-plan.md</code> for the public campaign surface.</li>
+        <li><code>The_Art_Localized_marketing.campaign/education-plan.md</code> and <code>harvest-protocol.md</code> for education and measurable impact.</li>
+      </ul>
+    </section>
+
+    <section class="panel" aria-label="Field guide">
+      <h2>Field guide</h2>
+      <p class="sub">
+        Use this before publishing a campaign beat. Amplification is not volume; it is the disciplined connection
+        between a person, a story, a channel, and a next action.
+      </p>
+      <div class="field-guide">
+        <article class="guide-card"><strong>Use the three-signal test.</strong> Every post or page section should include a human signal, a proof signal, and an action signal. If one is missing, the launch beat is probably weak.</article>
+        <article class="guide-card"><strong>Choose one primary metric.</strong> Do not hide behind vanity metrics. Pick the metric that matches the goal: signups, partner replies, workshop attendance, program-page clicks, or artist follow-up calls.</article>
+        <article class="guide-card"><strong>Protect context while simplifying.</strong> Short-form content can be concise without becoming generic. Keep the artist's region, medium, and intent visible.</article>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Engage">
+      <h2>Engage</h2>
+      <form id="engageForm">
+        <p class="sub">Pick the answer that matches the amplification model.</p>
+        <label class="choice"><input type="radio" name="engage" value="volume" /> Amplification means posting more often, even if the story, proof, and next step stay vague.</label>
+        <label class="choice"><input type="radio" name="engage" value="signal" data-correct="true" /> Good amplification ties the message to proof, a human story, and a clear next step for the audience.</label>
+        <div class="row" style="margin-top:14px;">
+          <button type="submit" class="btn btn--primary" id="engageSubmit">Submit Engage</button>
+        </div>
+        <p id="engageHint"></p>
+      </form>
+    </section>
+
+    <section class="panel" aria-label="Proof mission">
+      <h2>Proof mission</h2>
+      <p class="sub">
+        Draft the amplification move for a launch moment. Tie the public message to a human story, one channel,
+        and one metric that proves the signal is working.
+      </p>
+      <form id="missionForm">
+        <div class="mission-grid">
+          <label class="mission-field">
+            <span>Audience</span>
+            <input data-proof-field="audience" type="text" placeholder="Artists, educators, venue partners, local sponsors..." />
+          </label>
+          <label class="mission-field">
+            <span>Channel</span>
+            <input data-proof-field="channel" type="text" placeholder="Microsite, reel, workshop, newsletter, partner event..." />
+          </label>
+          <label class="mission-field">
+            <span>Success metric</span>
+            <textarea data-proof-field="successMetric" placeholder="Signup count, showcase attendance, artist leads, partner replies, program-page clicks..."></textarea>
+          </label>
+        </div>
+        <div class="row" style="margin-top:14px;">
+          <button type="submit" class="btn btn--primary">Record proof mission</button>
+        </div>
+        <p id="missionHint"></p>
+      </form>
+    </section>
+  </main>
+  <script src="../../../assets/shared/bytecast_loop.js"></script>
+  <script src="../../../assets/shared/art_localized_episode.js"></script>
+</body>
+</html>

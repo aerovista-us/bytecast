@@ -1,0 +1,102 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SEED-LUM-001 - Lumina Sales Brief</title>
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+  <style>
+    :root{--bg0:#050607;--bg1:#0b0f14;--line:rgba(255,255,255,0.14);--ink:rgba(255,255,255,0.93);--muted:rgba(255,255,255,0.66);--neon:#22a7ff;--max:980px;}
+    *{box-sizing:border-box;} body{margin:0;padding:18px;font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,sans-serif;color:var(--ink);background:radial-gradient(1000px 500px at 10% 0%,rgba(34,167,255,0.12),transparent),linear-gradient(180deg,var(--bg0),var(--bg1));}
+    .shell{max-width:var(--max);margin:0 auto;} .card{border-radius:18px;border:1px solid var(--line);padding:16px;background:rgba(255,255,255,0.04);margin-bottom:14px;} h1{margin:0 0 10px;} label,.muted{display:block;color:var(--muted);line-height:1.55;} .grid{display:grid;gap:12px;} .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;} @media(max-width:720px){.grid2{grid-template-columns:1fr;}} input,textarea{width:100%;border-radius:12px;border:1px solid var(--line);background:rgba(0,0,0,0.28);color:var(--ink);padding:12px;font:inherit;} textarea{min-height:92px;} .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,0.05);color:var(--ink);text-decoration:none;cursor:pointer;} .btn.primary{border-color:rgba(34,167,255,0.45);background:rgba(34,167,255,0.12);} .status{margin-top:12px;padding:12px 14px;border-radius:12px;border:1px solid rgba(34,167,255,0.35);background:rgba(34,167,255,0.10);}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="card"><h1>SEED-LUM-001 - Lumina Sales Brief</h1><p class="muted">Turn the mission into a reusable commercial artifact. This page packages the brief, generates an artifact name and hash, and records the seed proof for the Lumina lane.</p><div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;"><a class="btn" href="../../training_missions/tr_lum_001_revenue_routing/index.html">Back to TR-LUM-001</a><a class="btn" href="../../seed_bytecast.html">Playlist</a></div></section>
+    <section class="card"><h2>Gold-Standard Example</h2><p class="muted">This sample brief is intentionally strong, specific, and handoff-ready. Load it if you want a model for tone and detail level.</p><div style="display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 14px;"><button class="btn" id="loadSampleBrief" type="button">Load Gold-Standard Sample</button></div><details><summary style="cursor:pointer;">View sample brief notes</summary><div class="grid2" style="margin-top:12px;"><div><p><strong>Lead:</strong> Harbor Ridge Roofing</p><p><strong>Primary problem:</strong> strong local reputation, weak digital clarity, and slow lead follow-up.</p><p><strong>Primary division:</strong> Lumina + Nexus.</p><p><strong>Bundle signal:</strong> field-proof visuals may help later, but they are not the first fix.</p></div><div><p><strong>Message angle:</strong> trust, speed, and clarity for homeowners who need fast confidence.</p><p><strong>Good next step:</strong> scoped working session to map the current funnel, offer language, and intake process.</p><p><strong>Why it is strong:</strong> it names the real problem, keeps scope honest, and gives delivery a useful start point.</p></div></div></details></section>
+    <section class="card grid">
+      <div class="grid2"><div><label for="lead_name">Lead name</label><input id="lead_name" /></div><div><label for="company_or_project">Company or project</label><input id="company_or_project" /></div></div>
+      <div class="grid2"><div><label for="buyer_type">Buyer type</label><input id="buyer_type" /></div><div><label for="timeline">Timeline</label><input id="timeline" /></div></div>
+      <div><label for="primary_problem">Primary problem</label><textarea id="primary_problem"></textarea></div>
+      <div><label for="desired_outcome">Desired outcome</label><textarea id="desired_outcome"></textarea></div>
+      <div class="grid2"><div><label for="likely_primary_division">Likely primary division</label><input id="likely_primary_division" /></div><div><label for="likely_support_divisions">Likely support divisions</label><input id="likely_support_divisions" /></div></div>
+      <div class="grid2"><div><label for="bundle_signal">Bundle signal</label><textarea id="bundle_signal"></textarea></div><div><label for="lumina_role">Lumina role</label><textarea id="lumina_role"></textarea></div></div>
+      <div><label for="message_angle">Message angle</label><textarea id="message_angle"></textarea></div>
+      <div><label for="recommendation_summary">Recommendation summary</label><textarea id="recommendation_summary"></textarea></div>
+      <div class="grid2"><div><label for="next_step">Next step</label><textarea id="next_step"></textarea></div><div><label for="follow_up_copy">Follow-up copy</label><textarea id="follow_up_copy"></textarea></div></div>
+      <div><label for="internal_handoff_notes">Delivery handoff notes</label><textarea id="internal_handoff_notes"></textarea></div>
+      <div><label for="risks_or_open_questions">Risks or open questions</label><textarea id="risks_or_open_questions"></textarea></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;"><button class="btn primary" id="exportBrief" type="button">Generate Brief + Record Proof</button><a class="btn" id="downloadBrief" href="#" download hidden>Download JSON</a></div>
+      <div class="status" id="status">Artifact not generated yet.</div>
+    </section>
+  </main>
+  <script src="../../assets/shared/bytecast_loop.js"></script>
+  <script>
+    const Loop = window.ByteCastLoop || null;
+    const STORE = "bytecast.seed_lum_001.v1";
+    const SAMPLE_BRIEF = {
+      lead_name: "Harbor Ridge Roofing",
+      company_or_project: "Harbor Ridge Roofing growth sprint",
+      buyer_type: "Owner-operator service business",
+      primary_problem: "Referral business is strong, but the digital offer is unclear and inbound leads are handled inconsistently across phone, forms, and text.",
+      desired_outcome: "Clarify the offer, increase trust with new buyers, and create a simple intake path that speeds response without forcing a full rebuild immediately.",
+      timeline: "Need first improvements this month before peak season.",
+      likely_primary_division: "Lumina + Nexus",
+      likely_support_divisions: "Potential Horizon later for proof visuals if needed.",
+      bundle_signal: "The lead needs both message clarity and intake workflow structure, which points beyond a design-only fix.",
+      lumina_role: "Lumina owns the commercial framing, offer positioning, and follow-up logic that helps the buyer understand the path.",
+      message_angle: "Fast trust for homeowners: clear offer, dependable response, no confusing handoff.",
+      recommendation_summary: "Recommend Lumina + Nexus. Lumina sharpens the market-facing message and offer. Nexus designs the intake workflow that makes response speed more dependable.",
+      next_step: "Run a scoped working session to map the current lead journey, tighten offer language, and define the first intake workflow fix.",
+      follow_up_copy: "Based on the gaps we saw in offer clarity and intake handling, we recommend a Lumina + Nexus first step. Lumina will tighten the message and buyer path, while Nexus maps the intake workflow behind it. If that direction fits, the next move is a scoped working session this week.",
+      internal_handoff_notes: "Lead values trust and response speed. Do not promise a full rebuild yet. Start by mapping current lead sources, current response delay, and the fastest workflow improvement with the biggest trust lift.",
+      risks_or_open_questions: "Need to confirm who currently owns inbound response, what systems already exist, and whether field visuals are an immediate need or a later support asset."
+    };
+    const fields = ["lead_name","company_or_project","buyer_type","primary_problem","desired_outcome","timeline","likely_primary_division","likely_support_divisions","bundle_signal","lumina_role","message_angle","recommendation_summary","next_step","follow_up_copy","internal_handoff_notes","risks_or_open_questions"];
+    function loadState(){ try { return JSON.parse(localStorage.getItem(STORE) || "{}"); } catch { return {}; } }
+    function saveState(state){ localStorage.setItem(STORE, JSON.stringify(state)); }
+    function hydrate(){ const state = loadState(); fields.forEach((id) => { if (state[id] != null) document.getElementById(id).value = state[id]; }); }
+    function collect(){ const state = {}; fields.forEach((id) => { state[id] = String(document.getElementById(id).value || "").trim(); }); saveState(state); return state; }
+    fields.forEach((id) => document.getElementById(id).addEventListener("input", collect));
+    hydrate();
+    document.getElementById("loadSampleBrief").addEventListener("click", () => {
+      saveState({ ...loadState(), ...SAMPLE_BRIEF });
+      hydrate();
+      document.getElementById("status").textContent = "Gold-standard sample loaded. Review the structure, then adapt it into your own brief.";
+    });
+    async function sha256(text){ const data = new TextEncoder().encode(text); const digest = await crypto.subtle.digest("SHA-256", data); return Array.from(new Uint8Array(digest)).map((b) => b.toString(16).padStart(2, "0")).join(""); }
+    document.getElementById("exportBrief").addEventListener("click", async () => {
+      const state = collect();
+      const required = ["lead_name","company_or_project","primary_problem","desired_outcome","likely_primary_division","recommendation_summary","next_step","internal_handoff_notes"];
+      if (!required.every((key) => String(state[key] || "").length >= 6)) { document.getElementById("status").textContent = "Complete the core sales brief fields before generating the artifact."; return; }
+      const payload = { schema: "seed-lum-001-sales-brief-v1", exportedAt: new Date().toISOString(), ...state };
+      const artifactText = JSON.stringify(payload, null, 2);
+      const artifactHash = await sha256(artifactText);
+      const artifactName = `seed_lum_001_sales_brief_${new Date().toISOString().slice(0,19).replaceAll(":","-")}.json`;
+      const blob = new Blob([artifactText], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const link = document.getElementById("downloadBrief");
+      link.href = url; link.download = artifactName; link.hidden = false;
+      try { Loop?.setActiveJourneyId?.("lumina_revenue_v1"); } catch {}
+      try {
+        Loop?.markStepDone?.("seed_lum_001_sales_brief", {
+          journeyId: "lumina_revenue_v1",
+          artifactName,
+          artifactHash,
+          artifactType: "lumina_sales_brief",
+          lumSalesBriefPrimaryDivision: state.likely_primary_division,
+          lumSalesBriefSupportDivisions: state.likely_support_divisions,
+          lumSalesBriefRecommendationSummary: state.recommendation_summary,
+          lumSalesBriefNextStep: state.next_step,
+          lumSalesBriefExportedAt: payload.exportedAt
+        });
+        document.getElementById("status").textContent = `SEED-LUM-001 recorded. Artifact hash: ${artifactHash.slice(0, 16)}...`;
+      } catch (error) {
+        document.getElementById("status").textContent = "Could not record seed proof: " + error;
+      }
+    });
+  </script>
+</body>
+</html>

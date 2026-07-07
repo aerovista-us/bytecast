@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AeroVista Sales Quest Arcade</title>
+  <link rel="stylesheet" href="./sales_quest_arcade_styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <span class="eyebrow">AeroVista Sales Training Quest</span>
+      <h1>AeroVista Sales Quest Arcade</h1>
+      <p class="muted">A multi-offer, gameified training arcade for sales reps to practice qualification, offer matching, discovery questions, objection handling, pivots, and first-contact prep across multiple customer types.</p>
+      <div class="hero-grid">
+        <div class="card soft">
+          <div class="mini">Mission</div>
+          <h3>Win the first contact by asking less, but better</h3>
+          <p class="muted">You are not trying to ask everything. You are trying to identify the right prospect, reveal the real pain, prepare for the most likely pushback, and leave with a clean opening message.</p>
+          <div class="btn-row" style="margin-top:14px;">
+            <button type="button" onclick="startQuest()">Start New Quest</button>
+            <button type="button" class="secondary" onclick="loadDemoState()">Load Demo State</button>
+            <button type="button" class="ghost" onclick="window.print()">Print / Save PDF</button>
+          </div>
+        </div>
+        <div class="card soft">
+          <div class="mini">Operator status</div>
+          <div class="kpis">
+            <div class="metric"><small>XP</small><strong id="xpValue">0</strong></div>
+            <div class="metric"><small>Clues</small><strong id="clueValue">0</strong></div>
+            <div class="metric"><small>Prepared Objections</small><strong id="objValue">0</strong></div>
+            <div class="metric"><small>Quest Rank</small><strong id="rankValue">D</strong></div>
+          </div>
+          <div class="four-col" style="margin-top:12px;">
+            <div class="metric"><small>Coins</small><strong id="coinValue">0</strong></div>
+            <div class="metric"><small>Streak</small><strong id="streakValue">0</strong></div>
+            <div class="metric"><small>Badges</small><strong id="badgeValue">0</strong></div>
+            <div class="metric"><small>Entertainment</small><strong id="funValue">ON</strong></div>
+          </div>
+          <div class="mini" style="margin-top:14px;">Quest progress</div>
+          <div class="progress"><div class="bar" id="mainBar"></div></div>
+          <p class="muted" style="margin-top:10px;">Progress is based on choosing a prospect, matching the right offer, qualifying fit, uncovering hidden info, preparing rebuttals, and finishing the contact plan.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="span-12 card">
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="choose">1. Choose Prospect</button>
+          <button class="tab-btn" data-tab="offers">2. Match Offer</button>
+          <button class="tab-btn" data-tab="qualify">3. Qualify Fit</button>
+          <button class="tab-btn" data-tab="discover">4. Ask Questions</button>
+          <button class="tab-btn" data-tab="objections">5. Rebuttal Prep</button>
+          <button class="tab-btn" data-tab="plan">6. Contact Plan</button>
+          <button class="tab-btn" data-tab="score">7. Scoreboard</button>
+        </div>
+      </div>
+
+      <div class="span-12 panel active" id="panel-choose">
+        <div class="card">
+          <div class="mini">Stage 1</div>
+          <h2>Choose your practice prospect</h2>
+          <p class="muted">Pick the prospect you want to train on. Some are strong fits for DispatchFlow. Some are better for another offer. Some are wrong on purpose.</p>
+          <div class="prospects" id="prospectGrid"></div>
+        </div>
+      </div>
+
+      <div class="span-12 panel" id="panel-offers">
+        <div class="two-col">
+          <div class="card">
+            <div class="mini">Stage 2</div>
+            <h2>Offer match challenge</h2>
+            <p class="muted">Pick the best lead offer for the selected prospect.</p>
+            <div class="checklist" id="offerList"></div>
+            <div class="btn-row" style="margin-top:14px;">
+              <button type="button" onclick="scoreOfferMatch()">Lock answer</button>
+              <button type="button" class="secondary" onclick="resetOfferMatch()">Reset offer choice</button>
+            </div>
+            <div id="offerFeedback" class="scenario-results muted" style="margin-top:14px;">Choose one lead offer and lock it in.</div>
+          </div>
+          <div class="card">
+            <div class="mini">Offer deck</div>
+            <h2>Available offer lanes</h2>
+            <div id="offerDeck"></div>
+            <div class="hidden-box" style="margin-top:14px;">
+              <div class="mini">Why this offer?</div>
+              <label for="offerReason">Explain your choice</label>
+              <textarea id="offerReason" placeholder="Why is this the right first offer for this prospect?"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="span-12 panel" id="panel-qualify">
+        <div class="two-col">
+          <div class="card">
+            <div class="mini">Stage 3</div>
+            <h2>Prospect fit challenge</h2>
+            <p class="muted">Check what is true. A good first target should hit at least 4 strong fit indicators.</p>
+            <div class="checklist" id="fitChecklist"></div>
+            <div class="score-card" style="margin-top:14px;">
+              <div class="mini">Fit score</div>
+              <strong id="fitScore">0 / 6</strong>
+              <div id="fitVerdict" class="danger">No prospect selected</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="mini">Prospect briefing</div>
+            <h2 id="briefName">Select a prospect</h2>
+            <p id="briefSummary" class="muted">Once you select a prospect, the mission briefing will appear here.</p>
+            <div id="briefTags"></div>
+            <div class="hidden-box" style="margin-top:14px;">
+              <div class="mini">Your take</div>
+              <label for="fitReason">Why is this a fit or not a fit?</label>
+              <textarea id="fitReason" placeholder="Write your own plain-language reasoning."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="span-12 panel" id="panel-discover">
+        <div class="two-col">
+          <div class="card">
+            <div class="mini">Stage 4</div>
+            <h2>Question pick challenge</h2>
+            <p class="muted">You can only choose <strong>3 questions</strong>.</p>
+            <div class="pill" id="questionCount">0 / 3 selected</div>
+            <div class="checklist" id="questionList" style="margin-top:12px;"></div>
+            <div class="btn-row" style="margin-top:14px;">
+              <button type="button" onclick="revealClues()">Reveal hidden info</button>
+              <button type="button" class="secondary" onclick="resetQuestions()">Reset questions</button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="mini">Intel feed</div>
+            <h2>What you uncover</h2>
+            <div id="clueResults" class="scenario-results muted">Select a prospect and ask up to 3 questions to reveal hidden details.</div>
+            <div class="hidden-box" style="margin-top:14px;">
+              <div class="mini">Coach log</div>
+              <div id="coachLog" class="log">No questions asked yet.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="span-12 panel" id="panel-objections">
+        <div class="two-col">
+          <div class="card">
+            <div class="mini">Stage 5</div>
+            <h2>Objection prep challenge</h2>
+            <p class="muted">You can only prepare for <strong>3 objections</strong>.</p>
+            <div class="pill" id="objectionCount">0 / 3 selected</div>
+            <div class="checklist" id="objectionList" style="margin-top:12px;"></div>
+            <div class="btn-row" style="margin-top:14px;">
+              <button type="button" onclick="revealRebuttals()">Show rebuttals</button>
+              <button type="button" class="secondary" onclick="resetObjections()">Reset objections</button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="mini">Rebuttal output</div>
+            <h2>Prepared responses</h2>
+            <div id="rebuttalResults" class="scenario-results muted">Pick objections to build your rebuttal pack.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="span-12 panel" id="panel-plan">
+        <div class="card">
+          <div class="mini">Stage 6</div>
+          <h2>Build your first-contact plan</h2>
+          <div class="three-col">
+            <div>
+              <label for="oneLine">1-line explanation</label>
+              <textarea id="oneLine"></textarea>
+            </div>
+            <div>
+              <label for="leadPain">Main pain to lead with</label>
+              <textarea id="leadPain"></textarea>
+            </div>
+            <div>
+              <label for="leadValue">Main value to lead with</label>
+              <textarea id="leadValue"></textarea>
+            </div>
+          </div>
+          <div class="two-col" style="margin-top:16px;">
+            <div>
+              <label for="openingAngle">Opening angle</label>
+              <textarea id="openingAngle"></textarea>
+            </div>
+            <div>
+              <label for="ctaText">Follow-up CTA</label>
+              <textarea id="ctaText"></textarea>
+            </div>
+          </div>
+          <div class="two-col" style="margin-top:16px;">
+            <div>
+              <label for="outreachName">Prospect name / company</label>
+              <input id="outreachName" />
+            </div>
+            <div>
+              <label for="buyerRole">Buyer role</label>
+              <input id="buyerRole" />
+            </div>
+          </div>
+          <div class="btn-row" style="margin-top:14px;">
+            <button type="button" onclick="generateOutreach()">Generate outreach draft</button>
+            <button type="button" class="secondary" onclick="generateCallScript()">Generate 60-sec call path</button>
+          </div>
+          <div class="two-col" style="margin-top:16px;">
+            <div>
+              <div class="mini">Outreach draft</div>
+              <div id="outreachDraft" class="call-script muted">Generate a draft after filling in the plan.</div>
+            </div>
+            <div>
+              <div class="mini">Call path</div>
+              <div id="callPath" class="call-script muted">Generate a call path when ready.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="span-12 panel" id="panel-score">
+        <div class="card">
+          <div class="mini">Stage 7</div>
+          <h2>Quest scoreboard</h2>
+          <div class="score-grid">
+            <div class="score-card"><div class="mini">Prospect choice</div><strong id="scoreProspect">0</strong><div class="muted">Selected and reviewed</div></div>
+            <div class="score-card"><div class="mini">Offer match</div><strong id="scoreOffer">0</strong><div class="muted">Lead offer accuracy</div></div>
+            <div class="score-card"><div class="mini">Fit score</div><strong id="scoreFit">0</strong><div class="muted">Qualification quality</div></div>
+            <div class="score-card"><div class="mini">Clue score</div><strong id="scoreClues">0</strong><div class="muted">Useful hidden info revealed</div></div>
+            <div class="score-card"><div class="mini">Prep score</div><strong id="scorePrep">0</strong><div class="muted">Rebuttal and contact readiness</div></div>
+            <div class="score-card"><div class="mini">Bonus</div><strong id="scoreBonus">0</strong><div class="muted">Streaks, pivots, fun</div></div>
+          </div>
+          <div class="two-col" style="margin-top:16px;">
+            <div class="card soft">
+              <div class="mini">Final rank</div>
+              <div class="rank" id="finalRank">D</div>
+              <p id="finalRankText" class="muted" style="margin-top:10px;">Complete the quest to improve your operator rank.</p>
+              <div class="progress"><div class="bar" id="scoreBar"></div></div>
+            </div>
+            <div class="card soft coach-note">
+              <div class="mini">Coach summary</div>
+              <div id="coachSummary" class="muted">Choose a prospect, match the right offer, qualify fit, reveal clues, prepare rebuttals, and build a contact plan.</div>
+            </div>
+          </div>
+          <div class="btn-row" style="margin-top:16px;">
+            <button type="button" onclick="spinFlavorText()">Spin hype line</button>
+            <button type="button" class="secondary" onclick="playCoachTaunt()">Coach taunt</button>
+            <button type="button" onclick="downloadSession()">Download session (.txt)</button>
+            <button type="button" class="secondary" onclick="saveSession()">Save progress</button>
+            <button type="button" class="secondary" onclick="restoreSession()">Restore progress</button>
+          </div>
+          <div class="card soft" style="margin-top:16px;">
+            <div class="mini">Arcade flavor</div>
+            <div id="arcadeFlavor" class="call-script muted">Hit “Spin hype line” for a little chaos.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">AeroVista • Sales Quest Arcade • Multi-offer practice lab for first-contact readiness</div>
+  </div>
+  <script src="./sales_quest_arcade_data.js"></script>
+  <script src="./sales_quest_arcade_app.js"></script>
+</body>
+</html>

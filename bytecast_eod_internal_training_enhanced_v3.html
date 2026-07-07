@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ByteCast EOD Training — Internal Teams v3</title>
+  <style>
+    :root {
+      --bg: #08101d;
+      --bg2: #0d1730;
+      --panel: rgba(17,27,49,.96);
+      --panel2: rgba(255,255,255,.04);
+      --text: #eef4ff;
+      --muted: #a4b4d7;
+      --accent: #76d2ff;
+      --accent2: #89f1c8;
+      --warn: #ffd56e;
+      --ok: #9bffbf;
+      --need: #ffb3b3;
+      --border: rgba(255,255,255,.12);
+      --shadow: 0 18px 48px rgba(0,0,0,.38);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body {
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(118,210,255,.12), transparent 28%),
+        radial-gradient(circle at top right, rgba(137,241,200,.08), transparent 22%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      line-height: 1.6;
+    }
+    .app { display: grid; grid-template-columns: 320px 1fr; min-height: 100vh; }
+    .sidebar {
+      border-right: 1px solid var(--border);
+      background: rgba(5,10,20,.42);
+      backdrop-filter: blur(12px);
+      padding: 22px 18px 28px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: auto;
+    }
+    .brand, .controls, .section-list, .glossary-panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+      margin-bottom: 14px;
+    }
+    .brand {
+      background: linear-gradient(135deg, rgba(118,210,255,.14), rgba(137,241,200,.08));
+      border-radius: 20px;
+    }
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      font-size: 11px;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .brand h1 { margin: 0; font-size: 1.45rem; line-height: 1.1; }
+    .brand p, .note, .status { color: var(--muted); }
+    .controls h2, .section-list h2, .glossary-panel h2 { margin: 0 0 12px; font-size: 1rem; color: var(--accent2); }
+    .btnrow { display: flex; flex-wrap: wrap; gap: 8px; }
+    button, .slide-link {
+      background: linear-gradient(135deg, rgba(118,210,255,.14), rgba(137,241,200,.08));
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      cursor: pointer;
+      font: inherit;
+      transition: transform .15s ease, border-color .15s ease;
+    }
+    button:hover, .slide-link:hover { transform: translateY(-1px); border-color: rgba(118,210,255,.45); }
+    button.secondary, .slide-link { background: rgba(255,255,255,.03); }
+    .slide-nav { display: grid; gap: 8px; }
+    .slide-link { display: block; width: 100%; text-align: left; border: 1px solid transparent; border-radius: 14px; }
+    .slide-link small { display: block; color: var(--muted); margin-top: 4px; font-size: .82rem; }
+    .slide-link.active { border-color: rgba(118,210,255,.45); background: linear-gradient(135deg, rgba(118,210,255,.10), rgba(137,241,200,.06)); }
+    .glossary-panel input {
+      width: 100%;
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      font: inherit;
+      margin-bottom: 10px;
+    }
+    .glossary-list { display: grid; gap: 8px; max-height: 220px; overflow: auto; }
+    .glossary-item { border: 1px solid var(--border); border-radius: 12px; padding: 10px; background: rgba(255,255,255,.03); }
+    .glossary-item strong { color: var(--accent); display: block; }
+    .main { padding: 24px 24px 40px; overflow: auto; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
+    .deck { position: relative; }
+    .slide {
+      display: none;
+      background: linear-gradient(180deg, rgba(17,27,49,.96), rgba(9,18,36,.96));
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      padding: 26px;
+      box-shadow: var(--shadow);
+      min-height: 72vh;
+    }
+    .slide.active { display: block; }
+    .slide h2 { margin: 0 0 10px; font-size: clamp(1.9rem, 3vw, 2.6rem); line-height: 1.1; }
+    .lead { color: var(--muted); font-size: 1.05rem; margin-bottom: 18px; max-width: 920px; }
+    .kicker { display: inline-block; font-size: .85rem; color: var(--accent); text-transform: uppercase; letter-spacing: .14em; font-weight: 700; margin-bottom: 12px; }
+    .grid2, .grid3 { display: grid; gap: 16px; }
+    .grid2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .card { background: var(--panel2); border: 1px solid var(--border); border-radius: 18px; padding: 16px; }
+    .card h3 { margin: 0 0 8px; color: var(--accent2); font-size: 1.02rem; }
+    .callout { border-left: 4px solid var(--warn); background: rgba(255,213,110,.08); color: #ffe7a8; border-radius: 14px; padding: 12px 14px; margin: 16px 0 0; }
+    .diagram { display: grid; gap: 12px; margin-top: 14px; }
+    .box { border: 1px solid var(--border); border-radius: 16px; padding: 14px; background: rgba(255,255,255,.03); }
+    .arrow { text-align: center; color: var(--accent); font-size: 1.4rem; line-height: 1; }
+    .checklist { display: grid; gap: 10px; margin-top: 14px; }
+    .checklist label { display: flex; align-items: start; gap: 10px; border: 1px solid var(--border); border-radius: 14px; padding: 12px; background: rgba(255,255,255,.03); cursor: pointer; }
+    .checklist input { margin-top: 4px; }
+    details { border: 1px solid var(--border); border-radius: 14px; padding: 12px 14px; background: rgba(255,255,255,.03); }
+    details + details { margin-top: 10px; }
+    summary { cursor: pointer; font-weight: 700; color: var(--accent2); }
+    .footer-nav { display: flex; justify-content: space-between; gap: 10px; margin-top: 18px; }
+    .progress { height: 8px; background: rgba(255,255,255,.06); border-radius: 999px; overflow: hidden; margin-top: 10px; }
+    .progress > div { height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), var(--accent2)); transition: width .25s ease; }
+    .minihead { color: var(--accent); font-weight: 700; font-size: .95rem; margin: 16px 0 8px; }
+    .status-pill {
+      display: inline-block; padding: 6px 10px; border-radius: 999px; font-size: .84rem;
+      border: 1px solid var(--border); margin-right: 8px; margin-bottom: 8px;
+      background: rgba(255,255,255,.04); color: var(--muted);
+    }
+    .status-pill.need { color: var(--need); border-color: rgba(255,179,179,.35); }
+    .status-pill.ok { color: var(--ok); border-color: rgba(155,255,191,.35); }
+    code.path {
+      display: inline-block; padding: 2px 7px; border-radius: 8px;
+      background: rgba(255,255,255,.06); border: 1px solid var(--border);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .9em;
+    }
+    @media (max-width: 1100px) {
+      .app { grid-template-columns: 1fr; }
+      .sidebar { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--border); }
+      .grid2, .grid3 { grid-template-columns: 1fr; }
+      .slide { min-height: auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="eyebrow">ByteCast · Internal Teams · March 19, 2026</div>
+        <h1>What Counts Now</h1>
+        <p>Internal ops/training deck focused on what each system is, where it fits, how it should be accessed, what still needs help, and what remains on the punch list.</p>
+      </div>
+
+      <section class="controls">
+        <h2>Read aloud</h2>
+        <div class="btnrow">
+          <button id="speakSectionBtn">Read Slide</button>
+          <button id="pauseSpeechBtn" class="secondary">Pause / Resume</button>
+          <button id="stopSpeechBtn" class="secondary">Stop</button>
+        </div>
+        <p class="note">Uses the browser’s speech engine. In Edge, this can use voices available to the browser and system.</p>
+      </section>
+
+      <section class="section-list">
+        <h2>Slides</h2>
+        <div id="slideNav" class="slide-nav"></div>
+      </section>
+
+      <section class="glossary-panel">
+        <h2>Glossary</h2>
+        <input id="glossarySearch" type="text" placeholder="Filter terms..." />
+        <div id="glossaryList" class="glossary-list"></div>
+      </section>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div>
+          <div class="eyebrow">Internal briefing + training</div>
+          <div id="slideStatus" class="status">Slide 1</div>
+        </div>
+        <div style="min-width: 240px;">
+          <div class="status">Deck progress</div>
+          <div class="progress"><div id="progressBar"></div></div>
+        </div>
+      </div>
+
+      <section class="deck">
+        <article class="slide active" data-title="Executive Read" data-subtitle="Current state of the board">
+          <div class="kicker">Slide 1</div>
+          <h2>Executive Read</h2>
+          <p class="lead">
+            The ecosystem is active across multiple lanes at once. The problem is no longer lack of projects or ideas. The problem is keeping current truth, access paths, and next actions clear enough that teams can work without guessing.
+          </p>
+
+          <div class="grid2">
+            <div class="card">
+              <h3>What teams should understand</h3>
+              <p>We are in a consolidation phase. That means active work continues, but more attention is being placed on visibility, structure, canon paths, and reducing drift between versions and systems.</p>
+              <p>This is a maturity move. It is how a real operating environment protects speed without becoming noisy.</p>
+            </div>
+            <div class="card">
+              <h3>Why this matters today</h3>
+              <p>Several lanes are healthy at the same time: ACOS, SOT, reporting, work orders, storefront, Lumina, infrastructure, and creative systems. That increases the need for clear access points, current summaries, and punch-list visibility.</p>
+              <p>Without that, teams spend time re-figuring out what is current instead of moving the work forward.</p>
+            </div>
+          </div>
+
+          <div class="minihead">Current internal emphasis</div>
+          <div class="card">
+            <span class="status-pill ok">Momentum is real</span>
+            <span class="status-pill">Clarity work in progress</span>
+            <span class="status-pill need">Need better canon visibility</span>
+            <p style="margin-top:10px;">The main shift is from “what can we build?” to “what should be treated as current, visible, and actionable right now?”</p>
+          </div>
+
+          <div class="footer-nav">
+            <span></span>
+            <button class="nextBtn">Next slide</button>
+          </div>
+        </article>
+
+        <article class="slide" data-title="Operating Model" data-subtitle="How systems should plug into ACOS">
+          <div class="kicker">Slide 2</div>
+          <h2>Operating Model</h2>
+          <p class="lead">
+            The architecture should be run as separate domain systems with clear ownership, all feeding ACOS for unified visual awareness. ACOS is the cockpit. Domain systems remain the owners of their own truth.
+          </p>
+
+          <div class="diagram">
+            <div class="box"><strong>Domain systems</strong><br>SOT, Work Orders, Reporting, NXCal, Store, and other specific systems each hold their own records, logic, and canonical state.</div>
+            <div class="arrow">↓</div>
+            <div class="box"><strong>Integration layer</strong><br>Each domain publishes status, alerts, summaries, and drill-in links through defined contracts rather than through ad hoc copying.</div>
+            <div class="arrow">↓</div>
+            <div class="box"><strong>ACOS</strong><br>ACOS presents the board: what is healthy, what needs attention, what changed, where to drill in, and what systems are affecting each other.</div>
+          </div>
+
+          <div class="grid3" style="margin-top:16px;">
+            <div class="card">
+              <h3>Where teams will access it</h3>
+              <p>ACOS should be the primary visual entry point for cross-system awareness, not the hidden database of every system beneath it.</p>
+            </div>
+            <div class="card">
+              <h3>What help is needed</h3>
+              <p>Defined contracts for what each system publishes into ACOS, plus clear widget/panel meaning so teams trust what they are seeing.</p>
+            </div>
+            <div class="card">
+              <h3>Punch list</h3>
+              <ul>
+                <li>Define publishable status fields</li>
+                <li>Define drill-in destinations</li>
+                <li>Standardize panel language</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="callout">Rule: visibility belongs in ACOS, ownership stays in the domain systems.</div>
+
+          <div class="footer-nav">
+            <button class="prevBtn secondary">Previous</button>
+            <button class="nextBtn">Next slide</button>
+          </div>
+        </article>
+
+        <article class="slide" data-title="SOT System" data-subtitle="What it is, where it fits, and what it still needs">
+          <div class="kicker">Slide 3</div>
+          <h2>SOT System</h2>
+          <p class="lead">
+            The SOT system is the source-of-truth layer for current summaries, canon paths, active-vs-legacy labeling, and project-level trust. It exists to reduce ambiguity about what files and summaries should be treated as current.
+          </p>
+
+          <div class="grid2">
+            <div class="card">
+              <h3>What it is</h3>
+              <p>A structured system for declaring which project summary, status file, path, or definition is current and trusted. It is not a random doc pile. It is the control layer for canon visibility.</p>
+            </div>
+            <div class="card">
+              <h3>Where teams should access it</h3>
+              <p>Eventually through ACOS for visibility, but operationally it should also have direct paths to the current project index and per-project summaries. For example: <code class="path">PROJECT_INDEX.md</code>, <code class="path">PROJECT_SUMMARY.md</code>, and related canon markers.</p>
+            </div>
+          </div>
+
+          <div class="grid3" style="margin-top:16px;">
+            <div class="card">
+              <h3>What help is needed</h3>
+              <p>Agreement on naming, placement, and active/legacy/archive rules so the system stays usable rather than theoretical.</p>
+            </div>
+            <div class="card">
+              <h3>What is still on punch list</h3>
+              <ul>
+                <li>Top-level project index</li>
+                <li>Per-project current summaries</li>
+                <li>Canon path conventions</li>
+                <li>Active/legacy/archive tagging</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Why this matters</h3>
+              <p>If teams cannot tell what is current, re-entry cost goes up and trust in the system goes down.</p>
+            </div>
+          </div>
+
+          <details open>
+            <summary>Common misuse to avoid</summary>
+            <p>Do not assume the newest touched file is the official file. The point of SOT is declared trust, not accidental trust.</p>
+          </details>
+
+          <div class="footer-nav">
+            <button class="prevBtn secondary">Previous</button>
+            <button class="nextBtn">Next slide</button>
+          </div>
+        </article>
+
+        <article class="slide" data-title="Work Order System" data-subtitle="Workflow ownership and visibility">
+          <div class="kicker">Slide 4</div>
+          <h2>Work Order System</h2>
+          <p class="lead">
+            The Work Order system should own workflow truth: intake, assignment, priority, status, lifecycle, and completion. It should not be overloaded with unrelated observability or reporting responsibilities.
+          </p>
+
+          <div class="grid2">
+            <div class="card">
+              <h3>What it is</h3>
+              <p>The operating system for work itself. If something is being requested, triaged, assigned, worked, blocked, completed, or escalated, this is the domain that should hold that truth.</p>
+            </div>
+            <div class="card">
+              <h3>Where teams should access it</h3>
+              <p>Directly in its own interface for editing and managing work. Indirectly through ACOS for summarized visibility, queues, and current-state awareness.</p>
+            </div>
+          </div>
+
+          <div class="grid3" style="margin-top:16px;">
+            <div class="card">
+              <h3>What help is needed</h3>
+              <p>Clear scope boundaries so the system stays focused on workflow instead of expanding into every other ops concern.</p>
+            </div>
+            <div class="card">
+              <h3>What is still on punch list</h3>
+              <ul>
+                <li>Lifecycle definition cleanup</li>
+                <li>Priority and status normalization</li>
+                <li>Clear outputs for ACOS panels</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Related caution</h3>
+              <p>Deep device telemetry, DNS history, and file-access auditing should not quietly become the Work Order system’s job.</p>
+            </div>
+          </div>
+
+          <div class="callout">Rule: work order truth should stay about work, not become a catch-all for everything operational.</div>
+
+          <div class="footer-nav">
+            <button class="prevBtn secondary">Previous</button>
+            <button class="nextBtn">Next slide</button>
+          </div>
+        </article>
+
+        <article class="slide" data-title="Reporting System" data-subtitle="Rollups, status outputs, and internal readouts">
+          <div class="kicker">Slide 5</div>
+          <h2>Reporting System</h2>
+          <p class="lead">
+            The Reporting system should own rollups, summaries, metric definitions, EOD/EOW views, and internal status outputs. It exists to transform domain truth into usable awareness for operators and leadership.
+          </p>
+
+          <div class="grid2">
+            <div class="card">
+              <h3>What it is</h3>
+              <p>The layer that interprets current state into readable outputs. It should answer “what is going on?”, “what changed?”, and “what needs attention?” without recreating domain truth inconsistently.</p>
+            </div>
+            <div class="card">
+              <h3>Where teams should access it</h3>
+              <p>Directly through reporting artifacts and dashboards, and through ACOS where summarized outputs should be visible alongside work, system health, and other ecosystem awareness.</p>
+            </div>
+          </div>
+
+          <div class="grid3" style="margin-top:16px;">
+            <div class="card">
+              <h3>What help is needed</h3>
+              <p>Metric definitions and consistent report structures so different reports do not drift into different meanings for the same status.</p>
+            </div>
+            <div class="card">
+              <h3>What is still on punch list</h3>
+              <ul>
+                <li>Now/EOD/EOW format standards</li>
+                <li>Status interpretation rules</li>
+                <li>ACOS-facing summary outputs</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Important reminder</h3>
+              <p>Reporting should summarize and interpret. It should not randomly become the hidden owner of raw operational records.</p>
+            </div>
+          </div>
+
+          <div class="footer-nav">
+            <button class="prevBtn secondary">Previous</button>
+            <button class="nextBtn">Next slide</button>
+          </div>
+        </article>
+
+        <article class="slide" data-title="Storefront + Lumina" data-subtitle="Two high-value practical lanes">
+          <div class="kicker">Slide 6</div>
+          <h2>Storefront + Lumina</h2>
+          <p class="lead">
+            These are two of the highest-value practical lanes right now because they affect how the ecosystem is presented and used. Both need cleaner structure more than broader scope.
+          </p>
+
+          <div class="grid2">
+            <div class="card">
+              <h3>Storefront lane</h3>
+              <p><strong>What it is:</strong> the product/catalog publishing chain touching Square, Printful, live catalog views, and presentation layers.</p>
+              <p><strong>How to access:</strong> through the current catalog files and storefront assets used for operational edits and publishing.</p>
+              <p><strong>Help needed:</strong> a locked source chain from raw export to normalized master to curated live catalog to overlay or presentation layer.</p>
+              <p><strong>Punch list:</strong> remove duplicate paths, stabilize variant logic, and declare which JSON is actually live.</p>
+            </div>
+            <div class="card">
+              <h3>Lumina lane</h3>
+              <p><strong>What it is:</strong> a branding kit organizer for internal use and client-facing presentation.</p>
+              <p><strong>How to access:</strong> through the active app build/canvas/app surface currently being iterated.</p>
+              <p><strong>Help needed:</strong> one polished core path that proves the product is trustworthy.</p>
+              <p><strong>Punch list:</strong> item selection, focused detail view, branding kit inspection, and clean usage preview.</p>
+            </div>
+          </div>
+
+          <div class="callout">Shared lesson: both lanes become more valuable when teams can clearly tell what is current, what is editable, and what is production-facing.</div>
+
+          <div class="footer-nav">
+            <button class="prevBtn secondary">Previous</button>
+            <button class="nextBtn">Next slide</button>
+          </div>
+        </article>
+
+        <article class="slide" data-title="Creative + Infrastructure" data-subtitle="Continuity and resiliency">
+          <div class="kicker">Slide 7</div>
+          <h2>Creative + Infrastructure</h2>
+          <p class="lead">
+            Creative lanes and infrastructure lanes are different in feel, but they share the same operational need: continuity. Creative work needs canon packaging. Infrastructure needs reliable restart, clone, and handoff behavior.
+          </p>
+
+          <div class="grid2">
+            <div class="card">
+              <h3>Creative systems</h3>
+              <p><strong>What they are:</strong> song lanes, comic lanes, visual development, prompt packs, and art/story continuity work.</p>
+              <p><strong>How to access:</strong> through the active files, reference assets, and packaged materials tied to each lane.</p>
+              <p><strong>Help needed:</strong> canon packets such as panel briefs, episode sheets, sonic signatures, approved prompt references, and continuity notes.</p>
+            </div>
+            <div class="card">
+              <h3>Infrastructure systems</h3>
+              <p><strong>What they are:</strong> server setup, cloning, Docker restart reliability, service resiliency, and environment organization.</p>
+              <p><strong>How to access:</strong> through server paths, Docker/service configs, and operational docs tied to each environment.</p>
+              <p><strong>Help needed:</strong> cleaner restart behavior, clearer handoff/recovery rules, and predictable clone deployment practices.</p>
+            </div>
+          </div>
+
+          <div class="grid2" style="margin-top:16px;">
+            <div class="card">
+              <h3>Creative punch list</h3>
+              <ul>
+                <li>Package canon references</li>
+                <li>Reduce session-to-session style drift</li>
+                <li>Make current lane status easier to see</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Infrastructure punch list</h3>
+              <ul>
+                <li>Improve startup reliability</li>
+                <li>Make clone strategy cleaner</li>
+                <li>Ensure service visibility after restart</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="footer-nav">
+            <button class="prevBtn secondary">Previous</button>
+            <button class="nextBtn">Next slide</button>
+          </div>
+        </article>
+
+        <article class="slide" data-title="Priority Stack" data-subtitle="What help is needed next">
+          <div class="kicker">Slide 8</div>
+          <h2>Priority Stack</h2>
+          <p class="lead">
+            The next actions are ordered by leverage. These are the items that make the rest of the board easier to understand, maintain, and move.
+          </p>
+
+          <div class="checklist">
+            <label><input type="checkbox"> <span><strong>P1 — Build the portfolio front door.</strong><br>Needs: project index, per-project current summaries, active/legacy/archive labels, and a clearer way for teams to find current truth fast.</span></label>
+            <label><input type="checkbox"> <span><strong>P1 — Lock the storefront data chain.</strong><br>Needs: one live path from export to normalized master to curated live catalog to presentation output.</span></label>
+            <label><input type="checkbox"> <span><strong>P1 — Finish Lumina’s golden path.</strong><br>Needs: a core interaction that is polished enough to trust in internal and client-facing use.</span></label>
+            <label><input type="checkbox"> <span><strong>P2 — Formalize ACOS integration contracts.</strong><br>Needs: common publish fields, consistent panel language, and drill-in clarity.</span></label>
+            <label><input type="checkbox"> <span><strong>P2 — Package canon for creative lanes.</strong><br>Needs: reference packets, continuity notes, and clearer active-lane summaries.</span></label>
+          </div>
+
+          <div class="minihead">How teams can help</div>
+          <div class="card">
+            <p>Help is most useful when it reduces ambiguity: identifying canon files, clarifying access paths, documenting punch-list items, and tightening contracts between systems and ACOS.</p>
+          </div>
+
+          <div class="footer-nav">
+            <button class="prevBtn secondary">Previous</button>
+            <button class="nextBtn">Next slide</button>
+          </div>
+        </article>
+
+        <article class="slide" data-title="Knowledge Check" data-subtitle="Quick internal understanding check">
+          <div class="kicker">Slide 9</div>
+          <h2>Knowledge Check</h2>
+          <p class="lead">
+            This check is designed to reinforce the operating model and the practical priorities behind it.
+          </p>
+
+          <div class="checklist">
+            <label><input type="checkbox" data-correct="true"> <span>ACOS should provide unified awareness across domain systems.</span></label>
+            <label><input type="checkbox" data-correct="true"> <span>The SOT system should make canon paths and current summaries easier to find and trust.</span></label>
+            <label><input type="checkbox"> <span>The Work Order system should absorb every adjacent telemetry concern so fewer apps exist.</span></label>
+            <label><input type="checkbox" data-correct="true"> <span>The Reporting system should own rollups and interpreted outputs rather than raw domain truth.</span></label>
+            <label><input type="checkbox"> <span>If multiple files look plausible, teams should just use the newest one.</span></label>
+          </div>
+
+          <div class="btnrow" style="margin-top:14px;">
+            <button id="gradeBtn">Check answers</button>
+            <button id="resetQuizBtn" class="secondary">Reset</button>
+          </div>
+          <div id="quizResult" class="note"></div>
+
+          <div class="footer-nav">
+            <button class="prevBtn secondary">Previous</button>
+            <button id="restartBtn">Restart deck</button>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const nav = document.getElementById('slideNav');
+    const status = document.getElementById('slideStatus');
+    const progressBar = document.getElementById('progressBar');
+    let current = 0;
+
+    const glossary = [
+      { term: "ACOS", def: "The visual awareness and command layer that surfaces cross-system status, alerts, and drill-ins." },
+      { term: "SOT", def: "Source of Truth. The declared canonical artifact or system for a given concern." },
+      { term: "Canonical", def: "The version or path officially trusted as current truth." },
+      { term: "Domain system", def: "A system responsible for one specific ownership area, such as work orders, reporting, or calendar truth." },
+      { term: "Integration contract", def: "The defined format and rules for what one system publishes to another." },
+      { term: "Golden path", def: "The core workflow that should work cleanly and repeatedly before broader scope is added." },
+      { term: "Re-entry cost", def: "The time and mental load required to re-understand the current state of a project after stepping away." },
+      { term: "Portfolio front door", def: "A top-level index or summary layer that helps people understand what exists, what is active, and where the canon lives." },
+      { term: "Catalog normalization", def: "The cleanup process that turns raw exports into a stable master structure before live storefront use." },
+      { term: "NXCal", def: "The canonical event and timeline ledger in the ecosystem." },
+      { term: "Punch list", def: "A focused set of remaining items needed to make a lane cleaner, more complete, or more operational." }
+    ];
+
+    function buildGlossary(filter = "") {
+      const wrap = document.getElementById('glossaryList');
+      wrap.innerHTML = "";
+      const f = filter.trim().toLowerCase();
+      glossary
+        .filter(item => !f || item.term.toLowerCase().includes(f) || item.def.toLowerCase().includes(f))
+        .forEach(item => {
+          const div = document.createElement('div');
+          div.className = 'glossary-item';
+          div.innerHTML = `<strong>${item.term}</strong><span>${item.def}</span>`;
+          wrap.appendChild(div);
+        });
+    }
+
+    function renderNav() {
+      nav.innerHTML = "";
+      slides.forEach((slide, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'slide-link' + (idx === current ? ' active' : '');
+        btn.innerHTML = `${idx + 1}. ${slide.dataset.title}<small>${slide.dataset.subtitle || ''}</small>`;
+        btn.addEventListener('click', () => goTo(idx));
+        nav.appendChild(btn);
+      });
+    }
+
+    function updateStatus() {
+      status.textContent = `Slide ${current + 1} of ${slides.length} · ${slides[current].dataset.title}`;
+      progressBar.style.width = `${((current + 1) / slides.length) * 100}%`;
+      renderNav();
+    }
+
+    function goTo(index) {
+      current = Math.max(0, Math.min(slides.length - 1, index));
+      slides.forEach((s, i) => s.classList.toggle('active', i === current));
+      updateStatus();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      stopSpeech();
+    }
+
+    function nextSlide() { goTo(current + 1); }
+    function prevSlide() { goTo(current - 1); }
+
+    document.querySelectorAll('.nextBtn').forEach(btn => btn.addEventListener('click', nextSlide));
+    document.querySelectorAll('.prevBtn').forEach(btn => btn.addEventListener('click', prevSlide));
+    document.getElementById('restartBtn').addEventListener('click', () => goTo(0));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    });
+
+    document.getElementById('glossarySearch').addEventListener('input', (e) => buildGlossary(e.target.value));
+
+    let paused = false;
+    function getCurrentSlideText() {
+      const active = slides[current];
+      return active.innerText.replace(/Previous|Next slide|Restart deck/g, '').trim();
+    }
+    function speakCurrentSlide() {
+      stopSpeech();
+      const utter = new SpeechSynthesisUtterance(getCurrentSlideText());
+      utter.rate = 1;
+      utter.pitch = 1;
+      utter.volume = 1;
+      const voices = window.speechSynthesis.getVoices();
+      const preferred = voices.find(v => /Microsoft|Edge|Zira|Guy|Jenny|Aria|Sara|Christopher/i.test(v.name));
+      if (preferred) utter.voice = preferred;
+      window.speechSynthesis.speak(utter);
+      paused = false;
+    }
+    function stopSpeech() { window.speechSynthesis.cancel(); paused = false; }
+    function pauseResumeSpeech() {
+      if (window.speechSynthesis.speaking && !paused) { window.speechSynthesis.pause(); paused = true; }
+      else if (paused) { window.speechSynthesis.resume(); paused = false; }
+    }
+    document.getElementById('speakSectionBtn').addEventListener('click', speakCurrentSlide);
+    document.getElementById('stopSpeechBtn').addEventListener('click', stopSpeech);
+    document.getElementById('pauseSpeechBtn').addEventListener('click', pauseResumeSpeech);
+
+    document.getElementById('gradeBtn').addEventListener('click', () => {
+      const boxes = Array.from(slides[8].querySelectorAll('input[type="checkbox"]'));
+      let correct = 0;
+      let total = 0;
+      boxes.forEach(box => {
+        const shouldBeChecked = box.dataset.correct === "true";
+        total += 1;
+        if ((box.checked && shouldBeChecked) || (!box.checked && !shouldBeChecked)) correct += 1;
+      });
+      const pct = Math.round((correct / total) * 100);
+      const result = document.getElementById('quizResult');
+      result.textContent = pct >= 80
+        ? `Score: ${pct}%. Good read. The operating model is landing.`
+        : `Score: ${pct}%. Revisit the ACOS, SOT, and system ownership slides, then check again.`;
+      result.style.color = pct >= 80 ? 'var(--ok)' : 'var(--warn)';
+    });
+    document.getElementById('resetQuizBtn').addEventListener('click', () => {
+      slides[8].querySelectorAll('input[type="checkbox"]').forEach(box => box.checked = false);
+      document.getElementById('quizResult').textContent = "";
+    });
+
+    buildGlossary();
+    renderNav();
+    updateStatus();
+    if ('speechSynthesis' in window) window.speechSynthesis.onvoiceschanged = () => {};
+  </script>
+</body>
+</html>

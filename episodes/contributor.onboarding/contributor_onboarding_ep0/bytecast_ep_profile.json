@@ -1,0 +1,88 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "episode": {
+    "code": "CO-EP-0",
+    "title": "Contributor Onboarding — Ep 0 — What AeroVista Is",
+    "type": "training",
+    "date": "2026-03-30",
+    "runtime_target_minutes": 6,
+    "status": "active"
+  },
+  "content": {
+    "tags": ["contributor-onboarding", "aerovista", "orientation"],
+    "summary_short": "AeroVista is a multi-division ecosystem that ships small, real releases with clean lanes and safe defaults.",
+    "summary_long": "Start with the shape of the system: AeroVista is an ecosystem across apps, music, branding, and infrastructure. The point is not heroic output. The point is clean, repeatable releases that strengthen the whole studio over time."
+  },
+  "training": {
+    "eyebrow": "Contributor Onboarding",
+    "chips": ["Multi-division ecosystem", "Local-first builds", "Small drops", "Safe defaults"],
+    "sources": [
+      "episodes/contributor.onboarding/index.html",
+      "episodes/contributor.onboarding/docs/CONTRIBUTING.md"
+    ],
+    "transcript": [
+      "AeroVista is not a single app, a single track, or a single brand page. It is a multi-division ecosystem where apps, music, visuals, and infrastructure support each other.",
+      "The operating idea is simple: ship small drops that are real, reviewable, and repeatable. A release can be a song, a landing page, a tool, a workflow, or a support document, as long as it strengthens the system instead of adding noise.",
+      "That is why the culture emphasizes local-first builds, security by default, and quality as a form of respect. Every drop should feel intentional, not rushed and not vague.",
+      "In this environment, big heroic commits are less valuable than small proof-backed wins. Progress compounds when each release leaves the ecosystem clearer than it found it.",
+      "This training pack turns that operating model into a contributor path: understand the studio, check for mutual fit, learn the work lanes, use work orders and Definition of Done, then prove readiness through the Crew Check flow."
+    ],
+    "slides": [
+      {
+        "id": "s1",
+        "title": "One ecosystem, many outputs",
+        "body": "AeroVista connects apps, music, branding, and infrastructure instead of treating them like unrelated projects.",
+        "notes": [
+          "A drop can be a song, a tool, a launch page, or an ops support asset.",
+          "Each release should make the whole system stronger, not just finish one task.",
+          "Contributors work better when they understand the ecosystem context first."
+        ]
+      },
+      {
+        "id": "s2",
+        "title": "Small drops keep momentum honest",
+        "body": "The studio favors small, reviewable releases because they are easier to test, explain, and repeat.",
+        "notes": [
+          "Small is professional.",
+          "One task should map to one change set and one clear outcome.",
+          "Repeatable patterns beat one-off heroics."
+        ]
+      },
+      {
+        "id": "s3",
+        "title": "Craft plus care",
+        "body": "Quality, security, and story are part of the same standard. Fast is fine, but only when clean.",
+        "notes": [
+          "Quality is respect for users and for the team.",
+          "Safe defaults prevent fragile growth.",
+          "The work should still feel human, not churned out."
+        ]
+      },
+      {
+        "id": "s4",
+        "title": "The contributor path",
+        "body": "This pack moves from orientation to readiness so work starts with clarity instead of improvisation.",
+        "notes": [
+          "Fit Check filters for working style.",
+          "Lanes define what is safe, what needs review, and what is restricted.",
+          "Work orders and Definition of Done turn expectations into proof."
+        ]
+      }
+    ],
+    "engage": {
+      "prompt": "Which statement matches AeroVista's operating model?",
+      "options": [
+        {
+          "label": "It is an ecosystem across multiple divisions, and each small release should strengthen the whole system.",
+          "correct": true
+        },
+        {
+          "label": "It is mainly a place for large refactors because big changes show commitment."
+        },
+        {
+          "label": "It is a marketing-only brand site, so contributor rules matter less than speed."
+        }
+      ]
+    }
+  }
+}

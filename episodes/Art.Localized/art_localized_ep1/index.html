@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en" data-theme="art-localized">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ByteCast — The Art Localized • Ep 1 — Divisions and activation lanes</title>
+  <meta
+    name="description"
+    content="The Art Localized Training — Ep 1. Division ownership, artist onboarding flow, and spotlight activation from the Phase 2 source pack."
+  />
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml" />
+  <style>
+    :root {
+      --bg0: #0a0f1d;
+      --bg1: #13182a;
+      --panel: rgba(11, 16, 29, 0.82);
+      --ink: rgba(248, 247, 255, 0.96);
+      --muted: rgba(248, 247, 255, 0.72);
+      --line: rgba(179, 159, 255, 0.22);
+      --accent: #8f80ff;
+      --accent-2: #79d7ff;
+      --accent-3: #8ef0bf;
+      --max: 980px;
+      --pad: clamp(16px, 2.5vw, 26px);
+      --display: "Aptos Display", "Segoe UI Variable Display", "Trebuchet MS", sans-serif;
+      --sans: "Aptos", "Segoe UI Variable Text", "Segoe UI", sans-serif;
+      --mono: ui-monospace, "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      color: var(--ink);
+      background:
+        radial-gradient(840px 480px at 85% 0%, rgba(143, 128, 255, 0.16), transparent 58%),
+        radial-gradient(900px 520px at 0% 0%, rgba(121, 215, 255, 0.12), transparent 52%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      min-height: 100vh;
+    }
+    a { color: inherit; }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(10, 15, 29, 0.84);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar__inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 12px var(--pad);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .k, .eyebrow {
+      font-family: var(--mono);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .k {
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .eyebrow {
+      margin: 0 0 10px;
+      font-size: 12px;
+      color: var(--accent-2);
+    }
+    .btn {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font: inherit;
+      font-size: 13px;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn--primary {
+      border-color: rgba(143, 128, 255, 0.58);
+      box-shadow: 0 0 22px rgba(143, 128, 255, 0.18);
+    }
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 24px var(--pad) 72px;
+    }
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: var(--panel);
+      padding: 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 18px 46px rgba(0, 0, 0, 0.22);
+    }
+    .hero {
+      padding: 24px;
+      background:
+        linear-gradient(135deg, rgba(143, 128, 255, 0.18), rgba(121, 215, 255, 0.12)),
+        rgba(11, 16, 29, 0.84);
+    }
+    h1, h2 {
+      margin: 0 0 10px;
+      font-family: var(--display);
+      letter-spacing: -0.02em;
+    }
+    h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); }
+    h2 { font-size: 1.05rem; }
+    .sub {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 74ch;
+    }
+    .row, .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+    .chips { margin-top: 16px; }
+    .chip {
+      border: 1px solid rgba(143, 128, 255, 0.3);
+      background: rgba(143, 128, 255, 0.08);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+    }
+    .status {
+      margin: 12px 0 0;
+      font-size: 13px;
+      color: var(--accent-2);
+    }
+    .script {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .script p, .mini, .choice, .source-list li {
+      line-height: 1.6;
+    }
+    .script p, .mini, .choice {
+      margin: 0;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .slide-visual {
+      margin-bottom: 14px;
+      padding: 12px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+    }
+    .slide-visual svg { max-width: 100%; height: auto; display: block; }
+    .slides { min-height: 250px; }
+    .slide { display: none; }
+    .slide.is-active { display: block; }
+    .slide:not(.is-active) .bc-art :is(animate, animateTransform) { visibility: hidden; }
+    @media (prefers-reduced-motion: reduce) {
+      .slide-visual .bc-art :is(animate, animateTransform) { display: none !important; }
+    }
+    .note-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .mini { color: var(--muted); }
+    .source-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+    .choice {
+      display: block;
+      margin: 10px 0;
+      cursor: pointer;
+    }
+    .choice input { margin-right: 10px; }
+    .mission-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .mission-field {
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .mission-field input,
+    .mission-field textarea {
+      width: 100%;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
+      padding: 12px 14px;
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.04);
+      font: inherit;
+    }
+    .mission-field textarea {
+      min-height: 104px;
+      resize: vertical;
+    }
+    .field-guide {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .guide-card {
+      padding: 14px;
+      border-radius: 16px;
+      background: rgba(142, 240, 191, 0.07);
+      border: 1px solid rgba(142, 240, 191, 0.16);
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .guide-card strong { color: var(--ink); }
+    #engageHint, #missionHint {
+      margin-top: 12px;
+      color: var(--accent-3);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body data-bc-ep="1" data-bc-slug="art_localized_ep1">
+  <header class="topbar">
+    <div class="topbar__inner">
+      <span class="k">The Art Localized — Training</span>
+      <div class="row">
+        <a class="btn" href="../../../seed_bytecast.html">Playlist</a>
+        <a class="btn" href="../../../episodes/training_hub/index.html">Training Hub</a>
+        <a class="btn btn--primary" href="../../../index.html">Workspace</a>
+      </div>
+    </div>
+  </header>
+  <main class="wrap">
+    <section class="panel hero">
+      <p class="eyebrow">ART-EP-1 • Phase 2 Activation</p>
+      <h1>Ep 1 — Divisions and activation lanes</h1>
+      <p class="sub">
+        Phase 2 turns the manifesto into a working growth lane. Lumina leads, supporting divisions activate the
+        creator network, and every onboarding step should point to a clear next owner.
+      </p>
+      <div class="chips">
+        <span class="chip">Artist Onboarding</span>
+        <span class="chip">Spotlight Series</span>
+        <span class="chip">Regional Growth</span>
+        <span class="chip">Division Routing</span>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Listen">
+      <h2>Listen</h2>
+      <p class="sub">
+        Use read-aloud to hear the Phase 2 script. This replaces bundled narration and keeps the listen gate inside the browser.
+      </p>
+      <div class="row" style="margin-top:14px;">
+        <button type="button" class="btn btn--primary" id="btnReadAloud">Read Aloud</button>
+        <button type="button" class="btn" id="btnPauseReadAloud">Pause</button>
+        <button type="button" class="btn" id="btnStopReadAloud">Stop</button>
+        <button type="button" class="btn" id="btnListenDone">Mark listen complete</button>
+      </div>
+      <p class="status" id="readStatus" aria-live="polite">Ready to read the Phase 2 script aloud.</p>
+      <div id="readScript" class="script">
+        <p>
+          Phase 2 moves from awareness to activation. Lumina Creative Media remains the lead division, while
+          EchoVerse Audio, SkyForge Creative Studios, and Vespera Publishing support the growth protocol.
+          Divisions matter because they define who owns the next deliverable, not because they decorate the org chart.
+        </p>
+        <p>
+          The onboarding flow is explicit. Artists land on the join page, submit their region and medium, move
+          through weekly verification, receive a welcome pack, and then progress from Seed Artist to Regional
+          Beacon to AeroVista Partner as they build trust and visibility.
+        </p>
+        <p>
+          Activation is sustained with a spotlight framework: a short-form reel, a long-form interview or blog,
+          and an EchoVerse remix. The initial regions are Pacific Northwest, Midwest, Northeast, Southeast, and the Philippines.
+          The point is repeatable proof across regions, not one-off hype.
+        </p>
+        <p>
+          Growth is measured against real targets: one hundred artist signups in sixty days, ten thousand weekly
+          impressions, five regional showcases, and one partner per region. Division routing only matters if it
+          helps those numbers move.
+        </p>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Slides">
+      <h2>Slides</h2>
+      <p class="eyebrow" id="slideTitle">Lead and support</p>
+      <div id="slides" class="slides">
+        <div class="slide is-active" data-title="Lead and support">
+          <div class="slide-visual" data-slide-art="s1" aria-hidden="true"></div>
+          <p class="sub">
+            “Division” here means execution lane. Lumina leads the campaign while supporting teams deliver the pieces that make activation real.
+          </p>
+          <div class="note-grid">
+            <article class="mini"><strong>Lumina.</strong> Campaign lead, narrative continuity, and growth orchestration.</article>
+            <article class="mini"><strong>EchoVerse.</strong> Audio and remix layer for spotlight assets.</article>
+            <article class="mini"><strong>SkyForge / Vespera.</strong> Showcase formats, stories, and long-form publishing.</article>
+          </div>
+        </div>
+        <div class="slide" data-title="Onboarding flow">
+          <div class="slide-visual" data-slide-art="s2" aria-hidden="true"></div>
+          <p class="sub">
+            The onboarding system is already defined end-to-end, from public intake to verified progression.
+          </p>
+          <div class="note-grid">
+            <article class="mini"><strong>Step 1.</strong> Intake page captures name, region, medium, tools, and samples.</article>
+            <article class="mini"><strong>Step 2.</strong> Weekly review issues the Seed Artist badge.</article>
+            <article class="mini"><strong>Step 3-4.</strong> Welcome pack, community channel, and progression tiers keep momentum visible.</article>
+          </div>
+        </div>
+        <div class="slide" data-title="Spotlight engine">
+          <div class="slide-visual" data-slide-art="s3" aria-hidden="true"></div>
+          <p class="sub">
+            The spotlight series gives each region a repeatable content pattern instead of improvising outreach from scratch.
+          </p>
+          <div class="note-grid">
+            <article class="mini"><strong>Short form.</strong> Thirty-second reel optimized for mobile discovery.</article>
+            <article class="mini"><strong>Long form.</strong> Vespera interview or article for context and credibility.</article>
+            <article class="mini"><strong>Audio layer.</strong> EchoVerse remix extends the creator story into sound.</article>
+          </div>
+        </div>
+        <div class="slide" data-title="Metrics and regions">
+          <div class="slide-visual" data-slide-art="s4" aria-hidden="true"></div>
+          <p class="sub">
+            Phase 2 is only working if signups, impressions, showcases, and regional partners all climb together.
+          </p>
+          <div class="note-grid">
+            <article class="mini"><strong>Near-term signal.</strong> Early signups, audience feedback, and regional partner interest.</article>
+            <article class="mini"><strong>Regional target.</strong> Five launch regions with one partner per region.</article>
+            <article class="mini"><strong>Operating rule.</strong> Route the work toward outcomes, not status labels.</article>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="margin-top:14px;">
+        <button type="button" class="btn" id="btnSlidePrev">Previous</button>
+        <button type="button" class="btn btn--primary" id="btnSlideNext">Next</button>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Built from">
+      <h2>Built From</h2>
+      <ul class="source-list">
+        <li><code>The_Art_Localized_Phase2_Pack_AVHQ/artist-onboarding-flow.md</code> for the creator progression system.</li>
+        <li><code>The_Art_Localized_Phase2_Pack_AVHQ/growth-plan.md</code> for the activation objective, metrics, and supporting divisions.</li>
+        <li><code>The_Art_Localized_Phase2_Pack_AVHQ/spotlight-framework.md</code> for the regional content pattern and deliverables.</li>
+      </ul>
+    </section>
+
+    <section class="panel" aria-label="Field guide">
+      <h2>Field guide</h2>
+      <p class="sub">
+        Use this when routing artists after they express interest. The best route is the one that matches the artist's
+        goal, the evidence you have, and the division that can responsibly own the next step.
+      </p>
+      <div class="field-guide">
+        <article class="guide-card"><strong>Route by need, not excitement.</strong> A musician may need EchoVerse first; a muralist may need Lumina profile copy and Horizon visual capture; a writer may need Vespera publication support.</article>
+        <article class="guide-card"><strong>Capture the minimum useful intake.</strong> Region, medium, sample work, consent status, desired outcome, and availability beat a long form nobody finishes.</article>
+        <article class="guide-card"><strong>Define the spotlight artifact.</strong> Before promotion, decide whether the first artifact is a reel, profile, remix, interview, pilot page, or event page.</article>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Engage">
+      <h2>Engage</h2>
+      <form id="engageForm">
+        <p class="sub">Pick the answer that matches the routing logic in Phase 2.</p>
+        <label class="choice"><input type="radio" name="engage" value="branding" /> Divisions are mostly branding labels and do not change who reviews or ships the next artifact.</label>
+        <label class="choice"><input type="radio" name="engage" value="routing" data-correct="true" /> Division lanes help you choose the right owner, proof path, and supporting deliverables for activation.</label>
+        <div class="row" style="margin-top:14px;">
+          <button type="submit" class="btn btn--primary" id="engageSubmit">Submit Engage</button>
+        </div>
+        <p id="engageHint"></p>
+      </form>
+    </section>
+
+    <section class="panel" aria-label="Proof mission">
+      <h2>Proof mission</h2>
+      <p class="sub">
+        Route a real or sample artist into the activation lane. This should be specific enough that another operator
+        could tell who owns the next move and what the spotlight package needs.
+      </p>
+      <form id="missionForm">
+        <div class="mission-grid">
+          <label class="mission-field">
+            <span>Artist or region</span>
+            <input data-proof-field="artistRegion" type="text" placeholder="Pacific Northwest painter, Tacoma musician, Manila illustrator..." />
+          </label>
+          <label class="mission-field">
+            <span>Lead division</span>
+            <input data-proof-field="leadDivision" type="text" placeholder="Lumina, EchoVerse, Vespera, SkyForge..." />
+          </label>
+          <label class="mission-field">
+            <span>Spotlight deliverable</span>
+            <textarea data-proof-field="spotlightDeliverable" placeholder="Short-form reel, interview, remix, artist profile, showcase asset..."></textarea>
+          </label>
+        </div>
+        <div class="row" style="margin-top:14px;">
+          <button type="submit" class="btn btn--primary">Record proof mission</button>
+        </div>
+        <p id="missionHint"></p>
+      </form>
+    </section>
+  </main>
+  <script src="../../../assets/shared/bytecast_loop.js"></script>
+  <script src="../../../assets/shared/art_localized_episode.js"></script>
+</body>
+</html>

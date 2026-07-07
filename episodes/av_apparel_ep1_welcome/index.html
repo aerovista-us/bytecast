@@ -410,7 +410,7 @@
           <p>Once you complete all three gates here, your quest map will unlock the next Apparel step: Catalog Maintainer Bootcamp, then practice work and a Seed artifact.</p>
           <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
             <a class="btn btn--primary" href="../../seed_bytecast.html">Back to Playlist</a>
-            <a id="nextTrainingBtn" class="btn" href="../../training_hub/index.html">Open Training Hub</a>
+            <a id="nextTrainingBtn" class="btn" href="../../episodes/training_hub/index.html">Open Training Hub</a>
             <span id="gateNote" class="pill">Loading gate status...</span>
           </div>
         </div>
@@ -502,6 +502,16 @@
             "Write a clear change request using the suggested template.",
             "Pair with a maintainer to apply it safely — then log it as your first win."
           ]
+        },
+        {
+          id: "s7",
+          title: "First Win Proof Note",
+          goal: "Make the first contribution easy to review.",
+          bullets: [
+            "Name the product, collection, or catalog area you checked.",
+            "Write the before state, proposed change, and why it improves customer trust.",
+            "Include what you did not touch so review stays focused and safe."
+          ]
         }
       ],
       engagement: {
@@ -511,7 +521,8 @@
             { id: "q1", text: "Play the episode and mark 2–3 key timestamps you want to remember." },
             { id: "q2", text: "Pick your starting lane (Maintainer / Copy & Naming / Pricing / Collections / QA)." },
             { id: "q3", text: "Open the live apparel catalog and identify one small issue you could safely help fix." },
-            { id: "q4", text: "Draft a one-paragraph change request describing the issue and the desired outcome." }
+            { id: "q4", text: "Draft a one-paragraph change request describing the issue and the desired outcome." },
+            { id: "q5", text: "Write a one-line before/after proof note for the tiny catalog issue you found." }
           ],
           reward_badge: {
             label: "APPAREL FIRST WIN",
@@ -581,6 +592,18 @@
               ],
               answer_index: 2,
               explain: "Access increases as you prove you can follow the system and keep the catalog clean."
+            },
+            {
+              id: "k6",
+              q: "What makes a first apparel win reviewable?",
+              choices: [
+                "A broad redesign idea",
+                "A before state, proposed change, reason, and what was not touched",
+                "A private note with no product reference",
+                "Changing the live catalog before review"
+              ],
+              answer_index: 1,
+              explain: "A first win should be small, scoped, and easy for a maintainer to review."
             }
           ]
         }
@@ -1031,4 +1054,6 @@
   </script>
 </body>
 </html>
+
+
 
