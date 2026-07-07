@@ -1,0 +1,839 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mobile Player — NeoAmp Full-Screen</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg-shell: #020308;
+      --bg-inner: #050711;
+      --bezel: #0b0e18;
+      --metal: #111827;
+      --accent: #4fd1c5;
+      --accent-soft: rgba(79, 209, 197, 0.2);
+      --accent-hot: #fbbf24;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border-soft: rgba(148, 163, 184, 0.4);
+      --border-strong: rgba(15, 23, 42, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      margin: 0;
+      background: radial-gradient(circle at top, #020617 0, #020308 55%);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .phone-shell {
+      height: 100vh;
+      max-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 4px;
+    }
+
+    .phone-frame {
+      width: min(390px, 100%);
+      height: 100%;
+      border-radius: 32px;
+      padding: 8px;
+      background:
+        radial-gradient(circle at 0 0, #1f2937 0, transparent 55%),
+        radial-gradient(circle at 100% 0, #0f172a 0, transparent 55%),
+        linear-gradient(145deg, #020617, #000);
+      box-shadow:
+        0 0 32px rgba(15, 23, 42, 0.9),
+        0 26px 60px rgba(0, 0, 0, 1);
+      position: relative;
+      border: 1px solid #020617;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .notch {
+      position: absolute;
+      top: 7px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 92px;
+      height: 18px;
+      border-radius: 99px;
+      background: radial-gradient(circle at 10% 0, #111827 0, #020617 60%);
+      box-shadow: 0 0 10px rgba(15, 23, 42, 0.8) inset;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 8px;
+    }
+
+    .cam-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #1f2937, #020617);
+      box-shadow: 0 0 3px rgba(15, 23, 42, 0.8);
+    }
+
+    .ear-slot {
+      width: 32px;
+      height: 5px;
+      border-radius: 99px;
+      background: radial-gradient(circle at 50% 0, #0b1120, #020617);
+    }
+
+    .inner-screen {
+      flex: 1;
+      margin-top: 20px;
+      border-radius: 24px;
+      padding: 8px 10px 12px;
+      background:
+        radial-gradient(circle at top, rgba(15, 23, 42, 0.9) 0, #020617 50%),
+        linear-gradient(180deg, #020617, #020308);
+      border: 1px solid #020617;
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.8),
+        0 14px 40px rgba(0, 0, 0, 0.9) inset;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    /* TOP BAR */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+    }
+
+    .top-left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .led {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, var(--accent-hot), #b45309);
+      box-shadow:
+        0 0 6px rgba(251, 191, 36, 0.9),
+        0 0 12px rgba(22, 163, 74, 0.4);
+    }
+
+    .tiny-label {
+      opacity: 0.9;
+    }
+
+    .top-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 9px;
+    }
+
+    .battery {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .battery-shell {
+      width: 20px;
+      height: 8px;
+      border-radius: 3px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      padding: 1px;
+      position: relative;
+    }
+
+    .battery-fill {
+      height: 100%;
+      width: 70%;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--accent), #22c55e);
+    }
+
+    .battery-nub {
+      position: absolute;
+      right: -3px;
+      top: 2px;
+      width: 3px;
+      height: 4px;
+      border-radius: 1px;
+      background: rgba(148, 163, 184, 0.9);
+    }
+
+    .signal-bars {
+      display: flex;
+      gap: 1px;
+      align-items: flex-end;
+    }
+
+    .signal-bars span {
+      width: 2px;
+      border-radius: 1px;
+      background: rgba(148, 163, 184, 0.8);
+    }
+
+    .signal-bars span:nth-child(1) { height: 3px; }
+    .signal-bars span:nth-child(2) { height: 5px; }
+    .signal-bars span:nth-child(3) { height: 7px; }
+    .signal-bars span:nth-child(4) { height: 9px; }
+
+    /* DISPLAY STACK */
+    .stack {
+      flex: 1;
+      display: grid;
+      grid-template-rows: auto auto 1fr auto auto;
+      gap: 6px;
+      margin-top: 2px;
+    }
+
+    /* MARQUEE / DISPLAY */
+    .display-shell {
+      border-radius: 12px;
+      background:
+        radial-gradient(circle at 0 0, rgba(248, 250, 252, 0.09), transparent 55%),
+        radial-gradient(circle at 100% 0, rgba(79, 209, 197, 0.2), transparent 55%),
+        linear-gradient(180deg, #020617, #020617);
+      border: 1px solid rgba(15, 23, 42, 1);
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.9),
+        0 10px 30px rgba(0, 0, 0, 0.9) inset;
+      padding: 6px 8px;
+      font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 11px;
+      color: #e5e7eb;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .display-row-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .display-left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .disp-label {
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .disp-mode {
+      padding: 2px 6px;
+      border-radius: 6px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .display-row-mid {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .time-block {
+      width: 50px;
+      text-align: right;
+      font-size: 13px;
+    }
+
+    .marquee-shell {
+      flex: 1;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .marquee-text {
+      display: inline-block;
+      padding-left: 0;
+      animation: scroll 14s linear infinite;
+    }
+
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-60%); }
+    }
+
+    .display-row-bottom {
+      display: flex;
+      justify-content: space-between;
+      font-size: 9px;
+      color: var(--muted);
+    }
+
+    /* VISUALIZER / ART */
+    .visual-shell {
+      border-radius: 12px;
+      background:
+        radial-gradient(circle at 10% 0, rgba(148, 163, 184, 0.28), transparent 55%),
+        linear-gradient(145deg, #020617, #020617);
+      border: 1px solid rgba(31, 41, 55, 1);
+      box-shadow:
+        0 0 0 1px rgba(15, 23, 42, 0.9),
+        0 16px 40px rgba(0, 0, 0, 1) inset;
+      padding: 6px 8px;
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .art-panel {
+      border-radius: 10px;
+      padding: 3px;
+      background: conic-gradient(
+        from 200deg,
+        rgba(79, 209, 197, 0.7),
+        rgba(56, 189, 248, 0.3),
+        rgba(244, 114, 182, 0.35),
+        rgba(79, 209, 197, 0.7)
+      );
+      box-shadow: 0 0 16px rgba(79, 209, 197, 0.45);
+    }
+
+    .art-core {
+      border-radius: 8px;
+      background:
+        radial-gradient(circle at 20% 0, rgba(255, 255, 255, 0.18), transparent 55%),
+        linear-gradient(145deg, #020617, #020617);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .vis-bars {
+      display: grid;
+      grid-template-columns: repeat(14, 1fr);
+      align-items: flex-end;
+      gap: 2px;
+      height: 64px;
+    }
+
+    .vis-bars span {
+      border-radius: 2px 2px 0 0;
+      background: linear-gradient(to top, var(--accent), #38bdf8);
+      opacity: 0.7;
+    }
+
+    .vis-bars span:nth-child(odd) {
+      opacity: 0.95;
+    }
+
+    /* SLIDERS AREA */
+    .sliders-shell {
+      border-radius: 12px;
+      background: radial-gradient(circle at 0 0, rgba(15, 23, 42, 0.9), #020617 60%);
+      border: 1px solid rgba(15, 23, 42, 1);
+      padding: 6px 8px 4px;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 6px;
+      font-size: 9px;
+      color: var(--muted);
+    }
+
+    .eq-group {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .eq-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .preset-pill {
+      padding: 2px 6px;
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 8px;
+      cursor: pointer;
+    }
+
+    .preset-pill.active {
+      border-color: rgba(79, 209, 197, 0.9);
+      background: rgba(79, 209, 197, 0.16);
+      color: var(--accent);
+    }
+
+    .eq-bands {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 2px;
+    }
+
+    .eq-band {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .eq-bar {
+      width: 10px;
+      border-radius: 99px;
+      background: rgba(30, 64, 175, 0.7);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .eq-level {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, var(--accent), #38bdf8);
+    }
+
+    .device-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .device-pill {
+      padding: 4px 6px;
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      font-size: 9px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .device-pill.active {
+      border-color: rgba(79, 209, 197, 0.9);
+      background: rgba(15, 23, 42, 0.95);
+      color: var(--accent);
+    }
+
+    .vol-rail {
+      width: 100%;
+      height: 4px;
+      border-radius: 99px;
+      background: rgba(30, 64, 175, 0.9);
+      overflow: hidden;
+    }
+
+    .vol-fill {
+      height: 100%;
+      width: 65%;
+      background: linear-gradient(90deg, var(--accent), #38bdf8);
+    }
+
+    /* TRANSPORT & BOTTOM STRIP */
+    .transport-shell {
+      border-radius: 14px;
+      background: radial-gradient(circle at 0 0, rgba(15, 23, 42, 0.85), #020617 55%);
+      border: 1px solid rgba(15, 23, 42, 1);
+      padding: 6px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .prog-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .prog-bar-shell {
+      flex: 1;
+      height: 4px;
+      border-radius: 99px;
+      background: rgba(15, 23, 42, 0.95);
+      overflow: hidden;
+    }
+
+    .prog-fill {
+      height: 100%;
+      width: 40%;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--accent), #38bdf8);
+      transition: width 0.2s linear;
+    }
+
+    .prog-times {
+      font-size: 9px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .transport-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2px;
+    }
+
+    .soft-label {
+      font-size: 9px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .transport-buttons {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-round {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: radial-gradient(circle at 30% 0, #020617, #020617);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow:
+        0 2px 6px rgba(0, 0, 0, 0.8),
+        0 0 0 1px rgba(15, 23, 42, 1);
+    }
+
+    .btn-round.main {
+      width: 48px;
+      height: 48px;
+      border-radius: 999px;
+      border: 1px solid rgba(156, 163, 175, 1);
+      background: radial-gradient(circle at 30% 0, #fef9c3, #facc15, #f97316);
+      color: #1f2937;
+      font-size: 20px;
+      box-shadow:
+        0 0 26px rgba(251, 191, 36, 0.9),
+        0 10px 20px rgba(0, 0, 0, 0.9);
+    }
+
+    .btn-round:active {
+      transform: translateY(1px) scale(0.97);
+      box-shadow: 0 0 0 1px rgba(15, 23, 42, 1);
+    }
+
+    .bottom-strip {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 9px;
+      margin-top: 2px;
+      color: var(--muted);
+    }
+
+    .bottom-title {
+      max-width: 60%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .bottom-icons {
+      display: flex;
+      gap: 10px;
+      font-size: 13px;
+    }
+
+    .bottom-icons span {
+      cursor: pointer;
+    }
+
+    /* HOME BAR */
+    .home-bar {
+      margin-top: 4px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .home-pill {
+      width: 90px;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.95);
+      box-shadow:
+        0 -1px 0 rgba(148, 163, 184, 0.3),
+        0 2px 6px rgba(0, 0, 0, 0.8) inset;
+    }
+  </style>
+</head>
+<body>
+  <div class="phone-shell">
+    <div class="phone-frame">
+      <div class="notch">
+        <div class="cam-dot"></div>
+        <div class="ear-slot"></div>
+        <div class="cam-dot"></div>
+      </div>
+      <div class="inner-screen">
+        <div class="top-bar">
+          <div class="top-left">
+            <div class="led"></div>
+            <span class="tiny-label">EchoVerse NeoAmp</span>
+          </div>
+          <div class="top-right">
+            <div class="signal-bars">
+              <span></span><span></span><span></span><span></span>
+            </div>
+            <div class="battery">
+              <span>72%</span>
+              <div class="battery-shell">
+                <div class="battery-fill"></div>
+                <div class="battery-nub"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stack">
+          <!-- DISPLAY -->
+          <div class="display-shell">
+            <div class="display-row-top">
+              <div class="display-left">
+                <span class="disp-label">Input</span>
+                <span class="disp-mode" id="inputLabel">LOCAL · NXCORE</span>
+              </div>
+              <div style="font-size:10px;color:var(--muted);">
+                <span id="bitLabel">24-bit</span> · <span id="hzLabel">48kHz</span>
+              </div>
+            </div>
+            <div class="display-row-mid">
+              <div class="time-block" id="timeBlock">01:23</div>
+              <div class="marquee-shell">
+                <span class="marquee-text" id="marqueeText">
+                  Moonball Descent · Powder Peaks · Swamp-Hop Session · EchoVerse · Track 03 of 12
+                </span>
+              </div>
+            </div>
+            <div class="display-row-bottom">
+              <span id="statusLabel">Playing · Moonball arc aligned</span>
+              <span id="modeLabel">Mode: Focus sweep</span>
+            </div>
+          </div>
+
+          <!-- VISUALIZER -->
+          <div class="visual-shell">
+            <div class="art-panel">
+              <div class="art-core">
+                MOONBALL
+              </div>
+            </div>
+            <div class="vis-bars" id="visBars">
+              <span style="height:22%;"></span>
+              <span style="height:44%;"></span>
+              <span style="height:35%;"></span>
+              <span style="height:60%;"></span>
+              <span style="height:48%;"></span>
+              <span style="height:72%;"></span>
+              <span style="height:38%;"></span>
+              <span style="height:64%;"></span>
+              <span style="height:40%;"></span>
+              <span style="height:52%;"></span>
+              <span style="height:30%;"></span>
+              <span style="height:58%;"></span>
+              <span style="height:46%;"></span>
+              <span style="height:70%;"></span>
+            </div>
+          </div>
+
+          <!-- SLIDERS -->
+          <div class="sliders-shell">
+            <div class="eq-group">
+              <div class="eq-label-row">
+                <span>EQ · Swamp-Hop</span>
+                <span class="preset-pill active" id="presetBtn">Preset · SWP</span>
+              </div>
+              <div class="eq-bands">
+                <div class="eq-band">
+                  <div class="eq-bar" style="height:32px;">
+                    <div class="eq-level" style="height:72%;"></div>
+                  </div>
+                  <span>60</span>
+                </div>
+                <div class="eq-band">
+                  <div class="eq-bar" style="height:36px;">
+                    <div class="eq-level" style="height:65%;"></div>
+                  </div>
+                  <span>250</span>
+                </div>
+                <div class="eq-band">
+                  <div class="eq-bar" style="height:40px;">
+                    <div class="eq-level" style="height:50%;"></div>
+                  </div>
+                  <span>1k</span>
+                </div>
+                <div class="eq-band">
+                  <div class="eq-bar" style="height:34px;">
+                    <div class="eq-level" style="height:55%;"></div>
+                  </div>
+                  <span>4k</span>
+                </div>
+                <div class="eq-band">
+                  <div class="eq-bar" style="height:30px;">
+                    <div class="eq-level" style="height:60%;"></div>
+                  </div>
+                  <span>10k</span>
+                </div>
+              </div>
+            </div>
+            <div class="device-group">
+              <div class="device-pill active" id="devicePhone">
+                <span>🔊 Phone</span>
+                <span>65%</span>
+              </div>
+              <div class="device-pill" id="deviceRoom">
+                <span>📡 Room · EchoLink</span>
+                <span>Idle</span>
+              </div>
+              <div class="vol-rail" id="volRail">
+                <div class="vol-fill" id="volFill"></div>
+              </div>
+              <div style="font-size:9px;display:flex;justify-content:space-between;">
+                <span>Output bus: A</span>
+                <span id="volLabel">VOL 65</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- TRANSPORT -->
+          <div class="transport-shell">
+            <div class="prog-row">
+              <div class="prog-bar-shell">
+                <div class="prog-fill" id="progFill"></div>
+              </div>
+            </div>
+            <div class="prog-times">
+              <span id="timeStart">01:23</span>
+              <span id="timeEnd">-03:12</span>
+            </div>
+            <div class="transport-row">
+              <div class="soft-label" id="softLabel">session · powder peaks</div>
+              <div class="transport-buttons">
+                <button class="btn-round" id="btnPrev" aria-label="Previous">⏮</button>
+                <button class="btn-round main" id="btnPlay" aria-label="Play / Pause">▶</button>
+                <button class="btn-round" id="btnNext" aria-label="Next">⏭</button>
+              </div>
+              <div class="bottom-icons">
+                <span id="favIcon" title="Favorite">★</span>
+                <span id="queueIcon" title="Queue">≡</span>
+                <span id="moreIcon" title="More">⋮</span>
+              </div>
+            </div>
+            <div class="bottom-strip">
+              <span class="bottom-title" id="bottomTitle">
+                Moonball Descent · Swamp-Hop Session
+              </span>
+              <span>TRK 03 · Q: 12</span>
+            </div>
+          </div>
+
+          <!-- SPACER (tiny) -->
+          <div></div>
+        </div>
+
+        <div class="home-bar">
+          <div class="home-pill"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const btnPlay = document.getElementById("btnPlay");
+    const progFill = document.getElementById("progFill");
+    const statusLabel = document.getElementById("statusLabel");
+    const favIcon = document.getElementById("favIcon");
+    const volRail = document.getElementById("volRail");
+    const volFill = document.getElementById("volFill");
+    const volLabel = document.getElementById("volLabel");
+    const devicePhone = document.getElementById("devicePhone");
+    const deviceRoom = document.getElementById("deviceRoom");
+    const presetBtn = document.getElementById("presetBtn");
+
+    let isPlaying = false;
+    let isFav = false;
+    let vol = 65;
+    let presetAlt = false;
+
+    btnPlay.addEventListener("click", () => {
+      isPlaying = !isPlaying;
+      btnPlay.textContent = isPlaying ? "⏸" : "▶";
+      btnPlay.setAttribute("aria-label", isPlaying ? "Pause" : "Play");
+      progFill.style.width = isPlaying ? "62%" : "40%";
+      statusLabel.textContent = isPlaying
+        ? "Playing · Moonball arc aligned"
+        : "Paused · Buffer locked";
+    });
+
+    favIcon.addEventListener("click", () => {
+      isFav = !isFav;
+      favIcon.style.color = isFav ? "#facc15" : "inherit";
+      favIcon.title = isFav ? "Unfavorite" : "Favorite";
+    });
+
+    volRail.addEventListener("click", () => {
+      vol += 10;
+      if (vol > 80) vol = 40;
+      volFill.style.width = vol + "%";
+      volLabel.textContent = "VOL " + vol;
+      devicePhone.querySelector("span:last-child").textContent = vol + "%";
+    });
+
+    devicePhone.addEventListener("click", () => {
+      devicePhone.classList.add("active");
+      deviceRoom.classList.remove("active");
+    });
+
+    deviceRoom.addEventListener("click", () => {
+      deviceRoom.classList.add("active");
+      devicePhone.classList.remove("active");
+    });
+
+    presetBtn.addEventListener("click", () => {
+      presetAlt = !presetAlt;
+      presetBtn.classList.toggle("active", presetAlt);
+      presetBtn.textContent = presetAlt ? "Preset · VOC" : "Preset · SWP";
+    });
+  </script>
+</body>
+</html>

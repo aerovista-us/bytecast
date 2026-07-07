@@ -1,0 +1,40 @@
+{
+  "journeys": [
+    {
+      "id": "example-journey",
+      "title": "Example Journey: Learn \u2192 Do \u2192 Prove",
+      "description": "Demonstration journey using the sample episode, training, and seed app.",
+      "steps": [
+        {
+          "type": "episode",
+          "id": "ep-001",
+          "required": true,
+          "complete_when": [
+            "episode_completed"
+          ]
+        },
+        {
+          "type": "training",
+          "id": "tr-001",
+          "required": true,
+          "complete_when": [
+            "module_completed"
+          ]
+        },
+        {
+          "type": "seed_app",
+          "id": "seed-001",
+          "required": true,
+          "complete_when": [
+            "seed_completed"
+          ]
+        },
+        {
+          "type": "badge",
+          "id": "badge-example",
+          "required": true
+        }
+      ]
+    }
+  ]
+}

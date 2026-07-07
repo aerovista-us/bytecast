@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TR-001 — Example Training</title>
+  <style>
+    body{font-family:system-ui;margin:0;background:#0b0b10;color:#f2f2f7}
+    header{padding:16px;border-bottom:1px solid #2a2a3a}
+    main{padding:16px;max-width:880px}
+    .card{background:#131321;border:1px solid #2a2a3a;border-radius:14px;padding:14px;margin:12px 0}
+    button{border:1px solid #2a2a3a;background:transparent;color:#f2f2f7;padding:8px 10px;border-radius:12px;cursor:pointer}
+    button:hover{border-color:#4a4a6a}
+    .muted{color:#a7a7b6}
+  </style>
+  <script>window.__UMAMI__={enabled:true,host:"https://stats.aerocoreos.com",websiteId:"REPLACE_WITH_WEBSITE_UUID",app:"bytecast",surface:"training"};</script>
+</head>
+<body>
+<header>
+  <h1>TR-001 — Example Training</h1>
+  <p class="muted">Hands-on checkpoints (demo)</p>
+</header>
+<main>
+  <div class="card">
+    <h3>Checkpoint</h3>
+    <p class="muted">Click pass to emit checkpoint_passed.</p>
+    <button id="cp">Pass Checkpoint A</button>
+  </div>
+  <div class="card">
+    <h3>Complete</h3>
+    <button id="done">Mark Training Completed</button>
+  </div>
+</main>
+
+<script src="../../shared/umami_bridge.js"></script>
+<script>
+  AVBridge.emit("training_opened", { id: "tr-001" });
+  document.getElementById("cp").onclick = () => AVBridge.emit("checkpoint_passed", { checkpointId: "A" });
+  document.getElementById("done").onclick = () => {
+    AVBridge.emit("module_completed", { id:"tr-001" });
+    try{ parent.postMessage({type:"COMPLETE",requestId:window.__AV_REQ_ID||"local",props:{moduleId:"tr-001"}}, "*"); }catch(e){}
+  };
+</script>
+</body>
+</html>

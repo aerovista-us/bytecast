@@ -1,0 +1,26 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "teaching_mode": "BriefingSync",
+  "episode": {
+    "code": "S1-EP-04",
+    "title": "The Portable Ecosystem",
+    "type": "briefing",
+    "date": "2026-07-06",
+    "runtime_target_minutes": 8,
+    "status": "active"
+  },
+  "content": {
+    "tags": ["shareholder", "briefing", "season1", "portable"],
+    "summary_short": "Portable ecosystem narrative for shareholders — distinct from Day 1 EP-004 Current Truth Basics.",
+    "summary_long": "Shareholder Season 1 briefing. Legacy root player at bytecast-ep04.html. Not the same topic as EP-004 current_truth_basics."
+  },
+  "media": {
+    "audio_files": [
+      {
+        "path": "../../ep04.mp3",
+        "label": "Briefing audio (mp3)",
+        "required": false
+      }
+    ]
+  }
+}

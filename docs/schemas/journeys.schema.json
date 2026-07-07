@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aerovista/schemas/journeys.schema.json",
+  "title": "AeroVista Journeys",
+  "type": "object",
+  "required": [
+    "journeys"
+  ],
+  "properties": {
+    "journeys": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "steps"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9\\-_\\.]{2,64}$"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "steps": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "type",
+                "id"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "episode",
+                    "training",
+                    "seed_app",
+                    "badge",
+                    "workorders",
+                    "art",
+                    "hub",
+                    "other"
+                  ]
+                },
+                "id": {
+                  "type": "string"
+                },
+                "required": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "gates": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "complete_when": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

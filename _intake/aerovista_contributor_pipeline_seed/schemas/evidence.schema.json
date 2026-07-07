@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aerovista/schemas/evidence.schema.json",
+  "title": "Evidence Payload",
+  "type": "object",
+  "required": [
+    "journeyId",
+    "moduleId",
+    "events"
+  ],
+  "properties": {
+    "journeyId": {
+      "type": "string"
+    },
+    "moduleId": {
+      "type": "string"
+    },
+    "userHandle": {
+      "type": "string"
+    },
+    "sessionId": {
+      "type": "string"
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "ts"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "ts": {
+            "type": "string"
+          },
+          "props": {
+            "type": "object"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

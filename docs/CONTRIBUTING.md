@@ -1,4 +1,4 @@
-# Contributing
+﻿# Contributing
 
 This repo is built so non-coders and coders can both ship useful work.
 
@@ -10,7 +10,7 @@ This repo is built so non-coders and coders can both ship useful work.
    - Content and copy
    - UI polish
    - Code fixes and features
-2. Open `FIRST_TASKS.md` and choose one task.
+2. Open [`FIRST_TASKS.md`](./FIRST_TASKS.md) (this folder) and choose one task.
 3. Make one small change.
 4. Share what changed and how you tested it.
 
@@ -57,6 +57,14 @@ This repo is built so non-coders and coders can both ship useful work.
 5. Data and structure
    - Curate JSON content, examples, and category/tag cleanup.
 
+## Choosing a teaching mode (new episodes)
+
+When authoring under `episodes/`, pick delivery from content intent — do not force Listen→Engage→Do→Prove on every pack.
+
+1. Read [`BYTECAST_TRAINING_STANDARD.md`](./BYTECAST_TRAINING_STANDARD.md) teaching modes and [`CONTENT_PATTERN_MATRIX.md`](./CONTENT_PATTERN_MATRIX.md) for live examples.
+2. Set `teaching_mode` in `bytecast_ep_profile.json` (see [`BYTECAST_EP_WORKFLOW.md`](./BYTECAST_EP_WORKFLOW.md)).
+3. Register side lanes in `data/episode_registry.json` without merging numbering with Day 1 (`EP-001` … `EP-004` vs `S1-EP-01` … `S1-EP-06`).
+
 ## Bug Report Template (Use This)
 
 - What page/feature?
@@ -69,7 +77,7 @@ This repo is built so non-coders and coders can both ship useful work.
 ## Local Preview
 
 ### Offer Pack App
-From `aerovista_offer_pack/app/`:
+From `episodes/aerovista_offer_pack/app/`:
 
 ```bash
 python -m http.server 8080
@@ -78,15 +86,15 @@ python -m http.server 8080
 Open `http://localhost:8080`.
 
 ### Seed Orchard UI
-Open `seed_builder_studio/seed_orchard_ui/index.html` directly, or serve from repo root:
+Open `episodes/seed_builder_studio/seed_orchard_ui/index.html` directly, or serve from repo root:
 
 ```bash
 python -m http.server 8080
 ```
 
 Then open:
-- Local: `http://localhost:8080/seed_builder_studio/seed_orchard_ui/`
-- GitHub Pages: `https://aerovista-us.github.io/bytecast/seed_builder_studio/seed_orchard_ui/`
+- Local: `http://localhost:8080/episodes/seed_builder_studio/seed_orchard_ui/`
+- GitHub Pages: `https://aerovista-us.github.io/bytecast/episodes/seed_builder_studio/seed_orchard_ui/`
 
 ## Labels to Use
 
@@ -105,3 +113,6 @@ Then open:
 - Steps to test are included.
 - Screenshots or short video are included for UI changes.
 - Docs are updated when behavior changes.
+
+
+

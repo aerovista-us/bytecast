@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" data-theme="venta-neon">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ByteCast Command Center (Skeleton)</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <!-- Umami config -->
+  <script>
+    window.__UMAMI__ = {
+      enabled: true,
+      host: "https://stats.aerocoreos.com",
+      websiteId: "REPLACE_WITH_WEBSITE_UUID",
+      app: "bytecast",
+      surface: "command_center",
+      theme: "venta-neon"
+    };
+  </script>
+</head>
+<body>
+  <header class="top">
+    <h1>ByteCast Command Center</h1>
+    <p>Discovery • Overlay • Progress (static-site friendly)</p>
+  </header>
+
+  <main class="grid" id="cards"></main>
+
+  <section class="overlay" id="overlay" aria-hidden="true">
+    <div class="overlay__bar">
+      <strong id="overlayTitle">Overlay</strong>
+      <div class="overlay__spacer"></div>
+      <button id="btnOpenNew" type="button">Open in new tab</button>
+      <button id="btnClose" type="button">Close</button>
+    </div>
+    <iframe id="frame" title="Overlay Player" referrerpolicy="no-referrer"></iframe>
+  </section>
+
+  <script src="./app.js"></script>
+</body>
+</html>

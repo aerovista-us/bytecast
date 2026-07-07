@@ -1,0 +1,26 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "teaching_mode": "BriefingSync",
+  "episode": {
+    "code": "S1-EP-02",
+    "title": "Service Portfolio",
+    "type": "briefing",
+    "date": "2026-07-06",
+    "runtime_target_minutes": 8,
+    "status": "active"
+  },
+  "content": {
+    "tags": ["shareholder", "briefing", "season1", "services"],
+    "summary_short": "How AeroVista packages services and offers for the market — audio-synced briefing player.",
+    "summary_long": "Shareholder Season 1 briefing. Legacy root player at bytecast-ep02.html."
+  },
+  "media": {
+    "audio_files": [
+      {
+        "path": "../../EP02.aac",
+        "label": "Briefing audio (aac)",
+        "required": false
+      }
+    ]
+  }
+}

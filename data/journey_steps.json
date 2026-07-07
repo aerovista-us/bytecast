@@ -1,59 +1,192 @@
 {
   "schema": "bytecast-journey-steps-v1",
-  "updated_on": "2026-02-24",
+  "updated_on": "2026-07-06T12:00:00Z",
   "journeys": [
     {
       "id": "p1_golden_path",
       "label": "Onboarding (Golden Path)",
-      "description": "EP-001 gates -> TR-001 -> Seed export -> Publish -> Badge",
+      "description": "EP-001 to EP-004, then TR-001A, Practice Builder, Publish, and Badge",
       "isDefault": true,
       "steps": [
         {
           "id": "ep001_gates",
-          "label": "EP-001 Gates",
+          "label": "EP-001 Progress Check",
           "lane": "bytecast",
           "group": "ByteCast",
           "order": 10,
           "estimatedMinutes": 7,
           "href": "episodes/welcome_to_bytecast/index.html",
-          "cta": "Legendary: Finish EP-001",
+          "cta": "Finish EP-001",
           "complete_when": {
             "type": "steps_all",
-            "ids": ["ep001_listen", "ep001_slide", "ep001_engage"]
+            "ids": [
+              "ep001_listen",
+              "ep001_slide",
+              "ep001_engage"
+            ]
           }
         },
         {
-          "id": "tr001_golden_path",
-          "label": "Training (TR-001)",
+          "id": "ep002_gates",
+          "label": "EP-002 Progress Check",
+          "lane": "bytecast",
+          "group": "ByteCast",
+          "order": 12,
+          "estimatedMinutes": 8,
+          "href": "episodes/aerovista_7_division_overview/index.html",
+          "cta": "Finish EP-002",
+          "depends_on": [
+            "ep001_gates"
+          ],
+          "unlock_requires": [
+            {
+              "stepId": "ep001_engage",
+              "meta_fields": [
+                "engageQuizPassed",
+                "engageQuizScore"
+              ]
+            }
+          ],
+          "complete_when": {
+            "type": "steps_all",
+            "ids": [
+              "ep002_listen",
+              "ep002_slide",
+              "ep002_engage"
+            ]
+          }
+        },
+        {
+          "id": "ep003_gates",
+          "label": "EP-003 Progress Check",
+          "lane": "bytecast",
+          "group": "ByteCast",
+          "order": 14,
+          "estimatedMinutes": 7,
+          "href": "episodes/the_main_doors/index.html",
+          "cta": "Finish EP-003",
+          "depends_on": [
+            "ep002_gates"
+          ],
+          "unlock_requires": [
+            {
+              "stepId": "ep002_engage",
+              "meta_fields": [
+                "engageQuizPassed",
+                "engageQuizScore"
+              ]
+            }
+          ],
+          "complete_when": {
+            "type": "steps_all",
+            "ids": [
+              "ep003_listen",
+              "ep003_slide",
+              "ep003_engage"
+            ]
+          }
+        },
+        {
+          "id": "ep004_gates",
+          "label": "EP-004 Progress Check",
+          "lane": "bytecast",
+          "group": "ByteCast",
+          "order": 16,
+          "estimatedMinutes": 7,
+          "href": "episodes/current_truth_basics/index.html",
+          "cta": "Finish EP-004",
+          "depends_on": [
+            "ep003_gates"
+          ],
+          "unlock_requires": [
+            {
+              "stepId": "ep003_engage",
+              "meta_fields": [
+                "engageQuizPassed",
+                "engageQuizScore"
+              ]
+            }
+          ],
+          "complete_when": {
+            "type": "steps_all",
+            "ids": [
+              "ep004_listen",
+              "ep004_slide",
+              "ep004_engage"
+            ]
+          }
+        },
+        {
+          "id": "tr001a_day1_foundations",
+          "label": "TR-001A Day 1 Check",
           "lane": "training",
           "group": "Training",
           "order": 20,
-          "estimatedMinutes": 10,
-          "href": "training_missions/tr_001_golden_path/index.html",
-          "cta": "Legendary: Run TR-001",
-          "depends_on": ["ep001_gates"]
+          "estimatedMinutes": 12,
+          "href": "episodes/training_missions/tr_001a_day1_foundations/index.html",
+          "cta": "Run TR-001A",
+          "depends_on": [
+            "ep004_gates"
+          ],
+          "unlock_requires": [
+            {
+              "stepId": "ep004_engage",
+              "meta_fields": [
+                "engageQuizPassed",
+                "engageQuizScore"
+              ]
+            }
+          ]
         },
         {
           "id": "seed_export_v1",
-          "label": "Seed Export",
+          "label": "Practice Artifact",
           "lane": "seed",
           "group": "Seeding",
           "order": 30,
           "estimatedMinutes": 6,
-          "href": "seed_builder_studio/seed_orchard_ui/index.html",
-          "cta": "Legendary: Export Seed",
-          "depends_on": ["tr001_golden_path"]
+          "href": "episodes/seed_builder_studio/seed_orchard_ui/index.html",
+          "cta": "Export Seed",
+          "depends_on": [
+            "tr001a_day1_foundations"
+          ],
+          "unlock_requires": [
+            {
+              "stepId": "tr001a_day1_foundations",
+              "meta_fields": [
+                "mission",
+                "understandingCheckPassed",
+                "tr001aQuizPassed",
+                "tr001aQuizScore",
+                "tr001aWritten1",
+                "tr001aWritten2",
+                "tr001aScenarioRouting",
+                "tr001aCompletedAt"
+              ]
+            }
+          ]
         },
         {
           "id": "seed_publish_v1",
-          "label": "Publish Link",
+          "label": "Published Link",
           "lane": "seed",
           "group": "Publish",
           "order": 35,
           "estimatedMinutes": 2,
-          "href": "seed_builder_studio/seed_orchard_ui/index.html",
-          "cta": "Legendary: Record Publish URL",
-          "depends_on": ["seed_export_v1"],
+          "href": "episodes/seed_builder_studio/seed_orchard_ui/index.html",
+          "cta": "Record Publish URL",
+          "depends_on": [
+            "seed_export_v1"
+          ],
+          "unlock_requires": [
+            {
+              "stepId": "seed_export_v1",
+              "meta_fields": [
+                "artifactName",
+                "artifactHash"
+              ]
+            }
+          ],
           "complete_when": {
             "type": "step_done",
             "id": "seed_publish_v1"
@@ -67,8 +200,10 @@
           "order": 40,
           "estimatedMinutes": 1,
           "href": "seed_bytecast.html",
-          "cta": "Legendary: View Badge",
-          "depends_on": ["seed_publish_v1"],
+          "cta": "View Badge",
+          "depends_on": [
+            "seed_publish_v1"
+          ],
           "complete_when": {
             "type": "badge_has",
             "badge_id": "p1_golden_path_v1"
@@ -79,11 +214,49 @@
         {
           "id": "p1_golden_path_v1",
           "label": "P1: Golden Path",
-          "requires": ["ep001_gates", "tr001_golden_path", "seed_export_v1", "seed_publish_v1"],
+          "requires": [
+            "ep001_gates",
+            "ep002_gates",
+            "ep003_gates",
+            "ep004_gates",
+            "tr001a_day1_foundations",
+            "seed_export_v1",
+            "seed_publish_v1"
+          ],
           "minProof": {
-            "tr001_golden_path": ["mission"],
-            "seed_export_v1": ["artifactName", "artifactHash"],
-            "seed_publish_v1": ["publishedUrl"]
+            "ep001_engage": [
+              "engageQuizPassed",
+              "engageQuizScore"
+            ],
+            "ep002_engage": [
+              "engageQuizPassed",
+              "engageQuizScore"
+            ],
+            "ep003_engage": [
+              "engageQuizPassed",
+              "engageQuizScore"
+            ],
+            "ep004_engage": [
+              "engageQuizPassed",
+              "engageQuizScore"
+            ],
+            "tr001a_day1_foundations": [
+              "mission",
+              "understandingCheckPassed",
+              "tr001aQuizPassed",
+              "tr001aQuizScore",
+              "tr001aWritten1",
+              "tr001aWritten2",
+              "tr001aScenarioRouting",
+              "tr001aCompletedAt"
+            ],
+            "seed_export_v1": [
+              "artifactName",
+              "artifactHash"
+            ],
+            "seed_publish_v1": [
+              "publishedUrl"
+            ]
           }
         }
       ]
@@ -95,13 +268,13 @@
       "steps": [
         {
           "id": "seed_export_v1",
-          "label": "Seed Export",
+          "label": "Practice Artifact",
           "lane": "seed",
           "group": "Seeding",
           "order": 10,
           "estimatedMinutes": 6,
-          "href": "seed_builder_studio/seed_orchard_ui/index.html",
-          "cta": "Legendary: Export a Seed",
+          "href": "episodes/seed_builder_studio/seed_orchard_ui/index.html",
+          "cta": "Export a Seed",
           "complete_when": {
             "type": "step_done",
             "id": "seed_export_v1"
@@ -115,8 +288,10 @@
           "order": 20,
           "estimatedMinutes": 1,
           "href": "seed_bytecast.html",
-          "cta": "Legendary: View Badge",
-          "depends_on": ["seed_export_v1"],
+          "cta": "View Badge",
+          "depends_on": [
+            "seed_export_v1"
+          ],
           "complete_when": {
             "type": "badge_has",
             "badge_id": "seed_exporter_v1"
@@ -127,9 +302,14 @@
         {
           "id": "seed_exporter_v1",
           "label": "Seeding: Exporter",
-          "requires": ["seed_export_v1"],
+          "requires": [
+            "seed_export_v1"
+          ],
           "minProof": {
-            "seed_export_v1": ["artifactName", "artifactHash"]
+            "seed_export_v1": [
+              "artifactName",
+              "artifactHash"
+            ]
           }
         }
       ]
@@ -147,7 +327,7 @@
           "order": 10,
           "estimatedMinutes": 8,
           "href": "episodes/aerovista_7_division_overview/index.html",
-          "cta": "Legendary: Start EP-002",
+          "cta": "Start EP-002",
           "complete_when": {
             "type": "step_done",
             "id": "ep002_listen"
@@ -160,9 +340,11 @@
           "group": "Offer Pack",
           "order": 20,
           "estimatedMinutes": 10,
-          "href": "aerovista_offer_pack/app/index.html",
-          "cta": "Legendary: Open Offer Pack",
-          "depends_on": ["ep002_listen"],
+          "href": "episodes/aerovista_offer_pack/app/index.html",
+          "cta": "Open Offer Pack",
+          "depends_on": [
+            "ep002_listen"
+          ],
           "complete_when": {
             "type": "step_done",
             "id": "offer_pack_visit"
@@ -170,14 +352,16 @@
         },
         {
           "id": "seed_export_v1",
-          "label": "Seed Export",
+          "label": "Practice Artifact",
           "lane": "seed",
           "group": "Seeding",
           "order": 30,
           "estimatedMinutes": 6,
-          "href": "seed_builder_studio/seed_orchard_ui/index.html",
-          "cta": "Legendary: Export Seed",
-          "depends_on": ["offer_pack_visit"],
+          "href": "episodes/seed_builder_studio/seed_orchard_ui/index.html",
+          "cta": "Export Seed",
+          "depends_on": [
+            "offer_pack_visit"
+          ],
           "complete_when": {
             "type": "step_done",
             "id": "seed_export_v1"
@@ -191,8 +375,10 @@
           "order": 40,
           "estimatedMinutes": 1,
           "href": "seed_bytecast.html",
-          "cta": "Legendary: View Badge",
-          "depends_on": ["seed_export_v1"],
+          "cta": "View Badge",
+          "depends_on": [
+            "seed_export_v1"
+          ],
           "complete_when": {
             "type": "badge_has",
             "badge_id": "division_aerovista_v1"
@@ -203,16 +389,26 @@
         {
           "id": "division_aerovista_v1",
           "label": "Division: AeroVista",
-          "requires": ["ep002_listen", "offer_pack_visit", "seed_export_v1"],
+          "requires": [
+            "ep002_listen",
+            "offer_pack_visit",
+            "seed_export_v1"
+          ],
           "minProof": {
-            "ep002_listen": ["episode"],
-            "offer_pack_visit": ["app"],
-            "seed_export_v1": ["artifactName", "artifactHash"]
+            "ep002_listen": [
+              "episode"
+            ],
+            "offer_pack_visit": [
+              "app"
+            ],
+            "seed_export_v1": [
+              "artifactName",
+              "artifactHash"
+            ]
           }
         }
       ]
-    }
-    ,
+    },
     {
       "id": "session_updates_2026_02_09",
       "label": "Session Update: 2026-02-09",
@@ -226,7 +422,7 @@
           "order": 10,
           "estimatedMinutes": 4,
           "href": "episodes/eos_2026_02_09/index.html",
-          "cta": "Legendary: Play EoS",
+          "cta": "Play EoS",
           "complete_when": {
             "type": "step_done",
             "id": "eos_20260209_listen"
@@ -240,8 +436,10 @@
           "order": 20,
           "estimatedMinutes": 1,
           "href": "episodes/eos_2026_02_09/index.html",
-          "cta": "Legendary: Finish Slides",
-          "depends_on": ["eos_20260209_listen"],
+          "cta": "Finish Slides",
+          "depends_on": [
+            "eos_20260209_listen"
+          ],
           "complete_when": {
             "type": "step_done",
             "id": "eos_20260209_slide"
@@ -255,8 +453,10 @@
           "order": 30,
           "estimatedMinutes": 1,
           "href": "episodes/eos_2026_02_09/index.html",
-          "cta": "Legendary: Confirm",
-          "depends_on": ["eos_20260209_slide"],
+          "cta": "Confirm",
+          "depends_on": [
+            "eos_20260209_slide"
+          ],
           "complete_when": {
             "type": "step_done",
             "id": "eos_20260209_engage"
@@ -270,8 +470,10 @@
           "order": 40,
           "estimatedMinutes": 1,
           "href": "seed_bytecast.html",
-          "cta": "Legendary: View Badge",
-          "depends_on": ["eos_20260209_engage"],
+          "cta": "View Badge",
+          "depends_on": [
+            "eos_20260209_engage"
+          ],
           "complete_when": {
             "type": "badge_has",
             "badge_id": "session_updates_2026_02_09_v1"
@@ -282,60 +484,1094 @@
         {
           "id": "session_updates_2026_02_09_v1",
           "label": "Session Update: 2026-02-09",
-          "requires": ["eos_20260209_listen", "eos_20260209_slide", "eos_20260209_engage"],
+          "requires": [
+            "eos_20260209_listen",
+            "eos_20260209_slide",
+            "eos_20260209_engage"
+          ],
           "minProof": {
-            "eos_20260209_listen": ["episodeSlug"]
+            "eos_20260209_listen": [
+              "episodeSlug"
+            ]
           }
         }
       ]
     },
     {
       "id": "art_localized_training",
-      "label": "The Art Localized — Training",
-      "description": "Listen → Slide → Engage. Episodes 0–4 + final assessment. Badges: Listener, Foundation, Division Ally, Partner Ready, Amplifier, Certified.",
+      "label": "The Art Localized â€” Training",
+      "description": "Listen -> Slide -> Engage -> Proof Mission. Episodes 0-4 + launch readiness mission + final assessment. Badges: Listener, Foundation, Division Ally, Partner Ready, Amplifier, Certified.",
       "isDefault": false,
       "steps": [
-        {"id": "ep0_listen", "label": "Ep 0 Listen", "lane": "bytecast", "group": "Collaboration 0", "order": 10, "estimatedMinutes": 6, "href": "episodes/art_localized_ep0/index.html", "cta": "Listen: Collaboration 0", "complete_when": {"type": "step_done", "id": "ep0_listen"}},
-        {"id": "ep0_slide", "label": "Ep 0 Slide", "lane": "bytecast", "group": "Collaboration 0", "order": 20, "estimatedMinutes": 2, "href": "episodes/art_localized_ep0/index.html", "cta": "View slides", "depends_on": ["ep0_listen"], "complete_when": {"type": "step_done", "id": "ep0_slide"}},
-        {"id": "ep0_engage", "label": "Ep 0 Engage", "lane": "bytecast", "group": "Collaboration 0", "order": 30, "estimatedMinutes": 5, "href": "episodes/art_localized_ep0/index.html", "cta": "Quiz + reflection", "depends_on": ["ep0_slide"], "complete_when": {"type": "step_done", "id": "ep0_engage"}},
-        {"id": "ep0_gates", "label": "Ep 0 Complete", "lane": "bytecast", "group": "Collaboration 0", "order": 35, "estimatedMinutes": 0, "href": "episodes/art_localized_ep0/index.html", "cta": "Foundation", "complete_when": {"type": "steps_all", "ids": ["ep0_listen", "ep0_slide", "ep0_engage"]}},
-        {"id": "ep1_listen", "label": "Ep 1 Listen", "lane": "bytecast", "group": "Divisions", "order": 40, "estimatedMinutes": 2, "href": "episodes/art_localized_ep1/index.html", "cta": "Listen: Divisions", "depends_on": ["ep0_gates"], "complete_when": {"type": "step_done", "id": "ep1_listen"}},
-        {"id": "ep1_slide", "label": "Ep 1 Slide", "lane": "bytecast", "group": "Divisions", "order": 50, "estimatedMinutes": 2, "href": "episodes/art_localized_ep1/index.html", "cta": "View slides", "depends_on": ["ep1_listen"], "complete_when": {"type": "step_done", "id": "ep1_slide"}},
-        {"id": "ep1_engage", "label": "Ep 1 Engage", "lane": "bytecast", "group": "Divisions", "order": 60, "estimatedMinutes": 5, "href": "episodes/art_localized_ep1/index.html", "cta": "Match + scenario", "depends_on": ["ep1_slide"], "complete_when": {"type": "step_done", "id": "ep1_engage"}},
-        {"id": "ep1_gates", "label": "Ep 1 Complete", "lane": "bytecast", "group": "Divisions", "order": 65, "estimatedMinutes": 0, "href": "episodes/art_localized_ep1/index.html", "complete_when": {"type": "steps_all", "ids": ["ep1_listen", "ep1_slide", "ep1_engage"]}},
-        {"id": "ep2_listen", "label": "Ep 2 Listen", "lane": "bytecast", "group": "Partnership Tiers", "order": 70, "estimatedMinutes": 2, "href": "episodes/art_localized_ep2/index.html", "cta": "Listen", "depends_on": ["ep1_gates"], "complete_when": {"type": "step_done", "id": "ep2_listen"}},
-        {"id": "ep2_slide", "label": "Ep 2 Slide", "lane": "bytecast", "group": "Partnership Tiers", "order": 80, "estimatedMinutes": 2, "href": "episodes/art_localized_ep2/index.html", "cta": "View slides", "depends_on": ["ep2_listen"], "complete_when": {"type": "step_done", "id": "ep2_slide"}},
-        {"id": "ep2_engage", "label": "Ep 2 Engage", "lane": "bytecast", "group": "Partnership Tiers", "order": 90, "estimatedMinutes": 5, "href": "episodes/art_localized_ep2/index.html", "cta": "Sort + quiz", "depends_on": ["ep2_slide"], "complete_when": {"type": "step_done", "id": "ep2_engage"}},
-        {"id": "ep2_gates", "label": "Ep 2 Complete", "lane": "bytecast", "group": "Partnership Tiers", "order": 95, "estimatedMinutes": 0, "complete_when": {"type": "steps_all", "ids": ["ep2_listen", "ep2_slide", "ep2_engage"]}},
-        {"id": "ep3_listen", "label": "Ep 3 Listen", "lane": "bytecast", "group": "Amplification", "order": 100, "estimatedMinutes": 2, "href": "episodes/art_localized_ep3/index.html", "cta": "Listen", "depends_on": ["ep2_gates"], "complete_when": {"type": "step_done", "id": "ep3_listen"}},
-        {"id": "ep3_slide", "label": "Ep 3 Slide", "lane": "bytecast", "group": "Amplification", "order": 110, "estimatedMinutes": 2, "href": "episodes/art_localized_ep3/index.html", "cta": "View slides", "depends_on": ["ep3_listen"], "complete_when": {"type": "step_done", "id": "ep3_slide"}},
-        {"id": "ep3_engage", "label": "Ep 3 Engage", "lane": "bytecast", "group": "Amplification", "order": 120, "estimatedMinutes": 5, "href": "episodes/art_localized_ep3/index.html", "cta": "Timeline + numbers", "depends_on": ["ep3_slide"], "complete_when": {"type": "step_done", "id": "ep3_engage"}},
-        {"id": "ep3_gates", "label": "Ep 3 Complete", "lane": "bytecast", "group": "Amplification", "order": 125, "estimatedMinutes": 0, "complete_when": {"type": "steps_all", "ids": ["ep3_listen", "ep3_slide", "ep3_engage"]}},
-        {"id": "ep4_listen", "label": "Ep 4 Listen", "lane": "bytecast", "group": "Your Role", "order": 130, "estimatedMinutes": 2, "href": "episodes/art_localized_ep4/index.html", "cta": "Listen", "depends_on": ["ep3_gates"], "complete_when": {"type": "step_done", "id": "ep4_listen"}},
-        {"id": "ep4_slide", "label": "Ep 4 Slide", "lane": "bytecast", "group": "Your Role", "order": 140, "estimatedMinutes": 2, "href": "episodes/art_localized_ep4/index.html", "cta": "View slides", "depends_on": ["ep4_listen"], "complete_when": {"type": "step_done", "id": "ep4_slide"}},
-        {"id": "ep4_engage", "label": "Ep 4 Engage", "lane": "bytecast", "group": "Your Role", "order": 150, "estimatedMinutes": 3, "href": "episodes/art_localized_ep4/index.html", "cta": "Pledge", "depends_on": ["ep4_slide"], "complete_when": {"type": "step_done", "id": "ep4_engage"}},
-        {"id": "final_assessment", "label": "Final Assessment", "lane": "training", "group": "Your Role", "order": 160, "estimatedMinutes": 10, "href": "episodes/art_localized_ep4/index.html", "cta": "Pass 80%", "depends_on": ["ep4_engage"], "complete_when": {"type": "step_done", "id": "final_assessment"}},
-        {"id": "ep4_gates", "label": "Ep 4 + Assessment Complete", "lane": "bytecast", "group": "Your Role", "order": 165, "estimatedMinutes": 0, "complete_when": {"type": "steps_all", "ids": ["ep4_listen", "ep4_slide", "ep4_engage", "final_assessment"]}},
-        {"id": "badge_art_localized_listener_v1", "label": "Badge: Listener", "lane": "badge", "group": "Badge", "order": 200, "estimatedMinutes": 1, "href": "seed_bytecast.html", "cta": "View Badge", "depends_on": ["ep0_listen"], "complete_when": {"type": "badge_has", "badge_id": "listener_v1"}},
-        {"id": "badge_art_localized_foundation_v1", "label": "Badge: Foundation", "lane": "badge", "group": "Badge", "order": 210, "href": "seed_bytecast.html", "complete_when": {"type": "badge_has", "badge_id": "foundation_v1"}},
-        {"id": "badge_art_localized_division_ally_v1", "label": "Badge: Division Ally", "lane": "badge", "group": "Badge", "order": 220, "href": "seed_bytecast.html", "complete_when": {"type": "badge_has", "badge_id": "division_ally_v1"}},
-        {"id": "badge_art_localized_partner_ready_v1", "label": "Badge: Partner Ready", "lane": "badge", "group": "Badge", "order": 230, "href": "seed_bytecast.html", "complete_when": {"type": "badge_has", "badge_id": "partner_ready_v1"}},
-        {"id": "badge_art_localized_amplifier_v1", "label": "Badge: Amplifier", "lane": "badge", "group": "Badge", "order": 240, "href": "seed_bytecast.html", "complete_when": {"type": "badge_has", "badge_id": "amplifier_v1"}},
-        {"id": "badge_art_localized_certified_v1", "label": "Badge: Certified", "lane": "badge", "group": "Badge", "order": 250, "href": "seed_bytecast.html", "complete_when": {"type": "badge_has", "badge_id": "art_localized_certified_v1"}}
+        {
+          "id": "ep0_listen",
+          "label": "Ep 0 Listen",
+          "lane": "bytecast",
+          "group": "Collaboration 0",
+          "order": 10,
+          "estimatedMinutes": 6,
+          "href": "episodes/art_localized_ep0/index.html",
+          "cta": "Listen: Collaboration 0",
+          "complete_when": {
+            "type": "step_done",
+            "id": "ep0_listen"
+          }
+        },
+        {
+          "id": "ep0_slide",
+          "label": "Ep 0 Slide",
+          "lane": "bytecast",
+          "group": "Collaboration 0",
+          "order": 20,
+          "estimatedMinutes": 2,
+          "href": "episodes/art_localized_ep0/index.html",
+          "cta": "View slides",
+          "depends_on": [
+            "ep0_listen"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "ep0_slide"
+          }
+        },
+        {
+          "id": "ep0_engage",
+          "label": "Ep 0 Engage",
+          "lane": "bytecast",
+          "group": "Collaboration 0",
+          "order": 30,
+          "estimatedMinutes": 5,
+          "href": "episodes/art_localized_ep0/index.html",
+          "cta": "Quiz + reflection",
+          "depends_on": [
+            "ep0_slide"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "ep0_engage"
+          }
+        },
+        {
+          "id": "ep0_mission",
+          "label": "Ep 0 Proof Mission",
+          "lane": "training",
+          "group": "Proof Mission",
+          "order": 32,
+          "estimatedMinutes": 8,
+          "href": "episodes/art_localized_ep0/index.html",
+          "cta": "Record proof mission",
+          "depends_on": [
+            "ep0_engage"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "ep0_mission"
+          }
+        },
+        {
+          "id": "ep0_gates",
+          "label": "Ep 0 Complete",
+          "lane": "bytecast",
+          "group": "Collaboration 0",
+          "order": 35,
+          "estimatedMinutes": 0,
+          "href": "episodes/art_localized_ep0/index.html",
+          "cta": "Foundation",
+          "complete_when": {
+            "type": "steps_all",
+            "ids": [
+              "ep0_listen",
+              "ep0_slide",
+              "ep0_engage",
+              "ep0_mission"
+            ]
+          }
+        },
+        {
+          "id": "ep1_listen",
+          "label": "Ep 1 Listen",
+          "lane": "bytecast",
+          "group": "Divisions",
+          "order": 40,
+          "estimatedMinutes": 2,
+          "href": "episodes/art_localized_ep1/index.html",
+          "cta": "Listen: Divisions",
+          "depends_on": [
+            "ep0_gates"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "ep1_listen"
+          }
+        },
+        {
+          "id": "ep1_slide",
+          "label": "Ep 1 Slide",
+          "lane": "bytecast",
+          "group": "Divisions",
+          "order": 50,
+          "estimatedMinutes": 2,
+          "href": "episodes/art_localized_ep1/index.html",
+          "cta": "View slides",
+          "depends_on": [
+            "ep1_listen"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "ep1_slide"
+          }
+        },
+        {
+          "id": "ep1_engage",
+          "label": "Ep 1 Engage",
+          "lane": "bytecast",
+          "group": "Divisions",
+          "order": 60,
+          "estimatedMinutes": 5,
+          "href": "episodes/art_localized_ep1/index.html",
+          "cta": "Match + scenario",
+          "depends_on": [
+            "ep1_slide"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "ep1_engage"
+          }
+        },
+        {
+          "id": "ep1_mission",
+          "label": "Ep 1 Proof Mission",
+          "lane": "training",
+          "group": "Proof Mission",
+          "order": 62,
+          "estimatedMinutes": 8,
+          "href": "episodes/art_localized_ep1/index.html",
+          "cta": "Record proof mission",
+          "depends_on": [
+            "ep1_engage"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "ep1_mission"
+          }
+        },
+        {
+          "id": "ep1_gates",
+          "label": "Ep 1 Complete",
+          "lane": "bytecast",
+          "group": "Divisions",
+          "order": 65,
+          "estimatedMinutes": 0,
+          "href": "episodes/art_localized_ep1/index.html",
+          "complete_when": {
+            "type": "steps_all",
+            "ids": [
+              "ep1_listen",
+              "ep1_slide",
+              "ep1_engage",
+              "ep1_mission"
+            ]
+          }
+        },
+        {
+          "id": "ep2_listen",
+          "label": "Ep 2 Listen",
+          "lane": "bytecast",
+          "group": "Partnership Tiers",
+          "order": 70,
+          "estimatedMinutes": 2,
+          "href": "episodes/art_localized_ep2/index.html",
+          "cta": "Listen",
+          "depends_on": [
+            "ep1_gates"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "ep2_listen"
+          }
+        },
+        {
+          "id": "ep2_slide",
+          "label": "Ep 2 Slide",
+          "lane": "bytecast",
+          "group": "Partnership Tiers",
+          "order": 80,
+          "estimatedMinutes": 2,
+          "href": "episodes/art_localized_ep2/index.html",
+          "cta": "View slides",
+          "depends_on": [
+            "ep2_listen"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "ep2_slide"
+          }
+        },
+        {
+          "id": "ep2_engage",
+          "label": "Ep 2 Engage",
+          "lane": "bytecast",
+          "group": "Partnership Tiers",
+          "order": 90,
+          "estimatedMinutes": 5,
+          "href": "episodes/art_localized_ep2/index.html",
+          "cta": "Sort + quiz",
+          "depends_on": [
+            "ep2_slide"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "ep2_engage"
+          }
+        },
+        {
+          "id": "ep2_mission",
+          "label": "Ep 2 Proof Mission",
+          "lane": "training",
+          "group": "Proof Mission",
+          "order": 92,
+          "estimatedMinutes": 8,
+          "href": "episodes/art_localized_ep2/index.html",
+          "cta": "Record proof mission",
+          "depends_on": [
+            "ep2_engage"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "ep2_mission"
+          }
+        },
+        {
+          "id": "ep2_gates",
+          "label": "Ep 2 Complete",
+          "lane": "bytecast",
+          "group": "Partnership Tiers",
+          "order": 95,
+          "estimatedMinutes": 0,
+          "href": "episodes/art_localized_ep2/index.html",
+          "complete_when": {
+            "type": "steps_all",
+            "ids": [
+              "ep2_listen",
+              "ep2_slide",
+              "ep2_engage",
+              "ep2_mission"
+            ]
+          }
+        },
+        {
+          "id": "ep3_listen",
+          "label": "Ep 3 Listen",
+          "lane": "bytecast",
+          "group": "Amplification",
+          "order": 100,
+          "estimatedMinutes": 2,
+          "href": "episodes/art_localized_ep3/index.html",
+          "cta": "Listen",
+          "depends_on": [
+            "ep2_gates"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "ep3_listen"
+          }
+        },
+        {
+          "id": "ep3_slide",
+          "label": "Ep 3 Slide",
+          "lane": "bytecast",
+          "group": "Amplification",
+          "order": 110,
+          "estimatedMinutes": 2,
+          "href": "episodes/art_localized_ep3/index.html",
+          "cta": "View slides",
+          "depends_on": [
+            "ep3_listen"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "ep3_slide"
+          }
+        },
+        {
+          "id": "ep3_engage",
+          "label": "Ep 3 Engage",
+          "lane": "bytecast",
+          "group": "Amplification",
+          "order": 120,
+          "estimatedMinutes": 5,
+          "href": "episodes/art_localized_ep3/index.html",
+          "cta": "Timeline + numbers",
+          "depends_on": [
+            "ep3_slide"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "ep3_engage"
+          }
+        },
+        {
+          "id": "ep3_mission",
+          "label": "Ep 3 Proof Mission",
+          "lane": "training",
+          "group": "Proof Mission",
+          "order": 122,
+          "estimatedMinutes": 8,
+          "href": "episodes/art_localized_ep3/index.html",
+          "cta": "Record proof mission",
+          "depends_on": [
+            "ep3_engage"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "ep3_mission"
+          }
+        },
+        {
+          "id": "ep3_gates",
+          "label": "Ep 3 Complete",
+          "lane": "bytecast",
+          "group": "Amplification",
+          "order": 125,
+          "estimatedMinutes": 0,
+          "href": "episodes/art_localized_ep3/index.html",
+          "complete_when": {
+            "type": "steps_all",
+            "ids": [
+              "ep3_listen",
+              "ep3_slide",
+              "ep3_engage",
+              "ep3_mission"
+            ]
+          }
+        },
+        {
+          "id": "ep4_listen",
+          "label": "Ep 4 Listen",
+          "lane": "bytecast",
+          "group": "Your Role",
+          "order": 130,
+          "estimatedMinutes": 2,
+          "href": "episodes/art_localized_ep4/index.html",
+          "cta": "Listen",
+          "depends_on": [
+            "ep3_gates"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "ep4_listen"
+          }
+        },
+        {
+          "id": "ep4_slide",
+          "label": "Ep 4 Slide",
+          "lane": "bytecast",
+          "group": "Your Role",
+          "order": 140,
+          "estimatedMinutes": 2,
+          "href": "episodes/art_localized_ep4/index.html",
+          "cta": "View slides",
+          "depends_on": [
+            "ep4_listen"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "ep4_slide"
+          }
+        },
+        {
+          "id": "ep4_engage",
+          "label": "Ep 4 Engage",
+          "lane": "bytecast",
+          "group": "Your Role",
+          "order": 150,
+          "estimatedMinutes": 3,
+          "href": "episodes/art_localized_ep4/index.html",
+          "cta": "Pledge",
+          "depends_on": [
+            "ep4_slide"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "ep4_engage"
+          }
+        },
+        {
+          "id": "ep4_mission",
+          "label": "Launch Readiness Mission",
+          "lane": "training",
+          "group": "Launch Readiness",
+          "order": 152,
+          "estimatedMinutes": 12,
+          "href": "episodes/art_localized_ep4/index.html",
+          "cta": "Record launch proof",
+          "depends_on": [
+            "ep4_engage"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "ep4_mission"
+          }
+        },
+        {
+          "id": "final_assessment",
+          "label": "Final Assessment",
+          "lane": "training",
+          "group": "Your Role",
+          "order": 160,
+          "estimatedMinutes": 10,
+          "href": "episodes/art_localized_ep4/index.html",
+          "cta": "Pass 80%",
+          "depends_on": [
+            "ep4_engage"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "final_assessment"
+          }
+        },
+        {
+          "id": "ep4_gates",
+          "label": "Ep 4 + Assessment Complete",
+          "lane": "bytecast",
+          "group": "Your Role",
+          "order": 165,
+          "estimatedMinutes": 0,
+          "href": "episodes/art_localized_ep4/index.html",
+          "complete_when": {
+            "type": "steps_all",
+            "ids": [
+              "ep4_listen",
+              "ep4_slide",
+              "ep4_engage",
+              "final_assessment",
+              "ep4_mission"
+            ]
+          }
+        },
+        {
+          "id": "badge_art_localized_listener_v1",
+          "label": "Badge: Listener",
+          "lane": "badge",
+          "group": "Badge",
+          "order": 200,
+          "estimatedMinutes": 1,
+          "href": "seed_bytecast.html",
+          "cta": "View Badge",
+          "depends_on": [
+            "ep0_listen"
+          ],
+          "complete_when": {
+            "type": "badge_has",
+            "badge_id": "listener_v1"
+          }
+        },
+        {
+          "id": "badge_art_localized_foundation_v1",
+          "label": "Badge: Foundation",
+          "lane": "badge",
+          "group": "Badge",
+          "order": 210,
+          "href": "seed_bytecast.html",
+          "complete_when": {
+            "type": "badge_has",
+            "badge_id": "foundation_v1"
+          }
+        },
+        {
+          "id": "badge_art_localized_division_ally_v1",
+          "label": "Badge: Division Ally",
+          "lane": "badge",
+          "group": "Badge",
+          "order": 220,
+          "href": "seed_bytecast.html",
+          "complete_when": {
+            "type": "badge_has",
+            "badge_id": "division_ally_v1"
+          }
+        },
+        {
+          "id": "badge_art_localized_partner_ready_v1",
+          "label": "Badge: Partner Ready",
+          "lane": "badge",
+          "group": "Badge",
+          "order": 230,
+          "href": "seed_bytecast.html",
+          "complete_when": {
+            "type": "badge_has",
+            "badge_id": "partner_ready_v1"
+          }
+        },
+        {
+          "id": "badge_art_localized_amplifier_v1",
+          "label": "Badge: Amplifier",
+          "lane": "badge",
+          "group": "Badge",
+          "order": 240,
+          "href": "seed_bytecast.html",
+          "complete_when": {
+            "type": "badge_has",
+            "badge_id": "amplifier_v1"
+          }
+        },
+        {
+          "id": "badge_art_localized_certified_v1",
+          "label": "Badge: Certified",
+          "lane": "badge",
+          "group": "Badge",
+          "order": 250,
+          "href": "seed_bytecast.html",
+          "complete_when": {
+            "type": "badge_has",
+            "badge_id": "art_localized_certified_v1"
+          }
+        }
       ],
       "badges": [
-        {"id": "listener_v1", "label": "Listener", "requires": ["ep0_listen"]},
-        {"id": "foundation_v1", "label": "Foundation", "requires": ["ep0_gates"]},
-        {"id": "division_ally_v1", "label": "Division Ally", "requires": ["ep1_gates"]},
-        {"id": "partner_ready_v1", "label": "Partner Ready", "requires": ["ep2_gates"]},
-        {"id": "amplifier_v1", "label": "Amplifier", "requires": ["ep3_gates"]},
-        {"id": "art_localized_certified_v1", "label": "Art Localized Certified", "requires": ["ep4_gates", "final_assessment"]}
+        {
+          "id": "listener_v1",
+          "label": "Listener",
+          "requires": [
+            "ep0_listen"
+          ]
+        },
+        {
+          "id": "foundation_v1",
+          "label": "Foundation",
+          "requires": [
+            "ep0_gates"
+          ]
+        },
+        {
+          "id": "division_ally_v1",
+          "label": "Division Ally",
+          "requires": [
+            "ep1_gates"
+          ]
+        },
+        {
+          "id": "partner_ready_v1",
+          "label": "Partner Ready",
+          "requires": [
+            "ep2_gates"
+          ]
+        },
+        {
+          "id": "amplifier_v1",
+          "label": "Amplifier",
+          "requires": [
+            "ep3_gates"
+          ]
+        },
+        {
+          "id": "art_localized_certified_v1",
+          "label": "Art Localized Certified",
+          "requires": [
+            "ep4_gates",
+            "final_assessment",
+            "ep4_mission"
+          ],
+          "minProof": {
+            "ep0_mission": [
+              "localizedPromise",
+              "nextOwner",
+              "proofArtifact"
+            ],
+            "ep1_mission": [
+              "artistRegion",
+              "leadDivision",
+              "spotlightDeliverable"
+            ],
+            "ep2_mission": [
+              "partnerTier",
+              "requiredProofArtifact",
+              "reviewerPath"
+            ],
+            "ep3_mission": [
+              "audience",
+              "channel",
+              "successMetric"
+            ],
+            "ep4_mission": [
+              "creatorRoute",
+              "nextStepPath",
+              "creatorEquitySafeguard"
+            ],
+            "final_assessment": [
+              "mission",
+              "understandingCheckPassed",
+              "finalAssessmentPassed",
+              "finalAssessmentAt"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "contributor_onboarding_training",
+      "label": "Contributor Onboarding â€” Training",
+      "description": "Listen â†’ Slide â†’ Engage. Episodes 0â€“4 + final assessment. Focus: studio context, fit, lanes, work orders, Crew Check readiness.",
+      "isDefault": false,
+      "steps": [
+        {
+          "id": "co_ep0_listen",
+          "label": "CO-EP-0 Listen",
+          "lane": "bytecast",
+          "group": "Orientation",
+          "order": 10,
+          "estimatedMinutes": 6,
+          "href": "episodes/contributor_onboarding_ep0/index.html",
+          "cta": "Start orientation",
+          "complete_when": {
+            "type": "step_done",
+            "id": "co_ep0_listen"
+          }
+        },
+        {
+          "id": "co_ep0_slide",
+          "label": "CO-EP-0 Slides",
+          "lane": "bytecast",
+          "group": "Orientation",
+          "order": 20,
+          "estimatedMinutes": 2,
+          "href": "episodes/contributor_onboarding_ep0/index.html",
+          "cta": "View slides",
+          "depends_on": [
+            "co_ep0_listen"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "co_ep0_slide"
+          }
+        },
+        {
+          "id": "co_ep0_engage",
+          "label": "CO-EP-0 Engage",
+          "lane": "bytecast",
+          "group": "Orientation",
+          "order": 30,
+          "estimatedMinutes": 3,
+          "href": "episodes/contributor_onboarding_ep0/index.html",
+          "cta": "Confirm context",
+          "depends_on": [
+            "co_ep0_slide"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "co_ep0_engage"
+          }
+        },
+        {
+          "id": "co_ep0_gates",
+          "label": "CO-EP-0 Complete",
+          "lane": "bytecast",
+          "group": "Orientation",
+          "order": 35,
+          "estimatedMinutes": 0,
+          "href": "episodes/contributor_onboarding_ep0/index.html",
+          "complete_when": {
+            "type": "steps_all",
+            "ids": [
+              "co_ep0_listen",
+              "co_ep0_slide",
+              "co_ep0_engage"
+            ]
+          }
+        },
+        {
+          "id": "co_ep1_listen",
+          "label": "CO-EP-1 Listen",
+          "lane": "bytecast",
+          "group": "Fit",
+          "order": 40,
+          "estimatedMinutes": 5,
+          "href": "episodes/contributor_onboarding_ep1/index.html",
+          "cta": "Start fit check",
+          "depends_on": [
+            "co_ep0_gates"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "co_ep1_listen"
+          }
+        },
+        {
+          "id": "co_ep1_slide",
+          "label": "CO-EP-1 Slides",
+          "lane": "bytecast",
+          "group": "Fit",
+          "order": 50,
+          "estimatedMinutes": 2,
+          "href": "episodes/contributor_onboarding_ep1/index.html",
+          "cta": "View slides",
+          "depends_on": [
+            "co_ep1_listen"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "co_ep1_slide"
+          }
+        },
+        {
+          "id": "co_ep1_engage",
+          "label": "CO-EP-1 Engage",
+          "lane": "bytecast",
+          "group": "Fit",
+          "order": 60,
+          "estimatedMinutes": 3,
+          "href": "episodes/contributor_onboarding_ep1/index.html",
+          "cta": "Check fit",
+          "depends_on": [
+            "co_ep1_slide"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "co_ep1_engage"
+          }
+        },
+        {
+          "id": "co_ep1_gates",
+          "label": "CO-EP-1 Complete",
+          "lane": "bytecast",
+          "group": "Fit",
+          "order": 65,
+          "estimatedMinutes": 0,
+          "href": "episodes/contributor_onboarding_ep1/index.html",
+          "complete_when": {
+            "type": "steps_all",
+            "ids": [
+              "co_ep1_listen",
+              "co_ep1_slide",
+              "co_ep1_engage"
+            ]
+          }
+        },
+        {
+          "id": "co_ep2_listen",
+          "label": "CO-EP-2 Listen",
+          "lane": "bytecast",
+          "group": "Lanes",
+          "order": 70,
+          "estimatedMinutes": 6,
+          "href": "episodes/contributor_onboarding_ep2/index.html",
+          "cta": "Learn the lanes",
+          "depends_on": [
+            "co_ep1_gates"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "co_ep2_listen"
+          }
+        },
+        {
+          "id": "co_ep2_slide",
+          "label": "CO-EP-2 Slides",
+          "lane": "bytecast",
+          "group": "Lanes",
+          "order": 80,
+          "estimatedMinutes": 2,
+          "href": "episodes/contributor_onboarding_ep2/index.html",
+          "cta": "View slides",
+          "depends_on": [
+            "co_ep2_listen"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "co_ep2_slide"
+          }
+        },
+        {
+          "id": "co_ep2_engage",
+          "label": "CO-EP-2 Engage",
+          "lane": "bytecast",
+          "group": "Lanes",
+          "order": 90,
+          "estimatedMinutes": 3,
+          "href": "episodes/contributor_onboarding_ep2/index.html",
+          "cta": "Choose the safe move",
+          "depends_on": [
+            "co_ep2_slide"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "co_ep2_engage"
+          }
+        },
+        {
+          "id": "co_ep2_gates",
+          "label": "CO-EP-2 Complete",
+          "lane": "bytecast",
+          "group": "Lanes",
+          "order": 95,
+          "estimatedMinutes": 0,
+          "href": "episodes/contributor_onboarding_ep2/index.html",
+          "complete_when": {
+            "type": "steps_all",
+            "ids": [
+              "co_ep2_listen",
+              "co_ep2_slide",
+              "co_ep2_engage"
+            ]
+          }
+        },
+        {
+          "id": "co_ep3_listen",
+          "label": "CO-EP-3 Listen",
+          "lane": "bytecast",
+          "group": "Workflow",
+          "order": 100,
+          "estimatedMinutes": 6,
+          "href": "episodes/contributor_onboarding_ep3/index.html",
+          "cta": "Start work order basics",
+          "depends_on": [
+            "co_ep2_gates"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "co_ep3_listen"
+          }
+        },
+        {
+          "id": "co_ep3_slide",
+          "label": "CO-EP-3 Slides",
+          "lane": "bytecast",
+          "group": "Workflow",
+          "order": 110,
+          "estimatedMinutes": 2,
+          "href": "episodes/contributor_onboarding_ep3/index.html",
+          "cta": "View slides",
+          "depends_on": [
+            "co_ep3_listen"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "co_ep3_slide"
+          }
+        },
+        {
+          "id": "co_ep3_engage",
+          "label": "CO-EP-3 Engage",
+          "lane": "bytecast",
+          "group": "Workflow",
+          "order": 120,
+          "estimatedMinutes": 3,
+          "href": "episodes/contributor_onboarding_ep3/index.html",
+          "cta": "Check work-order readiness",
+          "depends_on": [
+            "co_ep3_slide"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "co_ep3_engage"
+          }
+        },
+        {
+          "id": "co_ep3_gates",
+          "label": "CO-EP-3 Complete",
+          "lane": "bytecast",
+          "group": "Workflow",
+          "order": 125,
+          "estimatedMinutes": 0,
+          "href": "episodes/contributor_onboarding_ep3/index.html",
+          "complete_when": {
+            "type": "steps_all",
+            "ids": [
+              "co_ep3_listen",
+              "co_ep3_slide",
+              "co_ep3_engage"
+            ]
+          }
+        },
+        {
+          "id": "co_ep4_listen",
+          "label": "CO-EP-4 Listen",
+          "lane": "bytecast",
+          "group": "Readiness",
+          "order": 130,
+          "estimatedMinutes": 7,
+          "href": "episodes/contributor_onboarding_ep4/index.html",
+          "cta": "Start final readiness",
+          "depends_on": [
+            "co_ep3_gates"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "co_ep4_listen"
+          }
+        },
+        {
+          "id": "co_ep4_slide",
+          "label": "CO-EP-4 Slides",
+          "lane": "bytecast",
+          "group": "Readiness",
+          "order": 140,
+          "estimatedMinutes": 2,
+          "href": "episodes/contributor_onboarding_ep4/index.html",
+          "cta": "View slides",
+          "depends_on": [
+            "co_ep4_listen"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "co_ep4_slide"
+          }
+        },
+        {
+          "id": "co_ep4_engage",
+          "label": "CO-EP-4 Engage",
+          "lane": "bytecast",
+          "group": "Readiness",
+          "order": 150,
+          "estimatedMinutes": 3,
+          "href": "episodes/contributor_onboarding_ep4/index.html",
+          "cta": "Confirm post-pass flow",
+          "depends_on": [
+            "co_ep4_slide"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "co_ep4_engage"
+          }
+        },
+        {
+          "id": "co_final_assessment",
+          "label": "Contributor Final Assessment",
+          "lane": "training",
+          "group": "Readiness",
+          "order": 160,
+          "estimatedMinutes": 8,
+          "href": "episodes/contributor_onboarding_ep4/index.html",
+          "cta": "Pass final checks",
+          "depends_on": [
+            "co_ep4_engage"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "co_final_assessment"
+          }
+        },
+        {
+          "id": "co_ep4_gates",
+          "label": "CO-EP-4 + Assessment Complete",
+          "lane": "bytecast",
+          "group": "Readiness",
+          "order": 165,
+          "estimatedMinutes": 0,
+          "href": "episodes/contributor_onboarding_ep4/index.html",
+          "complete_when": {
+            "type": "steps_all",
+            "ids": [
+              "co_ep4_listen",
+              "co_ep4_slide",
+              "co_ep4_engage",
+              "co_final_assessment"
+            ]
+          }
+        },
+        {
+          "id": "badge_contributor_onboarding_orientation_v1",
+          "label": "Badge: Orientation",
+          "lane": "badge",
+          "group": "Badge",
+          "order": 200,
+          "href": "seed_bytecast.html",
+          "complete_when": {
+            "type": "badge_has",
+            "badge_id": "contributor_onboarding_orientation_v1"
+          }
+        },
+        {
+          "id": "badge_contributor_onboarding_fit_v1",
+          "label": "Badge: Fit",
+          "lane": "badge",
+          "group": "Badge",
+          "order": 210,
+          "href": "seed_bytecast.html",
+          "complete_when": {
+            "type": "badge_has",
+            "badge_id": "contributor_onboarding_fit_v1"
+          }
+        },
+        {
+          "id": "badge_contributor_onboarding_lane_ready_v1",
+          "label": "Badge: Lane Ready",
+          "lane": "badge",
+          "group": "Badge",
+          "order": 220,
+          "href": "seed_bytecast.html",
+          "complete_when": {
+            "type": "badge_has",
+            "badge_id": "contributor_onboarding_lane_ready_v1"
+          }
+        },
+        {
+          "id": "badge_contributor_onboarding_workflow_ready_v1",
+          "label": "Badge: Workflow Ready",
+          "lane": "badge",
+          "group": "Badge",
+          "order": 230,
+          "href": "seed_bytecast.html",
+          "complete_when": {
+            "type": "badge_has",
+            "badge_id": "contributor_onboarding_workflow_ready_v1"
+          }
+        },
+        {
+          "id": "badge_contributor_onboarding_ready_v1",
+          "label": "Badge: Contributor Ready",
+          "lane": "badge",
+          "group": "Badge",
+          "order": 240,
+          "href": "seed_bytecast.html",
+          "complete_when": {
+            "type": "badge_has",
+            "badge_id": "contributor_onboarding_ready_v1"
+          }
+        }
+      ],
+      "badges": [
+        {
+          "id": "contributor_onboarding_orientation_v1",
+          "label": "Contributor Orientation",
+          "requires": [
+            "co_ep0_gates"
+          ]
+        },
+        {
+          "id": "contributor_onboarding_fit_v1",
+          "label": "Contributor Fit",
+          "requires": [
+            "co_ep1_gates"
+          ]
+        },
+        {
+          "id": "contributor_onboarding_lane_ready_v1",
+          "label": "Lane Ready",
+          "requires": [
+            "co_ep2_gates"
+          ]
+        },
+        {
+          "id": "contributor_onboarding_workflow_ready_v1",
+          "label": "Workflow Ready",
+          "requires": [
+            "co_ep3_gates"
+          ]
+        },
+        {
+          "id": "contributor_onboarding_ready_v1",
+          "label": "Contributor Ready",
+          "requires": [
+            "co_ep4_gates",
+            "co_final_assessment"
+          ]
+        }
       ]
     },
     {
       "id": "apparel_onboarding_v1",
       "label": "Apparel Ops Onboarding",
-      "description": "AV Apparel ByteCasts + practice + work order + seed. Listen → Slide → Engage → Training → Seed → Badge.",
+      "description": "AV Apparel ByteCasts + practice + work order + seed. Listen â†’ Slide â†’ Engage â†’ Training â†’ Seed â†’ Badge.",
       "isDefault": false,
       "steps": [
         {
@@ -346,7 +1582,7 @@
           "order": 10,
           "estimatedMinutes": 6,
           "href": "episodes/av_apparel_ep1_welcome/index.html",
-          "cta": "Legendary: Start AV Apparel Welcome",
+          "cta": "Start AV Apparel Welcome",
           "complete_when": {
             "type": "step_done",
             "id": "epapp1_listen"
@@ -360,8 +1596,10 @@
           "order": 20,
           "estimatedMinutes": 3,
           "href": "episodes/av_apparel_ep1_welcome/index.html",
-          "cta": "Legendary: Finish Slides",
-          "depends_on": ["epapp1_listen"],
+          "cta": "Finish Slides",
+          "depends_on": [
+            "epapp1_listen"
+          ],
           "complete_when": {
             "type": "step_done",
             "id": "epapp1_slide"
@@ -375,8 +1613,10 @@
           "order": 30,
           "estimatedMinutes": 5,
           "href": "episodes/av_apparel_ep1_welcome/index.html",
-          "cta": "Legendary: Quest + Quiz",
-          "depends_on": ["epapp1_slide"],
+          "cta": "Quest + Quiz",
+          "depends_on": [
+            "epapp1_slide"
+          ],
           "complete_when": {
             "type": "step_done",
             "id": "epapp1_engage"
@@ -384,7 +1624,7 @@
         },
         {
           "id": "epapp1_gates",
-          "label": "EP-APP-001 Gates",
+          "label": "EP-APP-001 Progress Check",
           "lane": "bytecast",
           "group": "Apparel",
           "order": 35,
@@ -393,7 +1633,11 @@
           "cta": "Welcome Complete",
           "complete_when": {
             "type": "steps_all",
-            "ids": ["epapp1_listen", "epapp1_slide", "epapp1_engage"]
+            "ids": [
+              "epapp1_listen",
+              "epapp1_slide",
+              "epapp1_engage"
+            ]
           }
         },
         {
@@ -404,8 +1648,10 @@
           "order": 40,
           "estimatedMinutes": 8,
           "href": "episodes/av_apparel_ep2_catalog/index.html",
-          "cta": "Legendary: Catalog Maintainer Bootcamp",
-          "depends_on": ["epapp1_gates"],
+          "cta": "Catalog Maintainer Bootcamp",
+          "depends_on": [
+            "epapp1_gates"
+          ],
           "complete_when": {
             "type": "step_done",
             "id": "epapp2_listen"
@@ -419,8 +1665,10 @@
           "order": 50,
           "estimatedMinutes": 4,
           "href": "episodes/av_apparel_ep2_catalog/index.html",
-          "cta": "Legendary: Finish Slides",
-          "depends_on": ["epapp2_listen"],
+          "cta": "Finish Slides",
+          "depends_on": [
+            "epapp2_listen"
+          ],
           "complete_when": {
             "type": "step_done",
             "id": "epapp2_slide"
@@ -434,8 +1682,10 @@
           "order": 60,
           "estimatedMinutes": 6,
           "href": "episodes/av_apparel_ep2_catalog/index.html",
-          "cta": "Legendary: Spot the Drift + Quiz",
-          "depends_on": ["epapp2_slide"],
+          "cta": "Spot the Drift + Quiz",
+          "depends_on": [
+            "epapp2_slide"
+          ],
           "complete_when": {
             "type": "step_done",
             "id": "epapp2_engage"
@@ -443,7 +1693,7 @@
         },
         {
           "id": "epapp2_gates",
-          "label": "EP-APP-002 Gates",
+          "label": "EP-APP-002 Progress Check",
           "lane": "bytecast",
           "group": "Apparel",
           "order": 65,
@@ -452,7 +1702,11 @@
           "cta": "Maintainer Bootcamp Complete",
           "complete_when": {
             "type": "steps_all",
-            "ids": ["epapp2_listen", "epapp2_slide", "epapp2_engage"]
+            "ids": [
+              "epapp2_listen",
+              "epapp2_slide",
+              "epapp2_engage"
+            ]
           }
         },
         {
@@ -463,8 +1717,10 @@
           "order": 70,
           "estimatedMinutes": 6,
           "href": "episodes/av_apparel_ep3_ops_standards/index.html",
-          "cta": "Legendary: Apparel Ops Standards",
-          "depends_on": ["epapp2_gates"],
+          "cta": "Apparel Ops Standards",
+          "depends_on": [
+            "epapp2_gates"
+          ],
           "complete_when": {
             "type": "step_done",
             "id": "epapp3_listen"
@@ -478,8 +1734,10 @@
           "order": 80,
           "estimatedMinutes": 4,
           "href": "episodes/av_apparel_ep3_ops_standards/index.html",
-          "cta": "Legendary: Finish Slides",
-          "depends_on": ["epapp3_listen"],
+          "cta": "Finish Slides",
+          "depends_on": [
+            "epapp3_listen"
+          ],
           "complete_when": {
             "type": "step_done",
             "id": "epapp3_slide"
@@ -493,8 +1751,10 @@
           "order": 90,
           "estimatedMinutes": 6,
           "href": "episodes/av_apparel_ep3_ops_standards/index.html",
-          "cta": "Legendary: Apply Standards + Quiz",
-          "depends_on": ["epapp3_slide"],
+          "cta": "Apply Standards + Quiz",
+          "depends_on": [
+            "epapp3_slide"
+          ],
           "complete_when": {
             "type": "step_done",
             "id": "epapp3_engage"
@@ -502,7 +1762,7 @@
         },
         {
           "id": "epapp3_gates",
-          "label": "EP-APP-003 Gates",
+          "label": "EP-APP-003 Progress Check",
           "lane": "bytecast",
           "group": "Apparel",
           "order": 95,
@@ -511,7 +1771,11 @@
           "cta": "Ops Standards Complete",
           "complete_when": {
             "type": "steps_all",
-            "ids": ["epapp3_listen", "epapp3_slide", "epapp3_engage"]
+            "ids": [
+              "epapp3_listen",
+              "epapp3_slide",
+              "epapp3_engage"
+            ]
           }
         },
         {
@@ -523,7 +1787,9 @@
           "estimatedMinutes": 15,
           "href": "episodes/av_apparel/workflows.md",
           "cta": "Run a practice catalog clean-up",
-          "depends_on": ["epapp3_gates"],
+          "depends_on": [
+            "epapp3_gates"
+          ],
           "complete_when": {
             "type": "step_done",
             "id": "apparel_practice_fix"
@@ -538,7 +1804,9 @@
           "estimatedMinutes": 20,
           "href": "episodes/av_apparel/onboarding.md",
           "cta": "Submit a real apparel change request",
-          "depends_on": ["apparel_practice_fix"],
+          "depends_on": [
+            "apparel_practice_fix"
+          ],
           "complete_when": {
             "type": "step_done",
             "id": "apparel_real_work_order"
@@ -551,9 +1819,11 @@
           "group": "Seeding",
           "order": 120,
           "estimatedMinutes": 10,
-          "href": "seed_builder_studio/seed_orchard_ui/index.html",
-          "cta": "Legendary: Export Apparel Workflow Seed",
-          "depends_on": ["apparel_real_work_order"],
+          "href": "episodes/seed_builder_studio/seed_orchard_ui/index.html",
+          "cta": "Export Apparel Workflow Seed",
+          "depends_on": [
+            "apparel_real_work_order"
+          ],
           "complete_when": {
             "type": "step_done",
             "id": "apparel_seed_export"
@@ -567,8 +1837,10 @@
           "order": 130,
           "estimatedMinutes": 1,
           "href": "seed_bytecast.html",
-          "cta": "Legendary: View Apparel Ops Badge",
-          "depends_on": ["apparel_seed_export"],
+          "cta": "View Apparel Ops Badge",
+          "depends_on": [
+            "apparel_seed_export"
+          ],
           "complete_when": {
             "type": "badge_has",
             "badge_id": "apparel_ops_ready_v1"
@@ -588,7 +1860,326 @@
             "apparel_seed_export"
           ],
           "minProof": {
-            "apparel_seed_export": ["artifactName", "artifactHash"]
+            "apparel_seed_export": [
+              "artifactName",
+              "artifactHash"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "lumina_revenue_v1",
+      "label": "Lumina Revenue Lane",
+      "description": "Learning lane: EP-LUM-101 to EP-LUM-106, then TR-LUM-001, SEED-LUM-001, and Badge. Golden Path is helpful, not required.",
+      "steps": [
+        {
+          "id": "lum101_gates",
+          "label": "EP-LUM-101 Progress Check",
+          "lane": "bytecast",
+          "group": "Lumina Lane",
+          "order": 10,
+          "estimatedMinutes": 10,
+          "href": "episodes/lumina_rev_101/index.html",
+          "cta": "Finish EP-LUM-101",
+          "complete_when": {
+            "type": "steps_all",
+            "ids": [
+              "lum101_listen",
+              "lum101_slide",
+              "lum101_engage"
+            ]
+          }
+        },
+        {
+          "id": "lum102_gates",
+          "label": "EP-LUM-102 Progress Check",
+          "lane": "bytecast",
+          "group": "Lumina Lane",
+          "order": 12,
+          "estimatedMinutes": 12,
+          "href": "episodes/lumina_rev_102/index.html",
+          "cta": "Finish EP-LUM-102",
+          "complete_when": {
+            "type": "steps_all",
+            "ids": [
+              "lum102_listen",
+              "lum102_slide",
+              "lum102_engage"
+            ]
+          }
+        },
+        {
+          "id": "lum103_gates",
+          "label": "EP-LUM-103 Progress Check",
+          "lane": "bytecast",
+          "group": "Lumina Lane",
+          "order": 14,
+          "estimatedMinutes": 12,
+          "href": "episodes/lumina_rev_103/index.html",
+          "cta": "Finish EP-LUM-103",
+          "complete_when": {
+            "type": "steps_all",
+            "ids": [
+              "lum103_listen",
+              "lum103_slide",
+              "lum103_engage"
+            ]
+          }
+        },
+        {
+          "id": "lum104_gates",
+          "label": "EP-LUM-104 Progress Check",
+          "lane": "bytecast",
+          "group": "Lumina Lane",
+          "order": 16,
+          "estimatedMinutes": 12,
+          "href": "episodes/lumina_rev_104/index.html",
+          "cta": "Finish EP-LUM-104",
+          "complete_when": {
+            "type": "steps_all",
+            "ids": [
+              "lum104_listen",
+              "lum104_slide",
+              "lum104_engage"
+            ]
+          }
+        },
+        {
+          "id": "lum105_gates",
+          "label": "EP-LUM-105 Progress Check",
+          "lane": "bytecast",
+          "group": "Lumina Lane",
+          "order": 18,
+          "estimatedMinutes": 12,
+          "href": "episodes/lumina_rev_105/index.html",
+          "cta": "Finish EP-LUM-105",
+          "complete_when": {
+            "type": "steps_all",
+            "ids": [
+              "lum105_listen",
+              "lum105_slide",
+              "lum105_engage"
+            ]
+          }
+        },
+        {
+          "id": "lum106_gates",
+          "label": "EP-LUM-106 Progress Check",
+          "lane": "bytecast",
+          "group": "Lumina Lane",
+          "order": 20,
+          "estimatedMinutes": 12,
+          "href": "episodes/lumina_rev_106/index.html",
+          "cta": "Finish EP-LUM-106",
+          "complete_when": {
+            "type": "steps_all",
+            "ids": [
+              "lum106_listen",
+              "lum106_slide",
+              "lum106_engage"
+            ]
+          }
+        },
+        {
+          "id": "tr_lum_001_revenue_routing",
+          "label": "TR-LUM-001 Revenue Routing Mission",
+          "lane": "training",
+          "group": "Training",
+          "order": 30,
+          "estimatedMinutes": 18,
+          "href": "episodes/training_missions/tr_lum_001_revenue_routing/index.html",
+          "cta": "Run TR-LUM-001"
+        },
+        {
+          "id": "seed_lum_001_sales_brief",
+          "label": "SEED-LUM-001 Sales Brief",
+          "lane": "seed",
+          "group": "Seeding",
+          "order": 40,
+          "estimatedMinutes": 12,
+          "href": "episodes/seed_builder_studio/lumina_sales_brief/index.html",
+          "cta": "Build SEED-LUM-001"
+        },
+        {
+          "id": "badge_lum_rev_001_ready",
+          "label": "Lumina Badge",
+          "lane": "badge",
+          "group": "Badge",
+          "order": 50,
+          "estimatedMinutes": 1,
+          "href": "seed_bytecast.html",
+          "cta": "View Badge",
+          "complete_when": {
+            "type": "badge_has",
+            "badge_id": "lum_rev_001_ready"
+          }
+        }
+      ],
+      "badges": [
+        {
+          "id": "lum_rev_001_ready",
+          "label": "Lumina Revenue Ready",
+          "requires": [
+            "lum101_gates",
+            "lum102_gates",
+            "lum103_gates",
+            "lum104_gates",
+            "lum105_gates",
+            "lum106_gates",
+            "tr_lum_001_revenue_routing",
+            "seed_lum_001_sales_brief"
+          ],
+          "minProof": {
+            "lum101_engage": [
+              "engageQuizPassed",
+              "engageQuizScore"
+            ],
+            "lum102_engage": [
+              "engageQuizPassed",
+              "engageQuizScore"
+            ],
+            "lum103_engage": [
+              "engageQuizPassed",
+              "engageQuizScore"
+            ],
+            "lum104_engage": [
+              "engageQuizPassed",
+              "engageQuizScore"
+            ],
+            "lum105_engage": [
+              "engageQuizPassed",
+              "engageQuizScore"
+            ],
+            "lum106_engage": [
+              "engageQuizPassed",
+              "engageQuizScore"
+            ],
+            "tr_lum_001_revenue_routing": [
+              "mission",
+              "understandingCheckPassed",
+              "lumMissionScore",
+              "lumScenarioId",
+              "lumPrimaryDivision",
+              "lumRecommendationSummary",
+              "lumReviewerApproved",
+              "lumReviewerName",
+              "lumMissionCompletedAt"
+            ],
+            "seed_lum_001_sales_brief": [
+              "artifactName",
+              "artifactHash",
+              "lumSalesBriefPrimaryDivision",
+              "lumSalesBriefRecommendationSummary",
+              "lumSalesBriefNextStep"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "shareholder_season1_v1",
+      "label": "Shareholder Season 1 — Briefings",
+      "description": "Optional linear briefing lane (S1-EP-01 through S1-EP-06). Not part of Golden Path onboarding.",
+      "isDefault": false,
+      "steps": [
+        {
+          "id": "s1_ep01_briefing",
+          "label": "S1-EP-01 — The AeroVista Universe",
+          "lane": "bytecast",
+          "group": "Shareholder Season 1",
+          "order": 10,
+          "estimatedMinutes": 8,
+          "href": "episodes/shareholder_s1_ep01/index.html",
+          "cta": "Open briefing",
+          "complete_when": {
+            "type": "step_done",
+            "id": "s1_ep01_briefing"
+          }
+        },
+        {
+          "id": "s1_ep02_briefing",
+          "label": "S1-EP-02 — Service Portfolio",
+          "lane": "bytecast",
+          "group": "Shareholder Season 1",
+          "order": 20,
+          "estimatedMinutes": 8,
+          "href": "episodes/shareholder_s1_ep02/index.html",
+          "cta": "Open briefing",
+          "depends_on": [
+            "s1_ep01_briefing"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "s1_ep02_briefing"
+          }
+        },
+        {
+          "id": "s1_ep03_briefing",
+          "label": "S1-EP-03 — Documented Ecosystem",
+          "lane": "bytecast",
+          "group": "Shareholder Season 1",
+          "order": 30,
+          "estimatedMinutes": 8,
+          "href": "episodes/shareholder_s1_ep03/index.html",
+          "cta": "Open briefing",
+          "depends_on": [
+            "s1_ep02_briefing"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "s1_ep03_briefing"
+          }
+        },
+        {
+          "id": "s1_ep04_briefing",
+          "label": "S1-EP-04 — The Portable Ecosystem",
+          "lane": "bytecast",
+          "group": "Shareholder Season 1",
+          "order": 40,
+          "estimatedMinutes": 8,
+          "href": "episodes/shareholder_s1_ep04/index.html",
+          "cta": "Open briefing",
+          "depends_on": [
+            "s1_ep03_briefing"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "s1_ep04_briefing"
+          }
+        },
+        {
+          "id": "s1_ep05_briefing",
+          "label": "S1-EP-05 — Revenue & Growth Model",
+          "lane": "bytecast",
+          "group": "Shareholder Season 1",
+          "order": 50,
+          "estimatedMinutes": 8,
+          "href": "episodes/shareholder_s1_ep05/index.html",
+          "cta": "Open briefing",
+          "depends_on": [
+            "s1_ep04_briefing"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "s1_ep05_briefing"
+          }
+        },
+        {
+          "id": "s1_ep06_briefing",
+          "label": "S1-EP-06 — The Roadmap Forward",
+          "lane": "bytecast",
+          "group": "Shareholder Season 1",
+          "order": 60,
+          "estimatedMinutes": 8,
+          "href": "episodes/shareholder_s1_ep06/index.html",
+          "cta": "Open briefing",
+          "depends_on": [
+            "s1_ep05_briefing"
+          ],
+          "complete_when": {
+            "type": "step_done",
+            "id": "s1_ep06_briefing"
           }
         }
       ]

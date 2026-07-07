@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aerovista/schemas/module_manifest.schema.json",
+  "title": "AeroVista Module Manifest",
+  "type": "object",
+  "required": [
+    "type",
+    "id",
+    "title",
+    "version",
+    "entry",
+    "capabilities"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "episode",
+        "training",
+        "seed_app",
+        "hub",
+        "workorders",
+        "art",
+        "other"
+      ]
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9\\-_\\.]{2,64}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 3
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "entry": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "estimated_minutes": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "lane": {
+      "type": "string",
+      "description": "What this module owns (single sentence)."
+    },
+    "overlaps": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Known overlap concepts/paths."
+    },
+    "capabilities": {
+      "type": "object",
+      "required": [
+        "overlay",
+        "progress_events"
+      ],
+      "properties": {
+        "overlay": {
+          "type": "boolean"
+        },
+        "progress_events": {
+          "type": "boolean"
+        },
+        "offline_fallback": {
+          "type": "boolean"
+        },
+        "downloadsZip": {
+          "type": "boolean"
+        },
+        "returnsArtifactMeta": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true
+    },
+    "handoffs": {
+      "type": "object",
+      "description": "Optional handoff contract for router/journey.",
+      "properties": {
+        "inputs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "outputs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

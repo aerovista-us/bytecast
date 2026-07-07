@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en" data-theme="venta-neon">
 <head>
   <meta charset="utf-8" />
@@ -206,6 +206,46 @@
 
     .episodes{
       display:grid;
+      gap: 14px;
+    }
+    .series-block{
+      border:1px solid var(--stroke);
+      border-radius: var(--radius2);
+      background: rgba(255,255,255,0.025);
+      padding: 12px;
+    }
+    .series-block__head{
+      display:flex;
+      gap: 12px;
+      align-items:flex-start;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      margin-bottom: 12px;
+    }
+    .series-block__title{
+      margin:0;
+      font-size: 17px;
+      letter-spacing: -0.01em;
+    }
+    .series-block__desc{
+      margin:6px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 64ch;
+    }
+    .series-block__count{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(34,167,255,0.28);
+      background: rgba(34,167,255,0.10);
+      color: rgba(255,255,255,0.86);
+      font-size: 12px;
+    }
+    .series-block__episodes{
+      display:grid;
       gap: 12px;
     }
     .ep{
@@ -305,7 +345,7 @@
         <span class="dot" aria-hidden="true"></span>
         <div>
           <div style="font-weight:800; letter-spacing:0.02em;">ByteCast Playlist</div>
-          <div class="k">Discovery • resume • handoffs</div>
+          <div class="k">Discovery â€¢ resume â€¢ handoffs</div>
         </div>
       </div>
 
@@ -319,8 +359,8 @@
           </select>
         </label>
         <a class="btn" href="./index.html">Overview</a>
-        <a class="btn" href="./training_hub/index.html">Training Hub</a>
-        <a class="btn" href="./seed_builder_studio/index.html">Seed Builder Studio</a>
+        <a class="btn" href="./episodes/training_hub/index.html">Training Hub</a>
+        <a class="btn" href="./episodes/seed_builder_studio/index.html">Seed Builder Studio</a>
       </div>
     </div>
   </header>
@@ -331,19 +371,19 @@
         <div>
           <h1 class="h-title">BYTECAST</h1>
           <p class="h-sub" id="heroSub">
-            Playlist hub for the journey: Listen -> Slide -> Engage -> Training -> Seed -> Publish -> Badge.
+            Your learning path starts here: Listen, Slides, Engage, Mission, Practice, Publish, Badge.
           </p>
           <div class="pills" id="metaPills">
-            <span class="pill"><span class="spark" aria-hidden="true"></span><strong>listen</strong> • anchor intent</span>
-            <span class="pill"><span class="spark" aria-hidden="true"></span><strong>slide</strong> • lock memory</span>
-            <span class="pill"><span class="spark" aria-hidden="true"></span><strong>interact</strong> • confirm retention</span>
+            <span class="pill"><span class="spark" aria-hidden="true"></span><strong>listen</strong> â€¢ anchor intent</span>
+            <span class="pill"><span class="spark" aria-hidden="true"></span><strong>slide</strong> â€¢ lock memory</span>
+            <span class="pill"><span class="spark" aria-hidden="true"></span><strong>interact</strong> â€¢ confirm retention</span>
           </div>
 
           <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
             <a id="resumeBtn" class="btn btn--legendary" href="./episodes/welcome_to_bytecast/index.html">Continue Where You Left Off</a>
             <a class="btn btn--primary" href="./episodes/welcome_to_bytecast/index.html">Start EP-001</a>
-            <a class="btn" href="./training_hub/index.html">Go Deeper: Training Hub</a>
-            <a class="btn" href="./seed_builder_studio/index.html">Make Repeatable: Seed Builder</a>
+            <a class="btn" href="./episodes/training_hub/index.html">Open Training Hub</a>
+            <a class="btn" href="./episodes/seed_builder_studio/index.html">Open Builder Studio</a>
           </div>
 
           <p class="tiny" id="resumeHint" style="margin:12px 0 0;">
@@ -351,21 +391,21 @@
           </p>
         </div>
 
-        <aside class="card" aria-label="Next recommended">
+        <aside class="card" aria-label="Recommended next step">
           <div class="banner" id="nextBanner">
-            <p class="label">Next recommended: loading...</p>
-            <p class="tiny muted" id="nextWhy">We pick the lowest-completion active episode by default.</p>
+            <p class="label">Recommended next step: loading...</p>
+            <p class="tiny muted" id="nextWhy">Based on your saved progress.</p>
             <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
-              <a id="nextBtn" class="btn btn--primary" href="./episodes/welcome_to_bytecast/index.html">Open recommended</a>
+              <a id="nextBtn" class="btn btn--primary" href="./episodes/welcome_to_bytecast/index.html">Open next step</a>
               <a class="btn" href="./docs/SITE_MAP.md">Site Map</a>
             </div>
           </div>
           <div class="banner banner--neon" id="goldenBanner" style="margin-top:12px;">
             <p class="label" id="goldenLabel">Golden Path: loading...</p>
-            <p class="tiny muted" id="goldenWhy">Playlist -> EP-001 -> Training -> Seed -> Badge.</p>
+            <p class="tiny muted" id="goldenWhy">Complete EP-001 to EP-004, then TR-001A, Practice Builder, Publish, and Badge.</p>
             <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
-              <a id="goldenBtn" class="btn btn--legendary" href="./episodes/welcome_to_bytecast/index.html">Legendary: Continue Journey</a>
-              <a class="btn" href="./training_missions/tr_001_golden_path/index.html">TR-001</a>
+              <a id="goldenBtn" class="btn btn--legendary" href="./episodes/welcome_to_bytecast/index.html">Continue Learning</a>
+              <a class="btn" href="./episodes/training_missions/tr_001a_day1_foundations/index.html">TR-001A</a>
             </div>
           </div>
         </aside>
@@ -375,8 +415,8 @@
     <section aria-label="Workspace app map" style="margin-top:14px; border:1px solid rgba(255,255,255,0.14); border-radius:18px; padding:14px; background:linear-gradient(140deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)); box-shadow:var(--shadow2);">
       <div style="display:grid; gap:6px; margin-bottom:10px;">
         <span style="display:inline-flex; width:max-content; padding:3px 10px; border-radius:999px; border:1px solid rgba(34,167,255,0.4); background:rgba(34,167,255,0.14); font:700 11px/1 var(--mono); letter-spacing:.06em; text-transform:uppercase;">App Map</span>
-        <h2 style="margin:0; font-size:18px;">Cross-App Visual Lanes</h2>
-        <p style="margin:0; color:var(--muted);">Same animated navigator across pages so app boundaries are obvious at a glance.</p>
+        <h2 style="margin:0; font-size:18px;">Learning Surface Map</h2>
+        <p style="margin:0; color:var(--muted);">Use this visual guide when you want to know which learning surface to open next.</p>
       </div>
       <svg viewBox="0 0 1240 430" role="img" aria-label="Workspace map" style="width:100%; height:auto; display:block; border-radius:12px; border:1px solid rgba(255,255,255,0.14); background:rgba(0,0,0,0.24);">
         <style>
@@ -410,9 +450,9 @@
         <circle class="m-dot" r="3.6" fill="#ffc45a"><animateMotion dur="4.4s" repeatCount="indefinite"><mpath href="#m4"/></animateMotion></circle>
         <circle class="m-dot" r="3.6" fill="#ffc45a"><animateMotion dur="5.1s" repeatCount="indefinite"><mpath href="#m5"/></animateMotion></circle>
         <a href="./seed_bytecast.html"><g class="m-node m-n1"><rect class="m-box m-sb" x="210" y="160" width="220" height="120" rx="20"/><text class="m-t" x="234" y="208">ByteCast</text><text class="m-s" x="234" y="230">episode player app</text></g></a>
-        <a href="./training_hub/index.html"><g class="m-node m-n2"><rect class="m-box m-st" x="780" y="48" width="240" height="110" rx="18"/><text class="m-t" x="804" y="92">Training Hub</text><text class="m-s" x="804" y="114">onboarding and modules</text></g></a>
-        <a href="./seed_builder_studio/index.html"><g class="m-node m-n3"><rect class="m-box m-ss" x="780" y="272" width="240" height="110" rx="18"/><text class="m-t" x="804" y="316">Seed Builder</text><text class="m-s" x="804" y="338">tooling and generation</text></g></a>
-        <a href="./docs/index.html"><g class="m-node m-n4"><rect class="m-box m-so" x="668" y="170" width="170" height="96" rx="16"/><text class="m-t" x="690" y="208" style="font-size:18px;">Docs</text><text class="m-s" x="690" y="229">manuals + ops</text></g></a>
+        <a href="./episodes/training_hub/index.html"><g class="m-node m-n2"><rect class="m-box m-st" x="780" y="48" width="240" height="110" rx="18"/><text class="m-t" x="804" y="92">Training Hub</text><text class="m-s" x="804" y="114">learning routes and modules</text></g></a>
+        <a href="./episodes/seed_builder_studio/index.html"><g class="m-node m-n3"><rect class="m-box m-ss" x="780" y="272" width="240" height="110" rx="18"/><text class="m-t" x="804" y="316">Seed Builder</text><text class="m-s" x="804" y="338">practice and artifacts</text></g></a>
+        <a href="./docs/index.html"><g class="m-node m-n4"><rect class="m-box m-so" x="668" y="170" width="170" height="96" rx="16"/><text class="m-t" x="690" y="208" style="font-size:18px;">Docs</text><text class="m-s" x="690" y="229">standards + reference</text></g></a>
         <a href="./episodes/welcome_to_bytecast/index.html"><g class="m-node m-n2"><rect class="m-box m-se" x="36" y="48" width="210" height="72" rx="14"/><text class="m-t" x="58" y="89" style="font-size:16px;">EP-001</text></g></a>
         <a href="./episodes/aerovista_7_division_overview/index.html"><g class="m-node m-n3"><rect class="m-box m-se" x="36" y="314" width="210" height="72" rx="14"/><text class="m-t" x="58" y="355" style="font-size:16px;">EP-002</text></g></a>
         <a href="./index.html"><g class="m-node m-n4"><rect class="m-box m-se" x="1038" y="170" width="166" height="96" rx="16"/><text class="m-t" x="1062" y="208" style="font-size:17px;">Workspace</text><text class="m-s" x="1062" y="229">all app entry</text></g></a>
@@ -420,8 +460,8 @@
     </section>
 
     <section class="card" aria-label="Quest map" style="margin-top:14px;">
-      <div class="k">Quest Map</div>
-      <h2 class="h2">Where you are, what’s next, what’s locked, why.</h2>
+      <div class="k">Journey Map</div>
+      <h2 class="h2">Where you are and what to open next.</h2>
       <p class="muted" style="margin:0 0 10px;">Powered by your active journey. Progress is saved locally in this browser.</p>
       <div id="journeyMap"></div>
     </section>
@@ -438,23 +478,23 @@
       </section>
 
       <aside class="card span-4" aria-label="Tools">
-        <div class="k">Journey Doors</div>
-        <h2 class="h2">Go Deeper, Then Make It Real.</h2>
-        <p class="muted" style="margin:0 0 12px;">Keep this page visitor-safe: episodes + next step + the two handoff doors.</p>
+        <div class="k">Next Learning Steps</div>
+        <h2 class="h2">Learn, practice, and keep going.</h2>
+        <p class="muted" style="margin:0 0 12px;">Use these links when you are ready to continue beyond the episode list.</p>
         <div style="display:grid; gap:10px;">
-          <a class="btn btn--primary" href="./training_hub/index.html">Training Hub</a>
-          <a class="btn" href="./seed_builder_studio/index.html">Seed Builder Studio</a>
+          <a class="btn btn--primary" href="./episodes/training_hub/index.html">Training Hub</a>
+          <a class="btn" href="./episodes/seed_builder_studio/index.html">Builder Studio</a>
           <button id="apparelJourneyBtn" type="button" class="btn">Apparel Ops Onboarding</button>
-          <a class="btn" href="./docs/index.html">Docs Portal</a>
+          <button id="artLocalizedJourneyBtn" type="button" class="btn">The Art Localized â€” Training</button>
+          <div id="luminaJourneyLaunch" style="display:grid; gap:10px;">
+  <button id="luminaJourneyBtn" type="button" class="btn btn--primary">Lumina Revenue Lane</button>
+  <a class="btn" id="luminaStartBtn" href="./episodes/lumina_rev_101/index.html">Start EP-LUM-101</a>
+  <div id="luminaJourneyNote" class="tiny" style="padding:10px 12px; border-radius:14px; border:1px solid rgba(255,196,90,0.24); background:rgba(255,196,90,0.08); color:rgba(255,240,210,0.92);">
+    Lumina Revenue is open now on the Playlist. Golden Path is still recommended, but it is no longer a blocker.
+  </div>
+</div>
+          <a class="btn" href="./docs/index.html">Reference Docs</a>
         </div>
-        <details style="margin-top:14px; border-top:1px solid var(--stroke); padding-top:14px;">
-          <summary class="tiny" style="cursor:pointer; color: rgba(248,223,169,0.95);">Maintainers (Internal links)</summary>
-          <div style="display:grid; gap:10px; margin-top:10px;">
-            <a class="btn" href="./training_missions/tr_001_golden_path/index.html">TR-001 Missions (Internal)</a>
-            <a class="btn" href="./seed_builder_studio/seed_orchard_ui/index.html">Seed Orchard (Internal)</a>
-            <a class="btn" href="./docs/index.html">Docs Portal (Governance + Raw)</a>
-          </div>
-        </details>
         <div style="margin-top:14px; padding-top:14px; border-top:1px solid var(--stroke);">
           <div class="k">Badges</div>
           <div id="badgeList" class="chips" style="margin-top:10px;">
@@ -463,11 +503,8 @@
         </div>
         <div style="margin-top:14px; padding-top:14px; border-top:1px solid var(--stroke);">
           <div class="k">Insights</div>
-          <div id="insights" class="tiny muted" style="margin-top:10px;">Loading…</div>
+          <div id="insights" class="tiny muted" style="margin-top:10px;">Loadingâ€¦</div>
         </div>
-        <p class="tiny" style="margin:12px 0 0;">
-          Run via `python -m http.server 8080` for best results (fetch + JSON).
-        </p>
       </aside>
     </section>
   </main>
@@ -742,7 +779,7 @@
           .map((b) => {
             const label = b?.label || b?.id || "Badge";
             const when = b?.issuedAt ? new Date(b.issuedAt).toLocaleDateString() : "";
-            return `<span class="chip chip--badge" title="${escapeHtml(b?.id || "")}"><b style="font-family:var(--mono);">BADGE</b> ${escapeHtml(label)}${when ? ` • ${escapeHtml(when)}` : ""}</span>`;
+            return `<span class="chip chip--badge" title="${escapeHtml(b?.id || "")}"><b style="font-family:var(--mono);">BADGE</b> ${escapeHtml(label)}${when ? ` â€¢ ${escapeHtml(when)}` : ""}</span>`;
           })
           .join("");
 
@@ -769,7 +806,7 @@
               <span class="badge-body">
                 <b style="font-family:var(--mono);">BADGE</b>
                 <span>${escapeHtml(label)}</span>
-                ${when ? `<span class="badge-when">• ${escapeHtml(when)}</span>` : ""}
+                ${when ? `<span class="badge-when">â€¢ ${escapeHtml(when)}</span>` : ""}
               </span>
             </span>
           `;
@@ -788,7 +825,7 @@
       const journeyId = Loop.getActiveJourneyId?.() || "p1_golden_path";
       const wf2 = Loop.loadWorkflowV2?.(journeyId) || null;
       if (!wf2 || typeof wf2 !== "object") {
-        el.textContent = `Journey: ${journeyId} • No workflow yet.`;
+        el.textContent = `Journey: ${journeyId} â€¢ No workflow yet.`;
         return;
       }
 
@@ -801,26 +838,31 @@
       const last = done[0] || null;
       const when = last?.doneAt ? new Date(last.doneAt).toLocaleString() : "";
       const updated = wf2.updatedAt ? new Date(wf2.updatedAt).toLocaleString() : "";
-      const pub = last?.meta?.publishedUrl ? ` • URL: ${String(last.meta.publishedUrl).slice(0, 72)}` : "";
-      el.textContent = `Journey: ${journeyId} • ${last ? `Last done: ${last.id}` : "Last done: (none)"}${when ? ` • ${when}` : ""}${updated ? ` • Updated: ${updated}` : ""}${pub}`;
+      const pub = last?.meta?.publishedUrl ? ` â€¢ URL: ${String(last.meta.publishedUrl).slice(0, 72)}` : "";
+      el.textContent = `Journey: ${journeyId} â€¢ ${last ? `Last done: ${last.id}` : "Last done: (none)"}${when ? ` â€¢ ${when}` : ""}${updated ? ` â€¢ Updated: ${updated}` : ""}${pub}`;
     }
 
-    const GOLDEN_FALLBACK_CONFIG = {
-      journeys: [
-        {
-          id: "p1_golden_path",
-          label: "P1: Golden Path",
-          steps: [
-            { id: "ep001_gates", label: "EP-001 Gates", href: "episodes/welcome_to_bytecast/index.html" },
-            { id: "tr001_golden_path", label: "Training (TR-001)", href: "training_missions/tr_001_golden_path/index.html", depends_on: ["ep001_gates"] },
-            { id: "seed_export_v1", label: "Seed Export", href: "seed_builder_studio/seed_orchard_ui/index.html", depends_on: ["tr001_golden_path"] },
-            { id: "seed_publish_v1", label: "Publish Link", href: "seed_builder_studio/seed_orchard_ui/index.html", depends_on: ["seed_export_v1"] },
-            { id: "badge_p1_golden_path_v1", label: "Badge", href: "seed_bytecast.html", depends_on: ["seed_publish_v1"], complete_when: { type: "badge_has", badge_id: "p1_golden_path_v1" } }
-          ],
-          badges: [{ id: "p1_golden_path_v1", label: "P1: Golden Path", requires: ["ep001_gates", "tr001_golden_path", "seed_export_v1", "seed_publish_v1"], minProof: { "seed_publish_v1": ["publishedUrl"] } }]
-        }
-      ]
-    };
+    function learningStepLabel(label) {
+      return String(label || "Next step")
+        .replace(/\bGates\b/g, "Progress Check")
+        .replace(/\bSeed Export\b/g, "Practice Artifact")
+        .replace(/\bPublish Link\b/g, "Published Link")
+        .replace(/\bBadge\b/g, "Badge Review")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function learningCtaLabel(cta, fallbackLabel = "Next step") {
+      const cleaned = String(cta || "")
+        .replace(/^Legendary:\s*/i, "")
+        .trim();
+      return cleaned || `Open ${learningStepLabel(fallbackLabel)}`;
+    }
+
+    function learningStatus(done, readyNow) {
+      if (done) return "Done";
+      return readyNow ? "Next" : "Later";
+    }
 
     async function renderGoldenPath() {
       const label = $("#goldenLabel");
@@ -838,33 +880,52 @@
         const badgeOk = loadBadges().some((b) => b && b.id === "p1_golden_path_v1");
 
         const funnel = [
-          `Listen ${wf.bytecast?.listen ? "OK" : "TODO"}`,
-          `Slide ${wf.bytecast?.slide ? "OK" : "TODO"}`,
-          `Engage ${wf.bytecast?.interact ? "OK" : "TODO"}`,
-          `Training ${trainingOk ? "OK" : (bcOk ? "TODO" : "LOCKED")}`,
-          `Seed ${seedOk ? "OK" : (trainingOk ? "TODO" : "LOCKED")}`,
-          `Badge ${badgeOk ? "OK" : (eligible ? "TODO" : "LOCKED")}`,
-        ].join(" • ");
-        $("#heroSub").textContent = `Playlist hub for the journey: Listen -> Slide -> Engage -> Training -> Seed -> Publish -> Badge. (${funnel})`;
+          `Listen ${learningStatus(Boolean(wf.bytecast?.listen), true)}`,
+          `Slides ${learningStatus(Boolean(wf.bytecast?.slide), true)}`,
+          `Engage ${learningStatus(Boolean(wf.bytecast?.interact), true)}`,
+          `Mission ${learningStatus(trainingOk, bcOk)}`,
+          `Practice ${learningStatus(seedOk, trainingOk)}`,
+          `Badge ${learningStatus(badgeOk, eligible)}`,
+        ].join(" â€¢ ");
+        $("#heroSub").textContent = `Your learning path: ${funnel}`;
 
         if (label) label.textContent = "Golden Path";
-        if (why) why.textContent = "Complete the loop: EP-001 -> Training -> Seed -> Publish -> Badge.";
+        if (why) why.textContent = "Complete EP-001 to EP-004, then TR-001A, Practice Builder, Publish, and Badge.";
         if (btn) {
-          btn.textContent = badgeOk ? "Legendary: View Badge" : "Legendary: Continue Journey";
-          btn.setAttribute("href", bcOk ? (trainingOk ? (seedOk ? "./seed_bytecast.html" : "./seed_builder_studio/seed_orchard_ui/index.html") : "./training_missions/tr_001_golden_path/index.html") : "./episodes/welcome_to_bytecast/index.html");
+          btn.textContent = badgeOk ? "View Badge" : "Continue Learning";
+          btn.setAttribute("href", bcOk ? (trainingOk ? (seedOk ? "./seed_bytecast.html" : "./episodes/seed_builder_studio/seed_orchard_ui/index.html") : "./episodes/training_missions/tr_001a_day1_foundations/index.html") : "./episodes/welcome_to_bytecast/index.html");
         }
         renderBadges();
         renderInsights();
         return;
       }
 
-      const config = await Loop.loadJourneyConfig(JOURNEY_URL, GOLDEN_FALLBACK_CONFIG);
+      const config = await Loop.loadJourneyConfig(JOURNEY_URL, null);
       const journeys = Array.isArray(config?.journeys) ? config.journeys : [];
       const activeId = Loop.getActiveJourneyId?.() || journeys.find((j) => j && j.isDefault)?.id || journeys[0]?.id || "p1_golden_path";
-      Loop.setActiveJourneyId?.(activeId);
+      if (activeId) Loop.setActiveJourneyId?.(activeId);
       const wf2 = Loop.ensureWorkflowV2(activeId);
-      const journey = Loop.getJourneyById(config, activeId) || Loop.getJourneyById(GOLDEN_FALLBACK_CONFIG, "p1_golden_path");
-      if (!journey) return;
+      const journey = Loop.getJourneyById(config, activeId);
+      if (!journey) {
+        const fallbackHref = Loop.resolveFromRoot?.("episodes/welcome_to_bytecast/index.html") || "./episodes/welcome_to_bytecast/index.html";
+        if (label) label.textContent = "Journey config unavailable";
+        if (why) why.textContent = "The central learning path could not be loaded. Refresh this page or start from EP-001 while the config is restored.";
+        if (btn) {
+          btn.textContent = "Open EP-001";
+          btn.setAttribute("href", fallbackHref);
+        }
+        $("#heroSub").textContent = "Learning path status is temporarily unavailable.";
+        renderBadges();
+        renderInsights();
+        if (LoopUI) {
+          await LoopUI.renderJourneyMap({
+            container: document.getElementById("journeyMap"),
+            configUrl: JOURNEY_URL,
+            surface: "playlist",
+          });
+        }
+        return;
+      }
 
       const badgeResult = Loop.ensureJourneyBadges(journey, wf2);
       if ((badgeResult?.minted || badgeResult?.marked) && Loop.saveWorkflowV2) {
@@ -873,20 +934,27 @@
 
       const next = Loop.getNextStep(journey, wf2);
       const nextHref = next?.href ? Loop.resolveFromRoot(next.href) : Loop.resolveFromRoot("episodes/welcome_to_bytecast/index.html");
-      const nextLabel = next?.label || "Next step";
+      const nextLabel = learningStepLabel(next?.label || "Next step");
       const done = journey.steps?.every?.((s) => Loop.isStepComplete(journey, s, wf2));
 
       if (label) label.textContent = done ? `${journey.label}: complete` : `${journey.label}: ${nextLabel}`;
-      if (why) why.textContent = done ? "Loop complete. Badge lives in this browser." : (journey.description || "Playlist -> EP-001 -> Training -> Seed -> Badge.");
+      if (why) {
+        if (done) {
+          why.textContent = "This learning path is complete. Your badge is saved in this browser.";
+        } else {
+          const base = journey.description || "Complete the lesson steps, mission, practice artifact, publish step, and badge.";
+          why.textContent = `${base} Earlier steps must be complete before later steps open.`;
+        }
+      }
       if (btn) {
-        btn.textContent = next?.cta || "Legendary: Continue Journey";
+        btn.textContent = learningCtaLabel(next?.cta, nextLabel);
         btn.setAttribute("href", nextHref);
       }
 
       const funnel = journey.steps
-        .map((s) => `${s.label} ${Loop.isStepComplete(journey, s, wf2) ? "OK" : (Loop.isStepUnlocked(journey, s, wf2) ? "TODO" : "LOCKED")}`)
-        .join(" • ");
-      $("#heroSub").textContent = `Playlist hub for the journey: Listen -> Slide -> Engage -> Training -> Seed -> Publish -> Badge. (${funnel})`;
+        .map((s) => `${learningStepLabel(s.label)} ${learningStatus(Loop.isStepComplete(journey, s, wf2), Loop.isStepUnlocked(journey, s, wf2))}`)
+        .join(" â€¢ ");
+      $("#heroSub").textContent = `Your learning path: ${funnel}`;
 
       renderBadges();
       renderInsights();
@@ -955,8 +1023,15 @@
       });
     }
 
+    function episodeHref(primaryPath) {
+      const p = String(primaryPath || "").trim();
+      if (!p) return "./";
+      if (/\.html?$/i.test(p)) return `./${p}`.replaceAll("//", "/");
+      return `./${p}/index.html`.replaceAll("//", "/");
+    }
+
     function renderEpisode(ep, profile, completion) {
-      const href = `./${ep.primary_path}/index.html`.replaceAll("//", "/");
+      const href = episodeHref(ep.primary_path);
       const code = ep.episode_code || profile?.episode?.code || "EP";
       const title = ep.title || profile?.episode?.title || ep.slug || "Episode";
       const date = profile?.episode?.date || "";
@@ -978,7 +1053,7 @@
         <article class="ep" data-ep-href="${escapeHtml(href)}">
           <div class="ep__head">
             <div>
-              <p class="k" style="margin:0;">${escapeHtml(code)} • ${escapeHtml(statusChip)}</p>
+              <p class="k" style="margin:0;">${escapeHtml(code)} â€¢ ${escapeHtml(statusChip)}</p>
               <h3 class="ep__title">${escapeHtml(title)}</h3>
               <div class="ep__meta">
                 ${date ? `<span class="chip"><b style="font-family:var(--mono);">DATE</b> ${escapeHtml(date)}</span>` : ""}
@@ -987,7 +1062,7 @@
                 <span class="chip">${escapeHtml(questLine)}</span>
                 <span class="chip">${escapeHtml(quizLine)}</span>
               </div>
-              ${tags.length ? `<p class="tiny" style="margin:8px 0 0;"><b style="font-family:var(--mono);">TAGS</b> ${escapeHtml(tags.join(" • "))}</p>` : ""}
+              ${tags.length ? `<p class="tiny" style="margin:8px 0 0;"><b style="font-family:var(--mono);">TAGS</b> ${escapeHtml(tags.join(" â€¢ "))}</p>` : ""}
               ${summary ? `<p class="muted" style="margin:10px 0 0;">${escapeHtml(summary)}</p>` : ""}
             </div>
             <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;">
@@ -1000,6 +1075,53 @@
       `;
     }
 
+    function getRegistrySeriesMap(registry) {
+      const map = new Map();
+      const series = Array.isArray(registry?.series) ? registry.series : [];
+      for (const item of series) {
+        const id = String(item?.id || "").trim();
+        if (!id) continue;
+        map.set(id, item);
+      }
+      return map;
+    }
+
+    function getEpisodeSeriesMeta(ep, seriesMap) {
+      const id = String(ep?.series_id || "").trim();
+      if (!id) {
+        return { id: "ungrouped", name: "Ungrouped", description: "", sort_order: 999 };
+      }
+      const meta = seriesMap.get(id) || {};
+      return {
+        id,
+        name: String(ep?.series_name || meta?.name || "Ungrouped"),
+        description: String(meta?.description || ""),
+        sort_order: Number.isFinite(Number(meta?.sort_order)) ? Number(meta.sort_order) : 999,
+      };
+    }
+
+    function getEpisodeSequence(ep) {
+      const numeric = Number(ep?.sequence);
+      return Number.isFinite(numeric) ? numeric : 999;
+    }
+
+    function renderSeriesBlock(meta, items) {
+      return `
+        <section class="series-block" data-series-id="${escapeHtml(meta.id)}">
+          <div class="series-block__head">
+            <div>
+              <h3 class="series-block__title">${escapeHtml(meta.name)}</h3>
+              ${meta.description ? `<p class="series-block__desc">${escapeHtml(meta.description)}</p>` : ""}
+            </div>
+            <span class="series-block__count">${items.length} episode${items.length === 1 ? "" : "s"}</span>
+          </div>
+          <div class="series-block__episodes">
+            ${items.map((item) => renderEpisode(item.ep, item.profile, item.completion)).join("")}
+          </div>
+        </section>
+      `;
+    }
+
     async function render() {
       const last = getLastEpisode();
       const resumeBtn = $("#resumeBtn");
@@ -1009,7 +1131,7 @@
         resumeBtn.setAttribute("href", hrefAbs);
         resumeBtn.removeAttribute("aria-disabled");
         resumeBtn.classList.remove("is-disabled");
-        resumeHint.textContent = `Resume: ${String(last.href).replace(/^\.\//, "")} • last visited ${formatWhen(last.time)}`;
+        resumeHint.textContent = `Resume: ${String(last.href).replace(/^\.\//, "")} â€¢ last visited ${formatWhen(last.time)}`;
       } else {
         // Keep the UI honest: when there is no resume, do not provide a clickable nav.
         resumeBtn.setAttribute("href", "#");
@@ -1028,7 +1150,7 @@
           episodes: [
             { slug: "welcome_to_bytecast", episode_code: "EP-001", title: "Welcome to ByteCast", primary_path: "episodes/welcome_to_bytecast", status: "active" },
             { slug: "aerovista_7_division_overview", episode_code: "EP-002", title: "AeroVista Overview", primary_path: "episodes/aerovista_7_division_overview", status: "active" },
-            { slug: "eos_2026_02_09", episode_code: "EP-EOS-2026-02-09", title: "EoS ByteCast — Platform Update", primary_path: "episodes/eos_2026_02_09", status: "active" }
+            { slug: "eos_2026_02_09", episode_code: "EP-EOS-2026-02-09", title: "EoS ByteCast â€” Platform Update", primary_path: "episodes/eos_2026_02_09", status: "active" }
           ]
         };
       }
@@ -1055,6 +1177,7 @@
         }
       }));
 
+      const seriesMap = getRegistrySeriesMap(registry);
       const computed = profiles.map(({ ep, profile }) => {
         const code = ep.episode_code || profile?.episode?.code || "";
         const epId = toId(code || ep.slug);
@@ -1062,9 +1185,31 @@
         return { ep, profile, completion, epId };
       });
 
-      computed.sort((a, b) => (a.ep.episode_code || "").localeCompare(b.ep.episode_code || ""));
+      computed.sort((a, b) => {
+        const leftMeta = getEpisodeSeriesMeta(a.ep, seriesMap);
+        const rightMeta = getEpisodeSeriesMeta(b.ep, seriesMap);
+        if (leftMeta.sort_order !== rightMeta.sort_order) {
+          return leftMeta.sort_order - rightMeta.sort_order;
+        }
+        const sequenceDiff = getEpisodeSequence(a.ep) - getEpisodeSequence(b.ep);
+        if (sequenceDiff !== 0) {
+          return sequenceDiff;
+        }
+        return String(a.ep.episode_code || "").localeCompare(String(b.ep.episode_code || ""));
+      });
 
-      listEl.innerHTML = computed.map((x) => renderEpisode(x.ep, x.profile, x.completion)).join("");
+      const grouped = new Map();
+      for (const item of computed) {
+        const meta = getEpisodeSeriesMeta(item.ep, seriesMap);
+        if (!grouped.has(meta.id)) {
+          grouped.set(meta.id, { meta, items: [] });
+        }
+        grouped.get(meta.id).items.push(item);
+      }
+
+      listEl.innerHTML = [...grouped.values()]
+        .map((group) => renderSeriesBlock(group.meta, group.items))
+        .join("");
 
       // Next recommended: lowest completion, then earliest episode code.
       const next = computed
@@ -1072,9 +1217,9 @@
         .sort((a, b) => (a.completion.pct - b.completion.pct) || (String(a.ep.episode_code).localeCompare(String(b.ep.episode_code))))[0];
 
       if (next) {
-        const nextHref = `./${next.ep.primary_path}/index.html`.replaceAll("//", "/");
+        const nextHref = episodeHref(next.ep.primary_path);
         $("#nextBtn").setAttribute("href", nextHref);
-        $("#nextBanner").querySelector(".label").textContent = `Next recommended: ${next.ep.episode_code || "EP"} • ${next.ep.title || next.ep.slug}`;
+        $("#nextBanner").querySelector(".label").textContent = `Next recommended: ${next.ep.episode_code || "EP"} â€¢ ${next.ep.title || next.ep.slug}`;
         $("#nextWhy").textContent = `Completion: ${next.completion.pct}%. We recommend the lowest-completion active episode.`;
       }
 
@@ -1091,11 +1236,39 @@
 
     wireTheme();
 
+    const luminaBtn = document.getElementById("luminaJourneyBtn");
+if (luminaBtn && Loop) {
+  luminaBtn.addEventListener("click", () => {
+    try { Loop.setActiveJourneyId?.("lumina_revenue_v1"); } catch {}
+    void renderGoldenPath();
+    const map = document.getElementById("journeyMap");
+    if (map && typeof map.scrollIntoView === "function") {
+      map.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
+}
+
     const apparelBtn = document.getElementById("apparelJourneyBtn");
     if (apparelBtn && Loop) {
       apparelBtn.addEventListener("click", () => {
         try {
           Loop.setActiveJourneyId?.("apparel_onboarding_v1");
+        } catch {
+          // ignore
+        }
+        void renderGoldenPath();
+        const map = document.getElementById("journeyMap");
+        if (map && typeof map.scrollIntoView === "function") {
+          map.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    }
+
+    const artLocalizedBtn = document.getElementById("artLocalizedJourneyBtn");
+    if (artLocalizedBtn && Loop) {
+      artLocalizedBtn.addEventListener("click", () => {
+        try {
+          Loop.setActiveJourneyId?.("art_localized_training");
         } catch {
           // ignore
         }
@@ -1123,3 +1296,6 @@
   </script>
 </body>
 </html>
+
+
+

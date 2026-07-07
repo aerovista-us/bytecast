@@ -1,11 +1,75 @@
 {
   "schema": "episode-registry-v1",
-  "updated_on": "2026-02-08",
+  "updated_on": "2026-07-07",
   "policy": {
-  "folder_naming": "content-slug",
-  "pattern": "episodes/<content_slug>",
-  "numeric_ep_folder_creation": "frozen"
+    "folder_naming": "content-slug",
+    "pattern": "episodes/<content_slug>",
+    "numeric_ep_folder_creation": "frozen"
   },
+  "series": [
+    {
+      "id": "core_day1",
+      "name": "Core Day 1",
+      "description": "Default ByteCast onboarding from EP-001 through EP-004.",
+      "journey_id": "p1_golden_path",
+      "start_path": "episodes/welcome_to_bytecast",
+      "sort_order": 10
+    },
+    {
+      "id": "infographic_training",
+      "name": "Infographic Training",
+      "description": "Image-first overlay lessons built from the infographic source pack.",
+      "start_path": "episodes/av_ecosystem_map_pilot",
+      "sort_order": 20
+    },
+    {
+      "id": "av_apparel_onboarding",
+      "name": "AV Apparel Onboarding",
+      "description": "Three-episode onboarding lane for apparel culture, catalog work, and operating standards.",
+      "journey_id": "apparel_onboarding_v1",
+      "start_path": "episodes/av_apparel_ep1_welcome",
+      "sort_order": 30
+    },
+    {
+      "id": "art_localized_training",
+      "name": "The Art Localized",
+      "description": "Five-episode creative collaboration and partnership training lane.",
+      "journey_id": "art_localized_training",
+      "start_path": "episodes/art_localized_ep0",
+      "sort_order": 40
+    },
+    {
+      "id": "contributor_onboarding",
+      "name": "Contributor Onboarding",
+      "description": "Hub plus five supporting episodes for contributor expectations, lanes, and readiness.",
+      "journey_id": "contributor_onboarding_training",
+      "start_path": "episodes/contributor.onboarding",
+      "sort_order": 50
+    },
+    {
+      "id": "lumina_revenue_lane",
+      "name": "Lumina Revenue Lane",
+      "description": "Six-episode Lumina revenue series that leads into the revenue routing mission.",
+      "journey_id": "lumina_revenue_v1",
+      "start_path": "episodes/lumina_rev_101",
+      "sort_order": 60
+    },
+    {
+      "id": "shareholder_season1",
+      "name": "Shareholder Season 1 — Briefing Series",
+      "description": "Legacy audio-synced briefing players for shareholder narrative (S1-EP-01 through S1-EP-06). Side lane — not Day 1 onboarding.",
+      "journey_id": "shareholder_season1_v1",
+      "start_path": "bytecast-season1.html",
+      "sort_order": 85
+    },
+    {
+      "id": "internal_recap",
+      "name": "Internal Recap",
+      "description": "Non-default platform recap and internal update surfaces.",
+      "start_path": "episodes/eos_2026_02_09",
+      "sort_order": 90
+    }
+  ],
   "episodes": [
     {
       "slug": "welcome_to_bytecast",
@@ -15,6 +79,9 @@
       "legacy_paths": [
         "ep1"
       ],
+      "series_id": "core_day1",
+      "series_name": "Core Day 1",
+      "sequence": 1,
       "status": "active",
       "publishable": true
     },
@@ -26,32 +93,396 @@
       "legacy_paths": [
         "ep3"
       ],
+      "series_id": "core_day1",
+      "series_name": "Core Day 1",
+      "sequence": 2,
+      "status": "active",
+      "publishable": true
+    },
+    {
+      "slug": "the_main_doors",
+      "episode_code": "EP-003",
+      "title": "The Main Doors - Where to Go for Which Job",
+      "primary_path": "episodes/the_main_doors",
+      "legacy_paths": [],
+      "series_id": "core_day1",
+      "series_name": "Core Day 1",
+      "sequence": 3,
+      "status": "active",
+      "publishable": true
+    },
+    {
+      "slug": "current_truth_basics",
+      "episode_code": "EP-004",
+      "title": "Current Truth Basics - Visibility, Ownership, and Trust",
+      "primary_path": "episodes/current_truth_basics",
+      "legacy_paths": [],
+      "series_id": "core_day1",
+      "series_name": "Core Day 1",
+      "sequence": 4,
+      "status": "active",
+      "publishable": true
+    },
+    {
+      "slug": "contributing_non_coders",
+      "episode_code": "EP-005",
+      "title": "Contributor Onboarding Hub - No-Code First",
+      "primary_path": "episodes/contributor.onboarding",
+      "legacy_paths": [
+        "contributing_non_coders"
+      ],
+      "series_id": "contributor_onboarding",
+      "series_name": "Contributor Onboarding",
+      "sequence": 0,
+      "status": "active",
+      "publishable": true
+    },
+    {
+      "slug": "av_ecosystem_map_pilot",
+      "episode_code": "EP-IG-001",
+      "title": "AeroVista App Ecosystem Map - Infographic Training Pilot",
+      "primary_path": "episodes/av_ecosystem_map_pilot",
+      "legacy_paths": [],
+      "series_id": "infographic_training",
+      "series_name": "Infographic Training",
+      "sequence": 1,
       "status": "active",
       "publishable": true
     },
     {
       "slug": "eos_2026_02_09",
       "episode_code": "EP-EOS-2026-02-09",
-      "title": "EoS ByteCast — Seed Orchard ZIP Export + Multi-Journey Quest Map",
+      "title": "EoS ByteCast - Seed Orchard ZIP Export + Multi-Journey Quest Map",
       "primary_path": "episodes/eos_2026_02_09",
       "legacy_paths": [],
+      "series_id": "internal_recap",
+      "series_name": "Internal Recap",
+      "sequence": 1,
       "status": "active",
       "publishable": false
     },
     {
-      "slug": "contributing_non_coders",
-      "episode_code": "EP-003",
-      "title": "How To Contribute (No-Code First)",
-      "primary_path": "",
-      "intended_path": "episodes/contributing_non_coders",
+      "slug": "av_apparel_ep1_welcome",
+      "episode_code": "EP-APP-001",
+      "title": "AV Apparel Welcome - Culture + First Win",
+      "primary_path": "episodes/av_apparel_ep1_welcome",
       "legacy_paths": [],
-      "status": "planned",
-      "publishable": false
+      "series_id": "av_apparel_onboarding",
+      "series_name": "AV Apparel Onboarding",
+      "sequence": 1,
+      "status": "active",
+      "publishable": true
+    },
+    {
+      "slug": "av_apparel_ep2_catalog",
+      "episode_code": "EP-APP-002",
+      "title": "Catalog Maintainer Bootcamp - Your Day-to-Day",
+      "primary_path": "episodes/av_apparel_ep2_catalog",
+      "legacy_paths": [],
+      "series_id": "av_apparel_onboarding",
+      "series_name": "AV Apparel Onboarding",
+      "sequence": 2,
+      "status": "active",
+      "publishable": true
+    },
+    {
+      "slug": "av_apparel_ep3_ops_standards",
+      "episode_code": "EP-APP-003",
+      "title": "Apparel Ops Standards - Naming, Copy, Collections, QA, Access",
+      "primary_path": "episodes/av_apparel_ep3_ops_standards",
+      "legacy_paths": [],
+      "series_id": "av_apparel_onboarding",
+      "series_name": "AV Apparel Onboarding",
+      "sequence": 3,
+      "status": "active",
+      "publishable": true
+    },
+    {
+      "slug": "art_localized_ep0",
+      "episode_code": "ART-EP-0",
+      "title": "The Art Localized - Ep 0 - Collaboration",
+      "primary_path": "episodes/art_localized_ep0",
+      "legacy_paths": [],
+      "series_id": "art_localized_training",
+      "series_name": "The Art Localized",
+      "sequence": 0,
+      "status": "active",
+      "publishable": true
+    },
+    {
+      "slug": "art_localized_ep1",
+      "episode_code": "ART-EP-1",
+      "title": "The Art Localized - Ep 1 - Divisions",
+      "primary_path": "episodes/art_localized_ep1",
+      "legacy_paths": [],
+      "series_id": "art_localized_training",
+      "series_name": "The Art Localized",
+      "sequence": 1,
+      "status": "active",
+      "publishable": true
+    },
+    {
+      "slug": "art_localized_ep2",
+      "episode_code": "ART-EP-2",
+      "title": "The Art Localized - Ep 2 - Partnership Tiers",
+      "primary_path": "episodes/art_localized_ep2",
+      "legacy_paths": [],
+      "series_id": "art_localized_training",
+      "series_name": "The Art Localized",
+      "sequence": 2,
+      "status": "active",
+      "publishable": true
+    },
+    {
+      "slug": "art_localized_ep3",
+      "episode_code": "ART-EP-3",
+      "title": "The Art Localized - Ep 3 - Amplification",
+      "primary_path": "episodes/art_localized_ep3",
+      "legacy_paths": [],
+      "series_id": "art_localized_training",
+      "series_name": "The Art Localized",
+      "sequence": 3,
+      "status": "active",
+      "publishable": true
+    },
+    {
+      "slug": "art_localized_ep4",
+      "episode_code": "ART-EP-4",
+      "title": "The Art Localized - Ep 4 - Your Role",
+      "primary_path": "episodes/art_localized_ep4",
+      "legacy_paths": [],
+      "series_id": "art_localized_training",
+      "series_name": "The Art Localized",
+      "sequence": 4,
+      "status": "active",
+      "publishable": true
+    },
+    {
+      "slug": "contributor_onboarding_ep0",
+      "episode_code": "CO-EP-0",
+      "title": "Contributor Onboarding - Ep 0 - What AeroVista Is",
+      "primary_path": "episodes/contributor_onboarding_ep0",
+      "legacy_paths": [],
+      "series_id": "contributor_onboarding",
+      "series_name": "Contributor Onboarding",
+      "sequence": 1,
+      "status": "active",
+      "publishable": true
+    },
+    {
+      "slug": "contributor_onboarding_ep1",
+      "episode_code": "CO-EP-1",
+      "title": "Contributor Onboarding - Ep 1 - Fit and Mutual Expectations",
+      "primary_path": "episodes/contributor_onboarding_ep1",
+      "legacy_paths": [],
+      "series_id": "contributor_onboarding",
+      "series_name": "Contributor Onboarding",
+      "sequence": 2,
+      "status": "active",
+      "publishable": true
+    },
+    {
+      "slug": "contributor_onboarding_ep2",
+      "episode_code": "CO-EP-2",
+      "title": "Contributor Onboarding - Ep 2 - Lanes and the Honest Helper",
+      "primary_path": "episodes/contributor_onboarding_ep2",
+      "legacy_paths": [],
+      "series_id": "contributor_onboarding",
+      "series_name": "Contributor Onboarding",
+      "sequence": 3,
+      "status": "active",
+      "publishable": true
+    },
+    {
+      "slug": "contributor_onboarding_ep3",
+      "episode_code": "CO-EP-3",
+      "title": "Contributor Onboarding - Ep 3 - Work Orders and Definition of Done",
+      "primary_path": "episodes/contributor_onboarding_ep3",
+      "legacy_paths": [],
+      "series_id": "contributor_onboarding",
+      "series_name": "Contributor Onboarding",
+      "sequence": 4,
+      "status": "active",
+      "publishable": true
+    },
+    {
+      "slug": "contributor_onboarding_ep4",
+      "episode_code": "CO-EP-4",
+      "title": "Contributor Onboarding - Ep 4 - Crew Check and Final Readiness",
+      "primary_path": "episodes/contributor_onboarding_ep4",
+      "legacy_paths": [],
+      "series_id": "contributor_onboarding",
+      "series_name": "Contributor Onboarding",
+      "sequence": 5,
+      "status": "active",
+      "publishable": true
+    },
+    {
+      "slug": "lumina_rev_101",
+      "episode_code": "EP-LUM-101",
+      "title": "Lumina Owns Revenue Messaging",
+      "primary_path": "episodes/lumina_rev_101",
+      "legacy_paths": [],
+      "series_id": "lumina_revenue_lane",
+      "series_name": "Lumina Revenue Lane",
+      "sequence": 1,
+      "status": "active",
+      "publishable": true
+    },
+    {
+      "slug": "lumina_rev_102",
+      "episode_code": "EP-LUM-102",
+      "title": "Know the Board",
+      "primary_path": "episodes/lumina_rev_102",
+      "legacy_paths": [],
+      "series_id": "lumina_revenue_lane",
+      "series_name": "Lumina Revenue Lane",
+      "sequence": 2,
+      "status": "active",
+      "publishable": true
+    },
+    {
+      "slug": "lumina_rev_103",
+      "episode_code": "EP-LUM-103",
+      "title": "Brand by Division",
+      "primary_path": "episodes/lumina_rev_103",
+      "legacy_paths": [],
+      "series_id": "lumina_revenue_lane",
+      "series_name": "Lumina Revenue Lane",
+      "sequence": 3,
+      "status": "active",
+      "publishable": true
+    },
+    {
+      "slug": "lumina_rev_104",
+      "episode_code": "EP-LUM-104",
+      "title": "Find the Real Need",
+      "primary_path": "episodes/lumina_rev_104",
+      "legacy_paths": [],
+      "series_id": "lumina_revenue_lane",
+      "series_name": "Lumina Revenue Lane",
+      "sequence": 4,
+      "status": "active",
+      "publishable": true
+    },
+    {
+      "slug": "lumina_rev_105",
+      "episode_code": "EP-LUM-105",
+      "title": "Recommend the Right Path",
+      "primary_path": "episodes/lumina_rev_105",
+      "legacy_paths": [],
+      "series_id": "lumina_revenue_lane",
+      "series_name": "Lumina Revenue Lane",
+      "sequence": 5,
+      "status": "active",
+      "publishable": true
+    },
+    {
+      "slug": "lumina_rev_106",
+      "episode_code": "EP-LUM-106",
+      "title": "Turn Qualified Interest into Growth",
+      "primary_path": "episodes/lumina_rev_106",
+      "legacy_paths": [],
+      "series_id": "lumina_revenue_lane",
+      "series_name": "Lumina Revenue Lane",
+      "sequence": 6,
+      "status": "active",
+      "publishable": true
+    },
+    {
+      "slug": "shareholder_s1_ep01",
+      "episode_code": "S1-EP-01",
+      "title": "The AeroVista Universe",
+      "primary_path": "episodes/shareholder_s1_ep01",
+      "legacy_paths": [
+        "bytecast-ep01.html"
+      ],
+      "series_id": "shareholder_season1",
+      "series_name": "Shareholder Season 1 — Briefing Series",
+      "sequence": 1,
+      "status": "active",
+      "publishable": true,
+      "teaching_mode": "BriefingSync"
+    },
+    {
+      "slug": "shareholder_s1_ep02",
+      "episode_code": "S1-EP-02",
+      "title": "Service Portfolio",
+      "primary_path": "episodes/shareholder_s1_ep02",
+      "legacy_paths": [
+        "bytecast-ep02.html"
+      ],
+      "series_id": "shareholder_season1",
+      "series_name": "Shareholder Season 1 — Briefing Series",
+      "sequence": 2,
+      "status": "active",
+      "publishable": true,
+      "teaching_mode": "BriefingSync"
+    },
+    {
+      "slug": "shareholder_s1_ep03",
+      "episode_code": "S1-EP-03",
+      "title": "Documented Ecosystem",
+      "primary_path": "episodes/shareholder_s1_ep03",
+      "legacy_paths": [
+        "bytecast-ep03.html"
+      ],
+      "series_id": "shareholder_season1",
+      "series_name": "Shareholder Season 1 — Briefing Series",
+      "sequence": 3,
+      "status": "active",
+      "publishable": true,
+      "teaching_mode": "BriefingSync"
+    },
+    {
+      "slug": "shareholder_s1_ep04",
+      "episode_code": "S1-EP-04",
+      "title": "The Portable Ecosystem",
+      "primary_path": "episodes/shareholder_s1_ep04",
+      "legacy_paths": [
+        "bytecast-ep04.html"
+      ],
+      "series_id": "shareholder_season1",
+      "series_name": "Shareholder Season 1 — Briefing Series",
+      "sequence": 4,
+      "status": "active",
+      "publishable": true,
+      "teaching_mode": "BriefingSync"
+    },
+    {
+      "slug": "shareholder_s1_ep05",
+      "episode_code": "S1-EP-05",
+      "title": "Revenue & Growth Model",
+      "primary_path": "episodes/shareholder_s1_ep05",
+      "legacy_paths": [
+        "bytecast-ep05.html"
+      ],
+      "series_id": "shareholder_season1",
+      "series_name": "Shareholder Season 1 — Briefing Series",
+      "sequence": 5,
+      "status": "active",
+      "publishable": true,
+      "teaching_mode": "BriefingSync"
+    },
+    {
+      "slug": "shareholder_s1_ep06",
+      "episode_code": "S1-EP-06",
+      "title": "The Roadmap Forward",
+      "primary_path": "episodes/shareholder_s1_ep06",
+      "legacy_paths": [
+        "bytecast-ep06.html"
+      ],
+      "series_id": "shareholder_season1",
+      "series_name": "Shareholder Season 1 — Briefing Series",
+      "sequence": 6,
+      "status": "active",
+      "publishable": true,
+      "teaching_mode": "BriefingSync"
     },
     {
       "slug": "reserved_ep2_slot",
       "episode_code": "",
-      "title": "Retired legacy slot for ep2",
+      "title": "Retired Legacy Slot for ep2",
       "primary_path": "",
       "legacy_paths": [
         "ep2"
@@ -60,33 +491,6 @@
       "publishable": false,
       "retired_on": "2026-02-08",
       "archived_path": "_archive/phase4_retired_2026-02-08/ep2"
-    },
-    {
-      "slug": "av_apparel_ep1_welcome",
-      "episode_code": "EP-APP-001",
-      "title": "AV Apparel Welcome — Culture + First Win",
-      "primary_path": "episodes/av_apparel_ep1_welcome",
-      "legacy_paths": [],
-      "status": "active",
-      "publishable": true
-    },
-    {
-      "slug": "av_apparel_ep2_catalog",
-      "episode_code": "EP-APP-002",
-      "title": "Catalog Maintainer Bootcamp — Your Day-to-Day",
-      "primary_path": "episodes/av_apparel_ep2_catalog",
-      "legacy_paths": [],
-      "status": "active",
-      "publishable": true
-    },
-    {
-      "slug": "av_apparel_ep3_ops_standards",
-      "episode_code": "EP-APP-003",
-      "title": "Apparel Ops Standards — Naming, Copy, Collections, QA, Access",
-      "primary_path": "episodes/av_apparel_ep3_ops_standards",
-      "legacy_paths": [],
-      "status": "active",
-      "publishable": true
     }
   ]
 }

@@ -1,0 +1,26 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "teaching_mode": "BriefingSync",
+  "episode": {
+    "code": "S1-EP-01",
+    "title": "The AeroVista Universe",
+    "type": "briefing",
+    "date": "2026-07-06",
+    "runtime_target_minutes": 8,
+    "status": "active"
+  },
+  "content": {
+    "tags": ["shareholder", "briefing", "season1", "orientation"],
+    "summary_short": "Platform story and seven-division orientation for shareholders — audio-synced briefing player.",
+    "summary_long": "Shareholder Season 1 briefing. Legacy root player at bytecast-ep01.html. Side lane — not Day 1 EP-001 onboarding."
+  },
+  "media": {
+    "audio_files": [
+      {
+        "path": "../../EP01.aac",
+        "label": "Briefing audio (aac)",
+        "required": false
+      }
+    ]
+  }
+}

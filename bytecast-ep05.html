@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ByteCast Learning Player — EP05</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #020617;
+      --bg-elevated: #020617;
+      --bg-panel: #030712;
+      --bg-chip: #020617;
+      --border-subtle: rgba(148, 163, 184, 0.2);
+      --accent: #38bdf8;
+      --accent-strong: #0ea5e9;
+      --accent-2: #a855f7;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --danger: #fb7185;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Orbitron, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #020617 0, #020617 40%, #000 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+    }
+
+    .bytecast-shell {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    header {
+      border-radius: 16px;
+      padding: 16px 20px;
+      background: linear-gradient(
+        135deg,
+        rgba(56, 189, 248, 0.16),
+        rgba(168, 85, 247, 0.14)
+      );
+      border: 1px solid var(--border-subtle);
+      backdrop-filter: blur(12px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    header .title-block {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    header h1 {
+      font-size: 1.25rem;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    header h1 span.logo-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: radial-gradient(circle, var(--accent-strong), var(--accent-2));
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.9);
+    }
+
+    header .subtitle {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    header .episode-tag {
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.9);
+      white-space: nowrap;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.3fr);
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .slide-view {
+      border-radius: 18px;
+      border: 1px solid var(--border-subtle);
+      background: radial-gradient(
+          circle at top left,
+          rgba(56, 189, 248, 0.12),
+          transparent 55%
+        ),
+        radial-gradient(
+          circle at bottom right,
+          rgba(168, 85, 247, 0.14),
+          transparent 60%
+        ),
+        var(--bg-panel);
+      padding: 18px 18px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .slide-stage-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+      gap: 8px;
+    }
+
+    .slide-stage-header .pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 6px rgba(56, 189, 248, 0.7);
+    }
+
+    .slide-container {
+      position: relative;
+      flex: 1;
+      overflow: hidden;
+      border-radius: 14px;
+      margin-top: 4px;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 16px 18px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      opacity: 0;
+      transform: translateX(18px) translateY(6px) scale(0.98);
+      pointer-events: none;
+      transition:
+        opacity 260ms ease-out,
+        transform 260ms ease-out;
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: translateX(0) translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .slide::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        circle at top center,
+        rgba(15, 23, 42, 0.2),
+        transparent 55%
+      );
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .slide-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 720px) {
+      .slide-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .slide-header {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 4px;
+    }
+
+    .slide-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .slide-title .index-pill {
+      font-size: 0.8rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--muted);
+    }
+
+    .slide-subtitle {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .slide-body {
+      font-size: 0.9rem;
+    }
+
+    .slide-body p {
+      margin: 0 0 6px;
+      color: #cbd5f5;
+    }
+
+    .slide-body ul {
+      margin: 0;
+      padding-left: 16px;
+      list-style: none;
+    }
+
+    .slide-body li {
+      position: relative;
+      margin-bottom: 4px;
+      padding-left: 12px;
+    }
+
+    .slide-body li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.6em;
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 6px rgba(56, 189, 248, 0.8);
+    }
+
+    .slide-body strong {
+      color: var(--accent-strong);
+      font-weight: 600;
+    }
+
+    .slide-visual {
+      border-radius: 12px;
+      border: 1px dashed rgba(148, 163, 184, 0.4);
+      padding: 10px 12px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      background: rgba(15, 23, 42, 0.8);
+    }
+
+    .slide-visual-label {
+      text-transform: uppercase;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: rgba(148, 163, 184, 0.9);
+    }
+
+    .slide-visual-main {
+      font-size: 0.8rem;
+      color: #dbeafe;
+    }
+
+    .slide-visual-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 2px;
+    }
+
+    .slide-visual-tag {
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      font-size: 0.7rem;
+    }
+
+    .slide-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      gap: 12px;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      padding: 4px 10px;
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text);
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn[disabled] {
+      opacity: 0.4;
+      cursor: default;
+    }
+
+    .btn-primary {
+      border-color: var(--accent);
+      background: radial-gradient(
+        circle at top left,
+        rgba(56, 189, 248, 0.4),
+        rgba(15, 23, 42, 0.9)
+      );
+    }
+
+    .btn-icon {
+      font-size: 1rem;
+      line-height: 1;
+    }
+
+    .slide-index-text {
+      opacity: 0.8;
+    }
+
+    /* Right panel */
+
+    .info-panel {
+      border-radius: 18px;
+      border: 1px solid var(--border-subtle);
+      background: linear-gradient(
+          150deg,
+          rgba(15, 23, 42, 0.9),
+          rgba(15, 23, 42, 0.98)
+        );
+      padding: 14px 16px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .info-section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .info-section-header h2 {
+      font-size: 0.9rem;
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: rgba(209, 213, 219, 0.95);
+    }
+
+    .audio-shell {
+      border-radius: 12px;
+      padding: 10px;
+      background: radial-gradient(
+        circle at left,
+        rgba(56, 189, 248, 0.16),
+        rgba(15, 23, 42, 0.98)
+      );
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .audio-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .audio-meta-title {
+      font-weight: 500;
+      color: #e5e7eb;
+    }
+
+    .audio-meta-tag {
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      font-size: 0.75rem;
+    }
+
+    audio {
+      width: 100%;
+    }
+
+    .timeline {
+      border-radius: 12px;
+      padding: 8px 10px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      max-height: 220px;
+      overflow: auto;
+      font-size: 0.82rem;
+    }
+
+    .timeline-item {
+      padding: 6px 6px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      transition:
+        background 140ms ease-out,
+        border 140ms ease-out,
+        transform 120ms ease-out;
+      border: 1px solid transparent;
+    }
+
+    .timeline-item:hover {
+      background: rgba(15, 23, 42, 0.95);
+      border-color: rgba(148, 163, 184, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .timeline-item.active {
+      background: rgba(30, 64, 175, 0.6);
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.5);
+    }
+
+    .timeline-item-main {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .timeline-item-title {
+      font-size: 0.8rem;
+      color: #e5e7eb;
+    }
+
+    .timeline-item-sub {
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    .timeline-item-time {
+      font-size: 0.75rem;
+      color: rgba(226, 232, 240, 0.9);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .notes {
+      border-radius: 12px;
+      padding: 8px 10px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .notes h3 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: rgba(209, 213, 219, 0.95);
+      margin: 0 0 4px;
+    }
+
+    .notes p {
+      margin: 0 0 4px;
+    }
+
+    .notes ul {
+      margin: 4px 0 0;
+      padding-left: 16px;
+    }
+
+    footer {
+      margin-top: 6px;
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-align: right;
+      opacity: 0.7;
+    }
+
+    footer span.hotkey {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 1px 7px;
+      font-size: 0.7rem;
+      margin-left: 4px;
+    }
+  </style>
+</head>
+<body>
+  <style>
+    .s1-lane-banner {
+      margin: 0;
+      padding: 10px 16px;
+      background: rgba(255, 209, 102, 0.12);
+      border-bottom: 1px solid rgba(255, 209, 102, 0.35);
+      color: #ffe3a1;
+      font: 600 0.82rem/1.4 system-ui, sans-serif;
+      text-align: center;
+      position: relative;
+      z-index: 100;
+    }
+    .s1-lane-banner a { color: #7dd3fc; text-decoration: none; }
+    .s1-lane-banner a:hover { text-decoration: underline; }
+  </style>
+  <div class="s1-lane-banner" role="note">
+    Shareholder Season 1 briefing — not Day 1 onboarding.
+    <a href="bytecast-season1.html">Series portal</a> ·
+    <a href="episodes/welcome_to_bytecast/index.html">Start Day 1 (EP-001)</a>
+  </div>
+  <div class="bytecast-shell">
+    <header>
+      <div class="title-block">
+        <h1>
+          <span class="logo-dot"></span>
+          ByteCast Learning Environment
+        </h1>
+        <div class="subtitle">
+          EP05 breaks down how AeroVista generates revenue across seven divisions and why this model compounds shareholder value.
+        </div>
+      </div>
+      <div class="episode-tag">
+        EP05 · Revenue & Growth Model
+      </div>
+    </header>
+
+    <main class="layout">
+      <!-- LEFT: Slide Stage -->
+      <section class="slide-view">
+        <div class="slide-stage-header">
+          <div class="pill">
+            <span class="pill-dot"></span>
+            ByteCast Slide Stage
+          </div>
+          <div>Slides stay in sync with EP05.mp3 as it plays.</div>
+        </div>
+
+        <div class="slide-container" id="slideContainer">
+
+          <!-- Slide 1 -->
+          <article
+            class="slide active"
+            data-slide-index="0"
+            data-start="0"
+            data-end="75"
+          >
+            <div class="slide-inner">
+              <div>
+                <div class="slide-header">
+                  <div class="slide-title">
+                    <span class="index-pill">1 / 4</span>
+                    Seven Divisions, One Revenue Engine
+                  </div>
+                  <div class="slide-subtitle">
+                    "Multiple streams, shared infrastructure, compounding returns."
+                  </div>
+                </div>
+
+                <div class="slide-body">
+                  <p>
+                    EP05 opens by framing AeroVista's
+                    <strong>multi-division revenue model</strong> as the key to
+                    sustainable growth.
+                  </p>
+                  <ul>
+                    <li>
+                      Each division is a <strong>distinct revenue stream</strong> —
+                      tech, audio, creative, learning, publishing, aerial, and branding.
+                    </li>
+                    <li>
+                      Shared infrastructure means <strong>lower marginal costs</strong>
+                      as new divisions spin up.
+                    </li>
+                    <li>
+                      Cross-division bundling increases <strong>deal size</strong> and
+                      client stickiness.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <aside class="slide-visual">
+                <div class="slide-visual-label">Suggested Visual</div>
+                <div class="slide-visual-main">
+                  Seven-spoke wheel: each spoke is a division with a dollar sign,
+                  all feeding into a central "AeroVista" hub that glows brighter
+                  as each spoke lights up.
+                </div>
+                <div class="slide-visual-tags">
+                  <span class="slide-visual-tag">Revenue wheel</span>
+                  <span class="slide-visual-tag">Division spokes</span>
+                  <span class="slide-visual-tag">Central glow</span>
+                </div>
+              </aside>
+            </div>
+          </article>
+
+          <!-- Slide 2 -->
+          <article
+            class="slide"
+            data-slide-index="1"
+            data-start="75"
+            data-end="180"
+          >
+            <div class="slide-inner">
+              <div>
+                <div class="slide-header">
+                  <div class="slide-title">
+                    <span class="index-pill">2 / 4</span>
+                    Division Revenue Breakdown
+                  </div>
+                  <div class="slide-subtitle">
+                    What each division sells and how they price it.
+                  </div>
+                </div>
+                <div class="slide-body">
+                  <p>
+                    This section walks through each division's
+                    <strong>primary revenue drivers</strong>.
+                  </p>
+                  <ul>
+                    <li>
+                      <strong>Nexus TechWorks</strong> — consulting, automation builds,
+                      NXCore hosting and maintenance retainers.
+                    </li>
+                    <li>
+                      <strong>EchoVerse Audio</strong> — anthem production, training
+                      soundtracks, licensing, and sync fees.
+                    </li>
+                    <li>
+                      <strong>SkyForge Creative</strong> — gamified tool development,
+                      experience design, and IP licensing.
+                    </li>
+                    <li>
+                      <strong>Summit Learning</strong> — course fees, micro-credential
+                      programs, and corporate training bundles.
+                    </li>
+                    <li>
+                      <strong>Lumina / Vespera / Horizon</strong> — branding packages,
+                      publishing royalties, and aerial capture services.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <aside class="slide-visual">
+                <div class="slide-visual-label">Suggested Visual</div>
+                <div class="slide-visual-main">
+                  Horizontal bar chart: each division bar shows relative revenue
+                  contribution, with hover-on-detail for pricing tiers.
+                </div>
+                <div class="slide-visual-tags">
+                  <span class="slide-visual-tag">Bar chart</span>
+                  <span class="slide-visual-tag">Hover details</span>
+                  <span class="slide-visual-tag">Color-coded</span>
+                </div>
+              </aside>
+            </div>
+          </article>
+
+          <!-- Slide 3 -->
+          <article
+            class="slide"
+            data-slide-index="2"
+            data-start="180"
+            data-end="300"
+          >
+            <div class="slide-inner">
+              <div>
+                <div class="slide-header">
+                  <div class="slide-title">
+                    <span class="index-pill">3 / 4</span>
+                    The Flywheel Effect
+                  </div>
+                  <div class="slide-subtitle">
+                    How each project strengthens the platform for the next.
+                  </div>
+                </div>
+                <div class="slide-body">
+                  <p>
+                    Here the audio explains the <strong>compounding flywheel</strong>
+                    that makes AeroVista's model different from typical agencies.
+                  </p>
+                  <ul>
+                    <li>
+                      <strong>Reusable IP</strong> — tools, templates, and content
+                      created for one client benefit future projects.
+                    </li>
+                    <li>
+                      <strong>Cross-sell motion</strong> — a Nexus client often
+                      graduates to EchoVerse anthems or Summit training.
+                    </li>
+                    <li>
+                      <strong>Platform value</strong> — every engagement improves
+                      shared infrastructure, reducing delivery costs.
+                    </li>
+                    <li>
+                      <strong>Data advantage</strong> — operational data informs
+                      better pricing, scoping, and product decisions.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <aside class="slide-visual">
+                <div class="slide-visual-label">Suggested Visual</div>
+                <div class="slide-visual-main">
+                  Animated circular arrow diagram: "Project" → "Platform Stronger"
+                  → "Faster Next Project" → back to "Project", with momentum lines.
+                </div>
+                <div class="slide-visual-tags">
+                  <span class="slide-visual-tag">Flywheel loop</span>
+                  <span class="slide-visual-tag">Momentum lines</span>
+                  <span class="slide-visual-tag">Growth arrows</span>
+                </div>
+              </aside>
+            </div>
+          </article>
+
+          <!-- Slide 4 -->
+          <article
+            class="slide"
+            data-slide-index="3"
+            data-start="300"
+            data-end="9999"
+          >
+            <div class="slide-inner">
+              <div>
+                <div class="slide-header">
+                  <div class="slide-title">
+                    <span class="index-pill">4 / 4</span>
+                    Shareholder Returns & Exit Paths
+                  </div>
+                  <div class="slide-subtitle">
+                    Why this model builds long-term equity value.
+                  </div>
+                </div>
+                <div class="slide-body">
+                  <p>
+                    EP05 closes by connecting the revenue model to
+                    <strong>shareholder returns and strategic optionality</strong>.
+                  </p>
+                  <ul>
+                    <li>
+                      <strong>Recurring revenue</strong> — retainers and subscriptions
+                      provide predictable cash flow.
+                    </li>
+                    <li>
+                      <strong>High gross margins</strong> — shared tooling and local-first
+                      infra keep delivery costs low.
+                    </li>
+                    <li>
+                      <strong>Multiple exit paths</strong> — acquirers can target the
+                      whole platform or spin out individual divisions.
+                    </li>
+                    <li>
+                      <strong>Compounding value</strong> — unlike project-based agencies,
+                      AeroVista's value grows faster than revenue.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <aside class="slide-visual">
+                <div class="slide-visual-label">Suggested Visual</div>
+                <div class="slide-visual-main">
+                  Upward staircase graph: each step is a year, with revenue and
+                  equity value lines both climbing, the equity line steeper.
+                </div>
+                <div class="slide-visual-tags">
+                  <span class="slide-visual-tag">Growth staircase</span>
+                  <span class="slide-visual-tag">Revenue vs equity</span>
+                  <span class="slide-visual-tag">Exit arrows</span>
+                </div>
+              </aside>
+            </div>
+          </article>
+        </div>
+
+        <div class="slide-nav">
+          <div class="nav-buttons">
+            <button class="btn" id="prevSlideBtn">
+              <span class="btn-icon">←</span>
+              Prev
+            </button>
+            <button class="btn btn-primary" id="nextSlideBtn">
+              Next
+              <span class="btn-icon">→</span>
+            </button>
+          </div>
+          <div class="slide-index-text" id="slideIndexText">
+            Slide 1 of 4
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT: Audio + Timeline + Notes -->
+      <aside class="info-panel">
+        <div class="info-section-header">
+          <h2>Episode Audio</h2>
+          <span>EP05.mp3 + slide sync</span>
+        </div>
+
+        <div class="audio-shell">
+          <div class="audio-meta">
+            <div class="audio-meta-title">EP05 — Revenue & Growth Model</div>
+            <div class="audio-meta-tag">ByteCast Audio</div>
+          </div>
+          <audio id="bytecastAudio" controls preload="metadata">
+            <source src="ep05.mp3" type="audio/mpeg" />
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+
+        <div class="info-section-header">
+          <h2>Slide Timeline</h2>
+          <span>Click to jump</span>
+        </div>
+        <div class="timeline" id="timeline">
+          <div class="timeline-item active" data-slide-index="0">
+            <div class="timeline-item-main">
+              <div class="timeline-item-title">Seven Divisions, One Engine</div>
+              <div class="timeline-item-sub">0:00 – 1:15</div>
+            </div>
+            <div class="timeline-item-time">0:00</div>
+          </div>
+          <div class="timeline-item" data-slide-index="1">
+            <div class="timeline-item-main">
+              <div class="timeline-item-title">Division Revenue Breakdown</div>
+              <div class="timeline-item-sub">1:15 – 3:00</div>
+            </div>
+            <div class="timeline-item-time">1:15</div>
+          </div>
+          <div class="timeline-item" data-slide-index="2">
+            <div class="timeline-item-main">
+              <div class="timeline-item-title">The Flywheel Effect</div>
+              <div class="timeline-item-sub">3:00 – 5:00</div>
+            </div>
+            <div class="timeline-item-time">3:00</div>
+          </div>
+          <div class="timeline-item" data-slide-index="3">
+            <div class="timeline-item-main">
+              <div class="timeline-item-title">Returns & Exit Paths</div>
+              <div class="timeline-item-sub">5:00 → end</div>
+            </div>
+            <div class="timeline-item-time">5:00</div>
+          </div>
+        </div>
+
+        <div class="notes">
+          <h3>Facilitator Notes</h3>
+          <p>
+            EP05 is the most investor-focused episode. Tailor examples to the audience.
+          </p>
+          <ul>
+            <li>On Slide 2, reference specific deal sizes or case studies if available.</li>
+            <li>On Slide 3, emphasize the "moat" created by reusable IP and platform value.</li>
+            <li>Close by inviting questions about valuation methodology or exit scenarios.</li>
+          </ul>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      Keyboard: <span class="hotkey">Space</span> play/pause ·
+      <span class="hotkey">←</span>/<span class="hotkey">→</span> prev/next slide
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      const audio = document.getElementById("bytecastAudio");
+      const slides = Array.from(document.querySelectorAll(".slide"));
+      const timelineItems = Array.from(
+        document.querySelectorAll(".timeline-item")
+      );
+      const slideIndexText = document.getElementById("slideIndexText");
+      const prevBtn = document.getElementById("prevSlideBtn");
+      const nextBtn = document.getElementById("nextSlideBtn");
+
+      function activateSlide(index, fromClick = false) {
+        const clamped = Math.max(0, Math.min(slides.length - 1, index));
+
+        slides.forEach((slide, i) => {
+          slide.classList.toggle("active", i === clamped);
+        });
+
+        timelineItems.forEach((item, i) => {
+          item.classList.toggle("active", i === clamped);
+        });
+
+        slideIndexText.textContent = `Slide ${clamped + 1} of ${slides.length}`;
+
+        prevBtn.disabled = clamped === 0;
+        nextBtn.disabled = clamped === slides.length - 1;
+
+        if (fromClick) {
+          const slide = slides[clamped];
+          const start = parseFloat(slide.dataset.start || "0");
+          if (!Number.isNaN(start) && audio && !isNaN(audio.duration)) {
+            audio.currentTime = Math.min(start, audio.duration - 0.3);
+            audio.play().catch(() => {});
+          }
+        }
+      }
+
+      function getActiveSlideIndex() {
+        return slides.findIndex((slide) => slide.classList.contains("active"));
+      }
+
+      // Sync slides to audio time
+      if (audio) {
+        audio.addEventListener("timeupdate", () => {
+          const t = audio.currentTime;
+          for (let i = 0; i < slides.length; i++) {
+            const slide = slides[i];
+            const start = parseFloat(slide.dataset.start || "0");
+            const end = parseFloat(slide.dataset.end || "999999");
+
+            if (t >= start && t < end) {
+              if (!slide.classList.contains("active")) {
+                activateSlide(i, false);
+              }
+              break;
+            }
+          }
+        });
+      }
+
+      // Timeline click → jump to slide
+      timelineItems.forEach((item, i) => {
+        item.addEventListener("click", () => activateSlide(i, true));
+      });
+
+      // Prev / Next buttons
+      prevBtn.addEventListener("click", () => {
+        activateSlide(getActiveSlideIndex() - 1, true);
+      });
+
+      nextBtn.addEventListener("click", () => {
+        activateSlide(getActiveSlideIndex() + 1, true);
+      });
+
+      // Keyboard shortcuts: space = play/pause, arrows = slide nav
+      window.addEventListener("keydown", (e) => {
+        if (e.target && ["INPUT", "TEXTAREA"].includes(e.target.tagName)) {
+          return;
+        }
+        if (e.code === "Space") {
+          e.preventDefault();
+          if (audio) {
+            if (audio.paused) audio.play();
+            else audio.pause();
+          }
+        } else if (e.code === "ArrowRight") {
+          e.preventDefault();
+          activateSlide(getActiveSlideIndex() + 1, true);
+        } else if (e.code === "ArrowLeft") {
+          e.preventDefault();
+          activateSlide(getActiveSlideIndex() - 1, true);
+        }
+      });
+
+      // Initial state
+      activateSlide(0, false);
+    })();
+  </script>
+</body>
+</html>
+

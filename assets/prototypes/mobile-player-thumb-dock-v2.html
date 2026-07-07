@@ -1,0 +1,748 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mobile Player — Thumb Dock v2</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #050609;
+      --bg-alt: #0f172a;
+      --accent: #4fd1c5;
+      --accent-soft: rgba(79, 209, 197, 0.16);
+      --text: #f9fafb;
+      --muted: #94a3b8;
+      --border: rgba(148, 163, 184, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #020617 55%);
+      color: var(--text);
+    }
+
+    .shell {
+      height: 100vh;
+      max-height: 100vh;
+      padding: 8px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    /* HEADER */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .badge {
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.8);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .header-right {
+      display: flex;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .icon-btn:active {
+      transform: scale(0.96);
+    }
+
+    /* MAIN CONTENT */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .art-zone {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding-top: 4px;
+    }
+
+    .art-wrap {
+      width: min(64vw, 240px);
+      aspect-ratio: 1 / 1;
+      border-radius: 22px;
+      padding: 3px;
+      background: conic-gradient(
+        from 200deg,
+        rgba(79, 209, 197, 0.7),
+        rgba(56, 189, 248, 0.3),
+        rgba(244, 114, 182, 0.35),
+        rgba(79, 209, 197, 0.7)
+      );
+      box-shadow: 0 0 26px rgba(79, 209, 197, 0.5);
+    }
+
+    .art-core {
+      width: 100%;
+      height: 100%;
+      border-radius: 18px;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.14), transparent 55%),
+        radial-gradient(circle at 90% 80%, rgba(79, 209, 197, 0.25), transparent 60%),
+        linear-gradient(135deg, #020617, #0b1120);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .track-lines {
+      text-align: center;
+      max-width: 260px;
+    }
+
+    .title {
+      font-size: 16px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .artist {
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: 2px;
+    }
+
+    /* PROGRESS */
+    .progress {
+      padding: 6px 4px 4px;
+    }
+
+    .bar {
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(51, 65, 85, 0.9);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .bar-fill {
+      height: 100%;
+      width: 45%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), #38bdf8);
+      transition: width 0.2s linear;
+    }
+
+    .times {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 10px;
+      margin-top: 3px;
+    }
+
+    /* DOCK */
+    .dock {
+      border-radius: 18px;
+      background: rgba(15, 23, 42, 0.98);
+      border: 1px solid rgba(30, 64, 175, 0.8);
+      box-shadow:
+        0 0 20px rgba(15, 23, 42, 0.9),
+        0 18px 32px rgba(0, 0, 0, 0.85);
+      padding: 8px 10px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .dock-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+    }
+
+    .mini-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      max-width: 60%;
+    }
+
+    .mini-title {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .mini-sub {
+      color: var(--muted);
+      font-size: 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .dock-actions {
+      display: flex;
+      gap: 10px;
+      font-size: 16px;
+    }
+
+    .dock-middle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2px 0;
+    }
+
+    .dock-middle-left,
+    .dock-middle-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .chip {
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.92);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .volume-rail {
+      width: 80px;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(30, 64, 175, 0.8);
+      overflow: hidden;
+    }
+
+    .volume-fill {
+      height: 100%;
+      width: 65%;
+      background: linear-gradient(90deg, var(--accent), #38bdf8);
+    }
+
+    .dock-bottom {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      padding-top: 2px;
+    }
+
+    .transport-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #020617;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .transport-btn.main {
+      width: 64px;
+      height: 64px;
+      border-radius: 999px;
+      border: none;
+      background: radial-gradient(circle at 30% 0, #fef9c3, #facc15, #f97316);
+      color: #1e293b;
+      font-size: 26px;
+      box-shadow:
+        0 0 24px rgba(246, 225, 128, 0.65),
+        0 16px 28px rgba(0, 0, 0, 0.85);
+    }
+
+    .transport-btn:active,
+    .transport-btn.main:active {
+      transform: scale(0.95);
+      box-shadow: none;
+    }
+
+    /* SHEETS */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.8);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease-out;
+    }
+
+    .backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .sheet {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 64%;
+      max-height: 420px;
+      background: rgba(15, 23, 42, 0.98);
+      border-radius: 20px 20px 0 0;
+      border-top: 1px solid var(--border);
+      transform: translateY(100%);
+      transition: transform 0.22s ease-out;
+      pointer-events: auto;
+      display: flex;
+      flex-direction: column;
+      padding: 8px 12px 12px;
+    }
+
+    .sheet.active {
+      transform: translateY(0);
+    }
+
+    .handle {
+      width: 56px;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.8);
+      margin: 4px auto 8px;
+    }
+
+    .sheet-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 12px;
+    }
+
+    .sheet-title {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+    }
+
+    .sheet-close {
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .sheet-body {
+      flex: 1;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      font-size: 13px;
+    }
+
+    .playlist-item {
+      padding: 8px 6px;
+      border-radius: 10px;
+      margin-bottom: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      cursor: pointer;
+    }
+
+    .playlist-item.current {
+      background: var(--accent-soft);
+      border: 1px solid rgba(79, 209, 197, 0.8);
+    }
+
+    .playlist-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .playlist-title {
+      max-width: 170px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .playlist-sub {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .eq-cols {
+      display: flex;
+      justify-content: space-around;
+      padding-top: 6px;
+    }
+
+    .eq-band {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    .eq-slider {
+      width: 28px;
+      height: 140px;
+      border-radius: 999px;
+      background: linear-gradient(to top, rgba(30, 64, 175, 0.8), rgba(79, 209, 197, 0.8));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .eq-knob {
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      top: 40%;
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      background: #020617;
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 8px rgba(79, 209, 197, 0.8);
+    }
+
+    .eq-footer {
+      margin-top: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--muted);
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .preset-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .preset {
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+    }
+
+    .preset.active {
+      border-color: rgba(79, 209, 197, 0.8);
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="header">
+      <div class="header-left">
+        <div class="badge">Now playing</div>
+        <span style="color: var(--muted);">Swamp-Hop Session</span>
+      </div>
+      <div class="header-right">
+        <button class="icon-btn" id="playlistOpen" title="Playlist">🎵</button>
+        <button class="icon-btn" id="eqOpen" title="EQ">🎚</button>
+      </div>
+    </div>
+
+    <div class="main">
+      <div>
+        <div class="art-zone">
+          <div class="art-wrap">
+            <div class="art-core">
+              ECHOVERSE
+            </div>
+          </div>
+          <div class="track-lines">
+            <div class="title" id="trackTitle">Moonball Descent</div>
+            <div class="artist" id="trackArtist">Powder Peaks · EchoVerse</div>
+          </div>
+        </div>
+
+        <div class="progress">
+          <div class="bar">
+            <div class="bar-fill" id="progressFill"></div>
+          </div>
+          <div class="times">
+            <span id="timeElapsed">01:05</span><span id="timeRemaining">-03:02</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="dock">
+        <div class="dock-top">
+          <div class="mini-meta">
+            <span class="mini-title" id="miniTitle">Moonball Descent</span>
+            <span class="mini-sub" id="miniSub">Swamp-Hop · Powder Peaks</span>
+          </div>
+          <div class="dock-actions">
+            <button class="icon-btn" id="favBtn" title="Favorite" style="width:28px;height:28px;font-size:14px;">★</button>
+            <button class="icon-btn" id="shareBtn" title="Share" style="width:28px;height:28px;font-size:14px;">📤</button>
+          </div>
+        </div>
+
+        <div class="dock-middle">
+          <div class="dock-middle-left">
+            <div class="chip">🔊 Phone</div>
+          </div>
+          <div class="dock-middle-right">
+            <span>VOL</span>
+            <div class="volume-rail">
+              <div class="volume-fill" id="volFill"></div>
+            </div>
+            <span id="volLabel">65%</span>
+          </div>
+        </div>
+
+        <div class="dock-bottom">
+          <button class="transport-btn" id="prevBtn" aria-label="Previous track">⏮</button>
+          <button class="transport-btn main" id="playBtn" aria-label="Play / Pause">▶</button>
+          <button class="transport-btn" id="nextBtn" aria-label="Next track">⏭</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SHEETS -->
+  <div class="overlay">
+    <div class="backdrop" id="backdrop"></div>
+
+    <div class="sheet" id="playlistSheet">
+      <div class="handle"></div>
+      <div class="sheet-header">
+        <div class="sheet-title">Playlist</div>
+        <div class="sheet-close" data-close>✕</div>
+      </div>
+      <div class="sheet-body" id="playlistBody">
+        <div class="playlist-item current" data-title="Moonball Descent" data-artist="Powder Peaks · EchoVerse">
+          <div class="playlist-top">
+            <span class="playlist-title">Moonball Descent</span>
+            <span style="font-size: 11px;">3:59</span>
+          </div>
+          <span class="playlist-sub">Now playing · Swamp-Hop</span>
+        </div>
+        <div class="playlist-item" data-title="Corner Pocket League Anthem" data-artist="EchoVerse · Draft">
+          <div class="playlist-top">
+            <span class="playlist-title">Corner Pocket League Anthem</span>
+            <span style="font-size: 11px;">4:20</span>
+          </div>
+          <span class="playlist-sub">League theme</span>
+        </div>
+        <div class="playlist-item" data-title="EchoStory · Birthday Run" data-artist="Narrative · Soft mix">
+          <div class="playlist-top">
+            <span class="playlist-title">EchoStory · Birthday Run</span>
+            <span style="font-size: 11px;">2:48</span>
+          </div>
+          <span class="playlist-sub">Story mode</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sheet" id="eqSheet">
+      <div class="handle"></div>
+      <div class="sheet-header">
+        <div class="sheet-title">EQ & tone</div>
+        <div class="sheet-close" data-close>✕</div>
+      </div>
+      <div class="sheet-body">
+        <div class="eq-cols">
+          <div class="eq-band">
+            <div class="eq-slider">
+              <div class="eq-knob" style="top: 60%;"></div>
+            </div>
+            <span>60Hz</span>
+          </div>
+          <div class="eq-band">
+            <div class="eq-slider">
+              <div class="eq-knob" style="top: 50%;"></div>
+            </div>
+            <span>250Hz</span>
+          </div>
+          <div class="eq-band">
+            <div class="eq-slider">
+              <div class="eq-knob" style="top: 40%;"></div>
+            </div>
+            <span>1k</span>
+          </div>
+          <div class="eq-band">
+            <div class="eq-slider">
+              <div class="eq-knob" style="top: 35%;"></div>
+            </div>
+            <span>4k</span>
+          </div>
+          <div class="eq-band">
+            <div class="eq-slider">
+              <div class="eq-knob" style="top: 30%;"></div>
+            </div>
+            <span>10k</span>
+          </div>
+        </div>
+        <div class="eq-footer">
+          <span>Preset</span>
+          <div class="preset-row">
+            <div class="preset active" data-preset="swamphop">Swamp-Hop</div>
+            <div class="preset" data-preset="warm">Warm</div>
+            <div class="preset" data-preset="bright">Bright</div>
+            <div class="preset" data-preset="vocal">Vocal</div>
+          </div>
+          <span id="presetLabel">Swamp-Hop curve</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const backdrop = document.getElementById("backdrop");
+    const playlistSheet = document.getElementById("playlistSheet");
+    const eqSheet = document.getElementById("eqSheet");
+    const playlistOpen = document.getElementById("playlistOpen");
+    const eqOpen = document.getElementById("eqOpen");
+    const progressFill = document.getElementById("progressFill");
+    const playBtn = document.getElementById("playBtn");
+    const favBtn = document.getElementById("favBtn");
+    const volFill = document.getElementById("volFill");
+    const volLabel = document.getElementById("volLabel");
+    const trackTitle = document.getElementById("trackTitle");
+    const trackArtist = document.getElementById("trackArtist");
+    const miniTitle = document.getElementById("miniTitle");
+    const miniSub = document.getElementById("miniSub");
+    const playlistBody = document.getElementById("playlistBody");
+    const presetLabel = document.getElementById("presetLabel");
+
+    let isPlaying = false;
+    let isFav = false;
+
+    function closeSheets() {
+      playlistSheet.classList.remove("active");
+      eqSheet.classList.remove("active");
+      backdrop.classList.remove("active");
+    }
+
+    playlistOpen.addEventListener("click", () => {
+      closeSheets();
+      backdrop.classList.add("active");
+      playlistSheet.classList.add("active");
+    });
+
+    eqOpen.addEventListener("click", () => {
+      closeSheets();
+      backdrop.classList.add("active");
+      eqSheet.classList.add("active");
+    });
+
+    backdrop.addEventListener("click", closeSheets);
+    document.querySelectorAll("[data-close]").forEach(el =>
+      el.addEventListener("click", closeSheets)
+    );
+
+    // Play / pause toggle (visual only)
+    playBtn.addEventListener("click", () => {
+      isPlaying = !isPlaying;
+      playBtn.textContent = isPlaying ? "⏸" : "▶";
+      playBtn.setAttribute("aria-label", isPlaying ? "Pause" : "Play");
+      progressFill.style.width = isPlaying ? "60%" : "45%";
+    });
+
+    // Favorite toggle
+    favBtn.addEventListener("click", () => {
+      isFav = !isFav;
+      favBtn.style.color = isFav ? "#facc15" : "inherit";
+      favBtn.style.borderColor = isFav ? "#facc15" : "var(--border)";
+      favBtn.title = isFav ? "Unfavorite" : "Favorite";
+    });
+
+    // Simple volume cycling on tap
+    volFill.parentElement.addEventListener("click", () => {
+      const current = parseInt(volLabel.textContent.replace("%", ""), 10);
+      const next = current >= 80 ? 40 : current + 20;
+      volFill.style.width = next + "%";
+      volLabel.textContent = next + "%";
+    });
+
+    // Playlist click = change track labels
+    playlistBody.addEventListener("click", (e) => {
+      const item = e.target.closest(".playlist-item");
+      if (!item) return;
+
+      document.querySelectorAll(".playlist-item").forEach(el => el.classList.remove("current"));
+      item.classList.add("current");
+
+      const title = item.getAttribute("data-title");
+      const artist = item.getAttribute("data-artist");
+
+      trackTitle.textContent = title;
+      miniTitle.textContent = title;
+      trackArtist.textContent = artist;
+      miniSub.textContent = artist;
+    });
+
+    // Preset selection
+    document.querySelectorAll(".preset").forEach(p => {
+      p.addEventListener("click", () => {
+        document.querySelectorAll(".preset").forEach(el => el.classList.remove("active"));
+        p.classList.add("active");
+        const preset = p.getAttribute("data-preset");
+        if (preset === "swamphop") presetLabel.textContent = "Swamp-Hop curve";
+        else if (preset === "warm") presetLabel.textContent = "Warm & round";
+        else if (preset === "bright") presetLabel.textContent = "Top-end sparkle";
+        else if (preset === "vocal") presetLabel.textContent = "Mid-forward vocal focus";
+      });
+    });
+  </script>
+</body>
+</html>

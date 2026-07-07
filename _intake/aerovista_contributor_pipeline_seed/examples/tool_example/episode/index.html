@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>EP-001 — Example Episode</title>
+  <style>
+    body{font-family:system-ui;margin:0;background:#0b0b10;color:#f2f2f7}
+    header{padding:16px;border-bottom:1px solid #2a2a3a}
+    main{padding:16px;max-width:880px}
+    .card{background:#131321;border:1px solid #2a2a3a;border-radius:14px;padding:14px;margin:12px 0}
+    button{border:1px solid #2a2a3a;background:transparent;color:#f2f2f7;padding:8px 10px;border-radius:12px;cursor:pointer}
+    button:hover{border-color:#4a4a6a}
+    .muted{color:#a7a7b6}
+  </style>
+  <script>window.__UMAMI__={enabled:true,host:"https://stats.aerocoreos.com",websiteId:"REPLACE_WITH_WEBSITE_UUID",app:"bytecast",surface:"episode"};</script>
+</head>
+<body>
+<header>
+  <h1>EP-001 — Example Episode</h1>
+  <p class="muted">Listen / Slide / Engage (demo)</p>
+</header>
+<main>
+  <div class="card">
+    <h3>Slide viewer (demo)</h3>
+    <p class="muted">Click next to emit slide_view events.</p>
+    <p>Slide: <span id="slide">1</span></p>
+    <button id="next">Next slide</button>
+  </div>
+
+  <div class="card">
+    <h3>Engage gate (demo)</h3>
+    <p class="muted">Click pass to emit gate_passed.</p>
+    <button id="pass">Pass Gate</button>
+  </div>
+
+  <div class="card">
+    <h3>Complete</h3>
+    <button id="done">Mark Episode Completed</button>
+  </div>
+</main>
+
+<script src="../../shared/umami_bridge.js"></script>
+<script>
+  AVBridge.emit("episode_opened", { id: "ep-001" });
+
+  let slide = 1;
+  document.getElementById("next").onclick = () => {
+    slide++;
+    document.getElementById("slide").textContent = slide;
+    AVBridge.emit("slide_view", { slideIndex: slide });
+  };
+  document.getElementById("pass").onclick = () => AVBridge.emit("gate_passed", { gateId: "gate-1" });
+  document.getElementById("done").onclick = () => {
+    AVBridge.emit("episode_completed", { id:"ep-001" });
+    // also notify parent completion
+    try{ parent.postMessage({type:"COMPLETE",requestId:window.__AV_REQ_ID||"local",props:{moduleId:"ep-001"}}, "*"); }catch(e){}
+  };
+</script>
+</body>
+</html>

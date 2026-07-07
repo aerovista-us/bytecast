@@ -1,0 +1,28 @@
+{
+  "modules": [
+    {
+      "type": "episode",
+      "id": "ep-001",
+      "title": "Welcome to ByteCast",
+      "entry": "../examples/tool_example/episode/index.html",
+      "description": "Example episode pack (listen/slide/engage).",
+      "overlay": true
+    },
+    {
+      "type": "training",
+      "id": "tr-001",
+      "title": "Tool Training: Basics",
+      "entry": "../examples/tool_example/training/index.html",
+      "description": "Hands-on module with checkpoints.",
+      "overlay": true
+    },
+    {
+      "type": "seed_app",
+      "id": "seed-001",
+      "title": "Seed App: Generate Bundle",
+      "entry": "../examples/tool_example/seed_app/index.html",
+      "description": "Creates a repeatable zip artifact.",
+      "overlay": true
+    }
+  ]
+}

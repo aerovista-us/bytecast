@@ -1,0 +1,25 @@
+{
+  "id": "badge-example",
+  "title": "Example Badge \u2014 Verified Repeatability",
+  "version": "1.0.0",
+  "description": "Awarded after completing episode gates, training checkpoints, and generating a seed artifact.",
+  "requirements": {
+    "evidence_rules": [
+      {
+        "event": "episode_completed",
+        "min_count": 1,
+        "notes": "Episode finished"
+      },
+      {
+        "event": "module_completed",
+        "min_count": 1,
+        "notes": "Training finished"
+      },
+      {
+        "event": "seed_completed",
+        "min_count": 1,
+        "notes": "Seed artifact generated"
+      }
+    ]
+  }
+}

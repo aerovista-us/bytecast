@@ -1,0 +1,26 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "teaching_mode": "BriefingSync",
+  "episode": {
+    "code": "S1-EP-05",
+    "title": "Revenue & Growth Model",
+    "type": "briefing",
+    "date": "2026-07-06",
+    "runtime_target_minutes": 8,
+    "status": "active"
+  },
+  "content": {
+    "tags": ["shareholder", "briefing", "season1", "revenue"],
+    "summary_short": "Revenue and growth model briefing for shareholders — audio-synced player.",
+    "summary_long": "Shareholder Season 1 briefing. Legacy root player at bytecast-ep05.html."
+  },
+  "media": {
+    "audio_files": [
+      {
+        "path": "../../ep05.mp3",
+        "label": "Briefing audio (mp3)",
+        "required": false
+      }
+    ]
+  }
+}

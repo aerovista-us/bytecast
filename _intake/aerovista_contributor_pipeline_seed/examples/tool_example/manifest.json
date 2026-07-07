@@ -1,0 +1,17 @@
+{
+  "type": "hub",
+  "id": "tool-example",
+  "title": "Example Tool (End-to-End)",
+  "version": "1.0.0",
+  "entry": "examples/tool_example/episode/index.html",
+  "capabilities": {
+    "overlay": true,
+    "progress_events": true,
+    "offline_fallback": true
+  },
+  "lane": "Demonstrates the contributor pipeline: episode \u2192 training \u2192 seed \u2192 badge spec.",
+  "tags": [
+    "example",
+    "pipeline"
+  ]
+}

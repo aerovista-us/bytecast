@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SEED-001 — Example Seed App</title>
+  <style>
+    body{font-family:system-ui;margin:0;background:#0b0b10;color:#f2f2f7}
+    header{padding:16px;border-bottom:1px solid #2a2a3a}
+    main{padding:16px;max-width:880px}
+    .card{background:#131321;border:1px solid #2a2a3a;border-radius:14px;padding:14px;margin:12px 0}
+    button{border:1px solid #2a2a3a;background:transparent;color:#f2f2f7;padding:8px 10px;border-radius:12px;cursor:pointer}
+    button:hover{border-color:#4a4a6a}
+    .muted{color:#a7a7b6}
+    progress{width:100%}
+  </style>
+  <script>window.__UMAMI__={enabled:true,host:"https://stats.aerocoreos.com",websiteId:"REPLACE_WITH_WEBSITE_UUID",app:"bytecast",surface:"seed_app"};</script>
+</head>
+<body>
+<header>
+  <h1>SEED-001 — Example Seed App</h1>
+  <p class="muted">Generates repeatable artifact (demo)</p>
+</header>
+<main>
+  <div class="card">
+    <h3>Run</h3>
+    <p class="muted">This demo simulates generation and emits progress + result events.</p>
+    <button id="run">Run Seed</button>
+    <progress id="bar" value="0" max="100"></progress>
+  </div>
+
+  <div class="card">
+    <h3>Complete</h3>
+    <button id="done" disabled>Mark Seed Completed</button>
+  </div>
+</main>
+
+<script src="../../shared/umami_bridge.js"></script>
+<script>
+  AVBridge.emit("seed_opened", { id: "seed-001" });
+
+  const runBtn = document.getElementById("run");
+  const doneBtn = document.getElementById("done");
+  const bar = document.getElementById("bar");
+
+  runBtn.onclick = async () => {
+    runBtn.disabled = true;
+    AVBridge.emit("seed_started", { id:"seed-001" });
+
+    for (let i=1;i<=10;i++){
+      await new Promise(r=>setTimeout(r, 200));
+      const pct = i*10;
+      bar.value = pct;
+      AVBridge.emit("seed_progress", { pct });
+    }
+
+    const artifact = { kind:"zip", name:"example_seed_bundle.zip", href:"#", summary:"Demo artifact meta (replace with real zip output)." };
+    try{ parent.postMessage({type:"RESULT",requestId:window.__AV_REQ_ID||"local",artifact}, "*"); }catch(e){}
+    AVBridge.emit("seed_result", artifact);
+
+    doneBtn.disabled = false;
+  };
+
+  doneBtn.onclick = () => {
+    AVBridge.emit("seed_completed", { id:"seed-001" });
+    try{ parent.postMessage({type:"COMPLETE",requestId:window.__AV_REQ_ID||"local",props:{moduleId:"seed-001", badgeEligible:true}}, "*"); }catch(e){}
+  };
+</script>
+</body>
+</html>
