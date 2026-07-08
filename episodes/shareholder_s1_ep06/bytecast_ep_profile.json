@@ -17,7 +17,7 @@
   "media": {
     "audio_files": [
       {
-        "path": "../../ep06.mp3",
+        "path": "../../assets/shareholder_s1/ep06.mp3",
         "label": "Briefing audio (mp3)",
         "required": false
       }

@@ -7,6 +7,7 @@ const registryPath = path.join(repoRoot, "data", "episode_registry.json");
 const codexRegistryPath = path.join(repoRoot, ".CODEX", "episode_registry.json");
 const modulesPath = path.join(episodesRoot, "training_hub", "modules.json");
 const modulesMirrorPath = path.join(episodesRoot, "training_hub", "data", "modules.json");
+const catalogPath = path.join(repoRoot, "data", "catalog.json");
 
 const issues = [];
 const warnings = [];
@@ -23,6 +24,15 @@ function main() {
 
   compareJson(registry, codexRegistry, "data/episode_registry.json", ".CODEX/episode_registry.json");
   compareJson(modules, modulesMirror, "episodes/training_hub/modules.json", "episodes/training_hub/data/modules.json");
+
+  if (existsSync(catalogPath)) {
+    const catalog = readJson(catalogPath, "catalog");
+    if (catalog) {
+      compareJson(catalog.episode_registry, registry, "data/catalog.json (episode_registry)", "data/episode_registry.json");
+      compareJson(catalog.training_hub_manifest, modulesMirror, "data/catalog.json (training_hub_manifest)", "episodes/training_hub/data/modules.json");
+      compareJson(catalog.pulse_feed, readJson(path.join(repoRoot, "data", "pulse.json"), "pulse feed"), "data/catalog.json (pulse_feed)", "data/pulse.json");
+    }
+  }
 
   const topDirs = listTopEpisodeDirs();
   checkRegistry(registry, modules, topDirs);

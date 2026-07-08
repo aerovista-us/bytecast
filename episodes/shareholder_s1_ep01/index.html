@@ -2,13 +2,47 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta http-equiv="refresh" content="0; url=../../bytecast-ep01.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>S1-EP-01 — The AeroVista Universe</title>
-  <script>
-    window.location.replace("../../bytecast-ep01.html");
-  </script>
+  <meta name="description" content="Pulse briefing player for S1-EP-01 (Season 1). Served from the canonical episode pack path." />
 </head>
 <body>
-  <p>Redirecting to <a href="../../bytecast-ep01.html">S1-EP-01 — The AeroVista Universe</a>.</p>
+  <p style="font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#e5e7eb;background:#020617;margin:0;padding:16px;">
+    Loading briefing…
+  </p>
+  <script>
+    (async () => {
+      const legacy = "../../bytecast-ep01.html";
+      const res = await fetch(legacy, { cache: "no-store" });
+      if (!res.ok) throw new Error(`Failed to load legacy player: ${res.status}`);
+      const html = await res.text();
+      const doc = new DOMParser().parseFromString(html, "text/html");
+
+      // Rebase internal links so the experience is native to /episodes/shareholder_s1_ep01/
+      for (const a of doc.querySelectorAll("a[href]")) {
+        const href = a.getAttribute("href") || "";
+        if (href === "bytecast-season1.html") a.setAttribute("href", "../../bytecast-season1.html");
+        if (href.startsWith("episodes/")) a.setAttribute("href", `../${href.slice("episodes/".length)}`);
+      }
+
+      // Move Season 1 audio under assets/shareholder_s1/ (files may be added later).
+      for (const source of doc.querySelectorAll("audio source[src]")) {
+        const src = source.getAttribute("src") || "";
+        if (/^EP01\.aac$/i.test(src)) source.setAttribute("src", "../../assets/shareholder_s1/EP01.aac");
+      }
+
+      document.open();
+      document.write("<!doctype html>\n" + doc.documentElement.outerHTML);
+      document.close();
+    })().catch((err) => {
+      console.error(err);
+      document.body.innerHTML =
+        '<div style="font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#e5e7eb;background:#020617;min-height:100vh;padding:18px;">' +
+        "<h1 style=\"margin:0 0 10px;\">Could not load briefing</h1>" +
+        `<p style="margin:0;color:#9ca3af;">${String(err && err.message || err)}</p>` +
+        '<p style="margin:14px 0 0;"><a style="color:#38bdf8;" href="../../bytecast-ep01.html">Open legacy player</a></p>' +
+        "</div>";
+    });
+  </script>
 </body>
 </html>

@@ -8,6 +8,8 @@
     "test:ui": "playwright test --ui",
     "test:headed": "playwright test --headed",
     "test:debug": "playwright test --debug",
+    "bootstrap:catalog": "node scripts/bootstrap-catalog.mjs",
+    "sync:catalog": "node scripts/sync-catalog.mjs",
     "check:episodes": "node -e \"process.chdir(process.env.INIT_CWD||process.cwd()); import('node:url').then(({pathToFileURL})=>import(pathToFileURL(require('node:path').join(process.cwd(),'scripts/check-episodes.mjs'))))\"",
     "test:golden-path": "playwright test tests/golden-path.spec.js",
     "test:seeding": "playwright test tests/seeding-track.spec.js",

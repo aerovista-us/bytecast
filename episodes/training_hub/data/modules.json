@@ -145,6 +145,8 @@
       "launch_label": "Open lab",
       "home_featured": true
     },
+    {
+      "id": "revenue_engine_training",
       "name": "Revenue Engine Training",
       "description": "Standalone visual sales training surface for the offer ladder, objections, and talking cards.",
       "owner": "Offers and Sales Ops",

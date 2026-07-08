@@ -1,68 +1,84 @@
 {
   "schema": "bytecast-module-manifest-v1",
   "app_id": "training_hub",
-  "app_name": "Training Hub",
-  "updated_on": "2026-05-11",
+  "app_name": "ByteCast",
+  "updated_on": "2026-07-07",
   "series": [
     {
       "id": "golden_path_day1",
       "name": "Golden Path Day 1",
       "description": "Default onboarding route: the core ByteCast episodes, the Day 1 training gate, and the practice handoff.",
-      "sort_order": 10
+      "sort_order": 10,
+      "lifecycle_section": "getting_started"
     },
     {
       "id": "sales_enablement",
       "name": "Sales Enablement",
       "description": "Offer framing, routing judgment, and the current sales practice surfaces.",
-      "sort_order": 20
+      "sort_order": 20,
+      "lifecycle_section": "skills"
     },
     {
       "id": "lumina_revenue_lane",
       "name": "Lumina Revenue Lane",
       "description": "Six Lumina revenue episodes followed by the routing capstone and seed brief handoff.",
-      "sort_order": 30
+      "sort_order": 30,
+      "lifecycle_section": "skills"
     },
     {
       "id": "apparel_onboarding",
       "name": "AV Apparel Onboarding",
       "description": "Three episodes for apparel culture, catalog work, and operating standards.",
-      "sort_order": 40
+      "sort_order": 40,
+      "lifecycle_section": "skills"
     },
     {
       "id": "art_localized_training",
       "name": "The Art Localized",
       "description": "Five-part collaboration and partnership training series.",
-      "sort_order": 50
+      "sort_order": 50,
+      "lifecycle_section": "skills"
     },
     {
       "id": "contributor_onboarding",
       "name": "Contributor Onboarding",
       "description": "Hub plus guided onboarding episodes for contributor expectations and readiness.",
-      "sort_order": 60
+      "sort_order": 60,
+      "lifecycle_section": "skills"
     },
     {
       "id": "infographic_training",
       "name": "Infographic Training",
       "description": "Image-first overlay lesson pilots built from the infographic pack.",
-      "sort_order": 70
+      "sort_order": 70,
+      "lifecycle_section": "ecosystem"
+    },
+    {
+      "id": "shareholder_briefings",
+      "name": "Shareholder Briefings",
+      "description": "Pulse signal briefings (S1-EP-01 through S1-EP-06). Listed via data/pulse.json — not Day 1 onboarding.",
+      "sort_order": 75,
+      "lifecycle_section": "pulse"
     },
     {
       "id": "story_context",
       "name": "Story + Context",
       "description": "Long-form origin and making-of surfaces that give the training lanes more context.",
-      "sort_order": 80
+      "sort_order": 80,
+      "lifecycle_section": "reference"
     },
     {
       "id": "reference_tools",
       "name": "Reference + Tools",
       "description": "Supporting shells, docs, and reference training surfaces.",
-      "sort_order": 90
+      "sort_order": 90,
+      "lifecycle_section": "reference"
     }
   ],
   "modules": [
     {
       "id": "golden_path_start",
-      "name": "Golden Path Playlist Start",
+      "name": "Day 1 · Start Here",
       "description": "Start the default learner route at EP-001 and move through the core ByteCast spine.",
       "owner": "Training and Community",
       "category": "series",
@@ -72,7 +88,8 @@
       "part_label": "EP-001 to EP-004",
       "path": "../../seed_bytecast.html",
       "canon_path": "seed_bytecast.html",
-      "launch_label": "Open playlist"
+      "launch_label": "Start Day 1",
+      "home_featured": true
     },
     {
       "id": "tr_001a_day1_foundations",
@@ -85,7 +102,8 @@
       "part_label": "Mission gate",
       "path": "../training_missions/tr_001a_day1_foundations/index.html",
       "canon_path": "episodes/training_missions/tr_001a_day1_foundations",
-      "launch_label": "Open mission"
+      "launch_label": "Open mission",
+      "home_featured": true
     },
     {
       "id": "tr_001_golden_path",
@@ -124,7 +142,8 @@
       "part_label": "Current lab",
       "path": "../training_missions/dispatchflow_sales_workbook.html",
       "canon_path": "episodes/training_missions/dispatchflow_sales_workbook.html",
-      "launch_label": "Open lab"
+      "launch_label": "Open lab",
+      "home_featured": true
     },
     {
       "id": "revenue_engine_training",
@@ -151,7 +170,8 @@
       "part_label": "EP-LUM-101 to EP-LUM-106",
       "path": "../lumina_rev_101/index.html",
       "canon_path": "episodes/lumina_rev_101",
-      "launch_label": "Start series"
+      "launch_label": "Start series",
+      "home_featured": true
     },
     {
       "id": "tr_lum_001_revenue_routing",
@@ -191,7 +211,8 @@
       "part_label": "EP-APP-001 to EP-APP-003",
       "path": "../av_apparel_ep1_welcome/index.html",
       "canon_path": "episodes/av_apparel_ep1_welcome",
-      "launch_label": "Start series"
+      "launch_label": "Start series",
+      "home_featured": true
     },
     {
       "id": "art_localized_series_start",
@@ -205,7 +226,8 @@
       "part_label": "ART-EP-0 to ART-EP-4",
       "path": "../art_localized_ep0/index.html",
       "canon_path": "episodes/art_localized_ep0",
-      "launch_label": "Start series"
+      "launch_label": "Start series",
+      "home_featured": true
     },
     {
       "id": "contributor_onboarding_hub",
@@ -218,7 +240,8 @@
       "part_label": "Hub",
       "path": "../contributor.onboarding/index.html",
       "canon_path": "episodes/contributor.onboarding",
-      "launch_label": "Open hub"
+      "launch_label": "Open hub",
+      "home_featured": true
     },
     {
       "id": "contributor_onboarding_series_start",
@@ -245,7 +268,100 @@
       "part_label": "Pilot episode",
       "path": "../av_ecosystem_map_pilot/index.html",
       "canon_path": "episodes/av_ecosystem_map_pilot",
-      "launch_label": "Open pilot"
+      "launch_label": "Open pilot",
+      "home_featured": true
+    },
+    {
+      "id": "shareholder_season1_portal",
+      "name": "Shareholder Season 1 — Briefing Series",
+      "description": "Legacy root HTML briefing players for shareholder narrative. Distinct from Core Day 1 EP-001 through EP-004.",
+      "owner": "Content Ops",
+      "category": "series",
+      "series_id": "shareholder_briefings",
+      "sequence": 1,
+      "step_count": 6,
+      "part_label": "S1-EP-01 to S1-EP-06",
+      "path": "../../bytecast-season1.html",
+      "canon_path": "bytecast-season1.html",
+      "launch_label": "Open season portal"
+    },
+    {
+      "id": "shareholder_s1_ep01",
+      "name": "S1-EP-01 — The AeroVista Universe",
+      "description": "Shareholder Season 1 orientation briefing — platform story and seven divisions.",
+      "owner": "Content Ops",
+      "category": "episode",
+      "series_id": "shareholder_briefings",
+      "sequence": 2,
+      "part_label": "S1-EP-01",
+      "path": "../shareholder_s1_ep01/index.html",
+      "canon_path": "episodes/shareholder_s1_ep01",
+      "launch_label": "Open briefing"
+    },
+    {
+      "id": "shareholder_s1_ep02",
+      "name": "S1-EP-02 — Service Portfolio",
+      "description": "How AeroVista packages services and offers for the market.",
+      "owner": "Content Ops",
+      "category": "episode",
+      "series_id": "shareholder_briefings",
+      "sequence": 3,
+      "part_label": "S1-EP-02",
+      "path": "../shareholder_s1_ep02/index.html",
+      "canon_path": "episodes/shareholder_s1_ep02",
+      "launch_label": "Open briefing"
+    },
+    {
+      "id": "shareholder_s1_ep03",
+      "name": "S1-EP-03 — Documented Ecosystem",
+      "description": "Documentation, governance, and ecosystem visibility for shareholders.",
+      "owner": "Content Ops",
+      "category": "episode",
+      "series_id": "shareholder_briefings",
+      "sequence": 4,
+      "part_label": "S1-EP-03",
+      "path": "../shareholder_s1_ep03/index.html",
+      "canon_path": "episodes/shareholder_s1_ep03",
+      "launch_label": "Open briefing"
+    },
+    {
+      "id": "shareholder_s1_ep04",
+      "name": "S1-EP-04 — The Portable Ecosystem",
+      "description": "Portable ecosystem narrative — not Day 1 EP-004 Current Truth Basics.",
+      "owner": "Content Ops",
+      "category": "episode",
+      "series_id": "shareholder_briefings",
+      "sequence": 5,
+      "part_label": "S1-EP-04",
+      "path": "../shareholder_s1_ep04/index.html",
+      "canon_path": "episodes/shareholder_s1_ep04",
+      "launch_label": "Open briefing"
+    },
+    {
+      "id": "shareholder_s1_ep05",
+      "name": "S1-EP-05 — Revenue & Growth Model",
+      "description": "Revenue and growth model briefing for shareholders.",
+      "owner": "Content Ops",
+      "category": "episode",
+      "series_id": "shareholder_briefings",
+      "sequence": 6,
+      "part_label": "S1-EP-05",
+      "path": "../shareholder_s1_ep05/index.html",
+      "canon_path": "episodes/shareholder_s1_ep05",
+      "launch_label": "Open briefing"
+    },
+    {
+      "id": "shareholder_s1_ep06",
+      "name": "S1-EP-06 — The Roadmap Forward",
+      "description": "Forward roadmap and shareholder expectations for the next quarter.",
+      "owner": "Content Ops",
+      "category": "episode",
+      "series_id": "shareholder_briefings",
+      "sequence": 7,
+      "part_label": "S1-EP-06",
+      "path": "../shareholder_s1_ep06/index.html",
+      "canon_path": "episodes/shareholder_s1_ep06",
+      "launch_label": "Open briefing"
     },
     {
       "id": "bytecasts_making_of_av",
@@ -297,7 +413,8 @@
       "part_label": "Governance",
       "path": "../../docs/index.html",
       "canon_path": "docs",
-      "launch_label": "Open docs"
+      "launch_label": "Open docs",
+      "home_featured": true
     }
   ]
 }

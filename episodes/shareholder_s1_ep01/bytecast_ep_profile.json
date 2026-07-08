@@ -17,7 +17,7 @@
   "media": {
     "audio_files": [
       {
-        "path": "../../EP01.aac",
+        "path": "../../assets/shareholder_s1/EP01.aac",
         "label": "Briefing audio (aac)",
         "required": false
       }
