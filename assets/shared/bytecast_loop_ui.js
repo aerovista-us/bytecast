@@ -8,7 +8,7 @@
   }
 
   const DEFAULT_CONFIG_URL = "./data/journey_steps.json";
-  const STYLE_ID = "bc-loop-ui-style-v1";
+  const STYLE_ID = "bc-loop-ui-style-v2";
   const ACTIVE_JOURNEY_KEY = "bytecast.journey.active";
   const LEGACY_ACTIVE_JOURNEY_KEY = "bytecast.journey.active.v1";
   const SHOW_DONE_KEY = "bytecast.loopui.show_done.v1";
@@ -54,6 +54,7 @@
   }
 
   function ensureStyle() {
+    document.getElementById("bc-loop-ui-style-v1")?.remove();
     if (document.getElementById(STYLE_ID)) return;
     const style = document.createElement("style");
     style.id = STYLE_ID;
@@ -157,6 +158,21 @@
       .bc-step__open { text-decoration:none; }
       .bc-step__open:hover { text-decoration: underline; text-underline-offset: 3px; }
       .bc-step__open.is-disabled { pointer-events:none; opacity: 0.6; text-decoration:none; }
+      .bc-journey__select,
+      .bc-journey select[data-bc-journey-pick] {
+        color-scheme: dark;
+        border-radius: 999px;
+        border: 1px solid rgba(255,255,255,0.18);
+        background-color: #0f141c;
+        color: rgba(255,255,255,0.92);
+        padding: 8px 10px;
+        font: 700 12px/1 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      }
+      .bc-journey__select option,
+      .bc-journey select[data-bc-journey-pick] option {
+        background-color: #131821;
+        color: #f4fbff;
+      }
       @media (prefers-reduced-motion: reduce){
         .bc-journey__btn{ transition:none; }
         .bc-journey__btn:hover{ transform:none; }
@@ -268,7 +284,7 @@
     const pickerHtml = (pickerEnabled && journeys.length > 1) ? `
       <label style="display:flex; gap:8px; align-items:center; color: rgba(255,255,255,0.72); font: 800 11px/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; letter-spacing:.06em; text-transform:uppercase;">
         Journey
-        <select data-bc-journey-pick="1" style="border-radius:999px; border:1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.03); color: rgba(255,255,255,0.92); padding: 8px 10px; font: 700 12px/1 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;">
+        <select data-bc-journey-pick="1" class="bc-journey__select">
           ${journeys.map((j) => {
             const id = j?.id || "";
             const label = j?.label || id;

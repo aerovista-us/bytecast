@@ -113,11 +113,16 @@
     .controls{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
     .select,.btn{
       border:1px solid var(--stroke);
-      background: rgba(255,255,255,0.03);
+      background: #0f141c;
       color:var(--ink);
+      color-scheme: dark;
       border-radius:999px;
       padding:10px 12px;
       font-size:13px;
+    }
+    .select option{
+      background-color:#131821;
+      color:#f4fbff;
     }
     .btn{
       cursor:pointer;
@@ -345,7 +350,7 @@
         <span class="dot" aria-hidden="true"></span>
         <div>
           <div style="font-weight:800; letter-spacing:0.02em;">ByteCast Playlist</div>
-          <div class="k">Discovery â€¢ resume â€¢ handoffs</div>
+          <div class="k">Discovery • resume • handoffs</div>
         </div>
       </div>
 
@@ -374,9 +379,9 @@
             Your learning path starts here: Listen, Slides, Engage, Mission, Practice, Publish, Badge.
           </p>
           <div class="pills" id="metaPills">
-            <span class="pill"><span class="spark" aria-hidden="true"></span><strong>listen</strong> â€¢ anchor intent</span>
-            <span class="pill"><span class="spark" aria-hidden="true"></span><strong>slide</strong> â€¢ lock memory</span>
-            <span class="pill"><span class="spark" aria-hidden="true"></span><strong>interact</strong> â€¢ confirm retention</span>
+            <span class="pill"><span class="spark" aria-hidden="true"></span><strong>listen</strong> • anchor intent</span>
+            <span class="pill"><span class="spark" aria-hidden="true"></span><strong>slide</strong> • lock memory</span>
+            <span class="pill"><span class="spark" aria-hidden="true"></span><strong>interact</strong> • confirm retention</span>
           </div>
 
           <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
@@ -485,7 +490,7 @@
           <a class="btn btn--primary" href="./episodes/training_hub/index.html">Training Hub</a>
           <a class="btn" href="./episodes/seed_builder_studio/index.html">Builder Studio</a>
           <button id="apparelJourneyBtn" type="button" class="btn">Apparel Ops Onboarding</button>
-          <button id="artLocalizedJourneyBtn" type="button" class="btn">The Art Localized â€” Training</button>
+          <button id="artLocalizedJourneyBtn" type="button" class="btn">The Art Localized — Training</button>
           <div id="luminaJourneyLaunch" style="display:grid; gap:10px;">
   <button id="luminaJourneyBtn" type="button" class="btn btn--primary">Lumina Revenue Lane</button>
   <a class="btn" id="luminaStartBtn" href="./episodes/lumina_rev_101/index.html">Start EP-LUM-101</a>
@@ -503,7 +508,7 @@
         </div>
         <div style="margin-top:14px; padding-top:14px; border-top:1px solid var(--stroke);">
           <div class="k">Insights</div>
-          <div id="insights" class="tiny muted" style="margin-top:10px;">Loadingâ€¦</div>
+          <div id="insights" class="tiny muted" style="margin-top:10px;">Loading…</div>
         </div>
       </aside>
     </section>
@@ -779,7 +784,7 @@
           .map((b) => {
             const label = b?.label || b?.id || "Badge";
             const when = b?.issuedAt ? new Date(b.issuedAt).toLocaleDateString() : "";
-            return `<span class="chip chip--badge" title="${escapeHtml(b?.id || "")}"><b style="font-family:var(--mono);">BADGE</b> ${escapeHtml(label)}${when ? ` â€¢ ${escapeHtml(when)}` : ""}</span>`;
+            return `<span class="chip chip--badge" title="${escapeHtml(b?.id || "")}"><b style="font-family:var(--mono);">BADGE</b> ${escapeHtml(label)}${when ? ` • ${escapeHtml(when)}` : ""}</span>`;
           })
           .join("");
 
@@ -806,7 +811,7 @@
               <span class="badge-body">
                 <b style="font-family:var(--mono);">BADGE</b>
                 <span>${escapeHtml(label)}</span>
-                ${when ? `<span class="badge-when">â€¢ ${escapeHtml(when)}</span>` : ""}
+                ${when ? `<span class="badge-when">• ${escapeHtml(when)}</span>` : ""}
               </span>
             </span>
           `;
@@ -825,7 +830,7 @@
       const journeyId = Loop.getActiveJourneyId?.() || "p1_golden_path";
       const wf2 = Loop.loadWorkflowV2?.(journeyId) || null;
       if (!wf2 || typeof wf2 !== "object") {
-        el.textContent = `Journey: ${journeyId} â€¢ No workflow yet.`;
+        el.textContent = `Journey: ${journeyId} • No workflow yet.`;
         return;
       }
 
@@ -838,8 +843,8 @@
       const last = done[0] || null;
       const when = last?.doneAt ? new Date(last.doneAt).toLocaleString() : "";
       const updated = wf2.updatedAt ? new Date(wf2.updatedAt).toLocaleString() : "";
-      const pub = last?.meta?.publishedUrl ? ` â€¢ URL: ${String(last.meta.publishedUrl).slice(0, 72)}` : "";
-      el.textContent = `Journey: ${journeyId} â€¢ ${last ? `Last done: ${last.id}` : "Last done: (none)"}${when ? ` â€¢ ${when}` : ""}${updated ? ` â€¢ Updated: ${updated}` : ""}${pub}`;
+      const pub = last?.meta?.publishedUrl ? ` • URL: ${String(last.meta.publishedUrl).slice(0, 72)}` : "";
+      el.textContent = `Journey: ${journeyId} • ${last ? `Last done: ${last.id}` : "Last done: (none)"}${when ? ` • ${when}` : ""}${updated ? ` • Updated: ${updated}` : ""}${pub}`;
     }
 
     function learningStepLabel(label) {
@@ -886,7 +891,7 @@
           `Mission ${learningStatus(trainingOk, bcOk)}`,
           `Practice ${learningStatus(seedOk, trainingOk)}`,
           `Badge ${learningStatus(badgeOk, eligible)}`,
-        ].join(" â€¢ ");
+        ].join(" • ");
         $("#heroSub").textContent = `Your learning path: ${funnel}`;
 
         if (label) label.textContent = "Golden Path";
@@ -953,7 +958,7 @@
 
       const funnel = journey.steps
         .map((s) => `${learningStepLabel(s.label)} ${learningStatus(Loop.isStepComplete(journey, s, wf2), Loop.isStepUnlocked(journey, s, wf2))}`)
-        .join(" â€¢ ");
+        .join(" • ");
       $("#heroSub").textContent = `Your learning path: ${funnel}`;
 
       renderBadges();
@@ -1053,7 +1058,7 @@
         <article class="ep" data-ep-href="${escapeHtml(href)}">
           <div class="ep__head">
             <div>
-              <p class="k" style="margin:0;">${escapeHtml(code)} â€¢ ${escapeHtml(statusChip)}</p>
+              <p class="k" style="margin:0;">${escapeHtml(code)} • ${escapeHtml(statusChip)}</p>
               <h3 class="ep__title">${escapeHtml(title)}</h3>
               <div class="ep__meta">
                 ${date ? `<span class="chip"><b style="font-family:var(--mono);">DATE</b> ${escapeHtml(date)}</span>` : ""}
@@ -1062,7 +1067,7 @@
                 <span class="chip">${escapeHtml(questLine)}</span>
                 <span class="chip">${escapeHtml(quizLine)}</span>
               </div>
-              ${tags.length ? `<p class="tiny" style="margin:8px 0 0;"><b style="font-family:var(--mono);">TAGS</b> ${escapeHtml(tags.join(" â€¢ "))}</p>` : ""}
+              ${tags.length ? `<p class="tiny" style="margin:8px 0 0;"><b style="font-family:var(--mono);">TAGS</b> ${escapeHtml(tags.join(" • "))}</p>` : ""}
               ${summary ? `<p class="muted" style="margin:10px 0 0;">${escapeHtml(summary)}</p>` : ""}
             </div>
             <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;">
@@ -1131,7 +1136,7 @@
         resumeBtn.setAttribute("href", hrefAbs);
         resumeBtn.removeAttribute("aria-disabled");
         resumeBtn.classList.remove("is-disabled");
-        resumeHint.textContent = `Resume: ${String(last.href).replace(/^\.\//, "")} â€¢ last visited ${formatWhen(last.time)}`;
+        resumeHint.textContent = `Resume: ${String(last.href).replace(/^\.\//, "")} • last visited ${formatWhen(last.time)}`;
       } else {
         // Keep the UI honest: when there is no resume, do not provide a clickable nav.
         resumeBtn.setAttribute("href", "#");
@@ -1150,7 +1155,7 @@
           episodes: [
             { slug: "welcome_to_bytecast", episode_code: "EP-001", title: "Welcome to ByteCast", primary_path: "episodes/welcome_to_bytecast", status: "active" },
             { slug: "aerovista_7_division_overview", episode_code: "EP-002", title: "AeroVista Overview", primary_path: "episodes/aerovista_7_division_overview", status: "active" },
-            { slug: "eos_2026_02_09", episode_code: "EP-EOS-2026-02-09", title: "EoS ByteCast â€” Platform Update", primary_path: "episodes/eos_2026_02_09", status: "active" }
+            { slug: "eos_2026_02_09", episode_code: "EP-EOS-2026-02-09", title: "EoS ByteCast — Platform Update", primary_path: "episodes/eos_2026_02_09", status: "active" }
           ]
         };
       }
@@ -1219,7 +1224,7 @@
       if (next) {
         const nextHref = episodeHref(next.ep.primary_path);
         $("#nextBtn").setAttribute("href", nextHref);
-        $("#nextBanner").querySelector(".label").textContent = `Next recommended: ${next.ep.episode_code || "EP"} â€¢ ${next.ep.title || next.ep.slug}`;
+        $("#nextBanner").querySelector(".label").textContent = `Next recommended: ${next.ep.episode_code || "EP"} • ${next.ep.title || next.ep.slug}`;
         $("#nextWhy").textContent = `Completion: ${next.completion.pct}%. We recommend the lowest-completion active episode.`;
       }
 

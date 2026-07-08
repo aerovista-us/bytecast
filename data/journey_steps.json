@@ -499,7 +499,7 @@
     },
     {
       "id": "art_localized_training",
-      "label": "The Art Localized â€” Training",
+      "label": "The Art Localized — Training",
       "description": "Listen -> Slide -> Engage -> Proof Mission. Episodes 0-4 + launch readiness mission + final assessment. Badges: Listener, Foundation, Division Ally, Partner Ready, Amplifier, Certified.",
       "isDefault": false,
       "steps": [
@@ -1109,8 +1109,8 @@
     },
     {
       "id": "contributor_onboarding_training",
-      "label": "Contributor Onboarding â€” Training",
-      "description": "Listen â†’ Slide â†’ Engage. Episodes 0â€“4 + final assessment. Focus: studio context, fit, lanes, work orders, Crew Check readiness.",
+      "label": "Contributor Onboarding — Training",
+      "description": "Listen → Slide → Engage. Episodes 0–4 + final assessment. Focus: studio context, fit, lanes, work orders, Crew Check readiness.",
       "isDefault": false,
       "steps": [
         {
@@ -1571,7 +1571,7 @@
     {
       "id": "apparel_onboarding_v1",
       "label": "Apparel Ops Onboarding",
-      "description": "AV Apparel ByteCasts + practice + work order + seed. Listen â†’ Slide â†’ Engage â†’ Training â†’ Seed â†’ Badge.",
+      "description": "AV Apparel ByteCasts + practice + work order + seed. Listen → Slide → Engage → Training → Seed → Badge.",
       "isDefault": false,
       "steps": [
         {

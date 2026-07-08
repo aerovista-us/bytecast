@@ -186,12 +186,13 @@ body {
   padding: 0.56rem 0.68rem;
   font: inherit;
   color: var(--ink);
-  background: rgba(0, 0, 0, 0.26);
+  background: #0f141c;
+  color-scheme: dark;
 }
 
 .controls-grid select option {
-  color: #fff;
-  background: #131821;
+  background-color: #131821;
+  color: #f4fbff;
 }
 
 .controls-grid input::placeholder {
