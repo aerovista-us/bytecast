@@ -20,6 +20,39 @@
   --shadow: 0 18px 65px rgba(0, 0, 0, 0.55);
   --radius: 18px;
   --radius-sm: 12px;
+
+  /* Section lane colors */
+  --lane-home-accent: #22a7ff;
+  --lane-home-line: rgba(34, 167, 255, 0.34);
+  --lane-home-bg: linear-gradient(145deg, rgba(34, 167, 255, 0.16), rgba(166, 107, 255, 0.07) 58%, rgba(8, 12, 18, 0.92));
+
+  --lane-continue-accent: #ffc45a;
+  --lane-continue-line: rgba(255, 196, 90, 0.34);
+  --lane-continue-bg: linear-gradient(140deg, rgba(255, 196, 90, 0.14), rgba(255, 106, 42, 0.05) 55%, rgba(8, 12, 18, 0.94));
+
+  --lane-pulse-accent: #b48cff;
+  --lane-pulse-line: rgba(166, 107, 255, 0.38);
+  --lane-pulse-bg: linear-gradient(145deg, rgba(166, 107, 255, 0.18), rgba(34, 167, 255, 0.06) 60%, rgba(8, 12, 18, 0.94));
+
+  --lane-start-accent: #3dd6c3;
+  --lane-start-line: rgba(61, 214, 195, 0.34);
+  --lane-start-bg: linear-gradient(145deg, rgba(61, 214, 195, 0.14), rgba(34, 167, 255, 0.05) 58%, rgba(8, 12, 18, 0.94));
+
+  --lane-skills-accent: #ff7a45;
+  --lane-skills-line: rgba(255, 106, 42, 0.36);
+  --lane-skills-bg: linear-gradient(145deg, rgba(255, 106, 42, 0.15), rgba(255, 196, 90, 0.06) 55%, rgba(8, 12, 18, 0.94));
+
+  --lane-ecosystem-accent: #5eb3ff;
+  --lane-ecosystem-line: rgba(94, 179, 255, 0.34);
+  --lane-ecosystem-bg: linear-gradient(145deg, rgba(94, 179, 255, 0.14), rgba(61, 214, 195, 0.05) 58%, rgba(8, 12, 18, 0.94));
+
+  --lane-reference-accent: #a8b8cc;
+  --lane-reference-line: rgba(168, 184, 204, 0.3);
+  --lane-reference-bg: linear-gradient(145deg, rgba(168, 184, 204, 0.1), rgba(255, 196, 90, 0.04) 55%, rgba(8, 12, 18, 0.96));
+
+  --lane-catalog-accent: #7f8fa3;
+  --lane-catalog-line: rgba(127, 143, 163, 0.28);
+  --lane-catalog-bg: linear-gradient(145deg, rgba(127, 143, 163, 0.1), rgba(255, 255, 255, 0.02) 60%, rgba(8, 12, 18, 0.96));
 }
 
 * {
@@ -117,14 +150,98 @@ body {
   max-width: 1120px;
   margin: 0 auto;
   padding: 0.72rem 1rem 2rem;
+  display: grid;
+  gap: 0.15rem;
+}
+
+/* Section bands — shared shell with left accent rail */
+.section-band {
+  position: relative;
+  --section-accent: var(--neon);
+  --section-line: var(--line);
+  --section-bg: var(--panel-soft);
+  --section-eyebrow: #9fe8ff;
+  border-color: var(--section-line);
+  background: var(--section-bg);
+  padding: 1rem 1rem 1.05rem 1.2rem;
+  margin-bottom: 0.35rem;
+  overflow: hidden;
+}
+
+.section-band::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--section-accent);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--section-accent) 55%, transparent);
+}
+
+.section-band .section-eyebrow,
+.section-band > .eyebrow:first-child {
+  color: var(--section-eyebrow);
+}
+
+.section-band--home {
+  --section-accent: var(--lane-home-accent);
+  --section-line: var(--lane-home-line);
+  --section-bg: var(--lane-home-bg);
+  --section-eyebrow: #9fe8ff;
+}
+
+.section-band--continue {
+  --section-accent: var(--lane-continue-accent);
+  --section-line: var(--lane-continue-line);
+  --section-bg: var(--lane-continue-bg);
+  --section-eyebrow: #ffe0a2;
+}
+
+.section-band--pulse {
+  --section-accent: var(--lane-pulse-accent);
+  --section-line: var(--lane-pulse-line);
+  --section-bg: var(--lane-pulse-bg);
+  --section-eyebrow: #d9b8ff;
+}
+
+.section-band--getting-started {
+  --section-accent: var(--lane-start-accent);
+  --section-line: var(--lane-start-line);
+  --section-bg: var(--lane-start-bg);
+  --section-eyebrow: #9ef5ea;
+}
+
+.section-band--skills {
+  --section-accent: var(--lane-skills-accent);
+  --section-line: var(--lane-skills-line);
+  --section-bg: var(--lane-skills-bg);
+  --section-eyebrow: #ffc9a8;
+}
+
+.section-band--ecosystem {
+  --section-accent: var(--lane-ecosystem-accent);
+  --section-line: var(--lane-ecosystem-line);
+  --section-bg: var(--lane-ecosystem-bg);
+  --section-eyebrow: #b8dcff;
+}
+
+.section-band--reference {
+  --section-accent: var(--lane-reference-accent);
+  --section-line: var(--lane-reference-line);
+  --section-bg: var(--lane-reference-bg);
+  --section-eyebrow: #d2dde8;
+}
+
+.section-band--catalog {
+  --section-accent: var(--lane-catalog-accent);
+  --section-line: var(--lane-catalog-line);
+  --section-bg: var(--lane-catalog-bg);
+  --section-eyebrow: #b8c4d4;
 }
 
 .home-hero {
-  border-color: rgba(34, 167, 255, 0.28);
-  background:
-    linear-gradient(145deg, rgba(34, 167, 255, 0.14), rgba(166, 107, 255, 0.06) 55%, rgba(255, 255, 255, 0.02)),
-    var(--panel-soft);
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.35rem;
 }
 
 .home-hero__top {
@@ -154,10 +271,10 @@ body {
 }
 
 .glance-stat {
-  border: 1px solid var(--line);
+  border: 1px solid color-mix(in srgb, var(--section-accent, var(--line)) 35%, var(--line));
   border-radius: 12px;
   padding: 0.55rem 0.65rem;
-  background: rgba(0, 0, 0, 0.22);
+  background: rgba(0, 0, 0, 0.28);
   display: grid;
   gap: 0.2rem;
 }
@@ -182,7 +299,7 @@ body {
   gap: 0.45rem;
   margin-top: 0.95rem;
   padding-top: 0.85rem;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid color-mix(in srgb, var(--section-accent) 25%, var(--line));
 }
 
 .home-quick-links a {
@@ -190,23 +307,44 @@ body {
   color: var(--ink);
   font-size: 0.82rem;
   font-weight: 600;
-  border: 1px solid var(--line);
+  border: 1px solid color-mix(in srgb, var(--section-accent) 30%, var(--line));
   border-radius: 999px;
   padding: 0.35rem 0.72rem;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.home-quick-links a[href="#pulse-section"] {
+  border-color: color-mix(in srgb, var(--lane-pulse-accent) 45%, var(--line));
+  color: #e8d4ff;
+}
+
+.home-quick-links a[href="#getting-started-section"] {
+  border-color: color-mix(in srgb, var(--lane-start-accent) 45%, var(--line));
+  color: #c9fff7;
+}
+
+.home-quick-links a[href="#skills-section"] {
+  border-color: color-mix(in srgb, var(--lane-skills-accent) 45%, var(--line));
+  color: #ffd8c4;
+}
+
+.home-quick-links a[href="#ecosystem-section"] {
+  border-color: color-mix(in srgb, var(--lane-ecosystem-accent) 45%, var(--line));
+  color: #d4ebff;
+}
+
+.home-quick-links a[href="#all-training"] {
+  border-color: color-mix(in srgb, var(--lane-catalog-accent) 45%, var(--line));
+  color: #d5dde8;
 }
 
 .home-quick-links a:hover {
-  border-color: var(--line-strong);
-  box-shadow: 0 0 14px rgba(34, 167, 255, 0.18);
+  border-color: var(--section-accent);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--section-accent) 35%, transparent);
 }
 
 .continue-strip {
-  border-color: rgba(255, 196, 90, 0.22);
-  background:
-    linear-gradient(140deg, rgba(255, 196, 90, 0.08), rgba(255, 255, 255, 0.02)),
-    var(--panel-soft);
-  margin-bottom: 1.1rem;
+  margin-bottom: 0.35rem;
 }
 
 .continue-strip__layout {
@@ -269,7 +407,7 @@ body {
 
 .journey-map-details {
   margin-top: 0.75rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid color-mix(in srgb, var(--section-accent) 22%, var(--line));
   padding-top: 0.55rem;
 }
 
@@ -287,7 +425,7 @@ body {
 
 .journey-map-details[open] > summary {
   margin-bottom: 0.65rem;
-  color: #9fe8ff;
+  color: var(--section-eyebrow);
 }
 
 .panel {
@@ -299,6 +437,13 @@ body {
   padding: 1rem;
   box-shadow: var(--shadow);
   margin-bottom: 1rem;
+}
+
+.panel.section-band {
+  background: var(--section-bg);
+  border-color: var(--section-line);
+  margin-bottom: 0.35rem;
+  padding: 1rem 1rem 1.05rem 1.2rem;
 }
 
 .glossary-panel {
@@ -407,9 +552,15 @@ body {
 }
 
 .wf-pill.done {
-  color: #9fe8ff;
-  border-color: rgba(34, 167, 255, 0.45);
-  background: rgba(34, 167, 255, 0.12);
+  color: var(--section-eyebrow, #9fe8ff);
+  border-color: color-mix(in srgb, var(--section-accent, var(--neon)) 45%, var(--line));
+  background: color-mix(in srgb, var(--section-accent, var(--neon)) 14%, transparent);
+}
+
+.section-band--continue .wf-pill.done {
+  color: #ffe8b8;
+  border-color: rgba(255, 196, 90, 0.45);
+  background: rgba(255, 196, 90, 0.12);
 }
 
 .metrics-panel {
@@ -634,7 +785,7 @@ body {
 }
 
 .home-section {
-  margin-bottom: 1.35rem;
+  margin-bottom: 0.35rem;
 }
 
 .home-section h2 {
@@ -645,7 +796,6 @@ body {
 
 .section-eyebrow {
   margin: 0;
-  color: #9fe8ff;
 }
 
 .section-intro {
@@ -661,22 +811,33 @@ body {
 
 .module-card--compact {
   gap: 0.45rem;
+  background: rgba(0, 0, 0, 0.26);
+  border-color: color-mix(in srgb, var(--section-accent, var(--line)) 28%, var(--line));
 }
 
-.module-series-label {
+.section-band .module-card--compact .module-series-label {
+  color: var(--section-eyebrow);
   margin: 0;
-  color: #9fe8ff;
   font-size: 0.76rem;
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
-.pulse-panel {
-  border-color: rgba(166, 107, 255, 0.28);
-  background:
-    linear-gradient(145deg, rgba(166, 107, 255, 0.12), rgba(34, 167, 255, 0.06) 58%, rgba(255, 255, 255, 0.02)),
-    var(--panel-soft);
+.section-band .module-card--compact .launch-link {
+  border-color: color-mix(in srgb, var(--section-accent) 50%, var(--line));
+  background: color-mix(in srgb, var(--section-accent) 12%, rgba(0, 0, 0, 0.2));
+  box-shadow: 0 0 16px color-mix(in srgb, var(--section-accent) 22%, transparent);
+}
+
+.section-band--reference .module-actions .launch-link,
+.section-band--reference .module-actions button {
+  border-color: color-mix(in srgb, var(--lane-reference-accent) 40%, var(--line));
+}
+
+.section-band--pulse .pulse-series-head .launch-link {
+  border-color: color-mix(in srgb, var(--lane-pulse-accent) 50%, var(--line));
+  background: color-mix(in srgb, var(--lane-pulse-accent) 12%, rgba(0, 0, 0, 0.2));
 }
 
 .pulse-series-head {
@@ -699,10 +860,10 @@ body {
 }
 
 .pulse-card {
-  border: 1px solid rgba(166, 107, 255, 0.28);
+  border: 1px solid color-mix(in srgb, var(--lane-pulse-accent) 40%, var(--line));
   border-radius: 14px;
   padding: 0.85rem;
-  background: rgba(0, 0, 0, 0.22);
+  background: rgba(0, 0, 0, 0.3);
   display: grid;
   gap: 0.45rem;
 }
@@ -734,7 +895,7 @@ body {
 }
 
 .all-training-panel {
-  margin-top: 1.2rem;
+  margin-top: 0.35rem;
 }
 
 .all-training-panel > summary {
@@ -765,7 +926,7 @@ body {
 .all-training-body {
   margin-top: 1rem;
   padding-top: 0.5rem;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid color-mix(in srgb, var(--section-accent) 22%, var(--line));
 }
 
 @media (max-width: 880px) {
