@@ -9,10 +9,11 @@ This is a reference map of the runnable pages (packs + shells) in the `bytecast/
 
 | Area | Repo path | GitHub Pages URL | Lane |
 |---|---|---|---|
-| Workspace entry (sacred indexer) | `index.html` | `https://aerovista-us.github.io/bytecast/` | Doors + journey only |
-| ByteCast App (launcher) | `seed_bytecast.html` | `https://aerovista-us.github.io/bytecast/seed_bytecast.html` | Episode discovery + resume + progress |
-| Training Hub (shell) | `episodes/training_hub/index.html` | `https://aerovista-us.github.io/bytecast/episodes/training_hub/index.html` | Onboarding + module routing |
-| Seed Builder Studio (shell) | `episodes/seed_builder_studio/index.html` | `https://aerovista-us.github.io/bytecast/episodes/seed_builder_studio/index.html` | Tooling + generator routing |
+| **Employee home (ByteCast)** | `episodes/training_hub/index.html` | `https://aerovista-us.github.io/bytecast/episodes/training_hub/index.html` | Continue · Pulse · lifecycle sections |
+| Workspace root (redirect) | `index.html` | `https://aerovista-us.github.io/bytecast/` | Redirects to employee home |
+| Continue / Playlist | `seed_bytecast.html` | `https://aerovista-us.github.io/bytecast/seed_bytecast.html` | Resume journey + episode discovery |
+| Seed Builder (Build) | `episodes/seed_builder_studio/index.html` | `https://aerovista-us.github.io/bytecast/episodes/seed_builder_studio/index.html` | Contributor tooling |
+| Pulse feed (data) | `data/pulse.json` | `https://aerovista-us.github.io/bytecast/data/pulse.json` | What's new on employee home |
 
 ## Local run (Docker Compose)
 

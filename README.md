@@ -3,16 +3,17 @@
 ByteCast is the **employee pulse** for AeroVista collaborators: what's new, what to learn next, and how to use the ecosystem — from day 1 to last day. Full product direction: [`docs/BYTECAST_PRODUCT_DIRECTION.md`](docs/BYTECAST_PRODUCT_DIRECTION.md).
 
 ## Start here
-1. Open the workspace entry:
-   - GitHub Pages: `https://aerovista-us.github.io/bytecast/`
+1. Open the employee home:
+   - GitHub Pages: `https://aerovista-us.github.io/bytecast/` (redirects to employee home)
+   - Direct: `https://aerovista-us.github.io/bytecast/episodes/training_hub/index.html`
    - Local server: `python -m http.server 8080` then open `http://localhost:8080`
-2. Use the Smart Workflow panel:
-   - complete `ByteCast (listen -> slide -> interact) -> Training Hub -> Seed Builder real work`
-   - each completed cycle unlocks the next Seed Builder ability level
+2. **Continue** — resume your active journey (`seed_bytecast.html`)
+3. **Pulse** — what's new (from `data/pulse.json`)
+4. **Build** — Seed Builder Studio (contributors)
 
 ## Primary apps
-- ByteCast App: `seed_bytecast.html`
-- Training Hub: `episodes/training_hub/index.html`
+- **ByteCast (employee home):** `episodes/training_hub/index.html`
+- Continue / Playlist: `seed_bytecast.html`
 - Seed Builder Studio: `episodes/seed_builder_studio/index.html`
 
 ## Docs and governance

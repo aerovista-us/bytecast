@@ -1,11 +1,19 @@
 const MANIFEST_PATH = "./data/modules.json";
 const CANON_MAP_PATH = "../../.CODEX/bytecast_canon_map_2026-02-08.md";
 const JOURNEY_PATH = "../../data/journey_steps.json";
+const PULSE_PATH = "../../data/pulse.json";
 const PRIMARY_JOURNEY_ID = "";
 const WORKFLOW_KEY = "bytecast.workflow.v1";
 const APP_MODE = document.body.dataset.appMode || "training";
 const Loop = window.ByteCastLoop || null;
 const LoopUI = window.ByteCastLoopUI || null;
+
+const LIFECYCLE_SECTIONS = [
+  { id: "getting_started", containerId: "lifecycle-getting_started" },
+  { id: "skills", containerId: "lifecycle-skills" },
+  { id: "ecosystem", containerId: "lifecycle-ecosystem" },
+  { id: "reference", containerId: "lifecycle-reference" },
+];
 
 const state = {
   modules: [],
@@ -14,6 +22,7 @@ const state = {
   journeyConfig: null,
   primaryJourney: null,
   nextJourneyHref: "",
+  pulse: { series: [], items: [] },
 };
 
 const refs = {
@@ -43,10 +52,11 @@ async function init() {
   wireEvents();
   renderWorkflow();
   try {
-    const [manifestResponse, canonResponse, journeyResponse] = await Promise.all([
+    const [manifestResponse, canonResponse, journeyResponse, pulseResponse] = await Promise.all([
       fetch(MANIFEST_PATH),
       fetch(CANON_MAP_PATH),
       fetch(JOURNEY_PATH),
+      fetch(PULSE_PATH),
     ]);
 
     if (!manifestResponse.ok) {
@@ -66,6 +76,12 @@ async function init() {
       journeyConfig = null;
     }
 
+    try {
+      state.pulse = pulseResponse.ok ? await pulseResponse.json() : { series: [], items: [] };
+    } catch {
+      state.pulse = { series: [], items: [] };
+    }
+
     state.modules = Array.isArray(manifest.modules) ? manifest.modules : [];
     state.series = Array.isArray(manifest.series) ? manifest.series : [];
     state.canonEntries = parseCanonEntries(canonMarkdown);
@@ -76,6 +92,8 @@ async function init() {
 
     hydrateCategoryFilter(state.modules);
     render();
+    renderPulse();
+    renderLifecycleSections();
     renderWorkflow();
     refs.loadStatus.textContent = `Loaded ${state.modules.length} learning modules across ${state.series.length || 1} registered series.`;
   } catch (error) {
@@ -289,7 +307,7 @@ function renderWorkflow() {
 
     if (refs.nextAppLink) {
       refs.nextAppLink.href = nextHref || "../seed_bytecast.html";
-      refs.nextAppLink.textContent = next ? toLearningCta(next.cta, next.label) : "Open Playlist";
+      refs.nextAppLink.textContent = next ? toLearningCta(next.cta, next.label) : "Open Continue";
       refs.nextAppLink.classList.toggle("is-disabled", !nextHref);
       refs.nextAppLink.setAttribute("aria-disabled", nextHref ? "false" : "true");
     }
@@ -546,6 +564,236 @@ function groupModulesBySeries(modules) {
     }
     return left.name.localeCompare(right.name);
   });
+}
+
+function getSeriesLifecycleSection(seriesId) {
+  return getSeriesMeta(seriesId)?.lifecycle_section || "";
+}
+
+function resolveRootHref(href) {
+  const raw = String(href || "").trim();
+  if (!raw) {
+    return "#";
+  }
+  if (/^https?:\/\//i.test(raw)) {
+    return raw;
+  }
+  return `../../${raw.replace(/^\/+/, "")}`;
+}
+
+function getHomeModulesForSection(sectionId) {
+  const featured = state.modules
+    .filter((module) => module.home_featured && getSeriesLifecycleSection(module.series_id) === sectionId)
+    .sort((left, right) => {
+      const seriesDiff = getSeriesOrder(left) - getSeriesOrder(right);
+      if (seriesDiff !== 0) {
+        return seriesDiff;
+      }
+      return getModuleSequence(left) - getModuleSequence(right);
+    });
+
+  if (featured.length) {
+    return featured;
+  }
+
+  const bySeries = new Map();
+  for (const module of state.modules) {
+    if (getSeriesLifecycleSection(module.series_id) !== sectionId) {
+      continue;
+    }
+
+    const key = String(module.series_id || module.id || "");
+    const existing = bySeries.get(key);
+    if (!existing || getModuleSequence(module) < getModuleSequence(existing)) {
+      bySeries.set(key, module);
+    }
+  }
+
+  return [...bySeries.values()].sort((left, right) => {
+    const seriesDiff = getSeriesOrder(left) - getSeriesOrder(right);
+    if (seriesDiff !== 0) {
+      return seriesDiff;
+    }
+    return left.name.localeCompare(right.name);
+  });
+}
+
+function renderLifecycleSections() {
+  for (const section of LIFECYCLE_SECTIONS) {
+    const container = document.getElementById(section.containerId);
+    if (!container) {
+      continue;
+    }
+
+    const modules = getHomeModulesForSection(section.id);
+    container.replaceChildren();
+
+    if (!modules.length) {
+      const empty = document.createElement("p");
+      empty.className = "status-line";
+      empty.textContent = "No modules in this section yet.";
+      container.append(empty);
+      continue;
+    }
+
+    for (const module of modules) {
+      container.append(renderCompactModuleCard(module));
+    }
+  }
+}
+
+function renderCompactModuleCard(module) {
+  const article = document.createElement("article");
+  article.className = "module-card module-card--compact";
+
+  const name = document.createElement("h3");
+  name.className = "module-name";
+  name.textContent = module.name;
+  article.append(name);
+
+  const series = document.createElement("p");
+  series.className = "module-series-label";
+  series.textContent = getSeriesName(module);
+  article.append(series);
+
+  const description = document.createElement("p");
+  description.className = "module-desc";
+  description.textContent = module.description || "No description.";
+  article.append(description);
+
+  const actions = document.createElement("div");
+  actions.className = "module-actions";
+  article.append(actions);
+
+  const launch = document.createElement("a");
+  launch.className = "launch-link";
+  launch.href = module.path;
+  launch.textContent = module.launch_label || "Open";
+  actions.append(launch);
+
+  return article;
+}
+
+function renderPulse() {
+  const container = document.getElementById("pulse-feed");
+  if (!container) {
+    return;
+  }
+
+  container.replaceChildren();
+  const items = Array.isArray(state.pulse?.items) ? [...state.pulse.items] : [];
+  const seriesList = Array.isArray(state.pulse?.series) ? [...state.pulse.series] : [];
+
+  if (!items.length) {
+    const empty = document.createElement("p");
+    empty.className = "status-line";
+    empty.textContent = "No pulse items yet. Add rows to data/pulse.json.";
+    container.append(empty);
+    return;
+  }
+
+  items.sort((left, right) => {
+    const orderDiff = (Number(left.sort_order) || 999) - (Number(right.sort_order) || 999);
+    if (orderDiff !== 0) {
+      return orderDiff;
+    }
+    return String(left.title || "").localeCompare(String(right.title || ""));
+  });
+
+  seriesList.sort((left, right) => (Number(left.sort_order) || 999) - (Number(right.sort_order) || 999));
+
+  const renderedSeries = seriesList.length
+    ? seriesList
+    : [{ id: "default", title: "Pulse", description: "", portal_href: "" }];
+
+  for (const series of renderedSeries) {
+    const seriesItems = series.id === "default"
+      ? items
+      : items.filter((item) => String(item.series_id || "") === String(series.id || ""));
+
+    if (!seriesItems.length) {
+      continue;
+    }
+
+    const head = document.createElement("div");
+    head.className = "pulse-series-head";
+
+    const copy = document.createElement("div");
+    copy.className = "pulse-series-copy";
+    head.append(copy);
+
+    const title = document.createElement("h3");
+    title.className = "pulse-series-title";
+    title.textContent = series.title || "Pulse";
+    copy.append(title);
+
+    if (series.description) {
+      const description = document.createElement("p");
+      description.className = "status-line";
+      description.textContent = series.description;
+      copy.append(description);
+    }
+
+    if (series.portal_href) {
+      const portal = document.createElement("a");
+      portal.className = "launch-link";
+      portal.href = resolveRootHref(series.portal_href);
+      portal.textContent = "Open full series";
+      head.append(portal);
+    }
+
+    container.append(head);
+
+    const grid = document.createElement("div");
+    grid.className = "pulse-grid";
+    for (const item of seriesItems) {
+      grid.append(renderPulseCard(item));
+    }
+    container.append(grid);
+  }
+}
+
+function renderPulseCard(item) {
+  const article = document.createElement("article");
+  article.className = "pulse-card";
+
+  const title = document.createElement("h4");
+  title.className = "pulse-card-title";
+  title.textContent = item.title || "Pulse item";
+  article.append(title);
+
+  if (item.summary) {
+    const summary = document.createElement("p");
+    summary.className = "pulse-card-summary";
+    summary.textContent = item.summary;
+    article.append(summary);
+  }
+
+  const meta = document.createElement("p");
+  meta.className = "pulse-card-meta";
+  const bits = [];
+  if (item.published_on) {
+    bits.push(item.published_on);
+  }
+  if (item.type) {
+    bits.push(item.type);
+  }
+  meta.textContent = bits.join(" · ");
+  if (bits.length) {
+    article.append(meta);
+  }
+
+  const actions = document.createElement("div");
+  actions.className = "module-actions";
+  article.append(actions);
+
+  const launch = document.createElement("a");
+  launch.className = "launch-link";
+  launch.href = resolveRootHref(item.href);
+  launch.textContent = "Listen";
+  actions.append(launch);
+
+  return article;
 }
 
 function render() {

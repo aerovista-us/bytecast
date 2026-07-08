@@ -1,0 +1,81 @@
+{
+  "schema": "bytecast-pulse-feed-v1",
+  "updated_on": "2026-07-07",
+  "series": [
+    {
+      "id": "shareholder_season1",
+      "title": "Company Briefings — Season 1",
+      "description": "Strategic signal briefings on the AeroVista universe, operations, revenue, onboarding, automation, and roadmap.",
+      "portal_href": "bytecast-season1.html",
+      "sort_order": 10
+    }
+  ],
+  "items": [
+    {
+      "id": "pulse-s1-01",
+      "series_id": "shareholder_season1",
+      "title": "Briefing 1: The AeroVista Universe",
+      "summary": "Platform story, seven divisions, and how the ecosystem fits together.",
+      "href": "episodes/shareholder_s1_ep01/index.html",
+      "published_on": "2026-02-01",
+      "sort_order": 1,
+      "type": "signal",
+      "teaching_mode": "BriefingSync"
+    },
+    {
+      "id": "pulse-s1-02",
+      "series_id": "shareholder_season1",
+      "title": "Briefing 2: Service Portfolio",
+      "summary": "How AeroVista packages services and offers for the market.",
+      "href": "episodes/shareholder_s1_ep02/index.html",
+      "published_on": "2026-02-08",
+      "sort_order": 2,
+      "type": "signal",
+      "teaching_mode": "BriefingSync"
+    },
+    {
+      "id": "pulse-s1-03",
+      "series_id": "shareholder_season1",
+      "title": "Briefing 3: Documented Ecosystem",
+      "summary": "Documentation, governance, and ecosystem visibility.",
+      "href": "episodes/shareholder_s1_ep03/index.html",
+      "published_on": "2026-02-15",
+      "sort_order": 3,
+      "type": "signal",
+      "teaching_mode": "BriefingSync"
+    },
+    {
+      "id": "pulse-s1-04",
+      "series_id": "shareholder_season1",
+      "title": "Briefing 4: The Portable Ecosystem",
+      "summary": "Portable ecosystem narrative and operating model.",
+      "href": "episodes/shareholder_s1_ep04/index.html",
+      "published_on": "2026-02-22",
+      "sort_order": 4,
+      "type": "signal",
+      "teaching_mode": "BriefingSync"
+    },
+    {
+      "id": "pulse-s1-05",
+      "series_id": "shareholder_season1",
+      "title": "Briefing 5: Revenue & Growth Model",
+      "summary": "Revenue engine, growth model, and commercial priorities.",
+      "href": "episodes/shareholder_s1_ep05/index.html",
+      "published_on": "2026-03-01",
+      "sort_order": 5,
+      "type": "signal",
+      "teaching_mode": "BriefingSync"
+    },
+    {
+      "id": "pulse-s1-06",
+      "series_id": "shareholder_season1",
+      "title": "Briefing 6: The Roadmap Forward",
+      "summary": "Forward roadmap and expectations for the next quarter.",
+      "href": "episodes/shareholder_s1_ep06/index.html",
+      "published_on": "2026-03-08",
+      "sort_order": 6,
+      "type": "signal",
+      "teaching_mode": "BriefingSync"
+    }
+  ]
+}

@@ -212,8 +212,8 @@ Phases are ordered by employee-visible impact. Track status in [`PLATFORM_STATUS
 
 | Phase | Scope | Employee-visible outcome |
 |-------|--------|---------------------------|
-| **A — Home reframe** | Rebrand Training Hub → ByteCast; reorder sections (Continue → Pulse → Getting started → Skills → Reference); collapse full catalog; root `index.html` → home | One clear front door |
-| **B — Pulse feed** | `data/pulse.json`; Shareholder Season 1 as first Pulse series; home "What's new" block | New comms ship without editing four config files |
+| **A — Home reframe** | **Done (2026-07-07)** | Rebrand Training Hub → ByteCast employee home; lifecycle sections; root `index.html` → home; catalog collapsed under All training |
+| **B — Pulse feed** | **Done (2026-07-07)** | `data/pulse.json`; Shareholder Season 1 as first Pulse series; home What's new block — see [`PULSE_FEED.md`](./PULSE_FEED.md) |
 | **C — Catalog unification** | `data/catalog.json` + sync script; CI validation | Authors edit one source |
 | **D — Handoffs** | Standard footer on packs; thread tags + `related_next` in profiles | Connected conversations across apps |
 | **E — URL cleanup** | Inline Season 1 players; audio under `assets/`; retire redirect chains | Stable links |

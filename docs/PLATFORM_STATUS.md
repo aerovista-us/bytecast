@@ -9,11 +9,12 @@
 
 | Door | Path | Current role |
 |------|------|--------------|
-| Workspace entry | `index.html` | Top-level door map into the workspace |
-| Playlist | `seed_bytecast.html` | Episode discovery, resume, badges, and next recommended action |
-| Training Hub | `episodes/training_hub/index.html` | Module routing, active journey map, and featured current missions |
-| Seed Builder Studio | `episodes/seed_builder_studio/index.html` | Seeding tools, Orchard access, and seed standards |
-| Docs Portal (HTML) | `docs/index.html` | Builder docs, reviewer tools, standards, raw runtime references |
+| **Employee home (ByteCast)** | `index.html` → `episodes/training_hub/index.html` | **Primary front door** — Continue, Pulse, lifecycle sections |
+| Playlist (Continue) | `seed_bytecast.html` | Resume episodes, badges, journey progress |
+| Seed Builder Studio | `episodes/seed_builder_studio/index.html` | Contributor **Build** tools (not employee default) |
+| Docs Portal (HTML) | `docs/index.html` | **Reference** — standards, reviewer tools |
+
+Legacy label **Training Hub** retired in UI; path unchanged (`episodes/training_hub/`).
 
 ## Canonical runtime episodes
 
@@ -41,8 +42,9 @@ Registry mirrors:
 
 ## Training Hub and missions
 
-- **Training Hub shell:** `episodes/training_hub/index.html`
-- **Manifest:** `episodes/training_hub/data/modules.json` (updated 2026-07-07)
+- **Employee home shell:** `episodes/training_hub/index.html` (UI: **ByteCast**)
+- **Pulse feed:** `data/pulse.json` — see [`PULSE_FEED.md`](./PULSE_FEED.md)
+- **Manifest:** `episodes/training_hub/data/modules.json` (`lifecycle_section` on series, `home_featured` on starters)
 - **Current Day 1 check:** `episodes/training_missions/tr_001a_day1_foundations/index.html`
 - **Legacy Day 1 reference:** `episodes/training_missions/tr_001_golden_path/index.html`
 - **Current sales lab:** `episodes/training_missions/dispatchflow_sales_workbook.html`
