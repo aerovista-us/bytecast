@@ -29,25 +29,66 @@
   </header>
 
   <main id="main-content" class="shell-main">
-    <section class="panel workflow-panel home-section" aria-label="Continue learning">
-      <p class="eyebrow section-eyebrow">Continue</p>
-      <h2>Pick up where you left off</h2>
-      <p id="workflow-summary" class="workflow-summary">Loading progress...</p>
-      <div class="workflow-pills">
-        <span id="wf-bytecast" class="wf-pill">ByteCast lessons</span>
-        <span id="wf-training" class="wf-pill">Training mission</span>
-        <span id="wf-seed" class="wf-pill">Practice builder</span>
+    <section class="panel home-hero" aria-label="ByteCast home">
+      <div class="home-hero__top">
+        <div class="home-hero__copy">
+          <p class="eyebrow">Employee home</p>
+          <h2 id="home-headline">Welcome</h2>
+          <p id="home-lede" class="home-lede">Your pulse on what's new, what to learn, and where to go next at AeroVista.</p>
+        </div>
+        <div class="home-glance" aria-label="At a glance">
+          <div class="glance-stat">
+            <span class="glance-label">Active journey</span>
+            <strong id="home-journey-label">Loading…</strong>
+          </div>
+          <div class="glance-stat">
+            <span class="glance-label">Progress</span>
+            <strong id="home-progress-value">—</strong>
+          </div>
+          <div class="glance-stat">
+            <span class="glance-label">Pulse</span>
+            <strong id="home-pulse-count">—</strong>
+          </div>
+          <div class="glance-stat">
+            <span class="glance-label">Last active</span>
+            <strong id="home-updated-at">—</strong>
+          </div>
+        </div>
       </div>
-      <div class="module-actions workflow-actions">
-        <button id="mark-loop-step" type="button">Open Next Step</button>
-        <a class="launch-link" href="../../seed_bytecast.html">Open Continue</a>
-        <a id="next-app-link" href="../seed_builder_studio/index.html">Open Next Step</a>
-      </div>
-      <p id="workflow-note" class="status-line">Progress is saved on this browser.</p>
-      <div id="journey-map" class="journey-map-compact"></div>
+      <nav class="home-quick-links" aria-label="Quick links">
+        <a href="#pulse-section">What's new</a>
+        <a href="#getting-started-section">Getting started</a>
+        <a href="#skills-section">Skills</a>
+        <a href="#all-training">All training</a>
+      </nav>
     </section>
 
-    <section class="panel pulse-panel home-section" aria-label="What's new">
+    <section class="panel continue-strip" aria-label="Continue learning">
+      <div class="continue-strip__layout">
+        <div class="continue-strip__main">
+          <p class="eyebrow section-eyebrow">Continue</p>
+          <h2 class="continue-strip__title" id="home-next-label">Next up</h2>
+          <p id="workflow-summary" class="workflow-summary">Loading progress…</p>
+          <div class="workflow-pills workflow-pills--compact">
+            <span id="wf-bytecast" class="wf-pill">ByteCast lessons</span>
+            <span id="wf-training" class="wf-pill">Training mission</span>
+            <span id="wf-seed" class="wf-pill">Practice builder</span>
+          </div>
+        </div>
+        <div class="module-actions continue-strip__actions">
+          <button id="mark-loop-step" type="button" class="btn-continue-primary">Open next step</button>
+          <a id="next-app-link" class="launch-link" href="../../seed_bytecast.html">Continue</a>
+          <a class="launch-link launch-link--ghost" href="../../seed_bytecast.html">Full journey view</a>
+        </div>
+      </div>
+      <p id="workflow-note" class="status-line continue-strip__note">Progress is saved on this browser.</p>
+      <details class="journey-map-details">
+        <summary>View journey map</summary>
+        <div id="journey-map" class="journey-map-compact"></div>
+      </details>
+    </section>
+
+    <section id="pulse-section" class="panel pulse-panel home-section" aria-label="What's new">
       <p class="eyebrow section-eyebrow">Pulse</p>
       <h2>What's new</h2>
       <p class="status-line">Company signals and briefings — optional listening, not Day 1 gates.</p>
@@ -56,14 +97,14 @@
       </div>
     </section>
 
-    <section class="home-section" aria-label="Getting started">
+    <section id="getting-started-section" class="home-section" aria-label="Getting started">
       <p class="eyebrow section-eyebrow">Getting Started</p>
       <h2 class="section-title">Day 1 foundations</h2>
       <p class="status-line section-intro">Start here if you're new — core episodes, Day 1 check, then practice handoff.</p>
       <div id="lifecycle-getting_started" class="lifecycle-grid"></div>
     </section>
 
-    <section class="home-section" aria-label="Skills">
+    <section id="skills-section" class="home-section" aria-label="Skills">
       <p class="eyebrow section-eyebrow">Skills</p>
       <h2 class="section-title">Skills for your role</h2>
       <p class="status-line section-intro">Sales, creative, ops, and contributor lanes — open when relevant.</p>

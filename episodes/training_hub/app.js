@@ -44,6 +44,12 @@ const refs = {
   markLoopStep: document.getElementById("mark-loop-step"),
   nextAppLink: document.getElementById("next-app-link"),
   openGlossaryWindow: document.getElementById("open-glossary-window"),
+  homeHeadline: document.getElementById("home-headline"),
+  homeJourneyLabel: document.getElementById("home-journey-label"),
+  homeProgressValue: document.getElementById("home-progress-value"),
+  homePulseCount: document.getElementById("home-pulse-count"),
+  homeUpdatedAt: document.getElementById("home-updated-at"),
+  homeNextLabel: document.getElementById("home-next-label"),
 };
 
 document.addEventListener("DOMContentLoaded", init);
@@ -93,6 +99,7 @@ async function init() {
     hydrateCategoryFilter(state.modules);
     render();
     renderPulse();
+    renderHomeHero();
     renderLifecycleSections();
     renderWorkflow();
     refs.loadStatus.textContent = `Loaded ${state.modules.length} learning modules across ${state.series.length || 1} registered series.`;
@@ -250,6 +257,64 @@ function formatWorkflowTime(isoText) {
   return parsed.toLocaleString();
 }
 
+function getTimeGreeting() {
+  const hour = new Date().getHours();
+  if (hour < 12) {
+    return "Good morning";
+  }
+  if (hour < 17) {
+    return "Good afternoon";
+  }
+  return "Good evening";
+}
+
+function formatRelativeTime(isoText) {
+  if (!isoText) {
+    return "Not yet";
+  }
+
+  const parsed = new Date(isoText);
+  if (Number.isNaN(parsed.getTime())) {
+    return "Unknown";
+  }
+
+  const diffMs = Date.now() - parsed.getTime();
+  const diffMin = Math.round(diffMs / 60000);
+  if (diffMin < 1) {
+    return "Just now";
+  }
+  if (diffMin < 60) {
+    return `${diffMin}m ago`;
+  }
+  const diffHr = Math.round(diffMin / 60);
+  if (diffHr < 48) {
+    return `${diffHr}h ago`;
+  }
+  return parsed.toLocaleDateString();
+}
+
+function renderHomeHero(meta = {}) {
+  if (refs.homeHeadline) {
+    refs.homeHeadline.textContent = getTimeGreeting();
+  }
+  if (refs.homeJourneyLabel) {
+    refs.homeJourneyLabel.textContent = meta.journeyLabel || "No active journey";
+  }
+  if (refs.homeProgressValue) {
+    refs.homeProgressValue.textContent = meta.progress || "—";
+  }
+  if (refs.homeUpdatedAt) {
+    refs.homeUpdatedAt.textContent = meta.updatedAt || "—";
+  }
+
+  const pulseCount = Array.isArray(state.pulse?.items) ? state.pulse.items.length : 0;
+  if (refs.homePulseCount) {
+    refs.homePulseCount.textContent = pulseCount
+      ? `${pulseCount} briefing${pulseCount === 1 ? "" : "s"}`
+      : "None yet";
+  }
+}
+
 function renderWorkflow() {
   if (!refs.workflowSummary) {
     return;
@@ -276,9 +341,21 @@ function renderWorkflow() {
     state.nextJourneyHref = nextHref;
 
     const updatedAt = formatWorkflowTime(wf2.updatedAt);
-    refs.workflowSummary.textContent =
-      `${journey.label}. ${doneCount}/${Math.max(1, steps.length)} steps complete. ` +
-      `${next ? `Next step: ${toLearningStepLabel(next.label)}.` : "You have finished this learning lane."}`;
+    const nextLabel = next ? toLearningStepLabel(next.label) : "Lane complete";
+
+    if (refs.homeNextLabel) {
+      refs.homeNextLabel.textContent = next ? `Next: ${nextLabel}` : "Journey complete";
+    }
+
+    refs.workflowSummary.textContent = next
+      ? `${nextLabel} — ${doneCount} of ${Math.max(1, steps.length)} steps done on ${journey.label}.`
+      : `You finished ${journey.label}. ${doneCount}/${Math.max(1, steps.length)} steps complete.`;
+
+    renderHomeHero({
+      journeyLabel: journey.label,
+      progress: `${doneCount}/${Math.max(1, steps.length)}`,
+      updatedAt: formatRelativeTime(wf2.updatedAt),
+    });
 
     const laneStep = (lane) => steps.find((s) => s && s.lane === lane) || null;
     const bc = laneStep("bytecast");
@@ -302,7 +379,7 @@ function renderWorkflow() {
       const disabled = !nextHref;
       refs.markLoopStep.disabled = disabled;
       refs.markLoopStep.classList.toggle("is-disabled", disabled);
-      refs.markLoopStep.textContent = next ? `Open ${toLearningStepLabel(next.label)}` : "Next step unavailable";
+      refs.markLoopStep.textContent = next ? `Open ${toLearningStepLabel(next.label)}` : "Complete";
     }
 
     if (refs.nextAppLink) {
@@ -332,9 +409,21 @@ function renderWorkflow() {
   const seedUnlocked = isSeedUnlocked(workflowState);
   const updatedAt = formatWorkflowTime(workflowState.updatedAt);
 
+  if (refs.homeNextLabel) {
+    refs.homeNextLabel.textContent = seedUnlocked
+      ? "Next: Practice builder"
+      : (trainingUnlocked ? "Next: Training mission" : "Next: ByteCast lessons");
+  }
+
   refs.workflowSummary.textContent =
-    `ByteCast lessons complete: ${bytecastCompletedCount}/3. ` +
-    `${seedUnlocked ? "Practice Builder is ready." : "Finish Listen, Slides, Engage, and the training mission to open Practice Builder."}`;
+    `ByteCast lessons ${bytecastCompletedCount}/3 complete. ` +
+    `${seedUnlocked ? "Practice Builder is ready." : "Finish lessons and the training mission to unlock Practice Builder."}`;
+
+  renderHomeHero({
+    journeyLabel: "Golden Path (legacy)",
+    progress: `${bytecastCompletedCount}/3 lessons`,
+    updatedAt: formatRelativeTime(workflowState.updatedAt),
+  });
 
   refs.wfBytecast?.classList.toggle("done", bytecastComplete);
   refs.wfTraining?.classList.toggle("done", Boolean(workflowState.trainingDone));
@@ -751,6 +840,7 @@ function renderPulse() {
     }
     container.append(grid);
   }
+  renderHomeHero();
 }
 
 function renderPulseCard(item) {
