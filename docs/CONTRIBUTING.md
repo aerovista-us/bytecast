@@ -2,6 +2,8 @@
 
 This repo is built so non-coders and coders can both ship useful work.
 
+**Product direction:** Before adding episodes or hub modules, read [`BYTECAST_PRODUCT_DIRECTION.md`](./BYTECAST_PRODUCT_DIRECTION.md) — classify content as Pulse, Path, or Depth, and pick the right lifecycle section for employees.
+
 ## Quick Start
 
 1. Pick a lane:

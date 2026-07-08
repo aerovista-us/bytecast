@@ -8,6 +8,7 @@ Canonical technical and training documentation for the `bytecast/` workspace. Pr
 
 | Doc | Purpose |
 |-----|---------|
+| [`BYTECAST_PRODUCT_DIRECTION.md`](./BYTECAST_PRODUCT_DIRECTION.md) | **Product north star** — employee pulse, Pulse → Path → Depth, lifecycle UX, roadmap. |
 | [`PLATFORM_STATUS.md`](./PLATFORM_STATUS.md) | **Current** platform snapshot (doors, episodes, journey/proof, seeds, QA). |
 | [`HANDOFF_2026-07-07.md`](./HANDOFF_2026-07-07.md) | **EOD handoff** — intake integration + Shareholder Season 1 status and next steps. |
 | [`archived/README.md`](./archived/README.md) | Historical audits and superseded `*_STATUS.md` stubs (Feb 2026). |

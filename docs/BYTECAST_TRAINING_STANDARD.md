@@ -1,7 +1,19 @@
 # ByteCast training standard (canonical)
 
 **Audience:** Authors of episodes, training missions, and Training Hub modules.  
-**Companion:** [`LOOP_STANDARD.md`](./LOOP_STANDARD.md) (journey JSON + `markStepDone`), [`BYTECAST_PROOF_SCHEMA.md`](./BYTECAST_PROOF_SCHEMA.md).
+**Companion:** [`LOOP_STANDARD.md`](./LOOP_STANDARD.md) (journey JSON + `markStepDone`), [`BYTECAST_PROOF_SCHEMA.md`](./BYTECAST_PROOF_SCHEMA.md), [`BYTECAST_PRODUCT_DIRECTION.md`](./BYTECAST_PRODUCT_DIRECTION.md) (Pulse → Path → Depth + content types).
+
+## Content layer (pick first)
+
+Before teaching mode or journey wiring, classify the artifact per product direction:
+
+| Layer | Content types | See |
+|-------|---------------|-----|
+| **Pulse** | Signal (company news, briefings) | [Product direction — Content types](./BYTECAST_PRODUCT_DIRECTION.md#content-types-authoring) |
+| **Path** | Lesson, How-to, Practice | Same |
+| **Depth** | Handoff to another app or method | Same |
+
+Pulse content does not require Golden Path proof. Path content follows the lesson shape below.
 
 ## Lesson shape (required)
 
@@ -68,4 +80,4 @@ The **Day 1 — Welcome, Navigation, and Current Truth** sequence (EP-001 → EP
 - Standard doc: bump **Updated** line when semantics change.
 - Proof payloads: use `schema` field in bundles per `BYTECAST_PROOF_SCHEMA.md`.
 
-**Updated:** 2026-07-06
+**Updated:** 2026-07-07

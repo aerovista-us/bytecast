@@ -3,6 +3,8 @@
 **Updated:** 2026-07-07  
 **Purpose:** Single current snapshot for doors, episodes, journeys, training/proof, seeds, and known risks. Historical notes and Feb 2026 audits live under [`archived/`](./archived/).
 
+**Product direction:** ByteCast is the employee pulse from day 1 to last day — see [`BYTECAST_PRODUCT_DIRECTION.md`](./BYTECAST_PRODUCT_DIRECTION.md). Implementation is phased (home reframe → Pulse feed → catalog unification → handoffs).
+
 ## Public doors (learner / visitor)
 
 | Door | Path | Current role |
@@ -75,6 +77,7 @@ Training Hub now explicitly surfaces registered series starts for Golden Path, L
 
 ## Current maintenance targets
 
+0. Align new content with [`BYTECAST_PRODUCT_DIRECTION.md`](./BYTECAST_PRODUCT_DIRECTION.md) (Pulse → Path → Depth).
 1. Keep `PLATFORM_STATUS.md`, `SITE_MAP.md`, `data/episode_registry.json`, `data/journey_steps.json`, and `episodes/training_hub/data/modules.json` aligned whenever a lane changes.
 2. Run and record smoke tests for Golden Path, contributor onboarding, and Lumina revenue when loop or mission logic changes.
 3. Reduce generator drift under `full_seed_starter/` while preserving one blessed profiles-capable path.

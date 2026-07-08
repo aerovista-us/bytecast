@@ -1,7 +1,9 @@
 # ByteCast App Shells
-Date: 2026-07-06
+Date: 2026-07-07
 
-This document defines how the two shell apps work and where module ownership boundaries are enforced.
+This document defines how the shell apps work and where module ownership boundaries are enforced.
+
+**Product direction:** Training Hub is planned to become the **employee home** (single front door). Playlist resume merges into **Continue**; Seed Builder moves under **Build** for contributors. See [`BYTECAST_PRODUCT_DIRECTION.md`](./BYTECAST_PRODUCT_DIRECTION.md).
 
 ## Shell entry points
 - Training Hub: `../episodes/training_hub/index.html`

@@ -1,5 +1,7 @@
 # ByteCast Episode Workflow
-Date: 2026-07-06
+Date: 2026-07-07
+
+**Before you create a pack:** classify the content in [`BYTECAST_PRODUCT_DIRECTION.md`](./BYTECAST_PRODUCT_DIRECTION.md) (Pulse / Path / Depth and content type). That decides teaching mode, journey wiring, and home placement.
 
 ## Canonical episode path (effective now)
 - New episode folders must use content slugs:

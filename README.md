@@ -1,6 +1,6 @@
 # ByteCast Workspace
 
-This is the root entrypoint for the ByteCast multi-project workspace.
+ByteCast is the **employee pulse** for AeroVista collaborators: what's new, what to learn next, and how to use the ecosystem — from day 1 to last day. Full product direction: [`docs/BYTECAST_PRODUCT_DIRECTION.md`](docs/BYTECAST_PRODUCT_DIRECTION.md).
 
 ## Start here
 1. Open the workspace entry:

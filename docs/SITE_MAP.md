@@ -1,6 +1,8 @@
 ﻿# ByteCast Site Map (GitHub Pages)
 Base: `https://aerovista-us.github.io/bytecast/`
 
+**Product direction:** Employee home is consolidating on Training Hub (`episodes/training_hub/`). See [`BYTECAST_PRODUCT_DIRECTION.md`](./BYTECAST_PRODUCT_DIRECTION.md).
+
 This is a reference map of the runnable pages (packs + shells) in the `bytecast/` workspace.
 
 ## Primary doors
