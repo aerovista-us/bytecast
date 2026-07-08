@@ -1,8 +1,14 @@
 # ByteCast product direction (canonical)
 
 **Updated:** 2026-07-07  
-**Status:** Approved direction — implementation phased (see [Roadmap](#implementation-roadmap))  
+**Status:** **Canonical — approved** (implementation phased; see [Roadmap](#implementation-roadmap))  
 **Audience:** Product owners, authors, engineers, and anyone deciding what ships through ByteCast
+
+## Product job
+
+ByteCast is the **front door**, **signal layer**, **continuation point**, and **routing spine** for AeroVista.
+
+It is the company **operating–learning–comms spine** for people who work here — not a collection of parallel mini-products (Training Hub, Playlist, Seed Builder, Shareholder Season each as its own destination).
 
 ## North star
 
@@ -20,7 +26,13 @@ ByteCast is the **first signal** (pulse) on what is happening, how to do the nex
 |-----|--------------------------|
 | **Employees / collaborators** | Primary — day 1 through last day |
 | **Authors / builders** | Secondary — Seed Builder and docs are contributor tools, not the employee front door |
-| **Shareholders / external stakeholders** | May consume Pulse-style briefings; employee home is still the canonical shell |
+| **Shareholders / external stakeholders** | May consume Pulse-style briefings; **not** the product's main identity |
+
+### Naming guardrail (canonical)
+
+> **ByteCast is the employee/collaborator home. Shareholder briefings are a Pulse series inside ByteCast, not the product's main identity.**
+
+Do **not** position ByteCast as "ByteCast for Shareholders" or an investor briefing channel. Strategic briefings (universe, operations, revenue, automation, long-game risk) belong under **Pulse** as optional signal content — the same shell employees use for onboarding, skills, and ecosystem routing.
 
 ---
 
@@ -104,6 +116,17 @@ Organize what employees see by **where they are**, not by repo structure.
 - Never competes with Pulse or Continue on the home screen
 
 **Reframe of current "side lanes":** Shareholder Briefings are **Pulse**, not a parallel product. Day 1 is **Getting started**. Lumina and sales labs are **Skills**.
+
+### Current surfaces → ByteCast roles
+
+| Current surface | ByteCast role |
+|-----------------|---------------|
+| Shareholder Season 1 | **Pulse** (signal briefings) |
+| Day 1 / Golden Path | **Getting started** / Path |
+| Lumina sales labs | **Skills** |
+| NXCore, AVCC, Art Localized intros | **Ecosystem** handoffs |
+| Docs / standards | **Reference** |
+| Seed Builder | Contributor tool — **not** employee front door |
 
 ---
 
@@ -205,6 +228,7 @@ Phases are ordered by employee-visible impact. Track status in [`PLATFORM_STATUS
 | Pulse or Path? | Is understanding optional (signal) or required (skill/proof)? |
 | Home placement | Is it new (Pulse), foundational (Getting started), or role-specific (Skills)? |
 | External app? | Is ByteCast the right **first** stop with a handoff, or is the app self-explanatory? |
+| Shareholder / investor content? | Pulse series only — never rebrand the product around it |
 
 When this direction changes, update **Updated** on this file and note the change in [`PLATFORM_STATUS.md`](./PLATFORM_STATUS.md).
 

@@ -3,7 +3,7 @@
 **Updated:** 2026-07-07  
 **Purpose:** Single current snapshot for doors, episodes, journeys, training/proof, seeds, and known risks. Historical notes and Feb 2026 audits live under [`archived/`](./archived/).
 
-**Product direction:** ByteCast is the employee pulse from day 1 to last day — see [`BYTECAST_PRODUCT_DIRECTION.md`](./BYTECAST_PRODUCT_DIRECTION.md). Implementation is phased (home reframe → Pulse feed → catalog unification → handoffs).
+**Product direction:** ByteCast is the employee operating–learning–comms spine (canonical — approved). See [`BYTECAST_PRODUCT_DIRECTION.md`](./BYTECAST_PRODUCT_DIRECTION.md). **Guardrail:** shareholder briefings are Pulse content, not the product identity. Implementation phased: home reframe → Pulse feed → catalog unification → handoffs.
 
 ## Public doors (learner / visitor)
 
