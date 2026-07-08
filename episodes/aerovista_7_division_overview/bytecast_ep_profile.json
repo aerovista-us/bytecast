@@ -20,6 +20,17 @@
     "summary_short": "What AeroVista is, why the seven divisions are peers, how HQ fits, and how real cross-division work combines learning, engineering, media, publishing, and brand execution.",
     "summary_long": "EP-002 gives the learner a practical company map. Instead of treating AeroVista as one product, it frames the organization as one platform with seven peer divisions plus HQ for strategy and cross-division alignment. The episode also grounds the model in real combinations a learner can understand quickly: ByteCast and training align naturally with Summit, repeatable tooling aligns with Nexus, publishing and research work align with Vespera, and shared presentation quality depends on Lumina and the rest of the ecosystem working together. Full scene-by-scene copy lives in docs/day1/EP-002_VOICEOVER.md."
   },
+  "thread_tags": ["day1", "ecosystem", "divisions", "routing"],
+  "related_next": [
+    { "label": "Next: EP-003 — The Main Doors", "href": "../the_main_doors/index.html" },
+    { "label": "Open ByteCast home", "href": "../training_hub/index.html" }
+  ],
+  "handoff": {
+    "label": "Open Offer Pack App",
+    "href": "../aerovista_offer_pack/app/index.html",
+    "return_label": "Back to ByteCast",
+    "return_href": "../training_hub/index.html"
+  },
   "media": {
     "audio_files": [
       {

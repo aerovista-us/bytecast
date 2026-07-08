@@ -19,6 +19,11 @@
     "summary_short": "Learn the three truth layers - see through ACOS, own through domain systems, trust through SOT - and use real ByteCast examples to avoid the newest-file trap.",
     "summary_long": "EP-004 closes the Day 1 thinking loop with practical truth boundaries. It explains why visibility is not the same as authority, why domain systems still own operational records, and why Source of Truth documentation must explicitly label active, legacy, and canonical paths. The lesson now includes real ByteCast-flavored examples, such as canon labels like Primary and Legacy, the rule that new episodes publish under episodes/<slug>/, and why governed docs beat random timestamps when the organization needs a stable answer."
   },
+  "thread_tags": ["day1", "current-truth", "visibility", "ownership"],
+  "related_next": [
+    { "label": "Open TR-001A — Day 1 check", "href": "../training_missions/tr_001a_day1_foundations/index.html" },
+    { "label": "Open ByteCast home", "href": "../training_hub/index.html" }
+  ],
   "media": {
     "audio_files": [
       {

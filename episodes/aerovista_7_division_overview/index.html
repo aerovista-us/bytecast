@@ -6,6 +6,7 @@
   <title>ByteCast EP-002</title>
   <meta name="description" content="AeroVista mission, seven peer divisions, HQ, cross-division collaboration â€” Day 1 ecosystem map." />
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+  <script defer src="../../assets/shared/bytecast_handoff_footer.js"></script>
   <style>
     :root {
       --bg0: #050607;
@@ -715,6 +716,7 @@
       <div id="footerLeft">ByteCast EP-002 â€¢ v1 â€¢ Venta/Neon default</div>
       <div style="font-family:var(--mono);">Tabs: Listen / Slides / Divisions / Engagement â€¢ â†/â†’ slides or tab bar</div>
     </footer>
+    <section id="bc-handoff-footer" style="max-width:var(--max);margin:18px auto 0;padding:0 var(--pad);"></section>
   </main>
 
   <script src="../../assets/shared/bytecast_loop.js"></script>
@@ -1301,6 +1303,9 @@
       $("#heroNote").textContent = summary || $("#heroNote").textContent;
       $("#keyLine").textContent = (profile?.slides?.[3]?.bullets?.[0]) || (profile?.slides?.[0]?.bullets?.[0]) || "One ecosystem â€” seven peer divisions â€” HQ at the center.";
       $("#footerLeft").textContent = `ByteCast ${epCode} â€¢ ${date || ""} â€¢ Venta/Neon default`;
+      try {
+        window.ByteCastHandoffFooter?.render?.({ profile, container: document.getElementById("bc-handoff-footer") });
+      } catch (_) {}
 
       const meta = $("#metaPills");
       meta.innerHTML = [

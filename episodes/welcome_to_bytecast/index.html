@@ -429,6 +429,7 @@
       <div>ByteCast EP-001 • v1 • Venta/Neon default • file:// safe</div>
       <div style="font-family:var(--mono);">Tabs: Listen / Slides / Engagement / About AV • ←/→ slides</div>
     </footer>
+    <section id="bc-handoff-footer" style="max-width:var(--max);margin:18px auto 0;padding:0 var(--pad);"></section>
   </main>
 
   <div id="epTour" class="epTour" hidden aria-hidden="true">
@@ -449,6 +450,7 @@
   <script src="../../assets/shared/bytecast_loop.js"></script>
   <script src="../../assets/shared/bytecast_slide_art.js"></script>
   <script src="../../assets/shared/listen_mode.js"></script>
+  <script src="../../assets/shared/bytecast_handoff_footer.js"></script>
   <script>
   const Loop = window.ByteCastLoop || null;
   const PROFILE = {
@@ -473,6 +475,11 @@
     "summary_short": "What ByteCast is, the six-step loop, the five main doors, learner vs internal surfaces, and a four-question engage check aligned with the Day 1 spine.",
     "summary_long": "EP-001 anchors the staged learning system: modular packs and thin shells, Listen through Badge, path-not-pile mental model, public doors (Workspace Entry, Playlist, Training Hub, Seed Builder, Docs), canonical EP-001 then EP-002 order, sequential progress, and a recap before the engage micro-check. Voiceover: docs/day1/EP-001_VOICEOVER.md. On-screen spec: docs/day1/EP-001_ON_SCREEN.md."
   },
+  "thread_tags": ["day1", "onboarding", "pulse-path-depth", "navigation"],
+  "related_next": [
+    { "label": "Next: EP-002 — Divisions overview", "href": "../aerovista_7_division_overview/index.html" },
+    { "label": "Open ByteCast home", "href": "../training_hub/index.html" }
+  ],
   "media": {
     "audio_files": [
       {
@@ -1467,6 +1474,7 @@
 
   renderQuiz();
   renderGate();
+  try { window.ByteCastHandoffFooter?.render?.({ profile: PROFILE, container: document.getElementById("bc-handoff-footer") }); } catch (_) {}
 </script>
 </body>
 </html>

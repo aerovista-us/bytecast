@@ -6,6 +6,7 @@
   <title>ByteCast â€” EP-004 â€¢ Current Truth Basics</title>
   <meta name="description" content="ACOS visibility, SOT trust, domain ownership â€” declared current truth, not newest-file guessing. Day 1 Golden Path." />
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+  <script defer src="../../assets/shared/bytecast_handoff_footer.js"></script>
   <style>
     :root {
       --bg0:#050607; --bg1:#0b0f14; --stroke:rgba(255,255,255,0.12);
@@ -258,6 +259,7 @@
       </div>
     </section>
     <footer><span>ByteCast EP-004 â€¢ Day 1</span><span style="font-family:var(--mono);">Tabs: Listen / Slides / Reference / Engage â€¢ â†/â†’</span></footer>
+    <section id="bc-handoff-footer" style="max-width:var(--max);margin:18px auto 0;padding:0 var(--pad);"></section>
   </main>
 
   <script src="../../assets/shared/bytecast_loop.js"></script>
@@ -645,6 +647,9 @@
       $("#heroTitle").textContent = code;
       $("#heroSub").textContent = ep.title || "";
       $("#heroNote").textContent = profile.content?.summary_short || "";
+      try {
+        window.ByteCastHandoffFooter?.render?.({ profile, container: document.getElementById("bc-handoff-footer") });
+      } catch (_) {}
       $("#keyLine").textContent = profile.content?.summary_short || $("#keyLine").textContent;
       const tags = Array.isArray(profile.content?.tags) ? profile.content.tags : [];
       const rt = Number(ep.runtime_target_minutes);
