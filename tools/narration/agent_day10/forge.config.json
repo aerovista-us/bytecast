@@ -1,0 +1,19 @@
+{
+  "schema": "narration-forge-config-v1",
+  "packId": "agent_day10_capstone",
+  "episodeCode": "AGENT-D10",
+  "authoringRoot": "docs/agent_day10",
+  "linesMaster": "tools/narration/agent_day10/lines.master.json",
+  "sequences": "tools/narration/agent_day10/sequences.json",
+  "voiceRecipes": "tools/narration/agent_day10/voiceRecipes.json",
+  "bindings": "tools/narration/agent_day10/bindings.json",
+  "outputDir": "episodes/trusted_agent_capstone/assets/narration",
+  "runtimeManifest": "episodes/trusted_agent_capstone/assets/narration.manifest.json",
+  "shipFormat": "wav",
+  "tts": {
+    "provider": "nxcore-echoverse",
+    "endpoint": "/api/generate",
+    "envUrl": "NXCORE_TTS_URL",
+    "defaultUrl": "http://127.0.0.1:5315"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "schema": "narration-sequences-v1",
+  "packId": "agent_day8_writing",
+  "sequences": {
+    "full_journey": {
+      "label": "Writing Like AeroVista — full journey",
+      "lineIds": [
+        "cold_open",
+        "writing_is_an_operating_system",
+        "the_aerovista_voice",
+        "the_four_writing_modes",
+        "evidence_based_writing",
+        "the_anti_bloat_rule",
+        "the_useful_sentence_test",
+        "audience_first",
+        "the_aerovista_writing_stack",
+        "rewrite_patterns_agents_must_learn",
+        "confidentiality_in_writing",
+        "closing"
+      ]
+    }
+  },
+  "defaultSequence": "full_journey"
+}

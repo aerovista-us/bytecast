@@ -1,0 +1,21 @@
+{
+  "schema": "narration-sequences-v1",
+  "packId": "agent_day2_source_of_truth",
+  "sequences": {
+    "full_journey": {
+      "label": "Finding the Source of Truth — full journey",
+      "lineIds": [
+        "cold_open",
+        "why_sot",
+        "authority_ladder",
+        "truth_labels",
+        "source_check",
+        "conflicts",
+        "evidence_packet",
+        "legal_confidential",
+        "closing"
+      ]
+    }
+  },
+  "defaultSequence": "full_journey"
+}

@@ -1,0 +1,14 @@
+{
+  "schema": "narration-bindings-v1",
+  "packId": "agent_day2_source_of_truth",
+  "runtime": {
+    "player": "../../assets/shared/nxcore_narration_player.js",
+    "manifest": "episodes/finding_source_of_truth/assets/narration.manifest.json",
+    "fallback": "assets/shared/listen_mode.js"
+  },
+  "episode": {
+    "slug": "finding_source_of_truth",
+    "listenGateStep": "sot_segments",
+    "profileAudioPath": "assets/narration/full_journey.wav"
+  }
+}

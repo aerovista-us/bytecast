@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="en" data-theme="first-door">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ByteCast — The First Door · Agent Day 1</title>
+  <meta name="description" content="Required Agent Day 1 orientation: operating law, main doors, lost-agent protocol, trust boundaries, and Day 1 Readiness Note." />
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../assets/shared/listen_mode.css" />
+  <link rel="stylesheet" href="../../assets/shared/agent_day_theme.css" />
+  <link rel="stylesheet" href="../../assets/shared/agent_day_interactive.css" />
+  <style>
+    :root {
+      --bg0:#040508; --bg1:#0a0e16; --panel:rgba(12,16,26,0.92);
+      --ink:rgba(255,255,255,0.94); --muted:rgba(255,255,255,0.68); --faint:rgba(255,255,255,0.42);
+      --neon:#22a7ff; --violet:#a66bff; --mint:#34d399; --amber:#ffb020;
+      --line:rgba(255,255,255,0.12); --max:1040px; --pad:clamp(16px,2.4vw,26px);
+      --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      --sans:ui-sans-serif,system-ui,Segoe UI,Roboto,sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:var(--sans);color:var(--ink);
+      background:radial-gradient(900px 500px at 10% 0%,rgba(34,167,255,0.14),transparent 55%),
+        radial-gradient(800px 480px at 100% 10%,rgba(166,107,255,0.10),transparent 50%),
+        linear-gradient(180deg,var(--bg0),var(--bg1));min-height:100vh}
+    a{color:inherit}
+    .topbar{position:sticky;top:0;z-index:30;backdrop-filter:blur(14px);
+      background:rgba(4,5,8,0.86);border-bottom:1px solid var(--line)}
+    .topbar__inner,.wrap{max-width:var(--max);margin:0 auto}
+    .topbar__inner{padding:12px var(--pad);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+    .wrap{padding:20px var(--pad) 80px}
+    .k{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+    .btn{appearance:none;border:1px solid var(--line);background:rgba(255,255,255,0.04);color:var(--ink);
+      border-radius:999px;padding:10px 14px;font:inherit;font-size:13px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+    .btn:hover{border-color:rgba(34,167,255,0.35)}
+    .btn--primary{border-color:rgba(34,167,255,0.45);box-shadow:0 0 20px rgba(34,167,255,0.14)}
+    .btn--ghost{background:transparent;border-color:rgba(255,255,255,0.1);font-size:12px;padding:8px 12px}
+    .btn:disabled{opacity:.45;cursor:not-allowed}
+    .hero{padding:24px;border-radius:24px;border:1px solid var(--line);
+      background:linear-gradient(135deg,rgba(34,167,255,0.10),rgba(166,107,255,0.08)),var(--panel);margin-bottom:16px}
+    h1{margin:8px 0 10px;font-size:clamp(1.8rem,4vw,2.6rem);letter-spacing:-.02em}
+    .sub{margin:0;color:var(--muted);line-height:1.6;max-width:72ch}
+    .law{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+    .law span{font-family:var(--mono);font-size:11px;padding:6px 10px;border-radius:999px;border:1px solid rgba(34,167,255,0.28);background:rgba(34,167,255,0.08)}
+    .tabs{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+    .tab{border:1px solid var(--line);background:rgba(255,255,255,0.03);border-radius:999px;padding:8px 12px;font-size:12px;cursor:pointer}
+    .tab[aria-selected="true"]{border-color:rgba(34,167,255,0.45);background:rgba(34,167,255,0.12)}
+    .tab.is-locked{opacity:.5}
+    .panel{display:none;border:1px solid var(--line);border-radius:20px;background:var(--panel);padding:18px;margin-bottom:14px}
+    .panel.is-active{display:block}
+    .panel h2{margin:0 0 8px;font-size:1.05rem}
+    .check{display:flex;gap:10px;align-items:flex-start;margin:10px 0;padding:10px 12px;border-radius:14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06)}
+    .check input{margin-top:3px}
+    .seg{border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:14px;margin:10px 0;background:rgba(0,0,0,0.22)}
+    .seg.is-done{border-color:rgba(52,211,153,0.35)}
+    .seg h3{margin:0 0 6px;font-size:1rem}
+    .seg .time{font-family:var(--mono);font-size:11px;color:var(--faint)}
+    .seg p{margin:8px 0 0;line-height:1.6;color:var(--muted)}
+    .door-grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:12px}
+    .door{padding:12px;border-radius:14px;border:1px solid rgba(166,107,255,0.22);background:rgba(166,107,255,0.06)}
+    .door strong{display:block;margin-bottom:4px}
+    .door small{color:var(--faint);font-family:var(--mono);font-size:10px}
+    .choice{display:block;margin:10px 0;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);cursor:pointer}
+    .field{margin:12px 0}
+    .field label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}
+    .field input,.field textarea{width:100%;border:1px solid var(--line);border-radius:12px;background:rgba(0,0,0,0.35);color:var(--ink);padding:10px 12px;font:inherit}
+    .field textarea{min-height:72px;resize:vertical}
+    .status{margin-top:10px;font-size:13px;color:var(--mint)}
+    .warn{color:var(--amber)}
+    .progress{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .chip{font-family:var(--mono);font-size:11px;padding:5px 9px;border-radius:999px;border:1px solid var(--line)}
+    .chip.done{border-color:rgba(52,211,153,0.4);color:var(--mint)}
+  </style>
+</head>
+<body data-bc-slug="the_first_door" data-bc-ep="AGENT-D1">
+  <header class="topbar">
+    <div class="topbar__inner">
+      <span class="k">Required · Agent Day 1</span>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <a class="btn" href="../../seed_bytecast.html">Playlist</a>
+        <a class="btn" href="../training_hub/index.html">ByteCast Home</a>
+      </div>
+    </div>
+  </header>
+  <main class="wrap">
+    <section class="hero">
+      <p class="k" id="heroKicker">Loading…</p>
+      <h1 id="heroTitle">The First Door</h1>
+      <p class="sub" id="heroSub"></p>
+      <div class="law" id="lawChips"></div>
+      <nav class="day-spine" id="daySpine" aria-label="Agent Days 1–10"></nav>
+      <div id="pocketLaw" class="pocket-law-wrap" hidden></div>
+      <div class="progress" id="progressChips" aria-live="polite"></div>
+    </section>
+
+    <nav class="tabs" id="tabs" aria-label="Episode sections">
+      <button type="button" class="tab" data-panel="trust" aria-selected="true">1 · Trust</button>
+      <button type="button" class="tab is-locked" data-panel="journey">2 · Journey</button>
+      <button type="button" class="tab is-locked" data-panel="practice">3 · Practice</button>
+      <button type="button" class="tab is-locked" data-panel="lawref">4 · Reference</button>
+      <button type="button" class="tab is-locked" data-panel="engage">5 · Check</button>
+      <button type="button" class="tab is-locked" data-panel="prove">6 · Prove</button>
+    </nav>
+
+    <section class="panel is-active" id="panel-trust" aria-labelledby="trustTitle">
+      <h2 id="trustTitle">Legal & Trust Acknowledgment</h2>
+      <p class="sub" id="trustIntro">Complete before continuing.</p>
+      <div id="trustItems"></div>
+      <button type="button" class="btn btn--primary" id="btnTrust" disabled>Acknowledge and continue</button>
+      <p class="status" id="trustStatus"></p>
+    </section>
+
+    <section class="panel" id="panel-journey" aria-labelledby="journeyTitle">
+      <h2 id="journeyTitle">The Journey — one segment at a time</h2>
+      <p class="panel-tip">Visual + key takeaway per segment. Pass quick checks where shown. Finish Practice labs before marking complete.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin:12px 0">
+        <button type="button" class="btn btn--primary" id="btnPlayForged">Play full journey (NXCore)</button>
+        <button type="button" class="btn" id="btnStopForged">Stop audio</button>
+      </div>
+      <p class="status" id="forgedStatus" aria-live="polite"></p>
+      <div id="listenModeMount" class="bytecast-listen-dim-exempt" style="margin:12px 0"></div>
+      <div id="journeyStepper"></div>
+      <button type="button" class="btn btn--primary" id="btnJourneyDone" disabled>Mark journey complete</button>
+      <p class="status" id="journeyStatus"></p>
+    </section>
+
+    <section class="panel" id="panel-practice" aria-labelledby="practiceTitle">
+      <h2 id="practiceTitle">Hands-on Practice</h2>
+      <p class="sub">Route doors, name states, and walk the lost-agent protocol — not just listen and forget.</p>
+      <div id="practiceLabs"></div>
+    </section>
+
+    <section class="panel" id="panel-lawref">
+      <h2>Operating Law & Main Doors</h2>
+      <div id="doorsRef" class="door-grid"></div>
+      <h3 style="margin-top:18px;font-size:.95rem">State labels</h3>
+      <ul id="statesRef" class="sub"></ul>
+    </section>
+
+    <section class="panel" id="panel-engage">
+      <h2>Operating Law Check</h2>
+      <p class="sub">Six questions — 80% to pass.</p>
+      <div id="quiz"></div>
+      <button type="button" class="btn btn--primary" id="btnGrade">Submit check</button>
+      <p class="status" id="quizStatus"></p>
+    </section>
+
+    <section class="panel" id="panel-prove">
+      <h2 id="proveTitle">Day 1 Readiness Note</h2>
+      <p class="sub" id="proveDesc"></p>
+      <form id="proveForm"></form>
+      <button type="submit" class="btn btn--primary" form="proveForm">Submit readiness note</button>
+      <p class="status" id="proveStatus"></p>
+    </section>
+
+    <section id="bc-handoff-footer" style="margin-top:8px"></section>
+  </main>
+
+  <script src="../../assets/shared/bytecast_loop.js"></script>
+  <script src="../../assets/shared/nxcore_narration_player.js"></script>
+  <script src="../../assets/shared/listen_mode.js"></script>
+  <script src="../../assets/shared/bytecast_handoff_footer.js"></script>
+  <script src="../../assets/shared/agent_day_labs.js"></script>
+  <script src="../../assets/shared/agent_day_visuals.js"></script>
+  <script src="../../assets/shared/agent_day_interactive.js"></script>
+  <script>
+  (() => {
+    const Loop = window.ByteCastLoop;
+    const PROFILE_URL = "./bytecast_ep_profile.json";
+    const SEG_KEY = "bc.first_door.segments.v1";
+    const STEP_KEY = "bc.first_door.stepper.v1";
+    const LABS_KEY = "bc.first_door.labs.v1";
+    const TRUST_KEY = "bc.first_door.trust.v1";
+    const QUIZ_KEY = "bc.first_door.quiz.v1";
+    const PROVE_KEY = "bc.first_door.prove.v1";
+
+    let profile = null;
+    let segmentState = {};
+    let trustChecked = {};
+    let quizAnswers = {};
+    let quizPassed = false;
+    let nxPlayer = null;
+    let listenApi = null;
+    let stepperApi = null;
+    let labsApi = null;
+    let labsComplete = false;
+
+    const $ = (s, r = document) => r.querySelector(s);
+    const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+
+    async function loadProfile() {
+      const res = await fetch(PROFILE_URL, { cache: "no-store" });
+      profile = await res.json();
+      renderHero();
+      renderTrust();
+      initInteractiveJourney();
+      renderDoors();
+      renderQuiz();
+      renderProve();
+      initListen();
+      refreshProgress();
+      unlockTabs();
+    }
+
+    function renderHero() {
+      $("#heroKicker").textContent = profile.content.hero_kicker || "Agent Day 1";
+      $("#heroTitle").textContent = profile.episode.title.replace(/^The First Door\s*[—-]\s*/i, "The First Door — ");
+      $("#heroSub").textContent = profile.content.summary_short;
+      $("#lawChips").innerHTML = (profile.operating_law || []).map(l => `<span>${l}</span>`).join("");
+      renderDaySpine();
+      window.ByteCastAgentDayInteractive?.renderPocketLaw?.($("#pocketLaw"), 1);
+    }
+
+    function renderDaySpine() {
+      const links = [
+        { day: 1, href: "./index.html" },
+        { day: 2, href: "../finding_source_of_truth/index.html" },
+        { day: 3, href: "../from_signal_to_action/index.html" },
+        { day: 4, href: "../the_handoff_is_the_work/index.html" },
+        { day: 5, href: "../working_the_queue/index.html" },
+        { day: 6, href: "../safe_access_boundaries/index.html" },
+        { day: 7, href: "../builder_client_experience/index.html" },
+        { day: 8, href: "../writing_like_aerovista/index.html" },
+        { day: 9, href: "../from_draft_to_deliverable/index.html" },
+        { day: 10, href: "../trusted_agent_capstone/index.html" }
+      ];
+      const mount = $("#daySpine");
+      if (!mount) return;
+      mount.innerHTML = links.map(d =>
+        `<a class="${d.day === 1 ? "is-current" : ""}" href="${d.href}" title="Agent Day ${d.day}">D${d.day}</a>`
+      ).join("");
+    }
+
+    function renderTrust() {
+      const ack = profile.legal_acknowledgment;
+      $("#trustIntro").textContent = ack.title;
+      $("#trustItems").innerHTML = ack.items.map((text, i) => `
+        <label class="check"><input type="checkbox" data-trust="${i}" /> <span>${text}</span></label>
+      `).join("");
+      $$("#trustItems input").forEach(inp => {
+        inp.addEventListener("change", () => {
+          trustChecked[inp.dataset.trust] = inp.checked;
+          const all = ack.items.every((_, i) => trustChecked[i]);
+          $("#btnTrust").disabled = !all;
+        });
+      });
+      try {
+        if (localStorage.getItem(TRUST_KEY) === "1" || Loop?.isStepDone?.(Loop.readWorkflowV2(), "first_door_trust")) {
+          $("#trustStatus").textContent = "Trust acknowledgment already recorded.";
+          unlockFrom("journey");
+        }
+      } catch {}
+    }
+
+  $("#btnTrust").addEventListener("click", () => {
+      Loop?.markStepDone?.("first_door_trust", {
+        episodeSlug: "the_first_door",
+        legalAcknowledged: true,
+        acknowledgedAt: new Date().toISOString()
+      });
+      try { localStorage.setItem(TRUST_KEY, "1"); } catch {}
+      $("#trustStatus").textContent = "Trust recorded. Continue to Journey.";
+      unlockFrom("journey");
+      selectTab("journey");
+      refreshProgress();
+    });
+
+    function initInteractiveJourney() {
+      const Interactive = window.ByteCastAgentDayInteractive;
+      if (!Interactive) return;
+
+      stepperApi = Interactive.mountJourneyStepper({
+        profile,
+        mount: $("#journeyStepper"),
+        storageKey: STEP_KEY,
+        listenApi: null,
+        nxPlayer: null,
+        onProgress(st, meta) {
+          if (st?.segments) {
+            segmentState = { ...segmentState, ...st.segments };
+            try { localStorage.setItem(SEG_KEY, JSON.stringify(segmentState)); } catch {}
+          }
+          checkJourneyComplete();
+          refreshProgress();
+          if (meta?.journeyComplete) {
+            $("#journeyStatus").textContent = "All segments complete. Finish Practice labs, then mark journey complete.";
+          }
+        }
+      });
+
+      labsApi = Interactive.mountPracticeLabs({
+        profile,
+        mount: $("#practiceLabs"),
+        storageKey: LABS_KEY,
+        onLabsComplete() {
+          labsComplete = true;
+          checkJourneyComplete();
+          refreshProgress();
+        }
+      });
+      labsComplete = labsApi?.allLabsDone?.() || false;
+
+      try {
+        segmentState = JSON.parse(localStorage.getItem(SEG_KEY) || "{}");
+      } catch { segmentState = {}; }
+      checkJourneyComplete();
+    }
+
+    function renderSegments() {
+      /* legacy — stepper replaces wall-of-text list */
+    }
+
+    function checkJourneyComplete() {
+      const ids = (profile.script?.sections || []).map(s => s.id);
+      const segsDone = stepperApi?.allSegmentsDone?.() || (ids.length && ids.every(id => segmentState[id]));
+      const labsOk = !profile.interactives?.labs_required || labsComplete || labsApi?.allLabsDone?.();
+      const all = segsDone && labsOk;
+      $("#btnJourneyDone").disabled = !all;
+      if (segsDone && !labsOk) {
+        $("#journeyStatus").textContent = "Segments done — complete Practice labs (tab 3) to continue.";
+      } else if (all) {
+        $("#journeyStatus").textContent = "Journey + practice complete. Mark journey complete to continue.";
+      }
+    }
+
+    $("#btnJourneyDone").addEventListener("click", () => {
+      Loop?.markStepDone?.("first_door_segments", {
+        episodeSlug: "the_first_door",
+        segmentsComplete: true,
+        segmentCount: (profile.script?.sections || []).length
+      });
+      $("#journeyStatus").textContent = "Journey complete.";
+      unlockFrom("engage");
+      selectTab("engage");
+      refreshProgress();
+    });
+
+    function markAllSegmentsRead() {
+      stepperApi?.markAllDone?.();
+      (profile.script?.sections || []).forEach(s => { segmentState[s.id] = true; });
+      try { localStorage.setItem(SEG_KEY, JSON.stringify(segmentState)); } catch {}
+      checkJourneyComplete();
+    }
+
+    function initListen() {
+      nxPlayer = window.NxcoreNarrationPlayer?.create?.();
+      if (nxPlayer) {
+        nxPlayer.onProgress((pct, label) => {
+          $("#forgedStatus").textContent = `Playing: ${label} (${Math.round(pct)}%)`;
+        });
+        nxPlayer.onComplete(() => {
+          $("#forgedStatus").textContent = "Forged journey complete.";
+          markAllSegmentsRead();
+        });
+        nxPlayer.onError(() => {
+          $("#forgedStatus").textContent = "No forged MP3 yet — use Listen below or run npm run forge:agent-day1.";
+        });
+        fetch("assets/narration.manifest.json", { cache: "no-store" })
+          .then(r => r.ok ? r.json() : null)
+          .then(m => {
+            if (m?.tracks?.length) {
+              $("#forgedStatus").textContent = `NXCore audio ready (${m.tracks.length} segments).`;
+            }
+          })
+          .catch(() => {});
+      }
+
+      $("#btnPlayForged").addEventListener("click", async () => {
+        try {
+          const m = await fetch("assets/narration.manifest.json", { cache: "no-store" }).then(r => {
+            if (!r.ok) throw new Error("no manifest");
+            return r.json();
+          });
+          nxPlayer?.playTracks(m.tracks);
+        } catch {
+          $("#forgedStatus").textContent = "Manifest missing. Run: python scripts/first_door_voiceover_build.py && npm run forge:agent-day1";
+        }
+      });
+      $("#btnStopForged").addEventListener("click", () => {
+        nxPlayer?.stop?.();
+        window.speechSynthesis?.cancel();
+        $("#forgedStatus").textContent = "Stopped.";
+      });
+
+      if (window.ByteCastListenMode?.init) {
+        window.ByteCastListenMode.init({
+          mount: $("#listenModeMount"),
+          jsonUrl: "assets/voiceover_sections.json",
+          onListenGate: () => markAllSegmentsRead(),
+          onReady(api) {
+            listenApi = api;
+            if (stepperApi) {
+              stepperApi = window.ByteCastAgentDayInteractive.mountJourneyStepper({
+                profile,
+                mount: $("#journeyStepper"),
+                storageKey: STEP_KEY,
+                listenApi: api,
+                nxPlayer,
+                onProgress(st, meta) {
+                  if (st?.segments) {
+                    segmentState = { ...segmentState, ...st.segments };
+                    try { localStorage.setItem(SEG_KEY, JSON.stringify(segmentState)); } catch {}
+                  }
+                  checkJourneyComplete();
+                  refreshProgress();
+                }
+              });
+            }
+          }
+        });
+      }
+    }
+
+    function renderDoors() {
+      $("#doorsRef").innerHTML = (profile.doors || []).map(d => `
+        <div class="door"><small>${d.subtitle}</small><strong>${d.name}</strong><div class="sub" style="font-size:12px;margin-top:6px">${d.when}</div></div>
+      `).join("");
+      $("#statesRef").innerHTML = (profile.state_labels || []).map(s => `<li><strong>${s.label}</strong> — ${s.meaning}</li>`).join("");
+    }
+
+    function renderQuiz() {
+      const Q = profile.engagement?.quiz?.questions || [];
+      $("#quiz").innerHTML = Q.map(q => `
+        <fieldset style="border:0;padding:0;margin:16px 0">
+          <legend style="font-weight:600;margin-bottom:8px">${q.q}</legend>
+          ${q.choices.map((c, i) => `<label class="choice"><input type="radio" name="${q.id}" value="${i}" /> ${c}</label>`).join("")}
+        </fieldset>
+      `).join("");
+      try {
+        const saved = JSON.parse(localStorage.getItem(QUIZ_KEY) || "{}");
+        if (saved.passed) { quizPassed = true; $("#quizStatus").textContent = `Passed (${Math.round(saved.score * 100)}%).`; }
+      } catch {}
+    }
+
+    $("#btnGrade").addEventListener("click", () => {
+      const Q = profile.engagement?.quiz?.questions || [];
+      let correct = 0;
+      Q.forEach(q => {
+        const picked = document.querySelector(`input[name="${q.id}"]:checked`);
+        if (picked && Number(picked.value) === q.answer_index) correct++;
+      });
+      const score = Q.length ? correct / Q.length : 0;
+      const pass = score >= (profile.engagement?.quiz?.pass_threshold || 0.8);
+      quizPassed = pass;
+      try { localStorage.setItem(QUIZ_KEY, JSON.stringify({ score, passed: pass })); } catch {}
+      $("#quizStatus").innerHTML = pass
+        ? `<span class="status">Passed (${Math.round(score * 100)}%).</span>`
+        : `<span class="warn">Score ${Math.round(score * 100)}% — review Law & Doors and try again.</span>`;
+      if (pass) {
+        Loop?.markStepDone?.("first_door_engage", {
+          episodeSlug: "the_first_door",
+          engageQuizPassed: true,
+          engageQuizScore: score
+        });
+        unlockFrom("prove");
+        refreshProgress();
+      }
+    });
+
+    function renderProve() {
+      const p = profile.prove;
+      $("#proveTitle").textContent = p.title;
+      $("#proveDesc").textContent = p.description;
+      $("#proveForm").innerHTML = (p.fields || []).map(f => `
+        <div class="field">
+          <label for="pf_${f.id}">${f.label}${f.required ? " *" : ""}</label>
+          ${f.rows > 1
+            ? `<textarea id="pf_${f.id}" name="${f.id}" ${f.required ? "required" : ""}></textarea>`
+            : `<input id="pf_${f.id}" name="${f.id}" ${f.required ? "required" : ""} />`}
+        </div>
+      `).join("");
+      try {
+        const saved = JSON.parse(localStorage.getItem(PROVE_KEY) || "{}");
+        Object.entries(saved).forEach(([k, v]) => {
+          const el = $(`#pf_${k}`);
+          if (el) el.value = v;
+        });
+        if (saved.submitted) $("#proveStatus").textContent = "Readiness note submitted.";
+      } catch {}
+      $("#proveForm").addEventListener("submit", e => {
+        e.preventDefault();
+        const data = {};
+        (p.fields || []).forEach(f => {
+          const el = $(`#pf_${f.id}`);
+          if (el) data[f.id] = el.value.trim();
+        });
+        const missing = (p.fields || []).filter(f => f.required && !data[f.id]);
+        if (missing.length) {
+          $("#proveStatus").innerHTML = `<span class="warn">Fill required fields: ${missing.map(m => m.label).join(", ")}</span>`;
+          return;
+        }
+        const bundle = { ...data, submitted: true, submittedAt: new Date().toISOString() };
+        try { localStorage.setItem(PROVE_KEY, JSON.stringify(bundle)); } catch {}
+        Loop?.markStepDone?.("first_door_prove", {
+          episodeSlug: "the_first_door",
+          readinessNoteSubmitted: true,
+          agentIdentity: data.agent_identity,
+          assignedLane: data.assigned_lane,
+          primaryDivision: data.primary_division,
+          currentState: data.current_state,
+          eodCapsule: {
+            learned: data.eod_learned,
+            verified: data.eod_verified,
+            unknown: data.eod_unknown,
+            next: data.eod_next
+          },
+          readinessNote: data
+        });
+        Loop?.markStepDone?.("first_door_gates", {
+          episodeSlug: "the_first_door",
+          day1Complete: true
+        });
+        window.ByteCastAgentDayInteractive?.savePocketLaw?.({
+          day: 1,
+          law: profile.content?.key_line || "Find the door before you wander the hall.",
+          title: profile.episode?.title || "The First Door",
+          savedAt: new Date().toISOString()
+        });
+        $("#proveStatus").textContent = "Day 1 Readiness Note saved. Continue to Day 2 when unlocked.";
+        refreshProgress();
+        window.ByteCastHandoffFooter?.render?.({ profile, container: document.getElementById("bc-handoff-footer") });
+      });
+    }
+
+    function unlockFrom(panelId) {
+      const order = ["trust", "journey", "practice", "lawref", "engage", "prove"];
+      const idx = order.indexOf(panelId);
+      $$(".tab").forEach(tab => {
+        const pi = order.indexOf(tab.dataset.panel);
+        if (pi <= idx + 1) tab.classList.remove("is-locked");
+      });
+    }
+
+    function unlockTabs() {
+      const wf = Loop?.readWorkflowV2?.() || {};
+      if (Loop?.isStepDone?.(wf, "first_door_trust")) unlockFrom("journey");
+      if (Loop?.isStepDone?.(wf, "first_door_segments")) unlockFrom("lawref");
+      if (Loop?.isStepDone?.(wf, "first_door_engage")) unlockFrom("prove");
+    }
+
+    function selectTab(id) {
+      $$(".tab").forEach(t => t.setAttribute("aria-selected", t.dataset.panel === id ? "true" : "false"));
+      $$(".panel").forEach(p => p.classList.toggle("is-active", p.id === `panel-${id}`));
+    }
+
+    $$(".tab").forEach(tab => {
+      tab.addEventListener("click", () => {
+        if (tab.classList.contains("is-locked")) return;
+        selectTab(tab.dataset.panel);
+      });
+    });
+
+    function refreshProgress() {
+      const wf = Loop?.readWorkflowV2?.() || {};
+      const chips = [
+        ["Trust", Loop?.isStepDone?.(wf, "first_door_trust")],
+        ["Journey", Loop?.isStepDone?.(wf, "first_door_segments")],
+        ["Practice", labsComplete || labsApi?.allLabsDone?.()],
+        ["Check", Loop?.isStepDone?.(wf, "first_door_engage")],
+        ["Prove", Loop?.isStepDone?.(wf, "first_door_prove")]
+      ];
+      $("#progressChips").innerHTML = chips.map(([l, d]) => `<span class="chip${d ? " done" : ""}">${l}${d ? " ✓" : ""}</span>`).join("");
+    }
+
+    loadProfile().catch(err => {
+      $("#heroSub").textContent = "Unable to load profile: " + err.message;
+    });
+  })();
+  </script>
+</body>
+</html>

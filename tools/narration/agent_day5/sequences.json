@@ -1,0 +1,22 @@
+{
+  "schema": "narration-sequences-v1",
+  "packId": "agent_day5_working_the_queue",
+  "sequences": {
+    "full_journey": {
+      "label": "Working the Queue — full journey",
+      "lineIds": [
+        "cold_open",
+        "the_queue_is_a_trust_layer",
+        "the_three_priority_lanes",
+        "active_blocked_parked_waiting_done",
+        "intake_how_new_work_enters_the_queue",
+        "the_one_action_rule",
+        "queue_anti_patterns",
+        "working_the_queue_like_avcc",
+        "confidentiality_while_working_the_queue",
+        "closing"
+      ]
+    }
+  },
+  "defaultSequence": "full_journey"
+}

@@ -428,187 +428,99 @@
     const Loop = window.ByteCastLoop || null;
 
     const PROFILE = {
-      schema: "bytecast-ep-profile-v1",
-      episode: {
-        code: "EP-APP-001",
-        title: "AV Apparel Welcome — Culture + First Win",
-        type: "internal",
-        date: "2026-02-24",
-        runtime_target_minutes: 8,
-        status: "draft"
-      },
-      content: {
-        tags: ["apparel", "onboarding", "catalog", "culture", "expectations"],
-        summary_short: "AV Apparel welcome: what the brand is, what catalog hygiene means, and how to earn your first safe win.",
-        summary_long: "This ByteCast is the entry point for AV Apparel contributors. It explains the brand, the three core tools, what catalog hygiene means, and the golden rule of no drift. It closes with a small, safe first task so new helpers can ship proof-of-work without breaking anything."
-      },
-      slides: [
-        {
-          id: "s1",
-          title: "What AV Apparel Is",
-          goal: "Anchor what AV Apparel is and why the catalog matters.",
-          bullets: [
-            "AV Apparel = the clothing arm of AeroVista: drops, staples, and collabs.",
-            "The catalog is how customers experience the brand — messy catalog = broken trust.",
-            "Your work lives where design, catalog data, and store UX meet."
-          ]
-        },
-        {
-          id: "s2",
-          title: "Catalog Hygiene Basics",
-          goal: "Define catalog hygiene in one slide.",
-          bullets: [
-            "Every product has clean: title, price, variants, images, tags, collections.",
-            "No duplicates, no orphaned products, no surprise prices.",
-            "If something feels off in the storefront, you are allowed to flag it."
-          ]
-        },
-        {
-          id: "s3",
-          title: "The Three Core Tools",
-          goal: "Show how Printful, Square, and the site catalog fit together.",
-          bullets: [
-            "Printful: production truth — what gets printed and in what variants.",
-            "Square: retail truth — prices, availability, and customer-facing data.",
-            "Site catalog: presentation truth — how things are grouped and discovered."
-          ]
-        },
-        {
-          id: "s4",
-          title: "Golden Rule: No Drift",
-          goal: "Explain drift and why it kills trust.",
-          bullets: [
-            "Drift = when Printful, Square, and the storefront disagree on price or details.",
-            "Customers notice: different prices, wrong sizes, weird images.",
-            "Your job is to prevent drift by following the playbooks and checklists."
-          ]
-        },
-        {
-          id: "s5",
-          title: "Pick Your Lane",
-          goal: "Help contributors choose where they help first.",
-          bullets: [
-            "Lanes: Maintainer, Copy & Naming, Pricing, Collections, QA.",
-            "You do not need access to everything on day one.",
-            "We graduate access as you ship clean work across a few tasks."
-          ]
-        },
-        {
-          id: "s6",
-          title: "First Win Checklist",
-          goal: "Define a tiny, safe first contribution.",
-          bullets: [
-            "Open the apparel catalog and find one small issue (typo, tag, or grouping).",
-            "Write a clear change request using the suggested template.",
-            "Pair with a maintainer to apply it safely — then log it as your first win."
-          ]
-        },
-        {
-          id: "s7",
-          title: "First Win Proof Note",
-          goal: "Make the first contribution easy to review.",
-          bullets: [
-            "Name the product, collection, or catalog area you checked.",
-            "Write the before state, proposed change, and why it improves customer trust.",
-            "Include what you did not touch so review stays focused and safe."
-          ]
-        }
-      ],
-      engagement: {
-        quest: {
-          title: "First Apparel Win",
-          items: [
-            { id: "q1", text: "Play the episode and mark 2–3 key timestamps you want to remember." },
-            { id: "q2", text: "Pick your starting lane (Maintainer / Copy & Naming / Pricing / Collections / QA)." },
-            { id: "q3", text: "Open the live apparel catalog and identify one small issue you could safely help fix." },
-            { id: "q4", text: "Draft a one-paragraph change request describing the issue and the desired outcome." },
-            { id: "q5", text: "Write a one-line before/after proof note for the tiny catalog issue you found." }
-          ],
-          reward_badge: {
-            label: "APPAREL FIRST WIN",
-            style: "neon"
-          }
-        },
-        quiz: {
-          enabled: true,
-          pass_threshold: 0.8,
-          questions: [
-            {
-              id: "k1",
-              q: "What does 'catalog hygiene' mean for AV Apparel?",
-              choices: [
-                "Having as many products as possible, even if messy",
-                "Clean titles, prices, variants, images, tags, and collections that match across systems",
-                "Letting Printful handle everything automatically",
-                "Only caring about the photos"
-              ],
-              answer_index: 1,
-              explain: "Hygiene is about consistency and correctness across Printful, Square, and the site catalog."
-            },
-            {
-              id: "k2",
-              q: "Which set of tools is considered the 'three core tools' in this episode?",
-              choices: [
-                "GitHub, Figma, Discord",
-                "Printful, Square, Site catalog",
-                "Slack, Notion, Email",
-                "Photoshop, Premiere, After Effects"
-              ],
-              answer_index: 1,
-              explain: "Printful (production), Square (retail), and the site catalog (presentation) form the triangle you care about."
-            },
-            {
-              id: "k3",
-              q: "Why is drift dangerous?",
-              choices: [
-                "It makes the catalog visually boring",
-                "It slows down designers",
-                "Customers see different prices or details in different places and stop trusting the store",
-                "It only affects internal reports"
-              ],
-              answer_index: 2,
-              explain: "Trust breaks when prices, sizes, or products don’t match across systems."
-            },
-            {
-              id: "k4",
-              q: "What is the goal of a 'first win' in this onboarding?",
-              choices: [
-                "To prove you can memorize every workflow",
-                "To ship one tiny, safe improvement using the catalog playbooks",
-                "To redesign the entire apparel line",
-                "To get full production access on day one"
-              ],
-              answer_index: 1,
-              explain: "A first win is deliberately small, safe, and rooted in the existing workflows."
-            },
-            {
-              id: "k5",
-              q: "How should new contributors think about access?",
-              choices: [
-                "Ask for all permissions immediately",
-                "Avoid asking for access and work anonymously",
-                "Earn more access as they ship clean, reviewable work in a lane",
-                "Only work through someone else’s account"
-              ],
-              answer_index: 2,
-              explain: "Access increases as you prove you can follow the system and keep the catalog clean."
-            },
-            {
-              id: "k6",
-              q: "What makes a first apparel win reviewable?",
-              choices: [
-                "A broad redesign idea",
-                "A before state, proposed change, reason, and what was not touched",
-                "A private note with no product reference",
-                "Changing the live catalog before review"
-              ],
-              answer_index: 1,
-              explain: "A first win should be small, scoped, and easy for a maintainer to review."
-            }
-          ]
-        }
+  "schema": "bytecast-ep-profile-v1",
+  "teaching_mode": "MissionLab",
+  "episode": {
+    "code": "EP-APP-001",
+    "title": "AV Apparel Welcome - Culture + First Win",
+    "type": "training",
+    "date": "2026-07-08",
+    "runtime_target_minutes": 12,
+    "status": "active"
+  },
+  "content": {
+    "tags": [
+      "apparel",
+      "catalog",
+      "operations"
+    ],
+    "summary_short": "AV Apparel Welcome - Culture + First Win",
+    "hero_kicker": "AV Apparel Onboarding",
+    "key_line": "Culture first, then catalog mechanics — one honest win beats ten rushed edits.",
+    "start_here": "Read the welcome flow, then work the practice steps before the quiz."
+  },
+  "media": {
+    "audio_files": [
+      {
+        "path": "assets\/av_apparel_ep1_welcome.mp3",
+        "label": "Episode narration (generate or drop in assets\/)",
+        "required": false
       }
-    };
+    ]
+  },
+  "engagement": {
+    "quiz": {
+      "enabled": true,
+      "pass_threshold": 0.8,
+      "questions": [
+        {
+          "id": "app1_q1",
+          "q": "A new contributor should start in:",
+          "choices": [
+            "Lane C immediately",
+            "Lane A or B with small PRs",
+            "Any lane they prefer"
+          ],
+          "answer_index": 1
+        },
+        {
+          "id": "app1_q2",
+          "q": "First win means:",
+          "choices": [
+            "A large refactor",
+            "One reviewable catalog improvement",
+            "Skipping QA"
+          ],
+          "answer_index": 1
+        }
+      ]
+    }
+  },
+  "slides": [
+    {
+      "id": "welcome",
+      "title": "Welcome to AV Apparel",
+      "goal": "Set culture and expectations before catalog work.",
+      "bullets": [
+        "Apparel is customer-facing — copy and inventory truth matter.",
+        "Start in Lane A\/B until you have two clean PRs.",
+        "Your first win is a small, reviewable catalog improvement."
+      ]
+    },
+    {
+      "id": "lanes",
+      "title": "Contributor lanes",
+      "goal": "Know what you can touch on day one.",
+      "bullets": [
+        "Lane A: markdown, copy, images, catalog entries.",
+        "Lane B: static UI and accessibility fixes.",
+        "Lane C: backend\/infra — elevated access only."
+      ]
+    }
+  ],
+  "lesson": {
+    "objective": "Understand AV Apparel culture, contributor lanes, and how to earn your first catalog win.",
+    "why_it_matters": "Apparel work touches customer-facing copy and inventory truth — speed without standards creates rework.",
+    "apply": "Complete the practice checklist and pass the welcome quiz.",
+    "advance": "Pass engage gate; continue to EP-APP-002 Catalog Maintainer Bootcamp."
+  },
+  "related_next": [
+    {
+      "label": "Next: EP-APP-002 — Catalog Maintainer Bootcamp - Your Day-to-Day",
+      "href": "..\/av_apparel_ep2_catalog\/index.html"
+    }
+  ]
+};
 
     const $ = (s, r = document) => r.querySelector(s);
     const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));

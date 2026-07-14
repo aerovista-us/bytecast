@@ -1,6 +1,6 @@
 ﻿# ByteCast `/docs` â€” index
 
-**Updated:** 2026-07-07
+**Updated:** 2026-07-09
 
 Canonical technical and training documentation for the `bytecast/` workspace. Prefer **HTML** entry [`index.html`](./index.html) for navigation; this file is the Markdown index for editors and GitHub.
 
@@ -8,11 +8,23 @@ Canonical technical and training documentation for the `bytecast/` workspace. Pr
 
 | Doc | Purpose |
 |-----|---------|
+| [`AGENT_DAY1_FIRST_DOOR.md`](./AGENT_DAY1_FIRST_DOOR.md) | **Required Day 1** — The First Door agent orientation pack. |
+| [`AGENT_DAY2_SOURCE_OF_TRUTH.md`](./AGENT_DAY2_SOURCE_OF_TRUTH.md) | **Required Day 2** — Finding the Source of Truth verification pack. |
+| [`AGENT_DAY3_SIGNAL_TO_ACTION.md`](./AGENT_DAY3_SIGNAL_TO_ACTION.md) | **Required Day 3** — From Signal to Action / AVCC judgment pack. |
+| [`AGENT_DAY4_HANDOFF_IS_THE_WORK.md`](./AGENT_DAY4_HANDOFF_IS_THE_WORK.md) | **Required Day 4** — The Handoff Is the Work / handoff discipline pack. |
+| [`AGENT_DAYS_5_10.md`](./AGENT_DAYS_5_10.md) | **Required Days 5–10** — Queue, access, client experience, writing, deliverables, capstone. |
+| [`NARRATION_FORGE_BYTECAST.md`](./NARRATION_FORGE_BYTECAST.md) | **NXCore TTS** — forge workflow for episode narration. |
+| [`NARRATION_FORGE_PORTABLE_GUIDE.md`](./NARRATION_FORGE_PORTABLE_GUIDE.md) | Portable narration forge pattern for other repos. |
+| [`agent_day1/THE_FIRST_DOOR_SCRIPT.md`](./agent_day1/THE_FIRST_DOOR_SCRIPT.md) | Canonical Byte narrator script for Agent Day 1. |
+| [`agent_day2/FINDING_SOURCE_OF_TRUTH_SCRIPT.md`](./agent_day2/FINDING_SOURCE_OF_TRUTH_SCRIPT.md) | Canonical Byte narrator script for Agent Day 2. |
+| [`agent_day3/FROM_SIGNAL_TO_ACTION_SCRIPT.md`](./agent_day3/FROM_SIGNAL_TO_ACTION_SCRIPT.md) | Canonical Byte narrator script for Agent Day 3. |
+| [`agent_day4/THE_HANDOFF_IS_THE_WORK_SCRIPT.md`](./agent_day4/THE_HANDOFF_IS_THE_WORK_SCRIPT.md) | Canonical Byte narrator script for Agent Day 4. |
 | [`BYTECAST_PRODUCT_DIRECTION.md`](./BYTECAST_PRODUCT_DIRECTION.md) | **Product north star** — employee pulse, Pulse → Path → Depth, lifecycle UX, roadmap. |
 | [`PULSE_FEED.md`](./PULSE_FEED.md) | **Pulse feed** — ship briefings via `data/pulse.json` only. |
 | [`CATALOG.md`](./CATALOG.md) | **Catalog (Phase C)** — single source of truth: `data/catalog.json` + sync script. |
 | [`PLATFORM_STATUS.md`](./PLATFORM_STATUS.md) | **Current** platform snapshot (doors, episodes, journey/proof, seeds, QA). |
-| [`HANDOFF_2026-07-07.md`](./HANDOFF_2026-07-07.md) | **EOD handoff** — intake integration + Shareholder Season 1 status and next steps. |
+| [`HANDOFF_2026-07-09.md`](./HANDOFF_2026-07-09.md) | **Current EOD handoff** — Agent Days 1–4, training upgrade, NXCore narration forge. |
+| [`HANDOFF_2026-07-07.md`](./HANDOFF_2026-07-07.md) | Prior handoff — intake integration + Shareholder Season 1. |
 | [`archived/README.md`](./archived/README.md) | Historical audits and superseded `*_STATUS.md` stubs (Feb 2026). |
 
 ## Contributor ramp

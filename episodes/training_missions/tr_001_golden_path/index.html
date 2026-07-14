@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TR-001 â€¢ Golden Path Missions</title>
-  <meta name="description" content="Golden Path v1: Playlist -> EP-001 -> Training -> Seed -> Badge â€” with understanding check and proof." />
+  <title>TR-001 • Golden Path Missions</title>
+  <meta name="description" content="Golden Path v1: Playlist -> EP-001 -> Training -> Seed -> Badge — with understanding check and proof." />
   <link rel="icon" href="../../../favicon.svg" type="image/svg+xml" />
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Sora:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap");
@@ -166,7 +166,7 @@
 <body>
   <main class="shell">
     <section class="hero" aria-label="TR-001">
-      <h1>TR-001 â€¢ Golden Path Missions</h1>
+      <h1>TR-001 • Golden Path Missions</h1>
       <p class="sub">
         Short training pack: checkpoints + understanding quiz + one-line proof for your journey record.
         Completion without understanding is not enough for the next lane.
@@ -181,7 +181,7 @@
         <li><b>Objective:</b> Confirm you can navigate EP-001, skim the Offer Pack, and explain the loop in your own words.</li>
         <li><b>Check:</b> Two-question quiz (100% required) + mission checkpoints.</li>
         <li><b>Prove:</b> Short written response stored as <code>proofExplain</code>.</li>
-        <li><b>Advance:</b> Unlocks Seed Export when EP-001 engage proof exists and this stepâ€™s meta is complete.</li>
+        <li><b>Advance:</b> Unlocks Seed Export when EP-001 engage proof exists and this step's meta is complete.</li>
       </ul>
     </section>
 
@@ -201,7 +201,7 @@
           <p>2) Where does Golden Path proof live today?</p>
           <div class="qopts">
             <label><input type="radio" name="trq1" value="0" /> Only on a central server (no local copy)</label>
-            <label><input type="radio" name="trq1" value="1" /> In this browserâ€™s local storage (export bundle for teachers)</label>
+            <label><input type="radio" name="trq1" value="1" /> In this browser's local storage (export bundle for teachers)</label>
             <label><input type="radio" name="trq1" value="2" /> Only in email</label>
           </div>
         </div>
@@ -209,7 +209,7 @@
       </article>
 
       <article class="card">
-        <h2>Apply â€” checkpoints</h2>
+        <h2>Apply — checkpoints</h2>
         <p class="hint">Proof-of-work beats theory. Check each when done.</p>
 
         <label class="check">
@@ -229,7 +229,7 @@
         </label>
 
         <div class="field">
-          <label for="proofExplain">Prove â€” one sentence (min 20 characters)</label>
+          <label for="proofExplain">Prove — one sentence (min 20 characters)</label>
           <textarea id="proofExplain" class="field-input" placeholder="In your own words: what is the ByteCast loop and what will you do next?"></textarea>
         </div>
 
@@ -243,7 +243,7 @@
       </article>
 
       <article class="card">
-        <h2>What â€œdoneâ€ means now</h2>
+        <h2>What "done" means now</h2>
         <p class="hint">Golden Path requires <b>completion + understanding + proof</b>:</p>
         <div class="hint">
           <div>1. EP-001 gates + quiz proof on <code>ep001_engage</code></div>
@@ -251,7 +251,7 @@
           <div>3. Seed artifact exported (<code>artifactName</code> / <code>artifactHash</code>)</div>
           <div>4. Publish URL + badge mint</div>
         </div>
-        <p class="hint" style="margin-top:10px;">Teacher review: Docs â†’ Proof Review (paste export bundle).</p>
+        <p class="hint" style="margin-top:10px;">Teacher review: Docs → Proof Review (paste export bundle).</p>
       </article>
     </section>
   </main>
@@ -366,13 +366,13 @@
         lock.textContent = "Locked: complete EP-001 gates (Listen + Slide + Engage).";
         lock.className = "status";
       } else if (!engageProof) {
-        lock.textContent = "Locked: EP-001 engage quiz proof missing. Open EP-001, pass the quiz (â‰¥80%), return here.";
+        lock.textContent = "Locked: EP-001 engage quiz proof missing. Open EP-001, pass the quiz (≥80%), return here.";
         lock.className = "status";
       } else if (trDone) {
         lock.textContent = "Training proof recorded. Next: Seed Orchard.";
         lock.className = "status ok";
       } else if (!quizOk || !allChecks || explain.length < 20) {
-        lock.textContent = "Complete: both quiz answers, both checkpoints, and 20+ chars in Prove field â€” then click Complete.";
+        lock.textContent = "Complete: both quiz answers, both checkpoints, and 20+ chars in Prove field — then click Complete.";
         lock.className = "status";
       } else {
         lock.textContent = "Ready: click Complete training (record proof).";

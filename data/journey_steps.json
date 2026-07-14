@@ -1,118 +1,302 @@
 {
   "schema": "bytecast-journey-steps-v1",
-  "updated_on": "2026-07-06T12:00:00Z",
+  "updated_on": "2026-07-08T12:00:00Z",
   "journeys": [
     {
       "id": "p1_golden_path",
       "label": "Onboarding (Golden Path)",
-      "description": "EP-001 to EP-004, then TR-001A, Practice Builder, Publish, and Badge",
+      "description": "Agent Days 1–10 (required), then TR-001A, Practice Builder, Publish, and Badge",
       "isDefault": true,
       "steps": [
         {
-          "id": "ep001_gates",
-          "label": "EP-001 Progress Check",
+          "id": "first_door_gates",
+          "label": "The First Door — Agent Day 1",
           "lane": "bytecast",
           "group": "ByteCast",
           "order": 10,
-          "estimatedMinutes": 7,
-          "href": "episodes/welcome_to_bytecast/index.html",
-          "cta": "Finish EP-001",
+          "estimatedMinutes": 22,
+          "href": "episodes/the_first_door/index.html",
+          "cta": "Complete The First Door",
           "complete_when": {
             "type": "steps_all",
             "ids": [
-              "ep001_listen",
-              "ep001_slide",
-              "ep001_engage"
+              "first_door_trust",
+              "first_door_segments",
+              "first_door_engage",
+              "first_door_prove"
             ]
           }
         },
         {
-          "id": "ep002_gates",
-          "label": "EP-002 Progress Check",
+          "id": "sot_gates",
+          "label": "Finding the Source of Truth — Agent Day 2",
           "lane": "bytecast",
           "group": "ByteCast",
-          "order": 12,
-          "estimatedMinutes": 8,
-          "href": "episodes/aerovista_7_division_overview/index.html",
-          "cta": "Finish EP-002",
+          "order": 15,
+          "estimatedMinutes": 24,
+          "href": "episodes/finding_source_of_truth/index.html",
+          "cta": "Complete Day 2",
           "depends_on": [
-            "ep001_gates"
+            "first_door_gates"
           ],
           "unlock_requires": [
             {
-              "stepId": "ep001_engage",
+              "stepId": "first_door_prove",
               "meta_fields": [
-                "engageQuizPassed",
-                "engageQuizScore"
+                "readinessNoteSubmitted"
               ]
             }
           ],
           "complete_when": {
             "type": "steps_all",
             "ids": [
-              "ep002_listen",
-              "ep002_slide",
-              "ep002_engage"
+              "sot_gate",
+              "sot_segments",
+              "sot_engage",
+              "sot_prove"
             ]
           }
         },
         {
-          "id": "ep003_gates",
-          "label": "EP-003 Progress Check",
+          "id": "avcc_gates",
+          "label": "From Signal to Action — Agent Day 3",
           "lane": "bytecast",
           "group": "ByteCast",
-          "order": 14,
-          "estimatedMinutes": 7,
-          "href": "episodes/the_main_doors/index.html",
-          "cta": "Finish EP-003",
+          "order": 18,
+          "estimatedMinutes": 26,
+          "href": "episodes/from_signal_to_action/index.html",
+          "cta": "Complete Day 3",
           "depends_on": [
-            "ep002_gates"
+            "sot_gates"
           ],
           "unlock_requires": [
             {
-              "stepId": "ep002_engage",
+              "stepId": "sot_prove",
               "meta_fields": [
-                "engageQuizPassed",
-                "engageQuizScore"
+                "sotDrillSubmitted"
               ]
             }
           ],
           "complete_when": {
             "type": "steps_all",
             "ids": [
-              "ep003_listen",
-              "ep003_slide",
-              "ep003_engage"
+              "avcc_gate",
+              "avcc_segments",
+              "avcc_engage",
+              "avcc_prove"
             ]
           }
         },
         {
-          "id": "ep004_gates",
-          "label": "EP-004 Progress Check",
+          "id": "handoff_gates",
+          "label": "The Handoff Is the Work — Agent Day 4",
           "lane": "bytecast",
           "group": "ByteCast",
-          "order": 16,
-          "estimatedMinutes": 7,
-          "href": "episodes/current_truth_basics/index.html",
-          "cta": "Finish EP-004",
+          "order": 19,
+          "estimatedMinutes": 25,
+          "href": "episodes/the_handoff_is_the_work/index.html",
+          "cta": "Complete Day 4",
           "depends_on": [
-            "ep003_gates"
+            "avcc_gates"
           ],
           "unlock_requires": [
             {
-              "stepId": "ep003_engage",
+              "stepId": "avcc_prove",
               "meta_fields": [
-                "engageQuizPassed",
-                "engageQuizScore"
+                "avccBriefSubmitted",
+                "signalChanged",
+                "priority",
+                "confidence"
               ]
             }
           ],
           "complete_when": {
             "type": "steps_all",
             "ids": [
-              "ep004_listen",
-              "ep004_slide",
-              "ep004_engage"
+              "handoff_gate",
+              "handoff_segments",
+              "handoff_engage",
+              "handoff_prove"
+            ]
+          }
+        },
+        {
+          "id": "queue_gates",
+          "label": "Working the Queue — Agent Day 5",
+          "lane": "bytecast",
+          "group": "ByteCast",
+          "order": 20,
+          "estimatedMinutes": 25,
+          "href": "episodes/working_the_queue/index.html",
+          "cta": "Complete Day 5",
+          "depends_on": [
+            "handoff_gates"
+          ],
+          "unlock_requires": [
+            {
+              "stepId": "handoff_prove",
+              "meta_fields": [
+                "drillSubmitted"
+              ]
+            }
+          ],
+          "complete_when": {
+            "type": "steps_all",
+            "ids": [
+              "queue_gate",
+              "queue_segments",
+              "queue_engage",
+              "queue_prove"
+            ]
+          }
+        },
+        {
+          "id": "access_gates",
+          "label": "Safe Access & Boundaries — Agent Day 6",
+          "lane": "bytecast",
+          "group": "ByteCast",
+          "order": 21,
+          "estimatedMinutes": 28,
+          "href": "episodes/safe_access_boundaries/index.html",
+          "cta": "Complete Day 6",
+          "depends_on": [
+            "queue_gates"
+          ],
+          "unlock_requires": [
+            {
+              "stepId": "queue_prove",
+              "meta_fields": [
+                "drillSubmitted"
+              ]
+            }
+          ],
+          "complete_when": {
+            "type": "steps_all",
+            "ids": [
+              "access_gate",
+              "access_segments",
+              "access_engage",
+              "access_prove"
+            ]
+          }
+        },
+        {
+          "id": "serve_gates",
+          "label": "Builder & Client Experience — Agent Day 7",
+          "lane": "bytecast",
+          "group": "ByteCast",
+          "order": 22,
+          "estimatedMinutes": 28,
+          "href": "episodes/builder_client_experience/index.html",
+          "cta": "Complete Day 7",
+          "depends_on": [
+            "access_gates"
+          ],
+          "unlock_requires": [
+            {
+              "stepId": "access_prove",
+              "meta_fields": [
+                "drillSubmitted"
+              ]
+            }
+          ],
+          "complete_when": {
+            "type": "steps_all",
+            "ids": [
+              "serve_gate",
+              "serve_segments",
+              "serve_engage",
+              "serve_prove"
+            ]
+          }
+        },
+        {
+          "id": "writing_gates",
+          "label": "Writing Like AeroVista — Agent Day 8",
+          "lane": "bytecast",
+          "group": "ByteCast",
+          "order": 23,
+          "estimatedMinutes": 28,
+          "href": "episodes/writing_like_aerovista/index.html",
+          "cta": "Complete Day 8",
+          "depends_on": [
+            "serve_gates"
+          ],
+          "unlock_requires": [
+            {
+              "stepId": "serve_prove",
+              "meta_fields": [
+                "drillSubmitted"
+              ]
+            }
+          ],
+          "complete_when": {
+            "type": "steps_all",
+            "ids": [
+              "writing_gate",
+              "writing_segments",
+              "writing_engage",
+              "writing_prove"
+            ]
+          }
+        },
+        {
+          "id": "deliver_gates",
+          "label": "From Draft to Deliverable — Agent Day 9",
+          "lane": "bytecast",
+          "group": "ByteCast",
+          "order": 24,
+          "estimatedMinutes": 28,
+          "href": "episodes/from_draft_to_deliverable/index.html",
+          "cta": "Complete Day 9",
+          "depends_on": [
+            "writing_gates"
+          ],
+          "unlock_requires": [
+            {
+              "stepId": "writing_prove",
+              "meta_fields": [
+                "drillSubmitted"
+              ]
+            }
+          ],
+          "complete_when": {
+            "type": "steps_all",
+            "ids": [
+              "deliver_gate",
+              "deliver_segments",
+              "deliver_engage",
+              "deliver_prove"
+            ]
+          }
+        },
+        {
+          "id": "capstone_gates",
+          "label": "Trusted Agent Capstone — Agent Day 10",
+          "lane": "bytecast",
+          "group": "ByteCast",
+          "order": 25,
+          "estimatedMinutes": 32,
+          "href": "episodes/trusted_agent_capstone/index.html",
+          "cta": "Complete Day 10",
+          "depends_on": [
+            "deliver_gates"
+          ],
+          "unlock_requires": [
+            {
+              "stepId": "deliver_prove",
+              "meta_fields": [
+                "drillSubmitted"
+              ]
+            }
+          ],
+          "complete_when": {
+            "type": "steps_all",
+            "ids": [
+              "capstone_gate",
+              "capstone_segments",
+              "capstone_engage",
+              "capstone_prove"
             ]
           }
         },
@@ -121,16 +305,22 @@
           "label": "TR-001A Day 1 Check",
           "lane": "training",
           "group": "Training",
-          "order": 20,
+          "order": 30,
           "estimatedMinutes": 12,
           "href": "episodes/training_missions/tr_001a_day1_foundations/index.html",
           "cta": "Run TR-001A",
           "depends_on": [
-            "ep004_gates"
+            "capstone_gates"
           ],
           "unlock_requires": [
             {
-              "stepId": "ep004_engage",
+              "stepId": "capstone_prove",
+              "meta_fields": [
+                "drillSubmitted"
+              ]
+            },
+            {
+              "stepId": "capstone_engage",
               "meta_fields": [
                 "engageQuizPassed",
                 "engageQuizScore"
@@ -215,30 +405,52 @@
           "id": "p1_golden_path_v1",
           "label": "P1: Golden Path",
           "requires": [
-            "ep001_gates",
-            "ep002_gates",
-            "ep003_gates",
-            "ep004_gates",
+            "first_door_gates",
+            "sot_gates",
+            "avcc_gates",
+            "handoff_gates",
             "tr001a_day1_foundations",
             "seed_export_v1",
             "seed_publish_v1"
           ],
           "minProof": {
-            "ep001_engage": [
+            "first_door_trust": [
+              "legalAcknowledged"
+            ],
+            "first_door_engage": [
               "engageQuizPassed",
               "engageQuizScore"
             ],
-            "ep002_engage": [
-              "engageQuizPassed",
-              "engageQuizScore"
+            "first_door_prove": [
+              "readinessNoteSubmitted",
+              "agentIdentity",
+              "assignedLane",
+              "currentState",
+              "eodCapsule"
             ],
-            "ep003_engage": [
-              "engageQuizPassed",
-              "engageQuizScore"
+            "sot_prove": [
+              "sotDrillSubmitted",
+              "objectBeingChecked",
+              "truthLabel",
+              "packetConfidence",
+              "sotDrill"
             ],
-            "ep004_engage": [
-              "engageQuizPassed",
-              "engageQuizScore"
+            "avcc_prove": [
+              "avccBriefSubmitted",
+              "signalChanged",
+              "priority",
+              "confidence",
+              "avccBrief"
+            ],
+            "handoff_prove": [
+              "handoffPacketSubmitted",
+              "taskTitle",
+              "currentState",
+              "nextAction",
+              "ownerLane",
+              "eodPriority",
+              "eodConfidence",
+              "handoffPacket"
             ],
             "tr001a_day1_foundations": [
               "mission",

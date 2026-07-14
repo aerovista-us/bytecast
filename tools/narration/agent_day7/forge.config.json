@@ -1,0 +1,19 @@
+{
+  "schema": "narration-forge-config-v1",
+  "packId": "agent_day7_builder_client",
+  "episodeCode": "AGENT-D7",
+  "authoringRoot": "docs/agent_day7",
+  "linesMaster": "tools/narration/agent_day7/lines.master.json",
+  "sequences": "tools/narration/agent_day7/sequences.json",
+  "voiceRecipes": "tools/narration/agent_day7/voiceRecipes.json",
+  "bindings": "tools/narration/agent_day7/bindings.json",
+  "outputDir": "episodes/builder_client_experience/assets/narration",
+  "runtimeManifest": "episodes/builder_client_experience/assets/narration.manifest.json",
+  "shipFormat": "wav",
+  "tts": {
+    "provider": "nxcore-echoverse",
+    "endpoint": "/api/generate",
+    "envUrl": "NXCORE_TTS_URL",
+    "defaultUrl": "http://127.0.0.1:5315"
+  }
+}

@@ -1,0 +1,595 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "teaching_mode": "InteractiveScript",
+  "episode": {
+    "code": "AGENT-D4",
+    "title": "The Handoff Is the Work",
+    "type": "required",
+    "date": "2026-07-09",
+    "runtime_target_minutes": 25,
+    "status": "active"
+  },
+  "content": {
+    "tags": [
+      "agent-day4",
+      "required",
+      "onboarding",
+      "handoff",
+      "eod-capsule",
+      "documentation",
+      "getting-started"
+    ],
+    "hero_kicker": "Required · Getting Started · Durability",
+    "summary_short": "Learn the AeroVista Trail System — EOD Capsules, handoff packets, release boards, registry, docs, memory, and backlog — then produce an Agent Handoff Packet + EOD Capsule Stub.",
+    "summary_long": "Agent Day 4 teaches durable handoffs. Byte covers why handoffs matter, the seven update surfaces, the ten-part Handoff Packet, EOD Capsule human + machine layers, state-update discipline, anti-duplication lines, confidentiality in handoffs, and the final handoff formula. Completion requires gate acknowledgment, segment pass, quiz, and Handoff Packet drill.",
+    "key_line": "If the next agent cannot tell what happened, the work is not done.",
+    "start_here": "Complete the Day 4 gate, listen or read all segments, pass the handoff check, then submit your Agent Handoff Packet + EOD Capsule Stub on a real or simulated task.",
+    "narrator": "Byte",
+    "tone": "Operational, direct, durable, motivating"
+  },
+  "trail_system": [
+    {
+      "surface": "EOD Capsule",
+      "when": "Work needs daily operational visibility — human-readable and machine-readable."
+    },
+    {
+      "surface": "Handoff document",
+      "when": "Another agent or operator must continue the work."
+    },
+    {
+      "surface": "Release board",
+      "when": "Release state changed — active, blocked, released, adopted, archived."
+    },
+    {
+      "surface": "Registry",
+      "when": "The operational map changed — services, routes, agents, tools, surfaces."
+    },
+    {
+      "surface": "Documentation",
+      "when": "The pattern should survive beyond the day; mark stale docs."
+    },
+    {
+      "surface": "Memory",
+      "when": "Durable decisions, preferences, or operating principles for future agents."
+    },
+    {
+      "surface": "Backlog / task",
+      "when": "Work is not done — lane, owner, priority, next action required."
+    }
+  ],
+  "handoff_packet_sections": [
+    "Title — name the work clearly",
+    "Current state — planned, built, live, healthy, released, adopted, blocked, stale, unknown",
+    "What changed — meaningful changes only",
+    "Evidence — what was verified directly",
+    "Decisions made — separate from observations",
+    "Open questions — navigation markers",
+    "Risks — if the next person acts blindly",
+    "Next action — one next action",
+    "Owner or lane — who owns the next move",
+    "Do not repeat — anti-chaos field"
+  ],
+  "final_formula": [
+    "I touched",
+    "I changed",
+    "I verified",
+    "I decided",
+    "I found conflicts in",
+    "I did not touch",
+    "Still unknown",
+    "Risk if ignored",
+    "Next action",
+    "Owner or lane",
+    "Update surfaces needed",
+    "Do not repeat"
+  ],
+  "script": {
+    "sections": [
+      {
+        "id": "cold_open",
+        "title": "Cold Open",
+        "time": "0:00–1:20",
+        "paragraphs": [
+          "Day 1: find the door. Day 2: find the source. Day 3: turn signal into action.",
+          "Day 4: the handoff is the work — not cleanup, not admin.",
+          "If the next agent cannot tell what happened, the work is not done."
+        ]
+      },
+      {
+        "id": "why_handoffs",
+        "title": "Why Handoffs Matter Here",
+        "time": "1:20–4:30",
+        "paragraphs": [
+          "Context decays fast across divisions, systems, docs, memory, and operators.",
+          "A good handoff answers what changed, where, why it matters, what was verified, what is unknown, what is blocked, what happens next, who owns it, and what not to repeat."
+        ]
+      },
+      {
+        "id": "trail_system",
+        "title": "The AeroVista Trail System",
+        "time": "4:30–8:30",
+        "paragraphs": [
+          "Seven surfaces: EOD Capsule, handoff, release board, registry, documentation, memory, backlog.",
+          "Not every update belongs everywhere. An unowned \"we should\" is a ghost."
+        ]
+      },
+      {
+        "id": "handoff_packet",
+        "title": "The Handoff Packet",
+        "time": "8:30–13:30",
+        "paragraphs": [
+          "Ten parts: title, current state, what changed, evidence, decisions, open questions, risks, next action, owner, do not repeat.",
+          "A good title lets the next operator find the thread. Do not blur state words."
+        ]
+      },
+      {
+        "id": "eod_capsules",
+        "title": "EOD Capsules: Daily Memory With Teeth",
+        "time": "13:30–17:30",
+        "paragraphs": [
+          "Human layer for plain language; machine layer for structured data.",
+          "\"Worked on docs\" is almost useless. Name what changed, what remains, and what risk appeared."
+        ]
+      },
+      {
+        "id": "state_updated",
+        "title": "Done Is Not Done Until State Is Updated",
+        "time": "17:30–20:30",
+        "paragraphs": [
+          "A task can be complete but operationally invisible.",
+          "Before calling work done: release board, registry, handoff, EOD, doc status, memory, backlog, owner, risk."
+        ]
+      },
+      {
+        "id": "prevent_duplicate",
+        "title": "Preventing Duplicate Work",
+        "time": "20:30–23:30",
+        "paragraphs": [
+          "Duplicate work looks productive but steals momentum.",
+          "Use anti-duplication lines: already checked, already decided, drafted not published, current authority is Y."
+        ]
+      },
+      {
+        "id": "handoff_confidential",
+        "title": "Confidentiality in Handoffs",
+        "time": "23:30–26:00",
+        "paragraphs": [
+          "Summarize safely — do not paste contracts, credentials, private URLs, or client data into broad handoffs.",
+          "Route full sensitive detail only to authorized lanes."
+        ]
+      },
+      {
+        "id": "final_formula",
+        "title": "The Final Handoff Formula",
+        "time": "26:00–28:00",
+        "paragraphs": [
+          "I touched, changed, verified, decided, found conflicts, did not touch, still unknown, risk, next action, owner, update surfaces, do not repeat.",
+          "You need a bridge, not a novel."
+        ]
+      },
+      {
+        "id": "closing",
+        "title": "Closing",
+        "time": "28:00–29:00",
+        "paragraphs": [
+          "Day 1: find the door. Day 2: find the source. Day 3: turn signal into action. Day 4: leave the trail.",
+          "The next agent is your continuation. The handoff is the work."
+        ]
+      }
+    ]
+  },
+  "day4_gate": {
+    "title": "Day 4 Gate — Handoff Discipline Commitment",
+    "required": true,
+    "items": [
+      "I completed Agent Days 1–3 (or received equivalent briefing on doors, source-of-truth verification, and AVCC judgment).",
+      "I understand the handoff is part of the work — not optional cleanup after the \"real\" task.",
+      "I will use the AeroVista Trail System and put updates on the correct surface (EOD, handoff, release board, registry, docs, memory, backlog).",
+      "I will not call work done until operational state is updated where required.",
+      "I will protect confidential evidence in handoffs — summarize safely and route sensitive detail to authorized lanes only."
+    ]
+  },
+  "prove": {
+    "title": "Agent Handoff Packet + EOD Capsule Stub",
+    "description": "Complete the Handoff Packet drill on a real or simulated AeroVista task — demonstrate durable continuity, not a vague summary.",
+    "fields": [
+      {
+        "id": "task_title",
+        "label": "1. Task Title",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "current_state",
+        "label": "2. Current State (Planned / Drafted / Built / Live / Healthy / Released / Adopted / Blocked / Stale / Unknown) — explain why",
+        "required": true,
+        "rows": 2
+      },
+      {
+        "id": "i_touched",
+        "label": "3. I Touched — systems, documents, files, pages, releases, roles, or decisions",
+        "required": true,
+        "rows": 2
+      },
+      {
+        "id": "i_changed",
+        "label": "4. I Changed — what actually changed",
+        "required": true,
+        "rows": 2
+      },
+      {
+        "id": "i_verified",
+        "label": "5. I Verified — label each: live check, registry, release board, documentation, handoff, EOD, memory, operator instruction, legal source, test result",
+        "required": true,
+        "rows": 3
+      },
+      {
+        "id": "i_decided",
+        "label": "6. I Decided — separate decisions from observations",
+        "required": true,
+        "rows": 2
+      },
+      {
+        "id": "i_did_not_touch",
+        "label": "7. I Did Not Touch — what you intentionally avoided changing",
+        "required": true,
+        "rows": 2
+      },
+      {
+        "id": "still_unknown",
+        "label": "8. Still Unknown — what remains unverified",
+        "required": true,
+        "rows": 2
+      },
+      {
+        "id": "conflicts_found",
+        "label": "9. Conflicts Found — Source A vs Source B, likely authority, risk if unresolved (or \"none\")",
+        "required": true,
+        "rows": 2
+      },
+      {
+        "id": "risk_ignored",
+        "label": "10. Risk If Ignored",
+        "required": true,
+        "rows": 2
+      },
+      {
+        "id": "next_action",
+        "label": "11. Next Action — one next action only",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "owner_lane",
+        "label": "12. Owner or Lane",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "update_surfaces",
+        "label": "13. Update Surfaces Needed — check all that apply: EOD, handoff, release board, registry, documentation, memory, backlog, git/release notes, legal review, none",
+        "required": true,
+        "rows": 2
+      },
+      {
+        "id": "do_not_repeat",
+        "label": "14. Do Not Repeat — what the next agent should not redo",
+        "required": true,
+        "rows": 2
+      },
+      {
+        "id": "final_handoff_note",
+        "label": "15. Final Handoff Note (10 sentences or fewer)",
+        "required": true,
+        "rows": 4
+      },
+      {
+        "id": "eod_date",
+        "label": "16a. EOD — Date",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "eod_agent_lane",
+        "label": "16b. EOD — Agent / lane",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "eod_division",
+        "label": "16c. EOD — Division / system",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "eod_activities",
+        "label": "16d. EOD — Activities completed",
+        "required": true,
+        "rows": 2
+      },
+      {
+        "id": "eod_metrics",
+        "label": "16e. EOD — Metrics or counts",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "eod_issues",
+        "label": "16f. EOD — Issues identified",
+        "required": true,
+        "rows": 2
+      },
+      {
+        "id": "eod_priority",
+        "label": "16g. EOD — Priority (P1 / P2 / P3)",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "eod_cross_division",
+        "label": "16h. EOD — Cross-division impact",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "eod_next_action",
+        "label": "16i. EOD — Next action",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "eod_confidence",
+        "label": "16j. EOD — Confidence (High / Medium / Low / Unknown)",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "eod_sensitive_omitted",
+        "label": "16k. EOD — Sensitive evidence omitted (Yes / No)",
+        "required": true,
+        "rows": 1
+      }
+    ]
+  },
+  "engagement": {
+    "quiz": {
+      "enabled": true,
+      "pass_threshold": 0.8,
+      "title": "Handoff Discipline Check",
+      "questions": [
+        {
+          "id": "d4_q1",
+          "q": "Inside AeroVista, unfinished documentation becomes:",
+          "choices": [
+            "Operational fog",
+            "A minor inconvenience",
+            "Someone else's problem"
+          ],
+          "answer_index": 0,
+          "explain": "Lost context sends the next agent backward by days or weeks."
+        },
+        {
+          "id": "d4_q2",
+          "q": "An EOD Capsule should include:",
+          "choices": [
+            "Only pretty prose",
+            "Only JSON",
+            "Both a human layer and a machine-readable layer"
+          ],
+          "answer_index": 2,
+          "explain": "Humans need plain language; automation needs structure."
+        },
+        {
+          "id": "d4_q3",
+          "q": "Which update belongs on the release board?",
+          "choices": [
+            "A personal diary entry",
+            "A change in release state (active, blocked, released, adopted)",
+            "A vague \"we should improve this\""
+          ],
+          "answer_index": 1,
+          "explain": "Release state changes are system signals, not diary entries."
+        },
+        {
+          "id": "d4_q4",
+          "q": "\"Done is not done until state is updated\" means:",
+          "choices": [
+            "The code compiled",
+            "Operational surfaces reflect the real current state",
+            "You sent a chat message"
+          ],
+          "answer_index": 1,
+          "explain": "Invisible completion causes the system to lie without intent."
+        },
+        {
+          "id": "d4_q5",
+          "q": "A strong \"Do not repeat\" line sounds like:",
+          "choices": [
+            "\"Maybe check again later\"",
+            "\"Drafted, not published — do not treat script as shipped audio\"",
+            "\"Do whatever feels right\""
+          ],
+          "answer_index": 1,
+          "explain": "Anti-duplication lines save hours of rework."
+        },
+        {
+          "id": "d4_q6",
+          "q": "Confidential evidence in a handoff should be:",
+          "choices": [
+            "Pasted into public ByteCast pages",
+            "Used for decisions but summarized safely in broad handoffs",
+            "Ignored entirely"
+          ],
+          "answer_index": 1,
+          "explain": "Continuity without exposure — route detail to authorized lanes."
+        }
+      ]
+    }
+  },
+  "lesson": {
+    "objective": "Leave durable handoffs using the Trail System, Handoff Packet structure, EOD Capsule discipline, and final handoff formula.",
+    "why_it_matters": "Agents who skip handoffs create operational fog — solved work becomes recurring confusion.",
+    "apply": "Complete gate, all segments, quiz, and Handoff Packet + EOD Capsule Stub on a real task.",
+    "advance": "Unlock Working the Queue (Day 5) when handoff_prove is complete."
+  },
+  "thread_tags": [
+    "day4",
+    "required",
+    "handoff",
+    "eod-capsule",
+    "agent-orientation"
+  ],
+  "related_next": [
+    {
+      "label": "Next: Day 5 — Working the Queue",
+      "href": "../working_the_queue/index.html"
+    },
+    {
+      "label": "TR-001A — Foundations Check (after Day 10)",
+      "href": "../training_missions/tr_001a_day1_foundations/index.html"
+    }
+  ],
+  "handoff": {
+    "label": "Open ByteCast home",
+    "href": "../training_hub/index.html",
+    "return_label": "Back to The Handoff Is the Work",
+    "return_href": "./index.html"
+  },
+  "media": {
+    "audio_files": [],
+    "script_doc": "../../docs/agent_day4/THE_HANDOFF_IS_THE_WORK_SCRIPT.md",
+    "voiceover_sections": "assets/voiceover_sections.json",
+    "narration_manifest": "assets/narration.manifest.json",
+    "forge_pack": "tools/narration/agent_day4"
+  },
+  "episode_gate": {
+    "title": "Day 4 Gate — Handoff Discipline Commitment",
+    "required": true,
+    "items": [
+      "I completed Agent Days 1–3 (or received equivalent briefing on doors, source-of-truth verification, and AVCC judgment).",
+      "I understand the handoff is part of the work — not optional cleanup after the \"real\" task.",
+      "I will use the AeroVista Trail System and put updates on the correct surface (EOD, handoff, release board, registry, docs, memory, backlog).",
+      "I will not call work done until operational state is updated where required.",
+      "I will protect confidential evidence in handoffs — summarize safely and route sensitive detail to authorized lanes only."
+    ]
+  },
+  "reference_panels": [
+    {
+      "type": "cards",
+      "title": "Trail System",
+      "items": [
+        {
+          "label": "EOD Capsule",
+          "title": "EOD Capsule",
+          "body": "Work needs daily operational visibility — human-readable and machine-readable."
+        },
+        {
+          "label": "Handoff document",
+          "title": "Handoff document",
+          "body": "Another agent or operator must continue the work."
+        },
+        {
+          "label": "Release board",
+          "title": "Release board",
+          "body": "Release state changed — active, blocked, released, adopted, archived."
+        },
+        {
+          "label": "Registry",
+          "title": "Registry",
+          "body": "The operational map changed — services, routes, agents, tools, surfaces."
+        },
+        {
+          "label": "Documentation",
+          "title": "Documentation",
+          "body": "The pattern should survive beyond the day; mark stale docs."
+        },
+        {
+          "label": "Memory",
+          "title": "Memory",
+          "body": "Durable decisions, preferences, or operating principles for future agents."
+        },
+        {
+          "label": "Backlog / task",
+          "title": "Backlog / task",
+          "body": "Work is not done — lane, owner, priority, next action required."
+        }
+      ]
+    },
+    {
+      "type": "steps",
+      "title": "Handoff Packet",
+      "items": [
+        "Title — name the work clearly",
+        "Current state — planned, built, live, healthy, released, adopted, blocked, stale, unknown",
+        "What changed — meaningful changes only",
+        "Evidence — what was verified directly",
+        "Decisions made — separate from observations",
+        "Open questions — navigation markers",
+        "Risks — if the next person acts blindly",
+        "Next action — one next action",
+        "Owner or lane — who owns the next move",
+        "Do not repeat — anti-chaos field"
+      ]
+    },
+    {
+      "type": "steps",
+      "title": "EOD Capsule",
+      "items": [
+        "Today I learned",
+        "Today I verified",
+        "Still unknown",
+        "Recommended next move"
+      ]
+    }
+  ],
+  "interactives": {
+    "day": 4,
+    "journey_mode": "stepper",
+    "segment_visuals": true,
+    "labs_required": true,
+    "labs": [
+      "trail_system",
+      "handoff_packet",
+      "eod_capsule"
+    ]
+  },
+  "episode_runtime": {
+    "day": 4,
+    "prefix": "handoff",
+    "law": "If the next agent cannot continue, the work is not finished.",
+    "prev_days": [
+      {
+        "day": 1,
+        "href": "../the_first_door/index.html"
+      },
+      {
+        "day": 2,
+        "href": "../finding_source_of_truth/index.html"
+      },
+      {
+        "day": 3,
+        "href": "../from_signal_to_action/index.html"
+      }
+    ],
+    "storage": {
+      "segments": "bc.the_handoff_is_the_work.segments.v1",
+      "gate": "bc.the_handoff_is_the_work.gate.v1",
+      "quiz": "bc.the_handoff_is_the_work.quiz.v1",
+      "prove": "bc.the_handoff_is_the_work.prove.v1",
+      "stepper": "bc.the_handoff_is_the_work.stepper.v1",
+      "labs": "bc.the_handoff_is_the_work.labs.v1"
+    },
+    "workflow": {
+      "gate": "handoff_gate",
+      "segments": "handoff_segments",
+      "engage": "handoff_engage",
+      "prove": "handoff_prove",
+      "complete": "handoff_gates"
+    },
+    "prove_complete_message": "Day 4 complete.",
+    "prove_saved_message": "Drill submitted.",
+    "prove_meta": {
+      "drillType": "the_handoff_is_the_work"
+    }
+  }
+}

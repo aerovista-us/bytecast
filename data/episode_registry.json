@@ -1,6 +1,6 @@
 {
   "schema": "episode-registry-v1",
-  "updated_on": "2026-07-07",
+  "updated_on": "2026-07-10",
   "policy": {
     "folder_naming": "content-slug",
     "pattern": "episodes/<content_slug>",
@@ -9,17 +9,89 @@
   "series": [
     {
       "id": "core_day1",
-      "name": "Core Day 1",
-      "description": "Default ByteCast onboarding from EP-001 through EP-004.",
+      "name": "Agent Day 1 — The First Door",
+      "description": "Required agent and hire orientation: operating law, doors, trust, readiness note — then TR-001A and seed path.",
       "journey_id": "p1_golden_path",
-      "start_path": "episodes/welcome_to_bytecast",
+      "start_path": "episodes/the_first_door",
       "sort_order": 10
+    },
+    {
+      "id": "core_day2",
+      "name": "Agent Day 2 — Finding the Source of Truth",
+      "description": "Required verification training: authority ladder, truth labels, source checks, conflicts, evidence packets.",
+      "journey_id": "p1_golden_path",
+      "start_path": "episodes/finding_source_of_truth",
+      "sort_order": 11
+    },
+    {
+      "id": "core_day3",
+      "name": "Agent Day 3 — From Signal to Action",
+      "description": "Flagship AVCC judgment training: signal-to-action brief, priority filter, executive brief format.",
+      "journey_id": "p1_golden_path",
+      "start_path": "episodes/from_signal_to_action",
+      "sort_order": 12
+    },
+    {
+      "id": "core_day4",
+      "name": "Agent Day 4 — The Handoff Is the Work",
+      "description": "Handoff discipline: Trail System, Handoff Packet, EOD Capsule, state-update discipline.",
+      "journey_id": "p1_golden_path",
+      "start_path": "episodes/the_handoff_is_the_work",
+      "sort_order": 13
+    },
+    {
+      "id": "core_day5",
+      "name": "Agent Day 5 — Working the Queue",
+      "description": "Learn queue triage without open-front chaos — P1/P2/P3, active/blocked/parked states, intake filter, One-Action Rule, and Queue Triage Card.",
+      "journey_id": "p1_golden_path",
+      "start_path": "episodes/working_the_queue",
+      "sort_order": 15
+    },
+    {
+      "id": "core_day6",
+      "name": "Agent Day 6 — Safe Access & Boundaries",
+      "description": "Protect trust while working with roles, identity, authorization, scope, environments, public/private surfaces, and access incidents.",
+      "journey_id": "p1_golden_path",
+      "start_path": "episodes/safe_access_boundaries",
+      "sort_order": 16
+    },
+    {
+      "id": "core_day7",
+      "name": "Agent Day 7 — Builder & Client Experience",
+      "description": "Help builders, clients, and prospects with the smallest complete answer — expose, summarize, or withhold internal detail appropriately.",
+      "journey_id": "p1_golden_path",
+      "start_path": "episodes/builder_client_experience",
+      "sort_order": 17
+    },
+    {
+      "id": "core_day8",
+      "name": "Agent Day 8 — Writing Like AeroVista",
+      "description": "Produce docs, briefs, scripts, and messages that guide action — audience-aware, bounded, and grounded in evidence.",
+      "journey_id": "p1_golden_path",
+      "start_path": "episodes/writing_like_aerovista",
+      "sort_order": 18
+    },
+    {
+      "id": "core_day9",
+      "name": "Agent Day 9 — From Draft to Deliverable",
+      "description": "Define done, prevent scope creep, verify acceptance criteria, polish in order, and package work as a usable deliverable.",
+      "journey_id": "p1_golden_path",
+      "start_path": "episodes/from_draft_to_deliverable",
+      "sort_order": 19
     },
     {
       "id": "infographic_training",
       "name": "Infographic Training",
       "description": "Image-first overlay lessons built from the infographic source pack.",
       "start_path": "episodes/av_ecosystem_map_pilot",
+      "sort_order": 20
+    },
+    {
+      "id": "core_day10",
+      "name": "Agent Day 10 — Trusted Agent Capstone",
+      "description": "Capstone readiness gate: integrate Days 1–9 into judgment, boundaries, momentum, and a Trusted Agent Readiness Brief before supervised live work.",
+      "journey_id": "p1_golden_path",
+      "start_path": "episodes/trusted_agent_capstone",
       "sort_order": 20
     },
     {
@@ -72,6 +144,62 @@
   ],
   "episodes": [
     {
+      "slug": "the_first_door",
+      "episode_code": "AGENT-D1",
+      "title": "The First Door — Agent Day 1 Orientation",
+      "primary_path": "episodes/the_first_door",
+      "legacy_paths": [],
+      "series_id": "core_day1",
+      "series_name": "Agent Day 1 — The First Door",
+      "sequence": 1,
+      "status": "active",
+      "publishable": true,
+      "teaching_mode": "ReadAloudScript",
+      "required": true
+    },
+    {
+      "slug": "finding_source_of_truth",
+      "episode_code": "AGENT-D2",
+      "title": "Finding the Source of Truth — Agent Day 2",
+      "primary_path": "episodes/finding_source_of_truth",
+      "legacy_paths": [],
+      "series_id": "core_day2",
+      "series_name": "Agent Day 2 — Finding the Source of Truth",
+      "sequence": 1,
+      "status": "active",
+      "publishable": true,
+      "teaching_mode": "ReadAloudScript",
+      "required": true
+    },
+    {
+      "slug": "from_signal_to_action",
+      "episode_code": "AGENT-D3",
+      "title": "From Signal to Action — How AVCC Thinks",
+      "primary_path": "episodes/from_signal_to_action",
+      "legacy_paths": [],
+      "series_id": "core_day3",
+      "series_name": "Agent Day 3 — From Signal to Action",
+      "sequence": 1,
+      "status": "active",
+      "publishable": true,
+      "teaching_mode": "ReadAloudScript",
+      "required": true
+    },
+    {
+      "slug": "the_handoff_is_the_work",
+      "episode_code": "AGENT-D4",
+      "title": "The Handoff Is the Work",
+      "primary_path": "episodes/the_handoff_is_the_work",
+      "legacy_paths": [],
+      "series_id": "core_day4",
+      "series_name": "Agent Day 4 — The Handoff Is the Work",
+      "sequence": 1,
+      "status": "active",
+      "publishable": true,
+      "teaching_mode": "ReadAloudScript",
+      "required": true
+    },
+    {
       "slug": "welcome_to_bytecast",
       "episode_code": "EP-001",
       "title": "Welcome to ByteCast: How to Use This + Why It Matters",
@@ -80,10 +208,11 @@
         "ep1"
       ],
       "series_id": "core_day1",
-      "series_name": "Core Day 1",
-      "sequence": 1,
+      "series_name": "Agent Day 1 — The First Door",
+      "sequence": 11,
       "status": "active",
-      "publishable": true
+      "publishable": true,
+      "lifecycle": "reference"
     },
     {
       "slug": "aerovista_7_division_overview",
@@ -94,8 +223,8 @@
         "ep3"
       ],
       "series_id": "core_day1",
-      "series_name": "Core Day 1",
-      "sequence": 2,
+      "series_name": "Agent Day 1 — The First Door",
+      "sequence": 12,
       "status": "active",
       "publishable": true
     },
@@ -106,10 +235,11 @@
       "primary_path": "episodes/the_main_doors",
       "legacy_paths": [],
       "series_id": "core_day1",
-      "series_name": "Core Day 1",
-      "sequence": 3,
+      "series_name": "Agent Day 1 — The First Door",
+      "sequence": 13,
       "status": "active",
-      "publishable": true
+      "publishable": true,
+      "lifecycle": "reference"
     },
     {
       "slug": "current_truth_basics",
@@ -118,8 +248,8 @@
       "primary_path": "episodes/current_truth_basics",
       "legacy_paths": [],
       "series_id": "core_day1",
-      "series_name": "Core Day 1",
-      "sequence": 4,
+      "series_name": "Agent Day 1 — The First Door",
+      "sequence": 14,
       "status": "active",
       "publishable": true
     },
@@ -491,6 +621,90 @@
       "publishable": false,
       "retired_on": "2026-02-08",
       "archived_path": "_archive/phase4_retired_2026-02-08/ep2"
+    },
+    {
+      "slug": "working_the_queue",
+      "episode_code": "AGENT-D5",
+      "title": "Working the Queue — Agent Day 5",
+      "primary_path": "episodes/working_the_queue",
+      "legacy_paths": [],
+      "series_id": "core_day5",
+      "series_name": "Agent Day 5 — Working the Queue",
+      "sequence": 1,
+      "status": "active",
+      "publishable": true,
+      "teaching_mode": "ReadAloudScript",
+      "required": true
+    },
+    {
+      "slug": "safe_access_boundaries",
+      "episode_code": "AGENT-D6",
+      "title": "Safe Access, Roles, and Public/Private Boundaries — Agent Day 6",
+      "primary_path": "episodes/safe_access_boundaries",
+      "legacy_paths": [],
+      "series_id": "core_day6",
+      "series_name": "Agent Day 6 — Safe Access & Boundaries",
+      "sequence": 1,
+      "status": "active",
+      "publishable": true,
+      "teaching_mode": "ReadAloudScript",
+      "required": true
+    },
+    {
+      "slug": "builder_client_experience",
+      "episode_code": "AGENT-D7",
+      "title": "Builder and Client Experience: Serving Without Exposing the System — Agent Day 7",
+      "primary_path": "episodes/builder_client_experience",
+      "legacy_paths": [],
+      "series_id": "core_day7",
+      "series_name": "Agent Day 7 — Builder & Client Experience",
+      "sequence": 1,
+      "status": "active",
+      "publishable": true,
+      "teaching_mode": "ReadAloudScript",
+      "required": true
+    },
+    {
+      "slug": "writing_like_aerovista",
+      "episode_code": "AGENT-D8",
+      "title": "Writing Like AeroVista: Clear, Useful, and Evidence-Based — Agent Day 8",
+      "primary_path": "episodes/writing_like_aerovista",
+      "legacy_paths": [],
+      "series_id": "core_day8",
+      "series_name": "Agent Day 8 — Writing Like AeroVista",
+      "sequence": 1,
+      "status": "active",
+      "publishable": true,
+      "teaching_mode": "ReadAloudScript",
+      "required": true
+    },
+    {
+      "slug": "from_draft_to_deliverable",
+      "episode_code": "AGENT-D9",
+      "title": "From Draft to Deliverable: Finishing the Slice — Agent Day 9",
+      "primary_path": "episodes/from_draft_to_deliverable",
+      "legacy_paths": [],
+      "series_id": "core_day9",
+      "series_name": "Agent Day 9 — From Draft to Deliverable",
+      "sequence": 1,
+      "status": "active",
+      "publishable": true,
+      "teaching_mode": "ReadAloudScript",
+      "required": true
+    },
+    {
+      "slug": "trusted_agent_capstone",
+      "episode_code": "AGENT-D10",
+      "title": "Operating as a Trusted Agent: Judgment, Boundaries, and Momentum — Agent Day 10",
+      "primary_path": "episodes/trusted_agent_capstone",
+      "legacy_paths": [],
+      "series_id": "core_day10",
+      "series_name": "Agent Day 10 — Trusted Agent Capstone",
+      "sequence": 1,
+      "status": "active",
+      "publishable": true,
+      "teaching_mode": "ReadAloudScript",
+      "required": true
     }
   ]
 }

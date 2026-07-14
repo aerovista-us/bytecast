@@ -1,0 +1,68 @@
+{
+  "package": "aerovista_agent_bytecast_days_1_10",
+  "updated_at_utc": "2026-07-10T19:05:53.083Z",
+  "status": "reference_docs_with_live_episodes_5_10",
+  "notes": [
+    "Days 1–4: live at episodes/the_first_door … the_handoff_is_the_work",
+    "Days 5–10: built from this pack via scripts/build-agent-days-5-10.mjs",
+    "Duplicate manifest (2).json / (4).json files are superseded by manifest.json"
+  ],
+  "days": [
+    {
+      "day": 1,
+      "live_slug": "the_first_door",
+      "reference": "Day_01_The_First_Door_Script.md"
+    },
+    {
+      "day": 2,
+      "live_slug": "finding_source_of_truth",
+      "reference": "Day_02_Finding_Source_of_Truth_Script.md"
+    },
+    {
+      "day": 3,
+      "live_slug": "from_signal_to_action",
+      "reference": "Day_03_From_Signal_to_Action_Script.md"
+    },
+    {
+      "day": 4,
+      "live_slug": "the_handoff_is_the_work",
+      "reference": "Day_04_The_Handoff_Is_The_Work_Script.md"
+    },
+    {
+      "day": 5,
+      "live_slug": "working_the_queue",
+      "script": "day_05_working_the_queue_script.md",
+      "completion_drill": "day_05_completion_drill_queue_triage_card.md"
+    },
+    {
+      "day": 6,
+      "live_slug": "safe_access_boundaries",
+      "script": "day_06_safe_access_roles_public_private_boundaries_script.md",
+      "completion_drill": "day_06_completion_drill_access_boundary_review.md"
+    },
+    {
+      "day": 7,
+      "live_slug": "builder_client_experience",
+      "script": "day_07_builder_client_experience_script.md",
+      "completion_drill": "day_07_completion_drill_builder_client_experience_card.md"
+    },
+    {
+      "day": 8,
+      "live_slug": "writing_like_aerovista",
+      "script": "day_08_writing_like_aerovista_script.md",
+      "completion_drill": "day_08_completion_drill_aerovista_writing_pass.md"
+    },
+    {
+      "day": 9,
+      "live_slug": "from_draft_to_deliverable",
+      "script": "day_09_from_draft_to_deliverable_script.md",
+      "completion_drill": "day_09_completion_drill_deliverable_readiness_card.md"
+    },
+    {
+      "day": 10,
+      "live_slug": "trusted_agent_capstone",
+      "script": "day_10_trusted_agent_capstone_script.md",
+      "completion_drill": "day_10_completion_drill_trusted_agent_readiness_brief.md"
+    }
+  ]
+}

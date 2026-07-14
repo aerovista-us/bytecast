@@ -1,0 +1,176 @@
+/**
+ * Shared Agent Day HTML shell with interactive journey + practice labs.
+ */
+export function renderAgentDayShell(spec) {
+  const t = spec.theme;
+  const day = spec.day;
+  const docDir = spec.docDir || `agent_day${day}`;
+  return `<!doctype html>
+<html lang="en" data-theme="${t.name}">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ByteCast — ${spec.shortTitle} · Agent Day ${day}</title>
+  <meta name="description" content="Required Agent Day ${day}: ${spec.summary_short || spec.shortTitle}" />
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../assets/shared/listen_mode.css" />
+  <link rel="stylesheet" href="../../assets/shared/agent_day_theme.css" />
+  <link rel="stylesheet" href="../../assets/shared/agent_day_interactive.css" />
+  <style>
+    :root {
+      --bg0:#040508; --bg1:#0a0e14; --panel:rgba(12,16,22,0.92);
+      --ink:rgba(255,255,255,0.94); --muted:rgba(255,255,255,0.68); --faint:rgba(255,255,255,0.42);
+      --neon:${t.neon}; --accent:${t.accent || t.neon}; --mint:#34d399; --amber:#ffb020;
+      --line:rgba(255,255,255,0.12); --max:1040px; --pad:clamp(16px,2.4vw,26px);
+      --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      --sans:ui-sans-serif,system-ui,Segoe UI,Roboto,sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:var(--sans);color:var(--ink);
+      background:radial-gradient(900px 500px at 10% 0%,color-mix(in srgb, var(--neon) 14%, transparent),transparent 55%),
+        radial-gradient(800px 480px at 100% 10%,color-mix(in srgb, var(--accent) 10%, transparent),transparent 50%),
+        linear-gradient(180deg,var(--bg0),var(--bg1));min-height:100vh}
+    a{color:inherit}
+    .topbar{position:sticky;top:0;z-index:30;backdrop-filter:blur(14px);
+      background:rgba(4,5,8,0.86);border-bottom:1px solid var(--line)}
+    .topbar__inner,.wrap{max-width:var(--max);margin:0 auto}
+    .topbar__inner{padding:12px var(--pad);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+    .wrap{padding:20px var(--pad) 80px}
+    .k{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+    .btn{appearance:none;border:1px solid var(--line);background:rgba(255,255,255,0.04);color:var(--ink);
+      border-radius:999px;padding:10px 14px;font:inherit;font-size:13px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+    .btn:hover{border-color:color-mix(in srgb, var(--neon) 35%, var(--line))}
+    .btn--primary{border-color:color-mix(in srgb, var(--neon) 45%, var(--line));box-shadow:0 0 20px color-mix(in srgb, var(--neon) 14%, transparent)}
+    .btn:disabled{opacity:.45;cursor:not-allowed}
+    .btn--ghost{background:transparent;border-color:rgba(255,255,255,0.1)}
+    .hero{padding:24px;border-radius:24px;border:1px solid var(--line);
+      background:linear-gradient(135deg,color-mix(in srgb, var(--neon) 10%, transparent),color-mix(in srgb, var(--accent) 6%, transparent)),var(--panel);margin-bottom:16px}
+    h1{margin:8px 0 10px;font-size:clamp(1.8rem,4vw,2.6rem);letter-spacing:-.02em}
+    .sub{margin:0;color:var(--muted);line-height:1.6;max-width:72ch}
+    .spine{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+    .spine span{font-family:var(--mono);font-size:11px;padding:6px 10px;border-radius:999px;border:1px solid color-mix(in srgb, var(--neon) 28%, var(--line));background:color-mix(in srgb, var(--neon) 8%, transparent)}
+    .tabs{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+    .tab{border:1px solid var(--line);background:rgba(255,255,255,0.03);border-radius:999px;padding:8px 12px;font-size:12px;cursor:pointer}
+    .tab[aria-selected="true"]{border-color:color-mix(in srgb, var(--neon) 45%, var(--line));background:color-mix(in srgb, var(--neon) 12%, transparent)}
+    .tab.is-locked{opacity:.5}
+    .panel{display:none;border:1px solid var(--line);border-radius:20px;background:var(--panel);padding:18px;margin-bottom:14px}
+    .panel.is-active{display:block}
+    .panel h2{margin:0 0 8px;font-size:1.05rem}
+    .check{display:flex;gap:10px;align-items:flex-start;margin:10px 0;padding:10px 12px;border-radius:14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06)}
+    .check input{margin-top:3px}
+    .ref-grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:12px}
+    .ref-card{padding:12px;border-radius:14px;border:1px solid color-mix(in srgb, var(--neon) 22%, var(--line));background:color-mix(in srgb, var(--neon) 6%, transparent)}
+    .ref-card--alt{border-color:color-mix(in srgb, var(--accent) 28%, var(--line));background:color-mix(in srgb, var(--accent) 6%, transparent)}
+    .ref-card strong{display:block;margin-bottom:4px}
+    .ref-card small{color:var(--faint);font-family:var(--mono);font-size:10px}
+    .choice{display:block;margin:10px 0;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);cursor:pointer}
+    .field{margin:12px 0}
+    .field label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}
+    .field input,.field textarea{width:100%;border:1px solid var(--line);border-radius:12px;background:rgba(0,0,0,0.35);color:var(--ink);padding:10px 12px;font:inherit}
+    .field textarea{min-height:72px;resize:vertical}
+    .status{margin-top:10px;font-size:13px;color:var(--mint)}
+    .warn{color:var(--amber)}
+    .progress{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .chip{font-family:var(--mono);font-size:11px;padding:5px 9px;border-radius:999px;border:1px solid var(--line)}
+    .chip.done{border-color:rgba(52,211,153,0.4);color:var(--mint)}
+    ol.steps{margin:8px 0 0;padding-left:1.2rem;color:var(--muted);line-height:1.7}
+  </style>
+</head>
+<body data-bc-slug="${spec.slug}" data-bc-ep="${spec.code}" data-bc-agent-day-shell="1">
+  <header class="topbar">
+    <div class="topbar__inner">
+      <span class="k">Required · Agent Day ${day}</span>
+      <div style="display:flex;gap:8px;flex-wrap:wrap" id="prevDayNav"></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <a class="btn" href="../../seed_bytecast.html">Playlist</a>
+        <a class="btn" href="../training_hub/index.html">Home</a>
+      </div>
+    </div>
+  </header>
+  <main class="wrap">
+    <section class="hero">
+      <p class="k" id="heroKicker">Loading…</p>
+      <h1 id="heroTitle">${spec.shortTitle}</h1>
+      <p class="sub" id="heroSub"></p>
+      <nav class="day-spine" id="daySpine" aria-label="Agent Days 1–10"></nav>
+      <div class="law-row" id="lawRow"></div>
+      <div id="pocketLaw" class="pocket-law-wrap" hidden></div>
+      <div class="spine" id="spineChips"></div>
+      <div class="progress" id="progressChips" aria-live="polite"></div>
+    </section>
+    <nav class="tabs" id="tabs" aria-label="Episode sections">
+      <button type="button" class="tab" data-panel="gate" aria-selected="true">1 · Gate</button>
+      <button type="button" class="tab is-locked" data-panel="journey">2 · Journey</button>
+      <button type="button" class="tab is-locked" data-panel="practice">3 · Practice</button>
+      <button type="button" class="tab is-locked" data-panel="ref">4 · Reference</button>
+      <button type="button" class="tab is-locked" data-panel="engage">5 · Check</button>
+      <button type="button" class="tab is-locked" data-panel="prove">6 · Prove</button>
+    </nav>
+    <section class="panel is-active" id="panel-gate">
+      <h2 id="gateTitle">Day ${day} Gate</h2>
+      <p class="sub" id="gateIntro">Complete before continuing.</p>
+      <div id="gateItems"></div>
+      <button type="button" class="btn btn--primary" id="btnGate" disabled>Commit and continue</button>
+      <p class="status" id="gateStatus"></p>
+    </section>
+    <section class="panel" id="panel-journey">
+      <h2>The Journey — one segment at a time</h2>
+      <p class="panel-tip">Visual + key takeaway per segment. Pass quick checks where shown. Complete <strong>Practice</strong> labs before marking journey complete.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin:12px 0">
+        <button type="button" class="btn btn--primary" id="btnPlayForged">Play full journey (NXCore)</button>
+        <button type="button" class="btn" id="btnStopForged">Stop audio</button>
+      </div>
+      <p class="status" id="forgedStatus" aria-live="polite"></p>
+      <div id="listenModeMount" class="bytecast-listen-dim-exempt" style="margin:12px 0"></div>
+      <div id="journeyStepper"></div>
+      <button type="button" class="btn btn--primary" id="btnJourneyDone" disabled>Mark journey complete</button>
+      <p class="status" id="journeyStatus"></p>
+    </section>
+    <section class="panel" id="panel-practice">
+      <h2>Hands-on Practice</h2>
+      <p class="sub">Three short drills — apply today's habit before the knowledge check. Keep them light; they teach by doing.</p>
+      <div id="practiceLabs"></div>
+    </section>
+    <section class="panel" id="panel-ref">
+      <h2>Reference</h2>
+      <div id="refMount"></div>
+    </section>
+    <section class="panel" id="panel-engage">
+      <h2 id="quizTitle">Knowledge Check</h2>
+      <p class="sub">Six questions — 80% to pass.</p>
+      <div id="quiz"></div>
+      <button type="button" class="btn btn--primary" id="btnGrade">Submit check</button>
+      <p class="status" id="quizStatus"></p>
+    </section>
+    <section class="panel" id="panel-prove">
+      <h2 id="proveTitle">Completion Drill</h2>
+      <p class="sub" id="proveDesc"></p>
+      <form id="proveForm"></form>
+      <button type="submit" class="btn btn--primary" form="proveForm">Submit drill</button>
+      <p class="status" id="proveStatus"></p>
+    </section>
+    <section id="bc-handoff-footer" style="margin-top:8px"></section>
+  </main>
+  <script src="../../assets/shared/bytecast_loop.js"></script>
+  <script src="../../assets/shared/nxcore_narration_player.js"></script>
+  <script src="../../assets/shared/listen_mode.js"></script>
+  <script src="../../assets/shared/bytecast_handoff_footer.js"></script>
+  <script src="../../assets/shared/agent_day_labs.js"></script>
+  <script src="../../assets/shared/agent_day_visuals.js"></script>
+  <script src="../../assets/shared/agent_day_interactive.js"></script>
+  <script src="../../assets/shared/agent_day_episode.js"></script>
+</body>
+</html>`;
+}
+
+export const INTERACTIVE_LABS_BY_DAY = {
+  2: ["authority_pick", "truth_label", "conflict_protocol"],
+  3: ["priority_triage", "cos_brief", "judgment_chain"],
+  4: ["trail_system", "handoff_packet", "eod_capsule"],
+  5: ["queue_triage", "queue_state", "one_action"],
+  6: ["access_boundary", "role_vs_grant", "public_private"],
+  7: ["builder_scope", "client_tone", "experience_check"],
+  8: ["writing_tone", "aerovista_voice", "clarity_edit"],
+  9: ["deliverable_parts", "readiness_gate", "definition_of_done"],
+  10: ["capstone_judgment", "trusted_habits", "readiness_path"]
+};

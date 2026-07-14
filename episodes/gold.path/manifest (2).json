@@ -1,0 +1,78 @@
+{
+  "package_name": "aerovista_agent_bytecast_days_5_7_reference_docs",
+  "created": "2026-07-09",
+  "status": "draft reference docs",
+  "series": "AeroVista Agent Onboarding ByteCast",
+  "days_included": [
+    5,
+    6,
+    7
+  ],
+  "episodes": [
+    {
+      "day": 5,
+      "title": "Working the Queue",
+      "script": "day_05_working_the_queue_script.md",
+      "completion_drill": "day_05_completion_drill_queue_triage_card.md"
+    },
+    {
+      "day": 6,
+      "title": "Safe Access, Roles, and Public/Private Boundaries",
+      "script": "day_06_safe_access_roles_public_private_boundaries_script.md",
+      "completion_drill": "day_06_completion_drill_access_boundary_review.md"
+    },
+    {
+      "day": 7,
+      "title": "Builder and Client Experience: Serving Without Exposing the System",
+      "script": "day_07_builder_client_experience_script.md",
+      "completion_drill": "day_07_completion_drill_builder_client_experience_card.md"
+    }
+  ],
+  "files": [
+    {
+      "filename": "00_pack_overview.md",
+      "size_bytes": 1269,
+      "sha256": "7808b5882685b256e5da07d07473aba9be8f972cb6fc30f027193f8cb9e14681"
+    },
+    {
+      "filename": "README.md",
+      "size_bytes": 905,
+      "sha256": "f8696dd9638d91c13c7452f9417eeb55340c86b850cd9ca6b146020c3f8c3e59"
+    },
+    {
+      "filename": "day_05_completion_drill_queue_triage_card.md",
+      "size_bytes": 2326,
+      "sha256": "d645fa6561cad3c7a139d4a37338d38b093225e2d0c8afd6c6ac18dc1620ac19"
+    },
+    {
+      "filename": "day_05_working_the_queue_script.md",
+      "size_bytes": 9215,
+      "sha256": "a51c49f6290762c4eba9d0ef69860b98cd61cb1b68ce00e1b95b8f5298e292f5"
+    },
+    {
+      "filename": "day_06_completion_drill_access_boundary_review.md",
+      "size_bytes": 3818,
+      "sha256": "2d2bbfdfa52a0a3dd6aa145b3a6e4db141fde8ef457da3dd6745c0cac60da022"
+    },
+    {
+      "filename": "day_06_safe_access_roles_public_private_boundaries_script.md",
+      "size_bytes": 11356,
+      "sha256": "21f8d241c13c52544f655a4402152f07144b9b66e2875d1c6f4dbeaf264ba77c"
+    },
+    {
+      "filename": "day_07_builder_client_experience_script.md",
+      "size_bytes": 11264,
+      "sha256": "89f8fae14f927bf92e31844bf9df751ac8dc4497c9fc6d8b60ac54ea4a8b6e53"
+    },
+    {
+      "filename": "day_07_completion_drill_builder_client_experience_card.md",
+      "size_bytes": 2359,
+      "sha256": "b57fa78d05f6cdf67a72e61de8e40afeefab9a9a13457812d6852beaf36162b1"
+    },
+    {
+      "filename": "master_reference_days_5_7.md",
+      "size_bytes": 41649,
+      "sha256": "47704d464816fab875e934e4068179d20068a2e4afa37cf4fe355c2dcae29ce8"
+    }
+  ]
+}

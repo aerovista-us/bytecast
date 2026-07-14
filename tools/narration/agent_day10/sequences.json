@@ -1,0 +1,24 @@
+{
+  "schema": "narration-sequences-v1",
+  "packId": "agent_day10_capstone",
+  "sequences": {
+    "full_journey": {
+      "label": "Trusted Agent Capstone — full journey",
+      "lineIds": [
+        "cold_open",
+        "what_trusted_means_here",
+        "the_three_part_standard",
+        "the_ten_agent_laws",
+        "the_trusted_agent_decision_loop",
+        "readiness_before_live_work",
+        "the_five_failure_modes",
+        "supervised_live_work_rules",
+        "trusted_agent_voice",
+        "the_final_readiness_standard",
+        "what_happens_after_day_10",
+        "closing"
+      ]
+    }
+  },
+  "defaultSequence": "full_journey"
+}

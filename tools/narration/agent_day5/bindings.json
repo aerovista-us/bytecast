@@ -1,0 +1,13 @@
+{
+  "schema": "narration-bindings-v1",
+  "packId": "agent_day5_working_the_queue",
+  "runtime": {
+    "player": "../../assets/shared/nxcore_narration_player.js",
+    "manifest": "episodes/working_the_queue/assets/narration.manifest.json",
+    "fallback": "assets/shared/listen_mode.js"
+  },
+  "episode": {
+    "slug": "working_the_queue",
+    "listenGateStep": "queue_segments"
+  }
+}

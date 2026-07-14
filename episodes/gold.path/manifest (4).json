@@ -1,0 +1,44 @@
+{
+  "package": "aerovista_agent_bytecast_days_8_10_reference_docs",
+  "created_at_utc": "2026-07-09T20:37:06Z",
+  "status": "draft_reference_pack",
+  "days": [
+    {
+      "day": 8,
+      "title": "Writing Like AeroVista: Clear, Useful, and Evidence-Based",
+      "script": "day_08_writing_like_aerovista_script.md",
+      "completion_drill": "day_08_completion_drill_aerovista_writing_pass.md",
+      "core_skill": "Clear, useful, audience-aware, evidence-based writing."
+    },
+    {
+      "day": 9,
+      "title": "From Draft to Deliverable: Finishing the Slice",
+      "script": "day_09_from_draft_to_deliverable_script.md",
+      "completion_drill": "day_09_completion_drill_deliverable_readiness_card.md",
+      "core_skill": "Define done, avoid scope creep, polish in order, and ship usable slices."
+    },
+    {
+      "day": 10,
+      "title": "Operating as a Trusted Agent: Judgment, Boundaries, and Momentum",
+      "script": "day_10_trusted_agent_capstone_script.md",
+      "completion_drill": "day_10_completion_drill_trusted_agent_readiness_brief.md",
+      "core_skill": "Final trusted-agent readiness standard before supervised live work."
+    }
+  ],
+  "included_files": [
+    "00_pack_overview.md",
+    "README.md",
+    "day_08_completion_drill_aerovista_writing_pass.md",
+    "day_08_writing_like_aerovista_script.md",
+    "day_09_completion_drill_deliverable_readiness_card.md",
+    "day_09_from_draft_to_deliverable_script.md",
+    "day_10_completion_drill_trusted_agent_readiness_brief.md",
+    "day_10_trusted_agent_capstone_script.md",
+    "manifest.json",
+    "master_reference_days_8_10.md"
+  ],
+  "notes": [
+    "Reference docs only.",
+    "Not yet converted into published ByteCast audio, HTML training pages, or completion tracking modules."
+  ]
+}

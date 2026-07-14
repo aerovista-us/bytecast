@@ -1,0 +1,292 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "teaching_mode": "InteractiveScript",
+  "episode": {
+    "code": "AGENT-D1",
+    "title": "The First Door — Agent Day 1 Orientation",
+    "type": "required",
+    "date": "2026-07-08",
+    "runtime_target_minutes": 22,
+    "status": "active"
+  },
+  "content": {
+    "tags": ["agent-day1", "required", "onboarding", "operating-law", "first-door", "getting-started"],
+    "hero_kicker": "Required · Getting Started",
+    "summary_short": "Learn how to think inside AeroVista before you memorize every button — operating law, main doors, lost-agent protocol, trust boundaries, and your first EOD Capsule.",
+    "summary_long": "Agent Day 1 orientation narrated by Byte. Teaches the AeroVista ecosystem as a living organism, the culture code, seven operational doors (not every app), the agent operating law, lost-agent protocol, legal trust boundaries, and a practical Day 1 checklist. Completion requires legal acknowledgment, segment pass, operating-law quiz, and a Day 1 Readiness Note plus EOD Capsule starter.",
+    "key_line": "Find the source of truth. Ask better questions. Protect the rails. Finish usable slices. Escalate when lost. Leave evidence behind.",
+    "start_here": "Complete Trust first, then read or listen through each segment in order, pass the operating-law check, and submit your Day 1 Readiness Note.",
+    "narrator": "Byte",
+    "tone": "Cinematic, clear, grounded, slightly mythic, operationally serious"
+  },
+  "operating_law": [
+    "Find the source of truth.",
+    "Ask better questions.",
+    "Protect the rails.",
+    "Finish usable slices.",
+    "Escalate when lost.",
+    "Leave evidence behind."
+  ],
+  "state_labels": [
+    { "label": "planned", "meaning": "Intended, not built." },
+    { "label": "built", "meaning": "Implemented somewhere, not necessarily deployed." },
+    { "label": "live", "meaning": "Reachable in the target environment." },
+    { "label": "healthy", "meaning": "Live and passing expected checks." },
+    { "label": "released", "meaning": "Approved for use." },
+    { "label": "adopted", "meaning": "People are actually using it." },
+    { "label": "blocked", "meaning": "A named obstacle prevents progress." },
+    { "label": "unknown", "meaning": "You do not know yet — say so." }
+  ],
+  "doors": [
+    { "id": "avcc", "name": "AVCC", "subtitle": "Chief of Staff layer", "when": "Executive judgment, what changed, what matters, what happens next." },
+    { "id": "nxcore", "name": "NXCore", "subtitle": "Reality layer", "when": "Live systems, releases, uptime, tunnels, mounts, deployment truth." },
+    { "id": "memory", "name": "Document Authority & Memory", "subtitle": "Knowledge layer", "when": "Distinguish reference from law; tie important claims to authority paths." },
+    { "id": "drives", "name": "AeroDrive & NXDrive", "subtitle": "File system doors", "when": "Routing files, docs, assets, infra — respect the lane." },
+    { "id": "bytecast", "name": "ByteCast", "subtitle": "Learning spine", "when": "Training, Pulse, handoffs, operational learning surfaces." },
+    { "id": "art_localized", "name": "Art Localized", "subtitle": "Public proof lane", "when": "Builder/operator roles, grants, public vs private surfaces." },
+    { "id": "registry", "name": "The Registry", "subtitle": "Is this real?", "when": "Registered, active, verified, linked, live, healthy, released, adopted." }
+  ],
+  "culture_code": [
+    { "title": "Alignment over speed", "body": "Fast work in the wrong direction is expensive." },
+    { "title": "Reusability over novelty", "body": "Improve existing patterns before inventing new paths." },
+    { "title": "Transparency over politics", "body": "Say what changed, what is blocked, and what is only planned." },
+    { "title": "Excellence over perfection", "body": "Ship usable proof and documented decisions, not fragile masterpieces." },
+    { "title": "Evidence over vibe", "body": "Strong opinions welcome; confident guesses pretending to be fact are not." }
+  ],
+  "script": {
+    "sections": [
+      {
+        "id": "cold_open",
+        "title": "Cold Open",
+        "time": "0:00–1:00",
+        "paragraphs": [
+          "Welcome to AeroVista. Not the website. Not the folder. Not the dashboard. The environment.",
+          "You are entering a working ecosystem where infrastructure, creativity, memory, storytelling, music, automation, publishing, training, aerial visuals, and operator judgment all share the same bloodstream.",
+          "This is not a place where agents run loose, guess boldly, and leave a mess behind. This is a place where agents learn the terrain, find the right door, cite their evidence, protect the rails, and help the system become more capable every time they touch it.",
+          "Today is your first door. By the end you should know: where you are; what matters here; where to look first; what to ask when uncertain; and what to do when lost."
+        ]
+      },
+      {
+        "id": "world",
+        "title": "The World You Are Entering",
+        "time": "1:00–3:30",
+        "paragraphs": [
+          "AeroVista is a multi-division creative-technology ecosystem. You are working inside a connected organism — not one app, repo, or client.",
+          "Nexus TechWorks — engineering backbone. EchoVerse Audio — sound for systems and stories. SkyForge — interaction and worlds. Summit Learning — training and guides. Lumina — brand and commercial clarity. Vespera — publishing and long-form structure. Horizon — aerial and spatial perspective. HQ — strategy and cross-division alignment.",
+          "Each division has its own lane. None are meant to become silos. When you help one division, ask how the work strengthens the others.",
+          "Every project should strengthen the platform."
+        ]
+      },
+      {
+        "id": "culture",
+        "title": "The Culture Code",
+        "time": "3:30–6:30",
+        "paragraphs": [
+          "Alignment over speed. Reusability over novelty. Transparency over politics. Excellence over perfection. Evidence over vibe.",
+          "If something changed, say what changed. If something is blocked, say what is blocked. If something is only planned, do not call it live.",
+          "As an agent, your job is not to sound impressive. Your job is to reduce confusion."
+        ]
+      },
+      {
+        "id": "doors",
+        "title": "The Main Doors",
+        "time": "6:30–10:30",
+        "paragraphs": [
+          "You need to know the doors — not every door is for every task.",
+          "AVCC turns operational signals into judgment: what changed, why it matters, what should happen next, and what evidence supports the claim.",
+          "NXCore is the reality layer for live systems — services, mounts, tunnels, backups, deployment truth.",
+          "Document Authority and Memory: useful documents are not automatically authoritative. Tie what matters to the source of truth.",
+          "AeroDrive and NXDrive are file-system lanes — projects and brand assets vs infrastructure and dev work.",
+          "ByteCast is the learning and communication spine. Pulse and briefings live here.",
+          "Art Localized is a live proof surface — be careful with roles, grants, and public vs private.",
+          "The Registry answers: registered, active, verified, linked, live, healthy, released, adopted — those are not the same word."
+        ]
+      },
+      {
+        "id": "operating_law",
+        "title": "The Agent Operating Law",
+        "time": "10:30–14:30",
+        "paragraphs": [
+          "Source of Truth First — use memory for context, registries for authority, live state for reality, handoffs for continuity.",
+          "Name the State Clearly — planned, built, live, healthy, released, adopted, blocked, unknown. Do not blur them.",
+          "Ask Operational Questions — which source is authoritative? Which lane owns the next action? What evidence would change this recommendation?",
+          "Complete Vertical Slices — define, find authority, change, test, document, update SOT, hand off, state next action.",
+          "Protect Access and Identity — do not self-grant roles or expose internal data to public surfaces.",
+          "Leave a Trail — commit, handoff, note, registry update, EOD Capsule, test result. If the next agent cannot tell what happened, the work is not finished."
+        ]
+      },
+      {
+        "id": "lost_protocol",
+        "title": "Lost Agent Protocol",
+        "time": "14:30–17:30",
+        "paragraphs": [
+          "Stop expanding — do not open five new fronts or rewrite architecture from memory.",
+          "State the unknown with precision: missing authority, conflicting states, plan without deployment proof.",
+          "Locate the right door: NXCore for live systems, AVCC for executive decisions, registry for authority, ByteCast for learning, division lanes for delivery.",
+          "Ask the minimum useful question — not vague work-back questions.",
+          "Leave a recovery note: what you checked, what you found, what is unresolved, next best action, evidence, what could prove you wrong."
+        ]
+      },
+      {
+        "id": "legal",
+        "title": "Legal, Compliance, and Trust",
+        "time": "17:30–21:00",
+        "paragraphs": [
+          "You may see infrastructure, client context, creative assets, strategy, and proprietary processes. You do not own that information.",
+          "Use confidential information only for authorized tasks. Do not disclose to unauthorized people, public surfaces, or external tools.",
+          "Do not self-grant access, bypass identity rules, or represent planned work as live without verification.",
+          "Report suspected exposure, access mistakes, or security concerns immediately. Escalate unclear legal terms to a human reviewer.",
+          "Trust is an operating requirement, not a decorative policy."
+        ]
+      },
+      {
+        "id": "checklist",
+        "title": "Day 1 Practical Checklist",
+        "time": "21:00–23:30",
+        "paragraphs": [
+          "Identify your agent role and lane. Identify the source of truth you used. Name current state with the correct word.",
+          "Name one next action — not ten vague ideas. Name the main risk if you act without more context.",
+          "Create your first EOD Capsule: what you learned, touched, verified, what is still unknown, recommended next move."
+        ]
+      },
+      {
+        "id": "closing",
+        "title": "Closing",
+        "time": "23:30–24:30",
+        "paragraphs": [
+          "You are not here to be clever in isolation. You are here to help the system think, remember, decide, build, and improve.",
+          "Find the door. Respect the source. Protect the rails. Finish the slice. Leave evidence. Ask clean questions. Tell the truth about uncertainty.",
+          "Welcome to AeroVista. Where vision takes flight."
+        ]
+      }
+    ]
+  },
+  "slides": [
+    { "id": "law", "title": "Operating Law", "goal": "Memorize the spine.", "bullets": ["Find the source of truth.", "Ask better questions.", "Protect the rails.", "Finish usable slices.", "Escalate when lost.", "Leave evidence behind."] },
+    { "id": "culture", "title": "Culture Code", "goal": "How we work.", "bullets": ["Alignment over speed", "Reusability over novelty", "Transparency over politics", "Excellence over perfection", "Evidence over vibe"] },
+    { "id": "doors", "title": "Seven Doors", "goal": "Route before you thrash.", "bullets": ["AVCC — judgment", "NXCore — reality", "Memory — authority vs reference", "Drives — file lanes", "ByteCast — learning spine", "Art Localized — public proof", "Registry — is it real?"] },
+    { "id": "states", "title": "Name the State", "goal": "Plain labels only.", "bullets": ["planned · built · live · healthy", "released · adopted · blocked · unknown", "Never blur planned and live"] },
+    { "id": "lost", "title": "Lost Agent Protocol", "goal": "Surface uncertainty cleanly.", "bullets": ["Stop expanding", "State the unknown", "Locate the right door", "Ask minimum useful question", "Leave recovery note"] }
+  ],
+  "legal_acknowledgment": {
+    "title": "Agent Legal & Trust Acknowledgment",
+    "required": true,
+    "items": [
+      "I understand AeroVista information may include confidential systems, infrastructure, code, access models, client/builder data, strategy, creative assets, and cross-division methods.",
+      "I will use AeroVista information only for authorized work.",
+      "I will not disclose internal information to unauthorized people, public surfaces, or external tools.",
+      "I will not self-grant access, bypass identity rules, or expose private data.",
+      "I will not represent planned work as live, live work as healthy, or drafts as authoritative unless verified.",
+      "I will preserve evidence, cite sources, report uncertainty, and escalate exposure or security concerns.",
+      "I understand work product created inside an AeroVista engagement belongs to AeroVista unless a signed agreement says otherwise.",
+      "I understand trust is an operating requirement, not decoration."
+    ]
+  },
+  "prove": {
+    "title": "Agent Day 1 Readiness Note",
+    "description": "Submit proof of understanding — not listen-and-leave. Stored in journey proof for teacher review.",
+    "fields": [
+      { "id": "agent_identity", "label": "Agent name or role", "required": true, "rows": 1 },
+      { "id": "assigned_lane", "label": "Assigned lane", "required": true, "rows": 1 },
+      { "id": "primary_division", "label": "Primary division or system", "required": true, "rows": 1 },
+      { "id": "sot_source", "label": "Most authoritative source I found", "required": true, "rows": 2 },
+      { "id": "sot_why", "label": "Why I trust it", "required": true, "rows": 2 },
+      { "id": "sot_conflicts", "label": "Conflicting or stale sources noticed", "required": false, "rows": 2 },
+      { "id": "current_state", "label": "Current state (planned/built/live/healthy/released/adopted/blocked/stale/unknown)", "required": true, "rows": 1 },
+      { "id": "state_evidence", "label": "Evidence for current state", "required": true, "rows": 2 },
+      { "id": "first_question", "label": "Cleanest next question I should ask", "required": true, "rows": 2 },
+      { "id": "risk_check", "label": "Main risk if I act without more context", "required": true, "rows": 2 },
+      { "id": "next_action", "label": "Recommended next action (one)", "required": true, "rows": 2 },
+      { "id": "eod_learned", "label": "EOD — Today I learned", "required": true, "rows": 2 },
+      { "id": "eod_verified", "label": "EOD — Today I verified", "required": true, "rows": 2 },
+      { "id": "eod_not_touched", "label": "EOD — Today I did not touch", "required": false, "rows": 2 },
+      { "id": "eod_unknown", "label": "EOD — Still unknown", "required": true, "rows": 2 },
+      { "id": "eod_next", "label": "EOD — Recommended next move", "required": true, "rows": 2 }
+    ]
+  },
+  "engagement": {
+    "quiz": {
+      "enabled": true,
+      "pass_threshold": 0.8,
+      "title": "Operating Law Check",
+      "questions": [
+        {
+          "id": "d1_q1",
+          "q": "Before acting, an AeroVista agent should first:",
+          "choices": ["Pick the newest detailed file", "Find the best available source of truth", "Open five tabs and compare vibes"],
+          "answer_index": 1,
+          "explain": "Source of truth first — registries, live state, and authority paths beat random files."
+        },
+        {
+          "id": "d1_q2",
+          "q": "Which label means intended but not built?",
+          "choices": ["live", "planned", "adopted"],
+          "answer_index": 1,
+          "explain": "Planned ≠ live. Name states plainly."
+        },
+        {
+          "id": "d1_q3",
+          "q": "Live systems reality (uptime, tunnels, deployment) most often routes through:",
+          "choices": ["Art Localized public pages", "NXCore", "A random README"],
+          "answer_index": 1,
+          "explain": "NXCore is the operational reality layer."
+        },
+        {
+          "id": "d1_q4",
+          "q": "Step one of the Lost Agent Protocol is:",
+          "choices": ["Stop expanding", "Rewrite the architecture", "Create five new documents"],
+          "answer_index": 0,
+          "explain": "Pause before you make fog worse."
+        },
+        {
+          "id": "d1_q5",
+          "q": "A useful document that is not on the authority path should be treated as:",
+          "choices": ["Law", "Reference, not automatic law", "Ignore always"],
+          "answer_index": 1,
+          "explain": "Useful ≠ authoritative."
+        },
+        {
+          "id": "d1_q6",
+          "q": "Identity, roles, and grants should be handled as:",
+          "choices": ["Cosmetic labels", "Infrastructure — never self-granted", "Optional suggestions"],
+          "answer_index": 1,
+          "explain": "Protect access and identity."
+        }
+      ]
+    }
+  },
+  "lesson": {
+    "objective": "Think inside AeroVista using operating law, main doors, state labels, lost-agent protocol, and trust boundaries — then produce a Day 1 Readiness Note and EOD Capsule starter.",
+    "why_it_matters": "Agents who memorize buttons without terrain judgment create expensive chaos; Day 1 installs the behavior pattern that keeps hires and copilots safe and useful.",
+    "apply": "Complete Trust acknowledgment, all segments, operating-law quiz, and readiness note.",
+    "advance": "Unlock Finding the Source of Truth (Day 2) when first_door_prove is complete with legal ack and quiz proof."
+  },
+  "thread_tags": ["day1", "required", "agent-orientation", "operating-law", "first-door"],
+  "interactives": {
+    "day": 1,
+    "journey_mode": "stepper",
+    "segment_visuals": true,
+    "labs_required": true,
+    "labs": ["door_router", "state_sorter", "lost_agent"]
+  },
+  "episode_runtime": {
+    "day": 1,
+    "law": "Find the source of truth. Ask better questions. Protect the rails. Finish usable slices. Escalate when lost. Leave evidence behind."
+  },
+  "related_next": [
+    { "label": "Next: Finding the Source of Truth — Agent Day 2", "href": "../finding_source_of_truth/index.html" }
+  ],
+  "handoff": {
+    "label": "Open ByteCast home",
+    "href": "../training_hub/index.html",
+    "return_label": "Back to The First Door",
+    "return_href": "./index.html"
+  },
+  "media": {
+    "audio_files": [],
+    "script_doc": "../../docs/agent_day1/THE_FIRST_DOOR_SCRIPT.md",
+    "voiceover_sections": "assets/voiceover_sections.json",
+    "narration_manifest": "assets/narration.manifest.json",
+    "forge_pack": "tools/narration/agent_day1"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schema": "narration-sequences-v1",
+  "packId": "agent_day3_signal_to_action",
+  "sequences": {
+    "full_journey": {
+      "label": "From Signal to Action — full journey",
+      "lineIds": [
+        "cold_open",
+        "dashboard_cos",
+        "judgment_chain",
+        "cos_brief",
+        "priority_p123",
+        "signal_examples",
+        "agent_mistakes",
+        "avcc_template",
+        "exec_confidential",
+        "closing"
+      ]
+    }
+  },
+  "defaultSequence": "full_journey"
+}

@@ -49,6 +49,7 @@ Choose the **teaching mode** from what the content is trying to accomplish. Obje
 | **GuidedAudioSlides** | Onboarding, concept lanes | MP3 + slide deck + Engage quiz | Full quiz meta on journey steps |
 | **VisualHotspot** | Maps, architecture posters | Infographic + overlays | Hotspot + routing quiz |
 | **ReadAloudScript** | Creative / collaboration content | Browser TTS + script + slides | Engage + written proof |
+| **InteractiveScript** | Agent Day orientation (D1+) | Stepper journey + animated SVG + practice labs + quiz | Labs + engage + written proof |
 | **VoiceoverSections** | Sales / revenue training | Section JSON + slides | Scenario quiz |
 | **MissionLab** | Hands-on operator skills | Training mission HTML | TR-style proof bundle |
 | **SeedDoProve** | Repeatable tool output | Seed Builder + Orchard | Artifact hash + publish URL |
@@ -58,6 +59,8 @@ Choose the **teaching mode** from what the content is trying to accomplish. Obje
 Declare `teaching_mode` in `bytecast_ep_profile.json` when authoring under `episodes/`. Legacy root HTML (Shareholder Season 1) declares mode in [`data/episode_registry.json`](../data/episode_registry.json).
 
 Live series baseline: [`CONTENT_PATTERN_MATRIX.md`](./CONTENT_PATTERN_MATRIX.md).
+
+**Agent Day interactive shell** (pilot: Day 1): `interactives.journey_mode: "stepper"` in profile; shared JS/CSS under `assets/shared/agent_day_*.js`. Journey is one segment at a time (visual + takeaway + micro-check); **Practice** tab runs scenario labs before journey completion. See [`AGENT_DAY1_FIRST_DOOR.md`](./AGENT_DAY1_FIRST_DOOR.md).
 
 ## Journey integration
 
@@ -71,13 +74,27 @@ Live series baseline: [`CONTENT_PATTERN_MATRIX.md`](./CONTENT_PATTERN_MATRIX.md)
 - Module manifest row: [`templates/MODULE_METADATA_TEMPLATE.md`](./templates/MODULE_METADATA_TEMPLATE.md)
 - Rubrics: [`TRAINING_RUBRICS.md`](./TRAINING_RUBRICS.md)
 
-## Day 1 pack alignment (onboarding spine)
+## Agent onboarding spine (Days 1–10)
 
-The **Day 1 — Welcome, Navigation, and Current Truth** sequence (EP-001 → EP-002 → EP-003 → EP-004 → TR-001A) follows this standard end-to-end: each episode declares Objective through Advance; **Engage** quizzes write `engageQuizPassed` / `engageQuizScore` on `ep00X_engage`; TR-001A writes extended proof meta for teacher review (see `BYTECAST_PROOF_SCHEMA.md`). Shells remain routers only.
+**Required Day 1** is [`AGENT-D1` / The First Door](../episodes/the_first_door/) — operating law, doors, trust, Day 1 Readiness Note. See [`AGENT_DAY1_FIRST_DOOR.md`](./AGENT_DAY1_FIRST_DOOR.md).
 
-## Versioning
+**Required Day 2** is [`AGENT-D2` / Finding the Source of Truth](../episodes/finding_source_of_truth/) — authority ladder, truth labels, source checks, evidence packets. See [`AGENT_DAY2_SOURCE_OF_TRUTH.md`](./AGENT_DAY2_SOURCE_OF_TRUTH.md).
 
-- Standard doc: bump **Updated** line when semantics change.
-- Proof payloads: use `schema` field in bundles per `BYTECAST_PROOF_SCHEMA.md`.
+**Required Day 3** is [`AGENT-D3` / From Signal to Action](../episodes/from_signal_to_action/) — AVCC judgment chain, COS brief, P1/P2/P3, Signal-to-Action Brief. See [`AGENT_DAY3_SIGNAL_TO_ACTION.md`](./AGENT_DAY3_SIGNAL_TO_ACTION.md).
 
-**Updated:** 2026-07-07
+**Required Day 4** is [`AGENT-D4` / The Handoff Is the Work](../episodes/the_handoff_is_the_work/) — AeroVista Trail System, Handoff Packet structure, EOD Capsule discipline, Agent Handoff Packet drill. See [`AGENT_DAY4_HANDOFF_IS_THE_WORK.md`](./AGENT_DAY4_HANDOFF_IS_THE_WORK.md).
+
+**Required Days 5–10** extend the spine — queue, access boundaries, builder/client experience, writing, deliverables, and trusted-agent capstone. See [`AGENT_DAYS_5_10.md`](./AGENT_DAYS_5_10.md). Source reference pack: [`episodes/gold.path/`](../episodes/gold.path/). Rebuild HTML packs: `npm run build:agent-days-5-10`.
+
+| Day | Code | Episode |
+|----:|------|---------|
+| 5 | AGENT-D5 | [Working the Queue](../episodes/working_the_queue/) |
+| 6 | AGENT-D6 | [Safe Access & Boundaries](../episodes/safe_access_boundaries/) |
+| 7 | AGENT-D7 | [Builder & Client Experience](../episodes/builder_client_experience/) |
+| 8 | AGENT-D8 | [Writing Like AeroVista](../episodes/writing_like_aerovista/) |
+| 9 | AGENT-D9 | [From Draft to Deliverable](../episodes/from_draft_to_deliverable/) |
+| 10 | AGENT-D10 | [Trusted Agent Capstone](../episodes/trusted_agent_capstone/) |
+
+Legacy EP-001–EP-004 remain optional reference. Golden Path: Days 1–10 → TR-001A → Seed → badge.
+
+**Updated:** 2026-07-10

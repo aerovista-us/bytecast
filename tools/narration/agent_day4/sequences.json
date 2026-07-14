@@ -1,0 +1,22 @@
+{
+  "schema": "narration-sequences-v1",
+  "packId": "agent_day4_handoff_is_the_work",
+  "sequences": {
+    "full_journey": {
+      "label": "The Handoff Is the Work — full journey",
+      "lineIds": [
+        "cold_open",
+        "why_handoffs",
+        "trail_system",
+        "handoff_packet",
+        "eod_capsules",
+        "state_updated",
+        "prevent_duplicate",
+        "handoff_confidential",
+        "final_formula",
+        "closing"
+      ]
+    }
+  },
+  "defaultSequence": "full_journey"
+}

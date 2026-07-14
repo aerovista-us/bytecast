@@ -1,0 +1,14 @@
+{
+  "schema": "narration-bindings-v1",
+  "packId": "agent_day4_handoff_is_the_work",
+  "runtime": {
+    "player": "../../assets/shared/nxcore_narration_player.js",
+    "manifest": "episodes/the_handoff_is_the_work/assets/narration.manifest.json",
+    "fallback": "assets/shared/listen_mode.js"
+  },
+  "episode": {
+    "slug": "the_handoff_is_the_work",
+    "listenGateStep": "handoff_segments",
+    "profileAudioPath": "assets/narration/full_journey.wav"
+  }
+}

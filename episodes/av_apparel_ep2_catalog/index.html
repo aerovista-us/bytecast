@@ -428,187 +428,72 @@
     const Loop = window.ByteCastLoop || null;
 
     const PROFILE = {
-      schema: "bytecast-ep-profile-v1",
-      episode: {
-        code: "EP-APP-002",
-        title: "Catalog Maintainer Bootcamp — Your Day-to-Day",
-        type: "internal",
-        date: "2026-02-24",
-        runtime_target_minutes: 10,
-        status: "draft"
-      },
-      content: {
-        tags: ["apparel", "catalog", "maintainer", "workflows", "drift"],
-        summary_short: "Bootcamp for AV Apparel catalog maintainers: how to safely add, remove, and update products.",
-        summary_long: "This ByteCast teaches the day-to-day discipline of catalog maintenance. It walks through intake, normalization, grouping, de-duplication, and publishing flows so maintainers can keep the apparel catalog clean, consistent, and free of drift."
-      },
-      slides: [
+  "schema": "bytecast-ep-profile-v1",
+  "teaching_mode": "MissionLab",
+  "episode": {
+    "code": "EP-APP-002",
+    "title": "Catalog Maintainer Bootcamp - Your Day-to-Day",
+    "type": "training",
+    "date": "2026-07-08",
+    "runtime_target_minutes": 12,
+    "status": "active"
+  },
+  "content": {
+    "tags": [
+      "apparel",
+      "catalog",
+      "operations"
+    ],
+    "summary_short": "Catalog Maintainer Bootcamp - Your Day-to-Day",
+    "hero_kicker": "Catalog Maintainer Bootcamp",
+    "key_line": "Treat every listing like a mini launch — verify before you ship."
+  },
+  "media": {
+    "audio_files": []
+  },
+  "engagement": {
+    "quiz": {
+      "enabled": true,
+      "pass_threshold": 0.8,
+      "questions": [
         {
-          id: "s1",
-          title: "Catalog Maintainer Role",
-          goal: "Clarify what a catalog maintainer is responsible for.",
-          bullets: [
-            "You keep the apparel catalog clean: no broken listings, no weird surprises.",
-            "You translate design and production into retail-safe data in Square and the storefront.",
-            "You are allowed to slow down changes that feel unsafe or unclear."
-          ]
-        },
-        {
-          id: "s2",
-          title: "Intake & Snapshot",
-          goal: "Introduce the intake step before making changes.",
-          bullets: [
-            "Always start by exporting the latest Square catalog CSV.",
-            "Import into the Console / validator to see current issues and structure.",
-            "Never edit old or stale exports — you want today's truth."
-          ]
-        },
-        {
-          id: "s3",
-          title: "Normalize Without Breaking 'Keeper' Copy",
-          goal: "Show how to normalize fields without overwriting good copy.",
-          bullets: [
-            "Mark products with great custom copy as locked before running bulk tools.",
-            "Apply title and pricing rules only where data is weak or missing.",
-            "Use overrides to protect hand-crafted descriptions."
-          ]
-        },
-        {
-          id: "s4",
-          title: "Add / Remove / Update Workflows",
-          goal: "Outline the three core maintainer workflows.",
-          bullets: [
-            "Add: bring in new products from Printful, then polish in Square and Console.",
-            "Remove: hide/archive safely so you don't break collections or history.",
-            "Update: adjust prices, names, or tags while respecting ladders and locks."
-          ]
-        },
-        {
-          id: "s5",
-          title: "Spot the Drift",
-          goal: "Teach maintainers to see drift quickly.",
-          bullets: [
-            "Look for mismatched prices between Square and the storefront.",
-            "Scan for duplicated designs or near-identical products.",
-            "Check collections and tags so products show up where you expect."
-          ]
-        },
-        {
-          id: "s6",
-          title: "Definition of Done",
-          goal: "Align on what 'done' means for catalog changes.",
-          bullets: [
-            "No missing prices; ladders applied (base / 2XL / 3XL where relevant).",
-            "Titles, tags, and collections follow the standard format.",
-            "You have re-exported the catalog and confirmed storefront behavior."
-          ]
-        },
-        {
-          id: "s7",
-          title: "Change Log + Rollback",
-          goal: "Make catalog maintenance reversible.",
-          bullets: [
-            "Record the export or snapshot used before the change.",
-            "List product IDs or SKUs touched and the exact fields changed.",
-            "Name the rollback path: restore old value, unpublish, or revert from the prior export."
-          ]
-        }
-      ],
-      engagement: {
-        quest: {
-          title: "Spot the Drift Checklist",
-          items: [
-            { id: "q1", text: "Open your current apparel grid and find one duplicate or near-duplicate product." },
-            { id: "q2", text: "Find one example where price, size, or title looks inconsistent across pages." },
-            { id: "q3", text: "Write down which workflow (Add / Remove / Update) would safely fix each issue." },
-            { id: "q4", text: "Identify one product that should probably be archived or hidden instead of left live." },
-            { id: "q5", text: "For one sample product, record product ID, field changed, before value, after value, and rollback path." }
+          "id": "app2_q1",
+          "q": "Before publish you should verify:",
+          "choices": [
+            "Only the title",
+            "SKU, price, collection, and links",
+            "Nothing if it looks fine"
           ],
-          reward_badge: {
-            label: "APPAREL MAINTAINER READY",
-            style: "neon"
-          }
-        },
-        quiz: {
-          enabled: true,
-          pass_threshold: 0.8,
-          questions: [
-            {
-              id: "k1",
-              q: "What should you do before making any catalog changes?",
-              choices: [
-                "Guess based on memory",
-                "Export the latest Square catalog and import it into the Console",
-                "Only look at the storefront grid",
-                "Edit the oldest CSV you can find"
-              ],
-              answer_index: 1,
-              explain: "You always want the freshest source-of-truth from Square before editing."
-            },
-            {
-              id: "k2",
-              q: "How do you protect 'keeper' copy when normalizing?",
-              choices: [
-                "Delete it and let tools rewrite everything",
-                "Leave all descriptions untouched forever",
-                "Mark products as locked or set explicit overrides before running bulk tools",
-                "Copy descriptions into a doc and hope they match later"
-              ],
-              answer_index: 2,
-              explain: "Locks or overrides prevent your automation from overwriting hand-crafted copy."
-            },
-            {
-              id: "k3",
-              q: "Which is the correct order for bringing in new products?",
-              choices: [
-                "Storefront → Square → Printful",
-                "Square → Printful → Console",
-                "Printful → Square → Console / storefront",
-                "Console → Square → Printful"
-              ],
-              answer_index: 2,
-              explain: "Design/production starts in Printful, then publishes to Square, then gets retail polish and storefront integration."
-            },
-            {
-              id: "k4",
-              q: "When should you archive or hide a product instead of deleting it?",
-              choices: [
-                "When it has no sales after one day",
-                "When it has history or relationships you want to preserve but it should not be sold now",
-                "Never — you should always delete",
-                "Whenever a price changes"
-              ],
-              answer_index: 1,
-              explain: "Archiving keeps history and avoids breaking references while removing it from the live catalog."
-            },
-            {
-              id: "k5",
-              q: "What is a red flag for drift when you scan the storefront?",
-              choices: [
-                "Products have high-quality photos",
-                "Titles are descriptive and consistent",
-                "Prices or details differ between product page, cart, and checkout",
-                "Collections are themed"
-              ],
-              answer_index: 2,
-              explain: "If the same product shows different prices or details in different places, you likely have drift."
-            },
-            {
-              id: "k6",
-              q: "What should a maintainer record after a catalog update?",
-              choices: [
-                "Only that it looks better",
-                "Product or SKU, changed fields, before/after values, and rollback path",
-                "Nothing if the storefront loads",
-                "Only a screenshot"
-              ],
-              answer_index: 1,
-              explain: "Catalog changes need enough recordkeeping to audit or reverse safely."
-            }
-          ]
+          "answer_index": 1
         }
-      }
-    };
+      ]
+    }
+  },
+  "slides": [
+    {
+      "id": "loop",
+      "title": "Catalog maintainer loop",
+      "goal": "Run intake → edit → QA → publish.",
+      "bullets": [
+        "Verify SKU, price, and collection membership before publish.",
+        "Use SOT.json in this pack as the canon checklist.",
+        "Log proof: screenshot or PR link in your work order."
+      ]
+    }
+  ],
+  "lesson": {
+    "objective": "Run the day-to-day catalog maintainer loop: intake, copy, collections, and QA before publish.",
+    "why_it_matters": "Catalog errors surface as wrong prices, broken links, and customer trust issues.",
+    "apply": "Walk through one sample SKU update using the SOT checklist in this pack.",
+    "advance": "Pass catalog quiz; continue to EP-APP-003 Ops Standards."
+  },
+  "related_next": [
+    {
+      "label": "Next: EP-APP-003 — Apparel Ops Standards - Naming, Copy, Collections, QA, Access",
+      "href": "..\/av_apparel_ep3_ops_standards\/index.html"
+    }
+  ]
+};
 
     const $ = (s, r = document) => r.querySelector(s);
     const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));

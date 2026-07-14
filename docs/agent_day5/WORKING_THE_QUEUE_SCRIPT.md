@@ -1,0 +1,235 @@
+# ByteCast: Agent Day 5 — “Working the Queue”
+
+**Audience:** New AeroVista agents, AVCC assistants, release operators, queue agents, builder-support agents, documentation agents, and internal copilots  
+**Placement:** ByteCast → Getting Started → Required  
+**Runtime Target:** 22–28 minutes  
+**Tone:** Focused, operational, firm, practical  
+**Narrator:** Byte  
+**Required Completion:** Yes  
+**Completion Artifact:** Queue Triage Card + One-Action Commitment
+
+---
+
+## Cold Open — 0:00–1:20
+
+[SFX: low server hum, scattered notification pings, then one clean priority tone cuts through]
+
+Day 1 taught you to find the door. Day 2 taught you to find the source. Day 3 taught you to turn signal into action. Day 4 taught you to leave the trail.
+
+Day 5 teaches you how to choose what to touch next.
+
+AeroVista does not fail from a lack of ideas. It fails when too many ideas become open fronts.
+
+A queue is not a junk drawer. It is not a wish list. It is not a panic board. It is not where vague “we should” ideas go to die quietly.
+
+A queue is a decision surface. It tells the system what matters now, what is blocked, what is waiting, what is active, what is finished, what should not be touched yet, what must be escalated, and what belongs to someone else.
+
+Welcome to Day 5: Working the Queue.
+
+---
+
+## Segment 1 — The Queue Is a Trust Layer
+
+Inside AeroVista, a queue is more than a task list. It is a trust layer.
+
+A good queue protects focus. A bad queue creates operational fog.
+
+A good queue says:
+
+- This is P1. Drop everything.
+- This is P2. Schedule and move it.
+- This is P3. Useful, but not allowed to hijack the day.
+- This is blocked. Do not pretend it is active.
+- This is parked. Do not keep reopening it.
+- This is waiting on owner decision.
+- This is ready for execution.
+- This is done, but needs handoff.
+- This is released, but not adopted.
+- This is drafted, not published.
+- This is verified, not assumed.
+
+AeroVista agents do not just do tasks. They clarify state. When you clarify state, you help the whole system move.
+
+---
+
+## Segment 2 — The Three Priority Lanes
+
+The queue has three core priority lanes: P1, P2, and P3.
+
+Do not inflate them. Do not blur them. Do not treat everything as critical just because it is interesting.
+
+### P1 — Critical
+
+P1 means immediate attention. Use P1 when trust, security, live service, client delivery, access control, data integrity, or core infrastructure is at risk.
+
+Examples: NXCore outage, public release path broken, access control failure, client production issue, data exposure risk, credential leak, legal/confidentiality issue, broken backup or restore path, public system showing private state, or a blocker affecting multiple active projects.
+
+P1 means stop, escalate, verify, and act. P1 should have a named owner and immediate next action. If nobody owns it, it is not being handled.
+
+### P2 — High
+
+P2 means important forward motion. Use P2 for work tied to active milestones, client commitments, revenue activity, release follow-up, builder onboarding, documentation needed by active operators, or cross-division deliverables.
+
+Examples: complete ByteCast Day 1–5 hub, convert drafted scripts into published training pages, finish Art Localized builder onboarding polish, update release board after verified release, create a client-ready one-pager for a current prospect, run scheduled smoke test before public push, or complete a known milestone.
+
+P2 means schedule, assign, execute, and report. Most healthy work lives here.
+
+### P3 — Standard
+
+P3 means useful, flexible, and not urgent. Use P3 for cleanup, style improvements, archive work, template refinement, nice-to-have UX polish, future ideas, non-blocking optimization, and maintenance.
+
+P3 is not worthless. But P3 does not get to steal oxygen from P1 or P2. A disciplined agent protects the queue from priority inflation.
+
+---
+
+## Segment 3 — Active, Blocked, Parked, Waiting, Done
+
+Priority is not enough. Every queue item also needs state.
+
+### Active
+
+Active means someone is currently working it. Active work should have an owner, next action, expected output, evidence source, priority, and completion condition. If a task has no owner, it is not active. It is floating.
+
+### Blocked
+
+Blocked means work cannot continue until a specific obstacle is removed. A real blocker has a name.
+
+Weak: “Blocked by access.”  
+Strong: “Blocked because builder role cannot access artists dashboard after Cloudflare login.”
+
+Weak: “Blocked by docs.”  
+Strong: “Blocked because current registry state conflicts with older onboarding doc and authority has not been resolved.”
+
+If the blocker is vague, the task is not blocked. It is unclear. Clarify it.
+
+### Parked
+
+Parked means intentionally paused. Parked work should not keep reappearing every day like an emergency. Parked means not now, not forgotten, not active, and not dead. A parked item needs a revisit condition.
+
+### Waiting
+
+Waiting means the next move belongs to someone else: founder, legal, operator access, client reply, asset upload, release approval, or health verification. Waiting is not the same as blocked.
+
+### Done
+
+Done means the work met its completion condition and the state was updated. Output exists, evidence is attached, owner confirms or acceptance criteria are met, handoff is written, queue state is updated, and the next action is closed or assigned.
+
+Done without trail is not done.
+
+---
+
+## Segment 4 — Intake: How New Work Enters the Queue
+
+New work should not crash into the queue blindly. Run the Intake Filter.
+
+1. **Capture the request.** Write the request in plain language.
+2. **Identify the lane.** AVCC, ByteCast, Nexus, Art Localized, EchoVerse, Lumina, Vespera, Summit, Horizon, SkyForge, HQ, Legal, or Founder.
+3. **Name the output.** Script, doc, HTML page, audio file, release note, registry update, smoke result, handoff, client one-pager, training module, legal review, decision memo.
+4. **Set priority.** P1, P2, or P3.
+5. **Define done.** If you do not define done, the task will sprawl.
+
+No output, no task.
+
+---
+
+## Segment 5 — The One-Action Rule
+
+AeroVista has many fronts. That is exactly why agents need the One-Action Rule.
+
+When working the queue, choose one next action that moves the item forward. Not ten. Not a whole universe map. One.
+
+Examples:
+
+- Verify the live route.
+- Update the release board.
+- Draft the Day 5 script.
+- Ask founder to choose audio-first or HTML-first.
+- Move remaining polish to P2.
+- Create the handoff.
+- Mark old doc as stale.
+- Escalate access conflict.
+- Attach evidence to the queue card.
+- Archive the duplicate task.
+
+The One-Action Rule prevents agents from opening five new fronts while closing zero. AeroVista does not need more partially opened doors. It needs closed loops.
+
+---
+
+## Segment 6 — Queue Anti-Patterns
+
+Watch for queue anti-patterns.
+
+1. **Priority inflation.** Everything is P1, which means nothing is P1.
+2. **Ghost tasks.** No owner, no output, no next action, no acceptance criteria.
+3. **Reopening solved work.** Check the trail first.
+4. **Confusing blocked with hard.** Hard work is not blocked.
+5. **Starting new fronts to avoid finishing.** Finish the slice.
+6. **Hiding legal or access risk in normal work.** Elevate it.
+7. **Treating draft as published.** Drafted is not published. Published is not adopted. Adopted is not complete forever.
+
+---
+
+## Segment 7 — Working the Queue Like AVCC
+
+AVCC does not ask, “What can we do?” That question is too wide.
+
+AVCC asks:
+
+- What is the highest-risk unresolved item?
+- What is the highest-value next action?
+- What is blocking active release momentum?
+- What has no owner?
+- What is stale and misleading?
+- What should be closed?
+- What should be parked?
+- What should be escalated?
+- What should become an EOD note?
+- What should become memory?
+- What should not be touched today?
+
+Use this queue-card format:
+
+Queue item:  
+Lane:  
+Priority:  
+State:  
+Owner:  
+Next action:  
+Done condition:  
+Evidence needed:  
+Risk if ignored:  
+Update surface:
+
+A good queue review ends with fewer ambiguities, not more.
+
+---
+
+## Segment 8 — Confidentiality While Working the Queue
+
+Queues can expose sensitive truth. Be careful.
+
+Do not turn private details into public task labels. Use safe labels.
+
+Instead of naming private client disputes, say: “Resolve client SOW clarification — restricted details in legal lane.”
+
+Instead of naming a credential file path, say: “P1 security exposure — restricted evidence in security lane.”
+
+Instead of naming a builder email, say: “Builder assignment mismatch — restricted identity details omitted.”
+
+The queue should guide action without exposing more than necessary.
+
+---
+
+## Closing
+
+You now have the first five laws.
+
+Day 1: Find the door.  
+Day 2: Find the source.  
+Day 3: Turn signal into action.  
+Day 4: Leave the trail.  
+Day 5: Work the queue.
+
+Capture the request. Name the lane. Set the priority. Name the state. Assign the owner. Define done. Take one action. Update the trail. Protect confidential details. Do not open a new front to avoid closing the current one.
+
+Work the queue. Then leave it clearer than you found it.

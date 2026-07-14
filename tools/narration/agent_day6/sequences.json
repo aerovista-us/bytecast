@@ -1,0 +1,23 @@
+{
+  "schema": "narration-sequences-v1",
+  "packId": "agent_day6_safe_access",
+  "sequences": {
+    "full_journey": {
+      "label": "Safe Access & Boundaries — full journey",
+      "lineIds": [
+        "cold_open",
+        "access_is_not_one_thing",
+        "the_aerovista_access_rule",
+        "role_map_who_can_do_what",
+        "public_authenticated_role_restricted_internal_re",
+        "public_private_mistakes_that_break_trust",
+        "the_art_localized_lesson",
+        "the_safe_access_checklist",
+        "access_incident_mini_protocol",
+        "agent_rules_for_public_output",
+        "closing"
+      ]
+    }
+  },
+  "defaultSequence": "full_journey"
+}

@@ -1,0 +1,67 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "teaching_mode": "MissionLab",
+  "episode": {
+    "code": "EP-APP-002",
+    "title": "Catalog Maintainer Bootcamp - Your Day-to-Day",
+    "type": "training",
+    "date": "2026-07-08",
+    "runtime_target_minutes": 12,
+    "status": "active"
+  },
+  "content": {
+    "tags": [
+      "apparel",
+      "catalog",
+      "operations"
+    ],
+    "summary_short": "Catalog Maintainer Bootcamp - Your Day-to-Day",
+    "hero_kicker": "Catalog Maintainer Bootcamp",
+    "key_line": "Treat every listing like a mini launch — verify before you ship."
+  },
+  "media": {
+    "audio_files": []
+  },
+  "engagement": {
+    "quiz": {
+      "enabled": true,
+      "pass_threshold": 0.8,
+      "questions": [
+        {
+          "id": "app2_q1",
+          "q": "Before publish you should verify:",
+          "choices": [
+            "Only the title",
+            "SKU, price, collection, and links",
+            "Nothing if it looks fine"
+          ],
+          "answer_index": 1
+        }
+      ]
+    }
+  },
+  "slides": [
+    {
+      "id": "loop",
+      "title": "Catalog maintainer loop",
+      "goal": "Run intake → edit → QA → publish.",
+      "bullets": [
+        "Verify SKU, price, and collection membership before publish.",
+        "Use SOT.json in this pack as the canon checklist.",
+        "Log proof: screenshot or PR link in your work order."
+      ]
+    }
+  ],
+  "lesson": {
+    "objective": "Run the day-to-day catalog maintainer loop: intake, copy, collections, and QA before publish.",
+    "why_it_matters": "Catalog errors surface as wrong prices, broken links, and customer trust issues.",
+    "apply": "Walk through one sample SKU update using the SOT checklist in this pack.",
+    "advance": "Pass catalog quiz; continue to EP-APP-003 Ops Standards."
+  },
+  "related_next": [
+    {
+      "label": "Next: EP-APP-003 — Apparel Ops Standards - Naming, Copy, Collections, QA, Access",
+      "href": "../av_apparel_ep3_ops_standards/index.html"
+    }
+  ]
+}

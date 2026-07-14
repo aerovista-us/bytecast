@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>ByteCast EP-002</title>
-  <meta name="description" content="AeroVista mission, seven peer divisions, HQ, cross-division collaboration â€” Day 1 ecosystem map." />
+  <meta name="description" content="AeroVista mission, seven peer divisions, HQ, cross-division collaboration — Day 1 ecosystem map." />
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
   <script defer src="../../assets/shared/bytecast_handoff_footer.js"></script>
   <style>
@@ -530,7 +530,7 @@
       <div class="badge">
         <span class="dot"></span>
         <div>
-          <div style="font-weight:900; letter-spacing:-0.01em;" id="topEp">ByteCast â€¢ EP-002</div>
+          <div style="font-weight:900; letter-spacing:-0.01em;" id="topEp">ByteCast • EP-002</div>
           <small style="color:var(--muted);" id="topTitle">AeroVista 7-Division Overview</small>
         </div>
       </div>
@@ -572,7 +572,7 @@
             </div>
             <div id="heroListenAttach" class="bytecast-listen-dim-exempt"></div>
             <p class="muted startCard__note" id="heroNote">
-              Day 1 flow: listen â†’ slides â†’ division explorer â†’ engage quiz (80%). Then EP-003 â€” The Main Doors.
+              Day 1 flow: listen → slides → division explorer → engage quiz (80%). Then EP-003 — The Main Doors.
             </p>
           </section>
         </div>
@@ -581,7 +581,7 @@
           <div class="callout" style="padding:16px; border-radius:18px;">
             <div class="k">AEROVISTA MAP</div>
             <p style="margin:10px 0 0; color:rgba(255,255,255,0.86); line-height:1.55;" id="keyLine">
-              One ecosystem â€” seven peer divisions â€” HQ at the center.
+              One ecosystem — seven peer divisions — HQ at the center.
             </p>
             <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
               <span class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">EP</b> EP-002</span>
@@ -606,7 +606,7 @@
           <h2>Listen</h2>
           <p id="audioLine">Narration from <span style="font-family:var(--mono);">docs/day1/EP-002_VOICEOVER.md</span> via <span style="font-family:var(--mono);">assets/voiceover_sections.json</span>. Optional MP3/AAC still counts toward the listen gate when played.</p>
         </div>
-        <div class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">MODE</b> â€¢ Guided Learning â€¢ Additive</div>
+        <div class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">MODE</b> • Guided Learning • Additive</div>
       </div>
 
       <div class="panel__body">
@@ -652,7 +652,7 @@
         <div class="panel__meta">
           <h2>Division card explorer</h2>
           <p>
-            Tap a division to expand â€” role, sample offers, links into the Offer Pack. Data:
+            Tap a division to expand — role, sample offers, links into the Offer Pack. Data:
             <span style="font-family:var(--mono);">episodes/aerovista_offer_pack/app/data/offer-pack-data.json</span>.
           </p>
         </div>
@@ -692,7 +692,7 @@
 
           <div class="card">
             <h4>Engage quiz</h4>
-            <p>Four checks â€” same distractors as voiceover micro-check (â‰¥80% to pass).</p>
+            <p>Four checks — same distractors as voiceover micro-check (≥80% to pass).</p>
             <div id="quiz"></div>
           </div>
         </div>
@@ -705,7 +705,7 @@
         <h3>After This Episode</h3>
       </div>
       <div class="card" style="margin:14px var(--pad) 18px;">
-        <p class="muted" style="margin:0 0 12px;">After EP-002 gates + quiz, continue to <strong>EP-003 â€” The Main Doors</strong>.</p>
+        <p class="muted" style="margin:0 0 12px;">After EP-002 gates + quiz, continue to <strong>EP-003 — The Main Doors</strong>.</p>
         <a class="btn btn--primary" id="nextEp" href="#lesson-slides">Open 2 Slides</a>
         <a class="btn" href="../../seed_bytecast.html" style="margin-left:10px;">Playlist</a>
         <span class="chip" id="gateNote" style="margin-left:10px;">Loading gate status...</span>
@@ -713,8 +713,8 @@
     </section>
 
     <footer>
-      <div id="footerLeft">ByteCast EP-002 â€¢ v1 â€¢ Venta/Neon default</div>
-      <div style="font-family:var(--mono);">Tabs: Listen / Slides / Divisions / Engagement â€¢ â†/â†’ slides or tab bar</div>
+      <div id="footerLeft">ByteCast EP-002 • v1 • Venta/Neon default</div>
+      <div style="font-family:var(--mono);">Tabs: Listen / Slides / Divisions / Engagement • ←/→ slides or tab bar</div>
     </footer>
     <section id="bc-handoff-footer" style="max-width:var(--max);margin:18px auto 0;padding:0 var(--pad);"></section>
   </main>
@@ -963,7 +963,7 @@
       function syncDots() {
         const dotEls = Array.from(document.querySelectorAll("#dots .dotBtn"));
         dotEls.forEach((b, i) => b.setAttribute("aria-current", String(i === idx)));
-        const title = slideEls[idx]?.dataset?.title ? `Episode Slides â€¢ ${slideEls[idx].dataset.title}` : "Episode Slides";
+        const title = slideEls[idx]?.dataset?.title ? `Episode Slides • ${slideEls[idx].dataset.title}` : "Episode Slides";
         $("#deckTitle").textContent = title;
       }
 
@@ -1016,7 +1016,7 @@
         return;
       }
 
-      $("#questTitle").textContent = `Quest â€” ${quest.title || ""}`.trim();
+      $("#questTitle").textContent = `Quest — ${quest.title || ""}`.trim();
       const QUEST_KEY = `${prefix}_quest`;
 
       const questState = new Set((() => {
@@ -1112,9 +1112,9 @@
               <button class="btn btn--primary" type="button" id="gradeQuiz">Grade Quiz</button>
               <button class="btn" type="button" id="resetQuiz">Reset</button>
               <span class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">THRESH</b> ${Math.round(passThresh * 100)}%</span>
-              <span class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">SCORE</b> ${score === null ? "â€”" : Math.round(score * 100) + "%"}</span>
+              <span class="chip"><span class="tagdot"></span> <b style="font-family:var(--mono);">SCORE</b> ${score === null ? "—" : Math.round(score * 100) + "%"}</span>
               <span class="chip" style="${passed ? "box-shadow: var(--glow-neon); border-color: rgba(34,167,255,0.35);" : ""}">
-                <span class="tagdot"></span> <b style="font-family:var(--mono);">STATUS</b> ${passed ? "PASS" : (score === null ? "â€”" : "TRY AGAIN")}
+                <span class="tagdot"></span> <b style="font-family:var(--mono);">STATUS</b> ${passed ? "PASS" : (score === null ? "—" : "TRY AGAIN")}
               </span>
             </div>
           </div>
@@ -1295,14 +1295,14 @@
       const tags = Array.isArray(profile?.content?.tags) ? profile.content.tags : [];
       const summary = profile?.content?.summary_short || "";
 
-      document.title = `ByteCast ${epCode} â€¢ ${title}`;
-      $("#topEp").textContent = `ByteCast â€¢ ${epCode}`;
+      document.title = `ByteCast ${epCode} • ${title}`;
+      $("#topEp").textContent = `ByteCast • ${epCode}`;
       $("#topTitle").textContent = title;
       $("#heroTitle").textContent = epCode;
       $("#heroSub").textContent = title;
       $("#heroNote").textContent = summary || $("#heroNote").textContent;
-      $("#keyLine").textContent = (profile?.slides?.[3]?.bullets?.[0]) || (profile?.slides?.[0]?.bullets?.[0]) || "One ecosystem â€” seven peer divisions â€” HQ at the center.";
-      $("#footerLeft").textContent = `ByteCast ${epCode} â€¢ ${date || ""} â€¢ Venta/Neon default`;
+      $("#keyLine").textContent = (profile?.slides?.[3]?.bullets?.[0]) || (profile?.slides?.[0]?.bullets?.[0]) || "One ecosystem — seven peer divisions — HQ at the center.";
+      $("#footerLeft").textContent = `ByteCast ${epCode} • ${date || ""} • Venta/Neon default`;
       try {
         window.ByteCastHandoffFooter?.render?.({ profile, container: document.getElementById("bc-handoff-footer") });
       } catch (_) {}
@@ -1311,7 +1311,7 @@
       meta.innerHTML = [
         pill(epCode, "Guided Learning"),
         pill(date || "Date", "Timestamped"),
-        pill("tags", tags.slice(0, 3).join(" â€¢ ") || ""),
+        pill("tags", tags.slice(0, 3).join(" • ") || ""),
       ].join("");
 
       TAB_DEF.forEach(({ id, tab }) => {
@@ -1408,7 +1408,7 @@
       renderGate();
       audioEl.addEventListener("error", () => {
         const h = $("#audioHint");
-        if (h) h.textContent = "Optional MP3/AAC missing â€” use Read episode overview to clear the listen gate.";
+        if (h) h.textContent = "Optional MP3/AAC missing — use Read episode overview to clear the listen gate.";
       });
     }
 

@@ -6,7 +6,7 @@
     "type": "internal",
     "date": "2026-03-25",
     "runtime_target_minutes": 11,
-    "status": "draft"
+    "status": "active"
   },
   "content": {
     "tags": [
@@ -281,5 +281,24 @@
       "note": "Public about page / hub."
     },
     "recruitment_copy": "Finish one clean pass through Listen, Slides, and Engage before exploring further. Clarity comes first."
-  }
+  },
+  "teaching_mode": "GuidedAudioSlides",
+  "lesson": {
+    "objective": "Explain what ByteCast is, how the Golden Path runs, and which main door to use for each job.",
+    "why_it_matters": "New operators waste days opening random tools without this routing layer; ByteCast exists to make proof-based progression the default.",
+    "apply": "Open Playlist, confirm your current step, and complete the Engage quiz with passing score.",
+    "advance": "Pass engage quiz (≥80%) on ep001_engage; then unlock EP-002 in the Golden Path."
+  },
+  "thread_tags": [
+    "day1",
+    "bytecast",
+    "doors",
+    "golden-path"
+  ],
+  "related_next": [
+    {
+      "label": "Next: EP-002 — AeroVista Overview",
+      "href": "../aerovista_7_division_overview/index.html"
+    }
+  ]
 }

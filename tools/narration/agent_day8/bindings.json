@@ -1,0 +1,13 @@
+{
+  "schema": "narration-bindings-v1",
+  "packId": "agent_day8_writing",
+  "runtime": {
+    "player": "../../assets/shared/nxcore_narration_player.js",
+    "manifest": "episodes/writing_like_aerovista/assets/narration.manifest.json",
+    "fallback": "assets/shared/listen_mode.js"
+  },
+  "episode": {
+    "slug": "writing_like_aerovista",
+    "listenGateStep": "writing_segments"
+  }
+}

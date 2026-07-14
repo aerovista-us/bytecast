@@ -1,0 +1,25 @@
+{
+  "schema": "narration-sequences-v1",
+  "packId": "agent_day9_deliverable",
+  "sequences": {
+    "full_journey": {
+      "label": "From Draft to Deliverable — full journey",
+      "lineIds": [
+        "cold_open",
+        "a_draft_is_not_a_deliverable",
+        "the_slice_principle",
+        "define_done_before_you_polish",
+        "the_polish_ladder",
+        "scope_creep_the_silent_draft_killer",
+        "review_without_reopening_everything",
+        "acceptance_criteria_and_evidence",
+        "the_delivery_state_ladder",
+        "the_finish_line_checklist",
+        "finishing_with_discipline",
+        "confidentiality_at_delivery",
+        "closing"
+      ]
+    }
+  },
+  "defaultSequence": "full_journey"
+}

@@ -1,0 +1,527 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "teaching_mode": "InteractiveScript",
+  "episode": {
+    "code": "AGENT-D5",
+    "title": "Working the Queue — Agent Day 5",
+    "type": "required",
+    "date": "2026-07-10",
+    "runtime_target_minutes": 25,
+    "status": "active"
+  },
+  "content": {
+    "tags": [
+      "agent-day5",
+      "required",
+      "onboarding",
+      "golden-path",
+      "getting-started"
+    ],
+    "hero_kicker": "Required · Agent Day 5",
+    "summary_short": "Learn queue triage without open-front chaos — P1/P2/P3, active/blocked/parked states, intake filter, One-Action Rule, and Queue Triage Card.",
+    "summary_long": "Learn queue triage without open-front chaos — P1/P2/P3, active/blocked/parked states, intake filter, One-Action Rule, and Queue Triage Card.",
+    "key_line": "Work the queue. Leave it clearer than you found it.",
+    "start_here": "Complete the Day 5 gate, read or listen through all segments, pass the check, then submit your completion drill.",
+    "narrator": "Byte",
+    "tone": "Operational, clear, grounded"
+  },
+  "episode_gate": {
+    "title": "Day 5 Gate — Working the Queue",
+    "required": true,
+    "items": [
+      "I completed Agent Days 1–4 (doors, source-of-truth, AVCC judgment, handoff discipline).",
+      "I understand a queue is a decision surface — not a junk drawer or panic board.",
+      "I will set priority and state honestly — no priority inflation or ghost tasks.",
+      "I will use the One-Action Rule and define done before starting work.",
+      "I will protect confidential details in queue labels and update surfaces."
+    ]
+  },
+  "reference_panels": [
+    {
+      "type": "cards",
+      "title": "Priority lanes",
+      "items": [
+        {
+          "label": "P1",
+          "title": "Critical",
+          "body": "Trust, security, live service, client delivery, access, or data integrity at risk."
+        },
+        {
+          "label": "P2",
+          "title": "High",
+          "body": "Active milestones, client commitments, release follow-up, cross-division deliverables."
+        },
+        {
+          "label": "P3",
+          "title": "Standard",
+          "body": "Useful cleanup and polish — must not steal oxygen from P1/P2."
+        }
+      ]
+    },
+    {
+      "type": "list",
+      "title": "Queue states",
+      "items": [
+        "Active — owned work in motion",
+        "Blocked — named obstacle",
+        "Parked — intentional pause",
+        "Waiting — next move is someone else's",
+        "Done — output + trail updated"
+      ]
+    },
+    {
+      "type": "steps",
+      "title": "Intake filter",
+      "items": [
+        "Capture the request in plain language",
+        "Identify the lane owner",
+        "Name the output",
+        "Set priority (P1/P2/P3)",
+        "Define done — no output, no task"
+      ]
+    }
+  ],
+  "script": {
+    "sections": [
+      {
+        "id": "cold_open",
+        "title": "Cold Open",
+        "time": "0:00–1:20",
+        "paragraphs": [
+          "Day 1 taught you to find the door. Day 2 taught you to find the source. Day 3 taught you to turn signal into action. Day 4 taught you to leave the trail.",
+          "Day 5 teaches you how to choose what to touch next.",
+          "AeroVista does not fail from a lack of ideas. It fails when too many ideas become open fronts.",
+          "A queue is not a junk drawer. It is not a wish list. It is not a panic board. It is not where vague “we should” ideas go to die quietly.",
+          "A queue is a decision surface. It tells the system what matters now, what is blocked, what is waiting, what is active, what is finished, what should not be touched yet, what must be escalated, and what belongs to someone else.",
+          "Welcome to Day 5: Working the Queue."
+        ]
+      },
+      {
+        "id": "the_queue_is_a_trust_layer",
+        "title": "The Queue Is a Trust Layer",
+        "time": "",
+        "paragraphs": [
+          "Inside AeroVista, a queue is more than a task list. It is a trust layer.",
+          "A good queue protects focus. A bad queue creates operational fog.",
+          "A good queue says:",
+          "This is P1. Drop everything.",
+          "This is P2. Schedule and move it.",
+          "This is P3. Useful, but not allowed to hijack the day.",
+          "This is blocked. Do not pretend it is active.",
+          "This is parked. Do not keep reopening it.",
+          "This is waiting on owner decision.",
+          "This is ready for execution.",
+          "This is done, but needs handoff.",
+          "This is released, but not adopted.",
+          "This is drafted, not published.",
+          "This is verified, not assumed.",
+          "AeroVista agents do not just do tasks. They clarify state. When you clarify state, you help the whole system move."
+        ]
+      },
+      {
+        "id": "the_three_priority_lanes",
+        "title": "The Three Priority Lanes",
+        "time": "",
+        "paragraphs": [
+          "The queue has three core priority lanes: P1, P2, and P3.",
+          "Do not inflate them. Do not blur them. Do not treat everything as critical just because it is interesting.",
+          "P1 — Critical",
+          "P1 means immediate attention. Use P1 when trust, security, live service, client delivery, access control, data integrity, or core infrastructure is at risk.",
+          "Examples: NXCore outage, public release path broken, access control failure, client production issue, data exposure risk, credential leak, legal/confidentiality issue, broken backup or restore path, public system showing private state, or a blocker affecting multiple active projects.",
+          "P1 means stop, escalate, verify, and act. P1 should have a named owner and immediate next action. If nobody owns it, it is not being handled.",
+          "P2 — High",
+          "P2 means important forward motion. Use P2 for work tied to active milestones, client commitments, revenue activity, release follow-up, builder onboarding, documentation needed by active operators, or cross-division deliverables.",
+          "Examples: complete ByteCast Day 1–5 hub, convert drafted scripts into published training pages, finish Art Localized builder onboarding polish, update release board after verified release, create a client-ready one-pager for a current prospect, run scheduled smoke test before public push, or complete a known milestone.",
+          "P2 means schedule, assign, execute, and report. Most healthy work lives here.",
+          "P3 — Standard",
+          "P3 means useful, flexible, and not urgent. Use P3 for cleanup, style improvements, archive work, template refinement, nice-to-have UX polish, future ideas, non-blocking optimization, and maintenance.",
+          "P3 is not worthless. But P3 does not get to steal oxygen from P1 or P2. A disciplined agent protects the queue from priority inflation."
+        ]
+      },
+      {
+        "id": "active_blocked_parked_waiting_done",
+        "title": "Active, Blocked, Parked, Waiting, Done",
+        "time": "",
+        "paragraphs": [
+          "Priority is not enough. Every queue item also needs state.",
+          "Active",
+          "Active means someone is currently working it. Active work should have an owner, next action, expected output, evidence source, priority, and completion condition. If a task has no owner, it is not active. It is floating.",
+          "Blocked",
+          "Blocked means work cannot continue until a specific obstacle is removed. A real blocker has a name.",
+          "Weak: “Blocked by access.”",
+          "Strong: “Blocked because builder role cannot access artists dashboard after Cloudflare login.”",
+          "Weak: “Blocked by docs.”",
+          "Strong: “Blocked because current registry state conflicts with older onboarding doc and authority has not been resolved.”",
+          "If the blocker is vague, the task is not blocked. It is unclear. Clarify it.",
+          "Parked",
+          "Parked means intentionally paused. Parked work should not keep reappearing every day like an emergency. Parked means not now, not forgotten, not active, and not dead. A parked item needs a revisit condition.",
+          "Waiting",
+          "Waiting means the next move belongs to someone else: founder, legal, operator access, client reply, asset upload, release approval, or health verification. Waiting is not the same as blocked.",
+          "Done",
+          "Done means the work met its completion condition and the state was updated. Output exists, evidence is attached, owner confirms or acceptance criteria are met, handoff is written, queue state is updated, and the next action is closed or assigned.",
+          "Done without trail is not done."
+        ]
+      },
+      {
+        "id": "intake_how_new_work_enters_the_queue",
+        "title": "Intake: How New Work Enters the Queue",
+        "time": "",
+        "paragraphs": [
+          "New work should not crash into the queue blindly. Run the Intake Filter.",
+          "Capture the request. — Write the request in plain language.",
+          "Identify the lane. — AVCC, ByteCast, Nexus, Art Localized, EchoVerse, Lumina, Vespera, Summit, Horizon, SkyForge, HQ, Legal, or Founder.",
+          "Name the output. — Script, doc, HTML page, audio file, release note, registry update, smoke result, handoff, client one-pager, training module, legal review, decision memo.",
+          "Set priority. — P1, P2, or P3.",
+          "Define done. — If you do not define done, the task will sprawl.",
+          "No output, no task."
+        ]
+      },
+      {
+        "id": "the_one_action_rule",
+        "title": "The One-Action Rule",
+        "time": "",
+        "paragraphs": [
+          "AeroVista has many fronts. That is exactly why agents need the One-Action Rule.",
+          "When working the queue, choose one next action that moves the item forward. Not ten. Not a whole universe map. One.",
+          "Examples:",
+          "Verify the live route.",
+          "Update the release board.",
+          "Draft the Day 5 script.",
+          "Ask founder to choose audio-first or HTML-first.",
+          "Move remaining polish to P2.",
+          "Create the handoff.",
+          "Mark old doc as stale.",
+          "Escalate access conflict.",
+          "Attach evidence to the queue card.",
+          "Archive the duplicate task.",
+          "The One-Action Rule prevents agents from opening five new fronts while closing zero. AeroVista does not need more partially opened doors. It needs closed loops."
+        ]
+      },
+      {
+        "id": "queue_anti_patterns",
+        "title": "Queue Anti-Patterns",
+        "time": "",
+        "paragraphs": [
+          "Watch for queue anti-patterns.",
+          "Priority inflation. — Everything is P1, which means nothing is P1.",
+          "Ghost tasks. — No owner, no output, no next action, no acceptance criteria.",
+          "Reopening solved work. — Check the trail first.",
+          "Confusing blocked with hard. — Hard work is not blocked.",
+          "Starting new fronts to avoid finishing. — Finish the slice.",
+          "Hiding legal or access risk in normal work. — Elevate it.",
+          "Treating draft as published. — Drafted is not published. Published is not adopted. Adopted is not complete forever."
+        ]
+      },
+      {
+        "id": "working_the_queue_like_avcc",
+        "title": "Working the Queue Like AVCC",
+        "time": "",
+        "paragraphs": [
+          "AVCC does not ask, “What can we do?” That question is too wide.",
+          "AVCC asks:",
+          "What is the highest-risk unresolved item?",
+          "What is the highest-value next action?",
+          "What is blocking active release momentum?",
+          "What has no owner?",
+          "What is stale and misleading?",
+          "What should be closed?",
+          "What should be parked?",
+          "What should be escalated?",
+          "What should become an EOD note?",
+          "What should become memory?",
+          "What should not be touched today?",
+          "Use this queue-card format:",
+          "Queue item:",
+          "Lane:",
+          "Priority:",
+          "State:",
+          "Owner:",
+          "Next action:",
+          "Done condition:",
+          "Evidence needed:",
+          "Risk if ignored:",
+          "Update surface:",
+          "A good queue review ends with fewer ambiguities, not more."
+        ]
+      },
+      {
+        "id": "confidentiality_while_working_the_queue",
+        "title": "Confidentiality While Working the Queue",
+        "time": "",
+        "paragraphs": [
+          "Queues can expose sensitive truth. Be careful.",
+          "Do not turn private details into public task labels. Use safe labels.",
+          "Instead of naming private client disputes, say: “Resolve client SOW clarification — restricted details in legal lane.”",
+          "Instead of naming a credential file path, say: “P1 security exposure — restricted evidence in security lane.”",
+          "Instead of naming a builder email, say: “Builder assignment mismatch — restricted identity details omitted.”",
+          "The queue should guide action without exposing more than necessary."
+        ]
+      },
+      {
+        "id": "closing",
+        "title": "Closing",
+        "time": "",
+        "paragraphs": [
+          "You now have the first five laws.",
+          "Day 1: Find the door.",
+          "Day 2: Find the source.",
+          "Day 3: Turn signal into action.",
+          "Day 4: Leave the trail.",
+          "Day 5: Work the queue.",
+          "Capture the request. Name the lane. Set the priority. Name the state. Assign the owner. Define done. Take one action. Update the trail. Protect confidential details. Do not open a new front to avoid closing the current one.",
+          "Work the queue. Then leave it clearer than you found it."
+        ]
+      }
+    ]
+  },
+  "prove": {
+    "title": "Queue Triage Card + One-Action Commitment",
+    "description": "Triage a real or simulated queue item — demonstrate state clarity, not vague busyness.",
+    "fields": [
+      {
+        "id": "field_1",
+        "label": "1. Queue Item",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_2",
+        "label": "2. Lane",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_3",
+        "label": "3. Priority",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_4",
+        "label": "4. State",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_5",
+        "label": "5. Owner",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_6",
+        "label": "6. Output",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_7",
+        "label": "7. Done Condition",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_8",
+        "label": "8. Evidence Needed",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_9",
+        "label": "9. Blocker Check",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_10",
+        "label": "10. One-Action Commitment",
+        "required": true,
+        "rows": 3
+      },
+      {
+        "id": "field_11",
+        "label": "11. Risk If Ignored",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_12",
+        "label": "12. Risk If Mishandled",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_13",
+        "label": "13. Confidentiality Check",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_14",
+        "label": "14. Update Surface",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_15",
+        "label": "15. Queue Card Final",
+        "required": true,
+        "rows": 3
+      }
+    ]
+  },
+  "engagement": {
+    "quiz": {
+      "enabled": true,
+      "pass_threshold": 0.8,
+      "title": "Working the Queue Check",
+      "questions": [
+        {
+          "id": "d5_q1",
+          "q": "A queue inside AeroVista is best described as:",
+          "choices": [
+            "A junk drawer for ideas",
+            "A decision surface with priority and state",
+            "A list sorted by newest file"
+          ],
+          "answer_index": 1
+        },
+        {
+          "id": "d5_q2",
+          "q": "Priority inflation means:",
+          "choices": [
+            "Everything labeled P1 so nothing is truly critical",
+            "Using P3 for security incidents",
+            "Closing tasks too fast"
+          ],
+          "answer_index": 0
+        },
+        {
+          "id": "d5_q3",
+          "q": "A task with no owner is:",
+          "choices": [
+            "Active",
+            "Floating — not truly active",
+            "Automatically P1"
+          ],
+          "answer_index": 1
+        },
+        {
+          "id": "d5_q4",
+          "q": "The One-Action Rule means:",
+          "choices": [
+            "Open five fronts at once",
+            "Choose one next action that moves the item forward",
+            "Wait for perfect information"
+          ],
+          "answer_index": 1
+        },
+        {
+          "id": "d5_q5",
+          "q": "\"Blocked\" requires:",
+          "choices": [
+            "A named, specific obstacle",
+            "That the work feels hard",
+            "Founder approval for all tasks"
+          ],
+          "answer_index": 0
+        },
+        {
+          "id": "d5_q6",
+          "q": "Done without trail is:",
+          "choices": [
+            "Acceptable for P3",
+            "Not done",
+            "Fine if the code compiled"
+          ],
+          "answer_index": 1
+        }
+      ]
+    }
+  },
+  "lesson": {
+    "objective": "Learn queue triage without open-front chaos — P1/P2/P3, active/blocked/parked states, intake filter, One-Action Rule, and Queue Triage Card.",
+    "why_it_matters": "Day 5 extends the Agent onboarding spine — Work the queue.",
+    "apply": "Complete gate, segments, quiz, and Queue Triage Card + One-Action Commitment.",
+    "advance": "Unlock Day 6 — Safe Access & Boundaries when queue_prove is complete."
+  },
+  "thread_tags": [
+    "day5",
+    "required",
+    "agent-orientation",
+    "golden-path"
+  ],
+  "related_next": [
+    {
+      "label": "Next: Day 6 — Safe Access & Boundaries",
+      "href": "../safe_access_boundaries/index.html"
+    }
+  ],
+  "handoff": {
+    "label": "Open ByteCast home",
+    "href": "../training_hub/index.html",
+    "return_label": "Back to Day 5",
+    "return_href": "./index.html"
+  },
+  "media": {
+    "audio_files": [],
+    "script_doc": "../../docs/agent_day5/WORKING_THE_QUEUE_SCRIPT.md",
+    "voiceover_sections": "assets/voiceover_sections.json",
+    "narration_manifest": "assets/narration.manifest.json",
+    "forge_pack": "tools/narration/agent_day5"
+  },
+  "episode_runtime": {
+    "day": 5,
+    "prefix": "queue",
+    "law": "Work the queue.",
+    "prev_days": [
+      {
+        "day": 1,
+        "href": "../the_first_door/index.html"
+      },
+      {
+        "day": 2,
+        "href": "../finding_source_of_truth/index.html"
+      },
+      {
+        "day": 3,
+        "href": "../from_signal_to_action/index.html"
+      },
+      {
+        "day": 4,
+        "href": "../the_handoff_is_the_work/index.html"
+      }
+    ],
+    "storage": {
+      "segments": "bc.working_the_queue.segments.v1",
+      "gate": "bc.working_the_queue.gate.v1",
+      "quiz": "bc.working_the_queue.quiz.v1",
+      "prove": "bc.working_the_queue.prove.v1",
+      "stepper": "bc.working_the_queue.stepper.v1",
+      "labs": "bc.working_the_queue.labs.v1"
+    },
+    "workflow": {
+      "gate": "queue_gate",
+      "segments": "queue_segments",
+      "engage": "queue_engage",
+      "prove": "queue_prove",
+      "complete": "queue_gates"
+    },
+    "prove_complete_message": "Day 5 complete. Continue to Day 6 — Safe Access & Boundaries.",
+    "prove_saved_message": "Queue Triage Card + One-Action Commitment submitted.",
+    "prove_meta": {
+      "drillType": "working_the_queue"
+    }
+  },
+  "interactives": {
+    "day": 5,
+    "journey_mode": "stepper",
+    "segment_visuals": true,
+    "labs_required": true,
+    "labs": [
+      "queue_triage",
+      "queue_state",
+      "one_action"
+    ]
+  }
+}

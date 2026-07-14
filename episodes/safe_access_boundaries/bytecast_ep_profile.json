@@ -1,0 +1,559 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "teaching_mode": "InteractiveScript",
+  "episode": {
+    "code": "AGENT-D6",
+    "title": "Safe Access, Roles, and Public/Private Boundaries — Agent Day 6",
+    "type": "required",
+    "date": "2026-07-10",
+    "runtime_target_minutes": 28,
+    "status": "active"
+  },
+  "content": {
+    "tags": [
+      "agent-day6",
+      "required",
+      "onboarding",
+      "golden-path",
+      "getting-started"
+    ],
+    "hero_kicker": "Required · Agent Day 6",
+    "summary_short": "Protect trust while working with roles, identity, authorization, scope, environments, public/private surfaces, and access incidents.",
+    "summary_long": "Protect trust while working with roles, identity, authorization, scope, environments, public/private surfaces, and access incidents.",
+    "key_line": "Known identity, correct role, narrow scope, right environment, minimum data, recorded action.",
+    "start_here": "Complete the Day 6 gate, read or listen through all segments, pass the check, then submit your completion drill.",
+    "narrator": "Byte",
+    "tone": "Operational, clear, grounded"
+  },
+  "episode_gate": {
+    "title": "Day 6 Gate — Safe Access & Boundaries",
+    "required": true,
+    "items": [
+      "I completed Agent Days 1–5.",
+      "I will not self-grant access, guess roles, or confuse authentication with authorization.",
+      "I understand public, authenticated, role-restricted, internal, restricted, and secret data classes.",
+      "I will fail closed when access is unclear and escalate exposure risks as P1.",
+      "I will record access changes with an audit trail."
+    ]
+  },
+  "reference_panels": [
+    {
+      "type": "cards",
+      "title": "Access layers",
+      "items": [
+        {
+          "label": "Identity",
+          "title": "Who is the actor?",
+          "body": "Founder, operator, builder, client, public visitor, agent, or service."
+        },
+        {
+          "label": "AuthN",
+          "title": "Authentication",
+          "body": "Proved identity — not permission."
+        },
+        {
+          "label": "AuthZ",
+          "title": "Authorization",
+          "body": "What they may do, where, and for how long."
+        }
+      ]
+    },
+    {
+      "type": "list",
+      "title": "Data sensitivity classes",
+      "items": [
+        "Public — intentionally safe for anyone",
+        "Authenticated — known user, role may still apply",
+        "Role-restricted — operator/builder lanes",
+        "Internal — AeroVista-only surfaces",
+        "Restricted — legal, client contracts, incident notes",
+        "Secret — credentials and keys — escalate immediately"
+      ]
+    },
+    {
+      "type": "steps",
+      "title": "Safe Access Checklist",
+      "items": [
+        "Actor",
+        "Role",
+        "Scope",
+        "Action",
+        "Environment",
+        "Time",
+        "Data visible",
+        "Evidence",
+        "Approval",
+        "Audit trail"
+      ]
+    }
+  ],
+  "script": {
+    "sections": [
+      {
+        "id": "cold_open",
+        "title": "Cold Open",
+        "time": "",
+        "paragraphs": [
+          "Day 1 taught you to find the door. Day 2 taught you to find the source. Day 3 taught you to turn signal into action. Day 4 taught you to leave the trail. Day 5 taught you to work the queue.",
+          "Day 6 teaches you not to break trust while doing any of it.",
+          "Access is not just a login. Access is authority, scope, identity, risk, public trust, legal exposure, and operational safety.",
+          "AeroVista agents do not self-grant. They do not guess roles. They do not expose private data. They do not confuse public pages with public records. They do not treat internal convenience as permission.",
+          "Welcome to Day 6: Safe Access, Roles, and Public/Private Boundaries."
+        ]
+      },
+      {
+        "id": "access_is_not_one_thing",
+        "title": "Access Is Not One Thing",
+        "time": "",
+        "paragraphs": [
+          "Access has layers.",
+          "Identity",
+          "Who is this actor? Founder, operator, builder, client, public visitor, internal agent, service, cron job, connector, or test account?",
+          "If you do not know who the actor is, stop.",
+          "Authentication",
+          "Did the actor prove who they are? Cloudflare Access, Firebase Auth, Tailscale, Google identity, internal HMAC, session token, API token, or service credential?",
+          "Authentication says the door recognized someone. It does not automatically say what they can do.",
+          "Authorization",
+          "What is this actor allowed to do? View, edit, approve, assign, publish, archive, delete, deploy, rotate secrets, read private memory, access client documents, or modify registry state?",
+          "Authentication says, “You are known.” Authorization says, “You may do this.” Never confuse them.",
+          "Scope",
+          "Where does permission apply? One booth, all booths, one division, one release, one client, one folder, one endpoint, one service, or one time-limited session?",
+          "Scope is the fence. Respect the fence.",
+          "Environment",
+          "Where are we? Local dev, NXCore internal, staging, production, public website, Cloudflare-protected tool, private network share, GitHub repository, memory vault, or client-facing page?",
+          "A thing can be safe in one environment and dangerous in another.",
+          "Data Sensitivity",
+          "What kind of information is involved? Public copy, booth content, builder data, client information, employee information, operational reports, legal agreements, source code, credentials, infrastructure paths, security logs, creative IP, or unreleased content?",
+          "The more sensitive the data, the tighter the boundary."
+        ]
+      },
+      {
+        "id": "the_aerovista_access_rule",
+        "title": "The AeroVista Access Rule",
+        "time": "",
+        "paragraphs": [
+          "The AeroVista access rule is:",
+          "**Known identity, correct role, narrow scope, right environment, minimum data, recorded action.**",
+          "Ask:",
+          "Do we know who this is?",
+          "Do they have the correct role?",
+          "Is the scope narrow enough?",
+          "Are we in the right environment?",
+          "Are we exposing only the minimum needed data?",
+          "Will this action leave an audit trail?",
+          "If any part is missing, do not casually proceed."
+        ]
+      },
+      {
+        "id": "role_map_who_can_do_what",
+        "title": "Role Map: Who Can Do What",
+        "time": "",
+        "paragraphs": [
+          "Roles are operational boundaries.",
+          "Founder / CEO",
+          "Can make strategic decisions, approve exceptions, redirect priorities, resolve authority conflicts, and define company-level direction. Even founder decisions should leave trails when they affect systems, access, releases, clients, money, legal exposure, or public surfaces.",
+          "Admin",
+          "Has elevated system permissions and may manage configuration, access policies, service state, registries, and restricted surfaces depending on scope. Admin work must be careful, logged, and reversible when possible.",
+          "Operator",
+          "Handles assigned workflows. May approve, assign, review, publish, triage, or manage work within a lane. Operator scope matters.",
+          "Builder / Creator",
+          "Should access their own booth, drafts, assets, and approved builder tools. They should not see another builder’s private draft, internal assignment data, founder-only dashboards, system-wide registries, or operational controls.",
+          "If a builder sees the wrong booth, that is an access failure.",
+          "Client",
+          "Access is engagement-specific. A client may see deliverables, reports, approvals, project files, dashboards, or communication surfaces defined by agreement or scope. A client should not see unrelated client work, internal margins, unrestricted source systems, or private internal methods.",
+          "Employee / Contractor",
+          "Access is role-based and minimum-necessary. Contractor access should be especially scoped, time-aware, and reviewed.",
+          "Public Visitor",
+          "Can see intentionally public content. Public visitors should never see internal state, private builder data, draft content, admin controls, logs, unpublished assets, or hidden operational metadata.",
+          "Agent",
+          "An agent is not automatically trusted just because it is helpful. Agent authority depends on assigned lane. Agents must not self-grant access, modify live roles, expose sensitive data, or present internal evidence publicly without authorization.",
+          "Service Account / Automation",
+          "Should have narrow, purpose-built permissions. A scheduler does not need founder access. A publisher does not need legal docs. Automation should be easier to audit than a human action, not harder."
+        ]
+      },
+      {
+        "id": "public_authenticated_role_restricted_internal_re",
+        "title": "Public, Authenticated, Role-Restricted, Internal, Restricted, Secret",
+        "time": "",
+        "paragraphs": [
+          "Public",
+          "Intentionally safe for anyone: public website pages, marketing copy, public booths, flyers, approved social posts, published ByteCast pages, and public division descriptions.",
+          "Do not assume something is public because it loads in a browser.",
+          "Authenticated",
+          "A known user can enter, but role checks may still be required. Authenticated is not the same as authorized.",
+          "Role-Restricted",
+          "Only certain roles may access it: operator queues, assign tools, builder management, release controls, internal dashboards, staff-only training, and client-specific portals.",
+          "Internal",
+          "AeroVista-only: handoffs, EOD Capsules, operational reports, private roadmaps, memory vault summaries, NXCore service notes, and internal queue state.",
+          "Restricted",
+          "Only specific authorized people or systems: legal agreements, client contracts, sensitive access logs, security incident notes, private financial planning, high-risk infrastructure details, identity mapping, and credential-adjacent operational notes.",
+          "Secret",
+          "Do not expose: API keys, private tokens, passwords, signing secrets, private keys, recovery codes, encryption materials, raw credential files, and production secrets.",
+          "If you see a secret, treat it as a security event. Do not repeat it. Escalate."
+        ]
+      },
+      {
+        "id": "public_private_mistakes_that_break_trust",
+        "title": "Public/Private Mistakes That Break Trust",
+        "time": "",
+        "paragraphs": [
+          "Most access failures begin with convenience.",
+          "Common mistakes:",
+          "Public route includes private data.",
+          "Authenticated user is not scoped by ownership.",
+          "Founder view leaks to regular users.",
+          "Client sees internal method or unrelated client data.",
+          "Public GitHub repo contains secrets, sensitive configs, private customer data, or internal-only notes.",
+          "Debug logs, stack traces, environment variables, or raw API responses reach production.",
+          "Agent summaries leak more than needed.",
+          "Fix fast. Treat as P1 if sensitive data, client data, secrets, private builder data, or public exposure may be involved."
+        ]
+      },
+      {
+        "id": "the_art_localized_lesson",
+        "title": "The Art Localized Lesson",
+        "time": "",
+        "paragraphs": [
+          "Art Localized has public market pages, founder booths, builder accounts, operator assignment queues, Cloudflare-protected surfaces, public booths, private drafts, role badges, registry state, external creator onboarding, and public trust.",
+          "A clean Art Localized access model asks:",
+          "Is this user public, builder, operator, founder, or service?",
+          "Which booth do they own?",
+          "Which booth can they edit?",
+          "Which booths can they view?",
+          "Can they publish, assign, approve, or see internal registry state?",
+          "Can they see another builder’s draft?",
+          "Can they reach the correct dashboard after login?",
+          "A builder may see what helps them build their booth. They should not inherit the whole market. An operator may manage the queue. They should not accidentally become founder. A public visitor may browse approved public content. They should not see private build machinery.",
+          "When an access mismatch appears, classify the failed layer: identity, authentication, authorization, scope, environment, data sensitivity, registry mismatch, UI routing, backend role logic, Cloudflare policy, or public/private route confusion.",
+          "Do not patch blindly. Find the layer that failed. Fix the layer, document the fix, and leave the trail."
+        ]
+      },
+      {
+        "id": "the_safe_access_checklist",
+        "title": "The Safe Access Checklist",
+        "time": "",
+        "paragraphs": [
+          "Before changing access, run the Safe Access Checklist:",
+          "1. Actor — who is requesting or receiving access?",
+          "2. Role — what role should they have?",
+          "3. Scope — what exact object, lane, folder, booth, route, repo, dashboard, service, or dataset should they access?",
+          "4. Action — what can they do?",
+          "5. Environment — where does this apply?",
+          "6. Time — permanent, temporary, project-based, or session-based?",
+          "7. Data — what becomes visible?",
+          "8. Evidence — what proves this access is needed?",
+          "9. Approval — who can approve it?",
+          "10. Audit trail — where will the action be recorded?",
+          "No trail, no access change."
+        ]
+      },
+      {
+        "id": "access_incident_mini_protocol",
+        "title": "Access Incident Mini-Protocol",
+        "time": "",
+        "paragraphs": [
+          "When access looks wrong:",
+          "1. Stop expansion. Do not grant more access to test. Do not copy sensitive details into broad notes.",
+          "2. Capture minimal evidence: who, role, route, expected access, actual access, time, environment, sensitivity.",
+          "3. Classify severity: P1 for exposure risk, P2 for blocked active work, P3 for cleanup.",
+          "4. Fail closed. Hide the surface, disable the risky grant, block publish, restrict route, or escalate.",
+          "5. Notify the correct lane: security, Nexus, Art Localized operator, AVCC, Founder, Legal, or relevant division lead.",
+          "6. Leave a handoff.",
+          "Access incidents become worse when the trail is vague."
+        ]
+      },
+      {
+        "id": "agent_rules_for_public_output",
+        "title": "Agent Rules for Public Output",
+        "time": "",
+        "paragraphs": [
+          "When creating anything public, do not include private emails, client names unless approved, internal URLs, secrets, access policies, debug traces, unreleased strategy, private financials, builder assignment details, credentials, sensitive infrastructure paths, or unapproved legal terms.",
+          "Do include approved messaging, public URLs, public product descriptions, published booth content, safe calls to action, brand-safe language, clear disclaimers, contact routes, public proof, and non-sensitive outcomes.",
+          "AeroVista can be transparent without being exposed."
+        ]
+      },
+      {
+        "id": "closing",
+        "title": "Closing",
+        "time": "",
+        "paragraphs": [
+          "You now have six laws.",
+          "Day 1: Find the door.",
+          "Day 2: Find the source.",
+          "Day 3: Turn signal into action.",
+          "Day 4: Leave the trail.",
+          "Day 5: Work the queue.",
+          "Day 6: Protect the boundary.",
+          "Know the actor. Verify the role. Narrow the scope. Respect the environment. Limit the data. Record the action. Fail closed when unsure. Escalate exposure fast. Never confuse helpfulness with permission.",
+          "Protect the boundary. That is how the world stays safe enough to grow."
+        ]
+      }
+    ]
+  },
+  "prove": {
+    "title": "Access Boundary Review + Role-Scope Checklist",
+    "description": "Review a real or simulated access scenario — classify layers, severity, and safe interim action.",
+    "fields": [
+      {
+        "id": "field_1",
+        "label": "1. Scenario",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_2",
+        "label": "2. Actor",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_3",
+        "label": "3. Authentication Layer",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_4",
+        "label": "4. Requested or Actual Role",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_5",
+        "label": "5. Correct Role",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_6",
+        "label": "6. Scope",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_7",
+        "label": "7. Allowed Actions",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_8",
+        "label": "8. Environment",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_9",
+        "label": "9. Data Sensitivity",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_10",
+        "label": "10. Boundary Check",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_11",
+        "label": "11. Risk If Wrong",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_12",
+        "label": "12. Severity",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_13",
+        "label": "13. Safe Interim Action",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_14",
+        "label": "14. Evidence Needed",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_15",
+        "label": "15. Public/Private Classification",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_16",
+        "label": "16. Handoff Note",
+        "required": true,
+        "rows": 3
+      },
+      {
+        "id": "field_17",
+        "label": "17. Final Access Decision",
+        "required": true,
+        "rows": 1
+      }
+    ]
+  },
+  "engagement": {
+    "quiz": {
+      "enabled": true,
+      "pass_threshold": 0.8,
+      "title": "Safe Access & Boundaries Check",
+      "questions": [
+        {
+          "id": "d6_q1",
+          "q": "Authentication proves:",
+          "choices": [
+            "What the actor may do",
+            "Who the actor is",
+            "That data is public"
+          ],
+          "answer_index": 1
+        },
+        {
+          "id": "d6_q2",
+          "q": "AeroVista agents should:",
+          "choices": [
+            "Self-grant when helpful",
+            "Never self-grant access",
+            "Share credentials in handoffs"
+          ],
+          "answer_index": 1
+        },
+        {
+          "id": "d6_q3",
+          "q": "A builder seeing another builder's private draft is:",
+          "choices": [
+            "Normal",
+            "An access failure",
+            "A P3 cleanup item"
+          ],
+          "answer_index": 1
+        },
+        {
+          "id": "d6_q4",
+          "q": "When you see a secret in a log or file:",
+          "choices": [
+            "Paste it into the handoff",
+            "Treat as security event and escalate",
+            "Ignore it"
+          ],
+          "answer_index": 1
+        },
+        {
+          "id": "d6_q5",
+          "q": "Fail closed means:",
+          "choices": [
+            "Grant more access to test",
+            "Restrict or hide until verified",
+            "Publish and fix later"
+          ],
+          "answer_index": 1
+        },
+        {
+          "id": "d6_q6",
+          "q": "Public visitor access should be:",
+          "choices": [
+            "Intentionally public content only",
+            "Any page that loads in a browser",
+            "All authenticated dashboards"
+          ],
+          "answer_index": 0
+        }
+      ]
+    }
+  },
+  "lesson": {
+    "objective": "Protect trust while working with roles, identity, authorization, scope, environments, public/private surfaces, and access incidents.",
+    "why_it_matters": "Day 6 extends the Agent onboarding spine — Protect the boundary.",
+    "apply": "Complete gate, segments, quiz, and Access Boundary Review + Role-Scope Checklist.",
+    "advance": "Unlock Day 7 — Builder & Client Experience when access_prove is complete."
+  },
+  "thread_tags": [
+    "day6",
+    "required",
+    "agent-orientation",
+    "golden-path"
+  ],
+  "related_next": [
+    {
+      "label": "Next: Day 7 — Builder & Client Experience",
+      "href": "../builder_client_experience/index.html"
+    }
+  ],
+  "handoff": {
+    "label": "Open ByteCast home",
+    "href": "../training_hub/index.html",
+    "return_label": "Back to Day 6",
+    "return_href": "./index.html"
+  },
+  "media": {
+    "audio_files": [],
+    "script_doc": "../../docs/agent_day6/SAFE_ACCESS_BOUNDARIES_SCRIPT.md",
+    "voiceover_sections": "assets/voiceover_sections.json",
+    "narration_manifest": "assets/narration.manifest.json",
+    "forge_pack": "tools/narration/agent_day6"
+  },
+  "episode_runtime": {
+    "day": 6,
+    "prefix": "access",
+    "law": "Protect the boundary.",
+    "prev_days": [
+      {
+        "day": 1,
+        "href": "../the_first_door/index.html"
+      },
+      {
+        "day": 2,
+        "href": "../finding_source_of_truth/index.html"
+      },
+      {
+        "day": 3,
+        "href": "../from_signal_to_action/index.html"
+      },
+      {
+        "day": 4,
+        "href": "../the_handoff_is_the_work/index.html"
+      },
+      {
+        "day": 5,
+        "href": "../working_the_queue/index.html"
+      }
+    ],
+    "storage": {
+      "segments": "bc.safe_access_boundaries.segments.v1",
+      "gate": "bc.safe_access_boundaries.gate.v1",
+      "quiz": "bc.safe_access_boundaries.quiz.v1",
+      "prove": "bc.safe_access_boundaries.prove.v1",
+      "stepper": "bc.safe_access_boundaries.stepper.v1",
+      "labs": "bc.safe_access_boundaries.labs.v1"
+    },
+    "workflow": {
+      "gate": "access_gate",
+      "segments": "access_segments",
+      "engage": "access_engage",
+      "prove": "access_prove",
+      "complete": "access_gates"
+    },
+    "prove_complete_message": "Day 6 complete. Continue to Day 7 — Builder & Client Experience.",
+    "prove_saved_message": "Access Boundary Review + Role-Scope Checklist submitted.",
+    "prove_meta": {
+      "drillType": "safe_access_boundaries"
+    }
+  },
+  "interactives": {
+    "day": 6,
+    "journey_mode": "stepper",
+    "segment_visuals": true,
+    "labs_required": true,
+    "labs": [
+      "access_boundary",
+      "role_vs_grant",
+      "public_private"
+    ]
+  }
+}

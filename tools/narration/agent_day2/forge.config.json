@@ -1,0 +1,20 @@
+{
+  "schema": "narration-forge-config-v1",
+  "packId": "agent_day2_source_of_truth",
+  "episodeCode": "AGENT-D2",
+  "authoringRoot": "docs/agent_day2",
+  "scriptSource": "docs/agent_day2/FINDING_SOURCE_OF_TRUTH_SCRIPT.md",
+  "linesMaster": "tools/narration/agent_day2/lines.master.json",
+  "sequences": "tools/narration/agent_day2/sequences.json",
+  "voiceRecipes": "tools/narration/agent_day2/voiceRecipes.json",
+  "bindings": "tools/narration/agent_day2/bindings.json",
+  "outputDir": "episodes/finding_source_of_truth/assets/narration",
+  "runtimeManifest": "episodes/finding_source_of_truth/assets/narration.manifest.json",
+  "shipFormat": "wav",
+  "tts": {
+    "provider": "nxcore-echoverse",
+    "endpoint": "/api/generate",
+    "envUrl": "NXCORE_TTS_URL",
+    "defaultUrl": "http://127.0.0.1:5315"
+  }
+}
