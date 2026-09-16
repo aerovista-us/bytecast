@@ -13,9 +13,31 @@
   const prefix = `co_ep${epNum}`;
   const slug = String(document.body?.dataset?.bcSlug || "").trim() || `contributor_onboarding_ep${epNum}`;
 
+  const WORKSTATION_SYNC_URL = "https://workstation.aerocoreos.com/api/onboarding/bytecast-event";
+
+  function syncWorkstationStep(stepId) {
+    const payload = { journeyId: JID, stepId, episodeSlug: slug };
+    try {
+      fetch(WORKSTATION_SYNC_URL, {
+        method: "POST",
+        mode: "cors",
+        credentials: "include",
+        keepalive: true,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      })
+        .then((response) => {
+          if (response.ok || response.status === 401 || response.status === 403) return;
+          console.warn(`[ByteCast] Workspace progress sync returned ${response.status}.`);
+        })
+        .catch(() => {});
+    } catch {}
+  }
+
   function markStep(stepId, meta = {}) {
     if (!Loop) return;
     Loop.markStepDone(stepId, { journeyId: JID, episodeSlug: slug, ...meta });
+    syncWorkstationStep(stepId);
   }
 
   function setText(id, value) {
