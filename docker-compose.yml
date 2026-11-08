@@ -15,9 +15,10 @@ services:
     image: nginx:alpine
     container_name: bytecast-web
     ports:
-      - "${BYTECAST_PORT:-8080}:80"
+      - "127.0.0.1:${BYTECAST_PORT:-8080}:80"
     volumes:
       - .:/usr/share/nginx/html:ro
+      - ./nginx-public.conf:/etc/nginx/conf.d/default.conf:ro
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://127.0.0.1/"]
       interval: 15s
