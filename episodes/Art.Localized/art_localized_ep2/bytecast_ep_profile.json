@@ -9,11 +9,18 @@
     "status": "active"
   },
   "content": {
-    "tags": ["art-localized", "training", "partnership"],
+    "tags": [
+      "art-localized",
+      "training",
+      "partnership"
+    ],
     "summary_short": "Phase 3 partnership tiers, division collaboration, and press-kit proof expectations."
   },
   "engagement": {
-    "quest": { "title": "Ep 2", "items": [] },
+    "quest": {
+      "title": "Ep 2",
+      "items": []
+    },
     "quiz": {
       "enabled": true,
       "pass_threshold": 0.8,
@@ -21,10 +28,26 @@
         {
           "id": "art_ep2_q1",
           "q": "Tiers should:",
-          "choices": ["Be cosmetic only", "Change artifacts and review paths"],
+          "choices": [
+            "Be cosmetic only",
+            "Change artifacts and review paths"
+          ],
           "answer_index": 1
         }
       ]
     }
-  }
+  },
+  "teaching_mode": "ReadAloudScript",
+  "lesson": {
+    "objective": "Explain partnership tiers and what proof each tier requires before amplification.",
+    "why_it_matters": "Tier confusion creates unfair expectations for partners and internal teams.",
+    "apply": "Label one real partner scenario with the correct tier.",
+    "advance": "Pass quiz; continue to ART-EP-3 — Amplification."
+  },
+  "related_next": [
+    {
+      "label": "Next: ART-EP-3 — The Art Localized - Ep 3 - Amplification",
+      "href": "../art_localized_ep3/index.html"
+    }
+  ]
 }

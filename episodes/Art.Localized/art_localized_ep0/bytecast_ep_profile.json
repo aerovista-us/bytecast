@@ -9,11 +9,20 @@
     "status": "active"
   },
   "content": {
-    "tags": ["art-localized", "training", "collaboration"],
-    "summary_short": "Phase 1 manifesto, cue notes, and handoff system for Art Localized collaboration foundations."
+    "tags": [
+      "art-localized",
+      "training",
+      "collaboration"
+    ],
+    "summary_short": "Phase 1 manifesto, cue notes, and handoff system for Art Localized collaboration foundations.",
+    "summary_long": "Phase 1 manifesto for Art Localized: collaboration means shared context, explicit handoffs, and proof — not more meetings.",
+    "start_here": "Listen or read the script, then check slides before Engage."
   },
   "engagement": {
-    "quest": { "title": "Ep 0", "items": [] },
+    "quest": {
+      "title": "Ep 0",
+      "items": []
+    },
     "quiz": {
       "enabled": true,
       "pass_threshold": 0.8,
@@ -21,10 +30,36 @@
         {
           "id": "art_ep0_q1",
           "q": "Collaboration in this journey means:",
-          "choices": ["More meetings", "Shared context and proof"],
+          "choices": [
+            "More meetings",
+            "Shared context and proof"
+          ],
+          "answer_index": 1
+        },
+        {
+          "id": "art_ep0_q2",
+          "q": "Cue notes should primarily:",
+          "choices": [
+            "Replace briefs",
+            "Carry timing and intent for collaborators",
+            "Stay private"
+          ],
           "answer_index": 1
         }
       ]
     }
-  }
+  },
+  "teaching_mode": "ReadAloudScript",
+  "lesson": {
+    "objective": "Use shared context, cue notes, and handoff discipline for Art Localized collaboration.",
+    "why_it_matters": "Creative work fails when context lives in DMs instead of reviewable artifacts.",
+    "apply": "Complete the collaboration quiz and note one handoff field you will always fill.",
+    "advance": "Pass quiz (≥80%); continue to ART-EP-1 — Divisions."
+  },
+  "related_next": [
+    {
+      "label": "Next: ART-EP-1 — The Art Localized - Ep 1 - Divisions",
+      "href": "../art_localized_ep1/index.html"
+    }
+  ]
 }

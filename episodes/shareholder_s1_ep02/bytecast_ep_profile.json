@@ -10,7 +10,12 @@
     "status": "active"
   },
   "content": {
-    "tags": ["shareholder", "briefing", "season1", "services"],
+    "tags": [
+      "shareholder",
+      "briefing",
+      "season1",
+      "services"
+    ],
     "summary_short": "How AeroVista packages services and offers for the market — audio-synced briefing player.",
     "summary_long": "Shareholder Season 1 briefing. Legacy root player at bytecast-ep02.html."
   },
@@ -22,5 +27,17 @@
         "required": false
       }
     ]
-  }
+  },
+  "lesson": {
+    "objective": "Survey the service portfolio and how offerings interlock across divisions.",
+    "why_it_matters": "Portfolio clarity supports investment and partnership conversations.",
+    "apply": "Map one service line to its likely delivery owner.",
+    "advance": "Continue to S1-EP-03."
+  },
+  "related_next": [
+    {
+      "label": "Next: S1-EP-03 — Documented Ecosystem",
+      "href": "../shareholder_s1_ep03/index.html"
+    }
+  ]
 }

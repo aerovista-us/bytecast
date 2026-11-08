@@ -10,7 +10,12 @@
     "status": "active"
   },
   "content": {
-    "tags": ["shareholder", "briefing", "season1", "portable"],
+    "tags": [
+      "shareholder",
+      "briefing",
+      "season1",
+      "portable"
+    ],
     "summary_short": "Portable ecosystem narrative for shareholders — distinct from Day 1 EP-004 Current Truth Basics.",
     "summary_long": "Shareholder Season 1 briefing. Legacy root player at bytecast-ep04.html. Not the same topic as EP-004 current_truth_basics."
   },
@@ -22,5 +27,17 @@
         "required": false
       }
     ]
-  }
+  },
+  "lesson": {
+    "objective": "Review operations, infrastructure, and scale claims at briefing level.",
+    "why_it_matters": "Ops narrative must connect to testable foundation work.",
+    "apply": "List one infrastructure question you would ask before trusting a scale claim.",
+    "advance": "Continue to S1-EP-05."
+  },
+  "related_next": [
+    {
+      "label": "Next: S1-EP-05 — Revenue & Growth Model",
+      "href": "../shareholder_s1_ep05/index.html"
+    }
+  ]
 }

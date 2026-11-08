@@ -1,4 +1,4 @@
-﻿{
+{
   "schema": "bytecast-ep-profile-v1",
   "episode": {
     "code": "EP-LUM-106",
@@ -229,7 +229,18 @@
         }
       ]
     }
+  },
+  "teaching_mode": "VoiceoverSections",
+  "lesson": {
+    "objective": "Turn qualified interest into growth actions with clean handoffs and follow-up proof.",
+    "why_it_matters": "Interest without handoff dies in inboxes; Lumina owns the commercial thread until delivery accepts.",
+    "apply": "Complete the growth handoff scenario and open the revenue routing mission when ready.",
+    "advance": "Finish Lumina lane quiz; optional handoff to revenue routing mission."
+  },
+  "handoff": {
+    "label": "Revenue routing mission",
+    "href": "../seed_builder_studio/lumina_sales_brief/index.html",
+    "return_label": "Back to Lumina 106",
+    "return_href": "./index.html"
   }
 }
-
-

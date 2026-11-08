@@ -19,10 +19,21 @@
     "summary_short": "Match the job to the correct door: Entry for orientation, Playlist for progress, Hub for routes, Builder for repeatable artifacts, and Docs for governed answers.",
     "summary_long": "EP-003 turns the learner's map into an action model. Each main surface gets a concrete use case, an honest 'not for this' boundary, and a few real examples pulled from the current ByteCast workspace: Entry for orientation, Playlist for gates and next action, Training Hub for route discovery, Seed Builder for export-oriented work, and Docs for standards like the training standard, proof schema, and site map. The goal is to help the learner stop opening random apps and start routing questions cleanly."
   },
-  "thread_tags": ["day1", "routing", "doors", "ecosystem"],
+  "thread_tags": [
+    "day1",
+    "routing",
+    "doors",
+    "ecosystem"
+  ],
   "related_next": [
-    { "label": "Next: EP-004 — Current Truth Basics", "href": "../current_truth_basics/index.html" },
-    { "label": "Open ByteCast home", "href": "../training_hub/index.html" }
+    {
+      "label": "Next: EP-004 — Current Truth Basics",
+      "href": "../current_truth_basics/index.html"
+    },
+    {
+      "label": "Open ByteCast home",
+      "href": "../training_hub/index.html"
+    }
   ],
   "media": {
     "audio_files": [
@@ -218,5 +229,12 @@
         }
       ]
     }
+  },
+  "teaching_mode": "GuidedAudioSlides",
+  "lesson": {
+    "objective": "Match a task to the correct ByteCast surface: Entry, Playlist, Hub, Builder, or Docs.",
+    "why_it_matters": "Correct routing cuts noise and keeps governed truth separate from learner progress.",
+    "apply": "Pick one real question you have today and name the door you would open first.",
+    "advance": "Pass engage quiz; continue to EP-004 — Current Truth Basics."
   }
 }

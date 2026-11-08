@@ -252,5 +252,18 @@
         }
       ]
     }
-  }
+  },
+  "teaching_mode": "VoiceoverSections",
+  "lesson": {
+    "objective": "Run discovery that finds the real need instead of the first requested feature.",
+    "why_it_matters": "Wrong problem definition produces quotes nobody can honor.",
+    "apply": "Complete the discovery scenario exercise.",
+    "advance": "Continue to EP-LUM-105."
+  },
+  "related_next": [
+    {
+      "label": "Next: EP-LUM-105 — Recommend the Right Path",
+      "href": "../lumina_rev_105/index.html"
+    }
+  ]
 }

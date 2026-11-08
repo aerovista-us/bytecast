@@ -9,13 +9,22 @@
     "status": "active"
   },
   "content": {
-    "tags": ["contributor-onboarding", "lanes", "communication"],
+    "tags": [
+      "contributor-onboarding",
+      "lanes",
+      "communication"
+    ],
     "summary_short": "Lane A, B, and C define risk boundaries; the Honest Helper standard defines how contributors take work and ask for help.",
     "summary_long": "Before touching files, contributors need two things: the correct lane and the correct communication pattern. That is how AeroVista gets speed without chaos."
   },
   "training": {
     "eyebrow": "Lanes + Honest Helper",
-    "chips": ["Lane A", "Lane B", "Lane C", "Ask WHERE first"],
+    "chips": [
+      "Lane A",
+      "Lane B",
+      "Lane C",
+      "Ask WHERE first"
+    ],
     "sources": [
       "episodes/contributor.onboarding/docs/CONTRIBUTING.md",
       "episodes/contributor.onboarding/docs/SECURITY_BOUNDARIES.md"
@@ -84,5 +93,18 @@
         }
       ]
     }
-  }
+  },
+  "teaching_mode": "ReadAloudScript",
+  "lesson": {
+    "objective": "Pick Lane A/B/C and know when to stay in low-risk work.",
+    "why_it_matters": "Lane discipline protects production systems while contributors build trust.",
+    "apply": "Classify three sample tasks by lane.",
+    "advance": "Continue to CO-EP-3 — Work Orders."
+  },
+  "related_next": [
+    {
+      "label": "Next: CO-EP-3 — Contributor Onboarding - Ep 3 - Work Orders and Definition of Done",
+      "href": "../contributor_onboarding_ep3/index.html"
+    }
+  ]
 }

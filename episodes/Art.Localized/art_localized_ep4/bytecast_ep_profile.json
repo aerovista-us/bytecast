@@ -9,11 +9,18 @@
     "status": "active"
   },
   "content": {
-    "tags": ["art-localized", "training", "assessment"],
+    "tags": [
+      "art-localized",
+      "training",
+      "assessment"
+    ],
     "summary_short": "Phase 4 pathways, rights review, ecosystem roles, and final assessment."
   },
   "engagement": {
-    "quest": { "title": "Ep 4", "items": [] },
+    "quest": {
+      "title": "Ep 4",
+      "items": []
+    },
     "quiz": {
       "enabled": true,
       "pass_threshold": 0.8,
@@ -21,10 +28,26 @@
         {
           "id": "art_ep4_q1",
           "q": "Your role emphasizes:",
-          "choices": ["Chat-only memory", "Clear artifacts and routing"],
+          "choices": [
+            "Chat-only memory",
+            "Clear artifacts and routing"
+          ],
           "answer_index": 1
         }
       ]
     }
-  }
+  },
+  "teaching_mode": "ReadAloudScript",
+  "lesson": {
+    "objective": "Define your role in the Art Localized lane and the proof you owe before handoff.",
+    "why_it_matters": "Clear role boundaries prevent duplicate creative work and missed approvals.",
+    "apply": "Write a one-sentence role statement and link your next proof artifact.",
+    "advance": "Pass final quiz; return to Training Hub Skills — Art Localized."
+  },
+  "related_next": [
+    {
+      "label": "Open ByteCast home",
+      "href": "../../training_hub/index.html"
+    }
+  ]
 }

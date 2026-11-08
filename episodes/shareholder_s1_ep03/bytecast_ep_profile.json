@@ -10,7 +10,12 @@
     "status": "active"
   },
   "content": {
-    "tags": ["shareholder", "briefing", "season1", "ecosystem"],
+    "tags": [
+      "shareholder",
+      "briefing",
+      "season1",
+      "ecosystem"
+    ],
     "summary_short": "Documentation, governance, and ecosystem visibility for shareholders — audio-synced briefing player.",
     "summary_long": "Shareholder Season 1 briefing. Legacy root player at bytecast-ep03.html."
   },
@@ -22,5 +27,17 @@
         "required": false
       }
     ]
-  }
+  },
+  "lesson": {
+    "objective": "Follow the growth and go-to-market thread across Lumina and partner lanes.",
+    "why_it_matters": "GTM story must stay aligned with what teams can actually ship.",
+    "apply": "Identify one claim that needs delivery verification before external use.",
+    "advance": "Continue to S1-EP-04."
+  },
+  "related_next": [
+    {
+      "label": "Next: S1-EP-04 — The Portable Ecosystem",
+      "href": "../shareholder_s1_ep04/index.html"
+    }
+  ]
 }

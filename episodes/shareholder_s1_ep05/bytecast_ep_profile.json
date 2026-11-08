@@ -10,7 +10,12 @@
     "status": "active"
   },
   "content": {
-    "tags": ["shareholder", "briefing", "season1", "revenue"],
+    "tags": [
+      "shareholder",
+      "briefing",
+      "season1",
+      "revenue"
+    ],
     "summary_short": "Revenue and growth model briefing for shareholders — audio-synced player.",
     "summary_long": "Shareholder Season 1 briefing. Legacy root player at bytecast-ep05.html."
   },
@@ -22,5 +27,17 @@
         "required": false
       }
     ]
-  }
+  },
+  "lesson": {
+    "objective": "Understand risk, governance, and how AeroVista contains downside while shipping.",
+    "why_it_matters": "Stakeholders weigh upside against operational discipline.",
+    "apply": "Note one governance practice you would want evidence for.",
+    "advance": "Continue to S1-EP-06."
+  },
+  "related_next": [
+    {
+      "label": "Next: S1-EP-06 — The Roadmap Forward",
+      "href": "../shareholder_s1_ep06/index.html"
+    }
+  ]
 }

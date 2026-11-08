@@ -9,13 +9,23 @@
     "status": "active"
   },
   "content": {
-    "tags": ["contributor-onboarding", "work-orders", "definition-of-done"],
+    "tags": [
+      "contributor-onboarding",
+      "work-orders",
+      "definition-of-done"
+    ],
     "summary_short": "Work starts with goal, scope, acceptance, and DoD; work finishes with preview proof, test notes, rollback notes, and a short docs note.",
     "summary_long": "AeroVista replaces vague tasks with work orders and a Definition of Done checklist. That turns review from opinion into proof, and keeps rushed changes from becoming hidden maintenance debt."
   },
   "training": {
     "eyebrow": "Work Orders + DoD",
-    "chips": ["Goal and scope", "Acceptance criteria", "Preview validation", "Rollback notes", "Docs note"],
+    "chips": [
+      "Goal and scope",
+      "Acceptance criteria",
+      "Preview validation",
+      "Rollback notes",
+      "Docs note"
+    ],
     "sources": [
       "episodes/contributor.onboarding/docs/WORK_ORDERS_TEMPLATE.md",
       "episodes/contributor.onboarding/docs/CONTRIBUTING.md",
@@ -97,5 +107,18 @@
         }
       ]
     }
-  }
+  },
+  "teaching_mode": "ReadAloudScript",
+  "lesson": {
+    "objective": "Use work orders and Definition of Done so every change set has clear proof.",
+    "why_it_matters": "Without DoD, reviewers cannot approve quickly or teach repeatable patterns.",
+    "apply": "Draft a mini work order for your next intended PR.",
+    "advance": "Continue to CO-EP-4 — Crew Check."
+  },
+  "related_next": [
+    {
+      "label": "Next: CO-EP-4 — Contributor Onboarding - Ep 4 - Crew Check and Final Readiness",
+      "href": "../contributor_onboarding_ep4/index.html"
+    }
+  ]
 }

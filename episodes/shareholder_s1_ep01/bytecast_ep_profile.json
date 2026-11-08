@@ -10,9 +10,14 @@
     "status": "active"
   },
   "content": {
-    "tags": ["shareholder", "briefing", "season1", "orientation"],
+    "tags": [
+      "shareholder",
+      "briefing",
+      "season1",
+      "orientation"
+    ],
     "summary_short": "Platform story and seven-division orientation for shareholders — audio-synced briefing player.",
-    "summary_long": "Shareholder Season 1 briefing. Legacy root player at bytecast-ep01.html. Side lane — not Day 1 EP-001 onboarding."
+    "summary_long": "Shareholder Season 1 Pulse briefing. Audio-synced narrative — not Day 1 EP-001 onboarding."
   },
   "media": {
     "audio_files": [
@@ -22,5 +27,17 @@
         "required": false
       }
     ]
-  }
+  },
+  "lesson": {
+    "objective": "Understand the AeroVista platform story and seven-division orientation at briefing depth.",
+    "why_it_matters": "Stakeholders need a shared narrative before diving into portfolio detail.",
+    "apply": "Listen through the briefing and note one division you want to explore deeper.",
+    "advance": "Optional completion; continue Pulse series at S1-EP-02."
+  },
+  "related_next": [
+    {
+      "label": "Next: S1-EP-02 — Service Portfolio",
+      "href": "../shareholder_s1_ep02/index.html"
+    }
+  ]
 }
