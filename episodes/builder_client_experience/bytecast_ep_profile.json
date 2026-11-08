@@ -1,0 +1,506 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "teaching_mode": "InteractiveScript",
+  "episode": {
+    "code": "AGENT-D7",
+    "title": "Builder and Client Experience: Serving Without Exposing the System — Agent Day 7",
+    "type": "required",
+    "date": "2026-07-10",
+    "runtime_target_minutes": 28,
+    "status": "active"
+  },
+  "content": {
+    "tags": [
+      "agent-day7",
+      "required",
+      "onboarding",
+      "golden-path",
+      "getting-started"
+    ],
+    "hero_kicker": "Required · Agent Day 7",
+    "summary_short": "Help builders, clients, and prospects with the smallest complete answer — expose, summarize, or withhold internal detail appropriately.",
+    "summary_long": "Help builders, clients, and prospects with the smallest complete answer — expose, summarize, or withhold internal detail appropriately.",
+    "key_line": "Serve the person. Protect the system. Translate the complexity.",
+    "start_here": "Complete the Day 7 gate, read or listen through all segments, pass the check, then submit your completion drill.",
+    "narrator": "Byte",
+    "tone": "Operational, clear, grounded"
+  },
+  "episode_gate": {
+    "title": "Day 7 Gate — Builder & Client Experience",
+    "required": true,
+    "items": [
+      "I completed Agent Days 1–6.",
+      "I will give outside people the door, not the whole engine room.",
+      "I understand builder, client, and prospect experiences need different answers.",
+      "I will not overpromise live features, pricing, timelines, or legal terms without verification.",
+      "I will escalate authority I do not have instead of improvising commitments."
+    ]
+  },
+  "reference_panels": [
+    {
+      "type": "cards",
+      "title": "Three outside experiences",
+      "items": [
+        {
+          "label": "Builder",
+          "title": "Creator lane",
+          "body": "Welcome, clear limits, ownership clarity, next step — not internal controls."
+        },
+        {
+          "label": "Client",
+          "title": "Engagement lane",
+          "body": "Scope, deliverables, rhythm, boundaries — guided, not dragged through internal chaos."
+        },
+        {
+          "label": "Prospect",
+          "title": "Decision lane",
+          "body": "Clarity and safe next step — no dumping every system name at once."
+        }
+      ]
+    },
+    {
+      "type": "list",
+      "title": "Expose · Summarize · Withhold",
+      "items": [
+        "Expose — public URLs, approved steps, milestones, contact paths",
+        "Summarize — investigation status without backend jargon",
+        "Withhold — secrets, logs, other users' data, unreleased strategy"
+      ]
+    },
+    {
+      "type": "steps",
+      "title": "Outside-facing response formula",
+      "items": [
+        "Acknowledge",
+        "Clarify the goal",
+        "Give the safe answer",
+        "State one next step",
+        "Set boundary if needed",
+        "Close cleanly"
+      ]
+    }
+  ],
+  "script": {
+    "sections": [
+      {
+        "id": "cold_open",
+        "title": "Cold Open",
+        "time": "",
+        "paragraphs": [
+          "Day 1 taught you to find the door. Day 2 taught you to find the source. Day 3 taught you to turn signal into action. Day 4 taught you to leave the trail. Day 5 taught you to work the queue. Day 6 taught you to protect the boundary.",
+          "Day 7 teaches you how to serve people on the outside without dragging them through the inside.",
+          "Creators, builders, clients, and prospects do not need the whole engine room. They need the right door, the next step, the clear answer, the safe explanation, and the human version of the system.",
+          "AeroVista is complex. That does not mean the experience should feel complex.",
+          "The outside-facing rule is simple:",
+          "**Serve the person. Protect the system. Translate the complexity.**"
+        ]
+      },
+      {
+        "id": "the_outside_person_does_not_need_the_whole_map",
+        "title": "The Outside Person Does Not Need the Whole Map",
+        "time": "",
+        "paragraphs": [
+          "AeroVista has many maps: division maps, service maps, system maps, release maps, registry maps, access maps, memory maps, client maps, and builder maps.",
+          "The outside person does not need all of them.",
+          "A builder opening a booth needs to know where to start, what to fill out, what happens after submit, what they can edit, when it goes public, who helps if something looks wrong, what they can upload, what stays private, and the next step.",
+          "A client needs to know what problem we are solving, what AeroVista will deliver, what decisions are needed, what timeline we are working toward, what information we need, what they can review, what is included, what is out of scope, and what happens next.",
+          "A prospect needs clarity, confidence, and a reason to keep talking.",
+          "The agent rule: give the smallest complete answer that moves the person forward."
+        ]
+      },
+      {
+        "id": "builder_client_prospect_three_different_experien",
+        "title": "Builder, Client, Prospect: Three Different Experiences",
+        "time": "",
+        "paragraphs": [
+          "Builder / Creator",
+          "A builder or creator participates in an AeroVista-powered creative surface like Art Localized. Builders need simple steps, encouragement, clear limits, ownership clarity, public/private clarity, fast help when access feels wrong, and plain language about what happens next.",
+          "Builders should feel welcomed, not interrogated. They should also not be given internal controls.",
+          "Client",
+          "A client is paying or preparing to pay for a defined service, project, retainer, or engagement. Clients need scope clarity, deliverables, milestones, approval points, communication rhythm, what AeroVista needs from them, what AeroVista owns versus what the client receives, professional confidence, and no internal chaos.",
+          "Clients should feel guided. They should not feel like they are managing AeroVista’s internal systems for us.",
+          "Prospect",
+          "A prospect is still deciding. Prospects need a clear value proposition, examples, a simple explanation of services, a safe next step, a reason to trust the process, no overpromising, and no internal-only details.",
+          "Prospects buy clarity before they buy complexity."
+        ]
+      },
+      {
+        "id": "the_translation_layer",
+        "title": "The Translation Layer",
+        "time": "",
+        "paragraphs": [
+          "AeroVista agents must learn experience translation.",
+          "Internal: “Your booth assignment appears missing from the registry after Cloudflare Access authentication.”",
+          "External: “Your login worked, but your booth is not connected to your account yet. We’re checking the assignment and will get you routed to the right booth.”",
+          "Internal: “The release board is marked active but adoption proof is incomplete.”",
+          "External: “The page is live, and the next step is making sure real users can move through it smoothly.”",
+          "Internal: “The source-of-truth conflict is between the onboarding manual and current NXCore handoff.”",
+          "External: “We’re verifying the latest setup path before giving you instructions, so we don’t send you to an outdated process.”",
+          "Internal: “Scope expansion requires SOW adjustment.”",
+          "External: “That request may be outside the current project scope. We can review it and either confirm it is included or outline a clean add-on.”",
+          "Internal: “Builder cannot access due to role-scope mismatch.”",
+          "External: “You have the right login, but the system is not showing the correct permissions yet. We’ll correct the access path before asking you to continue.”",
+          "You are not hiding truth. You are making truth useful."
+        ]
+      },
+      {
+        "id": "expose_summarize_withhold",
+        "title": "Expose, Summarize, Withhold",
+        "time": "",
+        "paragraphs": [
+          "Expose",
+          "Expose information that is intentionally public or directly useful: public URLs, published booth pages, approved onboarding steps, milestones, client-facing deliverables, timelines, next actions, contact paths, service descriptions, and general process explanations.",
+          "Summarize",
+          "Summarize internal information when the person needs the outcome but not the machinery: access issue status, internal review progress, release readiness, scope clarification, technical investigation, quality review, legal review status, documentation updates, route/login troubleshooting.",
+          "Say: “We found an access mismatch and are correcting the account-to-booth connection.”",
+          "Do not say: “The backend /me response returned null registration and boothSlugs are being regenerated from internal ledger state.”",
+          "Withhold",
+          "Withhold secrets, credentials, internal logs, private emails, other builder data, unrelated client contracts, system architecture details, security policies, internal registry mechanics, unreleased strategy, founder-only notes, private memory, internal financial assumptions, and proprietary methods beyond approved service descriptions.",
+          "Withholding is not evasive. It is professional."
+        ]
+      },
+      {
+        "id": "builder_support_standard",
+        "title": "Builder Support Standard",
+        "time": "",
+        "paragraphs": [
+          "Welcome them. — Builders are creators, not tickets.",
+          "Confirm their goal. — Opening a booth, editing, finding public link, submitting materials, fixing login, adding media, or publishing changes?",
+          "Give the next step. — Not the whole operating manual.",
+          "Clarify public vs private. — Published booth content is public; drafts, account details, and internal review notes are not.",
+          "Protect other builders. — Never expose another builder’s private data, draft, assignment, or account detail.",
+          "Avoid internal jargon. — Say “account connection” instead of registry mismatch; “permission path” instead of role-scope bug.",
+          "Close with confidence. — Tell them what happens next.",
+          "A builder should leave knowing they are not lost."
+        ]
+      },
+      {
+        "id": "client_support_standard",
+        "title": "Client Support Standard",
+        "time": "",
+        "paragraphs": [
+          "Restate the business goal. — Start with the outcome.",
+          "Tie AeroVista to the outcome. — Do not just list divisions. Connect the relevant divisions to the client’s problem.",
+          "Define the deliverable. — Dashboard, training pack, landing page, audio identity, booth system, EOD report format, brand kit, automation workflow, client portal, proposal, roadmap, or implementation plan.",
+          "Set boundaries. — Say what is included, what is not, what needs approval, what requires a change order, and what depends on client materials.",
+          "Keep internal complexity behind the curtain. — Clients can appreciate sophistication without raw machinery.",
+          "Give the next decision. — End with a clean next step.",
+          "Clients should feel guided, not dragged into internal chaos."
+        ]
+      },
+      {
+        "id": "prospect_experience_don_t_oversell_don_t_overexp",
+        "title": "Prospect Experience: Don’t Oversell, Don’t Overexplain",
+        "time": "",
+        "paragraphs": [
+          "Prospects evaluate trust. Do not oversell. Do not overexplain. Do not use internal complexity to compensate for an unclear offer.",
+          "A prospect needs problem clarity, a believable path, and a safe next step.",
+          "Strong prospect language:",
+          "“If your tools, brand, training, and reporting are scattered, AeroVista helps turn them into one connected operating system. We can start small with a focused Foundation engagement, prove the workflow, and expand only after the first piece works.”",
+          "Weak prospect language dumps every internal system name at once.",
+          "Give them the door, not the whole building."
+        ]
+      },
+      {
+        "id": "service_without_overpromising",
+        "title": "Service Without Overpromising",
+        "time": "",
+        "paragraphs": [
+          "Never promise that a feature is live unless verified, a price is final unless approved, a timeline is locked unless scoped, a legal term is acceptable unless reviewed, a public page is safe unless checked, a builder can publish unless role/process allow it, a client owns IP unless the SOW says so, a requested change is included unless scope confirms it, or a system can integrate without technical review.",
+          "Use safe language:",
+          "“That sounds aligned. We should confirm scope, timeline, and any access or legal requirements before committing.”",
+          "“Once the required materials are submitted and reviewed, the operator can move it toward publish.”",
+          "“Ownership and usage rights should be defined in the SOW so everyone is clear.”",
+          "Confidence is good. False certainty is expensive."
+        ]
+      },
+      {
+        "id": "the_outside_facing_response_formula",
+        "title": "The Outside-Facing Response Formula",
+        "time": "",
+        "paragraphs": [
+          "Use this formula:",
+          "1. Acknowledge.",
+          "2. Clarify the goal.",
+          "3. Give the safe answer.",
+          "4. State one next step.",
+          "5. Set the boundary if needed.",
+          "6. Close cleanly.",
+          "Example:",
+          "“Got it — you’re trying to update your booth. The goal is to get your public booth ready without exposing draft or account details. Your published booth content can be public, but account details and internal review notes stay private. The next step is verifying that your account is connected to the right booth. If the issue involves permissions, we’ll route it to the operator lane before asking you to continue.”",
+          "That is service."
+        ]
+      },
+      {
+        "id": "when_to_escalate_instead_of_answering",
+        "title": "When To Escalate Instead of Answering",
+        "time": "",
+        "paragraphs": [
+          "Escalate when the request involves legal terms, IP ownership, pricing exceptions, contract changes, refunds, sensitive client data, security concerns, access mismatch, public/private exposure, another user’s information, credentials, unreleased strategy, founder-only decisions, high-value client commitments, or anything that sounds like bypassing process.",
+          "Escalation phrase:",
+          "“I can help frame the issue, but this needs the right approval lane before we commit or expose details.”",
+          "Then identify the lane: Founder, Legal, Nexus/security, Art Localized operator, client owner, release operator, AVCC, or division lead.",
+          "Never improvise authority you do not have."
+        ]
+      },
+      {
+        "id": "closing",
+        "title": "Closing",
+        "time": "",
+        "paragraphs": [
+          "You now have seven laws.",
+          "Day 1: Find the door.",
+          "Day 2: Find the source.",
+          "Day 3: Turn signal into action.",
+          "Day 4: Leave the trail.",
+          "Day 5: Work the queue.",
+          "Day 6: Protect the boundary.",
+          "Day 7: Serve without exposing the system.",
+          "Builders should feel welcomed. Clients should feel guided. Prospects should feel clarity. The system should stay protected.",
+          "Translate the complexity. Give the next step. Respect the boundary. Escalate when authority is needed. Do not overpromise. Do not expose the engine room to prove you know it exists.",
+          "Serve the person. Protect the system. That is how trust takes flight."
+        ]
+      }
+    ]
+  },
+  "prove": {
+    "title": "Builder/Client Response Card + Translation Drill",
+    "description": "Practice outside-facing language on a builder, client, or prospect scenario.",
+    "fields": [
+      {
+        "id": "field_1",
+        "label": "1. Scenario Type",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_2",
+        "label": "2. Person’s Goal",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_3",
+        "label": "3. Internal Reality",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_4",
+        "label": "4. Outside-Facing Translation",
+        "required": true,
+        "rows": 3
+      },
+      {
+        "id": "field_5",
+        "label": "5. What Can Be Exposed",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_6",
+        "label": "6. What Should Be Summarized",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_7",
+        "label": "7. What Must Be Withheld",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_8",
+        "label": "8. Boundary Check",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_9",
+        "label": "9. Escalation Lane",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_10",
+        "label": "10. Safe Next Step",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_11",
+        "label": "11. Risk If Mishandled",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_12",
+        "label": "12. Final Response",
+        "required": true,
+        "rows": 3
+      }
+    ]
+  },
+  "engagement": {
+    "quiz": {
+      "enabled": true,
+      "pass_threshold": 0.8,
+      "title": "Builder & Client Experience Check",
+      "questions": [
+        {
+          "id": "d7_q1",
+          "q": "Experience translation means:",
+          "choices": [
+            "Hiding all truth from outsiders",
+            "Making truth useful without exposing machinery",
+            "Sharing internal registry details"
+          ],
+          "answer_index": 1
+        },
+        {
+          "id": "d7_q2",
+          "q": "A prospect needs:",
+          "choices": [
+            "Every division map",
+            "Clarity and a believable path",
+            "Internal queue state"
+          ],
+          "answer_index": 1
+        },
+        {
+          "id": "d7_q3",
+          "q": "Before promising a feature is live:",
+          "choices": [
+            "Assume it shipped",
+            "Verify release/registry state",
+            "Trust the oldest doc"
+          ],
+          "answer_index": 1
+        },
+        {
+          "id": "d7_q4",
+          "q": "When legal or pricing authority is missing:",
+          "choices": [
+            "Improvise to keep momentum",
+            "Escalate to the correct approval lane",
+            "Ignore the question"
+          ],
+          "answer_index": 1
+        },
+        {
+          "id": "d7_q5",
+          "q": "Builders should feel:",
+          "choices": [
+            "Interrogated",
+            "Welcomed with clear next steps",
+            "Given founder dashboards"
+          ],
+          "answer_index": 1
+        },
+        {
+          "id": "d7_q6",
+          "q": "Internal phrase \"registry mismatch\" becomes externally:",
+          "choices": [
+            "\"Backend /me returned null\"",
+            "\"Your account isn't connected yet — we're fixing the path\"",
+            "\"Check the internal ledger\""
+          ],
+          "answer_index": 1
+        }
+      ]
+    }
+  },
+  "lesson": {
+    "objective": "Help builders, clients, and prospects with the smallest complete answer — expose, summarize, or withhold internal detail appropriately.",
+    "why_it_matters": "Day 7 extends the Agent onboarding spine — Serve without exposing the system.",
+    "apply": "Complete gate, segments, quiz, and Builder/Client Response Card + Translation Drill.",
+    "advance": "Unlock Day 8 — Writing Like AeroVista when serve_prove is complete."
+  },
+  "thread_tags": [
+    "day7",
+    "required",
+    "agent-orientation",
+    "golden-path"
+  ],
+  "related_next": [
+    {
+      "label": "Next: Day 8 — Writing Like AeroVista",
+      "href": "../writing_like_aerovista/index.html"
+    }
+  ],
+  "handoff": {
+    "label": "Open ByteCast home",
+    "href": "../training_hub/index.html",
+    "return_label": "Back to Day 7",
+    "return_href": "./index.html"
+  },
+  "media": {
+    "audio_files": [],
+    "script_doc": "../../docs/agent_day7/BUILDER_CLIENT_EXPERIENCE_SCRIPT.md",
+    "voiceover_sections": "assets/voiceover_sections.json",
+    "narration_manifest": "assets/narration.manifest.json",
+    "forge_pack": "tools/narration/agent_day7"
+  },
+  "episode_runtime": {
+    "day": 7,
+    "prefix": "serve",
+    "law": "Serve without exposing the system.",
+    "prev_days": [
+      {
+        "day": 1,
+        "href": "../the_first_door/index.html"
+      },
+      {
+        "day": 2,
+        "href": "../finding_source_of_truth/index.html"
+      },
+      {
+        "day": 3,
+        "href": "../from_signal_to_action/index.html"
+      },
+      {
+        "day": 4,
+        "href": "../the_handoff_is_the_work/index.html"
+      },
+      {
+        "day": 5,
+        "href": "../working_the_queue/index.html"
+      },
+      {
+        "day": 6,
+        "href": "../safe_access_boundaries/index.html"
+      }
+    ],
+    "storage": {
+      "segments": "bc.builder_client_experience.segments.v1",
+      "gate": "bc.builder_client_experience.gate.v1",
+      "quiz": "bc.builder_client_experience.quiz.v1",
+      "prove": "bc.builder_client_experience.prove.v1",
+      "stepper": "bc.builder_client_experience.stepper.v1",
+      "labs": "bc.builder_client_experience.labs.v1"
+    },
+    "workflow": {
+      "gate": "serve_gate",
+      "segments": "serve_segments",
+      "engage": "serve_engage",
+      "prove": "serve_prove",
+      "complete": "serve_gates"
+    },
+    "prove_complete_message": "Day 7 complete. Continue to Day 8 — Writing Like AeroVista.",
+    "prove_saved_message": "Builder/Client Response Card + Translation Drill submitted.",
+    "prove_meta": {
+      "drillType": "builder_client_experience"
+    }
+  },
+  "interactives": {
+    "day": 7,
+    "journey_mode": "stepper",
+    "segment_visuals": true,
+    "labs_required": true,
+    "labs": [
+      "builder_scope",
+      "client_tone",
+      "experience_check"
+    ]
+  }
+}

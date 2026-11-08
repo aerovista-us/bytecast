@@ -1,0 +1,67 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "teaching_mode": "MissionLab",
+  "episode": {
+    "code": "EP-APP-003",
+    "title": "Apparel Ops Standards - Naming, Copy, Collections, QA, Access",
+    "type": "training",
+    "date": "2026-07-08",
+    "runtime_target_minutes": 12,
+    "status": "active"
+  },
+  "content": {
+    "tags": [
+      "apparel",
+      "catalog",
+      "operations"
+    ],
+    "summary_short": "Apparel Ops Standards - Naming, Copy, Collections, QA, Access",
+    "hero_kicker": "Apparel Ops Standards",
+    "key_line": "Standards are how we move fast without breaking trust."
+  },
+  "media": {
+    "audio_files": []
+  },
+  "engagement": {
+    "quiz": {
+      "enabled": true,
+      "pass_threshold": 0.8,
+      "questions": [
+        {
+          "id": "app3_q1",
+          "q": "Customer-facing copy should be:",
+          "choices": [
+            "Whatever ships fastest",
+            "Safe, accurate, and reviewable",
+            "Copied from random sources"
+          ],
+          "answer_index": 1
+        }
+      ]
+    }
+  },
+  "slides": [
+    {
+      "id": "standards",
+      "title": "Ops standards",
+      "goal": "Naming, copy, collections, QA, access.",
+      "bullets": [
+        "Naming follows division + product + variant conventions.",
+        "Copy must be customer-safe and legally cautious.",
+        "QA includes links, images, and mobile preview."
+      ]
+    }
+  ],
+  "lesson": {
+    "objective": "Apply naming, copy, collection, QA, and access standards for apparel operations.",
+    "why_it_matters": "Standards keep multi-contributor catalog work reviewable and reversible.",
+    "apply": "Audit one live listing against the ops rubric in this episode.",
+    "advance": "Pass final quiz; return to Training Hub Apparel lane for advanced missions."
+  },
+  "related_next": [
+    {
+      "label": "Open ByteCast home",
+      "href": "../training_hub/index.html"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "schema": "narration-forge-config-v1",
+  "packId": "agent_day8_writing",
+  "episodeCode": "AGENT-D8",
+  "authoringRoot": "docs/agent_day8",
+  "linesMaster": "tools/narration/agent_day8/lines.master.json",
+  "sequences": "tools/narration/agent_day8/sequences.json",
+  "voiceRecipes": "tools/narration/agent_day8/voiceRecipes.json",
+  "bindings": "tools/narration/agent_day8/bindings.json",
+  "outputDir": "episodes/writing_like_aerovista/assets/narration",
+  "runtimeManifest": "episodes/writing_like_aerovista/assets/narration.manifest.json",
+  "shipFormat": "wav",
+  "tts": {
+    "provider": "nxcore-echoverse",
+    "endpoint": "/api/generate",
+    "envUrl": "NXCORE_TTS_URL",
+    "defaultUrl": "http://127.0.0.1:5315"
+  }
+}

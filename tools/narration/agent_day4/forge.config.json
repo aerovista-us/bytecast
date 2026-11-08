@@ -1,0 +1,20 @@
+{
+  "schema": "narration-forge-config-v1",
+  "packId": "agent_day4_handoff_is_the_work",
+  "episodeCode": "AGENT-D4",
+  "authoringRoot": "docs/agent_day4",
+  "scriptSource": "docs/agent_day4/THE_HANDOFF_IS_THE_WORK_SCRIPT.md",
+  "linesMaster": "tools/narration/agent_day4/lines.master.json",
+  "sequences": "tools/narration/agent_day4/sequences.json",
+  "voiceRecipes": "tools/narration/agent_day4/voiceRecipes.json",
+  "bindings": "tools/narration/agent_day4/bindings.json",
+  "outputDir": "episodes/the_handoff_is_the_work/assets/narration",
+  "runtimeManifest": "episodes/the_handoff_is_the_work/assets/narration.manifest.json",
+  "shipFormat": "wav",
+  "tts": {
+    "provider": "nxcore-echoverse",
+    "endpoint": "/api/generate",
+    "envUrl": "NXCORE_TTS_URL",
+    "defaultUrl": "http://127.0.0.1:5315"
+  }
+}

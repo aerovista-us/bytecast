@@ -1,0 +1,14 @@
+{
+  "schema": "narration-bindings-v1",
+  "packId": "agent_day1_first_door",
+  "runtime": {
+    "player": "../../assets/shared/nxcore_narration_player.js",
+    "manifest": "episodes/the_first_door/assets/narration.manifest.json",
+    "fallback": "assets/shared/listen_mode.js"
+  },
+  "episode": {
+    "slug": "the_first_door",
+    "listenGateStep": "first_door_segments",
+    "profileAudioPath": "assets/narration/full_journey.mp3"
+  }
+}

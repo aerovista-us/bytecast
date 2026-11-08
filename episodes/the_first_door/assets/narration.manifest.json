@@ -1,0 +1,55 @@
+{
+  "schema": "narration-manifest-v1",
+  "packId": "agent_day1_first_door",
+  "episodeCode": "AGENT-D1",
+  "sequenceId": "full_journey",
+  "forgedAt": "2026-07-09T07:14:33.676Z",
+  "ttsGenerateUrl": "http://127.0.0.1:5315/api/generate",
+  "tracks": [
+    {
+      "id": "cold_open",
+      "label": "Cold Open",
+      "src": "assets/narration/cold_open-f38164f8fcf85c76.wav"
+    },
+    {
+      "id": "world",
+      "label": "The World You Are Entering",
+      "src": "assets/narration/world-874cf669fe80d27b.wav"
+    },
+    {
+      "id": "culture",
+      "label": "The Culture Code",
+      "src": "assets/narration/culture-fccfda9226119da4.wav"
+    },
+    {
+      "id": "doors",
+      "label": "The Main Doors",
+      "src": "assets/narration/doors-b8ef2ef638bd2140.wav"
+    },
+    {
+      "id": "operating_law",
+      "label": "The Agent Operating Law",
+      "src": "assets/narration/operating_law-779c194c8f5ca58a.wav"
+    },
+    {
+      "id": "lost_protocol",
+      "label": "Lost Agent Protocol",
+      "src": "assets/narration/lost_protocol-dcf9edfc1e87c99f.wav"
+    },
+    {
+      "id": "legal",
+      "label": "Legal, Compliance, and Trust",
+      "src": "assets/narration/legal-4269d952965ab34f.wav"
+    },
+    {
+      "id": "checklist",
+      "label": "Day 1 Practical Checklist",
+      "src": "assets/narration/checklist-2c182aee3d67ebe2.wav"
+    },
+    {
+      "id": "closing",
+      "label": "Closing",
+      "src": "assets/narration/closing-044570cb536c86f0.wav"
+    }
+  ]
+}

@@ -1,0 +1,620 @@
+{
+  "schema": "bytecast-training-upgrade-v1",
+  "updated_on": "2026-07-10",
+  "profile_path_overrides": {
+    "art_localized_ep0": "episodes/Art.Localized/art_localized_ep0/bytecast_ep_profile.json",
+    "art_localized_ep1": "episodes/Art.Localized/art_localized_ep1/bytecast_ep_profile.json",
+    "art_localized_ep2": "episodes/Art.Localized/art_localized_ep2/bytecast_ep_profile.json",
+    "art_localized_ep3": "episodes/Art.Localized/art_localized_ep3/bytecast_ep_profile.json",
+    "art_localized_ep4": "episodes/Art.Localized/art_localized_ep4/bytecast_ep_profile.json",
+    "contributor_onboarding_ep0": "episodes/contributor.onboarding/contributor_onboarding_ep0/bytecast_ep_profile.json",
+    "contributor_onboarding_ep1": "episodes/contributor.onboarding/contributor_onboarding_ep1/bytecast_ep_profile.json",
+    "contributor_onboarding_ep2": "episodes/contributor.onboarding/contributor_onboarding_ep2/bytecast_ep_profile.json",
+    "contributor_onboarding_ep3": "episodes/contributor.onboarding/contributor_onboarding_ep3/bytecast_ep_profile.json",
+    "contributor_onboarding_ep4": "episodes/contributor.onboarding/contributor_onboarding_ep4/bytecast_ep_profile.json",
+    "contributing_non_coders": "episodes/contributor.onboarding/bytecast_ep_profile.json"
+  },
+  "inline_profile_html": {
+    "welcome_to_bytecast": "episodes/welcome_to_bytecast/index.html",
+    "av_apparel_ep1_welcome": "episodes/av_apparel_ep1_welcome/index.html",
+    "av_apparel_ep2_catalog": "episodes/av_apparel_ep2_catalog/index.html",
+    "av_apparel_ep3_ops_standards": "episodes/av_apparel_ep3_ops_standards/index.html"
+  },
+  "series_defaults": {
+    "core_day1": {
+      "teaching_mode": "GuidedAudioSlides",
+      "thread_tags": [
+        "day1",
+        "golden-path",
+        "onboarding"
+      ]
+    },
+    "lumina_revenue_lane": {
+      "teaching_mode": "VoiceoverSections",
+      "thread_tags": [
+        "lumina",
+        "revenue",
+        "routing",
+        "client-safe"
+      ]
+    },
+    "art_localized_training": {
+      "teaching_mode": "ReadAloudScript",
+      "thread_tags": [
+        "art-localized",
+        "creative",
+        "collaboration"
+      ]
+    },
+    "contributor_onboarding": {
+      "teaching_mode": "ReadAloudScript",
+      "thread_tags": [
+        "contributor",
+        "onboarding",
+        "lanes"
+      ]
+    },
+    "av_apparel_onboarding": {
+      "teaching_mode": "MissionLab",
+      "thread_tags": [
+        "apparel",
+        "catalog",
+        "operations"
+      ]
+    },
+    "shareholder_season1": {
+      "teaching_mode": "BriefingSync",
+      "thread_tags": [
+        "pulse",
+        "shareholder",
+        "briefing",
+        "season1"
+      ]
+    },
+    "infographic_training": {
+      "teaching_mode": "VisualHotspot",
+      "thread_tags": [
+        "infographic",
+        "ecosystem",
+        "routing"
+      ]
+    },
+    "internal_recap": {
+      "teaching_mode": "BriefingSync",
+      "thread_tags": [
+        "internal",
+        "recap",
+        "platform"
+      ]
+    }
+  },
+  "episodes": {
+    "the_first_door": {
+      "lesson": {
+        "objective": "Think inside AeroVista using operating law, main doors, state labels, lost-agent protocol, and trust boundaries — then produce a Day 1 Readiness Note and EOD Capsule starter.",
+        "why_it_matters": "Agents who memorize buttons without terrain judgment create expensive chaos; Day 1 installs the behavior pattern that keeps hires and copilots safe and useful.",
+        "apply": "Complete Trust acknowledgment, all segments, operating-law quiz, and readiness note.",
+        "advance": "Unlock Finding the Source of Truth (Day 2) when first_door_prove is complete with legal ack and quiz proof."
+      },
+      "thread_tags": [
+        "day1",
+        "required",
+        "agent-orientation",
+        "first-door",
+        "operating-law"
+      ]
+    },
+    "finding_source_of_truth": {
+      "lesson": {
+        "objective": "Verify before acting — authority ladder, truth labels, source checks, conflicts, and evidence packets on a real object.",
+        "why_it_matters": "Agents who treat every document as equal become confidently wrong; Day 2 installs ranking, labeling, and conflict surfacing.",
+        "apply": "Complete Day 2 gate, all segments, quiz, and Source-of-Truth Drill.",
+        "advance": "Unlock From Signal to Action (Day 3) when sot_prove includes object, truth label, and evidence packet."
+      },
+      "thread_tags": [
+        "day2",
+        "required",
+        "source-of-truth",
+        "verification",
+        "agent-orientation"
+      ]
+    },
+    "from_signal_to_action": {
+      "lesson": {
+        "objective": "Turn signals into AVCC executive judgment — chain, COS brief, P1/P2/P3 — then produce a Signal-to-Action Brief.",
+        "why_it_matters": "Summarizer agents flood operators with noise; judgment agents protect focus, trust, and momentum.",
+        "apply": "Complete Day 3 gate, all segments, quiz, and Signal-to-Action Brief on a real signal.",
+        "advance": "Unlock The Handoff Is the Work (Day 4) when avcc_prove includes signal, priority, confidence, and final brief."
+      },
+      "thread_tags": [
+        "day3",
+        "required",
+        "avcc",
+        "executive-judgment",
+        "agent-orientation"
+      ],
+      "related_next": [
+        {
+          "label": "Next: Day 4 — The Handoff Is the Work",
+          "href": "../the_handoff_is_the_work/index.html"
+        }
+      ]
+    },
+    "the_handoff_is_the_work": {
+      "lesson": {
+        "objective": "Leave durable handoffs using the Trail System, Handoff Packet structure, EOD Capsule discipline, and final handoff formula.",
+        "why_it_matters": "Agents who skip handoffs create operational fog — solved work becomes recurring confusion.",
+        "apply": "Complete Day 4 gate, all segments, quiz, and Handoff Packet + EOD Capsule Stub on a real task.",
+        "advance": "Unlock TR-001A when handoff_prove includes task title, current state, next action, owner lane, and EOD stub."
+      },
+      "thread_tags": [
+        "day4",
+        "required",
+        "handoff",
+        "eod-capsule",
+        "agent-orientation"
+      ],
+      "related_next": [
+        {
+          "label": "Next: Day 5 — Working the Queue",
+          "href": "../working_the_queue/index.html"
+        }
+      ]
+    },
+    "welcome_to_bytecast": {
+      "activate": true,
+      "lesson": {
+        "objective": "Explain what ByteCast is, how the Golden Path runs, and which main door to use for each job.",
+        "why_it_matters": "New operators waste days opening random tools without this routing layer; ByteCast exists to make proof-based progression the default.",
+        "apply": "Open Playlist, confirm your current step, and complete the Engage quiz with passing score.",
+        "advance": "Pass engage quiz (≥80%) on ep001_engage; then unlock EP-002 in the Golden Path."
+      },
+      "thread_tags": [
+        "day1",
+        "bytecast",
+        "doors",
+        "golden-path"
+      ],
+      "related_next": [
+        {
+          "label": "Next: EP-002 — AeroVista Overview",
+          "href": "../aerovista_7_division_overview/index.html"
+        }
+      ]
+    },
+    "aerovista_7_division_overview": {
+      "activate": true,
+      "lesson": {
+        "objective": "Map AeroVista as one ecosystem with seven peer divisions plus HQ, and route sample work to the right lane.",
+        "why_it_matters": "Mis-routed work creates duplicate effort, broken handoffs, and client promises nobody can deliver.",
+        "apply": "Explore the division cards and open one Offer Pack example that matches a real request type.",
+        "advance": "Pass division explorer + engage quiz; continue to EP-003 — The Main Doors."
+      }
+    },
+    "the_main_doors": {
+      "lesson": {
+        "objective": "Match a task to the correct ByteCast surface: Entry, Playlist, Hub, Builder, or Docs.",
+        "why_it_matters": "Correct routing cuts noise and keeps governed truth separate from learner progress.",
+        "apply": "Pick one real question you have today and name the door you would open first.",
+        "advance": "Pass engage quiz; continue to EP-004 — Current Truth Basics."
+      }
+    },
+    "current_truth_basics": {
+      "lesson": {
+        "objective": "Distinguish visibility from ownership and use declared current truth instead of newest-file guessing.",
+        "why_it_matters": "Teams ship wrong assets when SOT, ACOS visibility, and domain ownership are confused.",
+        "apply": "Complete the visibility vs ownership sort and log quiz proof on ep004_engage.",
+        "advance": "Pass engage quiz; unlock TR-001A Day 1 Foundations mission."
+      },
+      "related_next": [
+        {
+          "label": "Next: TR-001A — Day 1 Foundations",
+          "href": "../training_missions/tr_001a_day1_foundations/index.html"
+        }
+      ]
+    },
+    "contributing_non_coders": {
+      "create_if_missing": true,
+      "lesson": {
+        "objective": "Orient contributors to lanes, guardrails, and the hub path before opening individual episodes.",
+        "why_it_matters": "The hub prevents random deep dives and sets safe defaults for no-code-first contributors.",
+        "apply": "Read CONTRIBUTING.md and pick Lane A or B for your first task.",
+        "advance": "Start CO-EP-0 after hub orientation; finish CO-EP-4 before requesting elevated access."
+      },
+      "content": {
+        "summary_short": "Contributor hub: lanes, guardrails, work orders, and the path from first PR to Crew Check.",
+        "start_here": "Skim the hub, then start CO-EP-0 — What AeroVista Is."
+      }
+    },
+    "av_ecosystem_map_pilot": {
+      "lesson": {
+        "objective": "Read the ecosystem map as a routing rubric — platform vs app, command center vs local ownership.",
+        "why_it_matters": "Operators need shared vocabulary for cross-division decisions without treating posters as proof.",
+        "apply": "Open every hotspot and name one routing decision the overlay clarifies beyond the image.",
+        "advance": "Pass infographic quiz (≥75%); optional follow-up EP-002 for division depth."
+      }
+    },
+    "av_apparel_ep1_welcome": {
+      "create_if_missing": true,
+      "lesson": {
+        "objective": "Understand AV Apparel culture, contributor lanes, and how to earn your first catalog win.",
+        "why_it_matters": "Apparel work touches customer-facing copy and inventory truth — speed without standards creates rework.",
+        "apply": "Complete the practice checklist and pass the welcome quiz.",
+        "advance": "Pass engage gate; continue to EP-APP-002 Catalog Maintainer Bootcamp."
+      },
+      "content": {
+        "hero_kicker": "AV Apparel Onboarding",
+        "key_line": "Culture first, then catalog mechanics — one honest win beats ten rushed edits.",
+        "start_here": "Read the welcome flow, then work the practice steps before the quiz."
+      },
+      "media": {
+        "audio_files": [
+          {
+            "path": "assets/av_apparel_ep1_welcome.mp3",
+            "label": "Episode narration (generate or drop in assets/)",
+            "required": false
+          }
+        ]
+      }
+    },
+    "av_apparel_ep2_catalog": {
+      "create_if_missing": true,
+      "lesson": {
+        "objective": "Run the day-to-day catalog maintainer loop: intake, copy, collections, and QA before publish.",
+        "why_it_matters": "Catalog errors surface as wrong prices, broken links, and customer trust issues.",
+        "apply": "Walk through one sample SKU update using the SOT checklist in this pack.",
+        "advance": "Pass catalog quiz; continue to EP-APP-003 Ops Standards."
+      },
+      "content": {
+        "hero_kicker": "Catalog Maintainer Bootcamp",
+        "key_line": "Treat every listing like a mini launch — verify before you ship."
+      }
+    },
+    "av_apparel_ep3_ops_standards": {
+      "create_if_missing": true,
+      "lesson": {
+        "objective": "Apply naming, copy, collection, QA, and access standards for apparel operations.",
+        "why_it_matters": "Standards keep multi-contributor catalog work reviewable and reversible.",
+        "apply": "Audit one live listing against the ops rubric in this episode.",
+        "advance": "Pass final quiz; return to Training Hub Apparel lane for advanced missions."
+      },
+      "content": {
+        "hero_kicker": "Apparel Ops Standards",
+        "key_line": "Standards are how we move fast without breaking trust."
+      },
+      "related_next": [
+        {
+          "label": "Open ByteCast home",
+          "href": "../training_hub/index.html"
+        }
+      ]
+    },
+    "art_localized_ep0": {
+      "lesson": {
+        "objective": "Use shared context, cue notes, and handoff discipline for Art Localized collaboration.",
+        "why_it_matters": "Creative work fails when context lives in DMs instead of reviewable artifacts.",
+        "apply": "Complete the collaboration quiz and note one handoff field you will always fill.",
+        "advance": "Pass quiz (≥80%); continue to ART-EP-1 — Divisions."
+      },
+      "quiz_extra": [
+        {
+          "id": "art_ep0_q2",
+          "q": "Cue notes should primarily:",
+          "choices": [
+            "Replace briefs",
+            "Carry timing and intent for collaborators",
+            "Stay private"
+          ],
+          "answer_index": 1
+        }
+      ],
+      "content": {
+        "summary_long": "Phase 1 manifesto for Art Localized: collaboration means shared context, explicit handoffs, and proof — not more meetings.",
+        "start_here": "Listen or read the script, then check slides before Engage."
+      }
+    },
+    "art_localized_ep1": {
+      "lesson": {
+        "objective": "Route creative requests to the right division lane without overpromising delivery.",
+        "why_it_matters": "Art Localized spans multiple divisions; wrong routing delays launches.",
+        "apply": "Match three sample requests to division lanes in the quiz.",
+        "advance": "Pass quiz; continue to ART-EP-2 — Partnership Tiers."
+      },
+      "quiz_extra": [
+        {
+          "id": "art_ep1_q2",
+          "q": "When unsure which division owns delivery, you should:",
+          "choices": [
+            "Guess and commit",
+            "Escalate with context and ask for routing",
+            "Skip the handoff"
+          ],
+          "answer_index": 1
+        }
+      ]
+    },
+    "art_localized_ep2": {
+      "lesson": {
+        "objective": "Explain partnership tiers and what proof each tier requires before amplification.",
+        "why_it_matters": "Tier confusion creates unfair expectations for partners and internal teams.",
+        "apply": "Label one real partner scenario with the correct tier.",
+        "advance": "Pass quiz; continue to ART-EP-3 — Amplification."
+      }
+    },
+    "art_localized_ep3": {
+      "lesson": {
+        "objective": "Apply amplification rules: when to boost, when to hold, and what assets must exist first.",
+        "why_it_matters": "Premature amplification burns audience trust and partner relationships.",
+        "apply": "Complete the amplification checklist on a sample drop.",
+        "advance": "Pass quiz; continue to ART-EP-4 — Your Role."
+      }
+    },
+    "art_localized_ep4": {
+      "lesson": {
+        "objective": "Define your role in the Art Localized lane and the proof you owe before handoff.",
+        "why_it_matters": "Clear role boundaries prevent duplicate creative work and missed approvals.",
+        "apply": "Write a one-sentence role statement and link your next proof artifact.",
+        "advance": "Pass final quiz; return to Training Hub Skills — Art Localized."
+      },
+      "related_next": [
+        {
+          "label": "Open ByteCast home",
+          "href": "../../training_hub/index.html"
+        }
+      ]
+    },
+    "contributor_onboarding_ep0": {
+      "lesson": {
+        "objective": "Describe AeroVista as a multi-division ecosystem that ships small, proof-backed releases.",
+        "why_it_matters": "Contributors who understand ecosystem shape pick safer first tasks and better lanes.",
+        "apply": "Read the transcript and identify one division that matches your skills.",
+        "advance": "Pass engage check; continue to CO-EP-1."
+      }
+    },
+    "contributor_onboarding_ep1": {
+      "lesson": {
+        "objective": "Assess mutual fit: expectations, availability, and what good first wins look like.",
+        "why_it_matters": "Early misalignment wastes review cycles on both sides.",
+        "apply": "Complete the fit reflection prompts honestly.",
+        "advance": "Continue to CO-EP-2 — Lanes."
+      }
+    },
+    "contributor_onboarding_ep2": {
+      "lesson": {
+        "objective": "Pick Lane A/B/C and know when to stay in low-risk work.",
+        "why_it_matters": "Lane discipline protects production systems while contributors build trust.",
+        "apply": "Classify three sample tasks by lane.",
+        "advance": "Continue to CO-EP-3 — Work Orders."
+      }
+    },
+    "contributor_onboarding_ep3": {
+      "lesson": {
+        "objective": "Use work orders and Definition of Done so every change set has clear proof.",
+        "why_it_matters": "Without DoD, reviewers cannot approve quickly or teach repeatable patterns.",
+        "apply": "Draft a mini work order for your next intended PR.",
+        "advance": "Continue to CO-EP-4 — Crew Check."
+      }
+    },
+    "contributor_onboarding_ep4": {
+      "lesson": {
+        "objective": "Complete Crew Check readiness: security boundaries, PR hygiene, and escalation paths.",
+        "why_it_matters": "Readiness proof unlocks higher-trust lanes and faster review.",
+        "apply": "Finish Crew Check quiz and link your first clean PR.",
+        "advance": "Pass Crew Check; request lane upgrades per CONTRIBUTING.md."
+      },
+      "related_next": [
+        {
+          "label": "Contributor hub",
+          "href": "../contributor.onboarding/index.html"
+        }
+      ]
+    },
+    "lumina_rev_101": {
+      "lesson": {
+        "objective": "State that Lumina owns commercial clarity while delivery lanes own delivery truth.",
+        "why_it_matters": "Revenue messaging without delivery boundaries erodes client trust fast.",
+        "apply": "Pass the Lumina 101 engage quiz with scenario answers.",
+        "advance": "Continue to EP-LUM-102 — Know the Board."
+      }
+    },
+    "lumina_rev_102": {
+      "lesson": {
+        "objective": "Navigate the AeroVista offer board and know which lanes appear on it.",
+        "why_it_matters": "Board literacy prevents recommending offers that do not exist or cannot be delivered.",
+        "apply": "Open the reference board and trace one offer to its delivery owner.",
+        "advance": "Continue to EP-LUM-103."
+      }
+    },
+    "lumina_rev_103": {
+      "lesson": {
+        "objective": "Match brand voice and division positioning without collapsing lanes into one story.",
+        "why_it_matters": "Homogenized messaging confuses buyers and overloads delivery teams.",
+        "apply": "Rewrite one sample pitch line to be division-accurate.",
+        "advance": "Continue to EP-LUM-104."
+      }
+    },
+    "lumina_rev_104": {
+      "lesson": {
+        "objective": "Run discovery that finds the real need instead of the first requested feature.",
+        "why_it_matters": "Wrong problem definition produces quotes nobody can honor.",
+        "apply": "Complete the discovery scenario exercise.",
+        "advance": "Continue to EP-LUM-105."
+      }
+    },
+    "lumina_rev_105": {
+      "lesson": {
+        "objective": "Recommend the right path — offer, division, and proof — for qualified interest.",
+        "why_it_matters": "Routing quality is the core Lumina operator skill.",
+        "apply": "Route three sample leads using the decision tree in slides.",
+        "advance": "Continue to EP-LUM-106."
+      }
+    },
+    "lumina_rev_106": {
+      "lesson": {
+        "objective": "Turn qualified interest into growth actions with clean handoffs and follow-up proof.",
+        "why_it_matters": "Interest without handoff dies in inboxes; Lumina owns the commercial thread until delivery accepts.",
+        "apply": "Complete the growth handoff scenario and open the revenue routing mission when ready.",
+        "advance": "Finish Lumina lane quiz; optional handoff to revenue routing mission."
+      },
+      "handoff": {
+        "label": "Revenue routing mission",
+        "href": "../seed_builder_studio/lumina_sales_brief/index.html",
+        "return_label": "Back to Lumina 106",
+        "return_href": "./index.html"
+      }
+    },
+    "shareholder_s1_ep01": {
+      "lesson": {
+        "objective": "Understand the AeroVista platform story and seven-division orientation at briefing depth.",
+        "why_it_matters": "Stakeholders need a shared narrative before diving into portfolio detail.",
+        "apply": "Listen through the briefing and note one division you want to explore deeper.",
+        "advance": "Optional completion; continue Pulse series at S1-EP-02."
+      },
+      "content": {
+        "summary_long": "Shareholder Season 1 Pulse briefing. Audio-synced narrative — not Day 1 EP-001 onboarding."
+      }
+    },
+    "shareholder_s1_ep02": {
+      "lesson": {
+        "objective": "Survey the service portfolio and how offerings interlock across divisions.",
+        "why_it_matters": "Portfolio clarity supports investment and partnership conversations.",
+        "apply": "Map one service line to its likely delivery owner.",
+        "advance": "Continue to S1-EP-03."
+      }
+    },
+    "shareholder_s1_ep03": {
+      "lesson": {
+        "objective": "Follow the growth and go-to-market thread across Lumina and partner lanes.",
+        "why_it_matters": "GTM story must stay aligned with what teams can actually ship.",
+        "apply": "Identify one claim that needs delivery verification before external use.",
+        "advance": "Continue to S1-EP-04."
+      }
+    },
+    "shareholder_s1_ep04": {
+      "lesson": {
+        "objective": "Review operations, infrastructure, and scale claims at briefing level.",
+        "why_it_matters": "Ops narrative must connect to testable foundation work.",
+        "apply": "List one infrastructure question you would ask before trusting a scale claim.",
+        "advance": "Continue to S1-EP-05."
+      }
+    },
+    "shareholder_s1_ep05": {
+      "lesson": {
+        "objective": "Understand risk, governance, and how AeroVista contains downside while shipping.",
+        "why_it_matters": "Stakeholders weigh upside against operational discipline.",
+        "apply": "Note one governance practice you would want evidence for.",
+        "advance": "Continue to S1-EP-06."
+      }
+    },
+    "shareholder_s1_ep06": {
+      "lesson": {
+        "objective": "Close Season 1 with forward look, priorities, and where to engage next.",
+        "why_it_matters": "Briefings should end with clear next conversations, not open loops.",
+        "apply": "Capture one follow-up question for leadership or the relevant division.",
+        "advance": "Season 1 complete; return to ByteCast Pulse feed for future briefings."
+      },
+      "related_next": [
+        {
+          "label": "ByteCast home",
+          "href": "../training_hub/index.html"
+        },
+        {
+          "label": "Day 1 Golden Path",
+          "href": "../welcome_to_bytecast/index.html"
+        }
+      ]
+    },
+    "eos_2026_02_09": {
+      "lesson": {
+        "objective": "Recap Seed Orchard export, multi-journey quest map, and platform changes from the Feb 2026 EoS drop.",
+        "why_it_matters": "Internal recaps align maintainers on what shipped and what proof paths changed.",
+        "apply": "Skim the recap and note one journey or export behavior that affects your lane.",
+        "advance": "Internal reference only — not a Golden Path gate."
+      }
+    },
+    "working_the_queue": {
+      "lesson": {
+        "objective": "Learn queue triage without open-front chaos — P1/P2/P3, active/blocked/parked states, intake filter, One-Action Rule, and Queue Triage Card.",
+        "why_it_matters": "Day 5 — Work the queue.",
+        "apply": "Complete gate, segments, quiz, and Queue Triage Card + One-Action Commitment.",
+        "advance": "Unlock Day 6 when queue_prove is complete."
+      },
+      "thread_tags": [
+        "day5",
+        "required",
+        "agent-orientation",
+        "golden-path"
+      ]
+    },
+    "safe_access_boundaries": {
+      "lesson": {
+        "objective": "Protect trust while working with roles, identity, authorization, scope, environments, public/private surfaces, and access incidents.",
+        "why_it_matters": "Day 6 — Protect the boundary.",
+        "apply": "Complete gate, segments, quiz, and Access Boundary Review + Role-Scope Checklist.",
+        "advance": "Unlock Day 7 when access_prove is complete."
+      },
+      "thread_tags": [
+        "day6",
+        "required",
+        "agent-orientation",
+        "golden-path"
+      ]
+    },
+    "builder_client_experience": {
+      "lesson": {
+        "objective": "Help builders, clients, and prospects with the smallest complete answer — expose, summarize, or withhold internal detail appropriately.",
+        "why_it_matters": "Day 7 — Serve without exposing the system.",
+        "apply": "Complete gate, segments, quiz, and Builder/Client Response Card + Translation Drill.",
+        "advance": "Unlock Day 8 when serve_prove is complete."
+      },
+      "thread_tags": [
+        "day7",
+        "required",
+        "agent-orientation",
+        "golden-path"
+      ]
+    },
+    "writing_like_aerovista": {
+      "lesson": {
+        "objective": "Produce docs, briefs, scripts, and messages that guide action — audience-aware, bounded, and grounded in evidence.",
+        "why_it_matters": "Day 8 — Write to move work.",
+        "apply": "Complete gate, segments, quiz, and AeroVista Writing Pass + Evidence-Based Rewrite.",
+        "advance": "Unlock Day 9 when writing_prove is complete."
+      },
+      "thread_tags": [
+        "day8",
+        "required",
+        "agent-orientation",
+        "golden-path"
+      ]
+    },
+    "from_draft_to_deliverable": {
+      "lesson": {
+        "objective": "Define done, prevent scope creep, verify acceptance criteria, polish in order, and package work as a usable deliverable.",
+        "why_it_matters": "Day 9 — Finish the slice.",
+        "apply": "Complete gate, segments, quiz, and Deliverable Readiness Card.",
+        "advance": "Unlock Day 10 when deliver_prove is complete."
+      },
+      "thread_tags": [
+        "day9",
+        "required",
+        "agent-orientation",
+        "golden-path"
+      ]
+    },
+    "trusted_agent_capstone": {
+      "lesson": {
+        "objective": "Capstone readiness gate: integrate Days 1–9 into judgment, boundaries, momentum, and a Trusted Agent Readiness Brief before supervised live work.",
+        "why_it_matters": "Day 10 — Earn trust through operation.",
+        "apply": "Complete gate, segments, quiz, and Trusted Agent Readiness Brief + Live Work Approval Checklist.",
+        "advance": "Unlock TR-001A when capstone prove is complete."
+      },
+      "thread_tags": [
+        "day10",
+        "required",
+        "agent-orientation",
+        "golden-path"
+      ]
+    }
+  }
+}

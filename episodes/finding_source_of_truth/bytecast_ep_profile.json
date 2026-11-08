@@ -1,0 +1,557 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "teaching_mode": "InteractiveScript",
+  "episode": {
+    "code": "AGENT-D2",
+    "title": "Finding the Source of Truth — Agent Day 2",
+    "type": "required",
+    "date": "2026-07-09",
+    "runtime_target_minutes": 24,
+    "status": "active"
+  },
+  "content": {
+    "tags": [
+      "agent-day2",
+      "required",
+      "onboarding",
+      "source-of-truth",
+      "verification",
+      "getting-started"
+    ],
+    "hero_kicker": "Required · Getting Started",
+    "summary_short": "Learn how to verify what is true inside AeroVista — authority ladder, truth labels, source checks, conflict protocol, evidence packets, and confidential-source discipline.",
+    "summary_long": "Agent Day 2 teaches verification before action. Byte walks through why source of truth matters in a multi-layer ecosystem, the seven-rung Authority Ladder, five truth labels, the six-step Source Check Method, conflict handling, evidence packets, and legal/confidential reporting rules. Completion requires Day 2 gate acknowledgment, segment pass, quiz, and a practical Source-of-Truth Drill with conflict note.",
+    "key_line": "Before you act, know what you are trusting.",
+    "start_here": "Complete the Day 2 gate, listen or read all segments, pass the verification check, then submit your Source-of-Truth Drill on a real object you are checking.",
+    "narrator": "Byte",
+    "tone": "Clear, operational, slightly cinematic — less mythic than Day 1"
+  },
+  "truth_labels": [
+    {
+      "label": "Verified",
+      "meaning": "You checked the source that can prove it."
+    },
+    {
+      "label": "Reported",
+      "meaning": "Someone says it — you have not verified underlying state."
+    },
+    {
+      "label": "Inferred",
+      "meaning": "You reasoned from evidence — label it explicitly."
+    },
+    {
+      "label": "Unknown",
+      "meaning": "You do not know — not probably, not seems."
+    },
+    {
+      "label": "Conflicting",
+      "meaning": "Two sources disagree — surface it."
+    }
+  ],
+  "authority_ladder": [
+    {
+      "rung": 1,
+      "name": "Current human instruction",
+      "note": "Powerful — scope and safety still apply."
+    },
+    {
+      "rung": 2,
+      "name": "Live system reality",
+      "note": "For live systems, reality beats intention."
+    },
+    {
+      "rung": 3,
+      "name": "Registry and release state",
+      "note": "Registered ≠ live ≠ healthy ≠ released."
+    },
+    {
+      "rung": 4,
+      "name": "Current handoff or EOD Capsule",
+      "note": "Bridge — can age quickly."
+    },
+    {
+      "rung": 5,
+      "name": "Current documentation",
+      "note": "Respect docs; check date and scope."
+    },
+    {
+      "rung": 6,
+      "name": "Memory and conversation",
+      "note": "Orientation — not automatic proof."
+    },
+    {
+      "rung": 7,
+      "name": "External research",
+      "note": "Public context — not internal authority."
+    }
+  ],
+  "source_check_steps": [
+    "Name the object",
+    "Name the decision",
+    "Find the highest available authority",
+    "Check for staleness",
+    "Check for scope",
+    "Report the result cleanly"
+  ],
+  "script": {
+    "sections": [
+      {
+        "id": "cold_open",
+        "title": "Cold Open",
+        "time": "0:00–1:15",
+        "paragraphs": [
+          "Yesterday, you entered AeroVista. Today, you learn how not to get tricked by it — not because AeroVista is dishonest, but because living systems generate layers.",
+          "If you treat every piece of information as equal, you will make a confident mess. AeroVista needs agents who tell reference, memory, evidence, authority, and reality apart.",
+          "Today's lesson: before you act, know what you are trusting."
+        ]
+      },
+      {
+        "id": "why_sot",
+        "title": "Why Source of Truth Matters",
+        "time": "1:15–3:45",
+        "paragraphs": [
+          "The same topic can appear in plans, handoffs, registries, live endpoints, legal docs, and founder notes.",
+          "Your job is not to memorize everything — it is to verify.",
+          "An AeroVista agent reports what they found, what they trust, what conflicts, the risk, and the next safe action."
+        ]
+      },
+      {
+        "id": "authority_ladder",
+        "title": "The Authority Ladder",
+        "time": "3:45–8:00",
+        "paragraphs": [
+          "Seven rungs: human instruction, live reality, registry/release, handoff/EOD, documentation, memory, external research.",
+          "Climb the ladder for the decision at hand — not every rung exists for every task.",
+          "Registered does not mean live. Memory guides search — it does not replace verification."
+        ]
+      },
+      {
+        "id": "truth_labels",
+        "title": "The Five Truth Labels",
+        "time": "8:00–11:30",
+        "paragraphs": [
+          "Verified, Reported, Inferred, Unknown, Conflicting — use them in every important report.",
+          "Do not quietly upgrade reported into verified.",
+          "Conflicts are progress signals when surfaced clearly."
+        ]
+      },
+      {
+        "id": "source_check",
+        "title": "The Source Check Method",
+        "time": "11:30–15:30",
+        "paragraphs": [
+          "Name the object. Name the decision. Find highest authority. Check staleness. Check scope.",
+          "Report: I checked, I found, I trust, I do not trust yet, the conflict is, the risk is, the next safe action is."
+        ]
+      },
+      {
+        "id": "conflicts",
+        "title": "Handling Conflicting Sources",
+        "time": "15:30–19:00",
+        "paragraphs": [
+          "Do not average sources or hide contradictions.",
+          "Conflict Protocol: name sources, name conflict, rank authority, safe interim decision, leave a conflict note."
+        ]
+      },
+      {
+        "id": "evidence_packet",
+        "title": "The Evidence Packet",
+        "time": "19:00–22:30",
+        "paragraphs": [
+          "Claim, evidence, source type, confidence, risk if wrong, one next action.",
+          "Judgment matters — include what breaks if you are wrong."
+        ]
+      },
+      {
+        "id": "legal_confidential",
+        "title": "Legal and Confidential Sources",
+        "time": "22:30–24:45",
+        "paragraphs": [
+          "Use confidential sources to decide — do not expose them casually.",
+          "Summarize only what is necessary. Escalate when legal, access, or ownership is unclear."
+        ]
+      },
+      {
+        "id": "closing",
+        "title": "Closing",
+        "time": "24:45–26:00",
+        "paragraphs": [
+          "Day 2 is when you stop being a narrator and start becoming an operator.",
+          "Tomorrow: Day 3 — From Signal to Action, how AVCC thinks.",
+          "Find the source. Then move."
+        ]
+      }
+    ]
+  },
+  "day2_gate": {
+    "title": "Day 2 Gate — Verification Commitment",
+    "required": true,
+    "items": [
+      "I completed Agent Day 1 (The First Door) or received equivalent operator briefing on operating law and trust.",
+      "I understand Day 2 is about verification and authority ranking — not memorizing every document in the ecosystem.",
+      "I will label claims as Verified, Reported, Inferred, Unknown, or Conflicting — and never upgrade silently.",
+      "I will surface conflicting sources instead of averaging them or picking the nicest-sounding answer.",
+      "I will protect confidential sources in public outputs while using them for safe internal decisions."
+    ]
+  },
+  "prove": {
+    "title": "Source-of-Truth Drill + Conflict Note",
+    "description": "Demonstrate you can rank sources and report uncertainty on a real check — not listen-and-leave.",
+    "fields": [
+      {
+        "id": "object_being_checked",
+        "label": "1. Object being checked (system, doc, release, role, asset…)",
+        "required": true,
+        "rows": 2
+      },
+      {
+        "id": "decision_depends_on",
+        "label": "2. Decision that depends on it (ship, grant access, update docs, escalate…)",
+        "required": true,
+        "rows": 2
+      },
+      {
+        "id": "sources_found",
+        "label": "3. Sources found (up to five — label each: live, registry, handoff, doc, memory, operator, legal, external)",
+        "required": true,
+        "rows": 4
+      },
+      {
+        "id": "strongest_source",
+        "label": "4a. Strongest source for this decision",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "strongest_why",
+        "label": "4b. Why it is strongest",
+        "required": true,
+        "rows": 2
+      },
+      {
+        "id": "weakest_source",
+        "label": "4c. Weakest source for this decision",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "weakest_why",
+        "label": "4d. Why it is weakest",
+        "required": true,
+        "rows": 2
+      },
+      {
+        "id": "truth_label",
+        "label": "5. Truth label (Verified / Reported / Inferred / Unknown / Conflicting)",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "truth_label_why",
+        "label": "5b. Why this label",
+        "required": true,
+        "rows": 2
+      },
+      {
+        "id": "conflict_detail",
+        "label": "6. Conflict check — if sources disagree: Source A says / Source B says / conflict / risk if ignored (or N/A)",
+        "required": true,
+        "rows": 3
+      },
+      {
+        "id": "safe_interim_decision",
+        "label": "7. Safe interim decision until resolved",
+        "required": true,
+        "rows": 2
+      },
+      {
+        "id": "packet_claim",
+        "label": "8a. Evidence packet — Claim",
+        "required": true,
+        "rows": 2
+      },
+      {
+        "id": "packet_evidence",
+        "label": "8b. Evidence",
+        "required": true,
+        "rows": 2
+      },
+      {
+        "id": "packet_source_type",
+        "label": "8c. Source type",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "packet_confidence",
+        "label": "8d. Confidence (High / Medium / Low / Unknown)",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "packet_risk",
+        "label": "8e. Risk if wrong",
+        "required": true,
+        "rows": 2
+      },
+      {
+        "id": "packet_next_action",
+        "label": "8f. Next action (one)",
+        "required": true,
+        "rows": 2
+      },
+      {
+        "id": "handoff_note",
+        "label": "9. Handoff note for the next agent",
+        "required": true,
+        "rows": 3
+      }
+    ]
+  },
+  "engagement": {
+    "quiz": {
+      "enabled": true,
+      "pass_threshold": 0.8,
+      "title": "Source-of-Truth Check",
+      "questions": [
+        {
+          "id": "d2_q1",
+          "q": "A document says a service is active, but the live health check fails. You should treat the service as:",
+          "choices": [
+            "Active per the document",
+            "Down until live reality proves otherwise",
+            "Unknown forever"
+          ],
+          "answer_index": 1,
+          "explain": "Live system reality beats stale documentation for operational state."
+        },
+        {
+          "id": "d2_q2",
+          "q": "Registry marks a release as registered. That means:",
+          "choices": [
+            "It is live and healthy for all users",
+            "It is recorded in registry — not automatically live",
+            "It is adopted everywhere"
+          ],
+          "answer_index": 1,
+          "explain": "Registered ≠ live ≠ healthy ≠ released ≠ adopted."
+        },
+        {
+          "id": "d2_q3",
+          "q": "A handoff says E2E passed but you have not checked logs yourself. Best label:",
+          "choices": [
+            "Verified",
+            "Reported",
+            "Conflicting"
+          ],
+          "answer_index": 1,
+          "explain": "Reported is honest — do not upgrade without proof."
+        },
+        {
+          "id": "d2_q4",
+          "q": "Step one of the Source Check Method is:",
+          "choices": [
+            "Pick the newest PDF",
+            "Name the object you are checking",
+            "Search external blogs"
+          ],
+          "answer_index": 1,
+          "explain": "No object, no source check."
+        },
+        {
+          "id": "d2_q5",
+          "q": "When two authoritative sources disagree, you should:",
+          "choices": [
+            "Average them and move on",
+            "Surface the conflict and rank authority",
+            "Hide the older source"
+          ],
+          "answer_index": 1,
+          "explain": "Conflicts surfaced clearly become progress."
+        },
+        {
+          "id": "d2_q6",
+          "q": "Confidential internal sources used for a decision should be:",
+          "choices": [
+            "Pasted into public outputs for transparency",
+            "Used to decide safely but protected in public reporting",
+            "Ignored entirely"
+          ],
+          "answer_index": 1,
+          "explain": "Use the source. Protect the source."
+        }
+      ]
+    }
+  },
+  "lesson": {
+    "objective": "Verify before acting — climb the authority ladder, label truth honestly, run source checks, surface conflicts, and leave an evidence packet.",
+    "why_it_matters": "Beautifully written chaos machines cite random docs as law; Day 2 installs the verification habit that keeps agents trustworthy inside AeroVista.",
+    "apply": "Complete gate, all segments, quiz, and Source-of-Truth Drill on a real object.",
+    "advance": "Unlock From Signal to Action (Day 3) when sot_prove is complete."
+  },
+  "thread_tags": [
+    "day2",
+    "required",
+    "source-of-truth",
+    "verification",
+    "agent-orientation"
+  ],
+  "related_next": [
+    {
+      "label": "Next: From Signal to Action — Agent Day 3",
+      "href": "../from_signal_to_action/index.html"
+    }
+  ],
+  "handoff": {
+    "label": "Open ByteCast home",
+    "href": "../training_hub/index.html",
+    "return_label": "Back to Finding the Source of Truth",
+    "return_href": "./index.html"
+  },
+  "media": {
+    "audio_files": [],
+    "script_doc": "../../docs/agent_day2/FINDING_SOURCE_OF_TRUTH_SCRIPT.md",
+    "voiceover_sections": "assets/voiceover_sections.json",
+    "narration_manifest": "assets/narration.manifest.json",
+    "forge_pack": "tools/narration/agent_day2"
+  },
+  "episode_gate": {
+    "title": "Day 2 Gate — Verification Commitment",
+    "required": true,
+    "items": [
+      "I completed Agent Day 1 (The First Door) or received equivalent operator briefing on operating law and trust.",
+      "I understand Day 2 is about verification and authority ranking — not memorizing every document in the ecosystem.",
+      "I will label claims as Verified, Reported, Inferred, Unknown, or Conflicting — and never upgrade silently.",
+      "I will surface conflicting sources instead of averaging them or picking the nicest-sounding answer.",
+      "I will protect confidential sources in public outputs while using them for safe internal decisions."
+    ]
+  },
+  "reference_panels": [
+    {
+      "type": "cards",
+      "title": "Authority Ladder",
+      "items": [
+        {
+          "label": "Rung 1",
+          "title": "Current human instruction",
+          "body": "Powerful — scope and safety still apply."
+        },
+        {
+          "label": "Rung 2",
+          "title": "Live system reality",
+          "body": "For live systems, reality beats intention."
+        },
+        {
+          "label": "Rung 3",
+          "title": "Registry and release state",
+          "body": "Registered ≠ live ≠ healthy ≠ released."
+        },
+        {
+          "label": "Rung 4",
+          "title": "Current handoff or EOD Capsule",
+          "body": "Bridge — can age quickly."
+        },
+        {
+          "label": "Rung 5",
+          "title": "Current documentation",
+          "body": "Respect docs; check date and scope."
+        },
+        {
+          "label": "Rung 6",
+          "title": "Memory and conversation",
+          "body": "Orientation — not automatic proof."
+        },
+        {
+          "label": "Rung 7",
+          "title": "External research",
+          "body": "Public context — not internal authority."
+        }
+      ]
+    },
+    {
+      "type": "cards",
+      "title": "Truth Labels",
+      "items": [
+        {
+          "label": "Verified",
+          "title": "Verified",
+          "body": "You checked the source that can prove it."
+        },
+        {
+          "label": "Reported",
+          "title": "Reported",
+          "body": "Someone says it — you have not verified underlying state."
+        },
+        {
+          "label": "Inferred",
+          "title": "Inferred",
+          "body": "You reasoned from evidence — label it explicitly."
+        },
+        {
+          "label": "Unknown",
+          "title": "Unknown",
+          "body": "You do not know — not probably, not seems."
+        },
+        {
+          "label": "Conflicting",
+          "title": "Conflicting",
+          "body": "Two sources disagree — surface it."
+        }
+      ]
+    },
+    {
+      "type": "steps",
+      "title": "Source Check Method",
+      "items": [
+        "Name the object",
+        "Name the decision",
+        "Find the highest available authority",
+        "Check for staleness",
+        "Check for scope",
+        "Report the result cleanly"
+      ]
+    }
+  ],
+  "interactives": {
+    "day": 2,
+    "journey_mode": "stepper",
+    "segment_visuals": true,
+    "labs_required": true,
+    "labs": [
+      "authority_pick",
+      "truth_label",
+      "conflict_protocol"
+    ]
+  },
+  "episode_runtime": {
+    "day": 2,
+    "prefix": "sot",
+    "law": "Before you act, know what you are trusting.",
+    "prev_days": [
+      {
+        "day": 1,
+        "href": "../the_first_door/index.html"
+      }
+    ],
+    "storage": {
+      "segments": "bc.finding_source_of_truth.segments.v1",
+      "gate": "bc.finding_source_of_truth.gate.v1",
+      "quiz": "bc.finding_source_of_truth.quiz.v1",
+      "prove": "bc.finding_source_of_truth.prove.v1",
+      "stepper": "bc.finding_source_of_truth.stepper.v1",
+      "labs": "bc.finding_source_of_truth.labs.v1"
+    },
+    "workflow": {
+      "gate": "sot_gate",
+      "segments": "sot_segments",
+      "engage": "sot_engage",
+      "prove": "sot_prove",
+      "complete": "sot_gates"
+    },
+    "prove_complete_message": "Day 2 complete.",
+    "prove_saved_message": "Drill submitted.",
+    "prove_meta": {
+      "drillType": "finding_source_of_truth"
+    }
+  }
+}

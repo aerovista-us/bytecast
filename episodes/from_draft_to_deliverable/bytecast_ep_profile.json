@@ -1,0 +1,604 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "teaching_mode": "InteractiveScript",
+  "episode": {
+    "code": "AGENT-D9",
+    "title": "From Draft to Deliverable: Finishing the Slice — Agent Day 9",
+    "type": "required",
+    "date": "2026-07-10",
+    "runtime_target_minutes": 28,
+    "status": "active"
+  },
+  "content": {
+    "tags": [
+      "agent-day9",
+      "required",
+      "onboarding",
+      "golden-path",
+      "getting-started"
+    ],
+    "hero_kicker": "Required · Agent Day 9",
+    "summary_short": "Define done, prevent scope creep, verify acceptance criteria, polish in order, and package work as a usable deliverable.",
+    "summary_long": "Define done, prevent scope creep, verify acceptance criteria, polish in order, and package work as a usable deliverable.",
+    "key_line": "Define done. Finish the slice. Ship usable proof.",
+    "start_here": "Complete the Day 9 gate, read or listen through all segments, pass the check, then submit your completion drill.",
+    "narrator": "Byte",
+    "tone": "Operational, clear, grounded"
+  },
+  "episode_gate": {
+    "title": "Day 9 Gate — From Draft to Deliverable",
+    "required": true,
+    "items": [
+      "I completed Agent Days 1–8.",
+      "I will define done before expanding scope.",
+      "I understand drafted ≠ published ≠ adopted.",
+      "I will verify acceptance criteria against evidence — not intention.",
+      "I will package deliverables with handoff and update surfaces."
+    ]
+  },
+  "reference_panels": [
+    {
+      "type": "list",
+      "title": "Done vs almost done",
+      "items": [
+        "Output exists in the right place",
+        "Acceptance criteria met with evidence",
+        "State labels are honest",
+        "Handoff written if another agent continues",
+        "Queue/backlog updated",
+        "No silent scope creep"
+      ]
+    },
+    {
+      "type": "steps",
+      "title": "Deliverable polish order",
+      "items": [
+        "Correctness and scope",
+        "Evidence and labels",
+        "Usability for the recipient",
+        "Navigation and links",
+        "Style and tone last"
+      ]
+    }
+  ],
+  "script": {
+    "sections": [
+      {
+        "id": "cold_open",
+        "title": "Cold Open",
+        "time": "0:00–1:30",
+        "paragraphs": [
+          "Day 1 taught you to find the door. Day 2 taught you to find the source. Day 3 taught you to turn signal into action. Day 4 taught you to leave the trail. Day 5 taught you to work the queue. Day 6 taught you to protect the boundary. Day 7 taught you to serve without exposing the system. Day 8 taught you to write clearly, usefully, and with evidence.",
+          "Day 9 teaches you how to finish.",
+          "Not imagine. Not expand. Not improve forever. Not open another front because the current one got boring.",
+          "Finish.",
+          "AeroVista has no shortage of drafts: scripts, pages, docs, offers, flyers, dashboards, reports, systems, ideas, training paths, client concepts, release plans.",
+          "But a draft does not create value until it becomes a deliverable.",
+          "Today, we learn the discipline of finishing the slice.",
+          "Welcome to Day 9.",
+          "From Draft to Deliverable."
+        ]
+      },
+      {
+        "id": "a_draft_is_not_a_deliverable",
+        "title": "A Draft Is Not a Deliverable",
+        "time": "1:30–4:30",
+        "paragraphs": [
+          "A draft is a working shape.",
+          "A deliverable is a usable output.",
+          "Do not confuse them.",
+          "A draft can be messy. A draft can be private. A draft can contain notes. A draft can be incomplete. A draft can ask questions. A draft can explore options.",
+          "A deliverable is different.",
+          "A deliverable has a purpose, audience, format, acceptance criteria, and boundaries. A deliverable is safe for the intended reader. A deliverable can be handed off, published, reviewed, used, or approved.",
+          "Inside AeroVista, agents must know which state they are in.",
+          "If it is drafted, say drafted. If it is ready for review, say ready for review. If it is approved, say approved. If it is published, say published. If it is live, say live. If it is adopted, say adopted.",
+          "A draft pretending to be a deliverable creates fog.",
+          "A deliverable mislabeled as a draft creates wasted rework.",
+          "Use the right state."
+        ]
+      },
+      {
+        "id": "the_slice_principle",
+        "title": "The Slice Principle",
+        "time": "4:30–8:30",
+        "paragraphs": [
+          "AeroVista is wide. That is why agents must finish slices.",
+          "A slice is a small complete unit of value.",
+          "Not the entire platform. Not the entire system. Not all future versions. Not every possible feature. Not a perfect cathedral.",
+          "A slice.",
+          "Examples:",
+          "One Day 9 script plus one completion drill.",
+          "One public booth page plus one verified public link.",
+          "One client one-pager plus one next-step email.",
+          "One EOD Capsule template plus one example entry.",
+          "One release status update plus one evidence note.",
+          "One access fix plus one verification pass.",
+          "One ByteCast episode page plus one audio player placeholder and one completion card.",
+          "A slice should be small enough to finish, but complete enough to use.",
+          "That is the sweet spot.",
+          "If a task keeps expanding, ask:",
+          "What is the smallest useful version? Who needs it? What does done mean? What can wait? What must be true before delivery? What proof shows it works?",
+          "Finish that.",
+          "Then decide the next slice."
+        ]
+      },
+      {
+        "id": "define_done_before_you_polish",
+        "title": "Define Done Before You Polish",
+        "time": "8:30–12:30",
+        "paragraphs": [
+          "Polishing before defining done is how work becomes endless.",
+          "Before you polish, define done.",
+          "Use the Done Definition.",
+          "One: Purpose",
+          "Why does this deliverable exist?",
+          "Train agents. Inform a client. Publish a page. Resolve access. Update a release. Capture a decision. Get approval. Reduce risk. Move a prospect forward.",
+          "Two: Audience",
+          "Who will use it?",
+          "Founder. Operator. Builder. Client. Prospect. Public visitor. Agent. Technical maintainer. Legal reviewer. Shareholder.",
+          "Three: Output",
+          "What exactly will exist?",
+          "Script. Drill. HTML page. ZIP pack. Handoff. Email. Proposal. Release note. Registry update. Audio file. Checklist. Dashboard card. Smoke result.",
+          "Four: Acceptance Criteria",
+          "What must be true for this to count?",
+          "Examples:",
+          "“The script includes all required segments and completion drill.”",
+          "“The public page loads at the intended URL.”",
+          "“The client update is safe to send and includes one next action.”",
+          "“The release note names state, evidence, risk, and owner.”",
+          "“The ZIP includes all expected files and a README.”",
+          "“The access fix is verified for founder, operator, builder, and public roles.”",
+          "Acceptance criteria are the finish line. No acceptance criteria, no finish line.",
+          "Five: Out of Scope",
+          "What are we not doing in this slice?",
+          "Example:",
+          "“Out of scope: audio production, HTML conversion, completion tracking, and visual design.”",
+          "That sentence protects the work.",
+          "Without out-of-scope boundaries, every draft becomes a galaxy."
+        ]
+      },
+      {
+        "id": "the_polish_ladder",
+        "title": "The Polish Ladder",
+        "time": "12:30–16:30",
+        "paragraphs": [
+          "Not all polish matters equally.",
+          "Use the Polish Ladder.",
+          "Level One: Correct",
+          "Is it true? Names, dates, states, links, roles, claims, citations, boundaries, and instructions must be correct. If it is not correct, do not polish the vibe. Fix the truth.",
+          "Level Two: Complete",
+          "Does it include the required parts? For a script: title, audience, runtime, segments, closing, completion drill. For a handoff: touched, changed, verified, unknowns, risks, next action. Complete means the deliverable can do its job.",
+          "Level Three: Clear",
+          "Can the intended audience understand it quickly? Cut bloat. Define terms. Use simple state labels. Lead with the point. End with the next action.",
+          "Level Four: Safe",
+          "Is it safe for the intended audience? No secrets. No private logs. No other builder data. No internal machinery in public. No unapproved legal terms. No overpromising.",
+          "Level Five: Useful",
+          "Can the reader act from it? If not, add the missing action, owner, or decision.",
+          "Level Six: On-Brand",
+          "Does it feel like AeroVista? Clear. Gritty but intelligent. Practical. Slightly cinematic when useful. No empty sci-fi fog.",
+          "Level Seven: Beautiful",
+          "Only after the first six.",
+          "Make it elegant. Make it memorable. Make it sing.",
+          "But never make it beautiful before it is correct, complete, clear, safe, and useful.",
+          "A pretty broken deliverable is still broken."
+        ]
+      },
+      {
+        "id": "scope_creep_the_silent_draft_killer",
+        "title": "Scope Creep: The Silent Draft Killer",
+        "time": "16:30–20:30",
+        "paragraphs": [
+          "Scope creep is how drafts die.",
+          "It starts innocently.",
+          "“While we are here, let’s add audio.”",
+          "“Maybe this should be a full course.”",
+          "“What if we also make a dashboard?”",
+          "“Could we turn this into a public landing page?”",
+          "“Should we create a workflow automation too?”",
+          "“Let’s also build the whole training hub.”",
+          "Maybe yes. But not inside this slice.",
+          "AeroVista agents must learn the Scope Stop.",
+          "When a new idea appears, ask:",
+          "Does this belong to the current deliverable? Is it required by acceptance criteria? Does it reduce current risk? Does it block delivery? Does the owner approve expanding scope? Can it become the next slice instead?",
+          "Most good ideas should be captured, not crammed.",
+          "Use this sentence:",
+          "“That is a good next-slice candidate, but it is out of scope for this delivery.”",
+          "That sentence saves projects.",
+          "It keeps momentum honest."
+        ]
+      },
+      {
+        "id": "review_without_reopening_everything",
+        "title": "Review Without Reopening Everything",
+        "time": "20:30–24:30",
+        "paragraphs": [
+          "Review is necessary. Reopening everything is not.",
+          "A review pass should match the deliverable state.",
+          "Draft Review",
+          "Draft review asks: Is the concept right? Is the structure right? Are we missing major pieces? Is the audience correct? Is this worth continuing?",
+          "Draft review can be broad.",
+          "Delivery Review",
+          "Delivery review asks: Does this meet acceptance criteria? Is it accurate? Is it safe? Is it complete? Is the next action clear? Can it be used now?",
+          "Delivery review should not reopen the entire concept unless a major risk appears.",
+          "Final Review",
+          "Final review asks: Are there typos? Are links right? Is formatting clean? Is the file named correctly? Is the handoff written? Is the state updated?",
+          "Final review is not the time to reinvent the project.",
+          "Agents must protect the review stage.",
+          "If the review starts expanding, say:",
+          "“That belongs in a new queue item unless it blocks acceptance.”",
+          "This is how deliverables actually leave the room."
+        ]
+      },
+      {
+        "id": "acceptance_criteria_and_evidence",
+        "title": "Acceptance Criteria and Evidence",
+        "time": "24:30–28:30",
+        "paragraphs": [
+          "A deliverable should not be accepted on vibes.",
+          "Use evidence.",
+          "For a document: does it include required sections, audience, truth labels, sensitive-content removal, next action, and clean file placement?",
+          "For a ZIP pack: does it include all files, README, manifest, master reference, and a clear filename? Does the archive open?",
+          "For a public page: does it load, work on the intended device, respect public/private boundaries, include correct links, and present a clear call to action?",
+          "For an access change: was it tested by role, scoped narrowly, audited, and documented safely?",
+          "For a client deliverable: does it match scope, avoid unapproved promises, identify client next steps, and respect IP/confidentiality terms?",
+          "Evidence turns “looks good” into “ready.”",
+          "AeroVista does not need fake certainty.",
+          "It needs clean acceptance."
+        ]
+      },
+      {
+        "id": "the_delivery_state_ladder",
+        "title": "The Delivery State Ladder",
+        "time": "28:30–32:00",
+        "paragraphs": [
+          "Use the Delivery State Ladder.",
+          "Drafted: the first usable shape exists. Not final. Not approved. Not published.",
+          "Ready for Review: the draft is complete enough for someone to evaluate against the goal.",
+          "Revision Needed: review found required changes. Not failure. Just state.",
+          "Ready for Delivery: acceptance criteria are met, and only final packaging remains.",
+          "Delivered: the output has been sent, published, packaged, deployed, or handed off to the intended lane.",
+          "Verified: the delivered output was checked in the target environment.",
+          "Adopted: people are actually using it.",
+          "Do not skip rungs.",
+          "Do not call drafted work delivered. Do not call delivered work verified. Do not call verified work adopted.",
+          "Precision protects the system."
+        ]
+      },
+      {
+        "id": "the_finish_line_checklist",
+        "title": "The Finish Line Checklist",
+        "time": "32:00–36:00",
+        "paragraphs": [
+          "Before calling a slice finished, run the Finish Line Checklist.",
+          "Purpose clear? Audience clear? Output exists? Acceptance criteria met? Out-of-scope items captured separately? Evidence attached? Sensitive material removed or restricted? State label correct? Owner identified? Next action named? Handoff written? Queue updated? Memory or documentation update needed? Release or registry update needed? File name and location clean? Reviewer or approver identified if needed?",
+          "If the answer is no, finish the missing piece.",
+          "If the missing piece is outside the slice, capture it as a next-slice item.",
+          "Do not let it block the current deliverable unless it affects acceptance.",
+          "That is how agents finish without becoming reckless."
+        ]
+      },
+      {
+        "id": "finishing_with_discipline",
+        "title": "Finishing With Discipline",
+        "time": "36:00–39:00",
+        "paragraphs": [
+          "There is a moment in every task where the agent has to stop expanding and start finishing.",
+          "That moment matters.",
+          "If you keep improving forever, you do not deliver.",
+          "If you deliver too early, you create rework.",
+          "The discipline is knowing the difference.",
+          "Ask:",
+          "Would another round materially improve usefulness? Or am I avoiding the handoff? Would more polish reduce risk? Or am I chasing taste? Is this missing an acceptance requirement? Or am I adding a future feature? Does the user need this now? Or do they need the larger system later?",
+          "AeroVista’s best work is not unfinished perfection.",
+          "It is finished usefulness that can evolve.",
+          "Ship the slice.",
+          "Leave the trail.",
+          "Capture the next slice.",
+          "Move."
+        ]
+      },
+      {
+        "id": "confidentiality_at_delivery",
+        "title": "Confidentiality at Delivery",
+        "time": "39:00–41:30",
+        "paragraphs": [
+          "Delivery is a risk point.",
+          "Before delivery, check boundaries.",
+          "Does this include client information, builder data, private emails, internal URLs, access details, source paths, unreleased strategy, legal language, pricing exceptions, IP terms, credentials, logs, or screenshots with sensitive details?",
+          "If yes, slow down.",
+          "Either remove, summarize, restrict, or escalate.",
+          "Do not ship sensitive material because you are excited to finish.",
+          "Finishing fast is good.",
+          "Finishing safely is mandatory."
+        ]
+      },
+      {
+        "id": "closing",
+        "title": "Closing",
+        "time": "41:30–43:00",
+        "paragraphs": [
+          "You now have nine laws.",
+          "Find the door. Find the source. Turn signal into action. Leave the trail. Work the queue. Protect the boundary. Serve without exposing the system. Write clearly, usefully, and with evidence. Finish the slice.",
+          "AeroVista does not need infinite drafts.",
+          "It needs useful deliverables.",
+          "Define done. Protect scope. Polish in the right order. Verify acceptance. Label the state. Package the output. Leave the handoff. Capture the next slice.",
+          "That is how work becomes real.",
+          "From draft to deliverable.",
+          "That is how vision takes flight."
+        ]
+      }
+    ]
+  },
+  "prove": {
+    "title": "Deliverable Readiness Card",
+    "description": "Define done and prove readiness for a real or simulated slice you are finishing.",
+    "fields": [
+      {
+        "id": "field_1",
+        "label": "1. Deliverable Name",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_2",
+        "label": "2. Current Delivery State",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_3",
+        "label": "3. Purpose",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_4",
+        "label": "4. Audience",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_5",
+        "label": "5. Output",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_6",
+        "label": "6. Acceptance Criteria",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_7",
+        "label": "7. Out of Scope",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_8",
+        "label": "8. Polish Ladder Check",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_9",
+        "label": "9. Evidence",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_10",
+        "label": "10. Scope Creep Check",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_11",
+        "label": "11. Risk If Delivered Too Early",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_12",
+        "label": "12. Risk If Delayed Too Long",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_13",
+        "label": "13. Boundary Check",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_14",
+        "label": "14. Required Updates",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_15",
+        "label": "15. Final Delivery Decision",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "field_16",
+        "label": "16. Final Handoff Line",
+        "required": true,
+        "rows": 1
+      }
+    ]
+  },
+  "engagement": {
+    "quiz": {
+      "enabled": true,
+      "pass_threshold": 0.8,
+      "title": "From Draft to Deliverable Check",
+      "questions": [
+        {
+          "id": "d9_q1",
+          "q": "Scope creep often starts when:",
+          "choices": [
+            "Done was never defined",
+            "The quiz was too hard",
+            "Audio was missing"
+          ],
+          "answer_index": 0
+        },
+        {
+          "id": "d9_q2",
+          "q": "Drafted training scripts are:",
+          "choices": [
+            "Shipped deliverables",
+            "Not yet published deliverables",
+            "Always adopted"
+          ],
+          "answer_index": 1
+        },
+        {
+          "id": "d9_q3",
+          "q": "Acceptance criteria should be checked with:",
+          "choices": [
+            "Evidence",
+            "Confidence alone",
+            "Newest chat message"
+          ],
+          "answer_index": 0
+        },
+        {
+          "id": "d9_q4",
+          "q": "Polish order means:",
+          "choices": [
+            "Style before correctness",
+            "Correctness before cosmetic polish",
+            "Skip verification"
+          ],
+          "answer_index": 1
+        },
+        {
+          "id": "d9_q5",
+          "q": "A usable slice:",
+          "choices": [
+            "Can be picked up by the next operator",
+            "Must include every future idea",
+            "Never needs a handoff"
+          ],
+          "answer_index": 0
+        },
+        {
+          "id": "d9_q6",
+          "q": "Almost done without trail is:",
+          "choices": [
+            "Good enough for P2",
+            "Still not done",
+            "Fine for internal only"
+          ],
+          "answer_index": 1
+        }
+      ]
+    }
+  },
+  "lesson": {
+    "objective": "Define done, prevent scope creep, verify acceptance criteria, polish in order, and package work as a usable deliverable.",
+    "why_it_matters": "Day 9 extends the Agent onboarding spine — Finish the slice.",
+    "apply": "Complete gate, segments, quiz, and Deliverable Readiness Card.",
+    "advance": "Unlock Day 10 — Trusted Agent Capstone when deliver_prove is complete."
+  },
+  "thread_tags": [
+    "day9",
+    "required",
+    "agent-orientation",
+    "golden-path"
+  ],
+  "related_next": [
+    {
+      "label": "Next: Day 10 — Trusted Agent Capstone",
+      "href": "../trusted_agent_capstone/index.html"
+    }
+  ],
+  "handoff": {
+    "label": "Open ByteCast home",
+    "href": "../training_hub/index.html",
+    "return_label": "Back to Day 9",
+    "return_href": "./index.html"
+  },
+  "media": {
+    "audio_files": [],
+    "script_doc": "../../docs/agent_day9/FROM_DRAFT_TO_DELIVERABLE_SCRIPT.md",
+    "voiceover_sections": "assets/voiceover_sections.json",
+    "narration_manifest": "assets/narration.manifest.json",
+    "forge_pack": "tools/narration/agent_day9"
+  },
+  "episode_runtime": {
+    "day": 9,
+    "prefix": "deliver",
+    "law": "Finish the slice.",
+    "prev_days": [
+      {
+        "day": 1,
+        "href": "../the_first_door/index.html"
+      },
+      {
+        "day": 2,
+        "href": "../finding_source_of_truth/index.html"
+      },
+      {
+        "day": 3,
+        "href": "../from_signal_to_action/index.html"
+      },
+      {
+        "day": 4,
+        "href": "../the_handoff_is_the_work/index.html"
+      },
+      {
+        "day": 5,
+        "href": "../working_the_queue/index.html"
+      },
+      {
+        "day": 6,
+        "href": "../safe_access_boundaries/index.html"
+      },
+      {
+        "day": 7,
+        "href": "../builder_client_experience/index.html"
+      },
+      {
+        "day": 8,
+        "href": "../writing_like_aerovista/index.html"
+      }
+    ],
+    "storage": {
+      "segments": "bc.from_draft_to_deliverable.segments.v1",
+      "gate": "bc.from_draft_to_deliverable.gate.v1",
+      "quiz": "bc.from_draft_to_deliverable.quiz.v1",
+      "prove": "bc.from_draft_to_deliverable.prove.v1",
+      "stepper": "bc.from_draft_to_deliverable.stepper.v1",
+      "labs": "bc.from_draft_to_deliverable.labs.v1"
+    },
+    "workflow": {
+      "gate": "deliver_gate",
+      "segments": "deliver_segments",
+      "engage": "deliver_engage",
+      "prove": "deliver_prove",
+      "complete": "deliver_gates"
+    },
+    "prove_complete_message": "Day 9 complete. Continue to Day 10 — Trusted Agent Capstone.",
+    "prove_saved_message": "Deliverable Readiness Card submitted.",
+    "prove_meta": {
+      "drillType": "from_draft_to_deliverable"
+    }
+  },
+  "interactives": {
+    "day": 9,
+    "journey_mode": "stepper",
+    "segment_visuals": true,
+    "labs_required": true,
+    "labs": [
+      "deliverable_parts",
+      "readiness_gate",
+      "definition_of_done"
+    ]
+  }
+}

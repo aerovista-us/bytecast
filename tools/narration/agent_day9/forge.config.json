@@ -1,0 +1,19 @@
+{
+  "schema": "narration-forge-config-v1",
+  "packId": "agent_day9_deliverable",
+  "episodeCode": "AGENT-D9",
+  "authoringRoot": "docs/agent_day9",
+  "linesMaster": "tools/narration/agent_day9/lines.master.json",
+  "sequences": "tools/narration/agent_day9/sequences.json",
+  "voiceRecipes": "tools/narration/agent_day9/voiceRecipes.json",
+  "bindings": "tools/narration/agent_day9/bindings.json",
+  "outputDir": "episodes/from_draft_to_deliverable/assets/narration",
+  "runtimeManifest": "episodes/from_draft_to_deliverable/assets/narration.manifest.json",
+  "shipFormat": "wav",
+  "tts": {
+    "provider": "nxcore-echoverse",
+    "endpoint": "/api/generate",
+    "envUrl": "NXCORE_TTS_URL",
+    "defaultUrl": "http://127.0.0.1:5315"
+  }
+}

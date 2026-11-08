@@ -428,164 +428,72 @@
     const Loop = window.ByteCastLoop || null;
 
     const PROFILE = {
-      schema: "bytecast-ep-profile-v1",
-      episode: {
-        code: "EP-APP-003",
-        title: "Apparel Ops Standards — Naming, Copy, Collections, QA, Access",
-        type: "internal",
-        date: "2026-02-24",
-        runtime_target_minutes: 10,
-        status: "draft"
-      },
-      content: {
-        tags: ["apparel", "standards", "naming", "copy", "qa", "access"],
-        summary_short: "Standards for AV Apparel: naming, copy, collections, QA, and the access & trust ladder.",
-        summary_long: "This ByteCast turns the AV Apparel playbooks into standards. It covers naming and copy rules, how to build curated collections, the QA and release ritual, and the access & trust ladder so contributors know what 'ready to publish' really means."
-      },
-      slides: [
+  "schema": "bytecast-ep-profile-v1",
+  "teaching_mode": "MissionLab",
+  "episode": {
+    "code": "EP-APP-003",
+    "title": "Apparel Ops Standards - Naming, Copy, Collections, QA, Access",
+    "type": "training",
+    "date": "2026-07-08",
+    "runtime_target_minutes": 12,
+    "status": "active"
+  },
+  "content": {
+    "tags": [
+      "apparel",
+      "catalog",
+      "operations"
+    ],
+    "summary_short": "Apparel Ops Standards - Naming, Copy, Collections, QA, Access",
+    "hero_kicker": "Apparel Ops Standards",
+    "key_line": "Standards are how we move fast without breaking trust."
+  },
+  "media": {
+    "audio_files": []
+  },
+  "engagement": {
+    "quiz": {
+      "enabled": true,
+      "pass_threshold": 0.8,
+      "questions": [
         {
-          id: "s1",
-          title: "Naming Standards",
-          goal: "Define how apparel titles should be structured.",
-          bullets: [
-            "Use the format: Brand • Collection • Product Type • Color.",
-            "Avoid inside jokes or vague names that don't help customers decide.",
-            "Keep titles scannable in grids and order history."
-          ]
-        },
-        {
-          id: "s2",
-          title: "Copy Framework",
-          goal: "Show the structure for apparel descriptions.",
-          bullets: [
-            "Use: hook → benefits → fit/care note as your baseline.",
-            "Lead with what matters to the wearer: feel, fit, context.",
-            "Keep sizing and care details easy to skim."
-          ]
-        },
-        {
-          id: "s3",
-          title: "Collections & Tagging",
-          goal: "Explain how collections and tags make the catalog feel curated.",
-          bullets: [
-            "Every product should have one primary collection and clear tags.",
-            "Collections signal story (Core / Drops / Seasonal / Collabs).",
-            "Tags power filters: brand, collection, type, color, tier."
-          ]
-        },
-        {
-          id: "s4",
-          title: "QA & Release Ritual",
-          goal: "Outline the checklist before any change goes live.",
-          bullets: [
-            "Run through the storefront like a customer: grid → product → cart → checkout.",
-            "Check images, variants, prices, and copy on both desktop and mobile.",
-            "Use the preflight checklist so nothing ships with obvious issues."
-          ]
-        },
-        {
-          id: "s5",
-          title: "Access & Trust Ladder",
-          goal: "Describe how contributors climb from viewer to publisher.",
-          bullets: [
-            "Roles: Viewer → Editor → Maintainer → Publisher.",
-            "Each role has specific allowed actions and review expectations.",
-            "Trust is earned by shipping clean, reviewable work over time."
-          ]
-        },
-        {
-          id: "s6",
-          title: "Ready to Publish",
-          goal: "Define the bar for 'Apparel Ops Ready'.",
-          bullets: [
-            "You can run catalog workflows, follow standards, and pass QA without supervision.",
-            "You log work with clear change requests and notes.",
-            "You know when to slow down and ask for another set of eyes."
-          ]
-        }
-      ],
-      engagement: {
-        quest: {
-          title: "Apply Ops Standards",
-          items: [
-            { id: "q1", text: "Pick one existing product and rewrite its title to match the naming standard." },
-            { id: "q2", text: "Draft a new description using the hook → benefits → fit/care framework." },
-            { id: "q3", text: "List which collection and tags that product should live under based on the standards." },
-            { id: "q4", text: "Run a mini QA pass (grid → product → cart → checkout) and note any issues you see." }
+          "id": "app3_q1",
+          "q": "Customer-facing copy should be:",
+          "choices": [
+            "Whatever ships fastest",
+            "Safe, accurate, and reviewable",
+            "Copied from random sources"
           ],
-          reward_badge: {
-            label: "APPAREL OPS READY",
-            style: "neon"
-          }
-        },
-        quiz: {
-          enabled: true,
-          pass_threshold: 0.8,
-          questions: [
-            {
-              id: "k1",
-              q: "Which title format matches the AV Apparel standard?",
-              choices: [
-                "Cozy Hoodie — Blue — AV",
-                "AV • Hoodies • Cozy Hoodie • Blue",
-                "Hoodie Blue",
-                "Cool Drop Hoodie"
-              ],
-              answer_index: 1,
-              explain: "Brand • Collection • Product Type • Color keeps titles structured and scannable."
-            },
-            {
-              id: "k2",
-              q: "What is the recommended structure for descriptions?",
-              choices: [
-                "Price → SKU → Internal notes",
-                "Hook → benefits → fit/care note",
-                "Random bullet list",
-                "Technical spec only"
-              ],
-              answer_index: 1,
-              explain: "Hook to draw attention, benefits to sell, and fit/care to set expectations."
-            },
-            {
-              id: "k3",
-              q: "Why do we care about collections and tags?",
-              choices: [
-                "They are only for internal analytics",
-                "They replace images",
-                "They make the catalog feel curated and power discovery for customers",
-                "They don't really matter"
-              ],
-              answer_index: 2,
-              explain: "Collections and tags configure how customers explore and understand the catalog."
-            },
-            {
-              id: "k4",
-              q: "What belongs in the QA & release ritual?",
-              choices: [
-                "Only checking the CSV",
-                "Clicking one random product",
-                "Running a structured pass: grid, product, cart, checkout, on multiple devices",
-                "Letting customers report issues first"
-              ],
-              answer_index: 2,
-              explain: "You simulate a real shopper journey before anything is considered ready."
-            },
-            {
-              id: "k5",
-              q: "How does someone move up the access & trust ladder?",
-              choices: [
-                "By asking for more permissions repeatedly",
-                "By shipping clean, reviewable work that follows the standards",
-                "By skipping QA to move fast",
-                "By working only in secret branches"
-              ],
-              answer_index: 1,
-              explain: "Trust is based on a track record of following the system and shipping high-quality changes."
-            }
-          ]
+          "answer_index": 1
         }
-      }
-    };
+      ]
+    }
+  },
+  "slides": [
+    {
+      "id": "standards",
+      "title": "Ops standards",
+      "goal": "Naming, copy, collections, QA, access.",
+      "bullets": [
+        "Naming follows division + product + variant conventions.",
+        "Copy must be customer-safe and legally cautious.",
+        "QA includes links, images, and mobile preview."
+      ]
+    }
+  ],
+  "lesson": {
+    "objective": "Apply naming, copy, collection, QA, and access standards for apparel operations.",
+    "why_it_matters": "Standards keep multi-contributor catalog work reviewable and reversible.",
+    "apply": "Audit one live listing against the ops rubric in this episode.",
+    "advance": "Pass final quiz; return to Training Hub Apparel lane for advanced missions."
+  },
+  "related_next": [
+    {
+      "label": "Open ByteCast home",
+      "href": "..\/training_hub\/index.html"
+    }
+  ]
+};
 
     const $ = (s, r = document) => r.querySelector(s);
     const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));

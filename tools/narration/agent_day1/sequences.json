@@ -1,0 +1,25 @@
+{
+  "schema": "narration-sequences-v1",
+  "packId": "agent_day1_first_door",
+  "sequences": {
+    "full_journey": {
+      "label": "The First Door — full journey",
+      "lineIds": [
+        "cold_open",
+        "world",
+        "culture",
+        "doors",
+        "operating_law",
+        "lost_protocol",
+        "legal",
+        "checklist",
+        "closing"
+      ]
+    },
+    "operating_law_only": {
+      "label": "Operating law excerpt",
+      "lineIds": ["operating_law", "lost_protocol"]
+    }
+  },
+  "defaultSequence": "full_journey"
+}

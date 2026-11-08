@@ -1,0 +1,24 @@
+{
+  "schema": "narration-sequences-v1",
+  "packId": "agent_day7_builder_client",
+  "sequences": {
+    "full_journey": {
+      "label": "Builder & Client Experience — full journey",
+      "lineIds": [
+        "cold_open",
+        "the_outside_person_does_not_need_the_whole_map",
+        "builder_client_prospect_three_different_experien",
+        "the_translation_layer",
+        "expose_summarize_withhold",
+        "builder_support_standard",
+        "client_support_standard",
+        "prospect_experience_don_t_oversell_don_t_overexp",
+        "service_without_overpromising",
+        "the_outside_facing_response_formula",
+        "when_to_escalate_instead_of_answering",
+        "closing"
+      ]
+    }
+  },
+  "defaultSequence": "full_journey"
+}

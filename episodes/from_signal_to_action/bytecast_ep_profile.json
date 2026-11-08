@@ -1,0 +1,533 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "teaching_mode": "InteractiveScript",
+  "episode": {
+    "code": "AGENT-D3",
+    "title": "From Signal to Action — How AVCC Thinks",
+    "type": "required",
+    "date": "2026-07-09",
+    "runtime_target_minutes": 26,
+    "status": "active"
+  },
+  "content": {
+    "tags": [
+      "agent-day3",
+      "required",
+      "onboarding",
+      "avcc",
+      "executive-judgment",
+      "getting-started"
+    ],
+    "hero_kicker": "Required · Getting Started · Flagship",
+    "summary_short": "Learn how AVCC turns signals into executive judgment — the judgment chain, Chief-of-Staff brief format, P1/P2/P3 priority filter, and a Signal-to-Action Brief on a real signal.",
+    "summary_long": "Agent Day 3 flagship episode. Byte teaches dashboard thinking vs Chief-of-Staff thinking, the AVCC chain (Signal → Context → Judgment → Action → Memory), the seven-part COS brief, priority classification, worked signal examples, agent mistakes to avoid, the AVCC template, and confidential executive reporting. Completion requires gate acknowledgment, segment pass, quiz, and Signal-to-Action Brief.",
+    "key_line": "Truth is raw material. AVCC turns signals into judgment.",
+    "start_here": "Complete the Day 3 gate, listen or read all segments, pass the AVCC check, then submit your Signal-to-Action Brief on one real or simulated signal.",
+    "narrator": "Byte",
+    "tone": "Executive, operational, direct, cinematic but practical"
+  },
+  "judgment_chain": [
+    {
+      "link": "Signal",
+      "meaning": "Something changed, failed, appeared, cleared, or became relevant."
+    },
+    {
+      "link": "Context",
+      "meaning": "Why it matters inside AeroVista — division, system, release, impact."
+    },
+    {
+      "link": "Judgment",
+      "meaning": "So what? Name the business implication."
+    },
+    {
+      "link": "Action",
+      "meaning": "What should happen next — with a verb."
+    },
+    {
+      "link": "Memory",
+      "meaning": "Leave the trail so the next agent does not pay the tax again."
+    }
+  ],
+  "cos_brief_sections": [
+    "What changed",
+    "Why it matters",
+    "Recommendation",
+    "Why now",
+    "Expected impact",
+    "If ignored",
+    "Confidence and evidence"
+  ],
+  "priority_levels": [
+    {
+      "level": "P1",
+      "name": "Critical",
+      "when": "Security, outage, access failure, broken public path, client impact, legal/confidential risk."
+    },
+    {
+      "level": "P2",
+      "name": "High",
+      "when": "Release follow-up, adoption, onboarding, committed milestones, cross-division deliverables."
+    },
+    {
+      "level": "P3",
+      "name": "Standard",
+      "when": "Cleanup, refinement, long-tail docs, polish that does not block release."
+    }
+  ],
+  "script": {
+    "sections": [
+      {
+        "id": "cold_open",
+        "title": "Cold Open",
+        "time": "0:00–1:20",
+        "paragraphs": [
+          "Day 1: where you are. Day 2: what is true. Day 3: what to do with the truth.",
+          "AVCC exists to turn signals into executive judgment — not walls of data.",
+          "Chief-of-Staff thinking asks what changed, why it matters, what to do next, why now, and how confident we are."
+        ]
+      },
+      {
+        "id": "dashboard_cos",
+        "title": "Dashboard vs Chief-of-Staff Thinking",
+        "time": "1:20–4:30",
+        "paragraphs": [
+          "Dashboards report facts. Chiefs of Staff convert facts into direction.",
+          "Inside AVCC, your highest value is operational judgment — not information retrieval."
+        ]
+      },
+      {
+        "id": "judgment_chain",
+        "title": "The AVCC Judgment Chain",
+        "time": "4:30–8:30",
+        "paragraphs": [
+          "Signal → Context → Judgment → Action → Memory. Miss one link, your answer weakens.",
+          "A recommendation without an action is commentary. Memory prevents the next agent from reopening solved work."
+        ]
+      },
+      {
+        "id": "cos_brief",
+        "title": "Chief-of-Staff Brief Format",
+        "time": "8:30–13:00",
+        "paragraphs": [
+          "Seven parts: what changed, why it matters, recommendation, why now, expected impact, if ignored, confidence and evidence.",
+          "Honest medium confidence beats fake high confidence."
+        ]
+      },
+      {
+        "id": "priority_p123",
+        "title": "The Priority Filter",
+        "time": "13:00–17:00",
+        "paragraphs": [
+          "P1 critical, P2 high, P3 standard — not decoration, focus protection.",
+          "Ask: what breaks if we do nothing today? Do not inflate. Do not minimize."
+        ]
+      },
+      {
+        "id": "signal_examples",
+        "title": "Signals Into Recommendations",
+        "time": "17:00–21:30",
+        "paragraphs": [
+          "Worked examples: Cindy E2E + public booth live; ByteCast pages without audio.",
+          "AVCC responses name shift in risk, specific actions, timing, impact, and confidence."
+        ]
+      },
+      {
+        "id": "agent_mistakes",
+        "title": "What Agents Should Not Do",
+        "time": "21:30–24:00",
+        "paragraphs": [
+          "No landfills of facts. No hidden uncertainty. No flat priorities. Release ≠ adoption.",
+          "Write like a Chief of Staff: clear, useful, specific, honest."
+        ]
+      },
+      {
+        "id": "avcc_template",
+        "title": "The AVCC Brief Template",
+        "time": "24:00–26:30",
+        "paragraphs": [
+          "Signal, change, why, action, why now, impact, risk, priority, confidence, evidence, owner, next check, memory update.",
+          "Judgment that survives the moment — not paperwork for its own sake."
+        ]
+      },
+      {
+        "id": "exec_confidential",
+        "title": "Confidentiality in Executive Judgment",
+        "time": "26:30–28:30",
+        "paragraphs": [
+          "Use sensitive evidence to decide. Protect it in public reporting.",
+          "Summarize safely; route detail to authorized lanes only."
+        ]
+      },
+      {
+        "id": "closing",
+        "title": "Closing",
+        "time": "28:30–29:30",
+        "paragraphs": [
+          "Day 1: find the door. Day 2: find the source. Day 3: turn signal into action.",
+          "AeroVista needs better judgment — then leave the trail."
+        ]
+      }
+    ]
+  },
+  "day3_gate": {
+    "title": "Day 3 Gate — AVCC Judgment Commitment",
+    "required": true,
+    "items": [
+      "I completed Agent Days 1–2 (or received equivalent briefing on operating law and source-of-truth verification).",
+      "I understand AVCC converts signals into judgment and direction — not dashboard dumps or activity reports.",
+      "I will classify priority as P1, P2, or P3 honestly — without inflating or minimizing.",
+      "My recommendations will include clear action verbs, timing, impact, and honest confidence levels.",
+      "I will protect confidential evidence in executive briefs while using it for safe internal decisions."
+    ]
+  },
+  "prove": {
+    "title": "Signal-to-Action Brief",
+    "description": "Convert one real or simulated AeroVista signal into a full AVCC-style brief — demonstrate executive judgment, not summarization.",
+    "fields": [
+      {
+        "id": "signal_changed",
+        "label": "1. Signal — What changed?",
+        "required": true,
+        "rows": 2
+      },
+      {
+        "id": "context_scope",
+        "label": "2. Context — Division, system, release, client, route, or workflow affected",
+        "required": true,
+        "rows": 2
+      },
+      {
+        "id": "why_matters",
+        "label": "3. Why it matters — operational consequence",
+        "required": true,
+        "rows": 2
+      },
+      {
+        "id": "recommended_action",
+        "label": "4. Recommended action (clear verb: verify, escalate, block, update, assign…)",
+        "required": true,
+        "rows": 2
+      },
+      {
+        "id": "why_now",
+        "label": "5. Why now",
+        "required": true,
+        "rows": 2
+      },
+      {
+        "id": "expected_impact",
+        "label": "6. Expected impact if action is taken",
+        "required": true,
+        "rows": 2
+      },
+      {
+        "id": "risk_ignored",
+        "label": "7. Risk if ignored",
+        "required": true,
+        "rows": 2
+      },
+      {
+        "id": "priority",
+        "label": "8a. Priority (P1 / P2 / P3)",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "priority_why",
+        "label": "8b. Why this priority",
+        "required": true,
+        "rows": 2
+      },
+      {
+        "id": "confidence",
+        "label": "9a. Confidence (High / Medium / Low / Unknown)",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "confidence_why",
+        "label": "9b. Evidence supporting confidence",
+        "required": true,
+        "rows": 2
+      },
+      {
+        "id": "evidence_list",
+        "label": "10. Evidence list (label each source type)",
+        "required": true,
+        "rows": 3
+      },
+      {
+        "id": "owner_lane",
+        "label": "11. Owner or lane for next move",
+        "required": true,
+        "rows": 1
+      },
+      {
+        "id": "memory_update",
+        "label": "12. Memory / handoff update needed (EOD, registry, docs, release board…)",
+        "required": true,
+        "rows": 2
+      },
+      {
+        "id": "final_brief",
+        "label": "13. Final AVCC brief (8 sentences or fewer)",
+        "required": true,
+        "rows": 4
+      }
+    ]
+  },
+  "engagement": {
+    "quiz": {
+      "enabled": true,
+      "pass_threshold": 0.8,
+      "title": "AVCC Judgment Check",
+      "questions": [
+        {
+          "id": "d3_q1",
+          "q": "Inside AVCC, the highest-value output is:",
+          "choices": [
+            "A longer list of facts",
+            "Operational judgment that converts facts into direction",
+            "More dashboard widgets"
+          ],
+          "answer_index": 1,
+          "explain": "Chiefs of Staff decide what deserves attention and what to do."
+        },
+        {
+          "id": "d3_q2",
+          "q": "The AVCC judgment chain is:",
+          "choices": [
+            "Signal → Context → Judgment → Action → Memory",
+            "Dashboard → Email → Guess",
+            "Memory → Signal only"
+          ],
+          "answer_index": 0,
+          "explain": "All five links matter; memory prevents rework."
+        },
+        {
+          "id": "d3_q3",
+          "q": "Which is a weak AVCC recommendation?",
+          "choices": [
+            "\"Continue monitoring\" with no owner or trigger",
+            "\"Run external smoke test and update release board adoption status\"",
+            "\"Escalate access ambiguity before changing grants\""
+          ],
+          "answer_index": 0,
+          "explain": "Recommendations need verbs and specific next moves."
+        },
+        {
+          "id": "d3_q4",
+          "q": "Live security exposure with client impact is most likely:",
+          "choices": [
+            "P3 Standard",
+            "P1 Critical",
+            "P2 High only if convenient"
+          ],
+          "answer_index": 1,
+          "explain": "P1 protects trust, access, security, and delivery."
+        },
+        {
+          "id": "d3_q5",
+          "q": "A feature marked released but not adopted means:",
+          "choices": [
+            "Work is finished forever",
+            "Risk may have shifted to adoption and proof — judgment must update",
+            "Ignore until someone complains"
+          ],
+          "answer_index": 1,
+          "explain": "Release ≠ adoption. AVCC names the new risk."
+        },
+        {
+          "id": "d3_q6",
+          "q": "Confidential evidence in an executive brief should be:",
+          "choices": [
+            "Pasted into public outputs for transparency",
+            "Used to decide safely but summarized for broader audiences",
+            "Ignored entirely"
+          ],
+          "answer_index": 1,
+          "explain": "Use the source. Protect the source."
+        }
+      ]
+    }
+  },
+  "lesson": {
+    "objective": "Turn signals into AVCC-style executive judgment using the chain, COS brief format, and P1/P2/P3 priority — then produce a Signal-to-Action Brief.",
+    "why_it_matters": "Summarizer agents create noise; judgment agents reduce operator load and protect focus, trust, and momentum.",
+    "apply": "Complete gate, all segments, quiz, and Signal-to-Action Brief on a real signal.",
+    "advance": "Unlock The Handoff Is the Work (Day 4) when avcc_prove is complete."
+  },
+  "thread_tags": [
+    "day3",
+    "required",
+    "avcc",
+    "executive-judgment",
+    "agent-orientation"
+  ],
+  "related_next": [
+    {
+      "label": "Next: Day 4 — The Handoff Is the Work",
+      "href": "../the_handoff_is_the_work/index.html"
+    }
+  ],
+  "handoff": {
+    "label": "Open ByteCast home",
+    "href": "../training_hub/index.html",
+    "return_label": "Back to From Signal to Action",
+    "return_href": "./index.html"
+  },
+  "media": {
+    "audio_files": [],
+    "script_doc": "../../docs/agent_day3/FROM_SIGNAL_TO_ACTION_SCRIPT.md",
+    "voiceover_sections": "assets/voiceover_sections.json",
+    "narration_manifest": "assets/narration.manifest.json",
+    "forge_pack": "tools/narration/agent_day3"
+  },
+  "episode_gate": {
+    "title": "Day 3 Gate — AVCC Judgment Commitment",
+    "required": true,
+    "items": [
+      "I completed Agent Days 1–2 (or received equivalent briefing on operating law and source-of-truth verification).",
+      "I understand AVCC converts signals into judgment and direction — not dashboard dumps or activity reports.",
+      "I will classify priority as P1, P2, or P3 honestly — without inflating or minimizing.",
+      "My recommendations will include clear action verbs, timing, impact, and honest confidence levels.",
+      "I will protect confidential evidence in executive briefs while using it for safe internal decisions."
+    ]
+  },
+  "reference_panels": [
+    {
+      "type": "steps",
+      "title": "AVCC Judgment Chain",
+      "items": [
+        {
+          "link": "Signal",
+          "meaning": "Something changed, failed, appeared, cleared, or became relevant."
+        },
+        {
+          "link": "Context",
+          "meaning": "Why it matters inside AeroVista — division, system, release, impact."
+        },
+        {
+          "link": "Judgment",
+          "meaning": "So what? Name the business implication."
+        },
+        {
+          "link": "Action",
+          "meaning": "What should happen next — with a verb."
+        },
+        {
+          "link": "Memory",
+          "meaning": "Leave the trail so the next agent does not pay the tax again."
+        }
+      ]
+    },
+    {
+      "type": "cards",
+      "title": "COS Brief Sections",
+      "items": [
+        {
+          "label": "1",
+          "title": "What changed",
+          "body": ""
+        },
+        {
+          "label": "2",
+          "title": "Why it matters",
+          "body": ""
+        },
+        {
+          "label": "3",
+          "title": "Recommendation",
+          "body": ""
+        },
+        {
+          "label": "4",
+          "title": "Why now",
+          "body": ""
+        },
+        {
+          "label": "5",
+          "title": "Expected impact",
+          "body": ""
+        },
+        {
+          "label": "6",
+          "title": "If ignored",
+          "body": ""
+        },
+        {
+          "label": "7",
+          "title": "Confidence and evidence",
+          "body": ""
+        }
+      ]
+    },
+    {
+      "type": "cards",
+      "title": "Priority Filter",
+      "items": [
+        {
+          "label": "P1",
+          "title": "P1",
+          "body": "Security, outage, access failure, broken public path, client impact, legal/confidential risk."
+        },
+        {
+          "label": "P2",
+          "title": "P2",
+          "body": "Release follow-up, adoption, onboarding, committed milestones, cross-division deliverables."
+        },
+        {
+          "label": "P3",
+          "title": "P3",
+          "body": "Cleanup, refinement, long-tail docs, polish that does not block release."
+        }
+      ]
+    }
+  ],
+  "interactives": {
+    "day": 3,
+    "journey_mode": "stepper",
+    "segment_visuals": true,
+    "labs_required": true,
+    "labs": [
+      "priority_triage",
+      "cos_brief",
+      "judgment_chain"
+    ]
+  },
+  "episode_runtime": {
+    "day": 3,
+    "prefix": "avcc",
+    "law": "Judgment, not noise — protect operator focus.",
+    "prev_days": [
+      {
+        "day": 1,
+        "href": "../the_first_door/index.html"
+      },
+      {
+        "day": 2,
+        "href": "../finding_source_of_truth/index.html"
+      }
+    ],
+    "storage": {
+      "segments": "bc.from_signal_to_action.segments.v1",
+      "gate": "bc.from_signal_to_action.gate.v1",
+      "quiz": "bc.from_signal_to_action.quiz.v1",
+      "prove": "bc.from_signal_to_action.prove.v1",
+      "stepper": "bc.from_signal_to_action.stepper.v1",
+      "labs": "bc.from_signal_to_action.labs.v1"
+    },
+    "workflow": {
+      "gate": "avcc_gate",
+      "segments": "avcc_segments",
+      "engage": "avcc_engage",
+      "prove": "avcc_prove",
+      "complete": "avcc_gates"
+    },
+    "prove_complete_message": "Day 3 complete.",
+    "prove_saved_message": "Drill submitted.",
+    "prove_meta": {
+      "drillType": "from_signal_to_action"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "package": "AeroVista Agent ByteCast Days 1-4 Reference Docs",
+  "created_utc": "2026-07-09T17:04:59Z",
+  "file_count": 12,
+  "files": [
+    "README.md",
+    "00_Series_Overview.md",
+    "Day_01_The_First_Door_Script.md",
+    "Day_01_Completion_Prompt.md",
+    "Day_01_Legal_Trust_Acknowledgment.md",
+    "Day_02_Finding_Source_of_Truth_Script.md",
+    "Day_02_Source_of_Truth_Check.md",
+    "Day_03_From_Signal_to_Action_Script.md",
+    "Day_03_Signal_to_Action_Brief.md",
+    "Day_04_The_Handoff_Is_The_Work_Script.md",
+    "Day_04_Handoff_Packet.md",
+    "Agent_Onboarding_Days_1_4_Master_Reference.md"
+  ],
+  "notes": "Markdown docs created from Day 1-4 ByteCast materials in this conversation."
+}

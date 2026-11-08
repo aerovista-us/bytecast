@@ -1,0 +1,13 @@
+{
+  "schema": "narration-bindings-v1",
+  "packId": "agent_day7_builder_client",
+  "runtime": {
+    "player": "../../assets/shared/nxcore_narration_player.js",
+    "manifest": "episodes/builder_client_experience/assets/narration.manifest.json",
+    "fallback": "assets/shared/listen_mode.js"
+  },
+  "episode": {
+    "slug": "builder_client_experience",
+    "listenGateStep": "serve_segments"
+  }
+}

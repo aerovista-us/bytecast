@@ -103,7 +103,7 @@ async function getConsoleErrors(page) {
  * @param {string} selector
  */
 async function waitForAudioReady(page, selector = '#audio') {
-  await page.waitForSelector(selector);
+  await page.waitForSelector(selector, { state: 'attached' });
   // Preload is often "metadata" in ByteCast packs, so "loadeddata" may never fire.
   await page.waitForFunction((sel) => {
     const audio = document.querySelector(sel);

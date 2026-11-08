@@ -1,0 +1,19 @@
+{
+  "schema": "narration-voice-recipes-v1",
+  "recipes": {
+    "byte-narrator": {
+      "label": "Byte — Agent Day 3 narrator (NXCore preset)",
+      "engine": "piper",
+      "voice": "en_US-amy-medium",
+      "speed": 1.06,
+      "format": "wav"
+    },
+    "byte-chief-staff": {
+      "label": "Timbr / Chief of Staff insert",
+      "engine": "piper",
+      "voice": "en_US-lessac-medium",
+      "speed": 1.0,
+      "format": "wav"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "narration-bindings-v1",
+  "packId": "agent_day10_capstone",
+  "runtime": {
+    "player": "../../assets/shared/nxcore_narration_player.js",
+    "manifest": "episodes/trusted_agent_capstone/assets/narration.manifest.json",
+    "fallback": "assets/shared/listen_mode.js"
+  },
+  "episode": {
+    "slug": "trusted_agent_capstone",
+    "listenGateStep": "capstone_segments"
+  }
+}

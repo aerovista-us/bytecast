@@ -1,0 +1,94 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "teaching_mode": "MissionLab",
+  "episode": {
+    "code": "EP-APP-001",
+    "title": "AV Apparel Welcome - Culture + First Win",
+    "type": "training",
+    "date": "2026-07-08",
+    "runtime_target_minutes": 12,
+    "status": "active"
+  },
+  "content": {
+    "tags": [
+      "apparel",
+      "catalog",
+      "operations"
+    ],
+    "summary_short": "AV Apparel Welcome - Culture + First Win",
+    "hero_kicker": "AV Apparel Onboarding",
+    "key_line": "Culture first, then catalog mechanics — one honest win beats ten rushed edits.",
+    "start_here": "Read the welcome flow, then work the practice steps before the quiz."
+  },
+  "media": {
+    "audio_files": [
+      {
+        "path": "assets/av_apparel_ep1_welcome.mp3",
+        "label": "Episode narration (generate or drop in assets/)",
+        "required": false
+      }
+    ]
+  },
+  "engagement": {
+    "quiz": {
+      "enabled": true,
+      "pass_threshold": 0.8,
+      "questions": [
+        {
+          "id": "app1_q1",
+          "q": "A new contributor should start in:",
+          "choices": [
+            "Lane C immediately",
+            "Lane A or B with small PRs",
+            "Any lane they prefer"
+          ],
+          "answer_index": 1
+        },
+        {
+          "id": "app1_q2",
+          "q": "First win means:",
+          "choices": [
+            "A large refactor",
+            "One reviewable catalog improvement",
+            "Skipping QA"
+          ],
+          "answer_index": 1
+        }
+      ]
+    }
+  },
+  "slides": [
+    {
+      "id": "welcome",
+      "title": "Welcome to AV Apparel",
+      "goal": "Set culture and expectations before catalog work.",
+      "bullets": [
+        "Apparel is customer-facing — copy and inventory truth matter.",
+        "Start in Lane A/B until you have two clean PRs.",
+        "Your first win is a small, reviewable catalog improvement."
+      ]
+    },
+    {
+      "id": "lanes",
+      "title": "Contributor lanes",
+      "goal": "Know what you can touch on day one.",
+      "bullets": [
+        "Lane A: markdown, copy, images, catalog entries.",
+        "Lane B: static UI and accessibility fixes.",
+        "Lane C: backend/infra — elevated access only."
+      ]
+    }
+  ],
+  "lesson": {
+    "objective": "Understand AV Apparel culture, contributor lanes, and how to earn your first catalog win.",
+    "why_it_matters": "Apparel work touches customer-facing copy and inventory truth — speed without standards creates rework.",
+    "apply": "Complete the practice checklist and pass the welcome quiz.",
+    "advance": "Pass engage gate; continue to EP-APP-002 Catalog Maintainer Bootcamp."
+  },
+  "related_next": [
+    {
+      "label": "Next: EP-APP-002 — Catalog Maintainer Bootcamp - Your Day-to-Day",
+      "href": "../av_apparel_ep2_catalog/index.html"
+    }
+  ]
+}

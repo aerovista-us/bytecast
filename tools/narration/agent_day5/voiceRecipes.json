@@ -1,0 +1,12 @@
+{
+  "schema": "narration-voice-recipes-v1",
+  "recipes": {
+    "byte-narrator": {
+      "label": "Byte — Agent Day 5",
+      "engine": "piper",
+      "voice": "en_US-amy-medium",
+      "speed": 1.06,
+      "format": "wav"
+    }
+  }
+}

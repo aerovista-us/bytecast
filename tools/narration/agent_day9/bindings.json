@@ -1,0 +1,13 @@
+{
+  "schema": "narration-bindings-v1",
+  "packId": "agent_day9_deliverable",
+  "runtime": {
+    "player": "../../assets/shared/nxcore_narration_player.js",
+    "manifest": "episodes/from_draft_to_deliverable/assets/narration.manifest.json",
+    "fallback": "assets/shared/listen_mode.js"
+  },
+  "episode": {
+    "slug": "from_draft_to_deliverable",
+    "listenGateStep": "deliver_segments"
+  }
+}
