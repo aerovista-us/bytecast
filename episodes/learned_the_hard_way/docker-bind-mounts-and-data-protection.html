@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Docker Bind Mounts &amp; Data Protection — AeroVista Ops Lesson</title>
+  <meta name="description" content="Operator lesson: NXCore ACOS workspaces incident, Docker hollow stubs, and how to protect bind-mounted data." />
+  <!-- Fonts require network; system stack below is a deliberate non-default fallback -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Sora:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-deep: #0c1419;
+      --bg-panel: #121c24;
+      --bg-raised: #182630;
+      --ink: #e6edf2;
+      --ink-muted: #9aafbc;
+      --ink-dim: #6d8494;
+      --amber: #e8a838;
+      --amber-soft: rgba(232, 168, 56, 0.14);
+      --cyan: #3dd6e0;
+      --cyan-soft: rgba(61, 214, 224, 0.12);
+      --mint: #6ee7b7;
+      --mint-soft: rgba(110, 231, 183, 0.12);
+      --danger: #e86a5a;
+      --danger-soft: rgba(232, 106, 90, 0.14);
+      --ok: #6ee7b7;
+      --line: rgba(154, 175, 188, 0.22);
+      --radius: 6px;
+      --font-display: "Sora", "Segoe UI", "Helvetica Neue", sans-serif;
+      --font-body: "Source Serif 4", "Georgia", "Times New Roman", serif;
+      --font-mono: "IBM Plex Mono", "Consolas", "Courier New", monospace;
+      --max: 46rem;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 1.0625rem;
+      line-height: 1.65;
+      background:
+        radial-gradient(ellipse 90% 50% at 10% -10%, rgba(61, 214, 224, 0.08), transparent 50%),
+        radial-gradient(ellipse 70% 40% at 95% 5%, rgba(232, 168, 56, 0.07), transparent 45%),
+        linear-gradient(180deg, #0a1116 0%, var(--bg-deep) 40%, #0e171e 100%);
+      min-height: 100vh;
+    }
+
+    /* Subtle scan-grid atmosphere */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.35;
+      background-image:
+        linear-gradient(rgba(61, 214, 224, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(61, 214, 224, 0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,0.55), transparent 70%);
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: calc(var(--max) + 4rem);
+      margin: 0 auto;
+      padding: 2rem 1.25rem 4rem;
+    }
+
+    header.hero {
+      padding: 1.5rem 0 2.25rem;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 2.5rem;
+    }
+
+    .brand {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin: 0 0 0.85rem;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(1.65rem, 4vw, 2.15rem);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin: 0 0 0.75rem;
+      color: var(--ink);
+    }
+
+    .lede {
+      font-size: 1.1rem;
+      color: var(--ink-muted);
+      max-width: 38rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.25rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+    }
+
+    .meta span strong {
+      color: var(--amber);
+      font-weight: 500;
+    }
+
+    nav.toc {
+      margin: 0 0 2.75rem;
+      padding: 1rem 0 0;
+    }
+
+    nav.toc h2 {
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+      margin: 0 0 0.65rem;
+    }
+
+    nav.toc ol {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 0.35rem;
+    }
+
+    nav.toc a {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      color: var(--ink-muted);
+      text-decoration: none;
+      border-left: 2px solid transparent;
+      padding: 0.2rem 0 0.2rem 0.75rem;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    nav.toc a:hover,
+    nav.toc a:focus-visible {
+      color: var(--cyan);
+      border-left-color: var(--cyan);
+      outline: none;
+    }
+
+    section {
+      margin-bottom: 3rem;
+      scroll-margin-top: 1.5rem;
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      margin: 0 0 1rem;
+      color: var(--ink);
+      display: flex;
+      align-items: baseline;
+      gap: 0.65rem;
+    }
+
+    h2 .num {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--amber);
+    }
+
+    h3 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin: 1.5rem 0 0.6rem;
+      color: var(--ink);
+    }
+
+    p { margin: 0 0 1rem; }
+
+    a { color: var(--cyan); }
+
+    code, .path {
+      font-family: var(--font-mono);
+      font-size: 0.86em;
+      background: var(--cyan-soft);
+      color: var(--cyan);
+      padding: 0.1em 0.35em;
+      border-radius: 3px;
+    }
+
+    ul, ol { margin: 0 0 1rem; padding-left: 1.25rem; }
+    li { margin-bottom: 0.4rem; }
+    li::marker { color: var(--ink-dim); }
+
+    .callout {
+      margin: 1.25rem 0;
+      padding: 0.9rem 1rem;
+      border-left: 3px solid var(--amber);
+      background: var(--amber-soft);
+    }
+
+    .callout.danger {
+      border-left-color: var(--danger);
+      background: var(--danger-soft);
+    }
+
+    .callout.ok {
+      border-left-color: var(--mint);
+      background: var(--mint-soft);
+    }
+
+    .callout p:last-child { margin-bottom: 0; }
+
+    .callout strong {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.92em;
+    }
+
+    /* Progressive disclosure */
+    details.fold {
+      margin: 0.75rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    details.fold summary {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 0.95rem;
+      cursor: pointer;
+      list-style: none;
+      padding: 0.75rem 0;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    details.fold summary::-webkit-details-marker { display: none; }
+
+    details.fold summary::before {
+      content: "+";
+      font-family: var(--font-mono);
+      color: var(--cyan);
+      font-weight: 600;
+      width: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    details.fold[open] summary::before { content: "−"; }
+
+    details.fold .fold-body {
+      padding: 0 0 1rem 1.7rem;
+      color: var(--ink-muted);
+    }
+
+    details.fold .fold-body p:last-child { margin-bottom: 0; }
+
+    /* Outcome table */
+    .outcome {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+      margin: 1rem 0 1.25rem;
+    }
+
+    .outcome th,
+    .outcome td {
+      text-align: left;
+      padding: 0.55rem 0.65rem;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    .outcome th {
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+    }
+
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 500;
+      padding: 0.15em 0.4em;
+      border-radius: 3px;
+    }
+
+    .tag.ok { background: var(--mint-soft); color: var(--mint); }
+    .tag.warn { background: var(--amber-soft); color: var(--amber); }
+    .tag.bad { background: var(--danger-soft); color: var(--danger); }
+
+    /* Diagrams */
+    .diagrams {
+      display: grid;
+      gap: 1.25rem;
+      margin: 1.25rem 0;
+    }
+
+    @media (min-width: 720px) {
+      .diagrams { grid-template-columns: 1fr; }
+    }
+
+    .diagram {
+      background: var(--bg-panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1rem 1rem 0.85rem;
+    }
+
+    .diagram figcaption {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin: 0 0 0.75rem;
+      color: var(--ink);
+    }
+
+    .diagram .caption-sub {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 0.85rem;
+      color: var(--ink-muted);
+      display: block;
+      margin-top: 0.25rem;
+    }
+
+    .diagram svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .diagram .legend {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--ink-dim);
+      margin-top: 0.65rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.25rem;
+    }
+
+    .legend i {
+      display: inline-block;
+      width: 0.65rem;
+      height: 0.65rem;
+      border-radius: 2px;
+      margin-right: 0.35rem;
+      vertical-align: middle;
+    }
+
+    /* Playbook steps */
+    .playbook {
+      counter-reset: step;
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+
+    .playbook > li {
+      counter-increment: step;
+      position: relative;
+      padding: 0.85rem 0 0.85rem 2.75rem;
+      border-bottom: 1px solid var(--line);
+      margin: 0;
+    }
+
+    .playbook > li::before {
+      content: counter(step, decimal-leading-zero);
+      position: absolute;
+      left: 0;
+      top: 0.95rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--amber);
+    }
+
+    .playbook h3 {
+      margin: 0 0 0.35rem;
+      font-size: 0.98rem;
+    }
+
+    .playbook p { margin: 0; color: var(--ink-muted); font-size: 0.98rem; }
+
+    /* Quiz — interaction card */
+    .quiz {
+      background: var(--bg-panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.15rem 1.15rem 1rem;
+      margin: 1rem 0;
+    }
+
+    .q-block {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .q-block:last-of-type { border-bottom: none; }
+
+    .q-prompt {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 0.95rem;
+      margin: 0 0 0.75rem;
+    }
+
+    .q-options {
+      display: grid;
+      gap: 0.4rem;
+    }
+
+    .q-options label {
+      display: flex;
+      gap: 0.55rem;
+      align-items: flex-start;
+      cursor: pointer;
+      padding: 0.45rem 0.55rem;
+      border-radius: 4px;
+      color: var(--ink-muted);
+      font-size: 0.92rem;
+      transition: background 0.12s;
+    }
+
+    .q-options label:hover { background: var(--bg-raised); }
+
+    .q-options input { margin-top: 0.3rem; accent-color: var(--cyan); }
+
+    .q-feedback {
+      display: none;
+      margin-top: 0.65rem;
+      font-size: 0.88rem;
+      padding: 0.55rem 0.7rem;
+      border-radius: 4px;
+    }
+
+    .q-feedback.show { display: block; }
+    .q-feedback.correct { background: var(--mint-soft); color: var(--mint); }
+    .q-feedback.wrong { background: var(--danger-soft); color: var(--danger); }
+
+    .quiz-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-top: 1rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--line);
+    }
+
+    button {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid var(--cyan);
+      background: transparent;
+      color: var(--cyan);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.12s, color 0.12s;
+    }
+
+    button:hover,
+    button:focus-visible {
+      background: var(--cyan-soft);
+      outline: none;
+    }
+
+    button.primary {
+      background: var(--cyan);
+      color: var(--bg-deep);
+    }
+
+    button.primary:hover { filter: brightness(1.08); }
+
+    .score {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--amber);
+      align-self: center;
+      min-height: 1.2em;
+    }
+
+    /* Checklist — interaction card */
+    .checklist {
+      background: var(--bg-panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.15rem;
+      margin: 1rem 0;
+    }
+
+    .checklist h3 {
+      margin: 0 0 0.35rem;
+      font-size: 1rem;
+    }
+
+    .checklist .hint {
+      font-size: 0.88rem;
+      color: var(--ink-dim);
+      margin: 0 0 1rem;
+    }
+
+    .checklist ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1rem;
+    }
+
+    .checklist li {
+      margin: 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .checklist label {
+      display: flex;
+      gap: 0.65rem;
+      align-items: flex-start;
+      padding: 0.7rem 0;
+      cursor: pointer;
+      font-size: 0.95rem;
+      color: var(--ink-muted);
+    }
+
+    .checklist input {
+      margin-top: 0.25rem;
+      accent-color: var(--amber);
+      flex-shrink: 0;
+    }
+
+    .checklist label:has(input:checked) {
+      color: var(--ink-dim);
+      text-decoration: line-through;
+    }
+
+    .check-progress {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--ink-dim);
+      margin-bottom: 0.5rem;
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.88rem;
+      color: var(--ink-dim);
+    }
+
+    footer a { color: var(--ink-muted); }
+
+    @media print {
+      body {
+        background: #fff;
+        color: #111;
+      }
+      body::before { display: none; }
+      .toc, .quiz-actions, button { display: none !important; }
+      .quiz, .checklist, .diagram, .callout {
+        background: #fff;
+        border-color: #ccc;
+        color: #111;
+        break-inside: avoid;
+      }
+      .checklist label:has(input:checked) { text-decoration: none; color: #111; }
+      a { color: #111; text-decoration: underline; }
+      code, .path { background: #eee; color: #111; }
+      .tag { border: 1px solid #999; }
+      header.hero { border-color: #ccc; }
+      h2 .num, .brand, .meta span strong { color: #b36b00; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <p class="brand">AeroVista · EchoVerse Ops</p>
+      <h1>Docker Bind Mounts &amp; Data Protection</h1>
+      <p class="lede">
+        How a missing host path turned into hollow workspace stubs on NXCore —
+        and the preflight habits that keep bind-mounted data from being replaced by empty directories.
+      </p>
+      <div class="meta">
+        <span><strong>Incident</strong> ACOS workspaces · 2026-08-02</span>
+        <span><strong>Host</strong> NXCore</span>
+        <span><strong>Lesson</strong> ops · bind mounts · recovery discipline</span>
+      </div>
+    </header>
+
+    <nav class="toc" aria-label="Lesson sections">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#incident">1. The incident</a></li>
+        <li><a href="#why-docker">2. Why Docker does this</a></li>
+        <li><a href="#diagrams">3. Good bind · hollow stub · named volume</a></li>
+        <li><a href="#playbook">4. Protection playbook</a></li>
+        <li><a href="#quiz">5. Quick check</a></li>
+        <li><a href="#checklist">6. Never-start checklist</a></li>
+      </ol>
+    </nav>
+
+    <section id="incident">
+      <h2><span class="num">01</span> The incident</h2>
+      <p>
+        After a reboot on NXCore (~12:16), the live tree at
+        <code>/srv/ACOS/workspaces</code> on the ACOS ext4 volume
+        (<code>/dev/sdc1</code>) came back empty — wiped or recreated without
+        its prior contents. Compose stacks that depended on those host paths
+        were brought up (or remade mounts) against a hollow tree.
+      </p>
+      <p>
+        Docker’s default behavior filled the gap: for each missing bind source,
+        it created a <strong>directory</strong> on the host. Where a mount
+        expected a <strong>file</strong> (config, binary, entrypoint script),
+        that directory stub broke the container — classic
+        <code>Exit 127</code> (“command not found”) when a path that should be
+        an executable file is suddenly a folder.
+      </p>
+
+      <table class="outcome" aria-label="What was lost vs preserved">
+        <thead>
+          <tr>
+            <th>Surface</th>
+            <th>Status</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>EchoVerse Catalog / Music / Style Atlas</td>
+            <td><span class="tag ok">OK</span></td>
+            <td>On <code>/srv/NXDrive</code> — not the wiped ACOS workspaces SoT</td>
+          </tr>
+          <tr>
+            <td>Live <code>/srv/ACOS/workspaces</code></td>
+            <td><span class="tag bad">Hollow</span></td>
+            <td>Stub dirs left in place; not overwritten during recovery</td>
+          </tr>
+          <tr>
+            <td>Staging + preview restores</td>
+            <td><span class="tag warn">Recovered / gated</span></td>
+            <td>~7.3G staged; preview validates PASS; cutover needs operator approval</td>
+          </tr>
+          <tr>
+            <td>Some apps (e.g. bind-only / unknown)</td>
+            <td><span class="tag bad">Partial / unrecovered</span></td>
+            <td>Image/volume archives help some; others never found in images/volumes</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <p><strong>Authority boundary.</strong> Staging and preview are safe.
+        Live cutover (replace hollow with restored trees) is operator-approved
+        only, one app at a time. No undelete, prune, or stack start on empty
+        workspace roots without inspection.</p>
+      </div>
+
+      <details class="fold">
+        <summary>Timeline in one breath</summary>
+        <div class="fold-body">
+          <p>
+            Reboot → workspaces SoT empty → Docker remade hollow host dirs for
+            missing binds → file binds became directories → containers fail
+            (often Exit 127) → leave hollow alone → stage recovery under
+            <code>_recovery/</code> → validate in
+            <code>_restored_preview/</code> → cutover only with approval.
+          </p>
+        </div>
+      </details>
+
+      <details class="fold">
+        <summary>Recovery pattern used (stage → preview → cutover)</summary>
+        <div class="fold-body">
+          <ol>
+            <li>Do not overwrite live hollow stubs.</li>
+            <li>Stage extracts (tmp, image <code>cp</code>, container export, named volumes) under a dated recovery path.</li>
+            <li>Restore one app to a preview path only; validate (DB, inventory, secrets hygiene).</li>
+            <li>Cutover: rename hollow → <code>.hollow-bak</code>, then promote preview — with explicit approval.</li>
+          </ol>
+          <p>Evidence note: <code>docs/acos-workspaces-recovery-2026-08-02.md</code></p>
+        </div>
+      </details>
+    </section>
+
+    <section id="why-docker">
+      <h2><span class="num">02</span> Why Docker does this</h2>
+      <p>
+        A <strong>bind mount</strong> maps a host path into a container. If the
+        host path does not exist when the container starts, Docker Engine
+        <strong>creates it as a directory</strong>. That is convenient for
+        directory mounts. It is catastrophic when Compose expects a file.
+      </p>
+
+      <div class="callout danger">
+        <p><strong>File bind + missing source = hollow directory.</strong>
+        The next start “succeeds” at mount time and fails at runtime. You have
+        silently replaced a config or binary with an empty folder on the host.</p>
+      </div>
+
+      <details class="fold">
+        <summary>Why Exit 127 shows up</summary>
+        <div class="fold-body">
+          <p>
+            Exit 127 usually means the shell could not find the command. If your
+            entrypoint is bind-mounted from the host and that path is now a
+            directory, the kernel cannot execute it. Same story for scripts,
+            <code>.env</code> files wrongly mounted as dirs, or cert files that
+            became folders.
+          </p>
+        </div>
+      </details>
+
+      <details class="fold">
+        <summary>Named volumes vs binds</summary>
+        <div class="fold-body">
+          <p>
+            <strong>Named volumes</strong> live under Docker’s volume store.
+            They survive workspace-tree wipes on a separate disk as long as the
+            Docker data root is intact. <strong>Directory binds</strong> to
+            large trees are clearer than file binds: type mismatches are rarer,
+            and you can check size/inventory before start.
+          </p>
+          <p>
+            Prefer named volumes or directory binds for durable state. Reserve
+            file binds for cases you can preflight (path exists, is a file,
+            minimum size).
+          </p>
+        </div>
+      </details>
+    </section>
+
+    <section id="diagrams">
+      <h2><span class="num">03</span> Good bind · hollow stub · named volume</h2>
+      <p>Three shapes every operator should recognize before <code>compose up</code>.</p>
+
+      <div class="diagrams">
+        <figure class="diagram">
+          <figcaption>
+            A — Healthy file bind
+            <span class="caption-sub">Host file exists → container sees the file</span>
+          </figcaption>
+          <svg viewBox="0 0 640 160" role="img" aria-label="Healthy bind: host file maps into container">
+            <rect x="8" y="28" width="200" height="104" rx="4" fill="#182630" stroke="#3dd6e0" stroke-width="1.5"/>
+            <text x="108" y="52" text-anchor="middle" fill="#9aafbc" font-family="IBM Plex Mono, monospace" font-size="11">HOST</text>
+            <rect x="36" y="68" width="144" height="36" rx="3" fill="#6ee7b7" fill-opacity="0.2" stroke="#6ee7b7" stroke-width="1.5"/>
+            <text x="108" y="91" text-anchor="middle" fill="#6ee7b7" font-family="IBM Plex Mono, monospace" font-size="12">entrypoint.sh</text>
+            <text x="108" y="118" text-anchor="middle" fill="#6d8494" font-family="IBM Plex Mono, monospace" font-size="10">type: file · size &gt; 0</text>
+
+            <path d="M220 80 H300" stroke="#3dd6e0" stroke-width="2" marker-end="url(#arrowCyan)"/>
+            <text x="260" y="72" text-anchor="middle" fill="#3dd6e0" font-family="IBM Plex Mono, monospace" font-size="10">bind</text>
+
+            <rect x="312" y="28" width="200" height="104" rx="4" fill="#182630" stroke="#9aafbc" stroke-width="1.5"/>
+            <text x="412" y="52" text-anchor="middle" fill="#9aafbc" font-family="IBM Plex Mono, monospace" font-size="11">CONTAINER</text>
+            <rect x="340" y="68" width="144" height="36" rx="3" fill="#6ee7b7" fill-opacity="0.2" stroke="#6ee7b7" stroke-width="1.5"/>
+            <text x="412" y="91" text-anchor="middle" fill="#6ee7b7" font-family="IBM Plex Mono, monospace" font-size="12">/app/run.sh</text>
+            <text x="412" y="118" text-anchor="middle" fill="#6d8494" font-family="IBM Plex Mono, monospace" font-size="10">executable · OK</text>
+
+            <defs>
+              <marker id="arrowCyan" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                <path d="M0,0 L6,3 L0,6 Z" fill="#3dd6e0"/>
+              </marker>
+              <marker id="arrowAmber" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                <path d="M0,0 L6,3 L0,6 Z" fill="#e8a838"/>
+              </marker>
+              <marker id="arrowMint" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                <path d="M0,0 L6,3 L0,6 Z" fill="#6ee7b7"/>
+              </marker>
+            </defs>
+          </svg>
+          <div class="legend">
+            <span><i style="background:#6ee7b7"></i> Real file on both sides</span>
+          </div>
+        </figure>
+
+        <figure class="diagram">
+          <figcaption>
+            B — Hollow stub (the failure mode)
+            <span class="caption-sub">Missing host path → Docker mkdir → file mount becomes a directory</span>
+          </figcaption>
+          <svg viewBox="0 0 640 160" role="img" aria-label="Hollow stub: Docker creates a directory where a file was expected">
+            <rect x="8" y="28" width="200" height="104" rx="4" fill="#182630" stroke="#e86a5a" stroke-width="1.5"/>
+            <text x="108" y="52" text-anchor="middle" fill="#9aafbc" font-family="IBM Plex Mono, monospace" font-size="11">HOST (after)</text>
+            <rect x="36" y="62" width="144" height="48" rx="3" fill="#e86a5a" fill-opacity="0.15" stroke="#e86a5a" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <text x="108" y="82" text-anchor="middle" fill="#e86a5a" font-family="IBM Plex Mono, monospace" font-size="11">entrypoint.sh/</text>
+            <text x="108" y="98" text-anchor="middle" fill="#e86a5a" font-family="IBM Plex Mono, monospace" font-size="10">empty directory</text>
+
+            <path d="M220 80 H300" stroke="#e8a838" stroke-width="2" marker-end="url(#arrowAmber)"/>
+            <text x="260" y="68" text-anchor="middle" fill="#e8a838" font-family="IBM Plex Mono, monospace" font-size="9">auto-mkdir</text>
+
+            <rect x="312" y="28" width="200" height="104" rx="4" fill="#182630" stroke="#e86a5a" stroke-width="1.5"/>
+            <text x="412" y="52" text-anchor="middle" fill="#9aafbc" font-family="IBM Plex Mono, monospace" font-size="11">CONTAINER</text>
+            <text x="412" y="88" text-anchor="middle" fill="#e86a5a" font-family="IBM Plex Mono, monospace" font-size="12">Exit 127</text>
+            <text x="412" y="108" text-anchor="middle" fill="#6d8494" font-family="IBM Plex Mono, monospace" font-size="10">cannot exec directory</text>
+          </svg>
+          <div class="legend">
+            <span><i style="background:#e86a5a"></i> Hollow stub</span>
+            <span><i style="background:#e8a838"></i> Silent create on start</span>
+          </div>
+        </figure>
+
+        <figure class="diagram">
+          <figcaption>
+            C — Named volume survival
+            <span class="caption-sub">Data lives in Docker’s volume store — independent of a wiped workspace tree</span>
+          </figcaption>
+          <svg viewBox="0 0 640 160" role="img" aria-label="Named volume survives workspace wipe">
+            <rect x="8" y="28" width="180" height="104" rx="4" fill="#182630" stroke="#6d8494" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <text x="98" y="52" text-anchor="middle" fill="#6d8494" font-family="IBM Plex Mono, monospace" font-size="11">workspaces/</text>
+            <text x="98" y="88" text-anchor="middle" fill="#6d8494" font-family="IBM Plex Mono, monospace" font-size="11">wiped / empty</text>
+            <text x="98" y="108" text-anchor="middle" fill="#6d8494" font-family="IBM Plex Mono, monospace" font-size="10">bind SoT gone</text>
+
+            <rect x="220" y="28" width="180" height="104" rx="4" fill="#182630" stroke="#6ee7b7" stroke-width="1.5"/>
+            <text x="310" y="52" text-anchor="middle" fill="#9aafbc" font-family="IBM Plex Mono, monospace" font-size="11">DOCKER VOLUME</text>
+            <rect x="244" y="68" width="132" height="36" rx="3" fill="#6ee7b7" fill-opacity="0.2" stroke="#6ee7b7" stroke-width="1.5"/>
+            <text x="310" y="91" text-anchor="middle" fill="#6ee7b7" font-family="IBM Plex Mono, monospace" font-size="11">app_data</text>
+
+            <path d="M412 80 H480" stroke="#6ee7b7" stroke-width="2" marker-end="url(#arrowMint)"/>
+
+            <rect x="492" y="40" width="140" height="80" rx="4" fill="#182630" stroke="#3dd6e0" stroke-width="1.5"/>
+            <text x="562" y="72" text-anchor="middle" fill="#3dd6e0" font-family="IBM Plex Mono, monospace" font-size="11">CONTAINER</text>
+            <text x="562" y="94" text-anchor="middle" fill="#6ee7b7" font-family="IBM Plex Mono, monospace" font-size="10">state intact</text>
+          </svg>
+          <div class="legend">
+            <span><i style="background:#6ee7b7"></i> Named volume survives</span>
+            <span><i style="background:#6d8494"></i> Workspace bind tree may not</span>
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <section id="playbook">
+      <h2><span class="num">04</span> Protection playbook</h2>
+      <p>Actionable habits. Do these before stacks touch a shared workspace root.</p>
+
+      <ol class="playbook">
+        <li>
+          <h3>Preflight before compose up</h3>
+          <p>
+            For every bind: path exists; files are files; dirs are dirs; critical
+            files have a minimum size. Refuse start if any check fails.
+          </p>
+        </li>
+        <li>
+          <h3>Prefer named volumes / directory binds</h3>
+          <p>
+            Avoid file binds when possible. Directory mounts and named volumes
+            fail more loudly and recover more cleanly than “file became a folder.”
+          </p>
+        </li>
+        <li>
+          <h3>Back up critical bind roots</h3>
+          <p>
+            Snapshot or sync workspace trees that are SoT. Know which data lives
+            on ACOS vs NXDrive. Do not start stacks on an empty workspace after reboot.
+          </p>
+        </li>
+        <li>
+          <h3>Post-incident: inspect mounts before start</h3>
+          <p>
+            Compare hollow stubs to expected inventory. Treat unexpected empty
+            dirs as a stop signal — not as “Docker will fix it.” Disable or
+            refuse auto-mkdir surprises in your ops runbook.
+          </p>
+        </li>
+        <li>
+          <h3>Recovery: stage → preview → approved cutover</h3>
+          <p>
+            Stage elsewhere. Validate one app under a preview path. Cutover only
+            with operator approval. Keep hollow backups until the app is verified live.
+          </p>
+        </li>
+      </ol>
+
+      <div class="callout ok">
+        <p><strong>Rule of thumb.</strong> If the workspace root looks newly empty
+        after a reboot, stop. Inventory first. Compose second.</p>
+      </div>
+    </section>
+
+    <section id="quiz">
+      <h2><span class="num">05</span> Quick check</h2>
+      <p>Four questions. Score yourself before you trust muscle memory on the next <code>up -d</code>.</p>
+
+      <div class="quiz" id="quiz-root">
+        <div class="q-block" data-answer="b">
+          <p class="q-prompt">1. A Compose file bind points at a host path that does not exist. On start, Docker typically…</p>
+          <div class="q-options">
+            <label><input type="radio" name="q1" value="a" /> Fails the mount and refuses to start</label>
+            <label><input type="radio" name="q1" value="b" /> Creates the path as a directory on the host</label>
+            <label><input type="radio" name="q1" value="c" /> Creates an empty file of the same name</label>
+          </div>
+          <div class="q-feedback" data-explain-correct="Correct — Docker auto-creates a directory. That is the hollow-stub trap for file binds." data-explain-wrong="Not quite. Docker creates a directory for a missing bind source — disastrous when a file was expected."></div>
+        </div>
+
+        <div class="q-block" data-answer="c">
+          <p class="q-prompt">2. During the ACOS workspaces incident, EchoVerse Catalog / Music on NXDrive were…</p>
+          <div class="q-options">
+            <label><input type="radio" name="q2" value="a" /> Wiped with the ACOS workspace tree</label>
+            <label><input type="radio" name="q2" value="b" /> Replaced by hollow Docker stubs</label>
+            <label><input type="radio" name="q2" value="c" /> Intact — different disk / SoT from /srv/ACOS/workspaces</label>
+          </div>
+          <div class="q-feedback" data-explain-correct="Correct — NXDrive held Catalog/Music; the loss was the ACOS workspaces SoT." data-explain-wrong="Catalog/Music on /srv/NXDrive were not the wiped SoT. Know which disk owns which data."></div>
+        </div>
+
+        <div class="q-block" data-answer="a">
+          <p class="q-prompt">3. Best first move when you find hollow stubs after a reboot?</p>
+          <div class="q-options">
+            <label><input type="radio" name="q3" value="a" /> Leave live hollow alone; stage recovery; preview-validate before cutover</label>
+            <label><input type="radio" name="q3" value="b" /> Immediately compose up to “recreate” missing files</label>
+            <label><input type="radio" name="q3" value="c" /> Delete the hollow tree and prune all volumes</label>
+          </div>
+          <div class="q-feedback" data-explain-correct="Correct — stage → preview → operator-approved cutover. Auto-start deepens the mess." data-explain-wrong="Do not start stacks or prune on hollow trees. Stage and validate first."></div>
+        </div>
+
+        <div class="q-block" data-answer="b">
+          <p class="q-prompt">4. Which storage choice is generally safer for durable app state?</p>
+          <div class="q-options">
+            <label><input type="radio" name="q4" value="a" /> Many individual file binds without preflight</label>
+            <label><input type="radio" name="q4" value="b" /> Named volumes (or directory binds) with size/type checks</label>
+            <label><input type="radio" name="q4" value="c" /> Relying on Docker to recreate any missing host path</label>
+          </div>
+          <div class="q-feedback" data-explain-correct="Correct — named volumes / directory binds plus preflight beat silent file-bind mkdir." data-explain-wrong="Silent recreate of missing paths is the hazard. Prefer volumes/dir binds and preflight."></div>
+        </div>
+
+        <div class="quiz-actions">
+          <button type="button" class="primary" id="quiz-check">Check answers</button>
+          <button type="button" id="quiz-reset">Reset</button>
+          <span class="score" id="quiz-score" aria-live="polite"></span>
+        </div>
+      </div>
+    </section>
+
+    <section id="checklist">
+      <h2><span class="num">06</span> Never-start checklist</h2>
+      <p>Print this page or keep it beside the host console. Check each item before any compose up on shared workspace roots.</p>
+
+      <div class="checklist" id="checklist-root">
+        <h3>Never start if…</h3>
+        <p class="hint">Tick each gate you have verified. Print uses this list as a paper checklist.</p>
+        <p class="check-progress" id="check-progress">0 / 8 verified</p>
+        <ul>
+          <li>
+            <label>
+              <input type="checkbox" />
+              Workspace root is not newly empty after reboot / remount (inventory matches expectation)
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" />
+              Every bind source exists on the host
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" />
+              File binds resolve to files (not directories); dir binds resolve to directories
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" />
+              Critical files pass a minimum-size check (not zero-byte stubs)
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" />
+              You know which data is on which disk (e.g. ACOS vs NXDrive)
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" />
+              Hollow or unexpected empty dirs were inspected — not “fixed” by starting Compose
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" />
+              Backups / staging exist for any SoT you are about to touch
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" />
+              Cutover (if any) has explicit operator approval — preview already validated
+            </label>
+          </li>
+        </ul>
+        <div class="quiz-actions">
+          <button type="button" id="print-checklist">Print lesson / checklist</button>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>
+        Lesson for AeroVista / EchoVerse operators · Incident evidence: internal ops runbook
+        <code>acos-workspaces-recovery-2026-08-02.md</code> (NXCore ops docs, not part of this public training site).
+      </p>
+      <p>
+        Offline note: layout and scripts work without network. Google Fonts (Sora, Source Serif 4, IBM Plex Mono)
+        need connectivity; otherwise the page falls back to Segoe UI / Georgia / Consolas.
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.getElementById("quiz-root");
+      var scoreEl = document.getElementById("quiz-score");
+      var checkBtn = document.getElementById("quiz-check");
+      var resetBtn = document.getElementById("quiz-reset");
+
+      function grade() {
+        var blocks = root.querySelectorAll(".q-block");
+        var correct = 0;
+        var answered = 0;
+        blocks.forEach(function (block) {
+          var expected = block.getAttribute("data-answer");
+          var selected = block.querySelector('input[type="radio"]:checked');
+          var fb = block.querySelector(".q-feedback");
+          fb.classList.remove("show", "correct", "wrong");
+          if (!selected) {
+            fb.textContent = "Pick an answer.";
+            fb.classList.add("show", "wrong");
+            return;
+          }
+          answered += 1;
+          var ok = selected.value === expected;
+          if (ok) {
+            correct += 1;
+            fb.textContent = fb.getAttribute("data-explain-correct");
+            fb.classList.add("show", "correct");
+          } else {
+            fb.textContent = fb.getAttribute("data-explain-wrong");
+            fb.classList.add("show", "wrong");
+          }
+        });
+        scoreEl.textContent = correct + " / " + blocks.length + " correct" +
+          (answered < blocks.length ? " (answer all for a full score)" : "");
+      }
+
+      function resetQuiz() {
+        root.querySelectorAll('input[type="radio"]').forEach(function (el) {
+          el.checked = false;
+        });
+        root.querySelectorAll(".q-feedback").forEach(function (fb) {
+          fb.classList.remove("show", "correct", "wrong");
+          fb.textContent = "";
+        });
+        scoreEl.textContent = "";
+      }
+
+      checkBtn.addEventListener("click", grade);
+      resetBtn.addEventListener("click", resetQuiz);
+
+      var checks = document.querySelectorAll("#checklist-root input[type='checkbox']");
+      var progress = document.getElementById("check-progress");
+      function updateProgress() {
+        var n = 0;
+        checks.forEach(function (c) { if (c.checked) n += 1; });
+        progress.textContent = n + " / " + checks.length + " verified";
+      }
+      checks.forEach(function (c) { c.addEventListener("change", updateProgress); });
+      updateProgress();
+
+      document.getElementById("print-checklist").addEventListener("click", function () {
+        window.print();
+      });
+    })();
+  </script>
+</body>
+</html>

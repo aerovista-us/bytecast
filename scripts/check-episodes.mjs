@@ -8,6 +8,10 @@ const codexRegistryPath = path.join(repoRoot, ".CODEX", "episode_registry.json")
 const modulesPath = path.join(episodesRoot, "training_hub", "modules.json");
 const modulesMirrorPath = path.join(episodesRoot, "training_hub", "data", "modules.json");
 const catalogPath = path.join(repoRoot, "data", "catalog.json");
+const referenceOnlyEpisodeDirs = new Set([
+  "gold.path", // source pack for generated Agent Days 1-10; live lessons use their own slugs
+  "Shareholder Employee Learning Page", // legacy/reference mini-site; current shareholder lessons live in shareholder_s1_ep*
+]);
 
 const issues = [];
 const warnings = [];
@@ -146,6 +150,7 @@ function checkRegistry(registry, modules, topDirs) {
   }
 
   for (const dir of topDirs) {
+    if (referenceOnlyEpisodeDirs.has(dir)) continue;
     if (!knownDirs.has(dir) && isLikelyTrainingEntry(dir)) {
       warnings.push(`Top-level episode directory is not in episode registry or module manifest: episodes/${dir}`);
     }
@@ -169,12 +174,14 @@ function checkMetadata(topDirs, registry, modules) {
   const registered = new Set(
     ((registry && registry.episodes) || [])
       .filter((entry) => entry.primary_path)
-      .map((entry) => stripEpisodesPrefix(entry.primary_path).split("/")[0]),
+      .map((entry) => stripEpisodesPrefix(entry.primary_path))
+      .filter((entry) => !entry.includes("/")),
   );
   const moduleCanon = new Set(
     ((modules && modules.modules) || [])
       .filter((entry) => entry.canon_path && entry.canon_path.startsWith("episodes/"))
-      .map((entry) => stripEpisodesPrefix(entry.canon_path).split("/")[0]),
+      .map((entry) => stripEpisodesPrefix(entry.canon_path))
+      .filter((entry) => !entry.includes("/")),
   );
 
   for (const dir of topDirs) {

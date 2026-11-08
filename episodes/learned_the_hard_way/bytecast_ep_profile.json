@@ -1,0 +1,38 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "teaching_mode": "InteractiveLesson",
+  "episode": {
+    "code": "LTHW-001",
+    "title": "Learned the Hard Way — Docker Bind Mounts & Data Protection",
+    "type": "lesson",
+    "date": "2026-11-06",
+    "runtime_target_minutes": 12,
+    "status": "active"
+  },
+  "content": {
+    "tags": [
+      "ops",
+      "docker",
+      "data-protection",
+      "nxcore"
+    ],
+    "summary_short": "Operational lesson on protecting bind-mounted data and recognizing unsafe container starts.",
+    "start_here": "Open the Docker Bind Mounts & Data Protection lesson."
+  },
+  "media": {
+    "audio_files": []
+  },
+  "engagement": {
+    "quiz": {
+      "enabled": true,
+      "pass_threshold": 0.8,
+      "questions": []
+    }
+  },
+  "lesson": {
+    "objective": "Recognize Docker bind-mount failure modes and apply preflight checks before container startup.",
+    "why_it_matters": "A missing host path can silently create an empty directory and make real data appear lost.",
+    "apply": "Use the preflight checklist before starting a bind-mounted service.",
+    "advance": "Carry the never-start checks into NXCore service work."
+  }
+}
