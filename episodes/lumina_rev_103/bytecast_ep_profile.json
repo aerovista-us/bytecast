@@ -247,5 +247,18 @@
         }
       ]
     }
-  }
+  },
+  "teaching_mode": "VoiceoverSections",
+  "lesson": {
+    "objective": "Match brand voice and division positioning without collapsing lanes into one story.",
+    "why_it_matters": "Homogenized messaging confuses buyers and overloads delivery teams.",
+    "apply": "Rewrite one sample pitch line to be division-accurate.",
+    "advance": "Continue to EP-LUM-104."
+  },
+  "related_next": [
+    {
+      "label": "Next: EP-LUM-104 — Find the Real Need",
+      "href": "../lumina_rev_104/index.html"
+    }
+  ]
 }

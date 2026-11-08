@@ -261,5 +261,18 @@
         }
       ]
     }
-  }
+  },
+  "teaching_mode": "VoiceoverSections",
+  "lesson": {
+    "objective": "Recommend the right path — offer, division, and proof — for qualified interest.",
+    "why_it_matters": "Routing quality is the core Lumina operator skill.",
+    "apply": "Route three sample leads using the decision tree in slides.",
+    "advance": "Continue to EP-LUM-106."
+  },
+  "related_next": [
+    {
+      "label": "Next: EP-LUM-106 — Turn Qualified Interest into Growth",
+      "href": "../lumina_rev_106/index.html"
+    }
+  ]
 }

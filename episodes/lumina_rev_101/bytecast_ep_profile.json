@@ -255,5 +255,18 @@
         }
       ]
     }
-  }
+  },
+  "teaching_mode": "VoiceoverSections",
+  "lesson": {
+    "objective": "State that Lumina owns commercial clarity while delivery lanes own delivery truth.",
+    "why_it_matters": "Revenue messaging without delivery boundaries erodes client trust fast.",
+    "apply": "Pass the Lumina 101 engage quiz with scenario answers.",
+    "advance": "Continue to EP-LUM-102 — Know the Board."
+  },
+  "related_next": [
+    {
+      "label": "Next: EP-LUM-102 — Know the Board",
+      "href": "../lumina_rev_102/index.html"
+    }
+  ]
 }

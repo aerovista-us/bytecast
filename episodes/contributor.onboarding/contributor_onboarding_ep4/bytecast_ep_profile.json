@@ -9,13 +9,23 @@
     "status": "active"
   },
   "content": {
-    "tags": ["contributor-onboarding", "crew-check", "final"],
+    "tags": [
+      "contributor-onboarding",
+      "crew-check",
+      "final"
+    ],
     "summary_short": "The Crew Check, badge, and follow-up packet turn readiness into proof, but they do not replace scope review, access control, or human trust-building.",
     "summary_long": "The final step is to prove readiness in the same way the project expects real work to be proven: with explicit answers, clean proof, founder review, and a realistic first-scope request."
   },
   "training": {
     "eyebrow": "Crew Check + Final Readiness",
-    "chips": ["80% to pass", "Badge + packet", "Founder review", "First-scope request", "Proof before access"],
+    "chips": [
+      "80% to pass",
+      "Badge + packet",
+      "Founder review",
+      "First-scope request",
+      "Proof before access"
+    ],
     "sources": [
       "episodes/contributor.onboarding/quiz.html",
       "episodes/contributor.onboarding/badge.html",
@@ -182,5 +192,18 @@
         }
       ]
     }
-  }
+  },
+  "teaching_mode": "ReadAloudScript",
+  "lesson": {
+    "objective": "Complete Crew Check readiness: security boundaries, PR hygiene, and escalation paths.",
+    "why_it_matters": "Readiness proof unlocks higher-trust lanes and faster review.",
+    "apply": "Finish Crew Check quiz and link your first clean PR.",
+    "advance": "Pass Crew Check; request lane upgrades per CONTRIBUTING.md."
+  },
+  "related_next": [
+    {
+      "label": "Contributor hub",
+      "href": "../../training_hub/index.html"
+    }
+  ]
 }

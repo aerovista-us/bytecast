@@ -215,5 +215,12 @@
         "bread_and_butter": "Seed-to-fruit workflow: validate -> export -> badge."
       }
     ]
+  },
+  "teaching_mode": "BriefingSync",
+  "lesson": {
+    "objective": "Recap Seed Orchard export, multi-journey quest map, and platform changes from the Feb 2026 EoS drop.",
+    "why_it_matters": "Internal recaps align maintainers on what shipped and what proof paths changed.",
+    "apply": "Skim the recap and note one journey or export behavior that affects your lane.",
+    "advance": "Internal reference only — not a Golden Path gate."
   }
 }

@@ -9,13 +9,24 @@
     "status": "active"
   },
   "content": {
-    "tags": ["contributor-onboarding", "fit", "expectations", "question-quality"],
+    "tags": [
+      "contributor-onboarding",
+      "fit",
+      "expectations",
+      "question-quality"
+    ],
     "summary_short": "The fit pass is about working style: small changes, self-guidance, clean questions, and respect for boundaries.",
     "summary_long": "AeroVista is explicit about fit so nobody wastes time. The right match is someone who can ship small, stay inside scope, ask clear questions, and treat boundaries seriously."
   },
   "training": {
     "eyebrow": "Fit Check",
-    "chips": ["Mutual fit", "Self-guidance", "Preview baseline", "Question quality", "Signal, not access"],
+    "chips": [
+      "Mutual fit",
+      "Self-guidance",
+      "Preview baseline",
+      "Question quality",
+      "Signal, not access"
+    ],
     "sources": [
       "episodes/contributor.onboarding/fit.html",
       "episodes/contributor.onboarding/founder_welcome.html",
@@ -96,5 +107,18 @@
         }
       ]
     }
-  }
+  },
+  "teaching_mode": "ReadAloudScript",
+  "lesson": {
+    "objective": "Assess mutual fit: expectations, availability, and what good first wins look like.",
+    "why_it_matters": "Early misalignment wastes review cycles on both sides.",
+    "apply": "Complete the fit reflection prompts honestly.",
+    "advance": "Continue to CO-EP-2 — Lanes."
+  },
+  "related_next": [
+    {
+      "label": "Next: CO-EP-2 — Contributor Onboarding - Ep 2 - Lanes and the Honest Helper",
+      "href": "../contributor_onboarding_ep2/index.html"
+    }
+  ]
 }

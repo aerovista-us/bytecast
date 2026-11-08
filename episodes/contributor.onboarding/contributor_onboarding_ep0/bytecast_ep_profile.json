@@ -9,13 +9,22 @@
     "status": "active"
   },
   "content": {
-    "tags": ["contributor-onboarding", "aerovista", "orientation"],
+    "tags": [
+      "contributor-onboarding",
+      "aerovista",
+      "orientation"
+    ],
     "summary_short": "AeroVista is a multi-division ecosystem that ships small, real releases with clean lanes and safe defaults.",
     "summary_long": "Start with the shape of the system: AeroVista is an ecosystem across apps, music, branding, and infrastructure. The point is not heroic output. The point is clean, repeatable releases that strengthen the whole studio over time."
   },
   "training": {
     "eyebrow": "Contributor Onboarding",
-    "chips": ["Multi-division ecosystem", "Local-first builds", "Small drops", "Safe defaults"],
+    "chips": [
+      "Multi-division ecosystem",
+      "Local-first builds",
+      "Small drops",
+      "Safe defaults"
+    ],
     "sources": [
       "episodes/contributor.onboarding/index.html",
       "episodes/contributor.onboarding/docs/CONTRIBUTING.md"
@@ -84,5 +93,18 @@
         }
       ]
     }
-  }
+  },
+  "teaching_mode": "ReadAloudScript",
+  "lesson": {
+    "objective": "Describe AeroVista as a multi-division ecosystem that ships small, proof-backed releases.",
+    "why_it_matters": "Contributors who understand ecosystem shape pick safer first tasks and better lanes.",
+    "apply": "Read the transcript and identify one division that matches your skills.",
+    "advance": "Pass engage check; continue to CO-EP-1."
+  },
+  "related_next": [
+    {
+      "label": "Next: CO-EP-1 — Contributor Onboarding - Ep 1 - Fit and Mutual Expectations",
+      "href": "../contributor_onboarding_ep1/index.html"
+    }
+  ]
 }

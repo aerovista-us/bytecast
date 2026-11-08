@@ -9,11 +9,18 @@
     "status": "active"
   },
   "content": {
-    "tags": ["art-localized", "training", "divisions"],
+    "tags": [
+      "art-localized",
+      "training",
+      "divisions"
+    ],
     "summary_short": "Phase 2 onboarding, spotlight routing, and division ownership for creator activation."
   },
   "engagement": {
-    "quest": { "title": "Ep 1", "items": [] },
+    "quest": {
+      "title": "Ep 1",
+      "items": []
+    },
     "quiz": {
       "enabled": true,
       "pass_threshold": 0.8,
@@ -21,10 +28,36 @@
         {
           "id": "art_ep1_q1",
           "q": "Divisions primarily help you:",
-          "choices": ["Pick brand colors", "Choose proof lanes and reviewers"],
+          "choices": [
+            "Pick brand colors",
+            "Choose proof lanes and reviewers"
+          ],
+          "answer_index": 1
+        },
+        {
+          "id": "art_ep1_q2",
+          "q": "When unsure which division owns delivery, you should:",
+          "choices": [
+            "Guess and commit",
+            "Escalate with context and ask for routing",
+            "Skip the handoff"
+          ],
           "answer_index": 1
         }
       ]
     }
-  }
+  },
+  "teaching_mode": "ReadAloudScript",
+  "lesson": {
+    "objective": "Route creative requests to the right division lane without overpromising delivery.",
+    "why_it_matters": "Art Localized spans multiple divisions; wrong routing delays launches.",
+    "apply": "Match three sample requests to division lanes in the quiz.",
+    "advance": "Pass quiz; continue to ART-EP-2 — Partnership Tiers."
+  },
+  "related_next": [
+    {
+      "label": "Next: ART-EP-2 — The Art Localized - Ep 2 - Partnership Tiers",
+      "href": "../art_localized_ep2/index.html"
+    }
+  ]
 }

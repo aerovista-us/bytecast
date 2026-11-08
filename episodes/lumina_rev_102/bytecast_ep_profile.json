@@ -236,5 +236,18 @@
         }
       ]
     }
-  }
+  },
+  "teaching_mode": "VoiceoverSections",
+  "lesson": {
+    "objective": "Navigate the AeroVista offer board and know which lanes appear on it.",
+    "why_it_matters": "Board literacy prevents recommending offers that do not exist or cannot be delivered.",
+    "apply": "Open the reference board and trace one offer to its delivery owner.",
+    "advance": "Continue to EP-LUM-103."
+  },
+  "related_next": [
+    {
+      "label": "Next: EP-LUM-103 — Brand by Division",
+      "href": "../lumina_rev_103/index.html"
+    }
+  ]
 }

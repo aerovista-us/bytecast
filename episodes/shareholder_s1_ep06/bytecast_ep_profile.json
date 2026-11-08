@@ -10,7 +10,12 @@
     "status": "active"
   },
   "content": {
-    "tags": ["shareholder", "briefing", "season1", "roadmap"],
+    "tags": [
+      "shareholder",
+      "briefing",
+      "season1",
+      "roadmap"
+    ],
     "summary_short": "Forward roadmap and shareholder expectations for the next quarter — audio-synced briefing player.",
     "summary_long": "Shareholder Season 1 briefing. Legacy root player at bytecast-ep06.html. Final episode in the Season 1 lane."
   },
@@ -22,5 +27,21 @@
         "required": false
       }
     ]
-  }
+  },
+  "lesson": {
+    "objective": "Close Season 1 with forward look, priorities, and where to engage next.",
+    "why_it_matters": "Briefings should end with clear next conversations, not open loops.",
+    "apply": "Capture one follow-up question for leadership or the relevant division.",
+    "advance": "Season 1 complete; return to ByteCast Pulse feed for future briefings."
+  },
+  "related_next": [
+    {
+      "label": "ByteCast home",
+      "href": "../training_hub/index.html"
+    },
+    {
+      "label": "Day 1 Golden Path",
+      "href": "../welcome_to_bytecast/index.html"
+    }
+  ]
 }

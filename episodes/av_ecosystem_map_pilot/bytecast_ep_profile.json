@@ -391,5 +391,12 @@
         }
       ]
     }
+  },
+  "teaching_mode": "VisualHotspot",
+  "lesson": {
+    "objective": "Read the ecosystem map as a routing rubric — platform vs app, command center vs local ownership.",
+    "why_it_matters": "Operators need shared vocabulary for cross-division decisions without treating posters as proof.",
+    "apply": "Open every hotspot and name one routing decision the overlay clarifies beyond the image.",
+    "advance": "Pass infographic quiz (≥75%); optional follow-up EP-002 for division depth."
   }
 }
