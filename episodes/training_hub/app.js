@@ -1,5 +1,8 @@
 const MANIFEST_PATH = "./data/modules.json";
-const CANON_MAP_PATH = "../../.CODEX/bytecast_canon_map_2026-02-08.md";
+const CANON_MAP_PATHS = [
+  "../../data/bytecast_canon_map.md",
+  "../../.CODEX/bytecast_canon_map_2026-02-08.md",
+];
 const JOURNEY_PATH = "../../data/journey_steps.json";
 const PULSE_PATH = "../../data/pulse.json";
 const PRIMARY_JOURNEY_ID = "";
@@ -54,36 +57,48 @@ const refs = {
 
 document.addEventListener("DOMContentLoaded", init);
 
+async function fetchOk(url) {
+  try {
+    const response = await fetch(url);
+    return response.ok ? response : null;
+  } catch {
+    return null;
+  }
+}
+
 async function init() {
   wireEvents();
   renderWorkflow();
   try {
-    const [manifestResponse, canonResponse, journeyResponse, pulseResponse] = await Promise.all([
-      fetch(MANIFEST_PATH),
-      fetch(CANON_MAP_PATH),
-      fetch(JOURNEY_PATH),
-      fetch(PULSE_PATH),
+    const manifestResponse = await fetchOk(MANIFEST_PATH);
+    if (!manifestResponse) {
+      throw new Error("Module manifest failed to load.");
+    }
+
+    let canonResponse = null;
+    for (const path of CANON_MAP_PATHS) {
+      canonResponse = await fetchOk(path);
+      if (canonResponse) {
+        break;
+      }
+    }
+
+    const [journeyResponse, pulseResponse] = await Promise.all([
+      fetchOk(JOURNEY_PATH),
+      fetchOk(PULSE_PATH),
     ]);
 
-    if (!manifestResponse.ok) {
-      throw new Error(`Module manifest failed: ${manifestResponse.status}`);
-    }
-
-    if (!canonResponse.ok) {
-      throw new Error(`CANON map failed: ${canonResponse.status}`);
-    }
-
     const manifest = await manifestResponse.json();
-    const canonMarkdown = await canonResponse.text();
+    const canonMarkdown = canonResponse ? await canonResponse.text() : "";
     let journeyConfig = null;
     try {
-      journeyConfig = journeyResponse.ok ? await journeyResponse.json() : null;
+      journeyConfig = journeyResponse ? await journeyResponse.json() : null;
     } catch {
       journeyConfig = null;
     }
 
     try {
-      state.pulse = pulseResponse.ok ? await pulseResponse.json() : { series: [], items: [] };
+      state.pulse = pulseResponse ? await pulseResponse.json() : { series: [], items: [] };
     } catch {
       state.pulse = { series: [], items: [] };
     }

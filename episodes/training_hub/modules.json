@@ -68,6 +68,13 @@
       "lifecycle_section": "reference"
     },
     {
+      "id": "lessons_learned",
+      "name": "Learned the Hard Way",
+      "description": "Real incident post-mortems from AeroVista/NXCore operations, turned into short practical lessons with diagrams, a playbook, and a quick-check quiz.",
+      "sort_order": 85,
+      "lifecycle_section": "reference"
+    },
+    {
       "id": "reference_tools",
       "name": "Reference + Tools",
       "description": "Supporting shells, docs, and reference training surfaces.",
@@ -284,8 +291,8 @@
       "sequence": 1,
       "step_count": 5,
       "part_label": "ART-EP-0 to ART-EP-4",
-      "path": "../art_localized_ep0/index.html",
-      "canon_path": "episodes/art_localized_ep0",
+      "path": "../Art.Localized/art_localized_ep0/index.html",
+      "canon_path": "episodes/Art.Localized/art_localized_ep0",
       "launch_label": "Start series",
       "home_featured": true
     },
@@ -313,8 +320,8 @@
       "sequence": 2,
       "step_count": 5,
       "part_label": "CO-EP-0 to CO-EP-4",
-      "path": "../contributor_onboarding_ep0/index.html",
-      "canon_path": "episodes/contributor_onboarding_ep0",
+      "path": "../contributor.onboarding/contributor_onboarding_ep0/index.html",
+      "canon_path": "episodes/contributor.onboarding/contributor_onboarding_ep0",
       "launch_label": "Start series"
     },
     {
@@ -565,6 +572,21 @@
       "launch_label": "Start Day 10",
       "home_featured": false,
       "required": true
+    },
+    {
+      "id": "docker_bind_mounts_data_protection",
+      "name": "Docker Bind Mounts & Data Protection",
+      "description": "How a missing host path turned into hollow workspace stubs on NXCore, why Docker does this, and the preflight habits that protect bind-mounted data. Includes diagrams, a protection playbook, a quick-check quiz, and a never-start checklist.",
+      "owner": "Ops / Platform",
+      "category": "episode",
+      "series_id": "lessons_learned",
+      "sequence": 1,
+      "part_label": "Lesson",
+      "path": "../learned_the_hard_way/docker-bind-mounts-and-data-protection.html",
+      "canon_path": "episodes/learned_the_hard_way",
+      "launch_label": "Start the lesson",
+      "home_featured": true,
+      "required": false
     }
   ]
 }

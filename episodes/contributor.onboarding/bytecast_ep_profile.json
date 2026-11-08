@@ -1,0 +1,43 @@
+{
+  "schema": "bytecast-ep-profile-v1",
+  "teaching_mode": "ReadAloudScript",
+  "episode": {
+    "code": "EP-005",
+    "title": "Contributor Onboarding Hub - No-Code First",
+    "type": "hub",
+    "date": "2026-07-08",
+    "runtime_target_minutes": 12,
+    "status": "active"
+  },
+  "content": {
+    "tags": [
+      "contributor",
+      "onboarding",
+      "lanes"
+    ],
+    "summary_short": "Contributor hub: lanes, guardrails, work orders, and the path from first PR to Crew Check.",
+    "start_here": "Skim the hub, then start CO-EP-0 — What AeroVista Is."
+  },
+  "media": {
+    "audio_files": []
+  },
+  "engagement": {
+    "quiz": {
+      "enabled": false,
+      "pass_threshold": 0.8,
+      "questions": []
+    }
+  },
+  "lesson": {
+    "objective": "Orient contributors to lanes, guardrails, and the hub path before opening individual episodes.",
+    "why_it_matters": "The hub prevents random deep dives and sets safe defaults for no-code-first contributors.",
+    "apply": "Read CONTRIBUTING.md and pick Lane A or B for your first task.",
+    "advance": "Start CO-EP-0 after hub orientation; finish CO-EP-4 before requesting elevated access."
+  },
+  "related_next": [
+    {
+      "label": "Next: CO-EP-0 — Contributor Onboarding - Ep 0 - What AeroVista Is",
+      "href": "contributor_onboarding_ep0/index.html"
+    }
+  ]
+}
