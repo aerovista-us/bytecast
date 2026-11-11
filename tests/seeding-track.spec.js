@@ -1,69 +1,24 @@
-/**
- * Seeding Track Journey Tests (seeding_v1)
- * Tests: Seed export → Badge
- */
-
+// Current-catalog browser-local acceptance. Synthetic fixtures are NOT server credentials or certificates.
 const { test, expect } = require('@playwright/test');
-const {
-  clearByteCastStorage,
-  navigateAndWait,
-  isStepDone,
-  hasBadge,
-} = require('./helpers');
-
-test.describe('Seeding Track Journey (seeding_v1)', () => {
-  test.beforeEach(async ({ page }) => {
-    await clearByteCastStorage(page);
-  });
-
-  test('Seed export step completion', async ({ page }) => {
-    await navigateAndWait(page, '/episodes/seed_builder_studio/seed_orchard_ui/index.html');
-
-    // Wait for orchard to load
-    await page.waitForTimeout(2000);
-
-    // Simulate seed export
-    await page.evaluate(() => {
-      if (window.ByteCastLoop) {
-        window.ByteCastLoop.markStepDone('seed_export_v1', {
-          artifactName: 'standalone-seed.zip',
-          artifactHash: 'def456',
-          filesCount: 3,
-          exportedAt: new Date().toISOString(),
-        });
-      }
-    });
-
-    await page.waitForTimeout(1000);
-
-    // Verify seed export is done
-    const exportDone = await isStepDone(page, 'seeding_v1', 'seed_export_v1');
-    expect(exportDone).toBe(true);
-  });
-
-  test('Seeding badge minted after export', async ({ page }) => {
-    await navigateAndWait(page, '/episodes/seed_builder_studio/seed_orchard_ui/index.html');
-    await page.waitForTimeout(2000);
-
-    // Complete seed export
-    await page.evaluate(() => {
-      if (window.ByteCastLoop) {
-        window.ByteCastLoop.markStepDone('seed_export_v1', {
-          artifactName: 'standalone-seed.zip',
-          artifactHash: 'def456',
-          filesCount: 3,
-        });
-      }
-    });
-
-    await page.waitForTimeout(2000);
-
-    // Navigate to playlist
-    await navigateAndWait(page, '/seed_bytecast.html');
-
-    // Verify badge is minted
-    const badgeMinted = await hasBadge(page, 'seed_exporter_v1');
-    expect(badgeMinted).toBe(true);
-  });
+const {clearByteCastStorage, navigateAndWait} = require('./helpers');
+test.beforeEach(async ({page}) => { await clearByteCastStorage(page); });
+test('Seeding: actual ZIP download creates hashed browser-local completion and badge', async ({page}) => {
+  await page.addInitScript(() => localStorage.setItem('bytecast.journey.active','seeding_v1'));
+  await navigateAndWait(page,'/episodes/seed_builder_studio/seed_orchard_ui/index.html');
+  await page.locator('#seedName').fill('QA seeded export');
+  await page.locator('#goal').fill('Check downloadable archive');
+  await page.locator('#audience').fill('Internal acceptance');
+  await page.locator('#seedName').evaluate(el => el.form.requestSubmit());
+  const download = page.waitForEvent('download',{timeout:15000});
+  await expect(page.locator('#exportZip')).toBeEnabled();
+  await page.locator('#exportZip').click();
+  expect((await download).suggestedFilename()).toMatch(/\.zip$/);
+  await expect.poll(() => page.evaluate(() => {
+    const L=window.ByteCastLoop;
+    const step=L?.loadWorkflowV2('seeding_v1')?.steps?.seed_export_v1;
+    return !!(step?.done && /^sha256:/.test(step?.meta?.artifactHash||'') && L.badgeHas('seed_exporter_v1'));
+  })).toBe(true);
+  await page.reload();
+  expect(await page.evaluate(() => window.ByteCastLoop.badgeHas('seed_exporter_v1'))).toBe(true);
 });
 

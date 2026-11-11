@@ -139,44 +139,46 @@ test.describe('Golden Path Journey (p1_golden_path)', () => {
     expect(await isStepDone(page, 'p1_golden_path', 'seed_publish_v1')).toBe(true);
   });
 
-  test('Full Golden Path: All steps → Badge minted', async ({ page }) => {
-    await navigateAndWait(page, '/episodes/welcome_to_bytecast/index.html');
-    await completeDay1Spine(page);
-    await page.waitForTimeout(500);
-
-    await navigateAndWait(page, '/episodes/seed_builder_studio/seed_orchard_ui/index.html');
-    await page.waitForTimeout(2000);
-    await page.evaluate(() => {
-      if (window.ByteCastLoop) {
-        window.ByteCastLoop.markStepDone('seed_export_v1', {
-          artifactName: 'test-seed.zip',
-          artifactHash: 'abc123',
-          filesCount: 5,
-        });
-        window.ByteCastLoop.markStepDone('seed_publish_v1', {
-          publishedUrl: 'https://example.com/test-seed',
-        });
-      }
-    });
-    await page.waitForTimeout(2000);
-
-    await page.evaluate(async () => {
-      const Loop = window.ByteCastLoop;
-      if (!Loop) return;
-      try {
-        const config = await Loop.loadJourneyConfig('/data/journey_steps.json', null);
-        const journey = Loop.getJourneyById(config, 'p1_golden_path');
-        if (!journey) return;
-        const wf2 = Loop.ensureWorkflowV2('p1_golden_path');
-        Loop.ensureJourneyBadges(journey, wf2);
-        Loop.saveWorkflowV2(wf2, 'p1_golden_path');
-      } catch {
-        // ignore
-      }
-    });
-
-    await navigateAndWait(page, '/seed_bytecast.html');
-    expect(await hasBadge(page, 'p1_golden_path_v1')).toBe(true);
+test('Golden Path: old EP001-004 fixture cannot bypass current required proof gates', async ({page}) => {
+  await navigateAndWait(page,'/episodes/welcome_to_bytecast/index.html');
+  const result = await page.evaluate(async () => {
+    const L=window.ByteCastLoop;
+    const data=await L.loadJourneyConfig('/data/journey_steps.json',null);
+    const j=L.getJourneyById(data,'p1_golden_path');
+    for (const id of ['ep001_listen','ep001_slide','ep001_engage','ep002_listen','ep002_slide','ep002_engage','ep003_listen','ep003_slide','ep003_engage','ep004_listen','ep004_slide','ep004_engage','tr001a_day1_foundations','seed_export_v1','seed_publish_v1'])
+      L.markStepDone(id,{journeyId:j.id,artifactName:'synthetic.zip',artifactHash:'test-only',publishedUrl:'https://example.invalid'});
+    const wf=L.ensureWorkflowV2(j.id);
+    const required=j.badges[0].requires;
+    const blockers=required.filter(id=>{const s=j.steps.find(x=>x.id===id);return s&&!L.isStepComplete(j,s,wf)});
+    L.ensureJourneyBadges(j,wf);
+    return {blockers, minted:L.badgeHas('p1_golden_path_v1')};
   });
+  expect(result.blockers).toContain('first_door_gates');
+  expect(result.blockers).toContain('sot_gates');
+  expect(result.minted).toBe(false);
 });
 
+test('Golden Path: synthetic complete current proofs pass local badge rules, no server certificate', async ({page}) => {
+  await navigateAndWait(page,'/episodes/welcome_to_bytecast/index.html');
+  const result=await page.evaluate(async()=>{
+    const L=window.ByteCastLoop;
+    const config=await L.loadJourneyConfig('/data/journey_steps.json',null);
+    const j=L.getJourneyById(config,'p1_golden_path');
+    const badge=j.badges.find(x=>x.id==='p1_golden_path_v1');
+    const proofs=badge.minProof;
+    const values={};
+    for(const [id,fields] of Object.entries(proofs)) values[id]=Object.fromEntries(fields.map(f=>[f,/(Passed|Acknowledged|Submitted)$/i.test(f)?true:/(Score)$/i.test(f)?1:'test-only-proof']));
+    for(const s of j.steps) if(s.complete_when?.type==='steps_all') for(const id of s.complete_when.ids) L.markStepDone(id,{journeyId:j.id,...(values[id]||{})});
+    for(const [id,meta] of Object.entries(values)) L.markStepDone(id,{journeyId:j.id,...meta});
+    L.markStepDone('seed_publish_v1',{journeyId:j.id,publishedUrl:'https://example.invalid/test-only'});
+    const wf=L.ensureWorkflowV2(j.id);
+    const required=badge.requires.map(id=>{const s=j.steps.find(x=>x.id===id);return{id,complete:!!(s&&L.isStepComplete(j,s,wf))}});
+    const outcome=L.ensureJourneyBadges(j,wf);
+    L.saveWorkflowV2(wf,j.id);
+    return {required,outcome,localBadge:L.badgeHas(badge.id)};
+  });
+  expect(result.required.every(x=>x.complete),JSON.stringify(result.required)).toBe(true);
+  expect(result.localBadge).toBe(true);
+});
+
+});
