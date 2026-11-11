@@ -26,7 +26,7 @@
 
       for (const source of doc.querySelectorAll("audio source[src]")) {
         const src = source.getAttribute("src") || "";
-        if (/^EP02\.aac$/i.test(src)) source.setAttribute("src", "../../assets/shareholder_s1/EP02.aac");
+        if (/^EP02\.aac$/i.test(src)) source.setAttribute("src", "../../EP02.aac");
       }
 
       document.open();

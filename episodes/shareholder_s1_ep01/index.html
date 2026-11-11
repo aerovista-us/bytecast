@@ -28,7 +28,7 @@
       // Move Season 1 audio under assets/shareholder_s1/ (files may be added later).
       for (const source of doc.querySelectorAll("audio source[src]")) {
         const src = source.getAttribute("src") || "";
-        if (/^EP01\.aac$/i.test(src)) source.setAttribute("src", "../../assets/shareholder_s1/EP01.aac");
+        if (/^EP01\.aac$/i.test(src)) source.setAttribute("src", "../../EP01.aac");
       }
 
       document.open();
