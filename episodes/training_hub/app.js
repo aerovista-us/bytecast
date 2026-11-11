@@ -60,7 +60,7 @@ async function init() {
   try {
     const [manifestResponse, canonResponse, journeyResponse, pulseResponse] = await Promise.all([
       fetch(MANIFEST_PATH),
-      fetch(CANON_MAP_PATH),
+      fetch(CANON_MAP_PATH).catch(() => null),
       fetch(JOURNEY_PATH),
       fetch(PULSE_PATH),
     ]);
@@ -69,12 +69,11 @@ async function init() {
       throw new Error(`Module manifest failed: ${manifestResponse.status}`);
     }
 
-    if (!canonResponse.ok) {
-      throw new Error(`CANON map failed: ${canonResponse.status}`);
-    }
 
     const manifest = await manifestResponse.json();
-    const canonMarkdown = await canonResponse.text();
+    // The private .CODEX map is optional; production Nginx deliberately denies it.
+    // Course discovery must continue from the public module manifest without it.
+    const canonMarkdown = canonResponse?.ok ? await canonResponse.text() : "";
     let journeyConfig = null;
     try {
       journeyConfig = journeyResponse.ok ? await journeyResponse.json() : null;
