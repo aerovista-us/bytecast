@@ -846,7 +846,9 @@
       try { return JSON.parse(localStorage.getItem(QUEST_KEY) || "[]"); } catch { return []; }
     })());
     const questList = $("#questList");
-    questList.innerHTML = PROFILE.engagement.quest.items.map(item => {
+    const questItems = Array.isArray(PROFILE.engagement?.quest?.items) ? PROFILE.engagement.quest.items : [];
+    const questReward = PROFILE.engagement?.quest?.reward_badge?.label || "";
+    questList.innerHTML = questItems.map(item => {
       const checked = questState.has(item.id) ? "checked" : "";
       return `
         <label>
@@ -857,11 +859,11 @@
           </div>
         </label>
       `;
-    }).join("") + `
+    }).join("") + (questReward ? `
       <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:10px;">
-        <span class="pill"><span class="spark"></span><strong style="font-family:var(--mono);">BADGE</strong> ${PROFILE.engagement.quest.reward_badge.label}</span>
+        <span class="pill"><span class="spark"></span><strong style="font-family:var(--mono);">BADGE</strong> ${questReward}</span>
       </div>
-    `;
+    ` : `<p class="hint">Complete the quiz below to record the Engage gate.</p>`);
 
     questList.addEventListener("change", (e) => {
       const cb = e.target;
@@ -924,7 +926,7 @@
           ${passed ? `
             <div class="callout">
               <div class="k">COMPLETION</div>
-              <p style="margin:8px 0 0;">Badge unlocked: ${PROFILE.engagement.quest.reward_badge.label}. Log your first catalog win and move to Catalog Maintainer Bootcamp.</p>
+              <p style="margin:8px 0 0;">${questReward ? `Badge unlocked: ${questReward}.` : `Quiz passed; Engage gate recorded.`} Log your first catalog win and move to Catalog Maintainer Bootcamp.</p>
             </div>
           ` : ``}
         </div>
