@@ -23,9 +23,9 @@
 
   const WORKFLOW_KEY = "bytecast.workflow.v1";
   const BADGES_KEY = "bytecast.badges.v1";
-  const JOURNEY_URL = "../../data/journey_steps.json";
-  const TEMPLATE_URL = "../../template/index.html";
-  const FAVICON_URL = "../../favicon.svg";
+  const JOURNEY_URL = "../../../data/journey_steps.json";
+  const TEMPLATE_URL = "../../../template/index.html";
+  const FAVICON_URL = "../../../favicon.svg";
   const PRIMARY_JOURNEY_ID = "";
   const PACK_SCHEMA_VERSION = "seed-pack-v1";
 
